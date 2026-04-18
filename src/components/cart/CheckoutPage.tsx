@@ -92,6 +92,9 @@ export default function CheckoutPage() {
     amount,
     currency,
     paymentMethodCreation: "manual" as const,
+    // Restreint aux cartes : Apple Pay / Google Pay / Link restent car ce sont
+    // des "wallets" adossés au type card. Klarna et Multibanco disparaissent.
+    paymentMethodTypes: ["card"],
     appearance: {
       theme: "stripe" as const,
       variables: {
