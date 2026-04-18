@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import InstagramFeed from '../../components/InstagramFeed.astro';
+import BlogHeroGallery, { type BlogHeroItem } from '../../components/BlogHeroGallery';
+import { site } from '../../data/site';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+// Items pour le hero 3D — on passe TOUS les articles pour que la galerie soit complète
+const heroItems: BlogHeroItem[] = posts.map((p) => ({
+  href: `/blog/${p.id}`,
+  cover: p.data.cover || '/images/stories/paysage-plantes.webp',
+  title: p.data.title,
+  category: p.data.category,
+}));
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Journal', item: `${site.url}/blog` },
+  ],
+};
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: `Journal — ${site.name}`,
+  url: `${site.url}/blog`,
+  publisher: { '@id': `${site.url}#localbusiness` },
+};
+---
+<Layout
+  title="Journal | Plantes, recettes, terroir — La Brasserie des Plantes"
+  description="Notre journal : rencontres avec les plantes, recettes de cocktails, récits d'atelier, coulisses de la fabrication. Un regard d'artisans sur la botanique et le terroir auvergnat."
+  schema={[breadcrumb, blogSchema]}
+>
+  {/* Hero immersif — galerie 3D parallaxe qui se redresse au scroll */}
+  {heroItems.length > 0 && <BlogHeroGallery client:load items={heroItems} />}
+
+  <section id="blog-grid" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6 text-center mb-12">
+      <div class="text-[10px] uppercase tracking-[0.35em] text-gold-600 font-medium mb-3">
+        Tous les articles
+      </div>
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900">
+        {posts.length} chroniques à explorer
+      </h2>
+    </div>
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post) => (
+          <a
+            href={`/blog/${post.id}`}
+            class="group flex flex-col rounded-2xl bg-cream-50 border border-forest-100/60 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+          >
+            {post.data.cover && (
+              <div class="aspect-[3/2] overflow-hidden bg-forest-100">
+                <img
+                  src={post.data.cover}
+                  alt={post.data.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <div class="p-6 flex-1 flex flex-col">
+              <div class="flex items-center gap-3 text-xs text-ink-500 mb-3">
+                <span class="uppercase tracking-wide text-forest-600 font-medium">{post.data.category}</span>
+                <span>·</span>
+                <time datetime={post.data.date.toISOString()}>
+                  {post.data.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </time>
+              </div>
+              <h2 class="font-display text-2xl text-forest-900 leading-tight mb-3 group-hover:text-forest-700 transition-colors">
+                {post.data.title}
+              </h2>
+              <p class="text-sm text-ink-700 leading-relaxed mb-4 flex-1">
+                {post.data.description}
+              </p>
+              <div class="text-xs text-ink-500">{post.data.readingTime} de lecture</div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {posts.length === 0 && (
+        <p class="text-center text-ink-500 py-20">Les premiers articles arrivent bientôt.</p>
+      )}
+    </div>
+  </section>
+
+  <InstagramFeed variant="dark" kicker="Au jour le jour" title="Sur Instagram" />
+</Layout>

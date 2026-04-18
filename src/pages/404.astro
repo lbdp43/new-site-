@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Page introuvable — La Brasserie des Plantes"
+  description="La page que vous cherchez n'existe pas ou a été déplacée. Retrouvez nos liqueurs artisanales, notre histoire et nos ateliers depuis la page d'accueil."
+  noindex={true}
+>
+  <section class="min-h-[70vh] flex items-center justify-center bg-cream-50 py-20">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gold-500/15 text-gold-600 mb-8">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2c-2.8 0-5 2.2-5 5 0 3.7 3 6 5 12 2-6 5-8.3 5-12 0-2.8-2.2-5-5-5z"/>
+          <circle cx="12" cy="7" r="1.5" fill="currentColor"/>
+        </svg>
+      </div>
+
+      <div class="text-xs uppercase tracking-[0.35em] text-forest-600 font-medium mb-4">Erreur 404</div>
+      <h1 class="font-display text-5xl md:text-7xl text-forest-900 leading-[1.05] mb-6">
+        Cette page a disparu<br />
+        <em class="not-italic font-normal text-gold-600" style="font-family: var(--font-script);">dans les herbes hautes</em>
+      </h1>
+      <p class="text-lg text-ink-700 leading-relaxed mb-10 max-w-xl mx-auto">
+        Pas de panique — elle a peut-être été déplacée, ou vous avez suivi un lien un peu vieux.
+        Voici où vous pouvez continuer votre promenade :
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto text-left">
+        <a href="/" class="group p-5 rounded-2xl bg-cream-100 border border-forest-100/60 hover:border-gold-500/50 hover:shadow-cream transition-all">
+          <div class="text-xs uppercase tracking-wider text-gold-600 font-medium mb-1">Accueil</div>
+          <div class="font-display text-lg text-forest-900 leading-tight">La Brasserie des Plantes</div>
+        </a>
+        <a href="/boutique" class="group p-5 rounded-2xl bg-cream-100 border border-forest-100/60 hover:border-gold-500/50 hover:shadow-cream transition-all">
+          <div class="text-xs uppercase tracking-wider text-gold-600 font-medium mb-1">Boutique</div>
+          <div class="font-display text-lg text-forest-900 leading-tight">18 liqueurs à explorer</div>
+        </a>
+        <a href="/notre-histoire" class="group p-5 rounded-2xl bg-cream-100 border border-forest-100/60 hover:border-gold-500/50 hover:shadow-cream transition-all">
+          <div class="text-xs uppercase tracking-wider text-gold-600 font-medium mb-1">Notre histoire</div>
+          <div class="font-display text-lg text-forest-900 leading-tight">Trois amis, un terroir</div>
+        </a>
+        <a href="/blog" class="group p-5 rounded-2xl bg-cream-100 border border-forest-100/60 hover:border-gold-500/50 hover:shadow-cream transition-all">
+          <div class="text-xs uppercase tracking-wider text-gold-600 font-medium mb-1">Journal</div>
+          <div class="font-display text-lg text-forest-900 leading-tight">20 articles à lire</div>
+        </a>
+      </div>
+
+      <div class="mt-12">
+        <a href="/contact" class="inline-flex items-center gap-2 text-sm text-forest-700 hover:text-forest-900 border-b border-forest-300 hover:border-forest-700 pb-0.5">
+          Vous avez trouvé un lien cassé ? Dites-nous où
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

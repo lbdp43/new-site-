@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../data/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `Mentions légales — ${site.name}`,
+  url: `${site.url}/mentions-legales`,
+  inLanguage: 'fr-FR',
+};
+---
+<Layout
+  title={`Mentions légales | ${site.name}`}
+  description={`Mentions légales du site ${site.name} : éditeur, hébergeur, propriété intellectuelle, données personnelles.`}
+  schema={schema}
+  noindex={false}
+>
+  <PageHeader
+    kicker="Informations légales"
+    title="Mentions légales"
+    subtitle="Informations obligatoires relatives à l'éditeur et à l'hébergement du site labrasseriedesplantes.fr."
+    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Mentions légales' }]}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg prose-headings:font-display prose-headings:text-forest-900 prose-h2:text-2xl prose-h2:mt-10 prose-a:text-forest-700 prose-strong:text-forest-900">
+      <h2>Éditeur du site</h2>
+      <p>
+        <strong>{site.name}</strong><br />
+        SIRET : {site.siret}<br />
+        Adresse : {site.address.street}, {site.address.postalCode} {site.address.city}, France<br />
+        Téléphone : <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a><br />
+        Email : <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      <p>
+        Directeur de la publication : Étienne Darinot, cofondateur.
+      </p>
+
+      <h2>Hébergement</h2>
+      <p>
+        Le site <strong>labrasseriedesplantes.fr</strong> est hébergé par :<br />
+        <strong>Netlify, Inc.</strong><br />
+        512 2nd Street, Fl 2, San Francisco, CA 94107, USA<br />
+        <a href="https://www.netlify.com" target="_blank" rel="noopener">netlify.com</a>
+      </p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>
+        L'ensemble des contenus présents sur ce site (textes, photographies, illustrations, logos, vidéos, mises en page, marques) sont la propriété exclusive de <strong>{site.name}</strong> ou de ses partenaires. Toute reproduction, représentation, diffusion ou exploitation sans accord écrit préalable est interdite et constituerait une contrefaçon au sens des articles L. 335-2 et suivants du Code de la propriété intellectuelle.
+      </p>
+      <p>
+        Les citations courtes à des fins d'information ou de commentaire journalistique sont autorisées, sous réserve de mentionner clairement la source (« {site.name}, labrasseriedesplantes.fr »).
+      </p>
+
+      <h2>Données personnelles (RGPD)</h2>
+      <p>
+        Les données personnelles collectées via les formulaires (contact, newsletter, commande) sont utilisées uniquement pour traiter votre demande et, le cas échéant, vous envoyer nos actualités si vous y avez consenti.
+      </p>
+      <p>
+        Conformément au Règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, de suppression, de portabilité et d'opposition concernant vos données. Pour exercer ces droits, contactez-nous à <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+      <p>
+        Vos données ne sont en aucun cas revendues à des tiers. Elles sont conservées pour la durée strictement nécessaire à l'exécution du service, puis supprimées automatiquement.
+      </p>
+      <p>
+        Délégué à la protection des données : {site.email}.<br />
+        Autorité de contrôle : CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        Ce site utilise des cookies strictement nécessaires à son bon fonctionnement ainsi que, avec votre consentement, des cookies de mesure d'audience anonymisée. Consultez notre <a href="/politique-cookies">politique de cookies</a> pour plus de détails.
+      </p>
+
+      <h2>Loi applicable & juridiction</h2>
+      <p>
+        Le présent site est régi par le droit français. En cas de litige, les tribunaux compétents seront ceux du ressort du Puy-en-Velay (Haute-Loire), sauf disposition légale contraire.
+      </p>
+
+      <h2>Vente d'alcool — mention obligatoire</h2>
+      <p class="text-sm italic border-l-4 border-gold-500 pl-4 bg-gold-500/5">
+        La vente d'alcool aux mineurs de moins de 18 ans est interdite (Code de la santé publique, article L. 3342-1).<br />
+        L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+      </p>
+
+      <p class="text-xs text-ink-500 mt-12">Dernière mise à jour : {new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
+    </div>
+  </section>
+</Layout>

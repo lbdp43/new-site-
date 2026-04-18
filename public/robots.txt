@@ -1,0 +1,31 @@
+# robots.txt — La Brasserie des Plantes
+# https://labrasseriedesplantes.fr
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemap automatique (généré par Astro)
+Sitemap: https://labrasseriedesplantes.fr/sitemap-index.xml
+
+# Crawlers AI explicitement autorisés (GEO / AI search)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /

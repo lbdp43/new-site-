@@ -1,0 +1,101 @@
+---
+/**
+ * AgeGate — vérification d'âge obligatoire pour site vendant de l'alcool (Loi Évin).
+ * Modal plein écran affiché au premier chargement. Stocke le choix dans localStorage
+ * pour ne pas bloquer les visites suivantes (valable 30 jours).
+ */
+import { site } from '../data/site';
+---
+<div
+  id="age-gate"
+  class="fixed inset-0 z-[100] hidden items-center justify-center bg-forest-950/95 backdrop-blur-lg"
+  aria-modal="true"
+  role="dialog"
+  aria-labelledby="age-gate-title"
+  style="padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom));"
+>
+  <div class="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-2xl border border-gold-500/30">
+    <!-- Bandeau gold haut -->
+    <div class="bg-gradient-to-r from-gold-600 via-gold-500 to-gold-600 h-1.5"></div>
+
+    <div class="p-8 md:p-10 text-center">
+      <!-- Logo / mark -->
+      <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-gold-500/15 border border-gold-500/40 flex items-center justify-center text-gold-600">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 2v6l-3 4c0 1.5.5 3 2 4.5 1 1 3 2 5 2s4-1 5-2c1.5-1.5 2-3 2-4.5l-3-4V2"/>
+          <line x1="8" y1="2" x2="16" y2="2"/>
+          <line x1="10" y1="12" x2="14" y2="12"/>
+        </svg>
+      </div>
+
+      <div class="text-[10px] uppercase tracking-[0.35em] text-gold-600 font-medium mb-3">
+        {site.name}
+      </div>
+      <h2 id="age-gate-title" class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-3">
+        Avez-vous l'âge légal<br />
+        <em class="not-italic text-gold-600 font-normal" style="font-family: var(--font-script);">pour consommer ?</em>
+      </h2>
+      <p class="text-sm text-ink-700 leading-relaxed mb-8">
+        Ce site présente des boissons spiritueuses. L'accès est réservé aux personnes majeures (18 ans en France).
+      </p>
+
+      <div class="flex flex-col gap-3">
+        <button
+          type="button"
+          id="age-gate-yes"
+          class="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors"
+        >
+          Oui, j'ai 18 ans ou plus
+        </button>
+        <button
+          type="button"
+          id="age-gate-no"
+          class="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-full border border-forest-200 hover:border-forest-500 text-ink-700 text-sm font-medium transition-colors"
+        >
+          Non, je suis mineur(e)
+        </button>
+      </div>
+
+      <p class="mt-6 text-[11px] text-ink-500 leading-relaxed">
+        L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const KEY = 'lbdp_age_gate';
+    const VALID_DAYS = 30;
+    const gate = document.getElementById('age-gate');
+    if (!gate) return;
+
+    const stored = localStorage.getItem(KEY);
+    if (stored) {
+      try {
+        const { confirmed, until } = JSON.parse(stored);
+        if (confirmed && until && Date.now() < until) {
+          gate.remove();
+          return;
+        }
+      } catch {}
+    }
+
+    // Afficher la modale + bloquer scroll
+    gate.classList.remove('hidden');
+    gate.classList.add('flex');
+    document.documentElement.style.overflow = 'hidden';
+
+    document.getElementById('age-gate-yes')?.addEventListener('click', () => {
+      const until = Date.now() + VALID_DAYS * 24 * 60 * 60 * 1000;
+      localStorage.setItem(KEY, JSON.stringify({ confirmed: true, until }));
+      gate.remove();
+      document.documentElement.style.overflow = '';
+    });
+
+    document.getElementById('age-gate-no')?.addEventListener('click', () => {
+      // Redirection vers un site institutionnel santé publique
+      window.location.href = 'https://www.alcool-info-service.fr/';
+    });
+  })();
+</script>

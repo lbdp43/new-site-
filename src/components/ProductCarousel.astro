@@ -1,0 +1,138 @@
+---
+import type { Product } from '../data/products';
+import { GlowCard } from './ui/spotlight-card';
+import { Marquee } from './ui/marquee';
+
+interface Props {
+  items: Product[];
+  heading?: string;
+  kicker?: string;
+  subtitle?: string;
+  /** Thème : `light` (crème) ou `dark` (forest). */
+  theme?: 'light' | 'dark';
+  /** Vitesse de défilement : duration CSS (ex: '50s'). */
+  duration?: string;
+  /** Inverser le sens du défilement. */
+  reverse?: boolean;
+}
+
+const {
+  items,
+  heading = 'Notre gamme',
+  kicker = 'Toutes nos liqueurs',
+  subtitle,
+  theme = 'light',
+  duration = '61s',
+  reverse = false,
+} = Astro.props;
+
+const bg = theme === 'dark' ? 'bg-forest-900 text-cream-100' : 'bg-white text-forest-900';
+const accent = theme === 'dark' ? 'text-gold-400' : 'text-gold-600';
+const muted = theme === 'dark' ? 'text-cream-200/70' : 'text-ink-500';
+const fadeFrom = theme === 'dark' ? 'from-forest-900' : 'from-white';
+---
+<section class:list={['py-20 md:py-24 overflow-hidden relative', bg]}>
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-10 max-w-3xl mx-auto">
+      <div class:list={['text-[10px] md:text-xs uppercase tracking-[0.35em] font-medium mb-3', accent]}>
+        {kicker}
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl leading-tight">{heading}</h2>
+      {subtitle && <p class:list={['mt-4 max-w-2xl mx-auto leading-relaxed', muted]}>{subtitle}</p>}
+      <div class="gold-divider mt-6"></div>
+    </div>
+  </div>
+
+  <!-- Marquee produit — défilement infini, pause au survol -->
+  <div class="relative w-full">
+    <!-- Dégradés sur les bords (blend out) -->
+    <div
+      class:list={[
+        'pointer-events-none absolute top-0 left-0 z-10 h-full w-24 md:w-40 bg-gradient-to-r to-transparent',
+        fadeFrom,
+      ]}
+    ></div>
+    <div
+      class:list={[
+        'pointer-events-none absolute top-0 right-0 z-10 h-full w-24 md:w-40 bg-gradient-to-l to-transparent',
+        fadeFrom,
+      ]}
+    ></div>
+
+    <Marquee
+      client:visible
+      pauseOnHover
+      reverse={reverse}
+      className={`[--duration:${duration}] [--gap:1.25rem] md:[--gap:1.5rem] py-4`}
+    >
+      {items.map((p) => (
+        <a
+          href={`/boutique/${p.slug}`}
+          class="group/card flex-none w-[62vw] sm:w-[300px] md:w-[280px] lg:w-[260px] block transition-transform duration-300 hover:-translate-y-1"
+        >
+          <GlowCard
+            client:visible
+            glowColor="gold"
+            customSize
+            padding="none"
+            className={`!aspect-auto w-full overflow-hidden ${
+              theme === 'dark'
+                ? 'bg-forest-800/40 border border-cream-100/10'
+                : 'bg-white border border-forest-100/60'
+            }`}
+          >
+            <div class="aspect-[4/5] bg-white relative overflow-hidden">
+              {/* Photo produit en COULEUR — packshot. Se fond au survol si image2 existe. */}
+              <img
+                src={p.image}
+                alt={`${p.name} — liqueur artisanale aux plantes d'Auvergne`}
+                class:list={[
+                  'absolute inset-0 w-full h-full object-contain p-6 transition-all duration-500 ease-out',
+                  p.image2 ? 'opacity-100 group-hover/card:opacity-0' : 'group-hover/card:scale-105',
+                ]}
+                loading="lazy"
+              />
+              {p.image2 && (
+                <img
+                  src={p.image2}
+                  alt={`${p.name} — vue d'ambiance, mise en situation`}
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 ease-out"
+                  loading="lazy"
+                />
+              )}
+              {p.highlight && (
+                <span class="absolute top-3 left-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gold-500 text-cream-50 text-[10px] font-medium uppercase tracking-wide shadow-sm">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+                  {p.highlight}
+                </span>
+              )}
+              {p.alcohol > 0 && (
+                <span class:list={[
+                  'absolute top-3 right-3 z-10 text-[11px] font-medium px-2.5 py-1 rounded-full',
+                  theme === 'dark' ? 'bg-cream-50/10 text-cream-50 border border-cream-100/20' : 'bg-forest-800/90 text-cream-50',
+                ]}>
+                  {p.alcohol}°
+                </span>
+              )}
+            </div>
+            <div class="p-5">
+              <h3 class="font-display text-xl leading-tight mb-1.5">{p.name}</h3>
+              <p class:list={['text-xs italic leading-relaxed line-clamp-2', muted]}>{p.tagline}</p>
+              <div class:list={['mt-3 pt-3 border-t flex items-center justify-between text-xs',
+                theme === 'dark' ? 'border-cream-100/10' : 'border-forest-100'
+              ]}>
+                <span class="font-medium text-gold-600">
+                  {p.priceMin === p.priceMax ? `${p.priceMin} €` : `dès ${p.priceMin} €`}
+                </span>
+                <span class:list={['inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform', accent]}>
+                  Découvrir
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </div>
+            </div>
+          </GlowCard>
+        </a>
+      ))}
+    </Marquee>
+  </div>
+</section>

@@ -1,0 +1,99 @@
+---
+import { instagramPosts, instagramHandle, instagramProfileUrl } from '../data/instagram';
+
+interface Props {
+  variant?: 'dark' | 'light';
+  kicker?: string;
+  title?: string;
+  limit?: number;
+}
+
+const {
+  variant = 'light',
+  kicker = 'Sur Instagram',
+  title = 'Les coulisses en temps réel',
+  limit = 6,
+} = Astro.props;
+
+const posts = instagramPosts.slice(0, limit);
+const isDark = variant === 'dark';
+---
+<section class:list={[
+  "py-20 relative overflow-hidden",
+  isDark ? "bg-forest-900 text-cream-100" : "bg-cream-50 text-ink-900",
+]}>
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
+      <div>
+        <div class:list={[
+          "text-xs uppercase tracking-[0.25em] font-medium mb-3",
+          isDark ? "text-cream-300/70" : "text-forest-600",
+        ]}>
+          {kicker}
+        </div>
+        <h2 class:list={[
+          "font-display text-4xl md:text-5xl leading-tight",
+          isDark ? "text-cream-100" : "text-forest-900",
+        ]}>
+          {title}
+        </h2>
+        <p class:list={[
+          "mt-3 text-sm",
+          isDark ? "text-cream-200/70" : "text-ink-500",
+        ]}>
+          @{instagramHandle}
+        </p>
+      </div>
+      <a
+        href={instagramProfileUrl}
+        target="_blank"
+        rel="noopener"
+        class:list={[
+          "inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-colors self-start lg:self-end",
+          isDark
+            ? "bg-cream-50 text-forest-900 hover:bg-cream-100"
+            : "bg-forest-800 text-cream-100 hover:bg-forest-900",
+        ]}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>
+        Nous suivre sur Instagram
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3">
+      {posts.map((post) => (
+        <a
+          href={post.url}
+          target="_blank"
+          rel="noopener"
+          class="group relative aspect-square overflow-hidden rounded-lg"
+          aria-label={post.caption}
+        >
+          <img
+            src={post.image}
+            alt={post.caption}
+            loading="lazy"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-950/85 via-forest-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+            <p class="p-3 text-[11px] text-cream-100 leading-snug line-clamp-4">
+              {post.caption}
+            </p>
+          </div>
+          <!-- Icône Instagram en coin -->
+          <div class="absolute top-2 right-2 w-7 h-7 rounded-full bg-forest-950/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cream-100">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

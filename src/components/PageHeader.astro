@@ -1,0 +1,49 @@
+---
+interface Props {
+  kicker?: string;
+  title: string;
+  subtitle?: string;
+  breadcrumb: { label: string; href?: string }[];
+}
+
+const { kicker, title, subtitle, breadcrumb } = Astro.props;
+---
+<section class="relative overflow-hidden bg-gradient-to-b from-cream-50 to-cream-100 pt-16 pb-20">
+  <div class="absolute inset-0 pointer-events-none opacity-20">
+    <svg class="absolute -top-10 right-0 w-[28rem] h-[28rem] text-forest-300" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.5">
+      <path d="M100 20 C 100 80, 100 120, 100 180" />
+      <path d="M100 50 C 60 60, 40 80, 45 100" />
+      <path d="M100 50 C 140 60, 160 80, 155 100" />
+      <path d="M100 90 C 55 100, 32 125, 40 145" />
+    </svg>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6">
+    <nav class="text-xs text-ink-500 mb-6" aria-label="Fil d'Ariane">
+      {breadcrumb.map((item, i) => (
+        <>
+          {i > 0 && <span class="mx-2">/</span>}
+          {item.href ? (
+            <a href={item.href} class="hover:text-forest-700">{item.label}</a>
+          ) : (
+            <span class="text-forest-700">{item.label}</span>
+          )}
+        </>
+      ))}
+    </nav>
+
+    {kicker && (
+      <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+        {kicker}
+      </div>
+    )}
+    <h1 class="font-display text-5xl md:text-6xl text-forest-900 leading-[1.05] mb-4 max-w-3xl">
+      <Fragment set:html={title} />
+    </h1>
+    {subtitle && (
+      <p class="text-lg text-ink-700 max-w-2xl leading-relaxed">
+        {subtitle}
+      </p>
+    )}
+  </div>
+</section>

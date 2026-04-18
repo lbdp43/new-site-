@@ -1,0 +1,181 @@
+---
+import { nav, site } from '../data/site';
+import CartIcon from './cart/CartIcon';
+---
+<header
+  id="site-header"
+  class="sticky top-0 z-40 header-glass"
+>
+  <!-- Bandeau promo (émeraude jewel avec filet doré en bas) -->
+  <div class="relative bg-forest-800 text-cream-100 text-center text-xs tracking-wide py-2 px-4">
+    <span class="font-medium">Livraison offerte dès 65 €</span>
+    <span class="opacity-70 mx-2">·</span>
+    <span class="opacity-80">Expédition sous 2 à 3 jours ouvrés</span>
+    <!-- filet doré sous le bandeau promo (ornement signature) -->
+    <div class="absolute inset-x-0 bottom-0 h-px gold-hairline"></div>
+  </div>
+
+  <!-- Couche liquid-glass (blur + teinte cream + reflet blanc sur les bords) -->
+  <div class="relative header-glass-body">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-8">
+      <a href="/" class="flex items-center gap-3 group" aria-label="La Brasserie des Plantes — retour à l'accueil">
+        <img
+          src="/images/brand/logo-lbdp.png"
+          alt="La Brasserie des Plantes"
+          class="h-12 w-auto group-hover:opacity-80 transition-opacity"
+          width="200"
+          height="60"
+          fetchpriority="high"
+        />
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8 text-sm">
+        {nav.map((item) => (
+          <a
+            href={item.href}
+            class="relative text-ink-700 hover:text-forest-700 transition-colors font-medium nav-link"
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <CartIcon client:load />
+        <a
+          href="/boutique"
+          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-forest-700 hover:bg-forest-800 text-cream-100 text-sm font-medium transition-all shadow-[0_0_0_1px_rgba(205,182,132,0.2),0_4px_14px_-4px_rgba(10,107,67,0.4)] hover:shadow-[0_0_0_1px_rgba(205,182,132,0.6),0_8px_22px_-6px_rgba(205,182,132,0.4)]"
+        >
+          Découvrir la boutique
+        </a>
+        <button
+          id="menu-toggle"
+          aria-label="Ouvrir le menu"
+          class="lg:hidden p-2 text-forest-900"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filet doré en bas du header (apparaît au scroll) -->
+    <div class="absolute inset-x-0 bottom-0 h-px gold-hairline opacity-0 transition-opacity duration-500" id="header-gold-line"></div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-gold-500/20 bg-cream-50/95 backdrop-blur-md">
+    <nav class="flex flex-col px-6 py-4 gap-1">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class="py-3 text-ink-700 hover:text-forest-700 border-b border-forest-100/60 last:border-0"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href="/boutique"
+        class="mt-3 inline-flex justify-center items-center px-5 py-3 rounded-full bg-forest-700 text-cream-100 font-medium"
+      >
+        Découvrir la boutique
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* Liquid-glass : backdrop-blur fort + reflet intérieur blanc (edge refraction) */
+  .header-glass-body {
+    background-color: rgba(251, 248, 241, 0.72);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    /* Double inset : highlight blanc en haut + halo subtil */
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+      inset 0 -1px 0 0 rgba(205, 182, 132, 0.08);
+  }
+
+  /* Classe sur le <header> racine pour préserver sticky + z-index */
+  .header-glass {
+    isolation: isolate;
+  }
+
+  /* État au scroll : teinte légèrement plus dense + filet doré plus visible */
+  .header-glass[data-scrolled="true"] .header-glass-body {
+    background-color: rgba(251, 248, 241, 0.88);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
+      inset 0 -1px 0 0 rgba(205, 182, 132, 0.18),
+      0 2px 16px -8px rgba(10, 107, 67, 0.15);
+  }
+  .header-glass[data-scrolled="true"] #header-gold-line {
+    opacity: 1;
+  }
+
+  /* Filet doré — dégradé horizontal luxe */
+  .gold-hairline {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(205, 182, 132, 0.35) 15%,
+      rgba(220, 199, 151, 0.85) 50%,
+      rgba(205, 182, 132, 0.35) 85%,
+      transparent 100%
+    );
+  }
+
+  /* Soulignement doré subtil au hover sur les liens nav */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    height: 1.5px;
+    width: 0;
+    background: linear-gradient(to right, transparent, var(--color-gold-500), transparent);
+    transform: translateX(-50%);
+    transition: width 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Fallback pour navigateurs sans backdrop-filter */
+  @supports not (backdrop-filter: blur(1px)) {
+    .header-glass-body {
+      background-color: rgba(251, 248, 241, 0.98);
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+
+  // Scroll detection — active le filet doré + densifie le glass quand on scrolle
+  const header = document.getElementById('site-header');
+  if (header) {
+    let ticking = false;
+    const updateScrolled = () => {
+      const scrolled = window.scrollY > 8;
+      header.dataset.scrolled = scrolled ? 'true' : 'false';
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScrolled);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateScrolled();
+  }
+</script>

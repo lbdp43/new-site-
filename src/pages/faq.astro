@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../data/site';
+
+interface FaqItem {
+  q: string;
+  a: string;
+  category: 'Commande' | 'Dégustation' | 'Produits' | 'CBD' | 'Pro';
+}
+
+const faqs: FaqItem[] = [
+  {
+    category: 'Commande',
+    q: "Quels sont les délais de livraison ?",
+    a: "Nos commandes sont expédiées sous 2 à 3 jours ouvrés depuis notre atelier en Haute-Loire. La livraison en France métropolitaine se fait via Colissimo suivi, sous 48h à 72h après expédition.",
+  },
+  {
+    category: 'Commande',
+    q: "La livraison est-elle offerte ?",
+    a: "Oui, la livraison est offerte dès 65 € d'achats en France métropolitaine. En dessous de ce montant, les frais sont calculés selon le poids du colis.",
+  },
+  {
+    category: 'Commande',
+    q: "Livrez-vous hors de France ?",
+    a: "Nous livrons actuellement en France métropolitaine et en Belgique. Pour toute demande d'expédition à l'étranger, contactez-nous directement.",
+  },
+  {
+    category: 'Dégustation',
+    q: "Comment servir L'Alchimie Végétale ?",
+    a: "L'Alchimie Végétale se déguste en digestif, idéalement à 3°C (sortie de congélateur). Un trait dans un café, un long drink avec un tonic artisanal, ou nature — à vous de choisir. Son degré (50% vol.) et sa complexité en font un produit à apprécier lentement, par petites gorgées.",
+  },
+  {
+    category: 'Dégustation',
+    q: "Peut-on utiliser vos liqueurs en cuisine ?",
+    a: "Absolument. Nos apéritifs s'accordent très bien avec les desserts aux fruits (fraises, framboises, agrumes) et peuvent parfumer des sorbets, ganaches ou mousses. L'Herbe des Druides sublime un sabayon ; La Flèche Ardente relève une salade de fraises.",
+  },
+  {
+    category: 'Dégustation',
+    q: "Combien de temps se conservent vos liqueurs ?",
+    a: "Nos liqueurs se conservent plusieurs années non ouvertes, à l'abri de la lumière et de la chaleur. Une fois ouvertes, elles gardent toutes leurs qualités pendant 12 à 18 mois — au-delà, les arômes s'assouplissent mais restent très agréables.",
+  },
+  {
+    category: 'Produits',
+    q: "Vos produits sont-ils bio ?",
+    a: "Nos plantes sont issues d'agriculture biologique, récoltées sur nos parcelles ou chez des producteurs partenaires que nous sélectionnons un par un. Le label bio est en cours de certification pour l'ensemble de notre gamme.",
+  },
+  {
+    category: 'Produits',
+    q: "Utilisez-vous des arômes ou des conservateurs ?",
+    a: "Aucun. Nos liqueurs sont faites de plantes, d'alcool et de sucre. Ni arôme artificiel, ni colorant, ni conservateur. La couleur, le goût et la tenue viennent uniquement du travail de macération et de distillation.",
+  },
+  {
+    category: 'Produits',
+    q: "Quel est le degré d'alcool de vos liqueurs ?",
+    a: "L'Alchimie Végétale titre 50% vol. Les autres liqueurs de la gamme signature se situent entre 30 et 45% vol. Les apéritifs de la gamme Nectar/Lime/Flèche sont plus légers (18 à 22% vol.), ainsi que les infusions Lumière Obscure au CBD.",
+  },
+  {
+    category: 'CBD',
+    q: "Vos infusions CBD contiennent-elles du THC ?",
+    a: "Non. Nos infusions de la gamme Lumière Obscure ne contiennent que du CBD (cannabidiol), sans aucune trace de THC. Elles sont parfaitement légales en France et ne provoquent aucun effet psychoactif.",
+  },
+  {
+    category: 'CBD',
+    q: "Quels sont les effets du CBD dans vos infusions ?",
+    a: "Le CBD est reconnu pour ses propriétés apaisantes et relaxantes. Associé à des plantes comme l'ortie, la verveine ou l'absinthe, il s'inscrit dans une logique de détente botanique — pas de médication. Nos infusions ne remplacent pas un avis médical.",
+  },
+  {
+    category: 'Pro',
+    q: "Comment devenir revendeur ?",
+    a: "Nous distribuons directement aux cavistes, restaurateurs, épiceries fines et hôteliers. Écrivez-nous à " + site.email + " avec quelques mots sur votre établissement et nous reviendrons vers vous rapidement avec nos tarifs professionnels.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.a,
+    },
+  })),
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${site.url}/faq` },
+  ],
+};
+
+// Regroupement par catégorie pour l'affichage
+const categories = ['Commande', 'Dégustation', 'Produits', 'CBD', 'Pro'] as const;
+const faqsByCategory = Object.fromEntries(
+  categories.map((cat) => [cat, faqs.filter((f) => f.category === cat)])
+);
+---
+<Layout
+  title="Foire aux questions | Livraison, dégustation, CBD — La Brasserie des Plantes"
+  description="Livraison, conservation, dégustation, CBD, partenariats professionnels : toutes les réponses à vos questions sur nos liqueurs artisanales."
+  schema={[faqSchema, breadcrumb]}
+>
+  <PageHeader
+    kicker="Foire aux questions"
+    title="Toutes<br />nos réponses"
+    subtitle="Commande, dégustation, conservation, CBD, partenariats — tout est ici. Si vous ne trouvez pas, écrivez-nous."
+    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'FAQ' }]}
+  />
+
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-6 space-y-14">
+      {categories.map((cat) => (
+        <div>
+          <h2 class="font-display text-2xl md:text-3xl text-forest-900 mb-6 pb-2 border-b border-forest-200">
+            {cat}
+          </h2>
+          <div class="space-y-3">
+            {faqsByCategory[cat].map((f) => (
+              <details class="group rounded-2xl bg-cream-50 border border-forest-100/60 overflow-hidden open:border-forest-300">
+                <summary class="cursor-pointer px-6 py-4 font-medium text-forest-900 flex items-center justify-between gap-4 hover:bg-forest-50/50 transition-colors list-none">
+                  <span>{f.q}</span>
+                  <svg class="flex-none w-5 h-5 text-forest-600 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </summary>
+                <div class="px-6 pb-5 text-ink-700 leading-relaxed text-sm">
+                  {f.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="py-16 bg-forest-900 text-cream-100 mt-16">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl text-cream-100 mb-4">Une autre question ?</h2>
+      <p class="text-cream-200/80 mb-8">Nous répondons rapidement, sans langue de bois.</p>
+      <a href="/contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 text-forest-900 font-medium hover:bg-cream-100 transition-colors">
+        Nous écrire
+      </a>
+    </div>
+  </section>
+</Layout>

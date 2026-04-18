@@ -1,0 +1,147 @@
+---
+/**
+ * ProductMasonry — grille produits avec animation Scroll-Driven (CSS natif).
+ * Inspirée de https://21st.dev/community/components/ravikatiyar/masonry-grid-with-scroll-animation
+ *
+ * Chaque flacon apparaît en slide-in + léger pivot depuis sa colonne d'origine
+ * au moment où il entre dans le viewport. Anti-slop : pas de texte superflu,
+ * cartes aérées, dorure au hover, fond blanc.
+ */
+import type { Product } from '../data/products';
+import { GlowCard } from './ui/spotlight-card';
+
+interface Props {
+  items: Product[];
+  heading?: string;
+  kicker?: string;
+  subtitle?: string;
+}
+
+const { items, heading, kicker, subtitle } = Astro.props;
+---
+{heading && (
+  <div class="text-center mb-10 max-w-3xl mx-auto">
+    {kicker && (
+      <div class="text-[10px] md:text-xs uppercase tracking-[0.35em] text-gold-600 font-medium mb-3">
+        {kicker}
+      </div>
+    )}
+    <h2 class="font-display text-4xl md:text-5xl leading-tight text-forest-900">{heading}</h2>
+    {subtitle && <p class="mt-4 text-ink-700 leading-relaxed">{subtitle}</p>}
+    <div class="gold-divider mt-6"></div>
+  </div>
+)}
+
+<div class="product-masonry grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+  {items.map((p, i) => {
+    // On alterne les aspects pour créer l'effet masonry sans casser la lisibilité
+    // des flacons (toujours centrés, jamais tronqués).
+    const aspect = i % 5 === 0 ? 'aspect-[3/4]' : i % 4 === 0 ? 'aspect-[4/5]' : 'aspect-[5/6]';
+    return (
+      <a
+        href={`/boutique/${p.slug}`}
+        class={`product-masonry-card group relative block rounded-2xl overflow-hidden transition-transform duration-300`}
+        style={`--side: ${i % 2 === 0 ? 1 : -1}; --amp: ${Math.ceil((i % 6) / 2)};`}
+      >
+        <GlowCard
+          client:visible
+          glowColor="gold"
+          customSize
+          padding="none"
+          className="bg-white !aspect-auto w-full overflow-hidden"
+        >
+          {p.highlight && (
+            <span class="absolute top-3 left-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gold-500 text-cream-50 text-[10px] font-medium uppercase tracking-wide shadow-sm">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+              {p.highlight}
+            </span>
+          )}
+          {p.alcohol > 0 && (
+            <span class="absolute top-3 right-3 z-10 text-[11px] font-medium text-cream-50 bg-forest-800/90 px-2.5 py-1 rounded-full backdrop-blur-sm">
+              {p.alcohol}°
+            </span>
+          )}
+
+          <div class={`${aspect} bg-white relative overflow-hidden`}>
+            <img
+              src={p.sizeImages?.[70] || p.image}
+              alt={`${p.name} — liqueur artisanale aux plantes de Haute-Loire`}
+              loading="lazy"
+              decoding="async"
+              class:list={[
+                'absolute inset-0 w-full h-full object-contain p-6 transition-opacity duration-500 ease-in-out',
+                p.image2 ? 'group-hover:opacity-0' : 'group-hover:scale-105 transition-transform',
+              ]}
+            />
+            {p.image2 && (
+              <img
+                src={p.image2}
+                alt={`${p.name} — vue d'ambiance`}
+                loading="lazy"
+                class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
+              />
+            )}
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="font-display text-lg text-forest-900 leading-tight mb-1">{p.name}</h3>
+            {p.tagline && (
+              <p class="text-xs italic text-ink-500 leading-relaxed line-clamp-2">{p.tagline}</p>
+            )}
+            <div class="mt-auto pt-3 flex items-center justify-between text-xs">
+              <span class="text-forest-700 font-medium">
+                {p.priceMin === p.priceMax ? `${p.priceMin} €` : `dès ${p.priceMin} €`}
+              </span>
+              <span class="text-gold-600 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                Découvrir
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </div>
+          </div>
+        </GlowCard>
+      </a>
+    );
+  })}
+</div>
+
+<style>
+  @keyframes product-slide-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9) rotate(calc(var(--side, 1) * (3deg * var(--amp, 1))));
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  .product-masonry-card {
+    transform-origin: center 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .product-masonry-card {
+      animation: product-slide-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 20%;
+    }
+  }
+
+  /* Transform origin par colonne pour un effet asymétrique propre */
+  .product-masonry-card:nth-of-type(2n + 1) { transform-origin: 25vw 100%; }
+  .product-masonry-card:nth-of-type(2n)     { transform-origin: -25vw 100%; }
+
+  @media (min-width: 768px) {
+    .product-masonry-card:nth-of-type(3n + 1) { transform-origin: 35vw 100%; }
+    .product-masonry-card:nth-of-type(3n + 2) { transform-origin: 0 100%; }
+    .product-masonry-card:nth-of-type(3n)     { transform-origin: -35vw 100%; }
+  }
+
+  @media (min-width: 1024px) {
+    .product-masonry-card:nth-of-type(4n + 1) { transform-origin: 45vw 100%; }
+    .product-masonry-card:nth-of-type(4n + 2) { transform-origin: 15vw 100%; }
+    .product-masonry-card:nth-of-type(4n + 3) { transform-origin: -15vw 100%; }
+    .product-masonry-card:nth-of-type(4n)     { transform-origin: -45vw 100%; }
+  }
+</style>

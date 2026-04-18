@@ -1,0 +1,420 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* === POLICES LBDP === */
+@font-face {
+  font-family: "Joane";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Joane-Regular.woff2") format("woff2"),
+       url("/fonts/Joane-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/BarlowCondensed-Regular.woff2") format("woff2"),
+       url("/fonts/BarlowCondensed-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/BarlowCondensed-Medium.woff2") format("woff2"),
+       url("/fonts/BarlowCondensed-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/BarlowCondensed-SemiBold.woff2") format("woff2"),
+       url("/fonts/BarlowCondensed-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/BarlowCondensed-Bold.woff2") format("woff2"),
+       url("/fonts/BarlowCondensed-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Sunshine Script";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/SunshineScript.woff2") format("woff2"),
+       url("/fonts/SunshineScript.ttf") format("truetype");
+}
+
+@theme {
+  /* Palette LBDP — vert émeraude jewel-tone luxe + dorure signature
+   * Pivots :
+   * - emerald jewel #0a6b43 → saturation un peu plus haute, velours vert profond
+   * - gold #cdb684   → signature du V du logo
+   * - off-black #1b1b1b
+   */
+  --color-forest-50: #e8f4ec;
+  --color-forest-100: #c7e3d2;
+  --color-forest-200: #94c9a8;
+  --color-forest-300: #55a678;
+  --color-forest-400: #228755;
+  --color-forest-500: #0a6b43;      /* Émeraude jewel (couleur-signature) */
+  --color-forest-600: #085636;
+  --color-forest-700: #06452b;
+  --color-forest-800: #053722;
+  --color-forest-900: #042919;
+  --color-forest-950: #02180f;
+
+  --color-cream-50: #fbf8f1;
+  --color-cream-100: #f5efdf;
+  --color-cream-200: #ebdebe;
+  --color-cream-300: #dcc897;
+  --color-cream-400: #cdb684;       /* Accent doré secondaire (site officiel) */
+  --color-cream-500: #b6944e;
+
+  /* Gold — échelle enrichie pour orchestrer les dorures
+   * 300 : lumineux (highlights), 400 : clair, 500 : signature, 600 : chaud, 700 : profond */
+  --color-gold-300: #e7d9b1;
+  --color-gold-400: #dcc797;
+  --color-gold-500: #cdb684;        /* Doré officiel du logo */
+  --color-gold-600: #b69867;
+  --color-gold-700: #8f7847;
+
+  /* Off-black (site officiel : #1b1b1b) — évite le pur noir (taste-skill) */
+  --color-ink-900: #1b1b1b;
+  --color-ink-800: #272723;
+  --color-ink-700: #3a3a35;
+  --color-ink-500: #6b6b64;
+  --color-ink-300: #adada6;
+
+  /* Palette Lumière Obscure — nuit, lune, forêt sombre */
+  --color-night-50: #e6e7ef;
+  --color-night-100: #c2c5d4;
+  --color-night-200: #8e93ab;
+  --color-night-300: #5a6080;
+  --color-night-700: #1b1d2f;
+  --color-night-800: #12131f;
+  --color-night-900: #090a14;
+  --color-moon-300: #e9e2c4;
+  --color-moon-400: #d6cb97;
+  --color-moon-500: #b9ab67;
+
+  /* Typographies — Joane (serif display), Barlow Condensed (texte), Sunshine (script) */
+  --font-display: "Joane", "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-body: "Barlow Condensed", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-script: "Sunshine Script", "Dancing Script", cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink-900);
+  background-color: var(--color-cream-50);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-forest-900);
+  }
+
+  /* Auto-contrast : tout heading dans une section sombre devient crème/moon
+     si aucune classe text-* n'est posée explicitement. Résout le bug
+     "dark-on-dark" sur les sections forest-900 / black / night-*. */
+  [class*="bg-forest-8"] :is(h1, h2, h3, h4):not([class*="text-"]),
+  [class*="bg-forest-9"] :is(h1, h2, h3, h4):not([class*="text-"]),
+  [class*="bg-night-"]  :is(h1, h2, h3, h4):not([class*="text-"]),
+  [class*="bg-black"]   :is(h1, h2, h3, h4):not([class*="text-"]),
+  [class*="bg-ink-8"]   :is(h1, h2, h3, h4):not([class*="text-"]),
+  [class*="bg-ink-9"]   :is(h1, h2, h3, h4):not([class*="text-"]) {
+    color: var(--color-cream-100);
+  }
+  /* Cas spécifique : Lumière Obscure utilise moon-300 sur les titres */
+  [class*="bg-night-"] :is(h1, h2, h3, h4):not([class*="text-"]) {
+    color: var(--color-moon-300);
+  }
+
+  /* Feedback tactile universel sur les CTA pill (ancres + boutons) */
+  a[class*="rounded-full"],
+  button[class*="rounded-full"] {
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 220ms ease,
+                background-color 220ms ease,
+                border-color 220ms ease,
+                color 220ms ease;
+    will-change: transform;
+  }
+  a[class*="rounded-full"]:active,
+  button[class*="rounded-full"]:active {
+    transform: translateY(1px) scale(0.985);
+  }
+}
+
+/* Décoration : séparateur botanique */
+.botanical-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--color-forest-600);
+}
+
+.botanical-divider::before,
+.botanical-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-forest-300),
+    transparent
+  );
+  max-width: 8rem;
+}
+
+/* Apparition douce */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-rise {
+  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Staggered reveal — enfants d'un conteneur .stagger, décalage automatique */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 80ms) * var(--i, 0));
+}
+.stagger > *:nth-child(1)  { --i: 1; }
+.stagger > *:nth-child(2)  { --i: 2; }
+.stagger > *:nth-child(3)  { --i: 3; }
+.stagger > *:nth-child(4)  { --i: 4; }
+.stagger > *:nth-child(5)  { --i: 5; }
+.stagger > *:nth-child(6)  { --i: 6; }
+.stagger > *:nth-child(7)  { --i: 7; }
+.stagger > *:nth-child(8)  { --i: 8; }
+.stagger > *:nth-child(9)  { --i: 9; }
+.stagger > *:nth-child(10) { --i: 10; }
+.stagger > *:nth-child(11) { --i: 11; }
+.stagger > *:nth-child(12) { --i: 12; }
+
+/* Feedback tactile — ajoute .btn-tactile aux CTA principaux */
+.btn-tactile {
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms ease, background-color 200ms ease, color 200ms ease;
+  will-change: transform;
+}
+.btn-tactile:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+/* Ombres teintées à la palette cream (plutôt que du gris neutre) */
+.shadow-cream {
+  box-shadow: 0 10px 30px -10px rgba(205, 182, 132, 0.22),
+              0 4px 12px -4px rgba(15, 94, 61, 0.1);
+}
+.shadow-cream-lg {
+  box-shadow: 0 20px 50px -18px rgba(205, 182, 132, 0.28),
+              0 10px 22px -8px rgba(15, 94, 61, 0.12);
+}
+.shadow-gold {
+  box-shadow: 0 8px 22px -8px rgba(205, 182, 132, 0.4),
+              0 2px 6px -2px rgba(143, 120, 71, 0.25);
+}
+
+/* Filet doré — ornement typographique raffiné sous un titre */
+.gold-rule {
+  display: inline-block;
+  width: 56px;
+  height: 1.5px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold-500) 20%,
+    var(--color-gold-400) 50%,
+    var(--color-gold-500) 80%,
+    transparent
+  );
+  vertical-align: middle;
+  margin: 0 0.75rem;
+}
+
+/* Séparateur doré horizontal long (entre deux sections) */
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--color-gold-600);
+}
+.gold-divider::before,
+.gold-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  max-width: 8rem;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(205, 182, 132, 0.6),
+    transparent
+  );
+}
+.gold-divider::after {
+  background: linear-gradient(
+    to left,
+    transparent,
+    rgba(205, 182, 132, 0.6),
+    transparent
+  );
+}
+
+/* Soulignage doré sur un mot clé (lien / accent) */
+.gold-underline {
+  background-image: linear-gradient(
+    to right,
+    var(--color-gold-500),
+    var(--color-gold-400)
+  );
+  background-size: 100% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+}
+
+/* Filet doré en bord supérieur — pour marquer une section noble (émeraude / ink) */
+.gold-top-rule {
+  position: relative;
+}
+.gold-top-rule::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(205, 182, 132, 0.4) 20%,
+    rgba(220, 199, 151, 0.7) 50%,
+    rgba(205, 182, 132, 0.4) 80%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Inner border doré sur CTA / cartes premium (glass + doré intérieur) */
+.gold-inset-border {
+  box-shadow:
+    inset 0 0 0 1px rgba(205, 182, 132, 0.35),
+    0 6px 18px -6px rgba(205, 182, 132, 0.25);
+}
+
+/* CTA primaire signature : fond émeraude avec halo doré au hover */
+.btn-primary-gold {
+  position: relative;
+  background: var(--color-forest-700);
+  color: var(--color-cream-50);
+  transition: background-color 220ms ease, box-shadow 260ms ease, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-primary-gold:hover {
+  background: var(--color-forest-600);
+  box-shadow:
+    0 0 0 1px rgba(205, 182, 132, 0.45),
+    0 8px 22px -6px rgba(205, 182, 132, 0.4);
+}
+
+/* Coin doré décoratif (pour cartes éditoriales) */
+.gold-corner {
+  position: relative;
+}
+.gold-corner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-top: 1.5px solid rgba(205, 182, 132, 0.8);
+  border-right: 1.5px solid rgba(205, 182, 132, 0.8);
+  border-top-right-radius: inherit;
+  pointer-events: none;
+}
+
+/* Micro-animation pulse douce pour badges/étoiles */
+@keyframes soft-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.05); opacity: 0.92; }
+}
+.animate-soft-pulse {
+  animation: soft-pulse 3.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Float léger — pour visuels hero / icones */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+.animate-float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+/* Respect des préférences utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .stagger > *,
+  .animate-soft-pulse,
+  .animate-float-soft,
+  .animate-marquee,
+  .animate-marquee-vertical {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Marquee — défilement infini horizontal et vertical (boucle seamless) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% - var(--gap, 1.5rem))); }
+}
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to   { transform: translateY(calc(-100% - var(--gap, 1.5rem))); }
+}
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+  will-change: transform;
+}
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 40s) linear infinite;
+  will-change: transform;
+}
+/* Pause au survol de la zone marquee — règle CSS explicite (plus fiable que
+   la variante Tailwind arbitraire). Active si le parent a .marquee-pause-on-hover */
+.marquee-pause-on-hover:hover .animate-marquee,
+.marquee-pause-on-hover:hover .animate-marquee-vertical {
+  animation-play-state: paused;
+}
+/* Pause aussi au focus clavier (accessibilité) */
+.marquee-pause-on-hover:focus-within .animate-marquee,
+.marquee-pause-on-hover:focus-within .animate-marquee-vertical {
+  animation-play-state: paused;
+}

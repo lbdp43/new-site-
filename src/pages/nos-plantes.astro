@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { plants } from '../data/plants';
+import { site } from '../data/site';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Nos plantes', item: `${site.url}/nos-plantes` },
+  ],
+};
+
+// ItemList schema — chaque plante est un DefinedTerm pour AI search + SEO sémantique
+const plantsListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Plantes de La Brasserie des Plantes',
+  description: 'Plantes aromatiques, médicinales, racines et épices utilisées dans nos liqueurs artisanales.',
+  numberOfItems: plants.length,
+  itemListElement: plants.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'DefinedTerm',
+      name: p.name,
+      ...(p.latin && { alternateName: p.latin }),
+      description: p.description,
+      inDefinedTermSet: `${site.url}/nos-plantes`,
+    },
+  })),
+};
+
+const schema = [breadcrumbSchema, plantsListSchema];
+
+const familyLabels: Record<string, string> = {
+  aromatique: 'Plante aromatique',
+  racine: 'Racine',
+  ecorce: 'Écorce',
+  epice: 'Épice',
+  fleur: 'Fleur',
+  agrume: 'Agrume',
+};
+---
+<Layout
+  title="Nos plantes | Verveine, mélisse, carvi, hysope — La Brasserie des Plantes"
+  description="Découvrez les plantes qui composent nos liqueurs : verveine, mélisse, carvi, hysope, aurone, menthe, gentiane… 27 végétaux d'Auvergne, travaillés en agriculture biologique."
+  schema={schema}
+>
+  <PageHeader
+    kicker="Botanique"
+    title="Les plantes de<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>nos montagnes</em>"
+    subtitle="Verveine, mélisse, carvi, thym-citron, hysope, aurone… Plus de 27 plantes, racines, écorces et épices entrent dans nos liqueurs. Toutes issues d'agriculture biologique, récoltées au plus près de la Haute-Loire."
+    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Nos plantes' }]}
+  />
+
+  <section class="pb-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="aspect-[5/2] rounded-3xl overflow-hidden shadow-xl mb-16">
+        <img
+          src="/images/stories/paysage-plantes.webp"
+          alt="Paysage botanique de Haute-Loire — plantes médicinales utilisées par la Brasserie des Plantes"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-20">
+        <p>
+          Une liqueur, c'est un paysage en bouteille. C'est pourquoi nous ne
+          travaillons qu'avec des plantes dont nous connaissons l'origine :
+          nos propres parcelles, ou celles de producteurs voisins que nous
+          choisissons un par un. L'agriculture biologique est un non-négociable.
+        </p>
+        <p>
+          Voici douze des plantes qui reviennent le plus souvent dans nos
+          assemblages — chacune avec son histoire, sa saison, et les liqueurs
+          qu'elle compose.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {plants.map((plant) => (
+          <article class="p-7 rounded-2xl bg-cream-50 border border-forest-100/60 hover:border-forest-300 hover:shadow-lg transition-all">
+            <div class="flex items-start justify-between mb-3 gap-3">
+              <div>
+                <h2 class="font-display text-2xl text-forest-900 leading-tight">{plant.name}</h2>
+                {plant.latin && (
+                  <div class="text-xs italic text-ink-500 mt-1">{plant.latin}</div>
+                )}
+              </div>
+              <span class="text-[10px] uppercase tracking-[0.15em] text-forest-600 font-medium px-2 py-1 rounded-full bg-forest-50 whitespace-nowrap">
+                {familyLabels[plant.family]}
+              </span>
+            </div>
+            <p class="text-sm text-ink-700 leading-relaxed mb-4">{plant.description}</p>
+            <div class="pt-3 border-t border-forest-100/80 space-y-2">
+              <div class="text-xs">
+                <span class="text-ink-500 uppercase tracking-wide">Utilisée dans</span>
+                <div class="text-forest-800 font-medium mt-0.5">{plant.usedIn}</div>
+              </div>
+              {plant.season && (
+                <div class="text-xs">
+                  <span class="text-ink-500 uppercase tracking-wide">Saison</span>
+                  <div class="text-ink-700 mt-0.5">{plant.season}</div>
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-forest-900 text-cream-100">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl md:text-4xl mb-6">
+        Et les 15 autres ?
+      </h2>
+      <p class="text-cream-200/80 leading-relaxed text-lg mb-8">
+        Certaines sont nos petits secrets — des accords rares, composés pour
+        une seule liqueur. La meilleure façon de les découvrir : goûter.
+      </p>
+      <a href="/boutique" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
+        Explorer la boutique
+      </a>
+    </div>
+  </section>
+</Layout>

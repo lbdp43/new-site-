@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CartPage from '../components/cart/CartPage';
+---
+
+<Layout
+  title="Mon panier"
+  description="Votre panier — La Brasserie des Plantes"
+  noindex
+>
+  <section class="bg-cream-50 min-h-[60vh]">
+    <div class="max-w-7xl mx-auto px-6 pt-10 pb-4">
+      <h1 class="font-display text-4xl md:text-5xl text-forest-900">Mon panier</h1>
+    </div>
+    <CartPage client:load />
+  </section>
+</Layout>

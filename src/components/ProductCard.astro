@@ -1,0 +1,85 @@
+---
+import { GlowCard } from './ui/spotlight-card';
+import type { Product } from '../data/products';
+
+interface Props {
+  product: Product;
+  featured?: boolean;
+}
+
+const { product, featured = false } = Astro.props;
+const priceLabel =
+  product.priceMin === product.priceMax
+    ? `${product.priceMin} €`
+    : `${product.priceMin} – ${product.priceMax} €`;
+---
+<a
+  href={`/boutique/${product.slug}`}
+  class="group relative block rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform duration-300"
+>
+  <GlowCard
+    client:visible
+    glowColor="gold"
+    customSize
+    padding="none"
+    className="bg-white !aspect-auto w-full overflow-hidden"
+  >
+    {product.highlight && (
+      <span class="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500 text-cream-50 text-[11px] font-medium tracking-wide uppercase shadow-sm">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+        {product.highlight}
+      </span>
+    )}
+
+    <div class="aspect-[4/5] bg-white flex items-center justify-center relative overflow-hidden">
+      <img
+        src={product.image}
+        alt={`Liqueur artisanale ${product.name} — La Brasserie des Plantes`}
+        loading="lazy"
+        decoding="async"
+        class:list={[
+          'absolute inset-0 w-full h-full object-contain p-6 transition-opacity duration-500 ease-in-out',
+          product.image2 ? 'opacity-100 group-hover:opacity-0' : 'group-hover:scale-105 transition-transform',
+        ]}
+      />
+      {product.image2 && (
+        <img
+          src={product.image2}
+          alt={`${product.name} — seconde vue`}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover p-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
+        />
+      )}
+      <span class="absolute bottom-3 right-3 z-10 text-[10px] uppercase tracking-[0.2em] text-forest-700/80 font-medium bg-cream-50/90 px-2 py-1 rounded-full backdrop-blur-sm">
+        {product.range === 'brasserie' ? 'Brasserie' : product.range === 'aperitif' ? 'Apéritif' : product.range === 'lumiere-obscure' ? 'Lumière Obscure' : product.range === 'edition-limitee' ? 'Édition limitée' : 'Accessoire'}
+      </span>
+      {product.alcohol > 0 && (
+        <span class="absolute top-3 left-3 z-10 text-[11px] font-medium text-cream-50 bg-forest-800/80 px-2.5 py-1 rounded-full backdrop-blur-sm">
+          {product.alcohol}°
+        </span>
+      )}
+    </div>
+
+    <div class="p-6 flex-1 flex flex-col">
+      <h3 class="font-display text-xl text-forest-900 mb-2 leading-tight">
+        {product.name}
+      </h3>
+      {product.tagline && (
+        <p class="text-sm text-ink-500 italic leading-relaxed mb-4">
+          {product.tagline}
+        </p>
+      )}
+      <div class="mt-auto flex items-center justify-between pt-2">
+        <span class="text-forest-700 font-medium">{priceLabel}</span>
+        <span class="text-xs text-gold-600 group-hover:text-gold-700 transition-colors inline-flex items-center gap-1">
+          Découvrir
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </GlowCard>
+</a>

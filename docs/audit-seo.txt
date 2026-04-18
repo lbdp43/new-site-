@@ -1,0 +1,767 @@
+                        AUDIT SEO COMPLET
+
+
+
+
+      labrasseriedesplantes.fr
+   Analyse exhaustive — 10 catégories, 7 pages, 18 produits
+
+
+
+
+                            52/100
+                             Score SEO Global
+
+
+
+
+04/04/2026   |   WordPress + WooCommerce   |    Flatsome v3.20.5   |   IONOS
+Table des matières
+
+
+ 1. Résumé exécutif
+
+
+ 2. Balises Meta & SEO On-Page                                                      35
+
+
+
+ 3. Structure des titres (Hn)                                                       40
+
+
+
+ 4. Données structurées (Schema.org)                                                55
+
+
+
+ 5. Contenu & E-E-A-T                                                               50
+
+
+
+ 6. Images                                                                          35
+
+
+
+ 7. SEO Local                                                                       45
+
+
+
+ 8. Maillage interne                                                                60
+
+
+
+ 9. Fichiers techniques                                                             55
+
+
+
+ 10. Performance & Sécurité                                                         65
+
+
+
+ 11. SEO E-commerce                                                                 45
+
+
+
+ 12. Plan d'actions prioritaires
+
+
+
+
+                                       Page 2 / 22   labrasseriedesplantes.fr — Audit SEO
+     1. Résumé exécutif
+
+
+La Brasserie des Plantes (SIRET 89920152900018) est une entreprise artisanale basée à Saint-Didier-en-Velay (43140,
+Haute-Loire) qui produit des liqueurs et infusions à base de plantes. Le produit phare, L'Alchimie Végétale, a été élu
+Meilleur Digestif du Monde 2025 aux World Drinks Awards.
+
+Le site e-commerce (WordPress + WooCommerce) propose 18 produits répartis en 3 gammes. Malgré un produit
+d'exception, le site sous-exploite gravement son potentiel SEO avec un score global de 52/100.
+
+
+
+
+                                          Figure 1: Scores SEO par catégorie — Vue radar
+
+
+
+Points forts
+
+
+     • HTTPS activé, mentions légales complètes
+     • Schema Organization et Product en place
+     • Navigation claire, profondeur max 3 clics
+     • Prix mondial = levier d'autorité exceptionnel
+     • Conformité RGPD (Complianz) et vérification d'âge
+
+
+
+
+                                                           Page 3 / 22                        labrasseriedesplantes.fr — Audit SEO
+Problèmes critiques
+
+
+    • Incohérence NAP : 2 numéros de tél. et 2 emails différents entre les pages
+    • 0 avis clients sur la totalité des produits
+    • Aucune meta description sur les pages internes
+    • Pas de canonical (sauf 1 page produit)
+    • Pas de balises OG / Twitter Cards
+    • Stratégie de contenu inexistante (1 seul article de blog)
+
+
+
+
+                                              Figure 2: Scores détaillés par catégorie SEO
+
+
+
+
+                                                              Page 4 / 22                    labrasseriedesplantes.fr — Audit SEO
+                                                                                                                35/100
+    2. Balises Meta & SEO On-Page
+
+
+
+
+                                      Figure 3: Couverture des balises meta par page
+
+
+
+Analyse détaillée par page
+
+
+  Page                       Title                    Meta Desc            Canonical   OG Tags                    H1
+
+
+ Accueil                     ⚠ Trop court            ✓                    ✗            ✗                         ✓
+
+
+ /notre-histoire/            ✓                       ✗                    ✗            ✗                         ✓
+
+
+ /shop/                      ⚠ "Boutique" seul       ✗                    ✗            ✗                         ✓
+
+
+ /nos-cocktails/             ✓                       ✗                    ✗            ✗                         ✓
+
+
+ /nous-contacter/            ✓                       ✗                    ✗            ⚠ og:image seul           ✗ Absent
+
+
+ /lumiere-obscure/           ✓                       ⚠ Générique          ✗            ✗                         ✗ Absent
+
+
+ /shop/lalchimie-vegetale/   ✓                       ✗                    ✓            ✓                         ✓
+
+
+
+
+                                                         Page 5 / 22                       labrasseriedesplantes.fr — Audit SEO
+Recommandations de titles optimisés
+
+
+  Page        Title actuel                           Title recommandé
+
+
+ Accueil      La brasserie des plantes               La Brasserie des Plantes | Liqueurs artisanales bio — Haute-Loire
+
+
+ Boutique     Boutique                               Boutique | Liqueurs aux plantes bio — La Brasserie des Plantes
+
+
+ Notre        Notre Histoire - La brasserie des      Notre Histoire | Artisans liquoristes en Haute-Loire depuis 2021
+ Histoire     plantes
+
+
+ Cocktails    Nos Cocktails - La brasserie des       Recettes Cocktails aux Liqueurs de Plantes | La Brasserie des
+              plantes                                Plantes
+
+
+
+
+                                                  Page 6 / 22                             labrasseriedesplantes.fr — Audit SEO
+                                                                                                                    40/100
+   3. Structure des titres (Hn)
+
+
+Page                      H1                               Problème                                                  Statut
+
+
+Accueil                  La Brasserie des Plantes         H2 trop vagues ("Découvrez"), pas de H3                   ⚠
+
+
+/notre-histoire/         Notre histoire                   Saute directement au H3, pas de H2                        ⚠
+
+
+/nous-contacter/         —                                Pas de H1 !                                               ✗
+
+
+/nos-cocktails/          Cocktails                        Trop générique, pas de mots-clés                          ⚠
+
+
+/lumiere-obscure/        —                                Pas de H1 !                                               ✗
+
+
+/shop/                   Boutique                         Pas assez descriptif                                      ⚠
+
+
+Fiches produit           Nom du produit                   Hiérarchie correcte avec H2/H3                            ✓
+
+
+
+
+ Action immédiate : Ajouter un H1 sur /nous-contacter/ ("Contactez La Brasserie des Plantes") et /lumiere-obscure/
+ ("Lumière Obscure — Liqueurs CBD artisanales").
+
+
+
+
+                                                       Page 7 / 22                             labrasseriedesplantes.fr — Audit SEO
+                                                                                                                     55/100
+   4. Données structurées (Schema.org)
+
+
+Schemas détectés ✓
+
+
+ Type                                  Page                                   Qualité
+
+
+ WebSite                               Accueil                               ✓ Correct
+
+
+ Organization                          Accueil                               ✓ Bon (sameAs, contact, logo)
+
+
+ Product + AggregateOffer              Fiches produit                        ✓ Complet (prix, SKU, dispo)
+
+
+ BreadcrumbList                        Produits + catégories                 ✓ Correct
+
+
+
+Schemas manquants ✗
+
+
+ Type                               Importance             Impact attendu
+
+
+ LocalBusiness                      CRITIQUE              Visibilité Google Maps, Local Pack, Knowledge Panel
+
+
+ AggregateRating / Review           CRITIQUE              Rich snippets étoiles dans les SERP
+
+
+ FAQPage                            FORT                  Rich snippets FAQ, position 0
+
+
+ Recipe                             MOYEN                 Rich snippets recettes pour les cocktails
+
+
+
+Exemple de LocalBusiness recommandé
+
+
+ {"@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "La Brasserie des Plantes",
+    "image": "https://labrasseriedesplantes.fr/wp-content/uploads/2024/04/Fichier-3.png",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "18 Grand Place",
+        "addressLocality": "Saint-Didier-en-Velay",
+        "postalCode": "43140",
+        "addressCountry": "FR"
+    },
+    "telephone": "+33974974101",
+    "email": "labrasseriedesplantes@gmail.com",
+    "url": "https://labrasseriedesplantes.fr",
+    "priceRange": "€€",
+
+
+
+
+                                                        Page 8 / 22                             labrasseriedesplantes.fr — Audit SEO
+    "openingHours": "Mo-Sa 09:00-18:00"
+}
+
+
+
+
+                                          Page 9 / 22   labrasseriedesplantes.fr — Audit SEO
+                                                                                                                       50/100
+    5. Contenu & E-E-A-T
+
+
+Volume de contenu par page
+
+
+  Page                               Mots (est.)               Minimum recommandé                           Statut
+
+
+ Accueil                            ~150                      500+                                         ✗ Insuffisant
+
+
+ /notre-histoire/                   ~200                      400+                                         ✗ Insuffisant
+
+
+ /nos-cocktails/                    ~400                      400+                                         ✓ OK
+
+
+ /lumiere-obscure/                  ~250                      400+                                         ✗ Insuffisant
+
+
+ Fiches produit (moy.)              ~200-400                  300+                                         ⚠ Variable
+
+
+ /nous-contacter/                   ~50                       150+                                         ✗ Très léger
+
+
+
+Signaux E-E-A-T
+
+
+  Signal                 Statut       Détail
+
+
+ Expertise               ⚠           Mentions de plantes et savoir-faire, mais pas de contenu éducatif
+
+
+ Expérience              ✓           Page histoire avec photos de l'équipe (Étienne, Guillaume, Bastien)
+
+
+ Autorité                ✓           Meilleur digestif du monde 2025 — World Drinks Awards
+
+
+ Fiabilité               ✓           SIRET, RCS, mentions légales complètes
+
+
+ Avis clients            ✗           0 avis sur tous les produits
+
+
+ Blog                    ✗           1 seul article — stratégie de contenu absente
+
+
+
+Incohérence NAP critique
+
+
+
+     Source                                             Téléphone                Email
+
+
+     Schema Organization + Page Contact                09 74 97 41 01           labrasseriedesplantes@gmail.com
+
+
+
+
+                                                          Page 10 / 22                            labrasseriedesplantes.fr — Audit SEO
+  Source                                           Téléphone              Email
+
+
+  Mentions légales                                 07 49 53 64 19        contact@labrasseriedesplantes.fr
+
+
+
+Impact : L'incohérence NAP nuit directement au SEO local et à la confiance de Google.
+
+
+
+
+                                                     Page 11 / 22                        labrasseriedesplantes.fr — Audit SEO
+                                                                                                                       35/100
+   6. Images
+
+
+Critère                          Statut          Détail
+
+
+Attributs alt                   ⚠               Présents sur certaines images, absents/génériques sur d'autres
+
+
+Noms de fichiers                ✗               "Design-sans-titre-18.png", "20251209_170905-scaled.jpg"
+
+
+Format WebP                     ⚠               Quelques WebP mais majoritairement PNG et JPEG
+
+
+Images -scaled                  ✗               Images pleine résolution servies inutilement
+
+
+Alt sur page boutique           ✗               Aucun alt sur les vignettes produits de /shop/
+
+
+
+
+ Recommandation : Renommer les fichiers (ex: "liqueur-alchimie-vegetale-50cl.webp"), compresser et convertir en WebP,
+ ajouter des alt descriptifs incluant nom produit + marque.
+
+
+
+
+                                                          Page 12 / 22                            labrasseriedesplantes.fr — Audit SEO
+                                                                                                      45/100
+   7. SEO Local
+
+
+Critère                   Statut   Détail
+
+
+Adresse sur le site       ✓        18 Grand Place, 43140 Saint-Didier-en-Velay
+
+
+Google Maps               ✓        Lien présent sur /nous-contacter/
+
+
+Cohérence NAP             ✗        Téléphone et email incohérents
+
+
+Schema LocalBusiness      ✗        Absent — critique
+
+
+Horaires d'ouverture      ✗        Absents du site
+
+
+Google Business Profile   ✗        Non lié depuis le site
+
+
+Mots-clés géographiques   ✗        "Saint-Didier-en-Velay" uniquement dans les mentions légales
+
+
+Ateliers Wecandoo         ✓        Lien externe vers les ateliers
+
+
+
+
+                                          Page 13 / 22                           labrasseriedesplantes.fr — Audit SEO
+                                                                                                  60/100
+   8. Maillage interne
+
+
+Critère                    Statut     Détail
+
+
+Navigation principale      ✓         Claire et logique
+
+
+Breadcrumbs                ✓         Présents sur produits et catégories
+
+
+Produits similaires        ✓         Jusqu'à 10 produits liés par fiche
+
+
+Profondeur max             ✓         3 clics (accueil → catégorie → produit)
+
+
+Cross-linking contenu      ✗         Les cocktails ne lient pas vers les fiches produit
+
+
+Confusion page/catégorie   ⚠         /lumiere-obscure/ est page ET catégorie
+
+
+
+
+                                    Page 14 / 22                             labrasseriedesplantes.fr — Audit SEO
+                                                                                                                   55/100
+    9. Fichiers techniques
+
+
+robots.txt
+
+
+  User-agent: *
+  Disallow: /wp-content/uploads/wc-logs/
+  Disallow: /wp-content/uploads/woocommerce_transient_files/
+  Disallow: /wp-content/uploads/woocommerce_uploads/
+  Disallow: /*?add-to-cart=
+  Disallow: /*?*add-to-cart=
+  Disallow: /wp-admin/
+  Allow: /wp-admin/admin-ajax.php
+  Disallow: */cache/ionos-performance/
+  Sitemap: https://labrasseriedesplantes.fr/sitemaps.xml
+
+
+
+
+  Le robots.txt est bien configuré : blocage des logs WC, paramètres de panier, et cache IONOS.
+
+
+
+Sitemap XML
+
+
+  Sitemap                              URLs                  Problème
+
+
+ page-sitemap1.xml                    13 pages              ⚠ Inclut /cart/, /checkout/, /my-account/
+
+
+ product-sitemap1.xml                 19 produits           ✓ OK, MAJ récentes
+
+
+ post-sitemap1.xml                    1 article             ✗ Blog quasi vide
+
+
+
+
+  Actions : Exclure /cart/, /checkout/, /my-account/ du sitemap et ajouter noindex sur ces pages.
+
+
+
+
+                                                        Page 15 / 22                          labrasseriedesplantes.fr — Audit SEO
+                                                                                                      65/100
+   10. Performance & Sécurité
+
+
+Critère              Statut   Détail
+
+
+HTTPS                ✓        Certificat SSL valide
+
+
+Vérification d'âge   ✓        Age Gate 18+
+
+
+RGPD / Cookies       ✓        Complianz v7.4.5
+
+
+reCAPTCHA            ✓        v3 sur le formulaire
+
+
+Scripts tiers        ⚠        GTM + PayPal + reCAPTCHA + Age Gate = beaucoup de JS
+
+
+Google Fonts         ⚠        3 polices chargées (DM Serif Text, Dancing Script, Barlow)
+
+
+
+
+                                          Page 16 / 22                           labrasseriedesplantes.fr — Audit SEO
+                                                                                                                45/100
+    11. SEO E-commerce — Catalogue
+
+
+
+
+                                 Figure 4: Gamme de prix du catalogue produits
+
+
+
+Analyse des fiches produit
+
+
+  Critère                    Statut            Détail
+
+
+ Schema Product              ✓                Présent avec prix, SKU et disponibilité
+
+
+ Variantes (contenance)      ✓                AggregateOffer sur les produits variables
+
+
+ Notes de dégustation        ⚠                Présentes sur certains produits, absentes sur d'autres
+
+
+ Avis clients                ✗                0 avis sur TOUS les produits
+
+
+ Rich snippets étoiles       ✗                Impossible sans avis (AggregateRating absent)
+
+
+ Recettes cocktails          ✓                5 recettes bien rédigées — bon contenu
+
+
+
+
+                                                 Page 17 / 22                              labrasseriedesplantes.fr — Audit SEO
+12. Plan d'actions prioritaires
+
+
+
+
+                    Figure 5: Répartition des actions par niveau de priorité
+
+
+
+
+                      Figure 6: Planning de mise en œuvre recommandé
+
+
+
+
+                                         Page 18 / 22                          labrasseriedesplantes.fr — Audit SEO
+Semaine 1-2 — Actions urgentes (impact fort, effort faible)
+
+
+
+    CRITIQUE       Harmoniser les informations NAP
+
+  Utiliser le même téléphone et email sur TOUTES les pages (mentions légales, contact, schema).
+
+
+
+
+    CRITIQUE       Ajouter meta description sur toutes les pages
+
+  Rédiger une meta description unique (150-160 car.) par page avec mots-clés ciblés.
+
+
+
+
+    CRITIQUE       Optimiser les titles
+
+  Intégrer mots-clés (liqueur, artisanale, plantes, Haute-Loire) dans chaque title.
+
+
+
+
+    CRITIQUE       Ajouter les balises canonical
+
+  Balise <link rel="canonical"> sur chaque page pour éviter le duplicate content.
+
+
+
+
+    CRITIQUE       Ajouter Open Graph + Twitter Cards
+
+  og:title, og:description, og:image, og:url + twitter:card sur toutes les pages.
+
+
+
+
+    CRITIQUE       Ajouter H1 manquants
+
+  /nous-contacter/ et /lumiere-obscure/ n'ont pas de H1.
+
+
+
+
+    CRITIQUE       Exclure pages utilitaires du sitemap
+
+  Retirer /cart/, /checkout/, /my-account/ + ajouter noindex.
+
+
+
+
+                                                         Page 19 / 22                   labrasseriedesplantes.fr — Audit SEO
+Semaine 3-4 — Actions importantes (impact fort, effort moyen)
+
+
+
+    IMPORTANT        Schema LocalBusiness
+
+  Ajouter le schema LocalBusiness avec adresse, horaires, coordonnées GPS.
+
+
+
+
+    IMPORTANT        Google Business Profile
+
+  Créer ou optimiser la fiche GBP avec photos, horaires, catégorie, lien site.
+
+
+
+
+    IMPORTANT       Activer les avis clients
+
+  Activer les avis WooCommerce, inciter les clients post-achat par email.
+
+
+
+
+    IMPORTANT        Enrichir le contenu de l'accueil
+
+  Passer de ~150 à 500+ mots. Intégrer mots-clés, terroir, prix mondial.
+
+
+
+
+    IMPORTANT        Optimiser les images
+
+  Renommer, compresser, convertir en WebP, ajouter des alt descriptifs.
+
+
+
+
+    IMPORTANT        Schema Recipe sur les cocktails
+
+  5 recettes existantes = 5 rich snippets potentiels dans Google.
+
+
+
+
+    IMPORTANT        Schema FAQPage
+
+  FAQ sur livraison, CBD, dégustation, conservation → rich snippets.
+
+
+
+
+                                                        Page 20 / 22             labrasseriedesplantes.fr — Audit SEO
+Mois 2-3 — Actions stratégiques (impact fort, effort élevé)
+
+
+
+    STRATÉGIQUE         Créer un blog
+
+  Publication bi-mensuelle : vertus des plantes, recettes, terroir, fabrication.
+
+
+
+
+    STRATÉGIQUE         Page /nos-plantes/
+
+  Présenter les 27+ plantes utilisées → contenu éducatif riche.
+
+
+
+
+    STRATÉGIQUE         Page /professionnels/
+
+  Page B2B dédiée pour les restaurateurs et distributeurs.
+
+
+
+
+    STRATÉGIQUE         Core Web Vitals
+
+  Réduire JS tiers, optimiser les polices, activer le lazy loading.
+
+
+
+
+    STRATÉGIQUE         Stratégie backlinks
+
+  Presse locale, offices de tourisme, blogs gastronomiques, World Drinks Awards.
+
+
+
+
+    STRATÉGIQUE         Maillage cocktails → produits
+
+  Chaque recette de cocktail doit lier vers la fiche produit de la liqueur utilisée.
+
+
+
+
+                                                         Page 21 / 22                  labrasseriedesplantes.fr — Audit SEO
+      Méthodologie
+
+
+Cet audit a été réalisé le 04/04/2026 par Claude SEO (Claude Opus 4.6). L'analyse porte sur la page d'accueil, 6 pages
+internes, 2 fiches produit, les fichiers robots.txt et sitemap.xml, soit 10 URLs analysées au total.
+
+Les scores sont calculés sur la base de critères pondérés : présence et qualité des balises meta, structure Hn, données
+structurées, volume de contenu, signaux E-E-A-T, optimisation des images, cohérence NAP, configuration technique, et
+maillage interne.
+
+
+Rapport généré automatiquement par Claude SEO — labrasseriedesplantes.fr
+Données collectées le 04/04/2026 via WebFetch. Aucune API Google n'a été utilisée pour cet audit.
+
+
+
+
+                                                                    Page 22 / 22                    labrasseriedesplantes.fr — Audit SEO
+

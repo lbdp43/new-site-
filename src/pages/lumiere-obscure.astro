@@ -1,0 +1,356 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { products } from '../data/products';
+import { GlowCard } from '../components/ui/spotlight-card';
+
+const cbdProducts = products.filter((p) => p.range === 'lumiere-obscure');
+
+// Fiches dégustation reprises du site existant (attaque / cœur / fond de bouche)
+const tastingNotes: Record<string, { head: string; heart: string; base: string }> = {
+  'menthe-cbd-ortie': {
+    head: 'Attaque mentholée, fraîche et chlorophyllienne.',
+    heart: "Au cœur, apparaît la note de l'ortie, verte et légèrement piquante.",
+    base: "En fond de bouche, celle du CBD : herbacée, rappelant légèrement le goût du foin.",
+  },
+  'verveine-cbd-aurone': {
+    head: 'Attaque de verveine citronnée, fraîche et vive.',
+    heart: "Au cœur, la signature du CBD — herbacée, légèrement beurrée.",
+    base: "En fond de bouche, l'aurone complexe et très légèrement épicée.",
+  },
+  'absinthe-cbd-citron': {
+    head: "Attaque herbacée et légèrement beurrée, portée par le chanvre.",
+    heart: "Au cœur, le zeste de citron frais et tendu.",
+    base: "En fond de bouche, l'absinthe — légèrement épicée et mentholée.",
+  },
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Lumière Obscure', item: `${site.url}/lumiere-obscure` },
+  ],
+};
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Lumière Obscure — Liqueurs au CBD',
+  description:
+    "La gamme CBD de la Brasserie des Plantes. Chanvre sans THC, associé à la menthe, à la verveine ou à l'absinthe. Une autre approche de la détente botanique.",
+  url: `${site.url}/lumiere-obscure`,
+};
+
+// FAQ — contenu et schéma FAQPage (audit SEO : gap YMYL critique sur CBD)
+const faq = [
+  {
+    q: "Les liqueurs de la gamme Lumière Obscure sont-elles psychotropes ?",
+    a: "Non. Nos liqueurs contiennent du CBD (cannabidiol), molécule non psychotrope et légale en France. La teneur en THC reste sous le seuil légal de 0,1 % (arrêté du 30 décembre 2021). Vous ressentirez l'effet de l'alcool, pas celui du THC.",
+  },
+  {
+    q: "Quel est le taux de CBD et de THC dans ces liqueurs ?",
+    a: "THC : strictement inférieur à 0,1 % (seuil légal français). CBD : variable selon la recette, à un dosage aromatique (quelques mg par verre), très en-deçà des doses thérapeutiques étudiées en laboratoire. Nous ne revendiquons aucun effet médical.",
+  },
+  {
+    q: "Peut-on conduire après en avoir bu ?",
+    a: "Les règles françaises sur l'alcool au volant s'appliquent (limite 0,5 g/L). Le CBD n'étant pas psychotrope, il n'affecte pas l'aptitude à conduire, mais l'alcool du spiritueux (21 à 37° selon la référence), oui.",
+  },
+  {
+    q: "À quelle température les servir ?",
+    a: "Toujours à 3°C — soit très frais, soit givré après un passage de 20 minutes au congélateur. Le froid arrondit le chanvre et met en avant la plante compagne (menthe, verveine ou absinthe). À température ambiante, le CBD domine.",
+  },
+  {
+    q: "Peut-on les offrir ? Sont-elles légales en cadeau ?",
+    a: "Oui, sans restriction : ce sont des liqueurs aromatisées classiques, conformes à la réglementation française et européenne. Elles peuvent être expédiées par La Poste ou Chronopost en France métropolitaine comme n'importe quelle boisson alcoolisée.",
+  },
+  {
+    q: "Convient-il d'en boire pendant une grossesse ?",
+    a: "Non. Nos liqueurs contiennent de l'alcool (21 à 37°), déconseillé pendant la grossesse ou l'allaitement, comme tout spiritueux. La présence de CBD ajoute une prudence supplémentaire : les effets du CBD sur le fœtus sont encore à l'étude.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+<Layout
+  title="Lumière Obscure | Liqueurs au CBD — Chanvre & plantes — La Brasserie des Plantes"
+  description="Lumière Obscure — la gamme de liqueurs au CBD (chanvre sans THC) de la Brasserie des Plantes. Menthe, verveine, absinthe. Ad augusta per angusta."
+  schema={[breadcrumb, collectionSchema, faqSchema]}
+>
+  <!-- HERO NUIT -->
+  <section class="relative min-h-[100vh] w-full overflow-hidden bg-black text-[color:var(--color-moon-300)]">
+    <!-- Dégradé nuit + forêt -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[color:var(--color-night-900)] via-[color:var(--color-night-800)] to-[color:var(--color-night-700)]"></div>
+
+    <!-- Étoiles -->
+    <div class="absolute inset-0 starfield" aria-hidden="true"></div>
+
+    <!-- Lune + halo -->
+    <div class="absolute top-14 right-8 md:top-24 md:right-28 w-44 h-44 md:w-64 md:h-64 rounded-full bg-[color:var(--color-moon-300)] shadow-[0_0_140px_50px_rgba(233,226,196,0.35)] animate-moon-glow"></div>
+
+    <!-- Silhouette de cimes -->
+    <svg class="absolute bottom-0 left-0 w-full h-64 md:h-80 text-black/80" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="currentColor" d="M0,224 L40,213 L80,224 L120,197 L160,213 L200,186 L240,208 L280,181 L320,203 L360,176 L400,197 L440,165 L480,186 L520,154 L560,176 L600,144 L640,165 L680,133 L720,154 L760,133 L800,154 L840,128 L880,149 L920,123 L960,144 L1000,117 L1040,138 L1080,112 L1120,133 L1160,101 L1200,122 L1240,96 L1280,117 L1320,101 L1360,122 L1400,112 L1440,133 L1440,320 L0,320 Z"/>
+    </svg>
+
+    <!-- Contenu -->
+    <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24 md:py-36 min-h-[100vh]">
+      <!-- Chouette effraie (stylisée) -->
+      <svg class="w-20 h-20 md:w-28 md:h-28 text-[color:var(--color-moon-300)] mb-8 owl-glow" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <!-- tête en cœur -->
+        <path d="M40 8c-10 0-18 6-20 14-2 9 2 20 10 26 4 3 7 6 10 10 3-4 6-7 10-10 8-6 12-17 10-26-2-8-10-14-20-14z"/>
+        <!-- disques faciaux -->
+        <path d="M25 28c0 7 4 13 10 15M55 28c0 7-4 13-10 15"/>
+        <!-- yeux -->
+        <circle cx="29" cy="32" r="4.5" fill="currentColor" opacity=".85"/>
+        <circle cx="51" cy="32" r="4.5" fill="currentColor" opacity=".85"/>
+        <circle cx="29" cy="32" r="1.6" fill="var(--color-night-900)"/>
+        <circle cx="51" cy="32" r="1.6" fill="var(--color-night-900)"/>
+        <!-- bec -->
+        <path d="M40 40 L37 46 L43 46 Z" fill="currentColor" opacity=".9"/>
+        <!-- ailes -->
+        <path d="M20 46 c-4 6 -2 14 6 18"/>
+        <path d="M60 46 c4 6 2 14 -6 18"/>
+        <!-- plumage -->
+        <path d="M32 56c3-1 5-1 8 0s5 1 8 0"/>
+      </svg>
+
+      <span style="font-family: var(--font-script);" class="text-[color:var(--color-moon-400)] text-3xl md:text-5xl mb-6 italic">Ad augusta per angusta</span>
+
+      <h1 class="font-display text-6xl md:text-8xl lg:text-9xl leading-[1.02] mb-8 max-w-5xl text-[color:var(--color-moon-300)] tracking-tight">
+        Lumière <em class="not-italic font-normal text-[color:var(--color-moon-400)]" style="font-family: var(--font-script);">Obscure</em>
+      </h1>
+
+      <p class="text-lg md:text-xl text-[color:var(--color-night-100)] max-w-2xl leading-relaxed mb-4 italic">
+        « Laissez-vous bercer par la chouette effraie qui saura vous emmener
+        dans les lointaines contrées de vos esprits rationnels. »
+      </p>
+      <p class="text-base md:text-lg text-[color:var(--color-night-100)]/80 max-w-2xl leading-relaxed mb-12">
+        Cette concoction artisanale éveillera vos facultés psychiques.<br />
+        Ces liqueurs sont confectionnées par « La Brasserie des Plantes ».
+      </p>
+
+      <a
+        href="#gamme"
+        class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-[color:var(--color-moon-400)]/60 hover:border-[color:var(--color-moon-300)] hover:bg-[color:var(--color-moon-400)]/10 text-[color:var(--color-moon-300)] font-medium transition-all backdrop-blur-sm"
+      >
+        Entrer dans la nuit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHIE -->
+  <section class="py-24 md:py-32 bg-[color:var(--color-night-900)] text-[color:var(--color-moon-300)] relative overflow-hidden border-y border-[color:var(--color-moon-400)]/10">
+    <div class="absolute inset-0 starfield opacity-30" aria-hidden="true"></div>
+    <div class="relative max-w-4xl mx-auto px-6 text-center">
+      <div class="text-[10px] md:text-xs uppercase tracking-[0.4em] text-[color:var(--color-moon-400)] font-medium mb-6">La démarche</div>
+      <h2 class="font-display text-4xl md:text-6xl leading-tight mb-10 text-[color:var(--color-moon-300)]">
+        Trois liqueurs,<br />
+        <em class="not-italic text-[color:var(--color-moon-400)] font-normal" style="font-family: var(--font-script);">une invitation à la nuit.</em>
+      </h2>
+      <div class="space-y-6 text-lg md:text-xl leading-relaxed text-[color:var(--color-night-100)]">
+        <p>
+          Le chanvre — riche en CBD, sans THC — est une plante d'une grande
+          finesse aromatique. Herbacée, légèrement beurrée, rappelant le foin
+          vert : il pose une assise végétale particulière que nous avons voulu
+          marier à trois de nos signatures — la menthe verte, la verveine, l'absinthe.
+        </p>
+        <p>
+          La nuit, la lune, la chouette effraie. <em>Ad augusta per angusta</em> —
+          « vers les sommets par les chemins étroits ». Une promesse d'élévation,
+          d'éveil, à l'heure où les sens s'affûtent.
+        </p>
+      </div>
+      <div class="mt-12 inline-flex items-center gap-3 px-6 py-3 rounded-full border border-[color:var(--color-moon-400)]/40 text-[11px] uppercase tracking-[0.25em]">
+        <span class="w-2 h-2 rounded-full bg-[color:var(--color-moon-400)] animate-pulse"></span>
+        CBD &lt; 0,1 % · Sans THC · Température idéale 3°C
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMME : 3 produits avec fiche dégustation complète -->
+  <section id="gamme" class="py-24 md:py-32 bg-gradient-to-b from-[color:var(--color-night-900)] to-black text-[color:var(--color-moon-300)]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-20 max-w-3xl mx-auto">
+        <div class="text-[10px] md:text-xs uppercase tracking-[0.4em] text-[color:var(--color-moon-400)] font-medium mb-6">Trois flacons, trois voyages</div>
+        <h2 class="font-display text-4xl md:text-6xl leading-tight text-[color:var(--color-moon-300)]">
+          La gamme<br />
+          <em class="not-italic text-[color:var(--color-moon-400)] font-normal" style="font-family: var(--font-script);">Lumière Obscure</em>
+        </h2>
+      </div>
+
+      <div class="space-y-24 md:space-y-32">
+        {cbdProducts.map((p, i) => {
+          const t = tastingNotes[p.slug];
+          return (
+            <article class={`grid md:grid-cols-2 gap-12 md:gap-20 items-center ${i % 2 === 1 ? 'md:[&>div:first-child]:order-2' : ''}`}>
+              <div class="relative">
+                <GlowCard
+                  client:visible
+                  glowColor="gold"
+                  customSize
+                  padding="none"
+                  className="aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-[color:var(--color-night-700)] via-[color:var(--color-night-800)] to-[color:var(--color-night-900)] w-full !aspect-[4/5]"
+                >
+                  <img
+                    src={p.image}
+                    alt={`${p.name} — liqueur au CBD artisanale`}
+                    class="absolute inset-0 w-full h-full object-contain p-12 md:p-16 drop-shadow-[0_0_30px_rgba(217,203,151,0.25)]"
+                    loading="lazy"
+                  />
+                  {/* halo doux derrière */}
+                  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full bg-[color:var(--color-moon-400)]/12 blur-3xl pointer-events-none"></div>
+                  <span class="absolute top-5 right-5 z-10 text-xs font-medium bg-[color:var(--color-moon-400)]/15 text-[color:var(--color-moon-300)] px-3 py-1.5 rounded-full border border-[color:var(--color-moon-400)]/40 backdrop-blur-sm">
+                    {p.alcohol}° vol.
+                  </span>
+                </GlowCard>
+              </div>
+
+              <div>
+                <div class="text-[10px] uppercase tracking-[0.4em] text-[color:var(--color-moon-400)] font-medium mb-4">{`Flacon ${String(i + 1).padStart(2, '0')}`}</div>
+                <h3 class="font-display text-4xl md:text-5xl text-[color:var(--color-moon-300)] leading-tight mb-4">{p.name}</h3>
+                <p class="text-lg italic text-[color:var(--color-night-100)] mb-8 leading-relaxed">
+                  {p.tagline}
+                </p>
+
+                {t && (
+                  <div class="space-y-5 border-l-2 border-[color:var(--color-moon-400)]/40 pl-6 mb-8">
+                    <div>
+                      <div class="text-[10px] uppercase tracking-[0.3em] text-[color:var(--color-moon-400)] font-medium mb-2">Attaque</div>
+                      <p class="text-[color:var(--color-night-100)] leading-relaxed">{t.head}</p>
+                    </div>
+                    <div>
+                      <div class="text-[10px] uppercase tracking-[0.3em] text-[color:var(--color-moon-400)] font-medium mb-2">Cœur</div>
+                      <p class="text-[color:var(--color-night-100)] leading-relaxed">{t.heart}</p>
+                    </div>
+                    <div>
+                      <div class="text-[10px] uppercase tracking-[0.3em] text-[color:var(--color-moon-400)] font-medium mb-2">Fond de bouche</div>
+                      <p class="text-[color:var(--color-night-100)] leading-relaxed">{t.base}</p>
+                    </div>
+                  </div>
+                )}
+
+                {p.composition && (
+                  <div class="flex flex-wrap gap-2 mb-8">
+                    {p.composition.map((c) => (
+                      <span class="px-3 py-1.5 rounded-full text-xs bg-[color:var(--color-night-800)] border border-[color:var(--color-moon-400)]/20 text-[color:var(--color-night-100)]">
+                        {c}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <div class="flex flex-wrap gap-3">
+                  <a
+                    href={`/boutique/${p.slug}`}
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[color:var(--color-moon-400)] hover:bg-[color:var(--color-moon-300)] text-[color:var(--color-night-900)] font-medium transition-colors"
+                  >
+                    Découvrir le flacon
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </a>
+                  <span class="inline-flex items-center gap-2 px-4 py-3 text-xs uppercase tracking-[0.2em] text-[color:var(--color-night-100)]">
+                    Apéritif · Digestif · 3°C
+                  </span>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ — réponses aux questions fréquentes sur le CBD, l'alcool et la légalité -->
+  <section class="py-24 md:py-32 bg-[color:var(--color-night-800)] text-[color:var(--color-moon-300)] border-t border-[color:var(--color-moon-400)]/10">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <div class="text-[10px] md:text-xs uppercase tracking-[0.35em] text-[color:var(--color-moon-400)] font-medium mb-4">
+          Foire aux questions
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl leading-tight text-[color:var(--color-moon-300)]">
+          Ce qu'on nous demande<br />
+          <em class="not-italic font-normal text-[color:var(--color-moon-400)]" style="font-family: var(--font-script);">le plus souvent</em>
+        </h2>
+      </div>
+      <div class="space-y-3">
+        {faq.map((item, i) => (
+          <details
+            class="group rounded-xl bg-[color:var(--color-night-900)]/80 border border-[color:var(--color-moon-400)]/15 overflow-hidden transition-colors hover:border-[color:var(--color-moon-400)]/40"
+            {...(i === 0 ? { open: true } : {})}
+          >
+            <summary class="list-none cursor-pointer flex items-start justify-between gap-4 px-6 py-5 font-display text-lg md:text-xl text-[color:var(--color-moon-300)] select-none">
+              <span>{item.q}</span>
+              <svg class="w-5 h-5 flex-none mt-1.5 transition-transform duration-300 group-open:rotate-180 text-[color:var(--color-moon-400)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="px-6 pb-6 text-[color:var(--color-night-100)] leading-relaxed text-sm md:text-base">
+              {item.a}
+            </div>
+          </details>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-xs text-[color:var(--color-night-100)]/70">
+        Une question qui ne figure pas ici ? <a href="/contact" class="underline hover:text-[color:var(--color-moon-300)]">Écrivez-nous</a> — nous complétons cette FAQ avec vos retours.
+      </p>
+    </div>
+  </section>
+
+  <!-- CITATION FINALE -->
+  <section class="py-24 md:py-32 bg-black text-[color:var(--color-moon-300)] border-t border-[color:var(--color-moon-400)]/15 relative overflow-hidden">
+    <div class="absolute inset-0 starfield opacity-20" aria-hidden="true"></div>
+    <div class="relative max-w-3xl mx-auto px-6 text-center">
+      <svg class="w-12 h-12 mx-auto mb-8 text-[color:var(--color-moon-400)]/70" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z" opacity=".7"/></svg>
+      <p class="font-display italic text-2xl md:text-4xl leading-relaxed text-[color:var(--color-moon-300)] mb-6">
+        « Ad augusta per angusta »
+      </p>
+      <p class="text-[color:var(--color-night-100)] text-lg">
+        Vers les sommets, par les chemins étroits.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Étoiles scintillantes */
+  .starfield {
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, rgba(233,226,196,0.9), transparent 2px),
+      radial-gradient(1.2px 1.2px at 24% 62%, rgba(233,226,196,0.8), transparent 2px),
+      radial-gradient(1px 1px at 36% 28%, rgba(233,226,196,0.7), transparent 2px),
+      radial-gradient(1.5px 1.5px at 48% 82%, rgba(233,226,196,0.9), transparent 2px),
+      radial-gradient(1px 1px at 58% 14%, rgba(233,226,196,0.7), transparent 2px),
+      radial-gradient(1.1px 1.1px at 68% 48%, rgba(233,226,196,0.8), transparent 2px),
+      radial-gradient(1px 1px at 78% 8%, rgba(233,226,196,0.6), transparent 2px),
+      radial-gradient(1.4px 1.4px at 85% 72%, rgba(233,226,196,0.9), transparent 2px),
+      radial-gradient(1px 1px at 92% 36%, rgba(233,226,196,0.7), transparent 2px),
+      radial-gradient(1.2px 1.2px at 6% 88%, rgba(233,226,196,0.8), transparent 2px),
+      radial-gradient(1px 1px at 52% 45%, rgba(233,226,196,0.6), transparent 2px);
+    background-size: 100% 100%;
+    animation: twinkle 7s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    0% { opacity: 0.55; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes moon-glow {
+    0%, 100% { box-shadow: 0 0 140px 50px rgba(233,226,196,0.30); }
+    50%      { box-shadow: 0 0 180px 70px rgba(233,226,196,0.50); }
+  }
+  .animate-moon-glow { animation: moon-glow 7s ease-in-out infinite; }
+
+  @keyframes owl-pulse {
+    0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 14px rgba(233,226,196,.28)); }
+    50%      { transform: translateY(-5px); filter: drop-shadow(0 0 28px rgba(233,226,196,.55)); }
+  }
+  .owl-glow { animation: owl-pulse 4.5s ease-in-out infinite; }
+</style>

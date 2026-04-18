@@ -1,0 +1,164 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { GlowCard } from '../components/ui/spotlight-card';
+import { cocktails } from '../data/cocktails';
+import { site } from '../data/site';
+
+// Schema Recipe par cocktail — rich snippets Google (noté "FORT impact" dans l'audit)
+const recipeSchemas = cocktails.map((c) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Recipe',
+  name: c.name,
+  description: c.description,
+  recipeCategory: 'Cocktail',
+  recipeCuisine: 'Française',
+  keywords: `cocktail, liqueur, ${c.liqueurName.toLowerCase()}, ${c.tone}`,
+  prepTime: c.prepTime,
+  totalTime: c.prepTime,
+  recipeYield: `${c.servings} cocktail`,
+  recipeIngredient: c.ingredients.map((i) =>
+    i.amount ? `${i.amount} — ${i.item}` : i.item
+  ),
+  recipeInstructions: c.steps.map((step, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    text: step,
+  })),
+  author: { '@type': 'Organization', name: site.name },
+  image: new URL(c.image, site.url).toString(),
+}));
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Cocktails', item: `${site.url}/cocktails` },
+  ],
+};
+
+const schema = [breadcrumb, ...recipeSchemas];
+
+const toneColors: Record<string, string> = {
+  frais: 'bg-forest-100 text-forest-800',
+  fruité: 'bg-gold-500/15 text-gold-600',
+  amer: 'bg-forest-800/15 text-forest-800',
+  épicé: 'bg-orange-100 text-orange-700',
+};
+---
+<Layout
+  title="Cocktails aux liqueurs de plantes | Recettes maison — La Brasserie des Plantes"
+  description="5 recettes de cocktails créées par nos soins : Spritz Efflorescent, Verveine Printanière, Philtre d'Éros, Black Mule, Bonbon au Citron. Mixologie aux plantes d'Auvergne."
+  schema={schema}
+>
+  <PageHeader
+    kicker="Mixologie"
+    title="Nos cocktails<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>signatures</em>"
+    subtitle="Cinq recettes créées autour de nos liqueurs phares — du spritz ensoleillé au mule sombre. À reproduire chez soi, ou à venir découvrir à l'atelier."
+    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Cocktails' }]}
+  />
+
+  <section class="py-12">
+    <div class="max-w-5xl mx-auto px-6 space-y-20">
+      {cocktails.map((c, i) => (
+        <article id={c.slug} class={`grid lg:grid-cols-5 gap-10 items-start ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+          <div class="lg:col-span-2">
+            {/* Carte photo cocktail + halo doré au survol, swap vers la bouteille */}
+            <GlowCard
+              client:visible
+              glowColor="gold"
+              customSize
+              padding="none"
+              className="group/card aspect-square w-full overflow-hidden !aspect-square bg-white"
+            >
+              <img
+                src={c.image}
+                alt={`Cocktail ${c.name} — préparé avec ${c.liqueurName}`}
+                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out group-hover/card:opacity-0"
+                loading="lazy"
+              />
+              <img
+                src={`/images/products/${c.liqueurProductSlug}${c.liqueurProductSlug === 'gorgeon-des-machures' ? '.webp' : '.png'}`}
+                alt={`Liqueur ${c.liqueurName} — utilisée dans ${c.name}`}
+                class="absolute inset-0 w-full h-full object-contain p-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 ease-out bg-white"
+                loading="lazy"
+              />
+              <span class="absolute bottom-4 left-4 z-10 text-[10px] uppercase tracking-[0.2em] text-cream-50 font-medium bg-forest-900/70 px-2 py-1 rounded-full backdrop-blur-sm transition-opacity duration-500 group-hover/card:opacity-0">
+                Survolez pour voir la liqueur
+              </span>
+            </GlowCard>
+            <a href={`/boutique/${c.liqueurProductSlug}`} class="mt-4 inline-flex items-center gap-2 text-sm text-forest-700 hover:text-forest-900 font-medium">
+              {c.liqueurName}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+
+          <div class="lg:col-span-3">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <span class={`text-[11px] uppercase tracking-wide font-medium px-3 py-1 rounded-full ${toneColors[c.tone]}`}>
+                {c.tone.charAt(0).toUpperCase() + c.tone.slice(1)}
+              </span>
+              <span class="text-[11px] uppercase tracking-wide text-ink-500 px-3 py-1 rounded-full border border-forest-100">
+                {c.glass}
+              </span>
+              <span class="text-[11px] uppercase tracking-wide text-ink-500 px-3 py-1 rounded-full border border-forest-100">
+                ≈ {c.prepTime.replace('PT', '').replace('M', ' min')}
+              </span>
+            </div>
+
+            <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-4 leading-tight">
+              {c.name}
+            </h2>
+            <p class="text-ink-700 leading-relaxed mb-8 italic">
+              {c.description}
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="font-display text-lg text-forest-900 mb-3">Ingrédients</h3>
+                <ul class="space-y-2 text-sm text-ink-700">
+                  {c.ingredients.map((ing) => (
+                    <li class="flex justify-between gap-3 py-2 border-b border-forest-100/60">
+                      <span>{ing.item}</span>
+                      {ing.amount && <span class="text-forest-700 font-medium whitespace-nowrap">{ing.amount}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 class="font-display text-lg text-forest-900 mb-3">Préparation</h3>
+                <ol class="space-y-3 text-sm text-ink-700 leading-relaxed">
+                  {c.steps.map((step, si) => (
+                    <li class="flex gap-3">
+                      <span class="flex-none w-6 h-6 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center text-xs font-medium">
+                        {si + 1}
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="py-20 bg-cream-100/60 mt-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6">
+        Plus de recettes à l'atelier.
+      </h2>
+      <p class="text-ink-700 text-lg mb-8 leading-relaxed">
+        Nous proposons des ateliers de mixologie à Saint-Didier-en-Velay et à
+        Saint-Étienne — une soirée, une dégustation, et vous repartez avec vos
+        propres créations.
+      </p>
+      <a href="/ateliers" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+        Découvrir nos ateliers
+      </a>
+    </div>
+  </section>
+</Layout>

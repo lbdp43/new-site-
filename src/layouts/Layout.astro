@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AgeGate from '../components/AgeGate.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  /** JSON-LD structured data (object or array of objects) injecté dans <head>. */
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  /** Type OpenGraph. Par défaut 'website'. Utiliser 'article' pour les blogs. */
+  ogType?: 'website' | 'article' | 'product';
+}
+
+const {
+  title,
+  description = site.defaultDescription,
+  canonical,
+  ogImage = site.defaultOgImage,
+  noindex = false,
+  schema,
+  ogType = 'website',
+} = Astro.props;
+
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site.url).toString();
+const ogImageUrl = new URL(ogImage, site.url).toString();
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={site.locale} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Fonts (locaux — déclarés dans global.css, WOFF2 avec fallback TTF) -->
+    <link rel="preload" href="/fonts/Joane-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/BarlowCondensed-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/BarlowCondensed-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/SunshineScript.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/images/brand/logo-lbdp.png" />
+
+    {schema && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(schema)}
+      />
+    )}
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <AgeGate />
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

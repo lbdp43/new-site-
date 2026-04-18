@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../data/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `Conditions générales de vente — ${site.name}`,
+  url: `${site.url}/cgv`,
+  inLanguage: 'fr-FR',
+};
+---
+<Layout
+  title={`Conditions générales de vente | ${site.name}`}
+  description={`CGV de ${site.name} : commande, paiement, livraison, rétractation, garanties et service client.`}
+  schema={schema}
+>
+  <PageHeader
+    kicker="CGV"
+    title="Conditions générales de vente"
+    subtitle="Applicables à toute commande passée sur labrasseriedesplantes.fr à compter du 1er janvier 2025."
+    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'CGV' }]}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg prose-headings:font-display prose-headings:text-forest-900 prose-h2:text-2xl prose-h2:mt-10 prose-a:text-forest-700 prose-strong:text-forest-900 prose-ol:my-4">
+
+      <h2>1. Identification du vendeur</h2>
+      <p>
+        Les présentes conditions générales de vente (ci-après « CGV ») régissent toute vente passée sur le site <strong>labrasseriedesplantes.fr</strong> par <strong>{site.name}</strong>, SIRET {site.siret}, dont le siège est au {site.address.street}, {site.address.postalCode} {site.address.city}, France.
+      </p>
+
+      <h2>2. Produits</h2>
+      <p>
+        Nous commercialisons des <strong>liqueurs et spiritueux artisanaux</strong> élaborés à partir de plantes biologiques en Haute-Loire. Les produits sont présentés avec le maximum de précision (photos, descriptions, taux d'alcool, composition). Des écarts mineurs de teinte entre la photo et le produit livré peuvent exister du fait de macérations naturelles.
+      </p>
+
+      <h2>3. Interdiction de vente aux mineurs</h2>
+      <p class="text-sm italic border-l-4 border-gold-500 pl-4 bg-gold-500/5">
+        Conformément à l'article L. 3342-1 du Code de la santé publique, la vente d'alcool aux mineurs de moins de 18 ans est interdite. En validant votre commande, vous déclarez être majeur(e) et attestez de votre identité.
+      </p>
+
+      <h2>4. Commande</h2>
+      <p>
+        La commande est validée dès réception du paiement. Un email de confirmation est envoyé automatiquement. Nous nous réservons le droit d'annuler toute commande présentant une anomalie manifeste (volume déraisonnable, adresse invalide, etc.).
+      </p>
+
+      <h2>5. Prix</h2>
+      <p>
+        Les prix affichés sur le site sont exprimés <strong>en euros, toutes taxes comprises (TTC)</strong>, hors frais de livraison. Les frais de livraison sont calculés lors de la validation du panier. <strong>La livraison est offerte dès 65 € d'achats</strong> en France métropolitaine.
+      </p>
+      <p>
+        Nous nous réservons le droit de modifier nos prix à tout moment ; les produits sont facturés sur la base des tarifs en vigueur au moment de la commande.
+      </p>
+
+      <h2>6. Paiement</h2>
+      <p>
+        Le paiement s'effectue en ligne de manière sécurisée via SSL. Nous acceptons les cartes bancaires Visa, Mastercard, American Express, Apple Pay, Google Pay, PayPal et les virements SEPA. Aucune donnée bancaire n'est stockée sur nos serveurs.
+      </p>
+
+      <h2>7. Livraison</h2>
+      <p>
+        Les commandes sont préparées sous <strong>2 à 3 jours ouvrés</strong> et expédiées via Colissimo (livraison sous 48 à 72h après expédition) ou Chronopost sur demande. Un numéro de suivi est transmis par email au moment de l'expédition.
+      </p>
+      <p>
+        Nous livrons en France métropolitaine, Belgique, Suisse et Luxembourg. Pour toute autre destination, contactez-nous à <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+      <p>
+        Les risques liés au transport sont à la charge du transporteur. En cas de colis reçu endommagé, faites des réserves précises sur le bon de livraison et photographiez l'emballage ; nous remplacerons le produit sans frais.
+      </p>
+
+      <h2>8. Droit de rétractation</h2>
+      <p>
+        Conformément à l'article L. 221-18 du Code de la consommation, vous disposez d'un <strong>délai de 14 jours</strong> à compter de la réception du produit pour exercer votre droit de rétractation, sans avoir à justifier de motif.
+      </p>
+      <ol>
+        <li>Informez-nous de votre décision par email à <a href={`mailto:${site.email}`}>{site.email}</a> ou par courrier à l'adresse du siège.</li>
+        <li>Renvoyez-nous le produit <strong>intact, non ouvert, dans son emballage d'origine</strong>, à vos frais, sous 14 jours.</li>
+        <li>Nous vous remboursons intégralement (produit + frais de livraison initiaux) sous 14 jours à réception.</li>
+      </ol>
+      <p>
+        Les produits descellés, ouverts ou détériorés ne peuvent être repris pour raisons sanitaires.
+      </p>
+
+      <h2>9. Garanties</h2>
+      <p>
+        Tous nos produits bénéficient de la garantie légale de conformité (articles L. 217-4 et suivants du Code de la consommation) et de la garantie contre les vices cachés (articles 1641 et suivants du Code civil). En cas de défaut constaté à réception, contactez-nous sous 48h avec photos et description précise.
+      </p>
+
+      <h2>10. Service client</h2>
+      <p>
+        Pour toute question, réclamation ou suggestion, nous vous répondons sous <strong>48 heures ouvrées</strong> :<br />
+        Email : <a href={`mailto:${site.email}`}>{site.email}</a><br />
+        Téléphone : <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> ({site.hoursDisplay})
+      </p>
+
+      <h2>11. Médiation de la consommation</h2>
+      <p>
+        Conformément à l'article L. 612-1 du Code de la consommation, vous avez la faculté de recourir gratuitement à un médiateur de la consommation. Médiateur compétent : <strong>CNPM — Médiation Consommation</strong> (<a href="https://cnpm-mediation-consommation.eu" target="_blank" rel="noopener">cnpm-mediation-consommation.eu</a>).
+      </p>
+
+      <h2>12. Propriété intellectuelle</h2>
+      <p>
+        L'ensemble des contenus du site (photos, textes, recettes, vidéos, marques) reste la propriété exclusive de {site.name}. Toute reproduction sans autorisation est interdite.
+      </p>
+
+      <h2>13. Données personnelles</h2>
+      <p>
+        Consultez notre page <a href="/mentions-legales">Mentions légales</a> pour le détail du traitement de vos données personnelles (RGPD).
+      </p>
+
+      <h2>14. Droit applicable</h2>
+      <p>
+        Les présentes CGV sont régies par le droit français. En cas de litige, une solution amiable sera recherchée avant toute saisine juridictionnelle. À défaut, les tribunaux du ressort du Puy-en-Velay seront compétents.
+      </p>
+
+      <p class="text-xs text-ink-500 mt-12">CGV en vigueur depuis le 1er janvier 2025. Dernière mise à jour : {new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
+    </div>
+  </section>
+</Layout>

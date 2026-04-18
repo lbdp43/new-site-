@@ -1,0 +1,117 @@
+---
+import type { Review } from '../data/reviews';
+import { aggregateRating } from '../data/reviews';
+
+interface Props {
+  /** Liste d'avis à afficher. */
+  items: Review[];
+  /** Titre de la section. Par défaut : "Ils en parlent". */
+  heading?: string;
+  /** Eyebrow (texte en petit au-dessus du titre). */
+  kicker?: string;
+  /** Thème : `light` (crème) ou `dark` (forest). */
+  theme?: 'light' | 'dark';
+}
+
+const { items, heading = 'Ils en parlent', kicker = 'Avis clients', theme = 'light' } = Astro.props;
+const agg = aggregateRating(items);
+
+const bg = theme === 'dark' ? 'bg-forest-900 text-cream-100' : 'bg-cream-50';
+const accent = theme === 'dark' ? 'text-gold-400' : 'text-gold-600';
+const card =
+  theme === 'dark'
+    ? 'bg-forest-800/60 border border-cream-100/10 text-cream-100'
+    : 'bg-cream-100 border border-forest-100/60 text-ink-700';
+const muted = theme === 'dark' ? 'text-cream-200/70' : 'text-ink-500';
+const title = theme === 'dark' ? 'text-cream-100' : 'text-forest-900';
+
+// Formater date ISO en FR court
+const fmtDate = (iso: string) =>
+  new Date(iso).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' });
+---
+<section class:list={['py-20 md:py-24 relative overflow-hidden', bg]}>
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-12 max-w-2xl mx-auto">
+      <div class:list={['text-[10px] uppercase tracking-[0.35em] font-medium mb-3', accent]}>
+        {kicker}
+      </div>
+      <h2 class:list={['font-display text-4xl md:text-5xl leading-tight mb-6', title]}>{heading}</h2>
+
+      {agg && (
+        <div class="inline-flex items-center gap-3">
+          <div class="flex items-center gap-0.5" aria-label={`Note moyenne : ${agg.ratingValue} sur 5`}>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill={i <= Math.round(agg.ratingValue) ? '#b08d3d' : 'none'}
+                stroke="#b08d3d"
+                stroke-width="1.4"
+                stroke-linejoin="round"
+              >
+                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/>
+              </svg>
+            ))}
+          </div>
+          <div class:list={['text-sm', muted]}>
+            <span class="font-medium text-gold-500">{agg.ratingValue.toFixed(1)}</span>
+            <span class="mx-1.5 opacity-60">·</span>
+            {agg.reviewCount} avis
+          </div>
+        </div>
+      )}
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 stagger" style="--stagger-delay: 100ms;">
+      {items.map((r) => (
+        <article
+          class:list={['rounded-2xl p-6 md:p-7 transition-shadow hover:shadow-cream', card]}
+          itemprop="review"
+          itemscope
+          itemtype="https://schema.org/Review"
+        >
+          <div class="flex items-center gap-0.5 mb-4" aria-label={`${r.rating} étoiles sur 5`}>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill={i <= r.rating ? '#b08d3d' : 'none'}
+                stroke="#b08d3d"
+                stroke-width="1.4"
+                stroke-linejoin="round"
+              >
+                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/>
+              </svg>
+            ))}
+            <meta itemprop="reviewRating" content={String(r.rating)} />
+          </div>
+
+          <h3 class:list={['font-display text-xl leading-tight mb-2', title]} itemprop="name">
+            {r.title}
+          </h3>
+          <p class:list={['text-sm leading-relaxed mb-5', theme === 'dark' ? 'text-cream-100/85' : 'text-ink-700']} itemprop="reviewBody">
+            « {r.body} »
+          </p>
+
+          <div class="flex items-center justify-between text-xs">
+            <div>
+              <div class:list={['font-medium', title]} itemprop="author">{r.author}</div>
+              <div class:list={['mt-0.5', muted]}>{r.context}</div>
+            </div>
+            <div class:list={['flex flex-col items-end gap-1', muted]}>
+              <time datetime={r.date} itemprop="datePublished">{fmtDate(r.date)}</time>
+              {r.verified && (
+                <span class:list={['inline-flex items-center gap-1 text-[10px] uppercase tracking-wider', accent]}>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  Vérifié
+                </span>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CheckoutPage from '../components/cart/CheckoutPage';
+---
+
+<Layout
+  title="Commander"
+  description="Finaliser votre commande — La Brasserie des Plantes"
+  noindex
+>
+  <section class="bg-cream-50 min-h-[60vh]">
+    <div class="max-w-7xl mx-auto px-6 pt-10">
+      <h1 class="font-display text-4xl md:text-5xl text-forest-900">Commander</h1>
+      <p class="text-ink-700 mt-2">Paiement sécurisé Stripe — Visa, Mastercard, Apple Pay, Google Pay.</p>
+    </div>
+    <CheckoutPage client:load />
+  </section>
+</Layout>

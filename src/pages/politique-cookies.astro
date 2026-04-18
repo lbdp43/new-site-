@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../data/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `Politique de cookies — ${site.name}`,
+  url: `${site.url}/politique-cookies`,
+  inLanguage: 'fr-FR',
+};
+
+const cookies = [
+  {
+    name: 'lbdp_age_gate',
+    purpose: "Mémorise votre confirmation d'âge (18+) pour ne pas réafficher la modale à chaque visite.",
+    type: 'Fonctionnel — strictement nécessaire',
+    duration: '30 jours',
+    consent: false,
+  },
+  {
+    name: 'lbdp_cart',
+    purpose: "Conserve le contenu de votre panier d'achat entre les pages.",
+    type: 'Fonctionnel — strictement nécessaire',
+    duration: 'Session + 7 jours',
+    consent: false,
+  },
+  {
+    name: '_ga, _ga_*',
+    purpose: "Mesure d'audience anonymisée via Google Analytics 4 (IP anonymisée, pas de cross-site).",
+    type: 'Mesure d\'audience',
+    duration: '13 mois maximum (norme CNIL)',
+    consent: true,
+  },
+  {
+    name: 'fbp',
+    purpose: 'Meta Pixel — uniquement si vous avez donné votre consentement (reciblage publicitaire).',
+    type: 'Marketing / réseaux sociaux',
+    duration: '3 mois',
+    consent: true,
+  },
+];
+---
+<Layout
+  title={`Politique de cookies | ${site.name}`}
+  description="Quels cookies utilise labrasseriedesplantes.fr, pourquoi, combien de temps, et comment gérer vos préférences."
+  schema={schema}
+>
+  <PageHeader
+    kicker="Données & vie privée"
+    title="Politique de cookies"
+    subtitle="Comment nous utilisons les cookies, dans le respect du RGPD et des recommandations CNIL."
+    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Cookies' }]}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg prose-headings:font-display prose-headings:text-forest-900 prose-h2:text-2xl prose-h2:mt-10 prose-a:text-forest-700 prose-strong:text-forest-900">
+
+      <h2>Qu'est-ce qu'un cookie ?</h2>
+      <p>
+        Un cookie est un petit fichier texte stocké sur votre appareil (ordinateur, téléphone, tablette) par votre navigateur. Il permet à un site de reconnaître votre navigateur et de mémoriser certaines informations (préférences, session de connexion, panier, statistiques de visite).
+      </p>
+
+      <h2>Notre principe</h2>
+      <p>
+        Nous utilisons le <strong>strict minimum</strong> de cookies nécessaires pour que le site fonctionne bien. Les cookies non essentiels (mesure d'audience, marketing) ne sont activés <strong>qu'avec votre consentement explicite</strong>, que vous pouvez retirer à tout moment depuis ce bandeau.
+      </p>
+
+      <h2>Cookies utilisés sur ce site</h2>
+      <div class="not-prose overflow-x-auto my-8">
+        <table class="w-full border-collapse bg-cream-50 rounded-xl overflow-hidden text-sm">
+          <thead class="bg-forest-800 text-cream-100">
+            <tr>
+              <th class="px-4 py-3 text-left font-medium">Cookie</th>
+              <th class="px-4 py-3 text-left font-medium">Finalité</th>
+              <th class="px-4 py-3 text-left font-medium">Durée</th>
+              <th class="px-4 py-3 text-left font-medium">Consentement</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-forest-100">
+            {cookies.map((c) => (
+              <tr>
+                <td class="px-4 py-3 font-mono text-xs text-forest-900">{c.name}</td>
+                <td class="px-4 py-3 text-ink-700">
+                  <div class="font-medium text-forest-800 mb-0.5">{c.type}</div>
+                  {c.purpose}
+                </td>
+                <td class="px-4 py-3 text-ink-500 whitespace-nowrap">{c.duration}</td>
+                <td class="px-4 py-3">
+                  {c.consent ? (
+                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gold-500/15 text-gold-700 text-xs font-medium">Requis</span>
+                  ) : (
+                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-forest-100 text-forest-700 text-xs font-medium">Auto (nécessaire)</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Gérer mes préférences</h2>
+      <p>
+        Vous pouvez à tout moment :
+      </p>
+      <ul>
+        <li>Modifier votre choix via le bouton <strong>« Préférences cookies »</strong> en pied de page.</li>
+        <li>Supprimer les cookies déjà stockés depuis les réglages de votre navigateur (<a href="https://support.google.com/accounts/answer/61416" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies-preferences" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.microsoft.com/fr-fr/windows/supprimer-et-g%C3%A9rer-les-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Edge</a>).</li>
+        <li>Activer l'option « Do Not Track » de votre navigateur : nous la respectons automatiquement.</li>
+      </ul>
+
+      <h2>Transfert de données hors UE</h2>
+      <p>
+        Certains outils tiers (Google Analytics, Meta) peuvent transférer des données aux États-Unis. Ces transferts sont encadrés par les <strong>Clauses contractuelles types (SCC)</strong> adoptées par la Commission européenne, et ne sont actifs qu'avec votre consentement.
+      </p>
+
+      <h2>Vos droits</h2>
+      <p>
+        Consultez nos <a href="/mentions-legales">mentions légales</a> pour les détails sur vos droits RGPD (accès, rectification, suppression, portabilité, opposition). Pour toute question : <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+
+      <p class="text-xs text-ink-500 mt-12">Dernière mise à jour : {new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
+    </div>
+  </section>
+</Layout>

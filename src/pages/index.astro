@@ -1,0 +1,304 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import ScrollExpandMedia from '../components/ui/scroll-expansion-hero';
+import InstagramFeed from '../components/InstagramFeed.astro';
+import GoogleReviewsEmbed from '../components/GoogleReviewsEmbed.astro';
+import ProductCarousel from '../components/ProductCarousel.astro';
+import { site } from '../data/site';
+import { featuredProducts, products } from '../data/products';
+
+// Note : le schéma AggregateRating + Review a été retiré — il doit être
+// alimenté uniquement par de VRAIS avis Google (via Featurable, une fois le
+// widgetId renseigné dans site.ts) pour éviter tout risque de rich-snippet
+// trompeur. Les avis internes restent affichés côté UI pour la preuve sociale.
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  logo: new URL('/logo.png', site.url).toString(),
+  email: site.email,
+  telephone: site.phone,
+  foundingDate: site.founded,
+  founders: site.founders.map((f) => ({ '@type': 'Person', name: f })),
+  sameAs: [site.social.instagram, site.social.facebook],
+  award: `${site.award.title} ${site.award.year} — ${site.award.issuer}`,
+};
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${site.url}#localbusiness`,
+  name: site.name,
+  image: new URL('/og-default.jpg', site.url).toString(),
+  url: site.url,
+  telephone: site.phone,
+  email: site.email,
+  priceRange: '€€',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    postalCode: site.address.postalCode,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    addressCountry: site.address.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.geo.latitude,
+    longitude: site.geo.longitude,
+  },
+  openingHours: site.hours,
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  url: site.url,
+  inLanguage: 'fr-FR',
+  publisher: { '@id': `${site.url}#localbusiness` },
+};
+
+// VideoObject — vidéo de présentation atelier (lbdp-pro.mp4), indexable par
+// Google Video + AI Overviews
+const videoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: "Visite de l'atelier — La Brasserie des Plantes",
+  description:
+    "Tour des cuves, du séchage des plantes et de l'embouteillage dans notre atelier de Saint-Didier-en-Velay (Haute-Loire).",
+  thumbnailUrl: new URL('/videos/lbdp-pro-poster.jpg', site.url).toString(),
+  contentUrl: new URL('/videos/lbdp-pro.mp4', site.url).toString(),
+  uploadDate: '2025-04-18',
+  duration: 'PT1M32S',
+  inLanguage: 'fr-FR',
+  publisher: { '@id': `${site.url}#localbusiness` },
+};
+
+const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSchema];
+---
+<Layout
+  title="La Brasserie des Plantes | Liqueurs artisanales bio — Haute-Loire"
+  description="Liqueurs et infusions artisanales de plantes d'Auvergne. L'Alchimie Végétale, Meilleur Digestif du Monde 2025 aux World Drinks Awards. Producteur indépendant en Haute-Loire."
+  schema={schema}
+>
+  {/* H1 invisible pour SEO — le hero utilise un logo image, le H1 textuel reste nécessaire */}
+  <h1 class="sr-only">La Brasserie des Plantes — Liqueurs artisanales bio d'Auvergne, Meilleur Digestif du Monde 2025</h1>
+
+  <!-- HERO : scroll-expansion — photo primée + vidéo courte en fond -->
+  <ScrollExpandMedia
+    client:load
+    mediaType="image"
+    mediaSrc="/images/stories/world-drinks-awards-2025.webp"
+    bgVideoSrc="/videos/lbdp-intro.mp4"
+    bgVideoPoster="/videos/lbdp-intro-poster.jpg"
+    titleImageSrc="/images/brand/logo-clair-transparent.png"
+    titleImageAlt="La Brasserie des Plantes — Artisanat, Terroir, Passion — Haute-Loire"
+    date="Haute-Loire · depuis 2021"
+    scrollToExpand="Faites défiler pour découvrir"
+    textClass="text-cream-50"
+  >
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-600 text-xs font-medium tracking-wide uppercase mb-6 animate-soft-pulse">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+        Meilleur digestif du monde 2025
+      </div>
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+        Trois amis, un terroir<br />
+        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">27 plantes</em>
+      </h2>
+      <p class="text-lg text-ink-700 leading-relaxed mb-10 max-w-2xl mx-auto">
+        Depuis Saint-Didier-en-Velay, Étienne, Guillaume et Bastien composent
+        des liqueurs et infusions à partir de plantes oubliées d'Auvergne.
+        L'Alchimie Végétale a été couronnée Meilleur Digestif du Monde 2025
+        aux World Drinks Awards.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/boutique" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-all hover:shadow-lg">
+          Découvrir la boutique
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+        </a>
+        <a href="/notre-histoire" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 font-medium transition-colors">
+          Notre histoire
+        </a>
+      </div>
+    </div>
+  </ScrollExpandMedia>
+
+  <!-- CAROUSEL PRODUITS — découverte rapide après le hero -->
+  <ProductCarousel
+    items={products.filter((p) => p.range !== 'accessoire')}
+    kicker="Notre gamme complète"
+    heading="Dix-huit flacons, quatre gammes"
+    subtitle="Parcourez toutes nos liqueurs, de la Brasserie signature à la Lumière Obscure."
+  />
+
+  <!-- HISTOIRE -->
+  <section class="py-24 bg-cream-50">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <div class="gold-divider mb-8">
+        <span class="font-display italic text-xs uppercase tracking-[0.3em] text-gold-600">Notre savoir-faire</span>
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl text-forest-900 mb-8 leading-tight">
+        Des plantes oubliées,<br />assemblées avec patience.
+      </h2>
+      <div class="space-y-6 text-lg text-ink-700 leading-relaxed">
+        <p>
+          La Brasserie des Plantes est née en {site.founded} dans un petit village
+          de la <strong class="font-medium text-forest-800">Haute-Loire</strong>, à Saint-Didier-en-Velay.
+          Trois amis — Étienne, Guillaume et Bastien — réunis autour d'une idée
+          simple : faire revivre les plantes médicinales et aromatiques que nos
+          grand-mères distillaient, et les inviter dans la mixologie contemporaine.
+        </p>
+        <p>
+          Étienne, biotechnologue des plantes formé à Toulouse, choisit et
+          compose. Guillaume, ancien de la restauration, imagine les accords
+          et les usages. Bastien, venu des Hautes-Alpes en 2023, apporte le
+          geste et la rigueur de production. Ensemble, ils cultivent et récoltent
+          plus de <strong class="font-medium text-forest-800">27 plantes, racines, écorces et épices</strong> —
+          toutes issues de l'agriculture biologique, souvent de nos propres
+          parcelles.
+        </p>
+        <p>
+          En 2025, leur liqueur phare <em>L'Alchimie Végétale</em> remporte
+          le titre de <strong class="font-medium text-gold-600">Meilleur Digestif du Monde</strong>
+          aux World Drinks Awards — une reconnaissance internationale pour
+          un terroir discret, confirmée par le palais des plus grands jurys.
+        </p>
+      </div>
+      <div class="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
+        <a href="/notre-histoire" class="inline-flex items-center gap-1.5 text-forest-700 hover:text-forest-900 font-medium border-b border-forest-300 hover:border-forest-700 pb-0.5 transition-colors">
+          Notre histoire
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="/nos-plantes" class="inline-flex items-center gap-1.5 text-forest-700 hover:text-forest-900 font-medium border-b border-forest-300 hover:border-forest-700 pb-0.5 transition-colors">
+          Les 27 plantes
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="/lumiere-obscure" class="inline-flex items-center gap-1.5 text-forest-700 hover:text-forest-900 font-medium border-b border-forest-300 hover:border-forest-700 pb-0.5 transition-colors">
+          Gamme CBD Lumière Obscure
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="/ateliers" class="inline-flex items-center gap-1.5 text-forest-700 hover:text-forest-900 font-medium border-b border-forest-300 hover:border-forest-700 pb-0.5 transition-colors">
+          Venir faire un atelier
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDÉO DE PRÉSENTATION — version longue (même que la page pros) -->
+  <section class="relative py-0 bg-forest-950 overflow-hidden">
+    <div class="relative w-full aspect-[21/9] md:aspect-[21/8] max-h-[85vh]">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/videos/lbdp-pro-poster.jpg"
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/videos/lbdp-pro.mp4" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-b from-forest-950/65 via-forest-950/25 to-forest-950/80"></div>
+      <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-cream-100">
+        <span style="font-family: var(--font-script);" class="text-gold-400 text-3xl md:text-4xl mb-3">— Dans notre atelier —</span>
+        <h2 class="font-display text-4xl md:text-6xl leading-tight max-w-4xl mb-4 text-cream-100">
+          Chaque flacon, une histoire<br /><em class="not-italic text-gold-400 font-normal" style="font-family: var(--font-script);">faite main</em>
+        </h2>
+        <p class="text-cream-100/85 text-base md:text-lg max-w-2xl leading-relaxed">
+          Récolte, macération, distillation, embouteillage — tout se passe
+          à Saint-Didier-en-Velay, entre nos six mains.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUITS VEDETTES -->
+  <section class="py-24 bg-gradient-to-b from-forest-50/50 to-cream-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <div>
+          <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Sélection</div>
+          <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight">Six flacons à découvrir</h2>
+        </div>
+        <a href="/boutique" class="inline-flex items-center gap-2 text-forest-700 hover:text-forest-900 font-medium">
+          Voir tous les produits
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
+        {featuredProducts.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- COCKTAILS -->
+  <section class="py-24 bg-cream-100/60">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Mixologie</div>
+        <h2 class="font-display text-4xl md:text-5xl text-forest-900 mb-6 leading-tight">
+          Nos liqueurs<br />en cocktails
+        </h2>
+        <p class="text-lg text-ink-700 leading-relaxed mb-8">
+          Cinq recettes imaginées par nos soins — du Spritz Efflorescent au
+          Black Mule, en passant par le Philtre d'Éros. Chaque cocktail met
+          en lumière l'une de nos liqueurs.
+        </p>
+        <a href="/cocktails" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 font-medium transition-colors">
+          Découvrir les recettes
+        </a>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <a href="/cocktails#spritz-efflorescent" class="group aspect-square rounded-2xl overflow-hidden relative bg-forest-50 hover:shadow-xl transition-shadow">
+          <img src="/images/cocktails/spritz-efflorescent.webp" alt="Cocktail Le Spritz Efflorescent" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-900/80 via-forest-900/20 to-transparent"></div>
+          <h3 class="absolute bottom-4 left-4 right-4 font-display text-lg text-cream-50 leading-tight">Spritz Efflorescent</h3>
+        </a>
+        <a href="/cocktails#verveine-printaniere" class="group aspect-square rounded-2xl overflow-hidden relative mt-8 bg-forest-50 hover:shadow-xl transition-shadow">
+          <img src="/images/cocktails/verveine-printaniere.webp" alt="Cocktail La Verveine Printanière" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-900/80 via-forest-900/20 to-transparent"></div>
+          <h3 class="absolute bottom-4 left-4 right-4 font-display text-lg text-cream-50 leading-tight">Verveine Printanière</h3>
+        </a>
+        <a href="/cocktails#philtre-eros" class="group aspect-square rounded-2xl overflow-hidden relative bg-forest-50 hover:shadow-xl transition-shadow">
+          <img src="/images/cocktails/philtre-eros.webp" alt="Cocktail Le Philtre d'Éros" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-900/80 via-forest-900/20 to-transparent"></div>
+          <h3 class="absolute bottom-4 left-4 right-4 font-display text-lg text-cream-50 leading-tight">Philtre d'Éros</h3>
+        </a>
+        <a href="/cocktails#black-mule" class="group aspect-square rounded-2xl overflow-hidden relative mt-8 bg-forest-50 hover:shadow-xl transition-shadow">
+          <img src="/images/cocktails/black-mule.webp" alt="Cocktail Le Black Mule" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-900/80 via-forest-900/20 to-transparent"></div>
+          <h3 class="absolute bottom-4 left-4 right-4 font-display text-lg text-cream-50 leading-tight">Black Mule</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVIS GOOGLE — live via Featurable quand widgetId configuré, fallback interne sinon -->
+  <GoogleReviewsEmbed />
+
+  <!-- INSTAGRAM -->
+  <InstagramFeed variant="light" />
+
+  <!-- CTA FINAL -->
+  <section class="py-24 bg-gradient-to-br from-forest-800 via-forest-900 to-forest-950 text-cream-100 relative overflow-hidden">
+    <div class="relative max-w-4xl mx-auto px-6 text-center">
+      <span style="font-family: var(--font-script);" class="text-gold-400 text-2xl">— À votre table —</span>
+      <h2 class="font-display text-4xl md:text-5xl mt-4 mb-6 leading-tight text-cream-100">
+        Offrez une parenthèse<br />végétale.
+      </h2>
+      <p class="text-cream-200/80 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+        Flacons seuls, coffrets d'initiation, éditions limitées — livraison
+        offerte dès 65 € d'achats, sous 2 à 3 jours ouvrés en France.
+      </p>
+      <a href="/boutique" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-all hover:shadow-2xl">
+        Explorer la boutique
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </section>
+</Layout>
