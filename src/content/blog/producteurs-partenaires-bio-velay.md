@@ -4,7 +4,7 @@ description: "Les plantes qui entrent dans nos liqueurs viennent de nos parcelle
 date: 2024-09-05
 author: "Guillaume"
 category: Terroir
-cover: /images/gallery/evenement-03.jpg
+cover: /images/gallery/evenement-03.webp
 readingTime: "7 min"
 ---
 

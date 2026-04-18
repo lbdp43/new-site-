@@ -78,9 +78,18 @@ const breadcrumbSchema = {
   ],
 };
 
-const metaDescription =
-  product.description?.slice(0, 155) ||
-  `${product.name} — ${product.alcohol}° — ${product.tagline || ''} La Brasserie des Plantes, Haute-Loire.`;
+// Coupe la description sur la frontière d'un mot (≤155 chars) pour éviter
+// les descriptions tronquées en plein milieu d'un mot qui font mauvais effet
+// dans les SERP et sur les partages sociaux.
+const truncate = (s: string, max = 155) => {
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut).trimEnd() + '…';
+};
+const metaDescription = product.description
+  ? truncate(product.description, 155)
+  : `${product.name} — ${product.alcohol}° — ${product.tagline || ''} La Brasserie des Plantes, Haute-Loire.`;
 
 // Parseur simple des distinctions pour les convertir en badges animés
 type ParsedAward = {
