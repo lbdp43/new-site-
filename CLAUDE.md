@@ -1,0 +1,208 @@
+# La Brasserie des Plantes — site Astro headless WooCommerce
+
+> **🔄 À TOI, FUTURE SESSION CLAUDE** : ce fichier est la mémoire partagée du
+> projet. À chaque fois que tu fais une modification non-triviale (nouvelle
+> feature, nouvelle dépendance, nouvelle variable d'environnement, changement
+> d'architecture, nouveau gotcha découvert, tâche du backlog terminée…),
+> **mets ce fichier à jour** dans le même commit. L'utilisateur compte dessus
+> pour que chaque session reprenne efficacement le fil, sans avoir à lui
+> réexpliquer le contexte à chaque fois. Garde-le concis mais à jour.
+
+
+
+Site vitrine + e-commerce pour une marque de liqueurs artisanales (Haute-Loire).
+Front-end Astro statique sur Vercel, branché à un WordPress existant via la
+WooCommerce Store API. Objectif : le front-end est entièrement custom mais les
+commandes/paiements/emails/livraison passent par le WordPress existant, sans
+dupliquer la logique e-commerce.
+
+## Stack
+
+- **Astro 6** (SSG, sortie statique)
+- **React 19** pour les îles interactives (panier, checkout, hero blog, etc.)
+- **Tailwind CSS v4** via `@tailwindcss/vite`
+- **Framer Motion** pour les animations
+- **Stripe Elements** (`@stripe/stripe-js`, `@stripe/react-stripe-js`)
+- Hébergement : **Vercel** (auto-deploy depuis GitHub `main`)
+
+## Environnements
+
+| Environnement | URL | Rôle |
+|---|---|---|
+| Production WP actuelle | `https://www.labrasseriedesplantes.fr` | Site WordPress + WooCommerce live (ne pas toucher) |
+| Test Astro | `https://test.labrasseriedesplantes.fr` | Nouvelle vitrine Astro, en construction |
+| GitHub | `https://github.com/lbdp43/new-site-` | Repo Vercel auto-deploy |
+
+À terme, `www.` basculera sur Astro ; le WordPress continuera de tourner en
+back-end (admin, commandes, produits, paiements) mais ne servira plus de
+front-end public.
+
+## Architecture headless
+
+```
+Navigateur ─(browser)─▶ Astro SSG (Vercel CDN)
+         │
+         └─(fetch Store API)─▶ WordPress (WooCommerce + WooPayments)
+                                 └─ Stripe (via WooPayments)
+                                 └─ Emails, EasyBee, factures, stock, TVA...
+```
+
+Le front Astro ne dédouble **aucune** logique e-commerce : tout (panier, stock,
+prix, TVA, livraison, codes promo, emails de confirmation, intégration
+transporteur EasyBee) reste géré par WooCommerce côté serveur.
+
+### Flux panier
+
+1. `src/components/cart/AddToCartButton.tsx` (île React sur fiche produit)
+2. → `wc.addItem({id: product.wcId, variation: [{attribute, value}]})` 
+3. → `POST /wp-json/wc/store/v1/cart/add-item` sur labrasseriedesplantes.fr
+4. WooCommerce renvoie un `Cart-Token` (JWT) stocké dans `localStorage`
+5. Les requêtes suivantes envoient le token dans l'en-tête `Cart-Token`
+
+### Flux checkout (WooPayments)
+
+1. `src/components/cart/CheckoutPage.tsx` charge Stripe.js avec
+   `loadStripe(pk, { stripeAccount: accountId })`
+2. `PaymentElement` collecte la carte (filtré à `paymentMethodTypes: ["card"]`
+   pour exclure Klarna / Multibanco, garder les wallets Apple Pay / Google Pay)
+3. Sur submit : `stripe.createPaymentMethod()` → on récupère `pm_xxx`
+4. `POST /wp-json/wc/store/v1/checkout` avec :
+   ```json
+   {
+     "payment_method": "woocommerce_payments",
+     "payment_data": [
+       { "key": "wcpay-payment-method", "value": "pm_xxx" },
+       { "key": "wc-woocommerce_payments-new-payment-method", "value": "false" }
+     ]
+   }
+   ```
+5. WooPayments crée la commande côté WP, débite la carte, envoie les emails,
+   notifie EasyBee. Redirection vers `/commande/confirmation?order=XXX&key=YYY`.
+
+## Variables d'environnement
+
+Variables `PUBLIC_*` → exposées côté client (non-secret par design).
+
+| Variable | Valeur (Vercel) | Rôle |
+|---|---|---|
+| `PUBLIC_WC_BASE_URL` | `https://www.labrasseriedesplantes.fr` | Base URL de la Store API |
+| `PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_live_51ETDmy…TvtxNs` | Clé Stripe publique (WooPayments) |
+| `PUBLIC_STRIPE_ACCOUNT_ID` | `acct_1Mg83iFkUaBLmhte` | Compte Stripe Connect de WooPayments |
+
+Variables non-`PUBLIC_` (optionnelles, jamais exposées client) :
+
+| Variable | Rôle |
+|---|---|
+| `WC_CONSUMER_KEY` / `WC_CONSUMER_SECRET` | Clé REST API v3 WC pour des scripts de build (pas utilisé en runtime) |
+
+Pour développer localement : `cp .env.example .env` puis remplir. `.env` est
+gitignore. Ne **jamais** commiter de secret.
+
+## Mapping produits
+
+Le catalogue est dans `src/data/products.ts` — source de vérité **pour
+l'affichage** (descriptions, photos, tastings, awards). WooCommerce reste la
+source de vérité pour prix, stock, variations et commandes.
+
+Chaque produit a un `wcId` (ID numérique WooCommerce). 18 / 19 sont mappés ;
+`coffret-original` n'existe pas dans WooCommerce (bouton affiche "bientôt
+disponible" tant que le produit n'est pas créé côté WP).
+
+**Attribut de variation** :
+- Par défaut : `"Contenance"` (attribut local WC, **pas** `pa_contenance`)
+- Exception Flasque Entonnoir : `wcSizeAttribute: "Gravure"` (attribut propre
+  avec variantes "Sans personnalisation" / "Avec personnalisation")
+
+## Plugin WordPress CORS
+
+`wordpress-plugin/astro-cors/astro-cors.php` est installé + activé sur le WP
+live. Il autorise uniquement ces origines à taper sur `/wp-json/*` :
+
+- `https://test.labrasseriedesplantes.fr`
+- `http://localhost:4321` (dev Astro)
+- `http://127.0.0.1:4321`
+
+Pour ajouter le domaine `www.` au moment de la bascule, éditer la fonction
+`lbdp_astro_allowed_origins()` dans le plugin.
+
+## Commandes clés
+
+```bash
+npm run dev       # dev server http://localhost:4321
+npm run build     # build de production → ./dist
+npm run preview   # aperçu du build de prod
+npm run astro ... # CLI Astro
+```
+
+## Fichiers critiques
+
+| Fichier | Rôle |
+|---|---|
+| `src/lib/woocommerce.ts` | Client Store API (fetch wrapper, Cart-Token, Nonce) |
+| `src/lib/cart-store.tsx` | Store de panier partagé entre îles Astro (module singleton + `useSyncExternalStore`, pas de Context) |
+| `src/components/cart/CartIcon.tsx` | Icône panier Header (badge + total) |
+| `src/components/cart/AddToCartButton.tsx` | Bouton ajouter au panier fiche produit |
+| `src/components/cart/CartPage.tsx` | Page panier (tableau + récap + code promo) |
+| `src/components/cart/CheckoutPage.tsx` | Page commande (adresse + Stripe Elements + livraison dynamique) |
+| `src/pages/panier.astro` | Route `/panier` |
+| `src/pages/commande.astro` | Route `/commande` |
+| `src/pages/commande/confirmation.astro` | Route `/commande/confirmation` |
+| `src/data/products.ts` | Catalogue — source de vérité affichage |
+| `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande) + priorités différenciées |
+| `vercel.json` | Headers sécurité (HSTS, X-Frame, CSP-like) + noindex sur `test.*` |
+| `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
+
+## Gotchas
+
+- **Hydratation entre îles** : plusieurs îles React doivent partager l'état
+  panier. Astro ne partage pas le Context React entre îles séparées — on
+  utilise donc un **store niveau module** + `useSyncExternalStore` dans
+  `cart-store.tsx`. Ne pas remplacer par un Context React.
+- **Le stock n'est pas live dans le schema Product** — on affiche toujours
+  `availability: InStock`. Pour un vrai sync, il faudrait lire WC au build
+  via la REST API v3 (nécessite les `WC_CONSUMER_*`).
+- **Fiche produit `coffret-original`** : pas de `wcId`. Ajouter quand le
+  produit sera créé côté WP.
+- **SIZE_IMAGES dans products.ts** : une photo différente par contenance,
+  téléchargées depuis le WP legacy. Format `.webp` (convertis depuis PNG
+  pour perf).
+- **Paiement = live, pas test** : WooPayments du site est en mode LIVE. Pour
+  tester sans débiter un vrai client, passe par une vraie petite transaction
+  (1-2 €) puis rembourse depuis l'admin WooCommerce.
+
+## Sécurité — notes importantes
+
+- **Headers de sécurité** configurés dans `vercel.json` (HSTS, X-Frame-Options,
+  X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+- **`X-Robots-Tag: noindex, nofollow`** sur `test.labrasseriedesplantes.fr`
+  uniquement (le WP live et les futurs `www.` ne sont pas affectés)
+- **Clé publique Stripe** (`pk_live_…`) exposée côté client : c'est normal,
+  elle est publique par design
+- **Les clés REST API WC "Astro site"** (`ck_…` / `cs_…`) créées pour du
+  debug sont à **régénérer** (elles ont transité dans une conversation Claude)
+  → WP Admin → WooCommerce → Réglages → Avancé → API REST → supprimer / recréer
+- **Admin WP exposé** : `/wp-json/wp/v2/users` révèle le nom d'utilisateur
+  admin. Corriger côté WP avec un plugin type "Stop User Enumeration"
+  (indépendant de notre code)
+
+## Backlog (ce qui reste à faire)
+
+1. **Tester un paiement réel** de 1-2 € en conditions réelles, puis
+   rembourser depuis l'admin WooCommerce. Vérifier que la commande tombe bien
+   dans le WP admin comme une commande classique, que l'email part, que
+   EasyBee reçoit.
+2. **Régénérer la clé REST API WC "Astro site"** une fois les tests finis.
+3. **Préparer la bascule `www.`** : quand le moment est venu, ajouter
+   `https://www.labrasseriedesplantes.fr` aux origines autorisées dans le
+   plugin CORS, faire pointer `www.` sur Vercel, garder le WP accessible via
+   un autre nom (ex. `wp.labrasseriedesplantes.fr`) pour les API.
+4. **Activer IndexNow** une fois en live : le fichier
+   `public/e3e81d795b356f57b451d271fc89a108.txt` est déjà là. Il reste à
+   envoyer un POST à IndexNow à chaque rebuild (hook Vercel `build` ou
+   action GitHub).
+5. **Sync stock live** (optionnel) : lire le stock WC au build pour rendre
+   le schema `Product.availability` correct. À faire quand le site sera
+   stable.
+6. **Interface d'admin de contenu** (optionnel) : mini-CMS pour que l'équipe
+   puisse éditer les textes de `products.ts` sans passer par le code. Pas
+   urgent, à discuter quand le site sera en live.
