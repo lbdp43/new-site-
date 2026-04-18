@@ -21,6 +21,11 @@ export default defineConfig({
       priority: 0.7,
       lastmod: new Date(),
       i18n: undefined,
+      // Exclut les pages transactionnelles (noindex) et la confirmation
+      // (URL avec query params, pas indexable). Évite la contradiction
+      // "URL noindex dans le sitemap" qui dégrade la confiance du crawler.
+      filter: (page) =>
+        !/\/(panier|commande)(\/|$)/.test(new URL(page).pathname),
     }),
   ]
 });
