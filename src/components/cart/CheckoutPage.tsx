@@ -5,11 +5,23 @@ import { ensureCartLoaded, formatMoney, setCart, useCart } from "../../lib/cart-
 import { wc, type WcAddress } from "../../lib/woocommerce";
 
 const STRIPE_KEY = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY as string | undefined;
+/**
+ * WooPayments utilise un compte Stripe Connect (Express). On doit donc passer
+ * stripeAccount à Stripe.js pour que les PaymentMethod soient créés sur le bon
+ * compte marchand. L'account ID est visible dans la réponse de
+ * /wp-json/wc/v3/payments/accounts ("account_id").
+ */
+const STRIPE_ACCOUNT = import.meta.env.PUBLIC_STRIPE_ACCOUNT_ID as string | undefined;
 
 let stripePromise: Promise<Stripe | null> | null = null;
 function getStripe() {
   if (!STRIPE_KEY) return null;
-  if (!stripePromise) stripePromise = loadStripe(STRIPE_KEY);
+  if (!stripePromise) {
+    stripePromise = loadStripe(
+      STRIPE_KEY,
+      STRIPE_ACCOUNT ? { stripeAccount: STRIPE_ACCOUNT } : undefined,
+    );
+  }
   return stripePromise;
 }
 
