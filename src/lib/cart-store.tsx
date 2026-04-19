@@ -74,7 +74,12 @@ export function setCart(cart: WcCart | null) {
 
 export const cartActions = {
   refresh: () => run(() => wc.getCart()),
-  addItem: (args: { id: number; quantity?: number; variation?: Array<{ attribute: string; value: string }> }) =>
+  addItem: (args: {
+    id: number;
+    quantity?: number;
+    variation?: Array<{ attribute: string; value: string }>;
+    cart_item_data?: Record<string, string | number | boolean>;
+  }) =>
     run(() => wc.addItem({ quantity: 1, ...args })),
   updateItem: (key: string, quantity: number) => run(() => wc.updateItem(key, quantity)),
   removeItem: (key: string) => run(() => wc.removeItem(key)),

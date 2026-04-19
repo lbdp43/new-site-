@@ -171,7 +171,16 @@ export const wc = {
     return request<WcCart>("/cart");
   },
 
-  async addItem(args: { id: number; quantity: number; variation?: Array<{ attribute: string; value: string }> }): Promise<WcCart> {
+  async addItem(args: {
+    id: number;
+    quantity: number;
+    variation?: Array<{ attribute: string; value: string }>;
+    /** Metadata libre attachée à la ligne du panier — visible dans l'admin WC.
+     *  Utilisé ici pour marquer les bouteilles d'un Coffret DIY (ex:
+     *  { cart_item_data: { _coffret_diy: "3", _coffret_position: "1/3" } }).
+     *  WC conserve ces données et les affiche sous la ligne dans le BO. */
+    cart_item_data?: Record<string, string | number | boolean>;
+  }): Promise<WcCart> {
     return request<WcCart>("/cart/add-item", {
       method: "POST",
       body: JSON.stringify(args),

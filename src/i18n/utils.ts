@@ -99,6 +99,7 @@ export const translatedPages: Record<Lang, string[]> = {
     '/en/legal-notice',
     '/en/terms-of-sale',
     '/en/cookie-policy',
+    '/en/build-your-gift-box',
   ],
 };
 

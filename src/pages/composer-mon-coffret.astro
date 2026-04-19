@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CoffretBuilder, { type CoffretProduct } from '../components/coffret/CoffretBuilder';
+import { products } from '../data/products';
+import { site } from '../data/site';
+
+// Filtrer : uniquement les bouteilles (pas les accessoires), avec un wcId pour
+// pouvoir être ajoutées au panier. On conserve Brasserie, Apéritifs, Lumière
+// Obscure et Éditions limitées — toutes les bouteilles éligibles comme cadeau.
+const eligibleProducts: CoffretProduct[] = products
+  .filter((p) => p.range !== 'accessoire' && p.wcId !== undefined)
+  .map((p) => ({
+    slug: p.slug,
+    name: p.name,
+    range: p.range,
+    priceMin: p.priceMin,
+    image: p.image,
+    alcohol: p.alcohol,
+    tagline: p.tagline,
+    wcId: p.wcId as number,
+    // Par défaut on commande la plus petite contenance disponible (souvent 50cl)
+    defaultSize: p.sizes && p.sizes.length > 0 ? parseInt(p.sizes[0]) : undefined,
+    wcSizeAttribute: p.wcSizeAttribute,
+  }));
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Composer mon coffret', item: `${site.url}/composer-mon-coffret` },
+  ],
+};
+
+// Product schema bundle — on déclare un "concept" de coffret pour le SEO
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Coffret cadeau personnalisé — 3 bouteilles au choix',
+  description: "Composez votre propre coffret cadeau : 3 liqueurs artisanales au choix parmi toute la gamme de La Brasserie des Plantes. Emballage cadeau inclus, livraison offerte dès 65 €.",
+  image: new URL('/images/stories/coffret-diy-hero.webp', site.url).toString(),
+  brand: { '@type': 'Brand', name: site.name },
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'EUR',
+    lowPrice: '48',
+    highPrice: '210',
+    availability: 'https://schema.org/InStock',
+    offerCount: eligibleProducts.length,
+  },
+};
+
+const schema = [breadcrumb, productSchema];
+---
+<Layout
+  title="Composez votre coffret | 3 bouteilles au choix — La Brasserie des Plantes"
+  description="Créez votre propre coffret cadeau : choisissez 3 liqueurs artisanales parmi notre gamme de 18 références. Emballage soigné, livraison offerte dès 65 €."
+  schema={schema}
+>
+  <PageHeader
+    kicker="Coffret personnalisé"
+    title="Composez<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>votre coffret</em>"
+    subtitle="Trois bouteilles au choix parmi notre gamme. Un coffret cadeau soigné, emballé main, prêt à offrir — ou à s'offrir."
+    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Composer mon coffret' }]}
+  />
+
+  <section class="py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Bandeau d'explication -->
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">1</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Choisissez 3 bouteilles</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">Parmi toute notre gamme — digestifs, apéritifs, infusions CBD, éditions limitées.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">2</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Emballage cadeau</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">Un coffret soigné, préparé à la main dans notre atelier à Saint-Didier-en-Velay.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">3</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Expédition rapide</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">Livraison offerte dès 65 €, sous 2 à 3 jours ouvrés en France métropolitaine.</p>
+        </div>
+      </div>
+
+      <!-- Builder -->
+      <CoffretBuilder products={eligibleProducts} size={3} lang="fr" client:load />
+    </div>
+  </section>
+
+  <section class="py-20 bg-forest-900 text-cream-100">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl md:text-4xl mb-6">Une idée du coffret parfait&nbsp;?</h2>
+      <p class="text-cream-200/80 text-lg leading-relaxed mb-8">
+        Notre sélection "pour découvrir" : L'Alchimie Végétale (la primée),
+        Le Nectar d'Ostara (un apéritif floral) et Le Cerf'Gent (la gentiane
+        amère). Un tour complet de la maison.
+      </p>
+      <p class="text-cream-200/60 text-sm">
+        Ou composez selon vos envies — il n'y a pas de mauvais choix.
+      </p>
+    </div>
+  </section>
+</Layout>

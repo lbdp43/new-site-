@@ -22,6 +22,7 @@ export const routeMap = {
   '/cocktails': { fr: '/cocktails', en: '/en/cocktails' },
   '/ateliers': { fr: '/ateliers', en: '/en/workshops' },
   '/professionnels': { fr: '/professionnels', en: '/en/trade' },
+  '/composer-mon-coffret': { fr: '/composer-mon-coffret', en: '/en/build-your-gift-box' },
   '/contact': { fr: '/contact', en: '/en/contact' },
   '/blog': { fr: '/blog', en: '/en/journal' },
   '/faq': { fr: '/faq', en: '/en/faq' },

@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CoffretBuilder, { type CoffretProduct } from '../../components/coffret/CoffretBuilder';
+import { products } from '../../data/products';
+import { site } from '../../data/site';
+
+const eligibleProducts: CoffretProduct[] = products
+  .filter((p) => p.range !== 'accessoire' && p.wcId !== undefined)
+  .map((p) => ({
+    slug: p.slug,
+    name: p.name,
+    range: p.range,
+    priceMin: p.priceMin,
+    image: p.image,
+    alcohol: p.alcohol,
+    tagline: p.tagline,
+    wcId: p.wcId as number,
+    defaultSize: p.sizes && p.sizes.length > 0 ? parseInt(p.sizes[0]) : undefined,
+    wcSizeAttribute: p.wcSizeAttribute,
+  }));
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Build your gift box', item: `${site.url}/en/build-your-gift-box` },
+  ],
+};
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Custom gift box — 3 bottles of your choice',
+  description: "Build your own gift box: 3 craft liqueurs of your choice from La Brasserie des Plantes' range of 18 bottles. Hand-packed gift wrapping included, free shipping above €65.",
+  image: new URL('/images/stories/coffret-diy-hero.webp', site.url).toString(),
+  brand: { '@type': 'Brand', name: site.name },
+  inLanguage: 'en-US',
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'EUR',
+    lowPrice: '48',
+    highPrice: '210',
+    availability: 'https://schema.org/InStock',
+    offerCount: eligibleProducts.length,
+  },
+};
+
+const schema = [breadcrumb, productSchema];
+---
+<Layout
+  lang="en"
+  title="Build your gift box | 3 bottles of your choice — La Brasserie des Plantes"
+  description="Create your own gift box: choose any 3 craft liqueurs from our range of 18 bottles. Hand-packed, ready to give. Free shipping above €65."
+  schema={schema}
+>
+  <PageHeader
+    kicker="Custom gift box"
+    title="Build<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>your own box</em>"
+    subtitle="Three bottles of your choice from our full range. A carefully hand-packed gift box, ready to give — or to keep."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Build your gift box' }]}
+  />
+
+  <section class="py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Explanation -->
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">1</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Pick any 3 bottles</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">From our full range — digestifs, aperitifs, CBD infusions, limited editions.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">2</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Hand-packed gift box</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">A carefully assembled box, packed by hand in our distillery in Saint-Didier-en-Velay.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">3</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Fast shipping</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">Free shipping above €65, dispatched within 2 to 3 business days across France.</p>
+        </div>
+      </div>
+
+      <CoffretBuilder products={eligibleProducts} size={3} lang="en" client:load />
+    </div>
+  </section>
+
+  <section class="py-20 bg-forest-900 text-cream-100">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl md:text-4xl mb-6">Looking for the perfect trio?</h2>
+      <p class="text-cream-200/80 text-lg leading-relaxed mb-8">
+        Our "discovery" selection: L'Alchimie Végétale (the award winner),
+        Le Nectar d'Ostara (a floral aperitif) and Le Cerf'Gent (the bitter gentian).
+        A complete tour of the house.
+      </p>
+      <p class="text-cream-200/60 text-sm">
+        Or compose it to your own taste — there are no wrong choices.
+      </p>
+    </div>
+  </section>
+</Layout>

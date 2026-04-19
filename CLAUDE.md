@@ -155,6 +155,28 @@ npm run preview   # aperçu du build de prod
 npm run astro ... # CLI Astro
 ```
 
+## Coffret DIY — 3 bouteilles au choix
+
+Feature de différenciation : le visiteur compose son propre coffret cadeau en
+choisissant 3 bouteilles parmi la gamme (exception : accessoires). Implémenté
+depuis avril 2026.
+
+- **UI** : `src/components/coffret/CoffretBuilder.tsx` (île React, client:load)
+- **Pages** : `/composer-mon-coffret` (FR) et `/en/build-your-gift-box` (EN)
+- **Teaser** sur la homepage (FR + EN) — section après le carousel produits
+- **Intégration panier** : quand le visiteur valide, `cartActions.addItem` est
+  appelé **3 fois**, une par bouteille, avec `cart_item_data` portant les flags
+  `_coffret_diy: "3"`, `_coffret_position: "1/3"` et `_coffret_label`. Côté
+  WordPress/WooCommerce, ces métadonnées apparaissent dans l'admin de commande
+  (sous chaque ligne produit), signalant que les 3 bouteilles sont à emballer
+  ensemble en coffret cadeau.
+- **Pas de plugin WP nouveau requis** : la Store API native accepte
+  `cart_item_data` et WC Blocks le préserve en BO. Stock, TVA, livraison,
+  emails, WooPayments, EasyBee → fonctionnent comme d'habitude.
+- **Contenances** : par défaut le composant choisit la plus petite contenance
+  disponible du produit (`sizes[0]`). À ajuster si besoin dans
+  `composer-mon-coffret.astro` (mapper `defaultSize` par produit).
+
 ## Fichiers critiques i18n
 
 | Fichier | Rôle |
