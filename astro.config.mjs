@@ -10,6 +10,18 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://labrasseriedesplantes.fr',
+
+  // i18n — FR (défaut, pas de préfixe) + EN (préfixe /en/)
+  // Stratégie : pathname-prefix-other-locales → FR à la racine, EN sous /en/*
+  i18n: {
+    defaultLocale: 'fr',
+    locales: ['fr', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+    },
+  },
+
   vite: {
     plugins: [tailwindcss()]
   },
@@ -20,7 +32,14 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
-      i18n: undefined,
+      // i18n pour sitemap : déclare les deux langues avec leurs alternate links
+      i18n: {
+        defaultLocale: 'fr',
+        locales: {
+          fr: 'fr-FR',
+          en: 'en-US',
+        },
+      },
       // Exclut les pages transactionnelles (noindex) et la confirmation
       // (URL avec query params, pas indexable). Évite la contradiction
       // "URL noindex dans le sitemap" qui dégrade la confiance du crawler.

@@ -1,0 +1,334 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { GlowCard } from '../../components/ui/spotlight-card';
+import { site } from '../../data/site';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: `Our story — ${site.name}`,
+    url: `${site.url}/en/our-story`,
+    inLanguage: 'en-US',
+    about: { '@id': `${site.url}#localbusiness` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/en/` },
+      { '@type': 'ListItem', position: 2, name: 'Our story', item: `${site.url}/en/our-story` },
+    ],
+  },
+];
+
+const team = [
+  {
+    name: 'Étienne',
+    role: 'Plant biotechnologist',
+    image: '/images/team/portrait-etienne.webp',
+    bio: "Trained in plant biotechnology in Toulouse, Étienne composes, chooses and blends. He is the distillery's nose — the one who translates botany into flavour.",
+  },
+  {
+    name: 'Guillaume',
+    role: 'Pairings & uses',
+    image: '/images/team/portrait-guillaume.webp',
+    bio: "A former restaurateur and bar manager in Saint-Étienne, Guillaume imagines pairings, moments and recipes. He thinks about how our liqueurs meet at the table and behind the bar.",
+  },
+  {
+    name: 'Bastien',
+    role: 'Production & craft',
+    image: '/images/team/portrait-bastien.webp',
+    bio: "Arriving from the Southern Alps in September 2023, Bastien brings the craft and production rigour. He is the one who makes sure every bottle that leaves our distillery matches our standards.",
+  },
+];
+---
+<Layout
+  lang="en"
+  title="Our story | Craft distillers in Haute-Loire since 2021 — La Brasserie des Plantes"
+  description="Three childhood friends, a shared passion for the plants of Auvergne. Discover the story of La Brasserie des Plantes, from Saint-Didier-en-Velay, France."
+  schema={schema}
+>
+  <PageHeader
+    kicker="Our story"
+    title="Three friends,<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>one terroir</em>"
+    subtitle="From Saint-Didier-en-Velay, France, we bring the forgotten plants of Haute-Loire back to life, as liqueurs and infusions."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Our story' }]}
+  />
+
+  <!-- Group portrait -->
+  <section class="pb-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="aspect-[3/2] rounded-3xl overflow-hidden shadow-2xl">
+        <img
+          src="/images/team/portrait-groupe.webp"
+          alt="Étienne, Guillaume and Bastien — founders of La Brasserie des Plantes, in front of their distillery in Haute-Loire"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Key figures -->
+  <section class="py-12 border-y border-forest-100/60 bg-cream-100/40">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div>
+        <div class="font-display text-4xl md:text-5xl text-forest-800">2021</div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">Year founded</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl md:text-5xl text-forest-800">27+</div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">Plants blended</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl md:text-5xl text-forest-800">18</div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">References in range</div>
+      </div>
+      <div>
+        <div class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gold-500/15 text-gold-600">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="7"/>
+            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+          </svg>
+        </div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">World's Best Digestif 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Narrative -->
+  <section class="py-20 bg-cream-50">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="prose prose-lg max-w-none text-ink-700 space-y-6 leading-relaxed">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">The early days</div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+          A childhood friendship<br />
+          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">turned project</em>
+        </h2>
+        <p>
+          It all started in the school playground, in Saint-Didier-en-Velay.
+          Étienne and Guillaume grew up together in this Velay village,
+          perched on the foothills of the Massif Central, on the border of
+          Haute-Loire and Loire. Each took their road — Étienne studied plant
+          biotechnology in Toulouse, Guillaume cut his teeth in restaurants
+          and opened a bar-restaurant in Saint-Étienne.
+        </p>
+        <p>
+          But the Haute-Loire called them back. Its forests, its highland
+          pastures, its plants. A knowledge waiting to be brought back to
+          light — that of grandmothers who distilled lemon balm for the cold,
+          macerated gentian for the stomach, perfumed their liqueurs with
+          hyssop or southernwood. In {site.founded} they decided to combine
+          their expertise: scientific rigour on one side, the sensitivity of
+          service and taste on the other. La Brasserie des Plantes was born
+          — craft, from Auvergne, uncompromising. Bastien, originally from
+          the Southern Alps, joined them in September 2023 to take charge
+          of production.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image + text: forgotten plants -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div class="order-2 md:order-1">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">The terroir</div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+          A tribute to<br />
+          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">forgotten plants</em>
+        </h2>
+        <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
+          <p>
+            Our approach boils down to one idea: give back their place to
+            plants our grandmothers knew well — caraway, lemon balm,
+            scented verbena, lemon thyme, hyssop, southernwood, yellow
+            gentian — and that had disappeared from cupboards and
+            recipe books.
+          </p>
+          <p>
+            Medicinal plants, aromatic herbs, sometimes bitter, always
+            steeped in history. More than <strong class="font-medium text-forest-800">27 plants,
+            roots, barks and spices</strong> go into our liqueurs — all
+            chosen for their character, their seasonality, their rootedness
+            in the Velay landscape.
+          </p>
+        </div>
+      </div>
+      <div class="order-1 md:order-2">
+        <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src="/images/stories/plantes.webp"
+            alt="Aromatic and medicinal plants harvested in Haute-Loire for our craft liqueurs"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image + text: craft -->
+  <section class="py-20 bg-cream-50">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src="/images/stories/atelier-1.webp"
+            alt="Bastien at the bottling line in our distillery in Saint-Didier-en-Velay"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">The craft</div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+          Macerate, distill,<br />
+          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">let time do the rest</em>
+        </h2>
+        <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
+          <p>
+            We work organically. Some of our raw material comes from our own
+            parcels, the rest is harvested by neighbouring producers we choose
+            for their seriousness — and whom we know by their first name.
+          </p>
+          <p>
+            No artificial flavour, no preservative, no colouring: distillation,
+            cold maceration and time do the rest. Each bottle is filled, corked
+            and labelled by hand — six hands, to be precise.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workshop photo grid -->
+  <section class="py-20 bg-forest-900 text-cream-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12 max-w-3xl mx-auto">
+        <div class="text-xs uppercase tracking-[0.25em] text-gold-400 font-medium mb-3">Our distillery</div>
+        <h2 class="font-display text-3xl md:text-4xl leading-tight mb-4 text-cream-100">
+          In the cellars of Saint-Didier-en-Velay
+        </h2>
+        <p class="text-cream-200/80 leading-relaxed">
+          A small craft distillery in the heart of the village. Tanks, stills,
+          a semi-automatic bottling line — and many gestures, patiently repeated.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <img src="/images/gallery/production-01.webp" alt="Craft production — plant maceration" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
+        <img src="/images/stories/atelier-2.webp" alt="Hand-bottling a green liqueur" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
+        <img src="/images/gallery/atelier-01.webp" alt="Plant preparation before distillation" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
+        <img src="/images/gallery/production-02.webp" alt="Maceration tanks in our distillery" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
+        <img src="/images/gallery/atelier-03.webp" alt="Product preparation — Saint-Didier-en-Velay distillery" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
+        <img src="/images/gallery/atelier-05.webp" alt="Distillery view — La Brasserie des Plantes" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
+      </div>
+    </div>
+  </section>
+
+  <!-- World Drinks Awards -->
+  <section class="py-20 bg-gradient-to-b from-cream-50 to-gold-500/10 border-y border-gold-500/30">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl">
+          <img
+            src="/images/stories/world-drinks-awards-2025.webp"
+            alt="L'Alchimie Végétale — World's Best Digestif 2025 at the World Liqueur Awards"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">Recognition</div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+          World's Best<br />
+          <em class="not-italic text-gold-600 font-normal" style="font-family: var(--font-script);">Digestif 2025</em>
+        </h2>
+        <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
+          <p>
+            In April 2025, our flagship — <em>L'Alchimie Végétale</em>,
+            50 % vol., 27 plants — was crowned <strong class="text-gold-600">World's Best
+            Digestif</strong> at the World Drinks Awards in London, in the
+            digestive liqueur category.
+          </p>
+          <p>
+            International recognition that reaches far beyond our mountains,
+            and that confirms what we suspected: the plants from our region,
+            prepared with patience, have nothing to envy the great houses.
+          </p>
+          <p>
+            Behind this award stand three years of formulations, setbacks and
+            restarts. And above all the conviction that craft has its place
+            in a world that moves too fast.
+          </p>
+        </div>
+        <div class="mt-8">
+          <a href="/boutique/alchimie-vegetale" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+            Discover L'Alchimie Végétale
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="py-24 bg-forest-50/40">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">The team</div>
+        <h2 class="font-display text-4xl md:text-5xl text-forest-900">The hands behind the bottles</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 stagger" style="--stagger-delay: 140ms;">
+        {team.map((m) => (
+          <GlowCard
+            client:load
+            glowColor="gold"
+            customSize
+            padding="none"
+            className="overflow-hidden bg-white !aspect-auto w-full"
+          >
+            <div class="aspect-square overflow-hidden">
+              <img
+                src={m.image}
+                alt={`Portrait of ${m.name}, co-founder of La Brasserie des Plantes`}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="font-display text-2xl text-forest-900 mb-1">{m.name}</h3>
+              <div class="text-sm text-gold-600 font-medium mb-4">{m.role}</div>
+              <p class="text-sm text-ink-700 leading-relaxed">{m.bio}</p>
+            </div>
+          </GlowCard>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-cream-50">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6">
+        Come and meet us.
+      </h2>
+      <p class="text-lg text-ink-700 mb-8 leading-relaxed">
+        Our distillery is open in Saint-Didier-en-Velay, Monday to Saturday.
+        We also run mixology workshops — another way to discover our liqueurs.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/en/workshops" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+          Our workshops
+        </a>
+        <a href="/en/contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 font-medium transition-colors">
+          Write to us
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

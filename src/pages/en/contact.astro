@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { site } from '../../data/site';
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: `Contact — ${site.name}`,
+  url: `${site.url}/en/contact`,
+  inLanguage: 'en-US',
+  mainEntity: { '@id': `${site.url}#localbusiness` },
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Contact', item: `${site.url}/en/contact` },
+  ],
+};
+
+// Netlify Forms confirmation
+const sent = Astro.url.searchParams.get('sent') === '1';
+---
+<Layout
+  lang="en"
+  title="Contact | Get in touch — La Brasserie des Plantes, Haute-Loire"
+  description="Contact La Brasserie des Plantes in Saint-Didier-en-Velay, France. Phone, email, address, opening hours. Trade partnerships welcome."
+  schema={[contactSchema, breadcrumb]}
+>
+  <PageHeader
+    kicker="Contact"
+    title="Get in touch<br />with the distillery"
+    subtitle="For an order, a partnership, a question about our plants or our workshops — write to us, we reply quickly."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Contact' }]}
+  />
+
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
+      <!-- Contact details -->
+      <div class="space-y-10">
+        <div>
+          <h2 class="font-display text-2xl text-forest-900 mb-4">Our distillery</h2>
+          <address class="not-italic text-ink-700 leading-relaxed">
+            {site.address.street}<br />
+            {site.address.postalCode} {site.address.city}<br />
+            {site.address.region}, France
+          </address>
+          <div class="mt-4">
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address.street + ', ' + site.address.postalCode + ' ' + site.address.city)}`}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 text-sm text-forest-700 hover:text-forest-900 font-medium"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              View on Google Maps
+            </a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <h3 class="font-display text-lg text-forest-900 mb-2">Phone</h3>
+            <a href={`tel:${site.phone}`} class="text-ink-700 hover:text-forest-700 transition-colors">
+              {site.phoneDisplay}
+            </a>
+          </div>
+          <div>
+            <h3 class="font-display text-lg text-forest-900 mb-2">Email</h3>
+            <a href={`mailto:${site.email}`} class="text-ink-700 hover:text-forest-700 transition-colors break-all">
+              {site.email}
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-display text-lg text-forest-900 mb-2">Opening hours</h3>
+          <div class="text-ink-700">Wednesday, Friday &amp; Saturday — 9am to 6:30pm</div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-forest-50 border border-forest-200/60">
+          <h3 class="font-display text-xl text-forest-900 mb-2">Trade &amp; wholesale</h3>
+          <p class="text-sm text-ink-700 leading-relaxed mb-4">
+            Restaurants, wine merchants, fine grocers — we sell direct.
+            Write to us with a few words about your venue and we'll be
+            in touch.
+          </p>
+          <a href={`mailto:${site.email}?subject=Trade%20partnership`} class="text-forest-700 hover:text-forest-900 font-medium text-sm inline-flex items-center gap-1">
+            Contact us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div>
+        <h2 class="font-display text-2xl text-forest-900 mb-6">Send us a message</h2>
+        {sent && (
+          <div class="mb-6 p-5 rounded-xl bg-forest-50 border border-forest-200 text-forest-800">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 flex-none mt-0.5 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <div>
+                <div class="font-medium mb-1">Message sent, thank you!</div>
+                <div class="text-sm text-ink-700">We'll get back to you within 48 business hours.</div>
+              </div>
+            </div>
+          </div>
+        )}
+        <form
+          name="contact-en"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="/en/contact?sent=1"
+          class="space-y-5"
+        >
+          <input type="hidden" name="form-name" value="contact-en" />
+          <p class="hidden">
+            <label>Please do not fill in: <input name="bot-field" /></label>
+          </p>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name-en" class="block text-sm font-medium text-ink-700 mb-2">Full name</label>
+              <input
+                id="name-en"
+                name="name"
+                type="text"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-cream-50 focus:border-forest-600 focus:ring-2 focus:ring-forest-200 outline-none transition"
+              />
+            </div>
+            <div>
+              <label for="email-en" class="block text-sm font-medium text-ink-700 mb-2">Email</label>
+              <input
+                id="email-en"
+                name="email"
+                type="email"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-cream-50 focus:border-forest-600 focus:ring-2 focus:ring-forest-200 outline-none transition"
+              />
+            </div>
+          </div>
+          <div>
+            <label for="subject-en" class="block text-sm font-medium text-ink-700 mb-2">Subject</label>
+            <select
+              id="subject-en"
+              name="subject"
+              class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-cream-50 focus:border-forest-600 focus:ring-2 focus:ring-forest-200 outline-none transition"
+            >
+              <option>Question about a product</option>
+              <option>Order / shipping</option>
+              <option>Trade partnership</option>
+              <option>Workshops &amp; tastings</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="message-en" class="block text-sm font-medium text-ink-700 mb-2">Message</label>
+            <textarea
+              id="message-en"
+              name="message"
+              rows="6"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-cream-50 focus:border-forest-600 focus:ring-2 focus:ring-forest-200 outline-none transition resize-none"
+            ></textarea>
+          </div>
+          <button type="submit" class="w-full px-6 py-4 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+            Send
+          </button>
+          <p class="text-xs text-ink-500 text-center">
+            By submitting this form, you agree that your data may be processed
+            so we can respond to your enquiry.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>

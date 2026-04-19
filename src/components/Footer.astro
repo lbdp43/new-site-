@@ -1,7 +1,43 @@
 ---
-import { site, nav } from '../data/site';
+import { site } from '../data/site';
+import { t, localizedPath, type Lang } from '../i18n/utils';
+import type { UIKey } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'fr' } = Astro.props;
+const tr = (key: Parameters<typeof t>[0]) => t(key, lang);
 
 const year = new Date().getFullYear();
+
+// Navigation footer localisée
+const navItems: { labelKey: UIKey; href: string }[] = [
+  { labelKey: 'nav.story', href: localizedPath('/notre-histoire', lang) },
+  { labelKey: 'nav.shop', href: localizedPath('/boutique', lang) },
+  { labelKey: 'nav.lumiere', href: localizedPath('/lumiere-obscure', lang) },
+  { labelKey: 'nav.plants', href: localizedPath('/nos-plantes', lang) },
+  { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
+  { labelKey: 'nav.workshops', href: localizedPath('/ateliers', lang) },
+  { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
+  { labelKey: 'nav.pros', href: localizedPath('/professionnels', lang) },
+  { labelKey: 'nav.contact', href: localizedPath('/contact', lang) },
+];
+
+// Bloc "à propos" — traduit selon la langue
+const aboutBlurb = lang === 'en'
+  ? `Craft distillers in Haute-Loire, France. We craft liqueurs and infusions from forgotten plants, hand-harvested in our Auvergne mountains.`
+  : `Artisans liquoristes en Haute-Loire. Nous composons des liqueurs et infusions à partir de plantes oubliées, récoltées au plus près de nos montagnes d'Auvergne.`;
+
+const findUsLabel = lang === 'en' ? 'Find us' : 'Nous trouver';
+const navTitle = lang === 'en' ? 'Navigation' : 'Navigation';
+const paymentLabel = lang === 'en' ? 'Secure payment' : 'Paiement sécurisé';
+const paymentMethodsAria = lang === 'en' ? 'Accepted payment methods' : 'Moyens de paiement acceptés';
+const sslLabel = lang === 'en' ? 'SSL secured' : 'SSL sécurisé';
+const hoursDisplay = lang === 'en'
+  ? 'Wednesday, Friday & Saturday — 9am to 6:30pm'
+  : site.hoursDisplay;
 ---
 <footer class="bg-forest-900 text-cream-100 mt-24">
   <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -14,9 +50,7 @@ const year = new Date().getFullYear();
         />
       </div>
       <p class="text-cream-200/80 max-w-md text-sm leading-relaxed">
-        Artisans liquoristes en Haute-Loire. Nous composons des liqueurs et
-        infusions à partir de plantes oubliées, récoltées au plus près de nos
-        montagnes d'Auvergne.
+        {aboutBlurb}
       </p>
       <p class="mt-4 text-xs text-cream-200/60">
         SIRET {site.siret}
@@ -24,12 +58,12 @@ const year = new Date().getFullYear();
     </div>
 
     <div>
-      <h3 class="font-display text-lg text-cream-100 mb-4">Navigation</h3>
+      <h3 class="font-display text-lg text-cream-100 mb-4">{navTitle}</h3>
       <ul class="space-y-2 text-sm">
-        {nav.map((item) => (
+        {navItems.map((item) => (
           <li>
             <a href={item.href} class="text-cream-200/80 hover:text-cream-100 transition-colors">
-              {item.label}
+              {tr(item.labelKey)}
             </a>
           </li>
         ))}
@@ -37,11 +71,11 @@ const year = new Date().getFullYear();
     </div>
 
     <div>
-      <h3 class="font-display text-lg text-cream-100 mb-4">Nous trouver</h3>
+      <h3 class="font-display text-lg text-cream-100 mb-4">{findUsLabel}</h3>
       <address class="not-italic text-sm text-cream-200/80 space-y-2 leading-relaxed">
         <div>
           {site.address.street}<br />
-          {site.address.postalCode} {site.address.city}
+          {site.address.postalCode} {site.address.city}{lang === 'en' ? ', France' : ''}
         </div>
         <div>
           <a href={`tel:${site.phone}`} class="hover:text-cream-100 transition-colors">
@@ -54,7 +88,7 @@ const year = new Date().getFullYear();
           </a>
         </div>
         <div class="pt-2 text-xs text-cream-200/60">
-          {site.hoursDisplay}
+          {hoursDisplay}
         </div>
       </address>
     </div>
@@ -64,9 +98,9 @@ const year = new Date().getFullYear();
   <div class="border-t border-forest-700/50 bg-forest-950/50">
     <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="text-xs uppercase tracking-[0.25em] text-cream-200/70">
-        Paiement sécurisé
+        {paymentLabel}
       </div>
-      <div class="flex items-center gap-3 text-cream-100/90" aria-label="Moyens de paiement acceptés">
+      <div class="flex items-center gap-3 text-cream-100/90" aria-label={paymentMethodsAria}>
         <!-- Visa -->
         <div class="h-7 w-11 rounded bg-white flex items-center justify-center" title="Visa">
           <svg viewBox="0 0 48 32" class="h-4" aria-hidden="true">
@@ -114,23 +148,23 @@ const year = new Date().getFullYear();
       </div>
       <div class="text-xs text-cream-200/60 flex items-center gap-2">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        SSL sécurisé
+        {sslLabel}
       </div>
     </div>
   </div>
 
   <div class="border-t border-forest-700/50">
     <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-cream-200/60">
-      <div>© {year} {site.name}. Tous droits réservés.</div>
+      <div>© {year} {site.name}. {tr('footer.rights')}.</div>
       <div class="flex flex-wrap gap-5">
-        <a href="/faq" class="hover:text-cream-100">FAQ</a>
-        <a href="/presse" class="hover:text-cream-100">Presse</a>
-        <a href="/mentions-legales" class="hover:text-cream-100">Mentions légales</a>
-        <a href="/cgv" class="hover:text-cream-100">CGV</a>
-        <a href="/politique-cookies" class="hover:text-cream-100">Cookies</a>
+        <a href={localizedPath('/faq', lang)} class="hover:text-cream-100">{tr('footer.faq')}</a>
+        <a href={localizedPath('/presse', lang)} class="hover:text-cream-100">{tr('footer.press')}</a>
+        <a href={localizedPath('/mentions-legales', lang)} class="hover:text-cream-100">{tr('footer.legal')}</a>
+        <a href={localizedPath('/cgv', lang)} class="hover:text-cream-100">{tr('footer.cgv')}</a>
+        <a href={localizedPath('/politique-cookies', lang)} class="hover:text-cream-100">{tr('footer.cookies')}</a>
       </div>
       <div class="text-cream-200/60">
-        L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+        {tr('footer.abuse')}
       </div>
     </div>
   </div>

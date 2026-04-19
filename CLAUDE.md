@@ -18,12 +18,33 @@ dupliquer la logique e-commerce.
 
 ## Stack
 
-- **Astro 6** (SSG, sortie statique)
+- **Astro 6** (SSG, sortie statique) — config i18n native FR (défaut) + EN (préfixe `/en/`)
 - **React 19** pour les îles interactives (panier, checkout, hero blog, etc.)
 - **Tailwind CSS v4** via `@tailwindcss/vite`
 - **Framer Motion** pour les animations
 - **Stripe Elements** (`@stripe/stripe-js`, `@stripe/react-stripe-js`)
 - Hébergement : **Vercel** (auto-deploy depuis GitHub `main`)
+
+## Internationalisation (i18n)
+
+Le site est bilingue FR / EN depuis avril 2026.
+
+- **FR** = langue par défaut, sans préfixe (`/notre-histoire`, `/boutique`…)
+- **EN** = préfixe `/en/` avec **slugs traduits** (`/en/our-story`, `/en/shop`…)
+- Mapping FR↔EN défini dans `src/i18n/routes.ts` (`routeMap` + helpers
+  `localizedPath` / `alternateLangPath`)
+- Traductions UI centralisées dans `src/i18n/ui.ts` (navigation, footer, CTAs,
+  panier, étiquettes produit)
+- Helpers dans `src/i18n/utils.ts` (`getLangFromUrl`, `t`, `useTranslations`,
+  `getHreflangLinks`)
+- `Layout.astro` détecte la langue automatiquement via l'URL (ou via la prop
+  `lang`) et génère hreflang + `<html lang>` + `og:locale` corrects
+- Language switcher dans le Header (desktop + mobile)
+- Pages EN traduites à ce jour : home, contact, workshops, our-plants,
+  cocktails, our-story, shop (index). **À traduire dans une session future** :
+  fiches produit (`/en/shop/[slug]`), blog, lumiere-obscure, professionnels,
+  faq, presse, pages légales, 404.
+- Fichiers de données i18n : `src/data/plants.en.ts`, `src/data/cocktails.en.ts`
 
 ## Environnements
 
@@ -133,6 +154,16 @@ npm run build     # build de production → ./dist
 npm run preview   # aperçu du build de prod
 npm run astro ... # CLI Astro
 ```
+
+## Fichiers critiques i18n
+
+| Fichier | Rôle |
+|---|---|
+| `src/i18n/ui.ts` | Dictionnaire des chaînes UI FR + EN (type `UIKey`) |
+| `src/i18n/routes.ts` | Mapping FR↔EN des slugs (`routeMap`) + helpers `localizedPath`, `alternateLangPath` |
+| `src/i18n/utils.ts` | Helpers `getLangFromUrl`, `t`, `useTranslations`, `getHreflangLinks`, `getHtmlLang`, `getOgLocale` |
+| `src/data/plants.en.ts` | Descriptions EN des 12 plantes (keyed par nom FR) |
+| `src/data/cocktails.en.ts` | Traductions EN des 5 cocktails (keyed par slug) |
 
 ## Fichiers critiques
 

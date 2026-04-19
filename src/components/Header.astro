@@ -1,6 +1,34 @@
 ---
-import { nav, site } from '../data/site';
+import { site } from '../data/site';
 import CartIcon from './cart/CartIcon';
+import { t, localizedPath, alternateLangPath, type Lang } from '../i18n/utils';
+import type { UIKey } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'fr' } = Astro.props;
+const tr = (key: UIKey) => t(key, lang);
+
+// Navigation construite dynamiquement selon la langue
+const navItems: { labelKey: UIKey; href: string }[] = [
+  { labelKey: 'nav.story', href: localizedPath('/notre-histoire', lang) },
+  { labelKey: 'nav.shop', href: localizedPath('/boutique', lang) },
+  { labelKey: 'nav.lumiere', href: localizedPath('/lumiere-obscure', lang) },
+  { labelKey: 'nav.plants', href: localizedPath('/nos-plantes', lang) },
+  { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
+  { labelKey: 'nav.workshops', href: localizedPath('/ateliers', lang) },
+  { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
+  { labelKey: 'nav.pros', href: localizedPath('/professionnels', lang) },
+  { labelKey: 'nav.contact', href: localizedPath('/contact', lang) },
+];
+
+// Language switcher — on génère le chemin équivalent dans l'autre langue
+const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
+const switchTargetPath = alternateLangPath(Astro.url.pathname, lang, otherLang);
+const homeHref = lang === 'en' ? '/en/' : '/';
+const shopHref = localizedPath('/boutique', lang);
 ---
 <header
   id="site-header"
@@ -8,9 +36,9 @@ import CartIcon from './cart/CartIcon';
 >
   <!-- Bandeau promo (émeraude jewel avec filet doré en bas) -->
   <div class="relative bg-forest-800 text-cream-100 text-center text-xs tracking-wide py-2 px-4">
-    <span class="font-medium">Livraison offerte dès 65 €</span>
+    <span class="font-medium">{tr('promo.free-shipping')}</span>
     <span class="opacity-70 mx-2">·</span>
-    <span class="opacity-80">Expédition sous 2 à 3 jours ouvrés</span>
+    <span class="opacity-80">{tr('promo.delivery-time')}</span>
     <!-- filet doré sous le bandeau promo (ornement signature) -->
     <div class="absolute inset-x-0 bottom-0 h-px gold-hairline"></div>
   </div>
@@ -18,10 +46,10 @@ import CartIcon from './cart/CartIcon';
   <!-- Couche liquid-glass (blur + teinte cream + reflet blanc sur les bords) -->
   <div class="relative header-glass-body">
     <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-8">
-      <a href="/" class="flex items-center gap-3 group" aria-label="La Brasserie des Plantes — retour à l'accueil">
+      <a href={homeHref} class="flex items-center gap-3 group" aria-label={`${site.name} — ${tr('cta.back-home')}`}>
         <img
           src="/images/brand/logo-lbdp.png"
-          alt="La Brasserie des Plantes"
+          alt={site.name}
           class="h-12 w-auto group-hover:opacity-80 transition-opacity"
           width="200"
           height="60"
@@ -30,27 +58,37 @@ import CartIcon from './cart/CartIcon';
       </a>
 
       <nav class="hidden lg:flex items-center gap-8 text-sm">
-        {nav.map((item) => (
+        {navItems.map((item) => (
           <a
             href={item.href}
             class="relative text-ink-700 hover:text-forest-700 transition-colors font-medium nav-link"
           >
-            {item.label}
+            {tr(item.labelKey)}
           </a>
         ))}
       </nav>
 
       <div class="flex items-center gap-3">
+        <!-- Language switcher (desktop) -->
+        <a
+          href={switchTargetPath}
+          class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-forest-200/60 text-xs font-medium text-forest-700 hover:border-forest-400 hover:text-forest-900 transition-colors"
+          aria-label={tr('lang.switch')}
+          title={otherLang === 'fr' ? tr('lang.fr') : tr('lang.en')}
+        >
+          <span class="uppercase tracking-wider">{otherLang}</span>
+        </a>
+
         <CartIcon client:load />
         <a
-          href="/boutique"
+          href={shopHref}
           class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-forest-700 hover:bg-forest-800 text-cream-100 text-sm font-medium transition-all shadow-[0_0_0_1px_rgba(205,182,132,0.2),0_4px_14px_-4px_rgba(10,107,67,0.4)] hover:shadow-[0_0_0_1px_rgba(205,182,132,0.6),0_8px_22px_-6px_rgba(205,182,132,0.4)]"
         >
-          Découvrir la boutique
+          {tr('nav.discover-shop')}
         </a>
         <button
           id="menu-toggle"
-          aria-label="Ouvrir le menu"
+          aria-label={tr('nav.open-menu')}
           class="lg:hidden p-2 text-forest-900"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -69,19 +107,25 @@ import CartIcon from './cart/CartIcon';
   <!-- Mobile menu -->
   <div id="mobile-menu" class="hidden lg:hidden border-t border-gold-500/20 bg-cream-50/95 backdrop-blur-md">
     <nav class="flex flex-col px-6 py-4 gap-1">
-      {nav.map((item) => (
+      {navItems.map((item) => (
         <a
           href={item.href}
           class="py-3 text-ink-700 hover:text-forest-700 border-b border-forest-100/60 last:border-0"
         >
-          {item.label}
+          {tr(item.labelKey)}
         </a>
       ))}
       <a
-        href="/boutique"
+        href={switchTargetPath}
+        class="py-3 text-ink-500 hover:text-forest-700 border-b border-forest-100/60 uppercase text-xs tracking-wider"
+      >
+        {otherLang === 'en' ? 'English' : 'Français'}
+      </a>
+      <a
+        href={shopHref}
         class="mt-3 inline-flex justify-center items-center px-5 py-3 rounded-full bg-forest-700 text-cream-100 font-medium"
       >
-        Découvrir la boutique
+        {tr('nav.discover-shop')}
       </a>
     </nav>
   </div>

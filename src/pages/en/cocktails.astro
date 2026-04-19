@@ -1,0 +1,176 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { GlowCard } from '../../components/ui/spotlight-card';
+import { cocktails } from '../../data/cocktails';
+import { cocktailsEn, toneLabelsEn } from '../../data/cocktails.en';
+import { site } from '../../data/site';
+
+// Recipe schema per cocktail — Google rich snippets (strong SEO lever)
+const recipeSchemas = cocktails.map((c) => {
+  const en = cocktailsEn[c.slug];
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Recipe',
+    name: c.name, // French name kept
+    description: en?.description ?? c.description,
+    recipeCategory: 'Cocktail',
+    recipeCuisine: 'French',
+    inLanguage: 'en-US',
+    keywords: `cocktail, liqueur, ${c.liqueurName.toLowerCase()}, ${toneLabelsEn[c.tone]?.toLowerCase() ?? c.tone}`,
+    prepTime: c.prepTime,
+    totalTime: c.prepTime,
+    recipeYield: `${c.servings} cocktail`,
+    recipeIngredient: (en?.ingredients ?? c.ingredients).map((i) =>
+      i.amount ? `${i.amount} — ${i.item}` : i.item
+    ),
+    recipeInstructions: (en?.steps ?? c.steps).map((step, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      text: step,
+    })),
+    author: { '@type': 'Organization', name: site.name },
+    image: new URL(c.image, site.url).toString(),
+  };
+});
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Cocktails', item: `${site.url}/en/cocktails` },
+  ],
+};
+
+const schema = [breadcrumb, ...recipeSchemas];
+
+const toneColors: Record<string, string> = {
+  frais: 'bg-forest-100 text-forest-800',
+  fruité: 'bg-gold-500/15 text-gold-600',
+  amer: 'bg-forest-800/15 text-forest-800',
+  épicé: 'bg-orange-100 text-orange-700',
+};
+---
+<Layout
+  lang="en"
+  title="Botanical cocktails | House recipes — La Brasserie des Plantes"
+  description="Five cocktail recipes crafted in-house: Spritz Efflorescent, Verveine Printanière, Philtre d'Éros, Black Mule, Bonbon au Citron. Mixology with Auvergne plants."
+  schema={schema}
+>
+  <PageHeader
+    kicker="Mixology"
+    title="Our signature<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>cocktails</em>"
+    subtitle="Five recipes crafted around our flagship liqueurs — from sunny spritz to dark mule. To make at home, or discover at our workshop."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Cocktails' }]}
+  />
+
+  <section class="py-12">
+    <div class="max-w-5xl mx-auto px-6 space-y-20">
+      {cocktails.map((c, i) => {
+        const en = cocktailsEn[c.slug];
+        const ingredients = en?.ingredients ?? c.ingredients;
+        const steps = en?.steps ?? c.steps;
+        return (
+          <article id={c.slug} class={`grid lg:grid-cols-5 gap-10 items-start ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+            <div class="lg:col-span-2">
+              <GlowCard
+                client:visible
+                glowColor="gold"
+                customSize
+                padding="none"
+                className="group/card aspect-square w-full overflow-hidden !aspect-square bg-white"
+              >
+                <img
+                  src={c.image}
+                  alt={`${c.name} cocktail — made with ${c.liqueurName}`}
+                  class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out group-hover/card:opacity-0"
+                  loading="lazy"
+                />
+                <img
+                  src={`/images/products/${c.liqueurProductSlug}${c.liqueurProductSlug === 'gorgeon-des-machures' ? '.webp' : '.png'}`}
+                  alt={`${c.liqueurName} liqueur — used in ${c.name}`}
+                  class="absolute inset-0 w-full h-full object-contain p-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 ease-out bg-white"
+                  loading="lazy"
+                />
+                <span class="absolute bottom-4 left-4 z-10 text-[10px] uppercase tracking-[0.2em] text-cream-50 font-medium bg-forest-900/70 px-2 py-1 rounded-full backdrop-blur-sm transition-opacity duration-500 group-hover/card:opacity-0">
+                  Hover to see the liqueur
+                </span>
+              </GlowCard>
+              <a href={`/boutique/${c.liqueurProductSlug}`} class="mt-4 inline-flex items-center gap-2 text-sm text-forest-700 hover:text-forest-900 font-medium">
+                {c.liqueurName}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+
+            <div class="lg:col-span-3">
+              <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class={`text-[11px] uppercase tracking-wide font-medium px-3 py-1 rounded-full ${toneColors[c.tone]}`}>
+                  {toneLabelsEn[c.tone] ?? c.tone}
+                </span>
+                <span class="text-[11px] uppercase tracking-wide text-ink-500 px-3 py-1 rounded-full border border-forest-100">
+                  {en?.glass ?? c.glass}
+                </span>
+                <span class="text-[11px] uppercase tracking-wide text-ink-500 px-3 py-1 rounded-full border border-forest-100">
+                  ≈ {c.prepTime.replace('PT', '').replace('M', ' min')}
+                </span>
+              </div>
+
+              <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-1 leading-tight">
+                {c.name}
+              </h2>
+              {en?.subtitle && (
+                <div class="text-sm italic text-ink-500 mb-4">— {en.subtitle}</div>
+              )}
+              <p class="text-ink-700 leading-relaxed mb-8 italic">
+                {en?.description ?? c.description}
+              </p>
+
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="font-display text-lg text-forest-900 mb-3">Ingredients</h3>
+                  <ul class="space-y-2 text-sm text-ink-700">
+                    {ingredients.map((ing) => (
+                      <li class="flex justify-between gap-3 py-2 border-b border-forest-100/60">
+                        <span>{ing.item}</span>
+                        {ing.amount && <span class="text-forest-700 font-medium whitespace-nowrap">{ing.amount}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 class="font-display text-lg text-forest-900 mb-3">Method</h3>
+                  <ol class="space-y-3 text-sm text-ink-700 leading-relaxed">
+                    {steps.map((step, si) => (
+                      <li class="flex gap-3">
+                        <span class="flex-none w-6 h-6 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center text-xs font-medium">
+                          {si + 1}
+                        </span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="py-20 bg-cream-100/60 mt-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6">
+        More recipes at the workshop.
+      </h2>
+      <p class="text-ink-700 text-lg mb-8 leading-relaxed">
+        We run mixology workshops in Saint-Didier-en-Velay and Saint-Étienne —
+        an evening, a tasting, and you leave with your own creations.
+      </p>
+      <a href="/en/workshops" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+        Discover our workshops
+      </a>
+    </div>
+  </section>
+</Layout>

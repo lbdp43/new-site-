@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { site } from '../../data/site';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Workshops', item: `${site.url}/en/workshops` },
+  ],
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Tasting & mixology workshop — La Brasserie des Plantes',
+  description:
+    'Discover craft botanical liqueurs, learn the basics of mixology, and enjoy a guided tasting with the founders. Two hours in a small group, at our distillery in Saint-Didier-en-Velay (France).',
+  provider: { '@id': `${site.url}#localbusiness` },
+  areaServed: { '@type': 'Place', name: site.address.region },
+  serviceType: 'Mixology & tasting workshop',
+  inLanguage: 'en-US',
+  offers: {
+    '@type': 'Offer',
+    url: 'https://www.wecandoo.fr/artisan/la-brasserie-des-plantes',
+    availability: 'https://schema.org/InStock',
+    priceCurrency: 'EUR',
+  },
+};
+---
+<Layout
+  lang="en"
+  title="Tasting & mixology workshops | La Brasserie des Plantes"
+  description="Discover the world of botanical craft liqueurs at our distillery in Saint-Didier-en-Velay, France. Small-group mixology workshops, guided tasting, distillery tour."
+  schema={[breadcrumb, serviceSchema]}
+>
+  <PageHeader
+    kicker="Workshops"
+    title="Step inside<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>the distillery</em>"
+    subtitle="Two hours at our place, discovering our plants, tasting our liqueurs and making your own cocktails under the founders' eye."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Workshops' }]}
+  />
+
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="aspect-[5/2] rounded-3xl overflow-hidden shadow-xl mb-16">
+        <img
+          src="/images/stories/atelier-1.jpg"
+          alt="Tasting workshop at La Brasserie des Plantes, Saint-Didier-en-Velay"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="p-8 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <div class="w-12 h-12 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="font-display text-xl text-forest-900 mb-2">Two hours</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">
+            A long pause in the day — the rhythm of craft making.
+          </p>
+        </div>
+        <div class="p-8 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <div class="w-12 h-12 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="font-display text-xl text-forest-900 mb-2">Small group</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">
+            Six to ten people max, so everyone can chat, taste and experiment.
+          </p>
+        </div>
+        <div class="p-8 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <div class="w-12 h-12 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <h3 class="font-display text-xl text-forest-900 mb-2">With the founders</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">
+            Étienne, Guillaume or Bastien personally lead every workshop.
+          </p>
+        </div>
+      </div>
+
+      <div class="max-w-3xl mx-auto prose prose-lg text-ink-700 leading-relaxed space-y-6">
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-4">The programme</h2>
+        <p>
+          You arrive at our place and we welcome you with a house aperitif —
+          usually a spritz with Le Nectar d'Ostara. Then comes a seasonal tour
+          of the plants we use: why caraway, why hyssop, what we look for in
+          a lemon balm.
+        </p>
+        <p>
+          Next you taste four of our flagship liqueurs, neat and in cocktails.
+          Then, shaker in hand: each guest crafts their own drink with our
+          guidance. You leave with your recipes and a few ideas for your own
+          evenings.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-forest-900 text-cream-100">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-4xl mb-6">Book a workshop</h2>
+      <p class="text-cream-200/80 text-lg mb-10 leading-relaxed">
+        Our workshops are booked through <strong>Wecandoo</strong>, our
+        experience partner. A few clicks to reserve — gift vouchers available.
+      </p>
+      <a
+        href="https://www.wecandoo.fr/artisan/la-brasserie-des-plantes"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors"
+      >
+        See dates and book
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </section>
+</Layout>

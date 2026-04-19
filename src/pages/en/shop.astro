@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductMasonry from '../../components/ProductMasonry.astro';
+import { products, ranges, type ProductRange } from '../../data/products';
+import { site } from '../../data/site';
+
+const order: ProductRange[] = ['brasserie', 'aperitif', 'lumiere-obscure', 'edition-limitee', 'accessoire'];
+const productsByRange = Object.fromEntries(
+  order.map((r) => [r, products.filter((p) => p.range === r)])
+) as Record<ProductRange, typeof products>;
+
+// English translations for the range names and descriptions.
+// Kept inline here as the boutique page is the only consumer for now.
+const rangesEn: Record<ProductRange, { name: string; description: string }> = {
+  'brasserie': {
+    name: 'Brasserie — signature range',
+    description: "The heart of our work: seven flagship liqueurs, from 17 to 50 % vol., built around the plants of Auvergne.",
+  },
+  'aperitif': {
+    name: 'Aperitifs',
+    description: "Four bright, lower-alcohol aperitifs (15 to 17.5 % vol.) — ideal to open an evening.",
+  },
+  'lumiere-obscure': {
+    name: 'Lumière Obscure — CBD range',
+    description: "Botanical infusions pairing plants and CBD (THC < 0.1 %). Three creations with a fresh, deep character.",
+  },
+  'edition-limitee': {
+    name: 'Limited editions',
+    description: "Seasonal cuvées and oak-cask finishes, produced in small batches. Only as long as stocks last.",
+  },
+  'accessoire': {
+    name: 'Gifts & accessories',
+    description: "Discovery box, travel flask, glasses and tasting accessories — to offer or keep.",
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Shop', item: `${site.url}/en/shop` },
+  ],
+};
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Craft liqueurs — La Brasserie des Plantes',
+  inLanguage: 'en-US',
+  numberOfItems: products.length,
+  itemListElement: products.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${site.url}/en/shop/${p.slug}`,
+    name: p.name,
+  })),
+};
+---
+<Layout
+  lang="en"
+  title="Shop | Craft botanical liqueurs — La Brasserie des Plantes"
+  description="Browse our 18 craft liqueurs made with plants from Auvergne: signature range, aperitifs, CBD infusions, limited editions. Free shipping above €65."
+  schema={[breadcrumbSchema, itemListSchema]}
+>
+  <section class="bg-white border-b border-forest-100/60 py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <nav class="text-xs text-ink-500 mb-6" aria-label="Breadcrumb">
+        <a href="/en/" class="hover:text-forest-700">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-forest-700">Shop</span>
+      </nav>
+      <h1 class="font-display text-5xl md:text-6xl text-forest-900 mb-4 leading-tight">
+        Our shop
+      </h1>
+      <p class="text-lg text-ink-700 max-w-2xl leading-relaxed mb-8">
+        Eighteen references across several ranges, all composed and
+        hand-bottled in Haute-Loire, France. Free shipping above €65.
+      </p>
+      <nav class="flex flex-wrap gap-3" aria-label="Our ranges">
+        {order.map((r) => (
+          <a
+            href={`#${r}`}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cream-50 border border-forest-200/60 text-sm text-forest-800 hover:bg-forest-50 hover:border-forest-400 transition-colors"
+          >
+            <span class="text-xs uppercase tracking-wider text-forest-600">—</span>
+            {rangesEn[r].name}
+            <span class="text-xs text-ink-500">({productsByRange[r].length})</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+  </section>
+
+  {order.map((r) => (
+    <section id={r} class="py-16 bg-white odd:bg-cream-50/60">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-10 max-w-2xl">
+          <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+            Range — {productsByRange[r].length} references
+          </div>
+          <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-3">
+            {rangesEn[r].name}
+          </h2>
+          <p class="text-ink-700 leading-relaxed">{rangesEn[r].description}</p>
+        </div>
+        <ProductMasonry items={productsByRange[r]} />
+      </div>
+    </section>
+  ))}
+</Layout>
