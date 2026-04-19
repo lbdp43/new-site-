@@ -13,10 +13,15 @@ const eligibleProducts: CoffretProduct[] = products
     range: p.range,
     priceMin: p.priceMin,
     image: p.image,
+    stackImage: p.sizeImages?.[20],
     alcohol: p.alcohol,
     tagline: p.tagline,
     wcId: p.wcId as number,
-    defaultSize: p.sizes && p.sizes.length > 0 ? parseInt(p.sizes[0]) : undefined,
+    defaultSize: p.sizeImages?.[20]
+      ? 20
+      : p.sizes && p.sizes.length > 0
+        ? parseInt(p.sizes[0])
+        : undefined,
     wcSizeAttribute: p.wcSizeAttribute,
   }));
 

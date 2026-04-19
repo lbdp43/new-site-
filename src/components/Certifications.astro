@@ -1,0 +1,101 @@
+---
+/**
+ * Bandeau certifications & labels — affiché sur la home et sur les pages
+ * produit clés pour renforcer l'E-E-A-T (Expertise, Authoritativeness,
+ * Trustworthiness) côté SEO + confiance côté visiteur.
+ *
+ * Les certifications et les awards viennent de `site.ts` + awards hardcodés
+ * ici pour la couche visuelle. Ajuster les labels quand les certifications
+ * évoluent.
+ */
+
+interface Props {
+  /** Variante colorimétrique. */
+  variant?: 'light' | 'dark';
+  /** Afficher un kicker "Labels & distinctions". */
+  showKicker?: boolean;
+}
+
+const { variant = 'light', showKicker = true } = Astro.props;
+
+const certs = [
+  {
+    label: 'Agriculture biologique',
+    sublabel: 'Certification en cours',
+    icon: 'bio',
+  },
+  {
+    label: 'Artisan de France',
+    sublabel: 'Fait main à Saint-Didier-en-Velay',
+    icon: 'artisan',
+  },
+  {
+    label: 'Sans arôme ni conservateur',
+    sublabel: 'Plantes, alcool, sucre. Rien d\'autre.',
+    icon: 'natural',
+  },
+  {
+    label: 'Made in Haute-Loire',
+    sublabel: 'Plantes d\'Auvergne, récoltées à la main',
+    icon: 'origin',
+  },
+];
+
+const bgClass = variant === 'dark' ? 'bg-forest-900 text-cream-100' : 'bg-cream-50 text-forest-900';
+const cardClass = variant === 'dark' ? 'bg-forest-800/50 border-cream-100/10' : 'bg-white border-forest-100';
+const subTextClass = variant === 'dark' ? 'text-cream-200/70' : 'text-ink-500';
+const kickerColor = variant === 'dark' ? 'text-gold-400' : 'text-gold-600';
+const iconColor = variant === 'dark' ? 'text-gold-400' : 'text-forest-700';
+---
+<section class={`py-16 ${bgClass}`}>
+  <div class="max-w-6xl mx-auto px-6">
+    {showKicker && (
+      <div class="text-center mb-10">
+        <div class={`text-xs uppercase tracking-[0.25em] ${kickerColor} font-medium mb-3`}>
+          Nos engagements
+        </div>
+        <h2 class="font-display text-3xl md:text-4xl leading-tight">
+          Labels, valeurs, exigences
+        </h2>
+      </div>
+    )}
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {certs.map((c) => (
+        <div class={`p-5 rounded-2xl border ${cardClass} text-center`}>
+          <div class={`inline-flex items-center justify-center w-10 h-10 rounded-full mb-3 ${iconColor}`}>
+            {c.icon === 'bio' && (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 20c3.5-2 6-5 6-9 0-1-.5-3-2-5"/>
+                <path d="M12 6c-5 0-9 4-9 9 0 3 1.5 5.5 4 7"/>
+                <path d="M17 7c0 3-2 6-5 9"/>
+              </svg>
+            )}
+            {c.icon === 'artisan' && (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            )}
+            {c.icon === 'natural' && (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+              </svg>
+            )}
+            {c.icon === 'origin' && (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            )}
+          </div>
+          <div class="font-display text-base leading-tight mb-1">{c.label}</div>
+          <div class={`text-xs leading-relaxed ${subTextClass}`}>{c.sublabel}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

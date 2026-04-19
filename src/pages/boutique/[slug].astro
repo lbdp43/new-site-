@@ -318,7 +318,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
         )}
 
         <!-- Ajouter au panier → WooCommerce Store API via île React -->
-        <div class="mb-8">
+        <div class="mb-5">
           <AddToCartButton
             client:load
             wcId={product.wcId}
@@ -326,6 +326,35 @@ const parsedAwards = (product.awards || []).map(parseAward);
             productName={product.name}
           />
         </div>
+
+        <!-- CTA Coffret DIY — visible sur chaque fiche produit, pré-sélectionne la bouteille courante -->
+        {product.sizeImages?.[20] && (
+          <a
+            href={`/composer-mon-coffret?preselect=${product.slug}`}
+            class="group flex items-center gap-4 mb-8 p-4 rounded-2xl bg-gradient-to-r from-forest-50 to-cream-50 border border-forest-200/70 hover:border-gold-500/70 hover:shadow-md transition-all"
+          >
+            <!-- Vraie photo empilable 20cl (déjà sur le site) -->
+            <div class="flex-none w-14 h-14 rounded-xl overflow-hidden bg-white border border-forest-200/60">
+              <img
+                src={product.sizeImages[20]}
+                alt={`${product.name} — format empilable 20cl`}
+                class="w-full h-full object-contain p-1.5"
+                loading="lazy"
+              />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-xs uppercase tracking-wider text-gold-600 font-medium mb-0.5">Idée cadeau</div>
+              <div class="font-display text-base text-forest-900 leading-tight">
+                L'ajouter dans un coffret de 3 bouteilles
+              </div>
+              <div class="text-xs text-ink-500 mt-0.5">Format 20cl empilable · emballage main</div>
+            </div>
+            <svg class="flex-none w-5 h-5 text-forest-700 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        )}
 
         <!-- Trust signals -->
         <div class="grid grid-cols-3 gap-3 pt-6 border-t border-forest-100 text-xs text-ink-500">

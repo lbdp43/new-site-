@@ -16,11 +16,19 @@ const eligibleProducts: CoffretProduct[] = products
     range: p.range,
     priceMin: p.priceMin,
     image: p.image,
+    // Photo du format empilable 20cl = vraie visualisation de l'USP.
+    // Fallback sur l'image principale si pas disponible.
+    stackImage: p.sizeImages?.[20],
     alcohol: p.alcohol,
     tagline: p.tagline,
     wcId: p.wcId as number,
-    // Par défaut on commande la plus petite contenance disponible (souvent 50cl)
-    defaultSize: p.sizes && p.sizes.length > 0 ? parseInt(p.sizes[0]) : undefined,
+    // Par défaut on commande la contenance 20cl (format empilable) si dispo,
+    // sinon la plus petite disponible.
+    defaultSize: p.sizeImages?.[20]
+      ? 20
+      : p.sizes && p.sizes.length > 0
+        ? parseInt(p.sizes[0])
+        : undefined,
     wcSizeAttribute: p.wcSizeAttribute,
   }));
 

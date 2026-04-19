@@ -8,6 +8,8 @@
 export const languages = {
   fr: 'Français',
   en: 'English',
+  // es + it déclarés dans astro.config.mjs pour préparer les hreflang, mais
+  // pages pas encore traduites. Étendre ce type quand on créera /es/* et /it/*.
 } as const;
 
 export const defaultLang: Lang = 'fr';

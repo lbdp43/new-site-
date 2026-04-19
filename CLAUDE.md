@@ -155,6 +155,22 @@ npm run preview   # aperçu du build de prod
 npm run astro ... # CLI Astro
 ```
 
+## Langues préparées (infra) mais pas encore traduites
+
+- **ES** (Español) et **IT** (Italiano) : déclarés dans `astro.config.mjs`
+  (locales + sitemap) pour préparer les hreflang futurs, mais **aucune page
+  traduite pour l'instant**. Le type `Lang` dans `src/i18n/ui.ts` reste à
+  `'fr' | 'en'` — l'étendre quand on ajoutera les vraies pages sous `/es/*`
+  et `/it/*`.
+
+## Bascule `www.` → Astro
+
+Checklist complète dans **`docs/bascule-www.md`**. Résumé :
+pré-requis (tester paiement réel, régénérer clés API, backups), créer
+`wp.labrasseriedesplantes.fr` comme nouveau nom technique du WordPress,
+mettre à jour `PUBLIC_WC_BASE_URL` sur Vercel, basculer les DNS publics
+(`www.` en CNAME vers Vercel), vérifier en post-bascule.
+
 ## Coffret DIY — 3 bouteilles au choix
 
 Feature de différenciation : le visiteur compose son propre coffret cadeau en

@@ -11,11 +11,13 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://labrasseriedesplantes.fr',
 
-  // i18n — FR (défaut, pas de préfixe) + EN (préfixe /en/)
-  // Stratégie : pathname-prefix-other-locales → FR à la racine, EN sous /en/*
+  // i18n — FR (défaut, pas de préfixe) + EN + ES + IT
+  // ES et IT en cours de traduction : les locales sont déclarées pour que les
+  // hreflang / redirects soient préparés, mais les pages elles-mêmes sont à
+  // créer progressivement sous /es/* et /it/*.
   i18n: {
     defaultLocale: 'fr',
-    locales: ['fr', 'en'],
+    locales: ['fr', 'en', 'es', 'it'],
     routing: {
       prefixDefaultLocale: false,
       redirectToDefaultLocale: false,
@@ -32,12 +34,14 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
-      // i18n pour sitemap : déclare les deux langues avec leurs alternate links
+      // i18n pour sitemap : déclare les 4 langues avec leurs alternate links
       i18n: {
         defaultLocale: 'fr',
         locales: {
           fr: 'fr-FR',
           en: 'en-US',
+          es: 'es-ES',
+          it: 'it-IT',
         },
       },
       // Exclut les pages transactionnelles (noindex) et la confirmation
