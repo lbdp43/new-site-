@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-20T16:57:01.713Z",
+  "generatedAt": "2026-04-20T17:06:42.020Z",
   "productCount": 19,
   "draftCount": 0,
   "products": [
@@ -10,38 +10,38 @@
       "priceMin": 22,
       "priceMax": 115,
       "image": "/images/products/alchimie-vegetale.png",
-      "image2": "/images/products/alchimie-vegetale-2.webp",
       "alcohol": 50,
+      "usage": "Digestif de prestige",
+      "image2": "/images/products/alchimie-vegetale-2.webp",
+      "tagline": "27 plantes, racines, écorces et épices — un hommage à la Haute-Loire.",
+      "highlight": "Meilleur Digestif du Monde 2025",
+      "serving": "À 3°C en digestif, après le repas. Ou un trait dans un café long.",
+      "wcId": 348,
+      "order": 1,
+      "description": "Notre liqueur de prestige. Macérat complexe inspiré des grandes liqueurs monastiques, L'Alchimie Végétale assemble 27 plantes, racines, écorces et épices choisies une à une pour leur équilibre. Trois ans de formulation, un hommage aux savoir-faire de la Haute-Loire — et une reconnaissance mondiale en 2025.",
       "composition": [
         "27 plantes, racines, écorces, fleurs et épices sélectionnées"
       ],
-      "usage": "Digestif de prestige",
-      "tagline": "27 plantes, racines, écorces et épices — un hommage à la Haute-Loire.",
-      "highlight": "Meilleur Digestif du Monde 2025",
-      "description": "Notre liqueur de prestige. Macérat complexe inspiré des grandes liqueurs monastiques, L'Alchimie Végétale assemble 27 plantes, racines, écorces et épices choisies une à une pour leur équilibre. Trois ans de formulation, un hommage aux savoir-faire de la Haute-Loire — et une reconnaissance mondiale en 2025.",
-      "tasting": {
-        "nose": "Frais, herbacé, mentholé.",
-        "palate": "Notes citronnées en attaque, épicées en structure, avec une rondeur poivrée.",
-        "finish": "Longue, complexe, mentholée. Richesse aromatique persistante."
-      },
       "awards": [
         "Meilleur Digestif du Monde 2025 — World Drinks Awards"
       ],
-      "serving": "À 3°C en digestif, après le repas. Ou un trait dans un café long.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl",
         "Magnum 150cl"
       ],
+      "tasting": {
+        "nose": "Frais, herbacé, mentholé.",
+        "palate": "Notes citronnées en attaque, épicées en structure, avec une rondeur poivrée.",
+        "finish": "Longue, complexe, mentholée. Richesse aromatique persistante."
+      },
       "sizeImages": {
         "20": "/images/products/sizes/alchimie-vegetale-20cl.webp",
         "50": "/images/products/sizes/alchimie-vegetale-50cl.webp",
         "70": "/images/products/sizes/alchimie-vegetale-70cl.webp",
         "150": "/images/products/sizes/alchimie-vegetale-150cl.webp"
-      },
-      "wcId": 348,
-      "order": 1
+      }
     },
     {
       "slug": "herbe-des-druides",
@@ -50,22 +50,20 @@
       "priceMin": 16,
       "priceMax": 75,
       "image": "/images/products/herbe-des-druides.png",
-      "image2": "/images/products/herbe-des-druides-2.webp",
       "alcohol": 28,
+      "usage": "Apéritif ou digestif",
+      "image2": "/images/products/herbe-des-druides-2.webp",
+      "tagline": "La verveine dans sa version la plus noble — florale, sauvage, épicée.",
+      "highlight": "Multi-médaillée Lyon, Paris, Londres",
+      "serving": "En apéritif givré, ou en digestif à température ambiante.",
+      "wcId": 70,
+      "order": 2,
+      "description": "Notre best-seller. L'Herbe des Druides est une liqueur à la verveine, à 28°, adoucie par le serpolet (thym sauvage de nos pentes) et épicée par le carvi. Une expression florale, sauvage, où les notes épicées viennent tempérer l'alcool. À servir en apéritif avec un zeste, ou en digestif pur.",
       "composition": [
         "Verveine",
         "Serpolet (thym sauvage)",
         "Carvi (cumin des prés)"
       ],
-      "usage": "Apéritif ou digestif",
-      "tagline": "La verveine dans sa version la plus noble — florale, sauvage, épicée.",
-      "highlight": "Multi-médaillée Lyon, Paris, Londres",
-      "description": "Notre best-seller. L'Herbe des Druides est une liqueur à la verveine, à 28°, adoucie par le serpolet (thym sauvage de nos pentes) et épicée par le carvi. Une expression florale, sauvage, où les notes épicées viennent tempérer l'alcool. À servir en apéritif avec un zeste, ou en digestif pur.",
-      "tasting": {
-        "nose": "Verveine citronnée, thym sauvage, touche anisée.",
-        "palate": "Florale et sauvage, les notes épicées adoucissent l'alcool.",
-        "finish": "Douce, mentholée, persistante."
-      },
       "awards": [
         "Médaille d'Or 2023 — Concours de Lyon",
         "Médaille d'Or 2024 — Concours de Lyon",
@@ -73,21 +71,23 @@
         "Médaille d'Argent 2024 — Concours Général Agricole de Paris",
         "Médaille d'Argent 2025 — World Drinks Awards"
       ],
-      "serving": "En apéritif givré, ou en digestif à température ambiante.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl",
         "Magnum 150cl"
       ],
+      "tasting": {
+        "nose": "Verveine citronnée, thym sauvage, touche anisée.",
+        "palate": "Florale et sauvage, les notes épicées adoucissent l'alcool.",
+        "finish": "Douce, mentholée, persistante."
+      },
       "sizeImages": {
         "20": "/images/products/sizes/herbe-des-druides-20cl.webp",
         "50": "/images/products/sizes/herbe-des-druides-50cl.webp",
         "70": "/images/products/sizes/herbe-des-druides-70cl.webp",
         "150": "/images/products/sizes/herbe-des-druides-150cl.webp"
-      },
-      "wcId": 70,
-      "order": 2
+      }
     },
     {
       "slug": "gorgeon-des-machures",
@@ -96,37 +96,37 @@
       "priceMin": 17,
       "priceMax": 77,
       "image": "/images/products/gorgeon-des-machures.webp",
-      "image2": "/images/products/gorgeon-des-machures-2.webp",
       "alcohol": 30,
+      "usage": "Digestif — verveine noire",
+      "image2": "/images/products/gorgeon-des-machures-2.webp",
+      "tagline": "Hommage aux mineurs de Saint-Étienne — profond et mystérieux.",
+      "serving": "Digestif à température ambiante.",
+      "wcId": 71,
+      "order": 3,
+      "description": "Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).",
       "composition": [
         "Verveine",
         "Aurone",
         "Baraban",
         "Charbon végétal"
       ],
-      "usage": "Digestif — verveine noire",
-      "tagline": "Hommage aux mineurs de Saint-Étienne — profond et mystérieux.",
-      "description": "Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).",
-      "tasting": {
-        "nose": "Note d'Arquebuse en fond, racines, touche boisée.",
-        "palate": "Profonde et mystérieuse, légèrement poivrée, notes boisées de racine de pissenlit.",
-        "finish": "Longue, boisée, un rien fumée."
-      },
-      "serving": "Digestif à température ambiante.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl",
         "Magnum 150cl"
       ],
+      "tasting": {
+        "nose": "Note d'Arquebuse en fond, racines, touche boisée.",
+        "palate": "Profonde et mystérieuse, légèrement poivrée, notes boisées de racine de pissenlit.",
+        "finish": "Longue, boisée, un rien fumée."
+      },
       "sizeImages": {
         "20": "/images/products/sizes/gorgeon-des-machures-20cl.webp",
         "50": "/images/products/sizes/gorgeon-des-machures-50cl.webp",
         "70": "/images/products/sizes/gorgeon-des-machures-70cl.webp",
         "150": "/images/products/sizes/gorgeon-des-machures-150cl.webp"
-      },
-      "wcId": 71,
-      "order": 3
+      }
     },
     {
       "slug": "fleche-ardente",
@@ -135,8 +135,14 @@
       "priceMin": 16,
       "priceMax": 34,
       "image": "/images/products/fleche-ardente.png",
-      "image2": "/images/products/fleche-ardente-2.webp",
       "alcohol": 27,
+      "usage": "Digestif ou cocktail",
+      "image2": "/images/products/fleche-ardente-2.webp",
+      "tagline": "Bonbon aux fruits rouges, note vanillée en longueur.",
+      "serving": "Digestif ou long drink avec eau pétillante et menthe.",
+      "wcId": 72,
+      "order": 4,
+      "description": "Une liqueur de fruits rouges qui évoque le bonbon d'enfance — cassis, framboise, myrtille et une pointe de fruit du dragon pour la surprise. La vanille tisse le fond et arrondit l'acidité des fruits. À 27°, elle se tient parfaitement en digestif mais fait merveille en cocktail (voir notre Philtre d'Éros).",
       "composition": [
         "Cassis",
         "Framboises",
@@ -144,27 +150,21 @@
         "Fruits du dragon",
         "Vanille"
       ],
-      "usage": "Digestif ou cocktail",
-      "tagline": "Bonbon aux fruits rouges, note vanillée en longueur.",
-      "description": "Une liqueur de fruits rouges qui évoque le bonbon d'enfance — cassis, framboise, myrtille et une pointe de fruit du dragon pour la surprise. La vanille tisse le fond et arrondit l'acidité des fruits. À 27°, elle se tient parfaitement en digestif mais fait merveille en cocktail (voir notre Philtre d'Éros).",
-      "tasting": {
-        "nose": "Fruits rouges mûrs, touche de vanille bourbon.",
-        "palate": "Bonbon, rond, gourmand.",
-        "finish": "Longue vanille, légèrement acidulée."
-      },
-      "serving": "Digestif ou long drink avec eau pétillante et menthe.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl"
       ],
+      "tasting": {
+        "nose": "Fruits rouges mûrs, touche de vanille bourbon.",
+        "palate": "Bonbon, rond, gourmand.",
+        "finish": "Longue vanille, légèrement acidulée."
+      },
       "sizeImages": {
         "20": "/images/products/sizes/fleche-ardente-20cl.webp",
         "50": "/images/products/sizes/fleche-ardente-50cl.webp",
         "70": "/images/products/sizes/fleche-ardente-70cl.webp"
-      },
-      "wcId": 72,
-      "order": 4
+      }
     },
     {
       "slug": "essence-des-alpes",
@@ -174,36 +174,36 @@
       "priceMax": 36,
       "image": "/images/products/essence-des-alpes.png",
       "alcohol": 32,
+      "usage": "Digestif de montagne",
+      "tagline": "Un génépi dans la douceur — hysope, sapin, caractère montagnard.",
+      "highlight": "Médaille d'Argent 2026 — Lyon",
+      "serving": "Digestif à température ambiante, ou très frais en été.",
+      "wcId": 4042,
+      "order": 5,
+      "description": "Un digestif de montagne. Génépi biologique en provenance d'un partenaire de Barcelonnette, marié à notre liqueur d'épine de sapin et à l'hysope — cette cousine de la lavande aux notes mentholées et camphrées. Douceur, fraîcheur, petite note résineuse de fond.",
       "composition": [
         "Génépi bio (partenariat Barcelonnette)",
         "Liqueur d'épine de sapin",
         "Hysope"
       ],
-      "usage": "Digestif de montagne",
-      "tagline": "Un génépi dans la douceur — hysope, sapin, caractère montagnard.",
-      "highlight": "Médaille d'Argent 2026 — Lyon",
-      "description": "Un digestif de montagne. Génépi biologique en provenance d'un partenaire de Barcelonnette, marié à notre liqueur d'épine de sapin et à l'hysope — cette cousine de la lavande aux notes mentholées et camphrées. Douceur, fraîcheur, petite note résineuse de fond.",
-      "tasting": {
-        "nose": "Alpin, résineux, légèrement mentholé.",
-        "palate": "Génépi adouci, hysope fraîche, résine de sapin discrète.",
-        "finish": "Fraîche, camphrée, élégante."
-      },
       "awards": [
         "Médaille d'Argent 2026 — Concours International de Lyon"
       ],
-      "serving": "Digestif à température ambiante, ou très frais en été.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl"
       ],
+      "tasting": {
+        "nose": "Alpin, résineux, légèrement mentholé.",
+        "palate": "Génépi adouci, hysope fraîche, résine de sapin discrète.",
+        "finish": "Fraîche, camphrée, élégante."
+      },
       "sizeImages": {
         "20": "/images/products/sizes/essence-des-alpes-20cl.webp",
         "50": "/images/products/sizes/essence-des-alpes-50cl.webp",
         "70": "/images/products/sizes/essence-des-alpes-70cl.webp"
-      },
-      "wcId": 4042,
-      "order": 5
+      }
     },
     {
       "slug": "nectar-ostara",
@@ -212,34 +212,34 @@
       "priceMin": 16,
       "priceMax": 34,
       "image": "/images/products/nectar-ostara.png",
-      "image2": "/images/products/nectar-ostara-2.webp",
       "alcohol": 24,
+      "usage": "Liqueur de fleurs — spritz, apéritif floral",
+      "image2": "/images/products/nectar-ostara-2.webp",
+      "tagline": "Très florale, très mielleuse, très ronde — pour les spritz de printemps.",
+      "serving": "En spritz avec Prosecco et Mandarine Napoléon (cf. Spritz Efflorescent), ou pur à température ambiante.",
+      "wcId": 65,
+      "order": 6,
+      "description": "Notre liqueur la plus florale. Trois fleurs d'avril : sureau pour le pollen, bleuet pour la rondeur, camomille pour la tenue. Un Nectar d'Ostara très mielleux, très rond, à 24° — idéal en spritz ou en apéritif sans ajout.",
       "composition": [
         "Fleur de sureau",
         "Bleuet",
         "Camomille"
       ],
-      "usage": "Liqueur de fleurs — spritz, apéritif floral",
-      "tagline": "Très florale, très mielleuse, très ronde — pour les spritz de printemps.",
-      "description": "Notre liqueur la plus florale. Trois fleurs d'avril : sureau pour le pollen, bleuet pour la rondeur, camomille pour la tenue. Un Nectar d'Ostara très mielleux, très rond, à 24° — idéal en spritz ou en apéritif sans ajout.",
-      "tasting": {
-        "nose": "Pollen, miel d'acacia, touche d'amande.",
-        "palate": "Très florale, très ronde. Notes principales de pollen et de miel, secondaires d'agrumes, amandes et réglisse.",
-        "finish": "Douce, enveloppante."
-      },
-      "serving": "En spritz avec Prosecco et Mandarine Napoléon (cf. Spritz Efflorescent), ou pur à température ambiante.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl"
       ],
+      "tasting": {
+        "nose": "Pollen, miel d'acacia, touche d'amande.",
+        "palate": "Très florale, très ronde. Notes principales de pollen et de miel, secondaires d'agrumes, amandes et réglisse.",
+        "finish": "Douce, enveloppante."
+      },
       "sizeImages": {
         "20": "/images/products/sizes/nectar-ostara-20cl.webp",
         "50": "/images/products/sizes/nectar-ostara-50cl.webp",
         "70": "/images/products/sizes/nectar-ostara-70cl.webp"
-      },
-      "wcId": 65,
-      "order": 6
+      }
     },
     {
       "slug": "lime-des-pres",
@@ -248,34 +248,34 @@
       "priceMin": 16,
       "priceMax": 33,
       "image": "/images/products/lime-des-pres.png",
-      "image2": "/images/products/lime-des-pres-2.webp",
       "alcohol": 18,
+      "usage": "Liqueur citronnée sans citron",
+      "image2": "/images/products/lime-des-pres-2.webp",
+      "tagline": "L'effet citron, sans le citron — thym citron, mélisse, houblon.",
+      "serving": "À température ambiante avec glaçons, ou avec un trait de Porto blanc en apéritif.",
+      "wcId": 69,
+      "order": 7,
+      "description": "Un tour de passe-passe botanique : une liqueur citronnée sans un gramme de citron réel. Le thym citron apporte l'attaque zestée, la mélisse la fraîcheur florale, le houblon l'amertume noble. Aucune acidité — juste une vague de prairie citronnée.",
       "composition": [
         "Thym citron",
         "Mélisse",
         "Houblon"
       ],
-      "usage": "Liqueur citronnée sans citron",
-      "tagline": "L'effet citron, sans le citron — thym citron, mélisse, houblon.",
-      "description": "Un tour de passe-passe botanique : une liqueur citronnée sans un gramme de citron réel. Le thym citron apporte l'attaque zestée, la mélisse la fraîcheur florale, le houblon l'amertume noble. Aucune acidité — juste une vague de prairie citronnée.",
-      "tasting": {
-        "nose": "Thym citron à l'attaque.",
-        "palate": "Vert, herbacé, sans acidité.",
-        "finish": "Longue, rafraîchissante, légèrement amère."
-      },
-      "serving": "À température ambiante avec glaçons, ou avec un trait de Porto blanc en apéritif.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl"
       ],
+      "tasting": {
+        "nose": "Thym citron à l'attaque.",
+        "palate": "Vert, herbacé, sans acidité.",
+        "finish": "Longue, rafraîchissante, légèrement amère."
+      },
       "sizeImages": {
         "20": "/images/products/sizes/lime-des-pres-20cl.webp",
         "50": "/images/products/sizes/lime-des-pres-50cl.webp",
         "70": "/images/products/sizes/lime-des-pres-70cl.webp"
-      },
-      "wcId": 69,
-      "order": 7
+      }
     },
     {
       "slug": "cerf-gent",
@@ -285,6 +285,13 @@
       "priceMax": 27,
       "image": "/images/products/cerf-gent.png",
       "alcohol": 15,
+      "usage": "Apéritif amer — alternative française à la Suze",
+      "tagline": "Notre alternative française à la Suze — gentiane, quinquina, épices.",
+      "highlight": "Médaille d'Or Paris 2025",
+      "serving": "Très frais, en apéritif pur ou allongé d'un trait de tonic.",
+      "wcId": 4030,
+      "order": 1,
+      "description": "Un apéritif amer pour amateurs. La gentiane donne la colonne, le quinquina la profondeur, les épices (muscade, coriandre, cannelle, zestes de citron) la complexité. Un caractère puissant, authentique, à la hauteur des grandes eaux-de-vie amères d'Auvergne.",
       "composition": [
         "Gentiane",
         "Quinquina",
@@ -293,29 +300,22 @@
         "Graines de coriandre",
         "Cannelle"
       ],
-      "usage": "Apéritif amer — alternative française à la Suze",
-      "tagline": "Notre alternative française à la Suze — gentiane, quinquina, épices.",
-      "highlight": "Médaille d'Or Paris 2025",
-      "description": "Un apéritif amer pour amateurs. La gentiane donne la colonne, le quinquina la profondeur, les épices (muscade, coriandre, cannelle, zestes de citron) la complexité. Un caractère puissant, authentique, à la hauteur des grandes eaux-de-vie amères d'Auvergne.",
+      "awards": [
+        "Médaille d'Or 2025 — Concours Général Agricole de Paris"
+      ],
+      "sizes": [
+        "Empilable 20cl",
+        "70cl"
+      ],
       "tasting": {
         "nose": "Gentiane, racines, zestes.",
         "palate": "Amère franche, épicée, avec une touche d'orange amère.",
         "finish": "Longue amertume noble."
       },
-      "awards": [
-        "Médaille d'Or 2025 — Concours Général Agricole de Paris"
-      ],
-      "serving": "Très frais, en apéritif pur ou allongé d'un trait de tonic.",
-      "sizes": [
-        "Empilable 20cl",
-        "70cl"
-      ],
       "sizeImages": {
         "20": "/images/products/sizes/cerf-gent-20cl.webp",
         "70": "/images/products/sizes/cerf-gent-70cl.webp"
-      },
-      "wcId": 4030,
-      "order": 1
+      }
     },
     {
       "slug": "pralicoquine",
@@ -325,29 +325,29 @@
       "priceMax": 27,
       "image": "/images/products/pralicoquine.png",
       "alcohol": 15,
+      "usage": "Apéritif gourmand ou digestif léger",
+      "tagline": "Onctueuse, gourmande — la praline et l'amande en liqueur.",
+      "serving": "En apéritif pur, en cocktail, ou en digestif léger.",
+      "wcId": 2947,
+      "order": 2,
+      "description": "La liqueur plaisir. Pralines et amandes torréfiées macérées dans l'alcool — onctueuse, gourmande, très sympa à l'apéritif. Se prête aussi aux cocktails créatifs : kir pétillant, association gin, ou même une margherita avec un twist.",
       "composition": [
         "Pralines",
         "Amandes torréfiées macérées"
       ],
-      "usage": "Apéritif gourmand ou digestif léger",
-      "tagline": "Onctueuse, gourmande — la praline et l'amande en liqueur.",
-      "description": "La liqueur plaisir. Pralines et amandes torréfiées macérées dans l'alcool — onctueuse, gourmande, très sympa à l'apéritif. Se prête aussi aux cocktails créatifs : kir pétillant, association gin, ou même une margherita avec un twist.",
+      "sizes": [
+        "Empilable 20cl",
+        "70cl"
+      ],
       "tasting": {
         "nose": "Praline rose, amande grillée.",
         "palate": "Onctueux, sucré, rond.",
         "finish": "Amande grillée persistante."
       },
-      "serving": "En apéritif pur, en cocktail, ou en digestif léger.",
-      "sizes": [
-        "Empilable 20cl",
-        "70cl"
-      ],
       "sizeImages": {
         "20": "/images/products/sizes/pralicoquine-20cl.webp",
         "70": "/images/products/sizes/pralicoquine-70cl.webp"
-      },
-      "wcId": 2947,
-      "order": 2
+      }
     },
     {
       "slug": "menthor",
@@ -357,30 +357,30 @@
       "priceMax": 27,
       "image": "/images/products/menthor.png",
       "alcohol": 17.5,
+      "usage": "Mojitos, fin de repas",
+      "tagline": "Trois menthes en alliance — rafraîchissant et vivifiant.",
+      "serving": "Frais en fin de repas, ou en base mojito maison.",
+      "wcId": 3617,
+      "order": 3,
+      "description": "L'alternative artisanale à la menthe industrielle. Trois menthes s'associent : poivrée pour la fraîcheur dominante, coréenne pour la note épicée, verte pour l'assise chlorophyllienne. Tout en légèreté, tout en fraîcheur — parfait pour mojitos ou en fin de repas.",
       "composition": [
         "Menthe poivrée (fraîcheur dominante)",
         "Menthe coréenne (mentholée, épicée)",
         "Menthe verte (chlorophyllienne)"
       ],
-      "usage": "Mojitos, fin de repas",
-      "tagline": "Trois menthes en alliance — rafraîchissant et vivifiant.",
-      "description": "L'alternative artisanale à la menthe industrielle. Trois menthes s'associent : poivrée pour la fraîcheur dominante, coréenne pour la note épicée, verte pour l'assise chlorophyllienne. Tout en légèreté, tout en fraîcheur — parfait pour mojitos ou en fin de repas.",
+      "sizes": [
+        "Empilable 20cl",
+        "70cl"
+      ],
       "tasting": {
         "nose": "Menthe poivrée éclatante.",
         "palate": "Rafraîchissant, vivifiant, légèrement épicé.",
         "finish": "Fraîche, longue."
       },
-      "serving": "Frais en fin de repas, ou en base mojito maison.",
-      "sizes": [
-        "Empilable 20cl",
-        "70cl"
-      ],
       "sizeImages": {
         "20": "/images/products/sizes/menthor-20cl.webp",
         "70": "/images/products/sizes/menthor-70cl.webp"
-      },
-      "wcId": 3617,
-      "order": 3
+      }
     },
     {
       "slug": "zeleste",
@@ -390,30 +390,30 @@
       "priceMax": 27,
       "image": "/images/products/zeleste.png",
       "alcohol": 17.5,
+      "usage": "Apéritif frais — alternative au Limoncello",
+      "tagline": "Trio d'agrumes — change du Limoncello classique.",
+      "serving": "Très frais en apéritif, ou en long drink avec tonic.",
+      "wcId": 4037,
+      "order": 4,
+      "description": "Un trio d'agrumes : citron jaune, orange, citron vert — zestes et jus. Plus complexe qu'un Limoncello classique, avec une légère amertume en fond qui donne du caractère. L'originalité et la fraîcheur d'un apéritif distinct.",
       "composition": [
         "Citron jaune (zestes + jus)",
         "Orange",
         "Citron vert"
       ],
-      "usage": "Apéritif frais — alternative au Limoncello",
-      "tagline": "Trio d'agrumes — change du Limoncello classique.",
-      "description": "Un trio d'agrumes : citron jaune, orange, citron vert — zestes et jus. Plus complexe qu'un Limoncello classique, avec une légère amertume en fond qui donne du caractère. L'originalité et la fraîcheur d'un apéritif distinct.",
+      "sizes": [
+        "Empilable 20cl",
+        "70cl"
+      ],
       "tasting": {
         "nose": "Agrumes vifs, zestes frais.",
         "palate": "Acidulé, légère amertume en fond.",
         "finish": "Fraîche et nette."
       },
-      "serving": "Très frais en apéritif, ou en long drink avec tonic.",
-      "sizes": [
-        "Empilable 20cl",
-        "70cl"
-      ],
       "sizeImages": {
         "20": "/images/products/sizes/zeleste-20cl.webp",
         "70": "/images/products/sizes/zeleste-70cl.webp"
-      },
-      "wcId": 4037,
-      "order": 4
+      }
     },
     {
       "slug": "menthe-cbd-ortie",
@@ -423,27 +423,27 @@
       "priceMax": 34,
       "image": "/images/products/menthe-cbd-ortie.png",
       "alcohol": 21,
+      "usage": "Apéritif botanique au CBD",
+      "tagline": "Un thé à la menthe fermenté — menthe verte, chanvre, ortie.",
+      "serving": "Apéritif, frais, en long drink ou pur.",
+      "wcId": 626,
+      "order": 1,
+      "description": "Le versant herbacé de notre gamme CBD. La menthe verte domine — on y retrouve la chlorophylle d'un thé à la menthe, adoucie par l'ortie et le chanvre. Exactement l'opposée du Menthor, qui mise lui sur la fraîcheur mentholée.",
       "composition": [
         "Menthe verte",
         "Chanvre (CBD, sans THC)",
         "Ortie"
       ],
-      "usage": "Apéritif botanique au CBD",
-      "tagline": "Un thé à la menthe fermenté — menthe verte, chanvre, ortie.",
-      "description": "Le versant herbacé de notre gamme CBD. La menthe verte domine — on y retrouve la chlorophylle d'un thé à la menthe, adoucie par l'ortie et le chanvre. Exactement l'opposée du Menthor, qui mise lui sur la fraîcheur mentholée.",
-      "tasting": {
-        "nose": "Menthe verte, herbe fraîche.",
-        "palate": "Herbacé, thé à la menthe, assez doux.",
-        "finish": "Longue menthe verte."
-      },
-      "serving": "Apéritif, frais, en long drink ou pur.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl"
       ],
-      "wcId": 626,
-      "order": 1
+      "tasting": {
+        "nose": "Menthe verte, herbe fraîche.",
+        "palate": "Herbacé, thé à la menthe, assez doux.",
+        "finish": "Longue menthe verte."
+      }
     },
     {
       "slug": "verveine-cbd-aurone",
@@ -453,27 +453,27 @@
       "priceMax": 34,
       "image": "/images/products/verveine-cbd-aurone.png",
       "alcohol": 30,
+      "usage": "Digestif botanique au CBD",
+      "tagline": "Verveine + aurone + chanvre — détente digestif.",
+      "serving": "Digestif, à température ambiante.",
+      "wcId": 616,
+      "order": 2,
+      "description": "Un digestif au CBD. La verveine citronnée, l'aurone (cousine de l'absinthe, moins amère) et le chanvre s'associent pour une expérience en douceur. À 30°, c'est un vrai digestif, mais avec cette pointe de détente propre au CBD.",
       "composition": [
         "Verveine",
         "Aurone",
         "Chanvre (CBD, sans THC)"
       ],
-      "usage": "Digestif botanique au CBD",
-      "tagline": "Verveine + aurone + chanvre — détente digestif.",
-      "description": "Un digestif au CBD. La verveine citronnée, l'aurone (cousine de l'absinthe, moins amère) et le chanvre s'associent pour une expérience en douceur. À 30°, c'est un vrai digestif, mais avec cette pointe de détente propre au CBD.",
-      "tasting": {
-        "nose": "Verveine citronnée, touche résineuse.",
-        "palate": "Verveine dominante, chanvre en fond.",
-        "finish": "Persistante, légèrement camphrée."
-      },
-      "serving": "Digestif, à température ambiante.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl"
       ],
-      "wcId": 616,
-      "order": 2
+      "tasting": {
+        "nose": "Verveine citronnée, touche résineuse.",
+        "palate": "Verveine dominante, chanvre en fond.",
+        "finish": "Persistante, légèrement camphrée."
+      }
     },
     {
       "slug": "absinthe-cbd-citron",
@@ -483,28 +483,28 @@
       "priceMax": 39,
       "image": "/images/products/absinthe-cbd-citron.png",
       "alcohol": 37,
+      "usage": "Digestif botanique — pour amateurs de chanvre",
+      "tagline": "Chanvre dominant, absinthe en fond, agrumes — pour amateurs.",
+      "serving": "Digestif, à température ambiante. Pour amateurs avertis.",
+      "wcId": 629,
+      "order": 3,
+      "description": "Le plus marqué de la gamme Lumière Obscure. Le chanvre prend le dessus — on y perçoit nettement la note de foin vert, très particulière, pas pour tout le monde. L'absinthe apporte une structure mentholée et réglissée, les écorces de citron et la coriandre la fraîcheur nécessaire à l'équilibre.",
       "composition": [
         "Chanvre (CBD, dominant, sans THC)",
         "Absinthe",
         "Écorces de citron",
         "Graines de coriandre"
       ],
-      "usage": "Digestif botanique — pour amateurs de chanvre",
-      "tagline": "Chanvre dominant, absinthe en fond, agrumes — pour amateurs.",
-      "description": "Le plus marqué de la gamme Lumière Obscure. Le chanvre prend le dessus — on y perçoit nettement la note de foin vert, très particulière, pas pour tout le monde. L'absinthe apporte une structure mentholée et réglissée, les écorces de citron et la coriandre la fraîcheur nécessaire à l'équilibre.",
-      "tasting": {
-        "nose": "Chanvre, foin vert, citron.",
-        "palate": "Très verte, herbacée, avec l'absinthe en fond mentholé.",
-        "finish": "Chanvre persistant."
-      },
-      "serving": "Digestif, à température ambiante. Pour amateurs avertis.",
       "sizes": [
         "Empilable 20cl",
         "50cl",
         "70cl"
       ],
-      "wcId": 629,
-      "order": 3
+      "tasting": {
+        "nose": "Chanvre, foin vert, citron.",
+        "palate": "Très verte, herbacée, avec l'absinthe en fond mentholé.",
+        "finish": "Chanvre persistant."
+      }
     },
     {
       "slug": "herbe-druides-fut-chene",
@@ -514,26 +514,26 @@
       "priceMax": 50,
       "image": "/images/products/herbe-druides-fut-chene.webp",
       "alcohol": 28,
+      "usage": "Digestif — édition limitée",
+      "tagline": "Notre verveine, affinée six mois en fût de chêne.",
+      "serving": "Digestif, à température ambiante.",
+      "wcId": 2553,
+      "order": 1,
+      "description": "Une édition limitée qui passe six mois en fût de chêne français. Le bois arrondit les arômes de verveine, ajoute des notes de vanille et de caramel, transforme une liqueur vive en digestif suave. Quelques centaines de bouteilles par an, numérotées.",
       "composition": [
         "Verveine",
         "Serpolet",
         "Carvi",
         "Finition 6 mois en fût de chêne"
       ],
-      "usage": "Digestif — édition limitée",
-      "tagline": "Notre verveine, affinée six mois en fût de chêne.",
-      "description": "Une édition limitée qui passe six mois en fût de chêne français. Le bois arrondit les arômes de verveine, ajoute des notes de vanille et de caramel, transforme une liqueur vive en digestif suave. Quelques centaines de bouteilles par an, numérotées.",
+      "sizes": [
+        "70cl"
+      ],
       "tasting": {
         "nose": "Verveine intégrée, vanille, chêne grillé.",
         "palate": "Rond, boisé, verveine adoucie.",
         "finish": "Longue, chêne délicat, verveine persistante."
-      },
-      "serving": "Digestif, à température ambiante.",
-      "sizes": [
-        "70cl"
-      ],
-      "wcId": 2553,
-      "order": 1
+      }
     },
     {
       "slug": "alchimie-cuvee-michel",
@@ -543,24 +543,24 @@
       "priceMax": 70,
       "image": "/images/products/alchimie-cuvee-michel.webp",
       "alcohol": 50,
+      "usage": "Digestif de prestige — tirage confidentiel",
+      "tagline": "Hommage à un vieil ami — variation sur l'Alchimie, en tirage confidentiel.",
+      "serving": "Digestif à 3°C, lentement.",
+      "wcId": 2547,
+      "order": 2,
+      "description": "Notre cuvée hommage à Michel — vieil ami d'enfance disparu, qui aurait aimé ce prix du monde. Légère variation autour de la base de L'Alchimie Végétale, avec un surcroît de réglisse et de gentiane. Tirage confidentiel, quelques dizaines de bouteilles par an.",
       "composition": [
         "27 plantes (assemblage Alchimie)",
         "Variation autour de la réglisse et de la gentiane"
       ],
-      "usage": "Digestif de prestige — tirage confidentiel",
-      "tagline": "Hommage à un vieil ami — variation sur l'Alchimie, en tirage confidentiel.",
-      "description": "Notre cuvée hommage à Michel — vieil ami d'enfance disparu, qui aurait aimé ce prix du monde. Légère variation autour de la base de L'Alchimie Végétale, avec un surcroît de réglisse et de gentiane. Tirage confidentiel, quelques dizaines de bouteilles par an.",
+      "sizes": [
+        "70cl"
+      ],
       "tasting": {
         "nose": "Réglisse, plantes douces, mentholé.",
         "palate": "Plus sombre que l'Alchimie classique, réglisse en milieu de bouche.",
         "finish": "Gentiane longue, élégante."
-      },
-      "serving": "Digestif à 3°C, lentement.",
-      "sizes": [
-        "70cl"
-      ],
-      "wcId": 2547,
-      "order": 2
+      }
     },
     {
       "slug": "coffret-initiation",
@@ -570,18 +570,18 @@
       "priceMax": 24,
       "image": "/images/products/coffret-initiation.webp",
       "alcohol": 0,
+      "usage": "Découverte ou cadeau",
+      "tagline": "Six flacons pour entrer dans l'univers de la Brasserie.",
+      "serving": "À déguster en dégustation comparée.",
+      "wcId": 582,
+      "order": 1,
+      "description": "Six de nos liqueurs signatures, en format 4 cl, présentées dans un écrin. Le meilleur moyen de découvrir la gamme ou de l'offrir.",
       "composition": [
         "6 flacons de 4 cl — sélection Initiation"
       ],
-      "usage": "Découverte ou cadeau",
-      "tagline": "Six flacons pour entrer dans l'univers de la Brasserie.",
-      "description": "Six de nos liqueurs signatures, en format 4 cl, présentées dans un écrin. Le meilleur moyen de découvrir la gamme ou de l'offrir.",
-      "serving": "À déguster en dégustation comparée.",
       "sizes": [
         "6×4cl"
-      ],
-      "wcId": 582,
-      "order": 1
+      ]
     },
     {
       "slug": "coffret-original",
@@ -591,17 +591,17 @@
       "priceMax": 24,
       "image": "/images/products/coffret-initiation.webp",
       "alcohol": 0,
+      "usage": "Découverte ou cadeau",
+      "tagline": "Une autre entrée dans la maison — six flacons d'originales.",
+      "serving": "À déguster en dégustation comparée.",
+      "order": 2,
+      "description": "Notre second coffret de découverte, composé de six liqueurs de la maison en flacons de 4 cl. Un parcours différent de l'Initiation, pour compléter ou offrir.",
       "composition": [
         "6 flacons de 4 cl — sélection Originale"
       ],
-      "usage": "Découverte ou cadeau",
-      "tagline": "Une autre entrée dans la maison — six flacons d'originales.",
-      "description": "Notre second coffret de découverte, composé de six liqueurs de la maison en flacons de 4 cl. Un parcours différent de l'Initiation, pour compléter ou offrir.",
-      "serving": "À déguster en dégustation comparée.",
       "sizes": [
         "6×4cl"
-      ],
-      "order": 2
+      ]
     },
     {
       "slug": "flasque-entonnoir",
@@ -611,16 +611,16 @@
       "priceMax": 25,
       "image": "/images/products/flasque-entonnoir.png",
       "alcohol": 0,
-      "composition": [],
       "usage": "Accessoire",
       "tagline": "La flasque de poche, livrée avec son entonnoir.",
+      "wcSizeAttribute": "Gravure",
+      "wcId": 402,
+      "order": 3,
       "description": "Flasque inox de 20cl avec son entonnoir, pour emporter votre liqueur préférée en randonnée, en bivouac, ou offrir l'élégance d'un objet utile.",
+      "composition": [],
       "sizes": [
         "20cl"
-      ],
-      "wcId": 402,
-      "wcSizeAttribute": "Gravure",
-      "order": 3
+      ]
     }
   ]
 }

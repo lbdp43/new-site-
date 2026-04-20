@@ -28,22 +28,35 @@ const __dirname = dirname(__filename);
 const PRODUCTS_DIR = resolve(__dirname, '../src/content/products');
 const OUTPUT_PATH = resolve(__dirname, '../src/data/products.generated.json');
 
+/** Renvoie true si la valeur est "vide" au sens CMS (à supprimer du JSON).
+ *  Sveltia stocke les champs vides comme `null`, `''`, `[]`, ou `{}`
+ *  selon leur type. On nettoie agressivement pour garder un JSON propre.
+ */
+function isEmpty(v) {
+  if (v === null || v === undefined) return true;
+  if (typeof v === 'string' && v.trim() === '') return true;
+  if (Array.isArray(v) && v.length === 0) return true;
+  if (typeof v === 'object' && !Array.isArray(v) && Object.keys(v).length === 0) return true;
+  return false;
+}
+
 /** Convertit `sizeImages` de list `[{size, image}]` en `Record<number,string>`.
- *  Tolère aussi l'ancien format objet `{20: "…", 50: "…"}` pour migration
- *  douce. Retourne undefined si vide ou absent.
+ *  Tolère aussi l'ancien format objet `{20: "…", 50: "…"}` et les arrays sparse
+ *  (le bug Sveltia d'origine) pour migration robuste.
+ *  Retourne undefined si vide ou absent.
  */
 function normalizeSizeImages(raw) {
-  if (!raw) return undefined;
+  if (isEmpty(raw)) return undefined;
 
   // Nouveau format : array de { size, image }
   if (Array.isArray(raw)) {
     const entries = raw
-      .filter((e) => e && typeof e === 'object' && e.size != null && e.image)
+      .filter((e) => e && typeof e === 'object' && e.size != null && !isEmpty(e.image))
       .map((e) => [Number(e.size), String(e.image)]);
     return entries.length > 0 ? Object.fromEntries(entries) : undefined;
   }
 
-  // Ancien format : objet { "20": "/path" }
+  // Ancien format : objet { "20": "/path" } OU { "20": "/path", "50": null, ... }
   if (typeof raw === 'object') {
     const entries = Object.entries(raw)
       .filter(([, v]) => typeof v === 'string' && v.length > 0)
@@ -52,6 +65,27 @@ function normalizeSizeImages(raw) {
   }
 
   return undefined;
+}
+
+/** Nettoie un objet tasting en supprimant les champs nose/palate/finish vides.
+ *  Retourne undefined si tout est vide.
+ */
+function normalizeTasting(raw) {
+  if (isEmpty(raw)) return undefined;
+  if (typeof raw !== 'object' || Array.isArray(raw)) return undefined;
+
+  const clean = {};
+  for (const key of ['nose', 'palate', 'finish']) {
+    if (!isEmpty(raw[key])) clean[key] = String(raw[key]).trim();
+  }
+  return Object.keys(clean).length > 0 ? clean : undefined;
+}
+
+/** Nettoie une list de strings en filtrant les éléments vides. */
+function normalizeStringArray(raw) {
+  if (!Array.isArray(raw)) return undefined;
+  const clean = raw.filter((v) => typeof v === 'string' && v.trim() !== '').map((v) => v.trim());
+  return clean.length > 0 ? clean : undefined;
 }
 
 /** Parse un .md en { slug, frontmatter, body }. Format attendu :
@@ -102,43 +136,55 @@ function main() {
       }
 
       // Reconstruit l'objet Product au format attendu par products.ts.
-      // Note : le body markdown devient la `description` (champ principal
-      // d'édition via le CMS).
+      // Chaque champ optionnel passe par isEmpty() — Sveltia peut renvoyer
+      // null, string vide ou array vide sur les champs laissés blancs dans
+      // le CMS. On nettoie tout pour un JSON propre, sans propriétés
+      // polluantes qui pourraient casser les templates consommateurs.
       const product = {
+        // Champs obligatoires
         slug,
-        name: frontmatter.name,
+        name: String(frontmatter.name).trim(),
         range: frontmatter.range,
-        priceMin: frontmatter.priceMin,
-        priceMax: frontmatter.priceMax,
-        image: frontmatter.image,
-        image2: frontmatter.image2,
-        alcohol: frontmatter.alcohol,
-        composition: frontmatter.composition ?? [],
-        usage: frontmatter.usage,
-        tagline: frontmatter.tagline,
-        highlight: frontmatter.highlight,
-        description: body || undefined,
-        tasting: frontmatter.tasting,
-        awards: frontmatter.awards,
-        serving: frontmatter.serving,
-        sizes: frontmatter.sizes,
-        // sizeImages = list de { size, image } dans le .md (pour robustesse CMS)
-        // → on convertit en Record<number, string> pour products.ts.
-        // Tolérant aux deux formats (array de paires OU ancien objet legacy)
-        // pour migration sans casser.
-        sizeImages: normalizeSizeImages(frontmatter.sizeImages),
-        wcId: frontmatter.wcId,
-        wcSizeAttribute: frontmatter.wcSizeAttribute,
-        defaultSize: frontmatter.defaultSize,
-        order: frontmatter.order,
+        priceMin: Number(frontmatter.priceMin),
+        priceMax: Number(frontmatter.priceMax),
+        image: String(frontmatter.image).trim(),
+        alcohol: Number(frontmatter.alcohol),
+        usage: String(frontmatter.usage).trim(),
       };
 
-      // Nettoie les undefined pour un JSON plus propre
-      for (const key of Object.keys(product)) {
-        if (product[key] === undefined) {
-          delete product[key];
-        }
-      }
+      // Strings optionnels
+      if (!isEmpty(frontmatter.image2)) product.image2 = String(frontmatter.image2).trim();
+      if (!isEmpty(frontmatter.tagline)) product.tagline = String(frontmatter.tagline).trim();
+      if (!isEmpty(frontmatter.highlight)) product.highlight = String(frontmatter.highlight).trim();
+      if (!isEmpty(frontmatter.serving)) product.serving = String(frontmatter.serving).trim();
+      if (!isEmpty(frontmatter.wcSizeAttribute))
+        product.wcSizeAttribute = String(frontmatter.wcSizeAttribute).trim();
+
+      // Numbers optionnels
+      if (!isEmpty(frontmatter.wcId)) product.wcId = Number(frontmatter.wcId);
+      if (!isEmpty(frontmatter.defaultSize)) product.defaultSize = Number(frontmatter.defaultSize);
+      if (!isEmpty(frontmatter.order)) product.order = Number(frontmatter.order);
+
+      // Body markdown = description longue (nettoyée des espaces)
+      if (body) product.description = body;
+
+      // Composition : liste de plantes (array de strings, toujours présent
+      // pour le typage Product ; on défaut à [] si absent ou vide)
+      product.composition = normalizeStringArray(frontmatter.composition) ?? [];
+
+      // Listes optionnelles
+      const cleanAwards = normalizeStringArray(frontmatter.awards);
+      if (cleanAwards) product.awards = cleanAwards;
+      const cleanSizes = normalizeStringArray(frontmatter.sizes);
+      if (cleanSizes) product.sizes = cleanSizes;
+
+      // Objet tasting (nose/palate/finish) nettoyé
+      const cleanTasting = normalizeTasting(frontmatter.tasting);
+      if (cleanTasting) product.tasting = cleanTasting;
+
+      // Record<number, string> sizeImages (from list format)
+      const cleanSizeImages = normalizeSizeImages(frontmatter.sizeImages);
+      if (cleanSizeImages) product.sizeImages = cleanSizeImages;
 
       products.push(product);
     } catch (err) {
