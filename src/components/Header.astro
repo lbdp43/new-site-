@@ -43,9 +43,11 @@ const shopHref = localizedPath('/boutique', lang);
     <div class="absolute inset-x-0 bottom-0 h-px gold-hairline"></div>
   </div>
 
-  <!-- Couche liquid-glass (logo + navigation + CTAs) — TOUJOURS VISIBLE
-       sous le bandeau promo (pas de pop-in au scroll, pas d'image coupée). -->
-  <div class="relative header-glass-body">
+  <!-- Couche liquid-glass (logo script + navigation + CTAs) — CACHÉE tant
+       qu'on n'a pas scrollé, pour laisser le logo hero "dans le ciel" et
+       l'image award respirer sans concurrence visuelle. Apparaît avec
+       transition à la fin du scroll du hero. -->
+  <div class="relative header-glass-body header-main-collapsible">
     <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-8">
       <a href={homeHref} class="flex items-center gap-3 group shrink-0" aria-label={`${site.name} — ${tr('cta.back-home')}`}>
         <img
@@ -147,6 +149,20 @@ const shopHref = localizedPath('/boutique', lang);
   /* Classe sur le <header> racine pour préserver sticky + z-index */
   .header-glass {
     isolation: isolate;
+  }
+
+  /* Bandeau principal (logo script + nav + CTAs) — replié en haut de page,
+     se déplie en douceur dès qu'on commence à quitter le hero. */
+  .header-main-collapsible {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 360ms cubic-bezier(0.16, 1, 0.3, 1), opacity 260ms ease-out;
+  }
+  .header-glass[data-scrolled="true"] .header-main-collapsible {
+    max-height: 120px;
+    opacity: 1;
+    overflow: visible;
   }
 
   /* État au scroll : teinte légèrement plus dense + filet doré plus visible */

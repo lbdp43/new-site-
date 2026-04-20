@@ -188,8 +188,10 @@ const ScrollExpandMedia = ({
   // l'écran et occupe la hauteur maximale possible du viewport.
   const finalWidth = typeof window !== 'undefined' ? window.innerWidth : isMobileState ? 950 : 1550;
   const finalHeight = typeof window !== 'undefined' ? window.innerHeight : isMobileState ? 600 : 800;
+  // Card initiale plus compacte (320 au lieu de 400) pour laisser de la place
+  // au logo "Brasserie des Plantes" au-dessus dans le ciel.
   const mediaWidth = 300 + scrollProgress * (finalWidth - 300);
-  const mediaHeight = 400 + scrollProgress * (finalHeight - 400);
+  const mediaHeight = 320 + scrollProgress * (finalHeight - 320);
   const textTranslateX = scrollProgress * (isMobileState ? 180 : 150);
 
   const firstWord = title ? title.split(' ')[0] : '';
@@ -237,13 +239,16 @@ const ScrollExpandMedia = ({
           <div className='container mx-auto flex flex-col items-center justify-start relative z-10'>
             <div className='flex flex-col items-center justify-center w-full h-[100dvh] relative'>
               <div
-                className='absolute z-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-none rounded-2xl'
+                className='absolute z-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-none rounded-2xl'
                 style={{
+                  /* Centre vertical : 50vh + 70px → la carte laisse toujours
+                     140px au-dessus (promo + menu) et reste verticalement
+                     centrée sur le reste. Aucune coupure par le header, et
+                     de la place pour le logo "Brasserie des Plantes" en haut. */
+                  top: 'calc(50vh + 70px)',
                   width: `${mediaWidth}px`,
                   height: `${mediaHeight}px`,
                   maxWidth: '100vw',
-                  /* On laisse une marge en haut pour ne pas passer sous le
-                     header (promo + nav = ~120px selon breakpoint). */
                   maxHeight: 'calc(100vh - 140px)',
                   boxShadow: '0px 0px 50px rgba(0, 0, 0, 0.3)',
                 }}
@@ -354,9 +359,9 @@ const ScrollExpandMedia = ({
                   <img
                     src={titleImageSrc}
                     alt={titleImageAlt ?? 'Logo'}
-                    className='w-[46vw] max-w-[240px] md:max-w-[300px] h-auto select-none'
+                    className='w-[38vw] max-w-[180px] md:max-w-[260px] h-auto select-none'
                     style={{
-                      filter: 'drop-shadow(0 8px 32px rgba(0,0,0,0.65)) drop-shadow(0 0 16px rgba(255,255,255,0.25))',
+                      filter: 'drop-shadow(0 8px 28px rgba(255,255,255,0.35)) drop-shadow(0 0 14px rgba(0,0,0,0.25))',
                     }}
                     draggable={false}
                   />
