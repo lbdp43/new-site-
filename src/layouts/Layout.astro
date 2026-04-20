@@ -25,6 +25,11 @@ interface Props {
   ogType?: 'website' | 'article' | 'product';
   /** Langue forcée (override de la détection par URL). Utile pour pages dynamiques. */
   lang?: Lang;
+  /** Page avec hero scroll-expansion (home FR/EN). Quand true, le bandeau
+   *  principal du header est caché tant qu'on n'a pas scrollé — pour laisser
+   *  le hero respirer. Sur les autres pages, le header reste visible en
+   *  permanence. */
+  hasHero?: boolean;
 }
 
 const {
@@ -36,6 +41,7 @@ const {
   schema,
   ogType = 'website',
   lang: langProp,
+  hasHero = false,
 } = Astro.props;
 
 // Détection de la langue — priorité à la prop, sinon détection par URL
@@ -105,7 +111,7 @@ const alternates = getHreflangLinks(frEquivalentPath, 'fr', site.url);
       />
     )}
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col" data-has-hero={hasHero ? 'true' : undefined}>
     <AgeGate />
     <Header lang={lang} />
     <main class="flex-1">

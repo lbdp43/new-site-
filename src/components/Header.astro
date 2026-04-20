@@ -151,15 +151,17 @@ const shopHref = localizedPath('/boutique', lang);
     isolation: isolate;
   }
 
-  /* Bandeau principal (logo script + nav + CTAs) — replié en haut de page,
-     se déplie en douceur dès qu'on commence à quitter le hero. */
-  .header-main-collapsible {
+  /* Bandeau principal (logo script + nav + CTAs) — par défaut toujours
+     visible sur toutes les pages. Uniquement sur les pages avec hero
+     (body[data-has-hero]), on le cache tant qu'on n'a pas scrollé, pour
+     laisser le logo hero respirer dans le ciel. */
+  :global(body[data-has-hero]) .header-main-collapsible {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
     transition: max-height 360ms cubic-bezier(0.16, 1, 0.3, 1), opacity 260ms ease-out;
   }
-  .header-glass[data-scrolled="true"] .header-main-collapsible {
+  :global(body[data-has-hero]) .header-glass[data-scrolled="true"] .header-main-collapsible {
     max-height: 120px;
     opacity: 1;
     overflow: visible;
