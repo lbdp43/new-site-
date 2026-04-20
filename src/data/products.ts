@@ -139,6 +139,10 @@ const SIZE_IMAGES: Record<string, Record<number, string>> = {
     20: "/images/products/sizes/menthor-20cl.webp",
     70: "/images/products/sizes/menthor-70cl.webp",
   },
+  "zeleste": {
+    20: "/images/products/sizes/zeleste-20cl.webp",
+    70: "/images/products/sizes/zeleste-70cl.webp",
+  },
 };
 
 export const products: Product[] = [
