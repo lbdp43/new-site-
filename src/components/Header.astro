@@ -35,23 +35,33 @@ interface NavItem {
   children?: NavChild[];
 }
 
+const shopPath = localizedPath('/boutique', lang);
+
 const navItems: NavItem[] = [
   {
+    // La Maison = contenu éditorial / culture (pas de vente directe)
     labelKey: 'nav.maison',
     href: localizedPath('/notre-histoire', lang),
     children: [
       { labelKey: 'nav.story', href: localizedPath('/notre-histoire', lang) },
       { labelKey: 'nav.plants', href: localizedPath('/nos-plantes', lang) },
+      { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
       { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
     ],
   },
   {
+    // Boutique = catalogue par gamme. On scroll vers les sections de /boutique
+    // via ancres (#brasserie, #aperitif, etc.) — c'est le pattern utilisé par
+    // la page. Exception : Lumière Obscure a sa page dédiée (ambiance sombre).
     labelKey: 'nav.shop',
-    href: localizedPath('/boutique', lang),
+    href: shopPath,
     children: [
-      { labelKey: 'nav.shop-all', href: localizedPath('/boutique', lang) },
+      { labelKey: 'nav.shop-all', href: shopPath },
+      { labelKey: 'nav.range-brasserie', href: `${shopPath}#brasserie` },
+      { labelKey: 'nav.range-aperitif', href: `${shopPath}#aperitif` },
       { labelKey: 'nav.lumiere', href: localizedPath('/lumiere-obscure', lang) },
-      { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
+      { labelKey: 'nav.range-edition', href: `${shopPath}#edition-limitee` },
+      { labelKey: 'nav.range-accessoire', href: `${shopPath}#accessoire` },
     ],
   },
   { labelKey: 'nav.workshops', href: localizedPath('/ateliers', lang) },
