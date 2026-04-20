@@ -19,9 +19,12 @@ tasting:
 serving: "En spritz avec Prosecco et Mandarine Napoléon (cf. Spritz Efflorescent), ou pur à température ambiante."
 sizes: [Empilable 20cl, 50cl, 70cl]
 sizeImages:
-  "20": /images/products/sizes/nectar-ostara-20cl.webp
-  "50": /images/products/sizes/nectar-ostara-50cl.webp
-  "70": /images/products/sizes/nectar-ostara-70cl.webp
+  - size: 20
+    image: /images/products/sizes/nectar-ostara-20cl.webp
+  - size: 50
+    image: /images/products/sizes/nectar-ostara-50cl.webp
+  - size: 70
+    image: /images/products/sizes/nectar-ostara-70cl.webp
 wcId: 65
 order: 6
 ---

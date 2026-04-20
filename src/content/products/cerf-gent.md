@@ -24,8 +24,10 @@ tasting:
 serving: "Très frais, en apéritif pur ou allongé d'un trait de tonic."
 sizes: [Empilable 20cl, 70cl]
 sizeImages:
-  "20": /images/products/sizes/cerf-gent-20cl.webp
-  "70": /images/products/sizes/cerf-gent-70cl.webp
+  - size: 20
+    image: /images/products/sizes/cerf-gent-20cl.webp
+  - size: 70
+    image: /images/products/sizes/cerf-gent-70cl.webp
 wcId: 4030
 order: 1
 ---

@@ -124,15 +124,14 @@ collections:
         field: { name: size, label: Contenance, widget: string }
       - name: sizeImages
         label: "Photos par contenance"
-        widget: object
+        widget: list
         required: false
         collapsed: true
-        hint: "Associe une photo à chaque taille (cl → chemin image)"
+        summary: "{{fields.size}} cl"
+        hint: "Une photo par contenance. Ajoute autant de formats que tu veux (20, 50, 70, 150…)."
         fields:
-          - { name: "20", label: "20 cl", widget: image, required: false }
-          - { name: "50", label: "50 cl", widget: image, required: false }
-          - { name: "70", label: "70 cl", widget: image, required: false }
-          - { name: "150", label: "150 cl (Magnum)", widget: image, required: false }
+          - { name: size, label: "Contenance (cl)", widget: number, value_type: int, hint: "Ex: 20, 50, 70, 150" }
+          - { name: image, label: "Photo", widget: image }
       - name: composition
         label: "Composition (plantes, ingrédients)"
         widget: list

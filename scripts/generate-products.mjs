@@ -28,6 +28,32 @@ const __dirname = dirname(__filename);
 const PRODUCTS_DIR = resolve(__dirname, '../src/content/products');
 const OUTPUT_PATH = resolve(__dirname, '../src/data/products.generated.json');
 
+/** Convertit `sizeImages` de list `[{size, image}]` en `Record<number,string>`.
+ *  Tolère aussi l'ancien format objet `{20: "…", 50: "…"}` pour migration
+ *  douce. Retourne undefined si vide ou absent.
+ */
+function normalizeSizeImages(raw) {
+  if (!raw) return undefined;
+
+  // Nouveau format : array de { size, image }
+  if (Array.isArray(raw)) {
+    const entries = raw
+      .filter((e) => e && typeof e === 'object' && e.size != null && e.image)
+      .map((e) => [Number(e.size), String(e.image)]);
+    return entries.length > 0 ? Object.fromEntries(entries) : undefined;
+  }
+
+  // Ancien format : objet { "20": "/path" }
+  if (typeof raw === 'object') {
+    const entries = Object.entries(raw)
+      .filter(([, v]) => typeof v === 'string' && v.length > 0)
+      .map(([k, v]) => [Number(k), v]);
+    return entries.length > 0 ? Object.fromEntries(entries) : undefined;
+  }
+
+  return undefined;
+}
+
 /** Parse un .md en { slug, frontmatter, body }. Format attendu :
  *    ---
  *    yaml-front-matter
@@ -96,11 +122,11 @@ function main() {
         awards: frontmatter.awards,
         serving: frontmatter.serving,
         sizes: frontmatter.sizes,
-        sizeImages: frontmatter.sizeImages
-          ? Object.fromEntries(
-              Object.entries(frontmatter.sizeImages).map(([k, v]) => [Number(k), v])
-            )
-          : undefined,
+        // sizeImages = list de { size, image } dans le .md (pour robustesse CMS)
+        // → on convertit en Record<number, string> pour products.ts.
+        // Tolérant aux deux formats (array de paires OU ancien objet legacy)
+        // pour migration sans casser.
+        sizeImages: normalizeSizeImages(frontmatter.sizeImages),
         wcId: frontmatter.wcId,
         wcSizeAttribute: frontmatter.wcSizeAttribute,
         defaultSize: frontmatter.defaultSize,

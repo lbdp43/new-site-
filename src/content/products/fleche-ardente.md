@@ -21,9 +21,12 @@ tasting:
 serving: "Digestif ou long drink avec eau pétillante et menthe."
 sizes: [Empilable 20cl, 50cl, 70cl]
 sizeImages:
-  "20": /images/products/sizes/fleche-ardente-20cl.webp
-  "50": /images/products/sizes/fleche-ardente-50cl.webp
-  "70": /images/products/sizes/fleche-ardente-70cl.webp
+  - size: 20
+    image: /images/products/sizes/fleche-ardente-20cl.webp
+  - size: 50
+    image: /images/products/sizes/fleche-ardente-50cl.webp
+  - size: 70
+    image: /images/products/sizes/fleche-ardente-70cl.webp
 wcId: 72
 order: 4
 ---

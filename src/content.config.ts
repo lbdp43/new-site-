@@ -69,8 +69,17 @@ const products = defineCollection({
     awards: z.array(z.string()).optional(),
     serving: z.string().optional(),
     sizes: z.array(z.string()).optional(),
-    // YAML keys are strings ; on les coerce en number pour sizeImages
-    sizeImages: z.record(z.string(), z.string()).optional(),
+    // Liste de { size: number (cl), image: path }. Format stable face au CMS
+    // (contrairement à un Record<number, string> que Sveltia interprète en
+    // array sparse). Converti en Record<number, string> par generate-products.mjs.
+    sizeImages: z
+      .array(
+        z.object({
+          size: z.coerce.number(),
+          image: z.string(),
+        })
+      )
+      .optional(),
     wcId: z.number().optional(),
     wcSizeAttribute: z.string().optional(),
     defaultSize: z.number().optional(),

@@ -19,9 +19,12 @@ tasting:
 serving: "À température ambiante avec glaçons, ou avec un trait de Porto blanc en apéritif."
 sizes: [Empilable 20cl, 50cl, 70cl]
 sizeImages:
-  "20": /images/products/sizes/lime-des-pres-20cl.webp
-  "50": /images/products/sizes/lime-des-pres-50cl.webp
-  "70": /images/products/sizes/lime-des-pres-70cl.webp
+  - size: 20
+    image: /images/products/sizes/lime-des-pres-20cl.webp
+  - size: 50
+    image: /images/products/sizes/lime-des-pres-50cl.webp
+  - size: 70
+    image: /images/products/sizes/lime-des-pres-70cl.webp
 wcId: 69
 order: 7
 ---

@@ -20,10 +20,14 @@ tasting:
 serving: "Digestif à température ambiante."
 sizes: [Empilable 20cl, 50cl, 70cl, Magnum 150cl]
 sizeImages:
-  "20": /images/products/sizes/gorgeon-des-machures-20cl.webp
-  "50": /images/products/sizes/gorgeon-des-machures-50cl.webp
-  "70": /images/products/sizes/gorgeon-des-machures-70cl.webp
-  "150": /images/products/sizes/gorgeon-des-machures-150cl.webp
+  - size: 20
+    image: /images/products/sizes/gorgeon-des-machures-20cl.webp
+  - size: 50
+    image: /images/products/sizes/gorgeon-des-machures-50cl.webp
+  - size: 70
+    image: /images/products/sizes/gorgeon-des-machures-70cl.webp
+  - size: 150
+    image: /images/products/sizes/gorgeon-des-machures-150cl.webp
 wcId: 71
 order: 3
 ---
