@@ -59,6 +59,11 @@ const localBusinessSchema = {
     longitude: site.geo.longitude,
   },
   hasMap: site.googleBusiness.url,
+  identifier: {
+    '@type': 'PropertyValue',
+    propertyID: 'Google Place ID',
+    value: site.googleBusiness.placeId,
+  },
   openingHours: site.hours,
   openingHoursSpecification: [
     {

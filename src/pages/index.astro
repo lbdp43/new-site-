@@ -65,6 +65,13 @@ const localBusinessSchema = {
     longitude: site.geo.longitude,
   },
   hasMap: site.googleBusiness.url,
+  // Place ID officiel de la fiche Google Business Profile — signal fort
+  // pour relier ce LocalBusiness à la fiche Maps + GBP (colocalisation).
+  identifier: {
+    '@type': 'PropertyValue',
+    propertyID: 'Google Place ID',
+    value: site.googleBusiness.placeId,
+  },
   // Horaires simples (compact, lisibles par Google)
   openingHours: site.hours,
   // Horaires structurés (plus riches, utilisés par Google Maps + assistants

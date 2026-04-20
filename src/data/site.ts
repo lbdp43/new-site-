@@ -57,14 +57,14 @@ export const site = {
   // Remplace la valeur `placeId` une fois connue via le PlaceID Finder :
   // https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder
   googleBusiness: {
-    /** URL de partage de la fiche Google Maps. */
-    url: "https://www.google.com/maps/search/?api=1&query=La+Brasserie+des+Plantes+18+Grand+Place+43140+Saint-Didier-en-Velay",
-    /** Place ID (à remplir une fois identifié — format ChIJ...). Laissé vide = CTA "Laisser un avis" renverra vers l'URL Maps. */
-    placeId: "",
-    /** ID du widget Featurable pour afficher les avis (gratuit, pas de clé Google requise).
-     *  Création du compte sur https://featurable.com avec l'URL Google Maps de la brasserie.
-     *  Une fois inscrit, copier ici l'UUID du widget (ex : "a1b2c3d4-..."). */
-    featurableWidgetId: "",
+    /** URL canonique de la fiche Google Maps (basée sur Place ID, best signal). */
+    url: "https://www.google.com/maps/place/?q=place_id:ChIJw0TH0B-79UcR3ZhzNesMBUQ",
+    /** Place ID officiel de la fiche GBP (format ChIJ...). */
+    placeId: "ChIJw0TH0B-79UcR3ZhzNesMBUQ",
+    /** URL directe "Laisser un avis" (plus propre que ?hl=fr sur l'URL Maps). */
+    writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJw0TH0B-79UcR3ZhzNesMBUQ",
+    /** ID du widget Featurable — affiche les vrais avis Google en live, sans clé API Google. */
+    featurableWidgetId: "72bbcee7-7505-40ea-add0-e4071e80db1b",
   },
 
   // SEO defaults
