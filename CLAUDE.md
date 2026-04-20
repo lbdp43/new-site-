@@ -310,9 +310,9 @@ depuis avril 2026.
   uniquement (le WP live et les futurs `www.` ne sont pas affectés)
 - **Clé publique Stripe** (`pk_live_…`) exposée côté client : c'est normal,
   elle est publique par design
-- **Les clés REST API WC "Astro site"** (`ck_…` / `cs_…`) créées pour du
-  debug sont à **régénérer** (elles ont transité dans une conversation Claude)
-  → WP Admin → WooCommerce → Réglages → Avancé → API REST → supprimer / recréer
+- **Clés REST API WC** : régénérées en avril 2026. Celles actuellement
+  utilisées par `WC_CONSUMER_KEY` / `WC_CONSUMER_SECRET` sur Vercel sont
+  propres (n'ont pas transité par des conversations Claude).
 - **Admin WP exposé** : `/wp-json/wp/v2/users` révèle le nom d'utilisateur
   admin. Corriger côté WP avec un plugin type "Stop User Enumeration"
   (indépendant de notre code)
@@ -323,7 +323,9 @@ depuis avril 2026.
    rembourser depuis l'admin WooCommerce. Vérifier que la commande tombe bien
    dans le WP admin comme une commande classique, que l'email part, que
    EasyBee reçoit.
-2. **Régénérer la clé REST API WC "Astro site"** une fois les tests finis.
+2. ~~**Régénérer la clé REST API WC "Astro site"**~~ ✅ **FAIT (avril 2026)** —
+   clé régénérée côté WooCommerce + injectée dans Vercel env vars
+   (`WC_CONSUMER_KEY` + `WC_CONSUMER_SECRET` en Production + Preview).
 3. **Préparer la bascule `www.`** : quand le moment est venu, ajouter
    `https://www.labrasseriedesplantes.fr` aux origines autorisées dans le
    plugin CORS, faire pointer `www.` sur Vercel, garder le WP accessible via
