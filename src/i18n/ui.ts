@@ -8,12 +8,12 @@
 export const languages = {
   fr: 'Français',
   en: 'English',
-  // es + it déclarés dans astro.config.mjs pour préparer les hreflang, mais
-  // pages pas encore traduites. Étendre ce type quand on créera /es/* et /it/*.
+  es: 'Español',
+  it: 'Italiano',
 } as const;
 
 export const defaultLang: Lang = 'fr';
-export type Lang = 'fr' | 'en';
+export type Lang = 'fr' | 'en' | 'es' | 'it';
 
 // ui[lang][key] = traduction
 export const ui = {
@@ -102,6 +102,42 @@ export const ui = {
     // Métadonnées / SEO home
     'home.hero.title': "L'art végétal des liqueurs",
     'home.hero.subtitle': "Artisans liquoristes en Haute-Loire",
+  },
+
+  // ES et IT : fondations minimales, fallback sur FR pour les clés non traduites.
+  // À remplir progressivement quand on crée les pages /es/* et /it/*.
+  es: {
+    'lang.switch': 'Cambiar de idioma',
+    'lang.fr': 'Français',
+    'lang.en': 'English',
+    'lang.es': 'Español',
+    'lang.it': 'Italiano',
+    'nav.home': 'Inicio',
+    'nav.story': 'Nuestra historia',
+    'nav.shop': 'Tienda',
+    'nav.plants': 'Nuestras plantas',
+    'nav.cocktails': 'Cócteles',
+    'nav.workshops': 'Talleres',
+    'nav.journal': 'Diario',
+    'nav.contact': 'Contacto',
+    'nav.discover-shop': 'Ver la tienda',
+  },
+
+  it: {
+    'lang.switch': 'Cambia lingua',
+    'lang.fr': 'Français',
+    'lang.en': 'English',
+    'lang.es': 'Español',
+    'lang.it': 'Italiano',
+    'nav.home': 'Home',
+    'nav.story': 'La nostra storia',
+    'nav.shop': 'Bottega',
+    'nav.plants': 'Le nostre piante',
+    'nav.cocktails': 'Cocktail',
+    'nav.workshops': 'Laboratori',
+    'nav.journal': 'Diario',
+    'nav.contact': 'Contatti',
+    'nav.discover-shop': 'Scopri la bottega',
   },
 
   en: {

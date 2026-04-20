@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useCart } from '../../lib/cart-store';
+import { coffretTrios, type CoffretTrio } from '../../data/coffret-trios';
 
 /**
  * Coffret DIY — sélection de N bouteilles parmi le catalogue, ajoutées au
@@ -40,6 +41,19 @@ interface Props {
   /** Message cadeau optionnel (activé si true). */
   allowGiftMessage?: boolean;
 }
+
+const SUGGESTIONS_LABEL = {
+  fr: {
+    heading: 'Pas sûr de votre sélection ?',
+    subtitle: "Nous avons préparé 6 trios — cliquez pour remplir votre coffret en un geste.",
+    pick: 'Choisir ce trio',
+  },
+  en: {
+    heading: 'Not sure what to pick?',
+    subtitle: "We've prepared 6 curated trios — click to fill your box in one go.",
+    pick: 'Pick this trio',
+  },
+} as const;
 
 const L = {
   fr: {
@@ -336,6 +350,86 @@ export default function CoffretBuilder({
           </div>
         </div>
       </div>
+
+      {/* ==== MIDDLE : Suggestions (trios curés) ==== */}
+      {products.length > 3 && (
+        <div>
+          <div className="mb-5">
+            <h3 className="font-display text-xl md:text-2xl text-forest-900 mb-1">
+              {SUGGESTIONS_LABEL[lang].heading}
+            </h3>
+            <p className="text-sm text-ink-500">{SUGGESTIONS_LABEL[lang].subtitle}</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {coffretTrios.map((trio: CoffretTrio) => {
+              // On ne propose que les trios dont les 3 slugs existent dans la liste éligible
+              const allExist = trio.slugs.every((s) => productBySlug[s]);
+              if (!allExist) return null;
+              const trioProducts = trio.slugs.map((s) => productBySlug[s]);
+              const trioTotal = trioProducts.reduce((sum, p) => sum + (p?.priceMin ?? 0), 0);
+              const isCurrent =
+                selected.length === 3 &&
+                trio.slugs.every((s) => selected.includes(s));
+
+              return (
+                <button
+                  key={trio.id}
+                  type="button"
+                  onClick={() => {
+                    setStatus('idle');
+                    setSelected([...trio.slugs]);
+                  }}
+                  className={`group text-left rounded-2xl border-2 transition-all overflow-hidden ${
+                    isCurrent
+                      ? 'border-forest-700 bg-forest-50 shadow-lg'
+                      : 'border-forest-100 bg-cream-50 hover:border-forest-400 hover:shadow-md'
+                  }`}
+                >
+                  {/* Mini preview des 3 bouteilles (format empilable) */}
+                  <div className="flex items-end justify-center gap-1 p-4 bg-white h-32 border-b border-forest-100">
+                    {trioProducts.map((p, i) => (
+                      <img
+                        key={i}
+                        src={p?.stackImage ?? p?.image}
+                        alt=""
+                        className="h-full w-auto object-contain"
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                  <div className="p-4">
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <div className="font-display text-base md:text-lg text-forest-900 leading-tight">
+                        {trio.title[lang]}
+                      </div>
+                      {trio.badge && (
+                        <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-gold-500/15 text-gold-600 border border-gold-400/30 flex-none">
+                          {trio.badge[lang]}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-ink-500 leading-relaxed mb-3 line-clamp-3">
+                      {trio.description[lang]}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-forest-800">{t.format(trioTotal)}</span>
+                      <span className="text-xs text-forest-700 group-hover:text-forest-900 inline-flex items-center gap-1">
+                        {isCurrent ? '✓' : SUGGESTIONS_LABEL[lang].pick}
+                        {!isCurrent && (
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="group-hover:translate-x-0.5 transition-transform">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                          </svg>
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* ==== BOTTOM : Grille de sélection ==== */}
       <div>

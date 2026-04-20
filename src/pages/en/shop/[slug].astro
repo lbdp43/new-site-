@@ -1,0 +1,616 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import { AwardBadge, type AwardType } from '../../../components/ui/award-badge';
+import AddToCartButton from '../../../components/cart/AddToCartButton';
+import { products, ranges, type ProductRange } from '../../../data/products';
+import { productsEn } from '../../../data/products.en';
+import { cocktails } from '../../../data/cocktails';
+import { cocktailsEn } from '../../../data/cocktails.en';
+import { site } from '../../../data/site';
+
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const rangeInfo = ranges[product.range];
+const en = productsEn[product.slug] ?? {};
+
+// English range names (mirrors shop.astro)
+const rangesEn: Record<ProductRange, string> = {
+  'brasserie': 'Brasserie — signature range',
+  'aperitif': 'Aperitifs',
+  'lumiere-obscure': 'Lumière Obscure (CBD)',
+  'edition-limitee': 'Limited editions',
+  'accessoire': 'Gifts & accessories',
+};
+
+// Related products : 3 others from same range
+const related = products
+  .filter((p) => p.range === product.range && p.slug !== product.slug)
+  .slice(0, 3);
+
+// Cocktails that use this product
+const relatedCocktails = cocktails.filter((c) => c.liqueurProductSlug === product.slug);
+
+// Fallback to FR values if EN is missing
+const composition = en.composition ?? product.composition;
+const description = en.description ?? product.description;
+const tagline = en.tagline ?? product.tagline;
+const highlight = en.highlight ?? product.highlight;
+const awardsList = en.awards ?? product.awards ?? [];
+const tasting = en.tasting ?? product.tasting;
+const serving = en.serving ?? product.serving;
+const usage = en.usage ?? product.usage;
+
+// Product schema
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.name,
+  description: description || tagline,
+  image: new URL(product.image, site.url).toString(),
+  brand: { '@type': 'Brand', name: site.name },
+  category: rangesEn[product.range],
+  inLanguage: 'en-US',
+  offers:
+    product.priceMin === product.priceMax
+      ? {
+          '@type': 'Offer',
+          price: product.priceMin,
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: `${site.url}/en/shop/${product.slug}`,
+        }
+      : {
+          '@type': 'AggregateOffer',
+          lowPrice: product.priceMin,
+          highPrice: product.priceMax,
+          priceCurrency: 'EUR',
+          offerCount: product.sizes?.length || 1,
+          availability: 'https://schema.org/InStock',
+        },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Shop', item: `${site.url}/en/shop` },
+    { '@type': 'ListItem', position: 3, name: rangesEn[product.range], item: `${site.url}/en/shop#${product.range}` },
+    { '@type': 'ListItem', position: 4, name: product.name, item: `${site.url}/en/shop/${product.slug}` },
+  ],
+};
+
+const truncate = (s: string, max = 155) => {
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut).trimEnd() + '…';
+};
+const metaDescription = description
+  ? truncate(description, 155)
+  : `${product.name} — ${product.alcohol}% — ${tagline || ''} La Brasserie des Plantes, Haute-Loire, France.`;
+
+// Award parser
+type ParsedAward = { type: AwardType; title: string; issuer: string };
+const parseAward = (raw: string): ParsedAward => {
+  const lower = raw.toLowerCase();
+  let type: AwardType = 'gold';
+  if ((lower.includes('world') && lower.includes('best')) || (lower.includes('meilleur') && lower.includes('monde'))) {
+    type = 'world-best';
+  } else if (lower.includes('silver') || lower.includes('argent')) {
+    type = 'silver';
+  } else if (lower.includes('bronze')) {
+    type = 'bronze';
+  } else if (lower.includes('gold') || lower.includes(' or ') || lower.endsWith(' or')) {
+    type = 'gold';
+  }
+  const parts = raw.split(/\s[—–-]\s/);
+  const title = (parts[0] || raw).trim();
+  const issuer = (parts[1] || 'Award').trim();
+  return { type, title, issuer };
+};
+const parsedAwards = awardsList.map(parseAward);
+---
+<Layout
+  lang="en"
+  title={`${product.name} ${product.alcohol ? product.alcohol + '%' : ''} | ${rangesEn[product.range]} — La Brasserie des Plantes`}
+  description={metaDescription}
+  ogImage={product.image}
+  ogType="product"
+  schema={[productSchema, breadcrumbSchema]}
+>
+  <!-- Breadcrumb -->
+  <div class="bg-cream-50 py-5 border-b border-forest-100/60">
+    <div class="max-w-7xl mx-auto px-6 text-xs text-ink-500">
+      <a href="/en/" class="hover:text-forest-700">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/en/shop" class="hover:text-forest-700">Shop</a>
+      <span class="mx-2">/</span>
+      <a href={`/en/shop#${product.range}`} class="hover:text-forest-700">{rangesEn[product.range]}</a>
+      <span class="mx-2">/</span>
+      <span class="text-forest-700">{product.name}</span>
+    </div>
+  </div>
+
+  <!-- Product header -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
+      <!-- Gallery -->
+      <div>
+        <div
+          id="product-gallery"
+          class="aspect-[4/5] rounded-2xl bg-white border border-forest-100/50 relative overflow-hidden shadow-cream-lg group"
+          data-has-second={product.image2 ? 'true' : 'false'}
+        >
+          <img
+            id="main-slide"
+            data-slide="0"
+            src={product.sizeImages?.[70] || product.image}
+            alt={`${product.name} — craft botanical liqueur from Haute-Loire, France`}
+            class="gallery-slide absolute inset-0 w-full h-full object-contain p-10 transition-opacity duration-500 ease-in-out opacity-100"
+            fetchpriority="high"
+          />
+          {product.image2 && (
+            <img
+              data-slide="1"
+              src={product.image2}
+              alt={`${product.name} — secondary view`}
+              class="gallery-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-0"
+              loading="lazy"
+            />
+          )}
+
+          {product.image2 && (
+            <>
+              <button
+                type="button"
+                id="gallery-prev"
+                aria-label="Previous view"
+                class="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-cream-50/90 hover:bg-cream-50 text-forest-800 flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button
+                type="button"
+                id="gallery-next"
+                aria-label="Next view"
+                class="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-cream-50/90 hover:bg-cream-50 text-forest-800 flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                <button type="button" class="gallery-dot w-2.5 h-2.5 rounded-full bg-forest-800 transition-all" data-index="0" aria-label="View 1"></button>
+                <button type="button" class="gallery-dot w-2.5 h-2.5 rounded-full bg-forest-800/30 transition-all" data-index="1" aria-label="View 2"></button>
+              </div>
+            </>
+          )}
+
+          {highlight && (
+            <span class="absolute top-5 left-5 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold-500 text-cream-50 text-[11px] font-medium tracking-wide uppercase shadow-sm">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+              {highlight}
+            </span>
+          )}
+          {product.alcohol > 0 && (
+            <span class="absolute top-5 right-5 z-10 text-sm font-medium text-cream-50 bg-forest-800/90 px-3 py-1.5 rounded-full">
+              {product.alcohol}%
+            </span>
+          )}
+
+          {product.sizes && product.sizes.length > 1 && (
+            <span
+              id="current-size-tag"
+              class="absolute bottom-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-forest-800/90 text-cream-50 text-[11px] font-medium tracking-wide uppercase opacity-0 transition-opacity duration-300"
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <span id="current-size-label">Size</span>
+            </span>
+          )}
+        </div>
+
+        {product.image2 && (
+          <div class="mt-4 grid grid-cols-4 gap-3">
+            <button
+              type="button"
+              data-index="0"
+              class="thumb aspect-square rounded-lg border-2 border-forest-600 bg-white overflow-hidden transition-colors"
+              aria-label={`${product.name} — packshot view`}
+            >
+              <img src={product.image} alt={`${product.name} — packshot`} class="w-full h-full object-contain p-2" loading="lazy" />
+            </button>
+            <button
+              type="button"
+              data-index="1"
+              class="thumb aspect-square rounded-lg border-2 border-forest-100 hover:border-forest-400 bg-cream-100 overflow-hidden transition-colors"
+              aria-label={`${product.name} — lifestyle view`}
+            >
+              <img src={product.image2} alt={`${product.name} — lifestyle`} class="w-full h-full object-cover" loading="lazy" />
+            </button>
+          </div>
+        )}
+      </div>
+
+      <!-- Product info -->
+      <div>
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+          {rangesEn[product.range]}
+        </div>
+        <h1 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight mb-1">
+          {product.name}
+        </h1>
+        {en.subtitle && (
+          <div class="text-sm italic text-ink-500 mb-4">— {en.subtitle}</div>
+        )}
+        {tagline && (
+          <p class="text-lg italic text-ink-700 mb-6 leading-relaxed">
+            {tagline}
+          </p>
+        )}
+
+        <div class="flex flex-wrap gap-2 mb-8">
+          {product.alcohol > 0 && (
+            <span class="text-xs px-3 py-1.5 rounded-full bg-forest-100 text-forest-800 font-medium">
+              {product.alcohol}% vol.
+            </span>
+          )}
+          {usage && (
+            <span class="text-xs px-3 py-1.5 rounded-full bg-forest-100 text-forest-800 font-medium">
+              {usage}
+            </span>
+          )}
+          <span class="text-xs px-3 py-1.5 rounded-full bg-cream-200 text-ink-700 font-medium">
+            Haute-Loire craft
+          </span>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-8 pb-8 border-b border-forest-100">
+          <div class="text-3xl font-display text-forest-900 mb-1">
+            {product.priceMin === product.priceMax ? `€${product.priceMin}` : `€${product.priceMin} – €${product.priceMax}`}
+          </div>
+          {product.sizes && product.sizes.length > 1 && (
+            <div class="text-sm text-ink-500">Depending on size — {product.sizes.length} formats</div>
+          )}
+        </div>
+
+        <!-- Sizes -->
+        {product.sizes && product.sizes.length > 1 && (
+          <div class="mb-8">
+            <div class="text-xs uppercase tracking-wider text-forest-600 font-medium mb-3">
+              Size — {product.sizes.length} formats available
+            </div>
+            <div class="flex flex-wrap gap-2" id="size-selector">
+              {product.sizes.map((s, i) => {
+                const cl = parseInt(s.replace(/[^0-9]/g, ''), 10) || 70;
+                const sizeImage = product.sizeImages?.[cl];
+                return (
+                  <button
+                    type="button"
+                    data-size={s}
+                    data-size-index={i}
+                    data-size-cl={cl}
+                    data-size-image={sizeImage}
+                    class={`size-pill px-4 py-2 rounded-lg border text-sm font-medium transition-all ${
+                      s.includes('70')
+                        ? 'border-forest-700 bg-forest-800 text-cream-100 shadow-sm'
+                        : 'border-forest-200 text-ink-700 hover:border-forest-500 hover:bg-forest-50'
+                    }`}
+                  >
+                    {s}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <!-- Add to cart -->
+        <div class="mb-5">
+          <AddToCartButton
+            client:load
+            wcId={product.wcId}
+            sizeAttribute={product.wcSizeAttribute}
+            productName={product.name}
+          />
+        </div>
+
+        <!-- Coffret DIY CTA -->
+        {product.sizeImages?.[20] && (
+          <a
+            href={`/en/build-your-gift-box?preselect=${product.slug}`}
+            class="group flex items-center gap-4 mb-8 p-4 rounded-2xl bg-gradient-to-r from-forest-50 to-cream-50 border border-forest-200/70 hover:border-gold-500/70 hover:shadow-md transition-all"
+          >
+            <div class="flex-none w-14 h-14 rounded-xl overflow-hidden bg-white border border-forest-200/60">
+              <img
+                src={product.sizeImages[20]}
+                alt={`${product.name} — stackable 20cl format`}
+                class="w-full h-full object-contain p-1.5"
+                loading="lazy"
+              />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-xs uppercase tracking-wider text-gold-600 font-medium mb-0.5">Gift idea</div>
+              <div class="font-display text-base text-forest-900 leading-tight">
+                Add this bottle to a 3-bottle gift box
+              </div>
+              <div class="text-xs text-ink-500 mt-0.5">Stackable 20cl format · hand-packed</div>
+            </div>
+            <svg class="flex-none w-5 h-5 text-forest-700 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        )}
+
+        <!-- Trust signals -->
+        <div class="grid grid-cols-3 gap-3 pt-6 border-t border-forest-100 text-xs text-ink-500">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-forest-600 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Delivery 48-72h
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-forest-600 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Free above €65
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-forest-600 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Secure payment
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  {description && (
+    <section class="py-16 bg-white border-y border-forest-100/60">
+      <div class="max-w-3xl mx-auto px-6">
+        <h2 class="font-display text-3xl text-forest-900 mb-6">About</h2>
+        <div class="text-lg text-ink-700 leading-relaxed">{description}</div>
+      </div>
+    </section>
+  )}
+
+  <!-- Ingredients + Tasting notes -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+      {composition && composition.length > 0 && (
+        <div>
+          <h2 class="font-display text-2xl text-forest-900 mb-5">Ingredients</h2>
+          <ul class="space-y-3">
+            {composition.map((c) => (
+              <li class="flex items-start gap-3 text-ink-700">
+                <svg class="w-5 h-5 mt-0.5 text-forest-500 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c0 5-4 8-4 13h8c0-5-4-8-4-13z"/></svg>
+                <span>{c}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {tasting && (
+        <div>
+          <h2 class="font-display text-2xl text-forest-900 mb-5">Tasting notes</h2>
+          <dl class="space-y-4">
+            {tasting.nose && (
+              <div>
+                <dt class="text-xs uppercase tracking-wider text-forest-600 font-medium mb-1">Nose</dt>
+                <dd class="text-ink-700 leading-relaxed">{tasting.nose}</dd>
+              </div>
+            )}
+            {tasting.palate && (
+              <div>
+                <dt class="text-xs uppercase tracking-wider text-forest-600 font-medium mb-1">Palate</dt>
+                <dd class="text-ink-700 leading-relaxed">{tasting.palate}</dd>
+              </div>
+            )}
+            {tasting.finish && (
+              <div>
+                <dt class="text-xs uppercase tracking-wider text-forest-600 font-medium mb-1">Finish</dt>
+                <dd class="text-ink-700 leading-relaxed">{tasting.finish}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Awards -->
+  {parsedAwards.length > 0 && (
+    <section class="py-14 bg-gradient-to-b from-cream-50 via-gold-500/5 to-cream-50 border-y border-gold-500/25 overflow-hidden">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        <div class="text-xs uppercase tracking-[0.3em] text-gold-600 font-medium mb-3">Awards</div>
+        <h2 class="font-display text-2xl md:text-3xl text-forest-900 mb-10 leading-tight">
+          This bottle has been recognised
+        </h2>
+        <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+          {parsedAwards.map((a) => (
+            <AwardBadge
+              client:visible
+              type={a.type}
+              title={a.title}
+              issuer={a.issuer}
+              product={product.name}
+              size="md"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Serving suggestion -->
+  {serving && (
+    <section class="py-12 bg-forest-900 text-cream-100">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <div class="text-xs uppercase tracking-[0.25em] text-cream-300/70 font-medium mb-3">Serving</div>
+        <p class="font-display text-2xl md:text-3xl leading-relaxed">
+          "{serving}"
+        </p>
+      </div>
+    </section>
+  )}
+
+  <!-- Cocktails -->
+  {relatedCocktails.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="font-display text-3xl text-forest-900 mb-8">In cocktails</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedCocktails.map((c) => {
+            const cEn = cocktailsEn[c.slug];
+            const shortDesc = (cEn?.description ?? c.description).split('.')[0] + '.';
+            return (
+              <a href={`/en/cocktails#${c.slug}`} class="group flex flex-col rounded-2xl overflow-hidden bg-white border border-forest-100/60 hover:shadow-cream-lg transition-all">
+                <div class="aspect-square overflow-hidden">
+                  <img src={c.image} alt={c.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                </div>
+                <div class="p-5">
+                  <h3 class="font-display text-xl text-forest-900 mb-1 leading-tight">{c.name}</h3>
+                  <p class="text-sm text-ink-500 italic">{shortDesc}</p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Related products -->
+  {related.length > 0 && (
+    <section class="py-16 border-t border-forest-100/60">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="font-display text-3xl text-forest-900 mb-8">
+          Other {rangesEn[product.range].toLowerCase()}
+        </h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {related.map((p) => <ProductCard product={p} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>
+
+<script>
+  (() => {
+    const gallery = document.getElementById('product-gallery');
+    if (!gallery) return;
+
+    const slides = Array.from(gallery.querySelectorAll<HTMLElement>('.gallery-slide'));
+    const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.gallery-dot'));
+    const thumbs = Array.from(document.querySelectorAll<HTMLButtonElement>('.thumb'));
+    const prev = document.getElementById('gallery-prev');
+    const next = document.getElementById('gallery-next');
+    const sizePills = Array.from(document.querySelectorAll<HTMLButtonElement>('.size-pill'));
+
+    let current = 0;
+
+    const show = (idx: number) => {
+      if (slides.length < 2) return;
+      const i = ((idx % slides.length) + slides.length) % slides.length;
+      slides.forEach((el, k) => { el.style.opacity = k === i ? '1' : '0'; });
+      dots.forEach((d, k) => {
+        d.classList.toggle('bg-forest-800', k === i);
+        d.classList.toggle('bg-forest-800/30', k !== i);
+        d.classList.toggle('w-6', k === i);
+        d.classList.toggle('w-2.5', k !== i);
+      });
+      thumbs.forEach((t, k) => {
+        t.classList.toggle('border-forest-600', k === i);
+        t.classList.toggle('border-forest-100', k !== i);
+      });
+      current = i;
+    };
+
+    prev?.addEventListener('click', () => show(current - 1));
+    next?.addEventListener('click', () => show(current + 1));
+    dots.forEach((d) => d.addEventListener('click', () => show(Number(d.dataset.index || 0))));
+    thumbs.forEach((t) => t.addEventListener('click', () => show(Number(t.dataset.index || 0))));
+
+    document.addEventListener('keydown', (e) => {
+      if (slides.length < 2) return;
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+
+    let touchStartX = 0;
+    gallery.addEventListener('touchstart', (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    gallery.addEventListener('touchend', (e: TouchEvent) => {
+      if (slides.length < 2) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) show(dx < 0 ? current + 1 : current - 1);
+    });
+
+    // Size selector
+    const sizeTag = document.getElementById('current-size-tag');
+    const sizeLabel = document.getElementById('current-size-label');
+    const mainSlide = document.getElementById('main-slide') as HTMLImageElement | null;
+    const firstSlide = slides[0];
+
+    const scaleForCl = (cl: number): number => {
+      if (cl <= 20) return 0.78;
+      if (cl <= 50) return 0.93;
+      if (cl <= 70) return 1.0;
+      if (cl <= 100) return 1.1;
+      return 1.22;
+    };
+
+    const crossfadeMainTo = (newSrc: string) => {
+      if (!mainSlide) return;
+      if (mainSlide.getAttribute('src') === newSrc) return;
+      const preload = new Image();
+      preload.onload = () => {
+        mainSlide.style.opacity = '0';
+        window.setTimeout(() => {
+          mainSlide.src = newSrc;
+          mainSlide.style.opacity = '1';
+        }, 200);
+      };
+      preload.src = newSrc;
+    };
+
+    const applySize = (pill: HTMLButtonElement) => {
+      const cl = Number(pill.dataset.sizeCl || 70);
+      const label = pill.dataset.size || '';
+      const sizeImage = pill.dataset.sizeImage;
+
+      if (sizeImage) {
+        crossfadeMainTo(sizeImage);
+        if (firstSlide) firstSlide.style.transform = 'scale(1)';
+      } else {
+        const scale = scaleForCl(cl);
+        if (firstSlide) {
+          firstSlide.style.transformOrigin = 'center bottom';
+          firstSlide.style.transform = `scale(${scale})`;
+        }
+      }
+
+      if (sizeTag) sizeTag.style.opacity = '1';
+      if (sizeLabel) sizeLabel.textContent = label;
+    };
+
+    sizePills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        sizePills.forEach((p) => {
+          p.classList.remove('border-forest-700', 'bg-forest-800', 'text-cream-100', 'shadow-sm');
+          p.classList.add('border-forest-200', 'text-ink-700', 'hover:border-forest-500', 'hover:bg-forest-50');
+        });
+        pill.classList.remove('border-forest-200', 'text-ink-700', 'hover:border-forest-500', 'hover:bg-forest-50');
+        pill.classList.add('border-forest-700', 'bg-forest-800', 'text-cream-100', 'shadow-sm');
+        applySize(pill as HTMLButtonElement);
+        if (slides.length > 1) show(0);
+      });
+    });
+  })();
+</script>

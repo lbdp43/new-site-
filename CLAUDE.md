@@ -155,13 +155,20 @@ npm run preview   # aperçu du build de prod
 npm run astro ... # CLI Astro
 ```
 
-## Langues préparées (infra) mais pas encore traduites
+## Langues supportées — statut actuel
 
-- **ES** (Español) et **IT** (Italiano) : déclarés dans `astro.config.mjs`
-  (locales + sitemap) pour préparer les hreflang futurs, mais **aucune page
-  traduite pour l'instant**. Le type `Lang` dans `src/i18n/ui.ts` reste à
-  `'fr' | 'en'` — l'étendre quand on ajoutera les vraies pages sous `/es/*`
-  et `/it/*`.
+Le site est structuré autour de 4 langues :
+
+- **FR** — langue par défaut, 100% des pages traduites (58 pages)
+- **EN** — 28 pages traduites : home, notre-histoire, boutique (index + 20 fiches produit), cocktails, plantes, ateliers, contact, coffret DIY, 5 articles blog + routing `/en/journal/*`
+- **ES** — **fondations uniquement** : home minimale `/es/` + slugs mappés dans `routes.ts`. Pages à créer progressivement.
+- **IT** — **fondations uniquement** : home minimale `/it/` + slugs mappés. Pages à créer progressivement.
+
+Pour ajouter une page ES ou IT :
+1. Créer `src/pages/{es|it}/{slug-localisé}.astro`
+2. Le slug doit correspondre à celui déclaré dans `src/i18n/routes.ts` (section ES/IT déjà remplie pour les pages principales)
+3. Dans le fichier, passer `lang="es"` ou `lang="it"` au `Layout`
+4. Ajouter les traductions UI spécifiques dans `src/i18n/ui.ts` (les clés non traduites retombent automatiquement sur FR via le fallback de `t()`)
 
 ## Bascule `www.` → Astro
 

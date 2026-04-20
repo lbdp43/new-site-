@@ -8,20 +8,27 @@ export type { Lang };
 
 /**
  * Détecte la langue d'une URL (chemin ou URL complète).
- * /en/anything → 'en', sinon 'fr'.
+ * /en/* → 'en', /es/* → 'es', /it/* → 'it', sinon 'fr'.
  */
 export function getLangFromUrl(url: URL | string): Lang {
   const pathname = typeof url === 'string' ? url : url.pathname;
   if (pathname.startsWith('/en/') || pathname === '/en') return 'en';
+  if (pathname.startsWith('/es/') || pathname === '/es') return 'es';
+  if (pathname.startsWith('/it/') || pathname === '/it') return 'it';
   return 'fr';
 }
 
 /**
  * Traduit une clé UI. Si la clé n'existe pas dans la langue demandée,
  * fallback sur le français puis sur la clé elle-même.
+ *
+ * ES et IT sont des dictionnaires partiels — toutes les clés non traduites
+ * retombent naturellement sur FR via le fallback.
  */
 export function t(key: UIKey, lang: Lang = defaultLang): string {
-  const translated = ui[lang]?.[key];
+  // Cast nécessaire car ES/IT sont des dictionnaires partiels de UIKey.
+  const dict = ui[lang] as Record<string, string | undefined> | undefined;
+  const translated = dict?.[key];
   if (translated) return translated;
   // Fallback FR
   const fallback = ui[defaultLang]?.[key];
@@ -42,17 +49,22 @@ export function useTranslations(lang: Lang) {
 
 /**
  * Retourne la locale BCP47 pour une langue.
- * fr → fr_FR, en → en_US (par défaut international)
  */
 export function getOgLocale(lang: Lang): string {
-  return lang === 'en' ? 'en_US' : 'fr_FR';
+  const map: Record<Lang, string> = {
+    fr: 'fr_FR',
+    en: 'en_US',
+    es: 'es_ES',
+    it: 'it_IT',
+  };
+  return map[lang];
 }
 
 /**
  * Retourne la locale pour l'attribut lang du <html>.
  */
 export function getHtmlLang(lang: Lang): string {
-  return lang === 'en' ? 'en' : 'fr';
+  return lang;
 }
 
 /**

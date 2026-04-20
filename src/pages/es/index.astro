@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../data/site';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.name,
+    url: `${site.url}/es/`,
+    inLanguage: 'es-ES',
+    publisher: { '@id': `${site.url}#localbusiness` },
+  },
+];
+---
+<Layout
+  lang="es"
+  title="La Brasserie des Plantes | Licores artesanales ecológicos — Haute-Loire, Francia"
+  description="Licores e infusiones artesanales de plantas de Auvernia. L'Alchimie Végétale, Mejor Digestivo del Mundo 2025. Productor independiente en Haute-Loire, Francia."
+  schema={schema}
+>
+  <section class="py-24 bg-gradient-to-b from-forest-900 via-forest-800 to-forest-950 text-cream-100">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <img
+        src="/images/brand/logo-clair-transparent.png"
+        alt="La Brasserie des Plantes"
+        class="mx-auto h-20 mb-8"
+      />
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-400 text-xs font-medium tracking-wide uppercase mb-8">
+        Mejor Digestivo del Mundo 2025
+      </div>
+      <h1 class="font-display text-4xl md:text-5xl leading-tight mb-6 text-cream-100">
+        Licores artesanales<br />
+        <em class="not-italic font-normal text-gold-400" style="font-family: var(--font-script);">de plantas de Auvernia</em>
+      </h1>
+      <p class="text-lg text-cream-200/80 leading-relaxed mb-10 max-w-2xl mx-auto">
+        Desde Saint-Didier-en-Velay (Haute-Loire, Francia), Étienne, Guillaume
+        y Bastien componen licores e infusiones a partir de plantas olvidadas
+        de Auvernia. <em>L'Alchimie Végétale</em> fue coronada Mejor Digestivo
+        del Mundo 2025 en los World Drinks Awards de Londres.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <a href="/es/tienda" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-all">
+          Ver la tienda
+        </a>
+        <a href="/es/nuestra-historia" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-cream-100/30 hover:border-cream-100/60 text-cream-100 font-medium transition-colors">
+          Nuestra historia
+        </a>
+      </div>
+      <div class="pt-8 border-t border-cream-100/10 text-sm text-cream-200/60">
+        El sitio está siendo traducido al español. Entretanto, también puedes
+        visitar la versión <a href="/" class="underline hover:text-cream-100">francesa</a>
+        o <a href="/en/" class="underline hover:text-cream-100">inglesa</a>.
+      </div>
+    </div>
+  </section>
+</Layout>
