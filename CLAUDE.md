@@ -172,11 +172,19 @@ Pour ajouter une page ES ou IT :
 
 ## Bascule `www.` → Astro
 
-Checklist complète dans **`docs/bascule-www.md`**. Résumé :
-pré-requis (tester paiement réel, régénérer clés API, backups), créer
-`wp.labrasseriedesplantes.fr` comme nouveau nom technique du WordPress,
-mettre à jour `PUBLIC_WC_BASE_URL` sur Vercel, basculer les DNS publics
-(`www.` en CNAME vers Vercel), vérifier en post-bascule.
+**Checklist complète et toujours à jour dans `docs/bascule-www.md`.**
+
+Ce fichier contient 3 sections :
+1. **Pré-requis** avant bascule (tests paiement, backups, etc.)
+2. **Plan de bascule en 4 étapes** (DNS, CORS, env vars)
+3. **⏭ À faire APRÈS la bascule** — checklist complète (sitemap GSC,
+   IndexNow, Featurable prod, DMARC, GBP URL, schema validation, 404
+   monitoring, hreflang, etc.)
+
+**Convention** : toute décision ou intégration qui sort "j'active ça après
+la bascule" DOIT être ajoutée à la section "À faire APRÈS la bascule" de
+`docs/bascule-www.md` dans le même commit. Objectif : le jour J, il suffit
+de dérouler la liste sans avoir à retrouver les décisions éparpillées.
 
 ## Coffret DIY — 3 bouteilles au choix
 
@@ -225,9 +233,12 @@ depuis avril 2026.
 | `src/pages/commande/confirmation.astro` | Route `/commande/confirmation` |
 | `src/data/products.ts` | Catalogue — source de vérité affichage |
 | `scripts/sync-wc-stock.mjs` | Script prebuild : fetch stock WC, écrit `wc-live.json` |
+| `scripts/indexnow-submit.mjs` | Script postbuild : POST sitemap à IndexNow (Bing/Yandex) |
 | `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, etc. |
 | `src/data/wc-live.json` | Snapshot stock live (régénéré à chaque build, committé) |
-| `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande) + priorités différenciées |
+| `public/admin/index.html` + `public/admin/config.yml` | Interface CMS (Sveltia) + config collections blog |
+| `docs/cms-admin.md` | Guide utilisateur du CMS (auth GitHub, rédaction, SEO) |
+| `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande, /admin) + priorités différenciées |
 | `vercel.json` | Headers sécurité (HSTS, X-Frame, CSP-like) + noindex sur `test.*` |
 | `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
 
@@ -246,6 +257,20 @@ depuis avril 2026.
   script préserve le fichier existant et sort en code 0 — le build ne
   plante jamais. Les clés `WC_CONSUMER_*` sont maintenant obligatoires
   côté **Vercel** (Production + Preview) pour un sync réel.
+- **IndexNow au postbuild** : `scripts/indexnow-submit.mjs` s'exécute
+  APRÈS `astro build` et POST les URLs du sitemap à `api.indexnow.org`
+  (protocole Bing + Yandex). **Conditionné par `INDEXNOW_ENABLED=true`**
+  côté env — tant que la variable n'existe pas, le script skippe. À
+  activer dans Vercel uniquement APRÈS la bascule www. → Astro (sinon
+  on submit des URLs qui redirigent vers WordPress → crawl inutile).
+  Le script refuse explicitement les hosts `test.*` et `localhost`.
+- **Mini-CMS admin (Sveltia CMS)** : `public/admin/` monte un CMS pour
+  les articles de blog FR + EN. Auth GitHub directe (proxy hébergé par
+  Sveltia, zéro backend de notre côté). L'équipe édite, commit → Vercel
+  redeploy → article en ligne en 90s. Config dans `public/admin/config.yml`,
+  qui miroite le schema Zod de `src/content.config.ts`. Si tu ajoutes
+  un champ au schema, ajoute-le aussi dans `config.yml`. Doc complète
+  dans `docs/cms-admin.md`.
 - **Fiche produit `coffret-original`** : pas de `wcId`. Ajouter quand le
   produit sera créé côté WP.
 - **SIZE_IMAGES dans products.ts** : une photo différente par contenance,
@@ -281,12 +306,13 @@ depuis avril 2026.
    `https://www.labrasseriedesplantes.fr` aux origines autorisées dans le
    plugin CORS, faire pointer `www.` sur Vercel, garder le WP accessible via
    un autre nom (ex. `wp.labrasseriedesplantes.fr`) pour les API.
-4. **Activer IndexNow** une fois en live : le fichier
-   `public/e3e81d795b356f57b451d271fc89a108.txt` est déjà là. Il reste à
-   envoyer un POST à IndexNow à chaque rebuild (hook Vercel `build` ou
-   action GitHub).
+4. ~~**Activer IndexNow**~~ ✅ **CÂBLÉ (avril 2026)** — script postbuild prêt.
+   Reste à activer `INDEXNOW_ENABLED=true` dans Vercel **après bascule**
+   (voir checklist `docs/bascule-www.md`).
 5. ~~**Sync stock live**~~ ✅ **FAIT (avril 2026)** — `scripts/sync-wc-stock.mjs`
    au prebuild + `src/lib/wc-live.ts` helpers consommés par les templates.
-6. **Interface d'admin de contenu** (optionnel) : mini-CMS pour que l'équipe
-   puisse éditer les textes de `products.ts` sans passer par le code. Pas
-   urgent, à discuter quand le site sera en live.
+6. ~~**Interface d'admin de contenu**~~ ✅ **PHASE 1 FAIT (avril 2026)** —
+   Sveltia CMS à `/admin/` pour les articles de blog (FR + EN). Phase 2
+   (édition des produits, pages statiques) à faire plus tard si l'équipe
+   en a besoin — les fiches produits sont en TypeScript pas en YAML/MD,
+   nécessiteraient une migration en Content Collection.

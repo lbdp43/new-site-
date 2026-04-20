@@ -9,8 +9,10 @@
     "dev": "astro dev",
     "prebuild": "node scripts/sync-wc-stock.mjs",
     "build": "astro build",
+    "postbuild": "node scripts/indexnow-submit.mjs",
     "preview": "astro preview",
     "sync:stock": "node scripts/sync-wc-stock.mjs",
+    "indexnow:submit": "node scripts/indexnow-submit.mjs",
     "astro": "astro"
   },
   "dependencies": {

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin — La Brasserie des Plantes</title>
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .loading {
+      position: fixed; inset: 0; display: flex; align-items: center;
+      justify-content: center; color: #4a5d3b; font-size: 14px;
+      background: #f7f1e5;
+    }
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading">Chargement de l'espace d'édition…</div>
+  <!--
+    Sveltia CMS — fork moderne de Decap CMS (ex-Netlify CMS)
+    Auth : GitHub direct via le proxy hébergé auth.sveltia.app (gratuit).
+    Config : /admin/config.yml (côté de ce fichier).
+    Doc utilisateur : /docs/cms-admin.md
+  -->
+  <script type="module" src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" onload="document.getElementById('loading').remove()"></script>
+</body>
+</html>

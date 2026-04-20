@@ -99,9 +99,8 @@ Réuploader le plugin (ou SSH) sur le WordPress.
 3. Vercel va automatiquement générer un certificat HTTPS (Let's Encrypt).
    Attendre 5-10 minutes que ce soit actif.
 
-### Étape 5 — Validation post-bascule
+### Étape 5 — Validation post-bascule (dans l'heure)
 
-Dans l'heure qui suit :
 - [ ] `https://www.labrasseriedesplantes.fr/` → Astro homepage ✓
 - [ ] `https://labrasseriedesplantes.fr/` → redirige vers `www.` ✓
 - [ ] `https://www.labrasseriedesplantes.fr/boutique/alchimie-vegetale` → page
@@ -111,11 +110,129 @@ Dans l'heure qui suit :
       accessible ✓
 - [ ] TTFB mesuré < 300 ms (vs ~1000 ms sur l'ancien WP direct) ✓
 
-Dans les 48h :
-- [ ] Google Search Console → notification de changement de domaine OK
-- [ ] Pas d'augmentation anormale des 404 (monitor via GSC)
-- [ ] Pas de chute de trafic (normal 10-15% de turbulence les 2 premières
-      semaines, puis récupération)
+---
+
+## ⏭ À faire APRÈS la bascule (checklist post-J)
+
+Cette liste est alimentée au fil des sessions. À chaque fois qu'une décision
+ou une intégration est marquée "à faire après la bascule", elle finit ici.
+L'ordre n'est pas critique, mais plus c'est fait vite mieux c'est pour le
+SEO et pour éviter les oublis.
+
+### Dans les 24h après bascule
+
+- [ ] **Google Search Console — Sitemaps**
+  1. Ouvrir la propriété domaine `labrasseriedesplantes.fr` dans GSC.
+  2. Section *Sitemaps* → supprimer l'ancien `sitemap_index.xml` (format
+     Yoast WordPress, plus valide).
+  3. Ajouter le nouveau : `sitemap-index.xml` (⚠️ **tiret**, pas underscore —
+     c'est le format que génère Astro automatiquement).
+  4. Vérifier l'état `Opération effectuée` + attendre 24-48h que Google
+     crawle les ~100 URLs listées.
+
+- [ ] **Bing Webmaster Tools — Sitemaps**
+  Idem que GSC mais côté Bing. Soumettre `sitemap-index.xml`. Si pas encore
+  inscrit → créer un compte sur [bing.com/webmasters](https://www.bing.com/webmasters)
+  et vérifier la propriété via DNS TXT ou fichier HTML.
+
+- [ ] **Vérifier le `site` dans astro.config.mjs**
+  Si après bascule, les URLs du sitemap pointent encore sur l'apex
+  `https://labrasseriedesplantes.fr/...` alors que le domaine canonique
+  est `www.`, IndexNow soumettra les mauvaises URLs. Vérifier `site`
+  dans `astro.config.mjs` + `site.url` dans `src/data/site.ts`.
+  Si on veut `www.` en canonique : changer pour `https://www.labrasseriedesplantes.fr`
+  partout + redirection apex → www. dans Vercel (déjà au point 4.2 du plan
+  de bascule).
+
+- [ ] **Activer IndexNow**
+  IndexNow = protocole Bing/Yandex pour l'indexation quasi-instantanée.
+  Le fichier clé est déjà présent à `public/e3e81d795b356f57b451d271fc89a108.txt`.
+  Un script `scripts/indexnow-submit.mjs` est déjà câblé au `postbuild` mais
+  conditionné par une variable d'env — il est en dry-run tant que `www.`
+  n'est pas sur Astro.
+
+  **Action** : dans Vercel → Settings → Environment Variables :
+  ```
+  INDEXNOW_ENABLED = true
+  ```
+  Ajouter en **Production uniquement** (pas Preview, pas Development —
+  sinon chaque PR re-submit 100 URLs à Bing pour rien).
+  Déclencher un rebuild (`Redeploy`). Dans les logs Vercel, tu dois voir
+  `[indexnow] ✓ X URLs soumises (HTTP 202)`.
+
+- [ ] **Vérifier Featurable (avis Google live)**
+  Ouvrir la homepage `www.`, scroller jusqu'à la section "Ce que disent nos
+  clients". Les vrais avis Google doivent apparaître (pas les reviews
+  internes). Si tu vois encore "Avis clients vérifiés" au lieu de "Avis
+  Google en direct", c'est que Featurable n'a pas répondu au build ou que
+  le widget n'est pas public sur featurable.com.
+
+- [ ] **Tester le checkout réel** en conditions de production (1-2 €
+      puis remboursement depuis WC admin). Si ça casse, voir § rollback.
+
+### Dans la semaine qui suit
+
+- [ ] **DMARC + emails transactionnels WC**
+  Depuis que le `www.` est sur Astro, les emails de commande partent toujours
+  via le WordPress (SMTP config WP). Vérifier qu'ils arrivent bien en boîte
+  de réception (pas en spam) — particulièrement si le SPF WP cite encore
+  `www.labrasseriedesplantes.fr` qui n'existe plus comme serveur SMTP.
+  Si soucis : ajuster le SPF dans OVH/IONOS.
+
+- [ ] **Google Business Profile — URL du site**
+  Sur [business.google.com](https://business.google.com), ouvrir la fiche
+  de Saint-Didier-en-Velay. Vérifier que l'URL pointe bien sur
+  `https://www.labrasseriedesplantes.fr` (elle devrait déjà, mais autant
+  s'assurer qu'il n'y a pas de redirect bizarre).
+
+- [ ] **Schema.org — validation post-bascule**
+  Passer `https://www.labrasseriedesplantes.fr` dans :
+  - [Schema Markup Validator](https://validator.schema.org/) — doit valider
+    `LocalBusiness`, `Product` sur les fiches, `BlogPosting` sur les articles.
+  - [Rich Results Test](https://search.google.com/test/rich-results) —
+    doit détecter au moins : Product, LocalBusiness, Breadcrumb, FAQ (sur
+    `/faq`), Recipe (sur les cocktails).
+
+- [ ] **Régénérer les clés REST API WC "Astro site"**
+  WP Admin → WooCommerce → Réglages → Avancé → API REST → supprimer
+  les anciennes (qui ont transité par les conversations Claude). Créer une
+  nouvelle clé "Astro Production" avec rôle **Lecture seule** (le script
+  `sync-wc-stock.mjs` n'a besoin que de lire). Mettre à jour sur Vercel →
+  Environment Variables (`WC_CONSUMER_KEY`, `WC_CONSUMER_SECRET`).
+
+- [ ] **Monitoring 404s**
+  Dans GSC → section *Indexation* → *Pages* → filtrer sur `404`. Les vieilles
+  URLs WP qui ne matchent plus le slug Astro doivent être redirigées via
+  `vercel.json` (section `redirects`). Ex : `/produit/alchimie-vegetale/`
+  → `/boutique/alchimie-vegetale`. En général 10-20 URLs à rediriger en
+  masse.
+
+### Dans le mois qui suit
+
+- [ ] **Pas de chute de trafic anormale**
+  Normal : -10 à -15% de turbulence les 2 premières semaines, récupération
+  dans le mois. Au-delà de -25% au jour 30, il y a un souci SEO structurel
+  (mauvais canonicals, mauvais hreflang, mauvais robots.txt) à auditer.
+
+- [ ] **Hreflang FR/EN validé**
+  Ouvrir [merkle.com/hreflang](https://technicalseo.com/tools/hreflang/)
+  ou un outil équivalent, tester quelques paires (ex: `/notre-histoire` vs
+  `/en/our-story`). Les deux doivent se référencer mutuellement avec le bon
+  code langue.
+
+- [ ] **Core Web Vitals en champ (CrUX)**
+  Une fois que Google a collecté assez de données (~28 jours), vérifier sur
+  [pagespeed.web.dev](https://pagespeed.web.dev) que les CWV sont au vert :
+  LCP < 2.5s, INP < 200ms, CLS < 0.1. Sur mobile principalement.
+
+- [ ] **Supprimer la règle noindex du test.**
+  Une fois que `www.` est stable et indexé proprement, on peut garder
+  `test.` comme environnement de préprod (toujours en noindex) ou le
+  supprimer. À décider selon l'usage.
+
+- [ ] **Annuaires tourisme (Haute-Loire)** — ajout dans ~10 annuaires locaux
+      pour renforcer les signaux NAP et le SEO local (voir note "tourisme"
+      dans le backlog).
 
 ---
 

@@ -1,0 +1,96 @@
+# Sveltia CMS — configuration
+# Doc : https://github.com/sveltia/sveltia-cms
+#
+# Les collections ici miroitent le schema Zod défini dans
+# `src/content.config.ts`. À chaque changement de ce schema (nouveau champ,
+# nouvelle catégorie), mettre à jour ce fichier en miroir.
+
+backend:
+  name: github
+  repo: lbdp43/new-site-
+  branch: main
+  # Pas de base_url custom = on utilise le proxy OAuth hébergé par Sveltia
+  # (auth.sveltia.app, gratuit). Au 1er login, l'utilisateur autorise
+  # l'app Sveltia CMS à accéder au repo via GitHub.
+
+# Les images uploadées via le CMS atterrissent dans public/images/blog/
+media_folder: public/images/blog
+public_folder: /images/blog
+
+# Branche de publication editoriale : chaque édition crée un commit sur main
+# directement. On peut passer en mode "editorial_workflow" plus tard si on
+# veut un système brouillon → review → merge.
+publish_mode: simple
+
+locale: fr
+
+collections:
+  # ─── ARTICLES DE BLOG FR ──────────────────────────────────────────────
+  - name: blog-fr
+    label: "Articles — FR"
+    label_singular: "Article FR"
+    folder: src/content/blog
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: md
+    format: yaml-frontmatter
+    preview_path: "blog/{{slug}}"
+    summary: "{{title}} — {{date | date('DD/MM/YYYY')}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: "Titre", widget: string }
+      - { name: description, label: "Description (meta SEO, 120-160 car.)", widget: text, pattern: ['^.{50,200}$', '50 à 200 caractères'] }
+      - { name: date, label: "Date de publication", widget: datetime, format: "YYYY-MM-DD", time_format: false, picker_utc: false }
+      - { name: updated, label: "Dernière mise à jour (si ajout ultérieur)", widget: datetime, format: "YYYY-MM-DD", time_format: false, picker_utc: false, required: false }
+      - name: author
+        label: "Auteur"
+        widget: select
+        default: "La Brasserie des Plantes"
+        options:
+          - { label: "Étienne", value: "Étienne" }
+          - { label: "Guillaume", value: "Guillaume" }
+          - { label: "Bastien", value: "Bastien" }
+          - { label: "La Brasserie des Plantes (compte collectif)", value: "La Brasserie des Plantes" }
+      - { name: cover, label: "Image de couverture (16:9 recommandé)", widget: image, required: false, choose_url: true }
+      - name: category
+        label: "Catégorie"
+        widget: select
+        options: [Plantes, Recettes, Terroir, Fabrication, Actualité]
+      - { name: readingTime, label: "Temps de lecture (ex: \"5 min\")", widget: string, default: "5 min" }
+      - { name: body, label: "Contenu de l'article", widget: markdown }
+
+  # ─── ARTICLES DE BLOG EN ──────────────────────────────────────────────
+  - name: blog-en
+    label: "Articles — EN"
+    label_singular: "EN post"
+    folder: src/content/blog-en
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: md
+    format: yaml-frontmatter
+    preview_path: "en/journal/{{slug}}"
+    summary: "{{title}} — {{date | date('DD/MM/YYYY')}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: "Title", widget: string }
+      - { name: description, label: "Description (SEO meta, 120-160 chars)", widget: text, pattern: ['^.{50,200}$', '50 to 200 characters'] }
+      - { name: date, label: "Publication date", widget: datetime, format: "YYYY-MM-DD", time_format: false, picker_utc: false }
+      - { name: updated, label: "Last updated (if revised later)", widget: datetime, format: "YYYY-MM-DD", time_format: false, picker_utc: false, required: false }
+      - name: author
+        label: "Author"
+        widget: select
+        default: "La Brasserie des Plantes"
+        options:
+          - { label: "Étienne", value: "Étienne" }
+          - { label: "Guillaume", value: "Guillaume" }
+          - { label: "Bastien", value: "Bastien" }
+          - { label: "La Brasserie des Plantes (brand)", value: "La Brasserie des Plantes" }
+      - { name: cover, label: "Cover image (16:9)", widget: image, required: false, choose_url: true }
+      - name: category
+        label: "Category"
+        widget: select
+        options: [Plants, Recipes, Terroir, Craft, News]
+      - { name: readingTime, label: "Reading time (e.g. \"5 min\")", widget: string, default: "5 min" }
+      - { name: body, label: "Article content", widget: markdown }
