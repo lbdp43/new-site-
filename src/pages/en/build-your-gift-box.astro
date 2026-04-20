@@ -5,15 +5,25 @@ import CoffretBuilder, { type CoffretProduct } from '../../components/coffret/Co
 import { products } from '../../data/products';
 import { site } from '../../data/site';
 
+// Same filter as FR: 20cl stackable bottles only (no accessories, no limited
+// editions — those don't come in 20cl format).
 const eligibleProducts: CoffretProduct[] = products
-  .filter((p) => p.range !== 'accessoire' && p.wcId !== undefined)
+  .filter(
+    (p) =>
+      p.range !== 'accessoire' &&
+      p.range !== 'edition-limitee' &&
+      p.wcId !== undefined
+  )
   .map((p) => ({
     slug: p.slug,
     name: p.name,
     range: p.range,
     priceMin: p.priceMin,
     image: p.image,
-    stackImage: p.sizeImages?.[20],
+    // Pre-cropped stack image (see scripts/crop-stack-images.mjs).
+    stackImage: p.sizeImages?.[20]
+      ? p.sizeImages[20].replace('-20cl.webp', '-20cl-stack.webp')
+      : undefined,
     alcohol: p.alcohol,
     tagline: p.tagline,
     wcId: p.wcId as number,

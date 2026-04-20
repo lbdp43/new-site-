@@ -26,13 +26,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const SIZES_DIR = resolve(__dirname, '../public/images/products/sizes');
 
-// Seuil alpha pour considérer un pixel comme "visible" (partie de la bouteille).
-// 50/255 = ~20%. Ignore les shadows très subtiles et l'anti-aliasing des bords.
-const ALPHA_THRESHOLD = 50;
+// Seuil alpha pour considérer un pixel comme "partie nette de la bouteille".
+// 150/255 = ~60% → ignore les drop-shadows qui s'étendent jusqu'aux coins
+// du PNG (diag a montré que les 4 coins ont alpha=106, donc on doit aller
+// au-dessus). Ne garde que les pixels opaques du corps + goulot + étiquette.
+const ALPHA_THRESHOLD = 150;
 
-// Padding de sécurité (en pixels) autour de la bouteille détectée, pour ne pas
-// couper les bords pile sur la silhouette.
-const PADDING = 8;
+// Padding de sécurité (en pixels) autour de la bouteille détectée. 2px seulement
+// car on veut un crop TRÈS serré pour l'empilement (les bouteilles doivent se
+// toucher bout-à-bout comme un palet).
+const PADDING = 4;
 
 async function cropOne(filename) {
   const inputPath = join(SIZES_DIR, filename);

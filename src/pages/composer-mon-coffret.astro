@@ -5,20 +5,32 @@ import CoffretBuilder, { type CoffretProduct } from '../components/coffret/Coffr
 import { products } from '../data/products';
 import { site } from '../data/site';
 
-// Filtrer : uniquement les bouteilles (pas les accessoires), avec un wcId pour
-// pouvoir être ajoutées au panier. On conserve Brasserie, Apéritifs, Lumière
-// Obscure et Éditions limitées — toutes les bouteilles éligibles comme cadeau.
+// Filtrer : bouteilles 20cl empilables uniquement. Donc on exclut :
+// - accessoire (coffrets/flasques, pas des liqueurs 20cl)
+// - edition-limitee (les cuvées ne sont pas déclinées en 20cl)
+// - les produits sans wcId (pas achetables via panier)
 const eligibleProducts: CoffretProduct[] = products
-  .filter((p) => p.range !== 'accessoire' && p.wcId !== undefined)
+  .filter(
+    (p) =>
+      p.range !== 'accessoire' &&
+      p.range !== 'edition-limitee' &&
+      p.wcId !== undefined
+  )
   .map((p) => ({
     slug: p.slug,
     name: p.name,
     range: p.range,
     priceMin: p.priceMin,
     image: p.image,
-    // Photo du format empilable 20cl = vraie visualisation de l'USP.
-    // Fallback sur l'image principale si pas disponible.
-    stackImage: p.sizeImages?.[20],
+    // Photo du format empilable 20cl — on utilise la version pré-croppée
+    // (`-20cl-stack.webp` générée par scripts/crop-stack-images.mjs) qui
+    // supprime tout le transparent autour de la bouteille → empilement
+    // propre bout-à-bout. Fallback sur la version non-croppée ou l'image
+    // principale si pas disponible (ex: gamme Lumière Obscure pas encore
+    // shootée en 20cl empilable).
+    stackImage: p.sizeImages?.[20]
+      ? p.sizeImages[20].replace('-20cl.webp', '-20cl-stack.webp')
+      : undefined,
     alcohol: p.alcohol,
     tagline: p.tagline,
     wcId: p.wcId as number,

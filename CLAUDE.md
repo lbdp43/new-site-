@@ -350,6 +350,16 @@ laissés vides. Helper `emptyToUndefined` dispo dans `content.config.ts`.
   admin. Corriger côté WP avec un plugin type "Stop User Enumeration"
   (indépendant de notre code)
 
+## Images manquantes — TODO
+
+- **20cl empilables de la gamme Lumière Obscure** : les 3 produits CBD
+  (`menthe-cbd-ortie`, `verveine-cbd-aurone`, `absinthe-cbd-citron`) n'ont
+  pas de photo 20cl empilable dans `public/images/products/sizes/`.
+  Conséquence : dans le configurateur de coffret, leur visualisation dans
+  la pile utilise l'image principale (format 70cl) en fallback — pas idéal.
+  **À faire** : uploader les 3 PNG 20cl, puis lancer `npm run crop:stack`
+  qui générera automatiquement les versions `-stack.webp` serrées.
+
 ## Backlog (ce qui reste à faire)
 
 1. **Tester un paiement réel** de 1-2 € en conditions réelles, puis
