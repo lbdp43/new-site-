@@ -179,76 +179,78 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
     subtitle="Parcourez toutes nos liqueurs, de la Brasserie signature à la Lumière Obscure."
   />
 
-  <!-- COFFRET DIY — "Composez votre propre coffret" — bouteilles empilables USP -->
-  <section class="py-24 bg-gradient-to-br from-forest-900 via-forest-800 to-forest-950 text-cream-100 relative overflow-hidden">
-    <!-- Fond décoratif : bouteilles empilées en transparence -->
-    <div class="absolute inset-0 opacity-10 pointer-events-none select-none" aria-hidden="true">
-      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-end gap-4">
-        <div class="w-24 h-64 rounded-t-full rounded-b-xl bg-cream-50/40"></div>
-        <div class="w-24 h-64 rounded-t-full rounded-b-xl bg-cream-50/40"></div>
-        <div class="w-24 h-64 rounded-t-full rounded-b-xl bg-cream-50/40"></div>
-      </div>
-    </div>
-    <div class="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+  <!-- COFFRET DIY — teaser éditorial sobre (cream on cream, bouteilles empilées) -->
+  <section class="py-20 md:py-28 bg-cream-50 relative overflow-hidden">
+    <!-- Filet décoratif très subtil -->
+    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-forest-200 to-transparent" aria-hidden="true"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-center">
+      <!-- Colonne gauche : copy minimal -->
       <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-400 text-xs font-medium tracking-wider uppercase mb-6">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20 7h-2.29c.19-.42.29-.88.29-1.36C18 3.59 16.41 2 14.36 2 13.06 2 11.88 2.77 11 3.97 10.12 2.77 8.94 2 7.64 2 5.59 2 4 3.59 4 5.64c0 .48.1.94.29 1.36H2v2h20V7zm-6.36-3c.94 0 1.64.7 1.64 1.64S14.58 7 13.64 7H11c0-.94.94-3 2.64-3zm-7.28 0c1.7 0 2.64 2.06 2.64 3H7.64C6.7 7 6 6.3 6 5.36S6.7 4 7.64 4zM3 21h8v-9H3v9zm10 0h8v-9h-8v9z"/></svg>
-          Nouveau — coffret sur-mesure
+        <div class="text-[10px] uppercase tracking-[0.35em] text-gold-600 font-medium mb-5">
+          Coffret sur-mesure
         </div>
-        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 text-cream-100">
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-forest-900 mb-6">
           Composez<br />
-          <em class="not-italic font-normal text-gold-400" style="font-family: var(--font-script);">votre propre coffret</em>
+          <em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">votre propre coffret</em>
         </h2>
-        <p class="text-cream-200/85 text-lg leading-relaxed mb-4 max-w-xl">
-          Nos bouteilles s'empilent — alors nous avons créé un coffret qui
-          vous ressemble. <strong class="text-cream-50">Choisissez 3 liqueurs</strong>
-          parmi toute notre gamme.
+        <p class="text-ink-700 text-base md:text-lg leading-relaxed mb-10 max-w-md">
+          Trois liqueurs au choix parmi notre gamme. Nos bouteilles s'empilent
+          naturellement — un cadeau unique, prêt à offrir.
         </p>
-        <p class="text-cream-200/70 text-base leading-relaxed mb-10 max-w-xl">
-          Idée cadeau qui ne se trompe jamais : l'autre choisit, toujours.
-        </p>
-        <div class="flex flex-wrap gap-4">
+        <div class="flex flex-wrap gap-3 items-center">
           <a
             href="/composer-mon-coffret"
-            class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-all hover:shadow-2xl group"
+            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-forest-900 hover:bg-forest-800 text-cream-50 text-sm font-medium transition-colors group"
           >
             Composer mon coffret
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </a>
           <a
             href="/boutique?range=accessoire"
-            class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-cream-100/30 hover:border-cream-100/60 text-cream-100 font-medium transition-colors"
+            class="inline-flex items-center gap-1.5 px-5 py-3.5 text-forest-800 hover:text-forest-900 text-sm font-medium underline decoration-gold-500 decoration-1 underline-offset-4 hover:decoration-2 transition-all"
           >
             Voir les coffrets prêts
           </a>
         </div>
       </div>
-      <div class="relative">
-        <!-- Vraies photos empilables 20cl : on montre l'USP telle qu'elle existe -->
-        <div class="grid grid-cols-3 gap-3 relative">
-          <div class="aspect-[2/5] bg-cream-50 rounded-2xl border border-gold-400/30 overflow-hidden shadow-xl">
-            <img src="/images/products/sizes/alchimie-vegetale-20cl.webp" alt="L'Alchimie Végétale — format empilable 20cl" class="w-full h-full object-contain p-4" loading="lazy" />
-          </div>
-          <div class="aspect-[2/5] bg-cream-50 rounded-2xl border border-gold-400/30 overflow-hidden mt-6 shadow-xl">
-            <img src="/images/products/sizes/nectar-ostara-20cl.webp" alt="Le Nectar d'Ostara — format empilable 20cl" class="w-full h-full object-contain p-4" loading="lazy" />
-          </div>
-          <div class="aspect-[2/5] bg-cream-50 rounded-2xl border border-gold-400/30 overflow-hidden shadow-xl">
-            <img src="/images/products/sizes/cerf-gent-20cl.webp" alt="Le Cerf'Gent — format empilable 20cl" class="w-full h-full object-contain p-4" loading="lazy" />
-          </div>
-        </div>
-        <!-- Badges caractéristiques -->
-        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 flex flex-wrap gap-2 justify-center w-full">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream-50 text-forest-900 text-xs font-medium shadow-lg">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Bouteilles empilables
-          </span>
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream-50 text-forest-900 text-xs font-medium shadow-lg">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            3 bouteilles au choix
-          </span>
+
+      <!-- Colonne droite : 3 bouteilles 20cl empilées verticalement (illustration de l'USP) -->
+      <div class="relative flex items-end justify-center">
+        <div class="relative" style="width: 260px;">
+          <!-- Bouteille 1 (au-dessus de la pile) -->
+          <img
+            src="/images/products/sizes/alchimie-vegetale-20cl.webp"
+            alt="L'Alchimie Végétale — format empilable 20cl"
+            class="relative block mx-auto w-full h-auto"
+            style="filter: drop-shadow(0 10px 18px rgba(10, 107, 67, 0.18));"
+            loading="lazy"
+          />
+          <!-- Bouteille 2 (au milieu, chevauchement par le haut) -->
+          <img
+            src="/images/products/sizes/nectar-ostara-20cl.webp"
+            alt="Le Nectar d'Ostara — format empilable 20cl"
+            class="relative block mx-auto w-full h-auto -mt-[28%]"
+            style="filter: drop-shadow(0 10px 18px rgba(10, 107, 67, 0.18));"
+            loading="lazy"
+          />
+          <!-- Bouteille 3 (en bas) -->
+          <img
+            src="/images/products/sizes/cerf-gent-20cl.webp"
+            alt="Le Cerf'Gent — format empilable 20cl"
+            class="relative block mx-auto w-full h-auto -mt-[28%]"
+            style="filter: drop-shadow(0 10px 18px rgba(10, 107, 67, 0.18));"
+            loading="lazy"
+          />
+          <!-- Ombre au sol -->
+          <div
+            class="mx-auto mt-2 h-3 rounded-full pointer-events-none"
+            style="width: 70%; background: radial-gradient(ellipse, rgba(10, 107, 67, 0.25), transparent 65%);"
+            aria-hidden="true"
+          ></div>
         </div>
       </div>
     </div>

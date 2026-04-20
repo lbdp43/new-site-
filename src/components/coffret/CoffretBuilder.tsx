@@ -247,10 +247,25 @@ export default function CoffretBuilder({
     }
   };
 
-  // Dimensions bouteille adaptatives selon hauteur pile (variante 1 du handoff).
-  // On laisse Framer Motion gérer, mais on ajuste le chevauchement des slots
-  // pour que la pile reste dans la zone visible même avec 6+ bouteilles.
-  const overlapPercent = stack.length <= 3 ? 40 : stack.length <= 5 ? 55 : 65;
+  // Dimensions bouteille fixes (box avec aspect ratio) pour que l'overflow-hidden
+  // clippe la zone transparente des PNG (packshots produits ont ~20-30% de padding
+  // transparent en haut). Sans ça, on voyait le fond forest transparaître entre
+  // les bouteilles empilées.
+  //
+  // BOTTLE_W × BOTTLE_H = taille de la box visuelle d'une bouteille.
+  // BOTTLE_VISIBLE_H = portion visible qui dépasse de la bouteille sous-jacente.
+  // Plus stack grandit, plus on serre (hauteur dynamique + overlap + bottle shrink).
+  const n = stack.length;
+  const BOTTLE_W = n <= 3 ? 140 : n <= 5 ? 120 : n <= 8 ? 100 : 88;
+  const BOTTLE_H = Math.round(BOTTLE_W * 1.35); // ratio visuel serré (sans transparent haut)
+  const VISIBLE_PERCENT = n <= 3 ? 0.55 : n <= 5 ? 0.45 : n <= 8 ? 0.38 : 0.32;
+  const BOTTLE_VISIBLE_H = Math.round(BOTTLE_H * VISIBLE_PERCENT);
+
+  // Hauteur totale de la pile = 1re bouteille entière + (n-1) × portion visible
+  const stackHeight = n > 0
+    ? BOTTLE_H + (n - 1) * BOTTLE_VISIBLE_H
+    : 0;
+  const containerMinHeight = Math.max(280, stackHeight + 40);
 
   return (
     <div className="relative">
@@ -269,7 +284,10 @@ export default function CoffretBuilder({
             </div>
 
             {/* ─── Zone d'empilement ─── */}
-            <div className="relative px-6 pt-4 pb-8" style={{ minHeight: 340 }}>
+            <div
+              className="relative px-6 pt-4 pb-8"
+              style={{ minHeight: containerMinHeight }}
+            >
               {stack.length === 0 ? (
                 // État vide : ring + message
                 <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -279,12 +297,22 @@ export default function CoffretBuilder({
                   </p>
                 </div>
               ) : (
-                // Pile avec animation drop-bounce
-                <div className="relative flex flex-col-reverse items-center justify-end min-h-[280px]">
+                // Pile avec animation drop-bounce : position absolute par bouteille
+                // (de bas en haut). stack[0] = bottom, stack[N-1] = top de la pile
+                // visuelle = la dernière ajoutée, qui vient d'atterrir.
+                <div
+                  className="relative mx-auto"
+                  style={{
+                    width: BOTTLE_W,
+                    height: stackHeight,
+                  }}
+                >
                   <AnimatePresence mode="popLayout">
                     {stack.map((item, index) => {
-                      // Tilt subtil déterministe (pour éviter une pile trop droite)
                       const tilt = Math.sin(item.uid * 12.3) * 1.5;
+                      // bottom: la 1re bouteille collée au sol, les suivantes remontent
+                      // par VISIBLE_H (portion visible qui dépasse du dessous)
+                      const bottomOffset = index * BOTTLE_VISIBLE_H;
                       return (
                         <motion.div
                           key={item.uid}
@@ -308,29 +336,49 @@ export default function CoffretBuilder({
                             transition: { duration: 0.25 },
                           }}
                           style={{
-                            marginTop: index === 0 ? 0 : `-${overlapPercent}%`,
-                            zIndex: stack.length - index,
+                            position: 'absolute',
+                            left: 0,
+                            bottom: bottomOffset,
+                            width: BOTTLE_W,
+                            height: BOTTLE_H,
+                            zIndex: 10 + index,
+                            filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.45))',
                           }}
-                          className="relative group"
+                          className="group"
                         >
                           <button
                             type="button"
                             onClick={() => removeBottle(item.uid)}
-                            className="relative block focus:outline-none"
+                            className="relative w-full h-full block focus:outline-none"
                             aria-label={`${t.remove} ${item.name}`}
+                            style={{
+                              overflow: 'hidden',
+                              display: 'flex',
+                              alignItems: 'flex-end',
+                              justifyContent: 'center',
+                            }}
                           >
+                            {/* Image en hauteur naturelle, alignée en bas. La box
+                                (w × h) est plus courte que l'image naturelle du PNG
+                                (qui inclut de l'espace transparent en haut). L'overflow
+                                hidden clippe le transparent → on ne voit que la
+                                bouteille, collée au bas de la box. */}
                             <img
                               src={item.stackImage ?? item.image}
                               alt={item.name}
-                              className="w-28 sm:w-32 md:w-36 lg:w-40 h-auto drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
                               draggable={false}
+                              className="block pointer-events-none select-none"
+                              style={{
+                                width: '100%',
+                                height: 'auto',
+                              }}
                             />
                             {/* × bouton qui apparaît au hover */}
                             <span
-                              className="absolute top-0 right-0 translate-x-1 -translate-y-1 w-7 h-7 rounded-full bg-ink-900 text-cream-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                              className="absolute top-0.5 right-0.5 w-6 h-6 rounded-full bg-ink-900 text-cream-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
                               aria-hidden="true"
                             >
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                                 <line x1="18" y1="6" x2="6" y2="18" />
                                 <line x1="6" y1="6" x2="18" y2="18" />
                               </svg>
@@ -341,11 +389,11 @@ export default function CoffretBuilder({
                     })}
                   </AnimatePresence>
 
-                  {/* Ombre au sol (sous la dernière bouteille, celle du bas) */}
+                  {/* Ombre au sol (sous la base de la pile) */}
                   <div
-                    className="relative mt-1 h-3 rounded-full pointer-events-none"
+                    className="absolute left-1/2 -translate-x-1/2 -bottom-2 h-3 rounded-full pointer-events-none"
                     style={{
-                      width: 170,
+                      width: BOTTLE_W * 1.2,
                       background:
                         'radial-gradient(ellipse, rgba(0,0,0,0.45), transparent 65%)',
                     }}
