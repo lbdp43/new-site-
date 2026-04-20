@@ -18,9 +18,11 @@ backend:
   # "Sign In Using Access Token" et colle un GitHub PAT. Voir
   # docs/cms-admin.md section "Première connexion".
 
-# Les images uploadées via le CMS atterrissent dans public/images/blog/
-media_folder: public/images/blog
-public_folder: /images/blog
+# Media folder global → le CMS peut LIRE n'importe quelle image de public/images/*
+# (gallery, stories, products, team, brand…). Les UPLOADS d'articles de blog
+# atterrissent dans public/images/blog/ via l'override par collection ci-dessous.
+media_folder: public/images
+public_folder: /images
 
 # Branche de publication editoriale : chaque édition crée un commit sur main
 # directement. On peut passer en mode "editorial_workflow" plus tard si on
@@ -35,6 +37,9 @@ collections:
     label: "Articles — FR"
     label_singular: "Article FR"
     folder: src/content/blog
+    # Uploads de nouvelles images de cet CMS → vont dans public/images/blog/
+    media_folder: /public/images/blog
+    public_folder: /images/blog
     create: true
     delete: true
     slug: "{{slug}}"
@@ -42,6 +47,7 @@ collections:
     format: yaml-frontmatter
     preview_path: "blog/{{slug}}"
     summary: "{{title}} — {{date | date('DD/MM/YYYY')}}"
+    thumbnail: cover
     sortable_fields: [date, title]
     fields:
       - { name: title, label: "Titre", widget: string }
@@ -65,11 +71,104 @@ collections:
       - { name: readingTime, label: "Temps de lecture (ex: \"5 min\")", widget: string, default: "5 min" }
       - { name: body, label: "Contenu de l'article", widget: markdown }
 
+  # ─── PRODUITS (fiches boutique) ───────────────────────────────────────
+  # Phase 2 CMS — chaque produit = un .md dans src/content/products/
+  # Les nouveaux produits créés côté WooCommerce apparaissent ici en draft:true
+  # (script sync-wc-stock.mjs). Il suffit de remplir les champs manquants et
+  # de passer draft → false pour publier la fiche sur le site.
+  - name: products
+    label: "Produits"
+    label_singular: "Produit"
+    folder: src/content/products
+    media_folder: /public/images/products
+    public_folder: /images/products
+    create: true
+    delete: false  # sécurité : suppression d'un produit = action sensible, la faire en code
+    slug: "{{slug}}"
+    extension: md
+    format: yaml-frontmatter
+    preview_path: "boutique/{{slug}}"
+    thumbnail: image
+    summary: "{{name}} — {{range}}"
+    sortable_fields: [name, range, order, priceMin]
+    fields:
+      - { name: name, label: "Nom commercial", widget: string, hint: "Ex: L'Alchimie Végétale. Apparaît en titre de fiche + schema Product." }
+      - name: range
+        label: "Gamme"
+        widget: select
+        options:
+          - { label: "Brasserie (signature)", value: brasserie }
+          - { label: "Apéritifs", value: aperitif }
+          - { label: "Lumière Obscure (CBD)", value: lumiere-obscure }
+          - { label: "Édition limitée / cuvée", value: edition-limitee }
+          - { label: "Coffret / accessoire", value: accessoire }
+      - name: draft
+        label: "Brouillon — caché du site"
+        widget: boolean
+        default: false
+        hint: "true = fiche pas encore finie, cachée du site. false = publiée."
+      - { name: order, label: "Ordre d'affichage dans la gamme", widget: number, required: false, hint: "Plus petit = affiché en premier" }
+      - { name: priceMin, label: "Prix minimum (€)", widget: number, value_type: float, step: 0.5 }
+      - { name: priceMax, label: "Prix maximum (€)", widget: number, value_type: float, step: 0.5, hint: "Identique à priceMin si un seul format" }
+      - { name: alcohol, label: "Taux d'alcool (% vol.)", widget: number, value_type: float, step: 0.5 }
+      - { name: wcId, label: "ID WooCommerce", widget: number, required: false, hint: "ID numérique du produit côté WP. Requis pour le panier." }
+      - { name: wcSizeAttribute, label: "Attribut variation WC", widget: string, required: false, default: "Contenance", hint: "Nom de l'attribut WooCommerce pour la contenance (défaut: Contenance)" }
+      - { name: defaultSize, label: "Contenance par défaut (cl)", widget: number, required: false, hint: "Ex: 20, 70 — utilisé par le Coffret DIY" }
+      - { name: image, label: "Photo principale (bouteille sur fond transparent)", widget: image }
+      - { name: image2, label: "Photo secondaire (hover, mise en ambiance)", widget: image, required: false }
+      - name: sizes
+        label: "Contenances disponibles"
+        widget: list
+        required: false
+        hint: "Ex: Empilable 20cl, 50cl, 70cl, Magnum 150cl"
+        field: { name: size, label: Contenance, widget: string }
+      - name: sizeImages
+        label: "Photos par contenance"
+        widget: object
+        required: false
+        collapsed: true
+        hint: "Associe une photo à chaque taille (cl → chemin image)"
+        fields:
+          - { name: "20", label: "20 cl", widget: image, required: false }
+          - { name: "50", label: "50 cl", widget: image, required: false }
+          - { name: "70", label: "70 cl", widget: image, required: false }
+          - { name: "150", label: "150 cl (Magnum)", widget: image, required: false }
+      - name: composition
+        label: "Composition (plantes, ingrédients)"
+        widget: list
+        required: false
+        field: { name: ingredient, label: Ingrédient, widget: string }
+      - { name: usage, label: "Usage / occasion", widget: string, hint: "Ex: Digestif de prestige, Apéritif amer, Accessoire" }
+      - { name: tagline, label: "Accroche (affichée sur la carte)", widget: string, required: false }
+      - { name: highlight, label: "Badge (ex: Meilleur Digestif du Monde 2025)", widget: string, required: false }
+      - name: awards
+        label: "Distinctions / médailles"
+        widget: list
+        required: false
+        field: { name: award, label: Distinction, widget: string }
+      - name: tasting
+        label: "Profil sensoriel"
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: nose, label: "Nez", widget: string, required: false }
+          - { name: palate, label: "Bouche", widget: string, required: false }
+          - { name: finish, label: "Finale", widget: string, required: false }
+      - { name: serving, label: "Conseil de service", widget: text, required: false }
+      - name: body
+        label: "Description longue (fiche produit)"
+        widget: markdown
+        required: false
+        hint: "Texte principal sur la page /boutique/<slug>. Storytelling, histoire, détails."
+
   # ─── ARTICLES DE BLOG EN ──────────────────────────────────────────────
   - name: blog-en
     label: "Articles — EN"
     label_singular: "EN post"
     folder: src/content/blog-en
+    media_folder: /public/images/blog
+    public_folder: /images/blog
     create: true
     delete: true
     slug: "{{slug}}"
@@ -77,6 +176,7 @@ collections:
     format: yaml-frontmatter
     preview_path: "en/journal/{{slug}}"
     summary: "{{title}} — {{date | date('DD/MM/YYYY')}}"
+    thumbnail: cover
     sortable_fields: [date, title]
     fields:
       - { name: title, label: "Title", widget: string }

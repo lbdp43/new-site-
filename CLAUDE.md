@@ -121,13 +121,32 @@ gitignore. Ne **jamais** commiter de secret.
 
 ## Mapping produits
 
-Le catalogue est dans `src/data/products.ts` — source de vérité **pour
-l'affichage** (descriptions, photos, tastings, awards). WooCommerce reste la
-source de vérité pour prix, stock, variations et commandes.
+**Architecture depuis avril 2026 (Phase 2 CMS)** :
 
-Chaque produit a un `wcId` (ID numérique WooCommerce). 18 / 19 sont mappés ;
-`coffret-original` n'existe pas dans WooCommerce (bouton affiche "bientôt
-disponible" tant que le produit n'est pas créé côté WP).
+- **Source de vérité éditoriale** = `src/content/products/*.md` (1 fichier
+  par produit). Éditable via Sveltia CMS à `/admin/` → collection "Produits".
+  Frontmatter YAML pour les champs structurés, body markdown pour la
+  description longue.
+- **Source de vérité e-commerce** = WooCommerce (prix, stock, variations,
+  wcId). Synchronisé au build via `sync-wc-stock.mjs`.
+- `src/data/products.ts` est maintenant un **thin wrapper** qui lit
+  `src/data/products.generated.json` (généré au prebuild par
+  `scripts/generate-products.mjs`). L'API publique (`products`, `ranges`,
+  `featuredProducts`, `productsBySlug`, types `Product` / `ProductRange`)
+  reste identique, zéro changement côté 14 fichiers consommateurs.
+
+**Flux ajout nouveau produit** :
+1. Création côté WooCommerce (nom, prix, variations, stock) — comme d'habitude
+2. Au prochain build, `sync-wc-stock.mjs` détecte le nouveau `wcId`, crée un
+   stub `src/content/products/<slug>.md` avec `draft: true`
+3. Guillaume/Étienne/Bastien ouvre `/admin/` → collection "Produits" → la
+   nouvelle fiche apparaît avec badge "draft"
+4. Remplit les champs éditoriaux (description, tasting, photos par
+   contenance, serving…) → passe `draft: false` → Publish
+5. Commit auto → Vercel redeploy → fiche publique en 90s
+
+Chaque produit a un `wcId` (ID numérique WooCommerce). `coffret-original`
+n'en a pas (bouton "bientôt disponible"). À créer côté WP pour débloquer.
 
 **Attribut de variation** :
 - Par défaut : `"Contenance"` (attribut local WC, **pas** `pa_contenance`)
@@ -231,8 +250,11 @@ depuis avril 2026.
 | `src/pages/panier.astro` | Route `/panier` |
 | `src/pages/commande.astro` | Route `/commande` |
 | `src/pages/commande/confirmation.astro` | Route `/commande/confirmation` |
-| `src/data/products.ts` | Catalogue — source de vérité affichage |
-| `scripts/sync-wc-stock.mjs` | Script prebuild : fetch stock WC, écrit `wc-live.json` |
+| `src/content/products/*.md` | **Source de vérité éditoriale** des fiches produit (1 fichier par SKU). Éditable via Sveltia CMS. |
+| `src/data/products.ts` | Thin wrapper — importe `products.generated.json` + définit types + ranges + helpers |
+| `src/data/products.generated.json` | Généré au prebuild par `generate-products.mjs`. Ne pas éditer à la main. |
+| `scripts/generate-products.mjs` | Script prebuild : compile les .md → JSON consommable sync |
+| `scripts/sync-wc-stock.mjs` | Script prebuild : fetch stock WC + auto-draft des nouveaux produits WC |
 | `scripts/indexnow-submit.mjs` | Script postbuild : POST sitemap à IndexNow (Bing/Yandex) |
 | `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, etc. |
 | `src/data/wc-live.json` | Snapshot stock live (régénéré à chaque build, committé) |
@@ -311,8 +333,9 @@ depuis avril 2026.
    (voir checklist `docs/bascule-www.md`).
 5. ~~**Sync stock live**~~ ✅ **FAIT (avril 2026)** — `scripts/sync-wc-stock.mjs`
    au prebuild + `src/lib/wc-live.ts` helpers consommés par les templates.
-6. ~~**Interface d'admin de contenu**~~ ✅ **PHASE 1 FAIT (avril 2026)** —
-   Sveltia CMS à `/admin/` pour les articles de blog (FR + EN). Phase 2
-   (édition des produits, pages statiques) à faire plus tard si l'équipe
-   en a besoin — les fiches produits sont en TypeScript pas en YAML/MD,
-   nécessiteraient une migration en Content Collection.
+6. ~~**Interface d'admin de contenu**~~ ✅ **PHASE 1 + 2 FAITES (avril 2026)** —
+   Sveltia CMS à `/admin/` édite articles de blog (FR + EN) ET fiches
+   produit. `products.ts` migré en Content Collection, sync auto avec
+   WooCommerce pour détecter les nouveaux SKU (stubs `draft: true`).
+   Édition des pages statiques (Notre histoire, etc.) non couverte —
+   rarement modifiées, pas prioritaire.
