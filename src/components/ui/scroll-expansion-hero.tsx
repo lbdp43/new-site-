@@ -242,7 +242,9 @@ const ScrollExpandMedia = ({
                   width: `${mediaWidth}px`,
                   height: `${mediaHeight}px`,
                   maxWidth: '100vw',
-                  maxHeight: '100vh',
+                  /* On laisse une marge en haut pour ne pas passer sous le
+                     header (promo + nav = ~120px selon breakpoint). */
+                  maxHeight: 'calc(100vh - 140px)',
                   boxShadow: '0px 0px 50px rgba(0, 0, 0, 0.3)',
                 }}
               >
