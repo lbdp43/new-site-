@@ -1,11 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
 
 import tailwindcss from '@tailwindcss/vite';
 
 import react from '@astrojs/react';
 
 import sitemap from '@astrojs/sitemap';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,7 +29,14 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    // Alias @/* → src/* pour matcher la convention shadcn / 21st.dev.
+    // Complète `paths` dans tsconfig.json (pour l'analyse TypeScript).
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
+      },
+    },
   },
 
   integrations: [

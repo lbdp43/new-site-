@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 import { products, ranges, type ProductRange } from '../data/products';
-import { AwardBadge } from '../components/ui/award-badge';
+import { Awards } from '@/components/ui/award';
 import { GlowCard } from '../components/ui/spotlight-card';
 
 // Schema breadcrumb + FAQ pour la page pro (actions recommandées par l'audit)
@@ -360,38 +360,42 @@ const proArguments = [
           prêts à mettre en carte.
         </p>
       </div>
-      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8">
-        <AwardBadge
+      <div class="flex flex-wrap justify-center gap-2 md:gap-3 max-w-2xl mx-auto">
+        <Awards
           client:visible
-          type="world-best"
-          issuer="World Drinks Awards 2025"
+          variant="award"
+          level="gold"
           title="Meilleur Digestif du Monde"
-          product="L'Alchimie Végétale"
-          size="lg"
+          subtitle="World Drinks Awards 2025"
+          recipient="L'Alchimie Végétale"
+          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
         />
-        <AwardBadge
+        <Awards
           client:visible
-          type="gold"
-          issuer="Concours de Lyon"
+          variant="award"
+          level="gold"
           title="Médaille d'Or"
-          product="L'Herbe des Druides"
-          size="md"
+          subtitle="Concours de Lyon"
+          recipient="L'Herbe des Druides"
+          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
         />
-        <AwardBadge
+        <Awards
           client:visible
-          type="silver"
-          issuer="Concours Général Paris"
+          variant="award"
+          level="silver"
           title="Médaille d'Argent"
-          product="L'Herbe des Druides (×2)"
-          size="md"
+          subtitle="Concours Général Paris"
+          recipient="L'Herbe des Druides (×2)"
+          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
         />
-        <AwardBadge
+        <Awards
           client:visible
-          type="gold"
-          issuer="Concours National"
+          variant="award"
+          level="gold"
           title="Médaille d'Or"
-          product="Le Cerf'Gent"
-          size="md"
+          subtitle="Concours National"
+          recipient="Le Cerf'Gent"
+          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
         />
       </div>
     </div>

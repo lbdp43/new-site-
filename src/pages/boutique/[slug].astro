@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { AwardBadge, type AwardType } from '../../components/ui/award-badge';
+import { Awards } from '@/components/ui/award';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 import AddToCartButton from '../../components/cart/AddToCartButton';
 import { products, ranges } from '../../data/products';
@@ -123,25 +123,28 @@ const metaDescription = product.description
   ? truncate(product.description, 155)
   : `${product.name} — ${product.alcohol}° — ${product.tagline || ''} La Brasserie des Plantes, Haute-Loire.`;
 
-// Parseur simple des distinctions pour les convertir en badges animés
+// Parseur simple des distinctions pour les convertir en badges médailles.
+// Le niveau (or / argent / bronze) détermine la couleur métallique du badge.
+type AwardLevel = 'gold' | 'silver' | 'bronze' | 'platinum';
 type ParsedAward = {
-  type: AwardType;
+  level: AwardLevel;
   title: string;
   issuer: string;
 };
 const parseAward = (raw: string): ParsedAward => {
   const lower = raw.toLowerCase();
-  let type: AwardType = 'gold';
-  if (lower.includes('meilleur') && lower.includes('monde')) type = 'world-best';
-  else if (lower.includes('argent') || lower.includes('silver')) type = 'silver';
-  else if (lower.includes('bronze')) type = 'bronze';
-  else if (lower.includes('or') || lower.includes('gold')) type = 'gold';
+  let level: AwardLevel = 'gold';
+  // "Meilleur Digestif du Monde" reste en or — pas de variant platine distinct
+  if (lower.includes('argent') || lower.includes('silver')) level = 'silver';
+  else if (lower.includes('bronze')) level = 'bronze';
+  else if (lower.includes('platine') || lower.includes('platinum')) level = 'platinum';
+  // tout le reste (or / gold / meilleur du monde / médaille) → gold
 
   // Sépare le titre de l'émetteur : "Médaille d'Or — Concours de Lyon"
   const parts = raw.split(/\s[—–-]\s/);
   const title = (parts[0] || raw).trim();
   const issuer = (parts[1] || 'Distinction').trim();
-  return { type, title, issuer };
+  return { level, title, issuer };
 };
 const parsedAwards = (product.awards || []).map(parseAward);
 ---
@@ -509,15 +512,16 @@ const parsedAwards = (product.awards || []).map(parseAward);
         <h2 class="font-display text-2xl md:text-3xl text-forest-900 mb-10 leading-tight">
           Ce flacon a été primé
         </h2>
-        <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+        <div class="flex flex-wrap justify-center gap-2 md:gap-3 max-w-2xl mx-auto">
           {parsedAwards.map((a) => (
-            <AwardBadge
+            <Awards
               client:visible
-              type={a.type}
+              variant="award"
+              level={a.level}
               title={a.title}
-              issuer={a.issuer}
-              product={product.name}
-              size="md"
+              subtitle={a.issuer}
+              recipient={product.name}
+              className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
             />
           ))}
         </div>
