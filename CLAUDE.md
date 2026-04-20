@@ -264,6 +264,24 @@ depuis avril 2026.
 | `vercel.json` | Headers sécurité (HSTS, X-Frame, CSP-like) + noindex sur `test.*` |
 | `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
 
+## Règle d'or CMS (Sveltia)
+
+**NE JAMAIS** utiliser un widget `object` avec clés numériques dans
+`public/admin/config.yml`. Sveltia CMS les interprète comme indices
+d'array et sauvegarde un array sparse de N valeurs null (N = max
+index). Bug rencontré en avril 2026 sur `sizeImages` qui utilisait
+`{"20": "...", "50": "...", "150": "..."}` → Sveltia a écrit un array
+de 170 entrées.
+
+**Pattern à utiliser** : `widget: list` avec sous-champs
+`[{name: key, widget: number}, {name: value, widget: ...}]`. Le script
+`generate-products.mjs` reconvertit la list en `Record<number, string>`
+pour préserver l'API côté templates.
+
+Aussi : schema Zod toujours en `.nullish()` (pas `.optional()`) pour
+accepter les `null` que Sveltia injecte sur les champs optionnels
+laissés vides. Helper `emptyToUndefined` dispo dans `content.config.ts`.
+
 ## Gotchas
 
 - **Hydratation entre îles** : plusieurs îles React doivent partager l'état
