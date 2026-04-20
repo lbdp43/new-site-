@@ -46,7 +46,7 @@ const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: 'Coffret cadeau personnalisé — 3 bouteilles au choix',
-  description: "Composez votre propre coffret cadeau : 3 liqueurs artisanales au choix parmi toute la gamme de La Brasserie des Plantes. Emballage cadeau inclus, livraison offerte dès 65 €.",
+  description: "Composez votre propre coffret : 3 liqueurs artisanales au choix parmi toute la gamme de La Brasserie des Plantes. Bouteilles empilables, livraison offerte dès 65 €.",
   image: new URL('/images/stories/coffret-diy-hero.webp', site.url).toString(),
   brand: { '@type': 'Brand', name: site.name },
   offers: {
@@ -63,13 +63,13 @@ const schema = [breadcrumb, productSchema];
 ---
 <Layout
   title="Composez votre coffret | 3 bouteilles au choix — La Brasserie des Plantes"
-  description="Créez votre propre coffret cadeau : choisissez 3 liqueurs artisanales parmi notre gamme de 18 références. Emballage soigné, livraison offerte dès 65 €."
+  description="Créez votre propre coffret : choisissez 3 liqueurs artisanales parmi notre gamme de 18 références. Bouteilles empilables, livraison offerte dès 65 €."
   schema={schema}
 >
   <PageHeader
     kicker="Coffret personnalisé"
     title="Composez<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>votre coffret</em>"
-    subtitle="Trois bouteilles au choix parmi notre gamme. Un coffret cadeau soigné, emballé main, prêt à offrir — ou à s'offrir."
+    subtitle="Trois bouteilles au choix parmi notre gamme. Nos bouteilles s'empilent naturellement — un cadeau unique, prêt à offrir ou à s'offrir."
     breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Composer mon coffret' }]}
   />
 
@@ -84,8 +84,8 @@ const schema = [breadcrumb, productSchema];
         </div>
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
           <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">2</div>
-          <h3 class="font-display text-lg text-forest-900 mb-1">Emballage cadeau</h3>
-          <p class="text-sm text-ink-700 leading-relaxed">Un coffret soigné, préparé à la main dans notre atelier à Saint-Didier-en-Velay.</p>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Bouteilles empilables</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">Un format 20 cl breveté qui s'empile naturellement — préparé dans notre atelier à Saint-Didier-en-Velay.</p>
         </div>
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
           <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">3</div>

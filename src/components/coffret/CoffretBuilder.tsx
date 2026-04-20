@@ -75,8 +75,8 @@ const L = {
     alcoholSuffix: '% vol.',
     priceFrom: 'À partir de',
     benefits: [
-      'Emballage cadeau fait main',
       'Bouteilles empilables (breveté)',
+      'Préparé dans notre atelier en Haute-Loire',
       'Livraison offerte dès 65 €',
     ],
     format: (n: number) => `${n.toFixed(2).replace('.', ',')} €`,
@@ -100,8 +100,8 @@ const L = {
     alcoholSuffix: '% vol.',
     priceFrom: 'From',
     benefits: [
-      'Hand-made gift packaging',
       'Stackable bottles (patent)',
+      'Prepared in our workshop in Haute-Loire',
       'Free shipping above €65',
     ],
     format: (n: number) => `€${n.toFixed(2)}`,

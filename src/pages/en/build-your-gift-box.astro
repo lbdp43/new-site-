@@ -38,7 +38,7 @@ const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: 'Custom gift box — 3 bottles of your choice',
-  description: "Build your own gift box: 3 craft liqueurs of your choice from La Brasserie des Plantes' range of 18 bottles. Hand-packed gift wrapping included, free shipping above €65.",
+  description: "Build your own gift box: 3 craft liqueurs of your choice from La Brasserie des Plantes' range of 18 bottles. Stackable bottles, free shipping above €65.",
   image: new URL('/images/stories/coffret-diy-hero.webp', site.url).toString(),
   brand: { '@type': 'Brand', name: site.name },
   inLanguage: 'en-US',
@@ -57,13 +57,13 @@ const schema = [breadcrumb, productSchema];
 <Layout
   lang="en"
   title="Build your gift box | 3 bottles of your choice — La Brasserie des Plantes"
-  description="Create your own gift box: choose any 3 craft liqueurs from our range of 18 bottles. Hand-packed, ready to give. Free shipping above €65."
+  description="Create your own gift box: choose any 3 craft liqueurs from our range of 18 bottles. Stackable bottles, ready to give. Free shipping above €65."
   schema={schema}
 >
   <PageHeader
     kicker="Custom gift box"
     title="Build<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>your own box</em>"
-    subtitle="Three bottles of your choice from our full range. A carefully hand-packed gift box, ready to give — or to keep."
+    subtitle="Three bottles of your choice from our full range. Our bottles stack naturally — a unique gift, ready to give or to keep."
     breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Build your gift box' }]}
   />
 
@@ -78,8 +78,8 @@ const schema = [breadcrumb, productSchema];
         </div>
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
           <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">2</div>
-          <h3 class="font-display text-lg text-forest-900 mb-1">Hand-packed gift box</h3>
-          <p class="text-sm text-ink-700 leading-relaxed">A carefully assembled box, packed by hand in our workshop in Saint-Didier-en-Velay.</p>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Stackable bottles</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">A patented 20 cl format that stacks naturally — prepared in our workshop in Saint-Didier-en-Velay.</p>
         </div>
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
           <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">3</div>
