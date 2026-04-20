@@ -224,6 +224,9 @@ depuis avril 2026.
 | `src/pages/commande.astro` | Route `/commande` |
 | `src/pages/commande/confirmation.astro` | Route `/commande/confirmation` |
 | `src/data/products.ts` | Catalogue — source de vérité affichage |
+| `scripts/sync-wc-stock.mjs` | Script prebuild : fetch stock WC, écrit `wc-live.json` |
+| `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, etc. |
+| `src/data/wc-live.json` | Snapshot stock live (régénéré à chaque build, committé) |
 | `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande) + priorités différenciées |
 | `vercel.json` | Headers sécurité (HSTS, X-Frame, CSP-like) + noindex sur `test.*` |
 | `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
@@ -234,9 +237,15 @@ depuis avril 2026.
   panier. Astro ne partage pas le Context React entre îles séparées — on
   utilise donc un **store niveau module** + `useSyncExternalStore` dans
   `cart-store.tsx`. Ne pas remplacer par un Context React.
-- **Le stock n'est pas live dans le schema Product** — on affiche toujours
-  `availability: InStock`. Pour un vrai sync, il faudrait lire WC au build
-  via la REST API v3 (nécessite les `WC_CONSUMER_*`).
+- **Stock live au build** : `scripts/sync-wc-stock.mjs` s'exécute au
+  `prebuild` et lit `/wp-json/wc/v3/products` avec `WC_CONSUMER_KEY` +
+  `WC_CONSUMER_SECRET`. Le résultat va dans `src/data/wc-live.json`
+  (committé). Les helpers de `src/lib/wc-live.ts` le consomment pour
+  injecter le vrai `availability` dans le schema Product + badges UI
+  "Rupture temporaire" / "Sur commande". Sans clés (dev local), le
+  script préserve le fichier existant et sort en code 0 — le build ne
+  plante jamais. Les clés `WC_CONSUMER_*` sont maintenant obligatoires
+  côté **Vercel** (Production + Preview) pour un sync réel.
 - **Fiche produit `coffret-original`** : pas de `wcId`. Ajouter quand le
   produit sera créé côté WP.
 - **SIZE_IMAGES dans products.ts** : une photo différente par contenance,
@@ -276,9 +285,8 @@ depuis avril 2026.
    `public/e3e81d795b356f57b451d271fc89a108.txt` est déjà là. Il reste à
    envoyer un POST à IndexNow à chaque rebuild (hook Vercel `build` ou
    action GitHub).
-5. **Sync stock live** (optionnel) : lire le stock WC au build pour rendre
-   le schema `Product.availability` correct. À faire quand le site sera
-   stable.
+5. ~~**Sync stock live**~~ ✅ **FAIT (avril 2026)** — `scripts/sync-wc-stock.mjs`
+   au prebuild + `src/lib/wc-live.ts` helpers consommés par les templates.
 6. **Interface d'admin de contenu** (optionnel) : mini-CMS pour que l'équipe
    puisse éditer les textes de `products.ts` sans passer par le code. Pas
    urgent, à discuter quand le site sera en live.
