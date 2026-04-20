@@ -17,6 +17,9 @@ tasting:
   finish: "Persistante, légèrement camphrée."
 serving: "Digestif, à température ambiante."
 sizes: [Empilable 20cl, 50cl, 70cl]
+sizeImages:
+  - size: 20
+    image: /images/products/sizes/verveine-cbd-aurone-20cl.webp
 wcId: 616
 order: 2
 ---

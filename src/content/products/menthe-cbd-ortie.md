@@ -17,6 +17,9 @@ tasting:
   finish: "Longue menthe verte."
 serving: "Apéritif, frais, en long drink ou pur."
 sizes: [Empilable 20cl, 50cl, 70cl]
+sizeImages:
+  - size: 20
+    image: /images/products/sizes/menthe-cbd-ortie-20cl.webp
 wcId: 626
 order: 1
 ---
