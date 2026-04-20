@@ -41,18 +41,45 @@ if (id) {
   }
 }
 
+/**
+ * Google Maps renvoie les avis au format :
+ *   "(Translated by Google) <traduction EN>\n\n(Original) <original FR/autre>"
+ * quand la langue détectée ≠ langue de l'audience (ici FR).
+ *
+ * On nettoie pour ne garder que la version originale si elle existe
+ * (c'est généralement le vrai texte client, en FR pour nos avis).
+ * Fallback : si pas d'original détecté, on garde le texte brut tel quel.
+ */
+function cleanReviewText(raw: string): string {
+  if (!raw) return '';
+  const text = raw.trim();
+
+  // Pattern : "(Translated by Google) ... (Original) ..."
+  const originalMatch = text.match(/\(Original\)\s*([\s\S]+?)$/);
+  if (originalMatch && originalMatch[1]) {
+    return originalMatch[1].trim();
+  }
+
+  // Pattern inverse / résiduel : commence par "(Translated by Google) ..."
+  // sans bloc "(Original)" — on retire juste le préfixe.
+  return text.replace(/^\(Translated by Google\)\s*/i, '').trim();
+}
+
 // Données à afficher : soit Featurable (live Google), soit nos reviews internes
 const items = liveData
-  ? liveData.reviews.slice(0, 6).map((r) => ({
-      author: r.reviewer.displayName,
-      context: 'Avis Google',
-      rating: r.starRating,
-      date: r.createTime.slice(0, 10),
-      title: r.comment.split('.')[0].slice(0, 70) + (r.comment.length > 70 ? '…' : ''),
-      body: r.comment,
-      verified: true,
-      photo: r.reviewer.profilePhotoUrl,
-    }))
+  ? liveData.reviews.slice(0, 6).map((r) => {
+      const cleanBody = cleanReviewText(r.comment);
+      return {
+        author: r.reviewer.displayName,
+        context: 'Avis Google',
+        rating: r.starRating,
+        date: r.createTime.slice(0, 10),
+        title: cleanBody.split('.')[0].slice(0, 70) + (cleanBody.length > 70 ? '…' : ''),
+        body: cleanBody,
+        verified: true,
+        photo: r.reviewer.profilePhotoUrl,
+      };
+    })
   : reviews.slice(0, 6).map((r) => ({ ...r, photo: undefined }));
 
 const agg = liveData
