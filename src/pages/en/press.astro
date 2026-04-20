@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { site } from '../../data/site';
+import { pressByYear, pressYearsDesc, typeIcons, type PressMediaType } from '../../data/press';
+
+// English labels for press media types (the `typeLabels` in press.ts is French)
+const typeLabelsEn: Record<PressMediaType, string> = {
+  press: 'Press',
+  tv: 'TV',
+  radio: 'Radio',
+  institutional: 'Institutional',
+  specialist: 'Specialist',
+  award: 'Award',
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Press', item: `${site.url}/en/press` },
+  ],
+};
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `Press review — ${site.name}`,
+  description:
+    'All mentions of La Brasserie des Plantes in the French press: Zoomdici, Le Bonbon Lyon, M Lyon, La Commère 43, France 3, France Bleu, Réussir, Likora and more.',
+  url: `${site.url}/en/press`,
+  inLanguage: 'en-US',
+};
+
+const totalMentions = Object.values(pressByYear).reduce((s, arr) => s + arr.length, 0);
+---
+<Layout
+  lang="en"
+  title={`Press review | ${totalMentions} articles about us — ${site.name}`}
+  description={`${totalMentions} articles and reports about La Brasserie des Plantes: national, regional, specialist and institutional press, from 2021 to today.`}
+  schema={[breadcrumb, collectionSchema]}
+>
+  <PageHeader
+    kicker="Press review"
+    title={`${totalMentions} articles<br /><em class='not-italic font-normal text-gold-600' style='font-family: var(--font-script);'>about us</em>`}
+    subtitle="National, regional, specialist, institutional press — all verified coverage of La Brasserie des Plantes, in reverse chronological order. Items are in French (source language)."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Press' }]}
+  />
+
+  <section class="py-16 bg-cream-50">
+    <div class="max-w-5xl mx-auto px-6 space-y-16">
+      {pressYearsDesc.map((year) => (
+        <div>
+          <div class="flex items-baseline gap-4 mb-8 pb-3 border-b border-forest-200">
+            <h2 class="font-display text-4xl md:text-5xl text-forest-900 tracking-tight">{year}</h2>
+            <div class="text-sm uppercase tracking-[0.2em] text-ink-500">
+              {pressByYear[year].length} {pressByYear[year].length > 1 ? 'mentions' : 'mention'}
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 stagger">
+            {pressByYear[year].map((m) => (
+              <a
+                href={m.url}
+                target="_blank"
+                rel="noopener nofollow"
+                class="group p-6 rounded-2xl bg-cream-100 border border-forest-100/60 hover:border-gold-500/50 hover:shadow-cream transition-all"
+              >
+                <div class="flex items-start justify-between gap-4 mb-3">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-2 text-xs text-gold-600 font-medium uppercase tracking-wider mb-2">
+                      {typeIcons[m.type] === 'trophy' && (
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                      )}
+                      {typeIcons[m.type] === 'newspaper' && (
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+                      )}
+                      {typeIcons[m.type] === 'video' && (
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="14" height="12" rx="2"/><polygon points="16 10 22 6 22 18 16 14"/></svg>
+                      )}
+                      {typeIcons[m.type] === 'radio' && (
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+                      )}
+                      {typeIcons[m.type] === 'building' && (
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/></svg>
+                      )}
+                      {typeIcons[m.type] === 'star' && (
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+                      )}
+                      <span>{typeLabelsEn[m.type]}</span>
+                      <span class="opacity-40">·</span>
+                      <time datetime={m.date}>
+                        {new Date(m.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
+                      </time>
+                    </div>
+                    <h3 class="font-display text-xl text-forest-900 leading-tight mb-2 group-hover:text-forest-700">
+                      {m.title}
+                    </h3>
+                    <div class="text-sm font-medium text-forest-700 mb-3">{m.source}</div>
+                  </div>
+                  <svg class="flex-none w-5 h-5 text-ink-500 group-hover:text-forest-700 transition-colors mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                </div>
+                <p class="text-sm text-ink-700 leading-relaxed">{m.excerpt}</p>
+                {m.productFocus && (
+                  <div class="mt-4 inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-gold-600 bg-gold-500/10 border border-gold-500/30 px-2.5 py-1 rounded-full">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/></svg>
+                    Focus: {m.productFocus}
+                  </div>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Press CTA -->
+  <section class="py-20 bg-forest-900 text-cream-100">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <div class="text-[10px] md:text-xs uppercase tracking-[0.35em] text-gold-400 font-medium mb-3">Journalists, bloggers</div>
+      <h2 class="font-display text-3xl md:text-4xl leading-tight mb-6">
+        Working on an article?<br />
+        <em class="not-italic font-normal text-gold-400" style="font-family: var(--font-script);">We'll happily host you</em>
+      </h2>
+      <p class="text-cream-200/80 leading-relaxed mb-8">
+        We reply to press enquiries within 48 business hours and gladly provide HD visuals, tasting samples and interviews (studio, phone, email). Saint-Didier-en-Velay is 1h from Lyon, 1h30 from Clermont-Ferrand, 4h from Paris by TGV + car.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={`mailto:${site.email}?subject=Press%20enquiry`} class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
+          Press contact
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

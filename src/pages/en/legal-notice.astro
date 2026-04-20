@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { site } from '../../data/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `Legal notice — ${site.name}`,
+  url: `${site.url}/en/legal-notice`,
+  inLanguage: 'en-US',
+};
+---
+<Layout
+  lang="en"
+  title={`Legal notice | ${site.name}`}
+  description={`Legal notice for the ${site.name} website: publisher, hosting, intellectual property, personal data.`}
+  schema={schema}
+  noindex={false}
+>
+  <PageHeader
+    kicker="Legal information"
+    title="Legal notice"
+    subtitle="Mandatory information about the publisher and hosting of labrasseriedesplantes.fr."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Legal notice' }]}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg prose-headings:font-display prose-headings:text-forest-900 prose-h2:text-2xl prose-h2:mt-10 prose-a:text-forest-700 prose-strong:text-forest-900">
+      <h2>Publisher</h2>
+      <p>
+        <strong>{site.name}</strong><br />
+        Company ID (SIRET): {site.siret}<br />
+        Address: {site.address.street}, {site.address.postalCode} {site.address.city}, France<br />
+        Phone: <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a><br />
+        Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      <p>
+        Publication director: Étienne Darinot, co-founder.
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        The site <strong>labrasseriedesplantes.fr</strong> is hosted by:<br />
+        <strong>Netlify, Inc.</strong><br />
+        512 2nd Street, Fl 2, San Francisco, CA 94107, USA<br />
+        <a href="https://www.netlify.com" target="_blank" rel="noopener">netlify.com</a>
+      </p>
+
+      <h2>Intellectual property</h2>
+      <p>
+        All content on this site (text, photographs, illustrations, logos, videos, layouts, trademarks) is the exclusive property of <strong>{site.name}</strong> or its partners. Any reproduction, representation, distribution or use without prior written consent is forbidden and would constitute infringement under articles L. 335-2 and following of the French Intellectual Property Code.
+      </p>
+      <p>
+        Short quotations for informational or journalistic purposes are permitted, provided the source is clearly credited ("{site.name}, labrasseriedesplantes.fr").
+      </p>
+
+      <h2>Personal data (GDPR)</h2>
+      <p>
+        Personal data collected via our forms (contact, newsletter, orders) is used only to process your request and, where applicable, to send you our news if you have consented.
+      </p>
+      <p>
+        Under the General Data Protection Regulation (GDPR) and the French Data Protection Act, you have the right to access, rectify, erase, port and oppose your data. To exercise these rights, contact us at <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+      <p>
+        Your data is never sold to third parties. It is kept for the time strictly necessary to deliver the service, then automatically deleted.
+      </p>
+      <p>
+        Data Protection Officer: {site.email}.<br />
+        Supervisory authority: CNIL (<a href="https://www.cnil.fr/en" target="_blank" rel="noopener">cnil.fr</a>).
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        This site uses cookies strictly necessary for its operation, as well as, with your consent, anonymised audience measurement cookies. See our <a href="/en/cookie-policy">cookie policy</a> for details.
+      </p>
+
+      <h2>Applicable law & jurisdiction</h2>
+      <p>
+        This site is governed by French law. In the event of a dispute, the courts of Le Puy-en-Velay (Haute-Loire, France) shall have jurisdiction, except where otherwise provided by law.
+      </p>
+
+      <h2>Sale of alcohol — mandatory notice</h2>
+      <p class="text-sm italic border-l-4 border-gold-500 pl-4 bg-gold-500/5">
+        The sale of alcohol to minors under 18 is prohibited (French Public Health Code, article L. 3342-1).<br />
+        Excessive alcohol consumption is harmful to health. Please drink responsibly.
+      </p>
+
+      <p class="text-xs text-ink-500 mt-12">Last updated: {new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
+    </div>
+  </section>
+</Layout>

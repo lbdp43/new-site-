@@ -1,0 +1,210 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { site } from '../../data/site';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Trade', item: `${site.url}/en/trade` },
+  ],
+};
+
+const faq = [
+  {
+    q: 'How fast do you reply to a trade quote request?',
+    a: 'We come back to you within 48 business hours with a custom quote, printable product sheets and, on request, samples shipped at our cost for tasting.',
+  },
+  {
+    q: 'Is there a minimum order?',
+    a: 'For a first order: 6 bottles minimum, all sizes combined. For 5 L Bag-in-Boxes: no minimum. Above 12 units, we offer volume discounts.',
+  },
+  {
+    q: 'Do you provide samples and on-site tastings?',
+    a: 'Yes. We provide 5 cl samples free of charge for a first meeting, and we visit partners for tastings — every 2 weeks for HoReCa, every 1.5 to 2 months for wine merchants.',
+  },
+  {
+    q: 'Which formats are available for trade?',
+    a: 'Three formats: the 70 cl bottle (menus, retail), the 5 L Bag-in-Box (bar counter, glass pouring, cocktail prep) and custom gift boxes from 10 units (corporate gifts, employee welfare councils).',
+  },
+  {
+    q: 'Is the draught system provided?',
+    a: 'Yes. Our award-winning pressure draught system (Artinov 2023) is lent against a deposit to partners who order 5 L BIBs regularly. Installation and training included free of charge.',
+  },
+  {
+    q: 'What happens with unsold products?',
+    a: 'We systematically issue credit notes and exchanges on unsold products, with no time limit. No dormant stock, no commercial pressure — our partnerships are built to last.',
+  },
+  {
+    q: 'Do you ship throughout France?',
+    a: 'Yes, via insured B2B carrier. Free shipping from €300 ex-VAT in metropolitan France. Delivery in 3 to 5 business days. We also ship to Belgium, Switzerland and Luxembourg.',
+  },
+  {
+    q: 'Do you offer bartender training?',
+    a: 'Yes. Our cocktail menu workshops (1h30, on-site or at your venue) present our liqueurs, pairings and our five signature cocktails. Included free for HoReCa partners from the first order.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: 'en-US',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+const formats = [
+  {
+    name: '70 cl bottle',
+    use: 'Menus, retail, gift boxes, gifts',
+    note: 'Classic format for retail sale or by-the-glass menus.',
+  },
+  {
+    name: '5 L Bag-in-Box',
+    use: 'Bar counter, glass pouring, cocktail prep',
+    note: 'Zero breakage, zero oxidation, optimal shelf life. Ideal for daily service.',
+  },
+  {
+    name: 'Gift boxes & limited editions',
+    use: 'Corporate gifts, employee welfare, shops',
+    note: 'Discovery boxes, numbered cuvées, custom labels from 10 units.',
+  },
+];
+
+const proArguments = [
+  {
+    title: 'Award-winning products',
+    text: "L'Alchimie Végétale: World's Best Digestif 2025 at the World Drinks Awards. L'Herbe des Druides: Gold in Lyon, Silver in Paris. Le Cerf'Gent: Gold Medal. Awards that sell on a menu.",
+    icon: 'award',
+  },
+  {
+    title: 'Multiple formats',
+    text: '70 cl for retail and menus, 5 L Bag-in-Box for bar service and pouring, gift boxes for corporate and employee welfare. One format for every use.',
+    icon: 'package',
+  },
+  {
+    title: 'Dedicated follow-up',
+    text: 'Visits every 2 weeks for bars/restaurants, every 1.5 to 2 months for wine merchants. Samples, on-site tastings, credit notes and exchanges on unsold products as standard.',
+    icon: 'handshake',
+  },
+  {
+    title: 'Rooted in the terroir',
+    text: 'Haute-Loire craft, 27+ organic plants, short supply chains with partner producers. A story to tell your customers — and they will ask.',
+    icon: 'sprout',
+  },
+];
+---
+<Layout
+  lang="en"
+  title="Trade | Wine merchants, restaurants, bars — La Brasserie des Plantes"
+  description="Direct distribution for HoReCa (cafés, hotels, restaurants), wine merchants and fine grocers. Multiple formats (70 cl, 5 L Bag-in-Box, gift boxes), award-winning products, dedicated follow-up. Haute-Loire, France."
+  schema={[breadcrumb, faqSchema]}
+>
+  <PageHeader
+    kicker="Trade"
+    title={`Sell our liqueurs<br /><em class='not-italic font-normal text-gold-600' style='font-family: var(--font-script);'>in your venue</em>`}
+    subtitle="We work directly with wine merchants, restaurants, bars and fine grocers across France, Belgium, Switzerland and Luxembourg. No middlemen, clear margins, genuine partnership."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Trade' }]}
+  />
+
+  <!-- Arguments pros -->
+  <section class="py-16 bg-cream-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Why work with us</div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900">Four reasons to distribute us</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        {proArguments.map((arg) => (
+          <div class="p-8 rounded-2xl bg-white border border-forest-100 hover:shadow-cream transition-all">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-forest-100 text-forest-700 mb-4">
+              {arg.icon === 'award' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              )}
+              {arg.icon === 'package' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              )}
+              {arg.icon === 'handshake' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17a4 4 0 0 1-4-4V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a4 4 0 0 1-4 4z"/></svg>
+              )}
+              {arg.icon === 'sprout' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/></svg>
+              )}
+            </div>
+            <h3 class="font-display text-xl text-forest-900 mb-3">{arg.title}</h3>
+            <p class="text-ink-700 leading-relaxed">{arg.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Formats -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Formats</div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900">Three formats, three uses</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {formats.map((f) => (
+          <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100 text-center">
+            <div class="text-xs uppercase tracking-wider text-gold-600 font-medium mb-2">{f.use}</div>
+            <h3 class="font-display text-xl text-forest-900 mb-3">{f.name}</h3>
+            <p class="text-sm text-ink-700 leading-relaxed">{f.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ pros -->
+  <section class="py-20 bg-cream-50">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">FAQ for trade</div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900">Your questions, our answers</h2>
+      </div>
+      <div class="space-y-3">
+        {faq.map((item, i) => (
+          <details
+            class="group rounded-xl bg-white border border-forest-100 overflow-hidden hover:border-forest-300 transition-colors"
+            {...(i === 0 ? { open: true } : {})}
+          >
+            <summary class="list-none cursor-pointer flex items-start justify-between gap-4 px-6 py-5 font-display text-lg text-forest-900 select-none">
+              <span>{item.q}</span>
+              <svg class="w-5 h-5 flex-none mt-1.5 transition-transform duration-300 group-open:rotate-180 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="px-6 pb-6 text-ink-700 leading-relaxed text-sm md:text-base">
+              {item.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA contact -->
+  <section class="py-20 bg-forest-900 text-cream-100">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl md:text-4xl mb-6">Let's talk partnership</h2>
+      <p class="text-cream-200/80 leading-relaxed mb-8">
+        Write to us with a few words about your venue (type, city, average clientele). We reply within 48 business hours with a custom quote and, if you'd like, samples.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={`mailto:${site.email}?subject=Trade%20partnership`} class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
+          Write to us
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={`tel:${site.phone}`} class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-cream-100/40 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors">
+          {site.phoneDisplay}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

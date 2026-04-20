@@ -26,16 +26,31 @@ const organizationSchema = {
   award: `${site.award.title} ${site.award.year} — ${site.award.issuer}`,
 };
 
+// LocalBusiness enrichi — image riche, horaires structurés, paiements, zone
+// servie, fondateurs, lien GBP. Signal SEO majeur pour Google Maps et pour
+// les AI (citations "où trouver / adresse / horaires").
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   '@id': `${site.url}#localbusiness`,
   name: site.name,
-  image: new URL('/og-default.jpg', site.url).toString(),
+  alternateName: site.shortName,
+  description: site.defaultDescription,
+  image: [
+    new URL('/og-default.jpg', site.url).toString(),
+    new URL('/images/brand/logo-complet-fond-blanc.png', site.url).toString(),
+  ],
+  logo: new URL('/images/brand/logo-complet-fond-blanc.png', site.url).toString(),
   url: site.url,
   telephone: site.phone,
   email: site.email,
   priceRange: '€€',
+  currenciesAccepted: 'EUR',
+  paymentAccepted: 'Credit Card, Apple Pay, Google Pay, PayPal, SEPA',
+  foundingDate: site.founded,
+  founders: site.founders.map((f) => ({ '@type': 'Person', name: f })),
+  award: `${site.award.title} ${site.award.year} — ${site.award.issuer}`,
+  sameAs: [site.social.instagram, site.social.facebook, site.googleBusiness.url],
   address: {
     '@type': 'PostalAddress',
     streetAddress: site.address.street,
@@ -49,7 +64,28 @@ const localBusinessSchema = {
     latitude: site.geo.latitude,
     longitude: site.geo.longitude,
   },
+  hasMap: site.googleBusiness.url,
+  // Horaires simples (compact, lisibles par Google)
   openingHours: site.hours,
+  // Horaires structurés (plus riches, utilisés par Google Maps + assistants
+  // vocaux : "quand est-ce que La Brasserie des Plantes est ouverte ?")
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Wednesday', 'Friday', 'Saturday'],
+      opens: '09:00',
+      closes: '18:30',
+    },
+  ],
+  areaServed: [
+    { '@type': 'Country', name: 'France' },
+    { '@type': 'Country', name: 'Belgium' },
+    { '@type': 'Country', name: 'Switzerland' },
+    { '@type': 'Country', name: 'Luxembourg' },
+  ],
+  // VAT number (SIRET sert aussi d'identifiant français)
+  vatID: site.siret,
+  taxID: site.siret,
 };
 
 const websiteSchema = {

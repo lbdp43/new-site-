@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { site } from '../../data/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `Cookie policy — ${site.name}`,
+  url: `${site.url}/en/cookie-policy`,
+  inLanguage: 'en-US',
+};
+
+const cookies = [
+  {
+    name: 'lbdp_age_gate',
+    purpose: 'Stores your age confirmation (18+) so the modal is not shown on every visit.',
+    type: 'Functional — strictly necessary',
+    duration: '30 days',
+    consent: false,
+  },
+  {
+    name: 'lbdp_cart',
+    purpose: 'Keeps the content of your shopping cart between pages.',
+    type: 'Functional — strictly necessary',
+    duration: 'Session + 7 days',
+    consent: false,
+  },
+  {
+    name: '_ga, _ga_*',
+    purpose: 'Anonymised audience measurement via Google Analytics 4 (anonymised IP, no cross-site tracking).',
+    type: 'Audience measurement',
+    duration: '13 months max (CNIL standard)',
+    consent: true,
+  },
+  {
+    name: 'fbp',
+    purpose: 'Meta Pixel — only if you have given your consent (ad retargeting).',
+    type: 'Marketing / social media',
+    duration: '3 months',
+    consent: true,
+  },
+];
+---
+<Layout
+  lang="en"
+  title={`Cookie policy | ${site.name}`}
+  description="Which cookies labrasseriedesplantes.fr uses, why, for how long, and how to manage your preferences."
+  schema={schema}
+>
+  <PageHeader
+    kicker="Data & privacy"
+    title="Cookie policy"
+    subtitle="How we use cookies, in line with GDPR and CNIL recommendations."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Cookies' }]}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg prose-headings:font-display prose-headings:text-forest-900 prose-h2:text-2xl prose-h2:mt-10 prose-a:text-forest-700 prose-strong:text-forest-900">
+
+      <h2>What is a cookie?</h2>
+      <p>
+        A cookie is a small text file stored on your device (computer, phone, tablet) by your browser. It allows a site to recognise your browser and remember certain information (preferences, session, cart, visit statistics).
+      </p>
+
+      <h2>Our approach</h2>
+      <p>
+        We use the <strong>strict minimum</strong> of cookies needed for the site to work properly. Non-essential cookies (audience measurement, marketing) are only activated <strong>with your explicit consent</strong>, which you can withdraw at any time from the banner.
+      </p>
+
+      <h2>Cookies used on this site</h2>
+      <div class="not-prose overflow-x-auto my-8">
+        <table class="w-full border-collapse bg-cream-50 rounded-xl overflow-hidden text-sm">
+          <thead class="bg-forest-800 text-cream-100">
+            <tr>
+              <th class="px-4 py-3 text-left font-medium">Cookie</th>
+              <th class="px-4 py-3 text-left font-medium">Purpose</th>
+              <th class="px-4 py-3 text-left font-medium">Duration</th>
+              <th class="px-4 py-3 text-left font-medium">Consent</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-forest-100">
+            {cookies.map((c) => (
+              <tr>
+                <td class="px-4 py-3 font-mono text-xs text-forest-900">{c.name}</td>
+                <td class="px-4 py-3 text-ink-700">
+                  <div class="font-medium text-forest-800 mb-0.5">{c.type}</div>
+                  {c.purpose}
+                </td>
+                <td class="px-4 py-3 text-ink-500 whitespace-nowrap">{c.duration}</td>
+                <td class="px-4 py-3">
+                  {c.consent ? (
+                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gold-500/15 text-gold-700 text-xs font-medium">Required</span>
+                  ) : (
+                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-forest-100 text-forest-700 text-xs font-medium">Auto (necessary)</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Manage my preferences</h2>
+      <p>
+        At any time you can:
+      </p>
+      <ul>
+        <li>Change your choice via the <strong>"Cookie preferences"</strong> button in the footer.</li>
+        <li>Delete already-stored cookies from your browser settings (<a href="https://support.google.com/accounts/answer/61416" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.microsoft.com/en-us/windows/delete-and-manage-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Edge</a>).</li>
+        <li>Enable "Do Not Track" in your browser: we honour it automatically.</li>
+      </ul>
+
+      <h2>Data transfer outside the EU</h2>
+      <p>
+        Some third-party tools (Google Analytics, Meta) may transfer data to the United States. These transfers are covered by the <strong>Standard Contractual Clauses (SCC)</strong> adopted by the European Commission, and are only active with your consent.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        See our <a href="/en/legal-notice">legal notice</a> for details on your GDPR rights (access, rectification, erasure, portability, opposition). For any question: <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+
+      <p class="text-xs text-ink-500 mt-12">Last updated: {new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
+    </div>
+  </section>
+</Layout>

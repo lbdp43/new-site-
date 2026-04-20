@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { site } from '../../data/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `Terms of sale — ${site.name}`,
+  url: `${site.url}/en/terms-of-sale`,
+  inLanguage: 'en-US',
+};
+---
+<Layout
+  lang="en"
+  title={`Terms of sale | ${site.name}`}
+  description={`Terms of sale for ${site.name}: orders, payment, delivery, right of withdrawal, warranties and customer service.`}
+  schema={schema}
+>
+  <PageHeader
+    kicker="Terms of sale"
+    title="Terms of sale"
+    subtitle="Applicable to any order placed on labrasseriedesplantes.fr from 1 January 2025 onwards."
+    breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Terms of sale' }]}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg prose-headings:font-display prose-headings:text-forest-900 prose-h2:text-2xl prose-h2:mt-10 prose-a:text-forest-700 prose-strong:text-forest-900 prose-ol:my-4">
+
+      <h2>1. Seller identification</h2>
+      <p>
+        These terms of sale (hereinafter "Terms") govern any sale made on the website <strong>labrasseriedesplantes.fr</strong> by <strong>{site.name}</strong>, SIRET {site.siret}, registered at {site.address.street}, {site.address.postalCode} {site.address.city}, France.
+      </p>
+
+      <h2>2. Products</h2>
+      <p>
+        We sell <strong>craft liqueurs and spirits</strong> made from organic plants in Haute-Loire, France. Products are presented with maximum accuracy (photos, descriptions, alcohol content, ingredients). Minor variations in colour between the photo and the delivered product may occur due to natural macerations.
+      </p>
+
+      <h2>3. Ban on sales to minors</h2>
+      <p class="text-sm italic border-l-4 border-gold-500 pl-4 bg-gold-500/5">
+        Under article L. 3342-1 of the French Public Health Code, the sale of alcohol to minors under 18 is prohibited. By placing your order, you declare that you are of legal age and certify your identity.
+      </p>
+
+      <h2>4. Orders</h2>
+      <p>
+        An order is validated upon receipt of payment. A confirmation email is sent automatically. We reserve the right to cancel any order with obvious anomalies (unreasonable volumes, invalid address, etc.).
+      </p>
+
+      <h2>5. Prices</h2>
+      <p>
+        Prices on the site are shown <strong>in euros, taxes included</strong>, excluding shipping fees. Shipping is calculated at checkout. <strong>Free shipping applies from €65</strong> in metropolitan France.
+      </p>
+      <p>
+        We reserve the right to change our prices at any time; products are invoiced at the rates in effect at the time of the order.
+      </p>
+
+      <h2>6. Payment</h2>
+      <p>
+        Payment is processed securely online via SSL. We accept Visa, Mastercard, American Express, Apple Pay, Google Pay, PayPal and SEPA transfers. No banking data is stored on our servers.
+      </p>
+
+      <h2>7. Delivery</h2>
+      <p>
+        Orders are prepared within <strong>2 to 3 business days</strong> and shipped via Colissimo (delivery in 48-72h after dispatch) or Chronopost on request. A tracking number is emailed at dispatch.
+      </p>
+      <p>
+        We deliver to metropolitan France, Belgium, Switzerland and Luxembourg. For any other destination, contact us at <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+      <p>
+        Transport risks are borne by the carrier. If you receive a damaged parcel, note precise reservations on the delivery slip and photograph the packaging; we will replace the product free of charge.
+      </p>
+
+      <h2>8. Right of withdrawal</h2>
+      <p>
+        Under article L. 221-18 of the French Consumer Code, you have a <strong>14-day period</strong> from receipt of the product to exercise your right of withdrawal, without having to justify.
+      </p>
+      <ol>
+        <li>Notify us of your decision by email at <a href={`mailto:${site.email}`}>{site.email}</a> or by mail to the registered address.</li>
+        <li>Return the product <strong>intact, unopened, in its original packaging</strong>, at your own cost, within 14 days.</li>
+        <li>We refund you in full (product + initial shipping) within 14 days of receipt.</li>
+      </ol>
+      <p>
+        For hygiene reasons, unsealed, opened or damaged products cannot be returned.
+      </p>
+
+      <h2>9. Warranties</h2>
+      <p>
+        All our products benefit from the legal warranty of conformity (articles L. 217-4 and following of the French Consumer Code) and the warranty against hidden defects (articles 1641 and following of the French Civil Code). If you notice a defect on receipt, contact us within 48 hours with photos and a precise description.
+      </p>
+
+      <h2>10. Customer service</h2>
+      <p>
+        For any question, claim or suggestion, we reply within <strong>48 business hours</strong>:<br />
+        Email: <a href={`mailto:${site.email}`}>{site.email}</a><br />
+        Phone: <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> ({site.hoursDisplay})
+      </p>
+
+      <h2>11. Consumer mediation</h2>
+      <p>
+        In accordance with article L. 612-1 of the French Consumer Code, you may use a consumer mediator free of charge. Competent mediator: <strong>CNPM — Médiation Consommation</strong> (<a href="https://cnpm-mediation-consommation.eu" target="_blank" rel="noopener">cnpm-mediation-consommation.eu</a>).
+      </p>
+
+      <h2>12. Intellectual property</h2>
+      <p>
+        All content on this site (photos, texts, recipes, videos, trademarks) remains the exclusive property of {site.name}. Any unauthorised reproduction is prohibited.
+      </p>
+
+      <h2>13. Personal data</h2>
+      <p>
+        See our <a href="/en/legal-notice">Legal notice</a> page for details on how your personal data is processed (GDPR).
+      </p>
+
+      <h2>14. Applicable law</h2>
+      <p>
+        These Terms are governed by French law. In the event of a dispute, an amicable solution will be sought before any legal action. Failing that, the courts of Le Puy-en-Velay shall have jurisdiction.
+      </p>
+
+      <p class="text-xs text-ink-500 mt-12">Terms in force since 1 January 2025. Last updated: {new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
+    </div>
+  </section>
+</Layout>
