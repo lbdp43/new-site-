@@ -8,6 +8,7 @@ import { productsEn } from '../../../data/products.en';
 import { cocktails } from '../../../data/cocktails';
 import { cocktailsEn } from '../../../data/cocktails.en';
 import { site } from '../../../data/site';
+import { getSchemaAvailability, isOutOfStock, isOnBackorder } from '../../../lib/wc-live';
 
 export function getStaticPaths() {
   return products.map((product) => ({
@@ -63,7 +64,7 @@ const productSchema = {
           '@type': 'Offer',
           price: product.priceMin,
           priceCurrency: 'EUR',
-          availability: 'https://schema.org/InStock',
+          availability: getSchemaAvailability(product.wcId),
           url: `${site.url}/en/shop/${product.slug}`,
         }
       : {
@@ -72,7 +73,7 @@ const productSchema = {
           highPrice: product.priceMax,
           priceCurrency: 'EUR',
           offerCount: product.sizes?.length || 1,
-          availability: 'https://schema.org/InStock',
+          availability: getSchemaAvailability(product.wcId),
         },
 };
 
@@ -277,6 +278,18 @@ const parsedAwards = awardsList.map(parseAward);
           </div>
           {product.sizes && product.sizes.length > 1 && (
             <div class="text-sm text-ink-500">Depending on size — {product.sizes.length} formats</div>
+          )}
+          {isOutOfStock(product.wcId) && (
+            <div class="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-medium">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+              Temporarily out of stock — next batch coming soon
+            </div>
+          )}
+          {isOnBackorder(product.wcId) && (
+            <div class="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-forest-50 border border-forest-200 text-forest-800 text-xs font-medium">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              On backorder — shipped in 10 to 14 days
+            </div>
           )}
         </div>
 

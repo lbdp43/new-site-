@@ -7,8 +7,10 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/sync-wc-stock.mjs",
     "build": "astro build",
     "preview": "astro preview",
+    "sync:stock": "node scripts/sync-wc-stock.mjs",
     "astro": "astro"
   },
   "dependencies": {
