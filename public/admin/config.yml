@@ -9,9 +9,14 @@ backend:
   name: github
   repo: lbdp43/new-site-
   branch: main
-  # Pas de base_url custom = on utilise le proxy OAuth hébergé par Sveltia
-  # (auth.sveltia.app, gratuit). Au 1er login, l'utilisateur autorise
-  # l'app Sveltia CMS à accéder au repo via GitHub.
+  # ⚠️ Par défaut, Sveltia CMS utilise api.netlify.com/auth (compat Netlify CMS)
+  # qui renvoie 404 si on n'est pas hébergé Netlify.
+  # On bascule sur le proxy OAuth hébergé gratuitement par Sveltia :
+  base_url: https://auth.sveltia.app
+  auth_endpoint: /oauth/authorize
+  # Fallback : si ce proxy est indisponible, l'utilisateur clique
+  # "Sign In Using Access Token" et colle un GitHub PAT. Voir
+  # docs/cms-admin.md section "Première connexion".
 
 # Les images uploadées via le CMS atterrissent dans public/images/blog/
 media_folder: public/images/blog

@@ -22,16 +22,33 @@ Tu peux utiliser ton email `@labrasseriedesplantes.fr` ou gmail.
 Guillaume (admin) doit t'ajouter comme collaborateur sur
 [github.com/lbdp43/new-site-/settings/access](https://github.com/lbdp43/new-site-/settings/access).
 
-Tu reçois une invitation par mail → accepte.
+Tu reçois une invitation par mail → **accepte**.
 
-### 3. Se connecter au CMS
+### 3. Se connecter au CMS — 2 méthodes
 
-1. Ouvre `https://www.labrasseriedesplantes.fr/admin/`
-2. Clique **Login with GitHub**
-3. GitHub t'affiche une page "Sveltia CMS wants to access your account" →
-   Clic **Authorize**. (Sveltia est un outil open-source communautaire, on
-   l'a choisi parce qu'il est propre et ne nécessite pas d'infra back-end.)
-4. Tu es redirigé sur le CMS, connecté.
+Sur la page `/admin/`, tu as 2 boutons de connexion. **La méthode "Access Token"
+est plus fiable** pour notre setup Vercel, on la recommande.
+
+#### ✅ Méthode A : "Sign In Using Access Token" (recommandée)
+
+1. Ouvre un nouvel onglet : [github.com/settings/tokens/new](https://github.com/settings/tokens/new?scopes=repo&description=Sveltia%20CMS%20La%20Brasserie%20des%20Plantes)
+   - Le lien ci-dessus pré-remplit le scope correct (`repo`) et le nom.
+   - Si tu y vas manuellement : **Personal Access Tokens → Tokens (classic) → Generate new token (classic)**.
+2. **Note** : `Sveltia CMS La Brasserie des Plantes`
+3. **Expiration** : 1 an (ou `No expiration` si tu ne veux pas t'en soucier)
+4. **Scope** : coche uniquement `repo` (contrôle total des repos privés — nécessaire pour commit)
+5. Clic **Generate token** en bas. GitHub affiche un token qui commence par `ghp_…`. **Copie-le immédiatement** (il ne sera plus affiché après).
+6. Retourne sur `/admin/`, clic **Sign In Using Access Token**, colle ton token, valide.
+7. Tu es connecté. Le token est stocké en localStorage de ton navigateur — la prochaine fois tu n'auras pas besoin de le ressaisir (tant que tu n'effaces pas tes données navigateur).
+
+⚠️ **Sécurité du token** : ne le partage avec personne. Si tu le perds ou si un ordinateur est volé, révoque-le depuis [github.com/settings/tokens](https://github.com/settings/tokens) et crée-en un nouveau.
+
+#### ⚠️ Méthode B : "Sign In with GitHub" (bouton bleu)
+
+Cette méthode utilise un **proxy OAuth hébergé gratuitement par Sveltia**
+(`auth.sveltia.app`). Elle devrait fonctionner, mais elle dépend d'un service
+tiers qu'on ne contrôle pas. Si elle tombe ou affiche une erreur "Not Found",
+bascule sur la Méthode A.
 
 ---
 
