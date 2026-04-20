@@ -90,9 +90,9 @@ const websiteSchema = {
 const videoSchema = {
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
-  name: 'Visit our distillery — La Brasserie des Plantes',
+  name: 'Inside our workshop — La Brasserie des Plantes',
   description:
-    'A tour of our copper stills, plant-drying room and bottling floor at our distillery in Saint-Didier-en-Velay, Haute-Loire (France).',
+    'A tour of our plant-drying room, composition room and bottling floor at our workshop in Saint-Didier-en-Velay, Haute-Loire (France).',
   thumbnailUrl: new URL('/videos/lbdp-pro-poster.jpg', site.url).toString(),
   contentUrl: new URL('/videos/lbdp-pro.mp4', site.url).toString(),
   uploadDate: '2025-04-18',
@@ -106,7 +106,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
 <Layout
   lang="en"
   title="La Brasserie des Plantes | Organic craft liqueurs — Haute-Loire, France"
-  description="Organic craft liqueurs and botanical infusions from the Auvergne mountains. L'Alchimie Végétale — World's Best Digestif 2025 at the World Drinks Awards. Independent distillers in Haute-Loire."
+  description="Organic craft liqueurs and botanical infusions from the Auvergne mountains. L'Alchimie Végétale — World's Best Digestif 2025 at the World Drinks Awards. Independent craft liqueur house in Haute-Loire, France."
   schema={schema}
   hasHero={true}
 >
@@ -247,7 +247,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
           of the <strong class="font-medium text-forest-800">Haute-Loire</strong> region, in Saint-Didier-en-Velay.
           Three friends — Étienne, Guillaume and Bastien — brought together by
           a simple idea: to revive the medicinal and aromatic plants our
-          grandmothers once distilled, and invite them into contemporary mixology.
+          grandmothers once prepared, and invite them into contemporary mixology.
         </p>
         <p>
           Étienne, a plant biotechnologist trained in Toulouse, selects and
@@ -301,12 +301,12 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
       </video>
       <div class="absolute inset-0 bg-gradient-to-b from-forest-950/65 via-forest-950/25 to-forest-950/80"></div>
       <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-cream-100">
-        <span style="font-family: var(--font-script);" class="text-gold-400 text-3xl md:text-4xl mb-3">— Inside our distillery —</span>
+        <span style="font-family: var(--font-script);" class="text-gold-400 text-3xl md:text-4xl mb-3">— Inside our workshop —</span>
         <h2 class="font-display text-4xl md:text-6xl leading-tight max-w-4xl mb-4 text-cream-100">
           Each bottle, a story<br /><em class="not-italic text-gold-400 font-normal" style="font-family: var(--font-script);">made by hand</em>
         </h2>
         <p class="text-cream-100/85 text-base md:text-lg max-w-2xl leading-relaxed">
-          Harvest, maceration, distillation, bottling — everything happens
+          Harvest, composition, blending, bottling — everything happens
           in Saint-Didier-en-Velay, between our six hands.
         </p>
       </div>

@@ -267,6 +267,10 @@ export const products: Product[] = [
     ],
     usage: "Digestif de montagne",
     tagline: "Un génépi dans la douceur — hysope, sapin, caractère montagnard.",
+    highlight: "Médaille d'Argent 2026 — Lyon",
+    awards: [
+      "Médaille d'Argent 2026 — Concours International de Lyon",
+    ],
     description:
       "Un digestif de montagne. Génépi biologique en provenance d'un partenaire de Barcelonnette, marié à notre liqueur d'épine de sapin et à l'hysope — cette cousine de la lavande aux notes mentholées et camphrées. Douceur, fraîcheur, petite note résineuse de fond.",
     tasting: {

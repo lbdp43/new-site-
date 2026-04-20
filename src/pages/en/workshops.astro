@@ -17,7 +17,7 @@ const serviceSchema = {
   '@type': 'Service',
   name: 'Tasting & mixology workshop — La Brasserie des Plantes',
   description:
-    'Discover craft botanical liqueurs, learn the basics of mixology, and enjoy a guided tasting with the founders. Two hours in a small group, at our distillery in Saint-Didier-en-Velay (France).',
+    'Discover craft botanical liqueurs, learn the basics of mixology, and enjoy a guided tasting with the founders. Two hours in a small group, at our workshop in Saint-Didier-en-Velay (France).',
   provider: { '@id': `${site.url}#localbusiness` },
   areaServed: { '@type': 'Place', name: site.address.region },
   serviceType: 'Mixology & tasting workshop',
@@ -33,12 +33,12 @@ const serviceSchema = {
 <Layout
   lang="en"
   title="Tasting & mixology workshops | La Brasserie des Plantes"
-  description="Discover the world of botanical craft liqueurs at our distillery in Saint-Didier-en-Velay, France. Small-group mixology workshops, guided tasting, distillery tour."
+  description="Discover the world of botanical craft liqueurs at our workshop in Saint-Didier-en-Velay, France. Small-group mixology workshops, guided tasting, workshop tour."
   schema={[breadcrumb, serviceSchema]}
 >
   <PageHeader
     kicker="Workshops"
-    title="Step inside<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>the distillery</em>"
+    title="Step inside<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>our workshop</em>"
     subtitle="Two hours at our place, discovering our plants, tasting our liqueurs and making your own cocktails under the founders' eye."
     breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Workshops' }]}
   />

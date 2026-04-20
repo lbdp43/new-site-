@@ -32,7 +32,7 @@ const sent = Astro.url.searchParams.get('sent') === '1';
 >
   <PageHeader
     kicker="Contact"
-    title="Get in touch<br />with the distillery"
+    title="Get in touch<br />with the workshop"
     subtitle="For an order, a partnership, a question about our plants or our workshops — write to us, we reply quickly."
     breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Contact' }]}
   />
@@ -42,7 +42,7 @@ const sent = Astro.url.searchParams.get('sent') === '1';
       <!-- Contact details -->
       <div class="space-y-10">
         <div>
-          <h2 class="font-display text-2xl text-forest-900 mb-4">Our distillery</h2>
+          <h2 class="font-display text-2xl text-forest-900 mb-4">Our workshop</h2>
           <address class="not-italic text-ink-700 leading-relaxed">
             {site.address.street}<br />
             {site.address.postalCode} {site.address.city}<br />

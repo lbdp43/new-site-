@@ -22,7 +22,7 @@ Three reasons, always the same:
 
 We grow about **40% of our signature plants** ourselves. Mainly **scented verbena**, **lemon balm**, the wild **serpolet** we pick on sunny slopes, and some less common **aromatics** (southernwood, hyssop, lemon thyme, Mexican tarragon).
 
-The parcels, three in total, are all less than 5 km from the distillery — we get there by bike in under 15 minutes.
+The parcels, three in total, are all less than 5 km from the workshop — we get there by bike in under 15 minutes.
 
 ## The eleven partners
 
@@ -71,4 +71,4 @@ Concretely, five things:
 
 ---
 
-**Also read:** [Three friends, one distillery](/en/journal/trois-amis-une-brasserie) · [Forgotten plants of the Velay](/en/journal/plantes-oubliees-du-velay) · [L'Alchimie Végétale, 27 plants](/en/journal/alchimie-vegetale-27-plantes-composition).
+**Also read:** [Three friends, one liqueur house](/en/journal/trois-amis-une-brasserie) · [Forgotten plants of the Velay](/en/journal/plantes-oubliees-du-velay) · [L'Alchimie Végétale, 27 plants](/en/journal/alchimie-vegetale-27-plantes-composition).

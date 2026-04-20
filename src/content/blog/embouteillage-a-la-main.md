@@ -23,7 +23,7 @@ Notre embouteillage comprend six opérations, dont seulement deux sont semi-auto
 5. **Étiquetage** — **100 % manuel**, à la pose-étiquette manuelle ou directement à la main
 6. **Carton, pastille, bordereau** — **100 % manuel**
 
-Résultat : sur une journée standard à trois personnes, nous embouteillons environ **1 200 bouteilles**. Avec une chaîne industrielle automatisée, ce chiffre serait de 8 000 ou 10 000. Nous sommes **huit fois plus lents** qu'une distillerie classique.
+Résultat : sur une journée standard à trois personnes, nous embouteillons environ **1 200 bouteilles**. Avec une chaîne industrielle automatisée, ce chiffre serait de 8 000 ou 10 000. Nous sommes **huit fois plus lents** qu'une liquoristerie industrielle.
 
 ## Pourquoi accepter cette lenteur
 

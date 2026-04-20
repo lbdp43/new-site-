@@ -104,6 +104,10 @@ export const productsEn: Record<string, ProductEn> = {
     ],
     usage: 'Mountain digestif',
     tagline: 'Softened genepi — hyssop, fir, a mountain character.',
+    highlight: 'Silver Medal 2026 — Lyon',
+    awards: [
+      'Silver Medal 2026 — Lyon International Competition',
+    ],
     description:
       "A mountain digestif. Organic genepi from a partner in Barcelonnette, married to our fir bud liqueur and to hyssop — that cousin of lavender with mentholated, camphorated notes. Softness, freshness, a discreet resinous note at the bottom.",
     tasting: {

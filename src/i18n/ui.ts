@@ -224,7 +224,7 @@ export const ui = {
 
     // Home metadata / SEO
     'home.hero.title': 'The botanical art of spirits',
-    'home.hero.subtitle': 'Craft distillers in Haute-Loire, France',
+    'home.hero.subtitle': 'Craft botanical liqueur house in Haute-Loire, France',
   },
 } as const;
 

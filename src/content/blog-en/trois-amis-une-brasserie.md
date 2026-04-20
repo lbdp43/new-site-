@@ -1,6 +1,6 @@
 ---
-title: "Three friends, one distillery — how La Brasserie des Plantes was born"
-description: "Étienne, Guillaume and Bastien tell the story: school in Saint-Didier-en-Velay, the early garage experiments, and the rise of craft distilling in Haute-Loire."
+title: "Three friends, one liqueur house — how La Brasserie des Plantes was born"
+description: "Étienne, Guillaume and Bastien tell the story: school in Saint-Didier-en-Velay, the early garage experiments, and the rise of a botanical liqueur house in Haute-Loire."
 date: 2025-02-05
 updated: 2026-04-19
 author: "Guillaume"
@@ -13,13 +13,13 @@ One evening in 2020, in a back kitchen in Saint-Étienne, Étienne and Guillaume
 
 It's also the precise moment an idea becomes a project.
 
-## From school benches to the distillery
+## From school benches to the workshop
 
 **Étienne** and **Guillaume** have known each other since the playground in Saint-Didier-en-Velay. This Velay village, on the border of Haute-Loire and Loire, sits between the foothills of the Massif Central and the Gier valley. Little industry, many slopes, wild plants everywhere.
 
 Each takes their own road. Étienne studies **plant biotechnology** in Toulouse — understanding molecules, macerations, aromatic balance. Guillaume opens a **bar-restaurant in Saint-Étienne**, working service, customers, the menu. They see each other every year, in summer, in Saint-Didier.
 
-In 2019, the conversation takes a different turn. *"What if we did something?"* We know what we don't want: neither an American-style distillery, nor a marketing-first brand. We know what we want: plants we recognise, a territory we claim, a craft we master.
+In 2019, the conversation takes a different turn. *"What if we did something?"* We know what we don't want: neither an American-style production line, nor a marketing-first brand. We know what we want: plants we recognise, a territory we claim, a craft we master.
 
 ## The garage, the early trials
 
@@ -27,7 +27,7 @@ For eighteen months, Étienne formulates in a garage. Macerations sit on plastic
 
 The verbena / wild thyme / caraway ratio for *L'Herbe des Druides* stabilises at test 54. The idea of *Alchimie Végétale* — more complex, 27 plants — starts in parallel. It will be long: **four years of R&D** before this liqueur is entered in an international competition.
 
-In March 2021, **La Brasserie des Plantes** is registered with the Haute-Loire commercial court. A distillery is rented in Saint-Didier, second-hand tanks bought, the first series bottled in July. Eleven local wine merchants take the first pallets.
+In March 2021, **La Brasserie des Plantes** is registered with the Haute-Loire commercial court. A workshop is rented in Saint-Didier, second-hand tanks bought, the first series bottled in July. Eleven local wine merchants take the first pallets.
 
 ## Bastien joins, September 2023
 
@@ -39,11 +39,11 @@ In 2023, **Bastien** joins them. Originally from the Southern French Alps, he ha
 
 On **17 April 2025** in London, at the World Drinks Awards, *L'Alchimie Végétale* is crowned **World's Best Digestif 2025**. Results drop overnight. The phone rings very early in the morning. We didn't expect it. We didn't expect it at all.
 
-What followed — demand doubling, foreign distributors calling, press articles, trade-show meetings — we've told that story [in our spring 2025 press review](/en/journal/dans-la-presse-2025). The essential stays elsewhere: in the distillery, in the tanks, in the gestures that haven't changed.
+What followed — demand doubling, foreign distributors calling, press articles, trade-show meetings — we've told that story [in our spring 2025 press review](/en/journal/dans-la-presse-2025). The essential stays elsewhere: in the workshop, in the tanks, in the gestures that haven't changed.
 
 ## What hasn't changed
 
-- **Saint-Didier-en-Velay.** We haven't left the village. The distillery is 300 metres from the school where Étienne and Guillaume met.
+- **Saint-Didier-en-Velay.** We haven't left the village. The workshop is 300 metres from the school where Étienne and Guillaume met.
 - **The plants.** Still organic, many grown by us or by neighbouring partner farmers.
 - **Hand bottling.** A semi-automatic filler for the larger runs, hand bottling for the limited editions. Every cork is placed by hand.
 - **Team size.** Three. Étienne, Guillaume, Bastien. That's enough.
