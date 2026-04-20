@@ -359,9 +359,11 @@ const ScrollExpandMedia = ({
                   <img
                     src={titleImageSrc}
                     alt={titleImageAlt ?? 'Logo'}
-                    className='w-[38vw] max-w-[180px] md:max-w-[260px] h-auto select-none'
+                    className='w-[42vw] max-w-[220px] md:max-w-[300px] h-auto select-none'
                     style={{
-                      filter: 'drop-shadow(0 8px 28px rgba(255,255,255,0.35)) drop-shadow(0 0 14px rgba(0,0,0,0.25))',
+                      /* Drop-shadow discrète : le logo est en blanc, une ombre
+                         foncée renforce sa lisibilité sur le ciel clair du paysage. */
+                      filter: 'drop-shadow(0 6px 24px rgba(0,0,0,0.55)) drop-shadow(0 0 12px rgba(0,0,0,0.35))',
                     }}
                     draggable={false}
                   />
