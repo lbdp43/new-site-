@@ -270,13 +270,15 @@ export default function CoffretBuilder({
       {/* Layout 2 colonnes (desktop) / 1 colonne (mobile) */}
       <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-8 lg:gap-12">
         {/* ═══════════════════════════════════════════════════════
-            COLONNE GAUCHE : Pile + récap
+            COLONNE GAUCHE : Pile + récap — fond clair cream
+            Pas de lg:sticky : le scroll de la page passe librement
+            quand la souris est sur le module (bug utilisateur résolu).
            ═══════════════════════════════════════════════════════ */}
-        <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-3xl bg-gradient-to-br from-forest-900 via-forest-800 to-forest-950 text-cream-100 overflow-hidden shadow-2xl">
+        <aside>
+          <div className="rounded-3xl bg-cream-50 border border-forest-100 text-ink-900 overflow-hidden shadow-sm">
             {/* ─── Kicker ─── */}
             <div className="px-6 pt-6 pb-2">
-              <div className="text-[10px] uppercase tracking-[0.3em] text-gold-400 font-medium">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-gold-700 font-medium">
                 {t.kicker}
               </div>
             </div>
@@ -289,8 +291,8 @@ export default function CoffretBuilder({
               {stack.length === 0 ? (
                 // État vide : ring + message
                 <div className="flex flex-col items-center justify-center py-16 text-center">
-                  <div className="w-40 h-10 rounded-full border border-dashed border-cream-100/30 mb-4" />
-                  <p className="text-sm text-cream-200/70 font-display italic leading-relaxed whitespace-pre-line max-w-[260px]">
+                  <div className="w-40 h-10 rounded-full border border-dashed border-forest-200 mb-4" />
+                  <p className="text-sm text-ink-500 font-display italic leading-relaxed whitespace-pre-line max-w-[260px]">
                     {t.stackEmpty}
                   </p>
                 </div>
@@ -376,13 +378,13 @@ export default function CoffretBuilder({
                     })}
                   </AnimatePresence>
 
-                  {/* Ombre au sol (sous la base de la pile) */}
+                  {/* Ombre au sol (sous la base de la pile) — subtile sur fond clair */}
                   <div
                     className="h-3 rounded-full pointer-events-none mt-1"
                     style={{
                       width: BOTTLE_W * 1.15,
                       background:
-                        'radial-gradient(ellipse, rgba(0,0,0,0.45), transparent 65%)',
+                        'radial-gradient(ellipse, rgba(10, 107, 67, 0.22), transparent 65%)',
                     }}
                     aria-hidden="true"
                   />
@@ -390,25 +392,25 @@ export default function CoffretBuilder({
               )}
             </div>
 
-            {/* ─── Récap + CTA ─── */}
+            {/* ─── Récap + CTA (fond clair) ─── */}
             <div
               aria-live="polite"
-              className="px-6 py-5 border-t border-cream-100/10 bg-forest-950/50 backdrop-blur-sm"
+              className="px-6 py-5 border-t border-forest-100 bg-cream-100/50"
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <div className="font-display text-lg text-cream-50 leading-none">
+                  <div className="font-display text-lg text-forest-900 leading-none">
                     {t.yourBox}
                   </div>
-                  <div className="text-[11px] uppercase tracking-[0.15em] text-cream-200/60 mt-1">
+                  <div className="text-[11px] uppercase tracking-[0.15em] text-ink-500 mt-1">
                     {stack.length === 0 ? t.countEmpty : t.count(stack.length)}
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-cream-200/60 mb-0.5">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-ink-500 mb-0.5">
                     {t.total}
                   </div>
-                  <div className="font-display text-2xl md:text-3xl text-gold-400 leading-none">
+                  <div className="font-display text-2xl md:text-3xl text-gold-700 leading-none">
                     {t.format(total)}
                   </div>
                 </div>
@@ -417,7 +419,7 @@ export default function CoffretBuilder({
               {/* Gift message — visible seulement si pile non vide */}
               {allowGiftMessage && stack.length > 0 && (
                 <div className="mb-4">
-                  <label className="block text-[10px] uppercase tracking-[0.2em] text-cream-200/60 mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.2em] text-ink-500 mb-1.5">
                     {t.giftMessage}
                   </label>
                   <textarea
@@ -426,7 +428,7 @@ export default function CoffretBuilder({
                     placeholder={t.giftPlaceholder}
                     rows={2}
                     maxLength={200}
-                    className="w-full px-3 py-2 rounded-lg bg-cream-100/10 border border-cream-100/20 text-cream-50 placeholder-cream-200/40 text-sm resize-none focus:outline-none focus:border-gold-400 transition-colors"
+                    className="w-full px-3 py-2 rounded-lg bg-cream-50 border border-forest-200 text-ink-900 placeholder-ink-300 text-sm resize-none focus:outline-none focus:border-gold-600 transition-colors"
                   />
                 </div>
               )}
@@ -436,7 +438,7 @@ export default function CoffretBuilder({
                   type="button"
                   onClick={clearAll}
                   disabled={stack.length === 0}
-                  className="px-4 py-2.5 rounded-full text-xs font-medium border border-cream-100/20 text-cream-200/80 hover:bg-cream-100/10 hover:border-cream-100/40 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-2.5 rounded-full text-xs font-medium border border-forest-200 text-ink-700 hover:bg-forest-50 hover:border-forest-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                 >
                   {t.clear}
                 </button>
@@ -444,7 +446,7 @@ export default function CoffretBuilder({
                   type="button"
                   onClick={handleAddToCart}
                   disabled={stack.length === 0 || adding}
-                  className="flex-1 px-5 py-3 rounded-full text-sm font-medium bg-gold-500 hover:bg-gold-600 text-forest-950 shadow-lg hover:shadow-xl disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                  className="flex-1 px-5 py-3 rounded-full text-sm font-medium bg-forest-900 hover:bg-forest-800 text-cream-50 shadow-md hover:shadow-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                 >
                   {adding
                     ? t.adding
@@ -455,12 +457,12 @@ export default function CoffretBuilder({
               </div>
 
               {status === 'success' && (
-                <div className="mt-3 text-center text-xs text-gold-300 font-medium">
+                <div className="mt-3 text-center text-xs text-forest-700 font-medium">
                   ✓ {t.success}
                 </div>
               )}
               {status === 'error' && (
-                <div className="mt-3 text-center text-xs text-red-300 font-medium">
+                <div className="mt-3 text-center text-xs text-red-600 font-medium">
                   ⚠ {t.error}
                 </div>
               )}
