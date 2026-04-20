@@ -34,11 +34,15 @@ const shopHref = localizedPath('/boutique', lang);
   id="site-header"
   class="sticky top-0 z-40 header-glass"
 >
-  <!-- Bandeau promo (émeraude jewel avec filet doré en bas) -->
-  <div class="relative bg-forest-800 text-cream-100 text-center text-xs tracking-wide py-2 px-4">
-    <span class="font-medium">{tr('promo.free-shipping')}</span>
-    <span class="opacity-70 mx-2">·</span>
-    <span class="opacity-80">{tr('promo.delivery-time')}</span>
+  <!-- Bandeau promo (émeraude jewel avec filet doré en bas)
+       Caché en haut de page (hero visible), apparaît au scroll pour laisser le
+       visuel de bienvenue respirer. -->
+  <div class="promo-bar relative bg-forest-800 text-cream-100 text-center text-xs tracking-wide px-4 overflow-hidden">
+    <div class="py-2">
+      <span class="font-medium">{tr('promo.free-shipping')}</span>
+      <span class="opacity-70 mx-2">·</span>
+      <span class="opacity-80">{tr('promo.delivery-time')}</span>
+    </div>
     <!-- filet doré sous le bandeau promo (ornement signature) -->
     <div class="absolute inset-x-0 bottom-0 h-px gold-hairline"></div>
   </div>
@@ -146,6 +150,17 @@ const shopHref = localizedPath('/boutique', lang);
   /* Classe sur le <header> racine pour préserver sticky + z-index */
   .header-glass {
     isolation: isolate;
+  }
+
+  /* Bandeau promo — caché en haut de page (hero visible), se déplie au scroll. */
+  .promo-bar {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 320ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease-out;
+  }
+  .header-glass[data-scrolled="true"] .promo-bar {
+    max-height: 40px;
+    opacity: 1;
   }
 
   /* État au scroll : teinte légèrement plus dense + filet doré plus visible */

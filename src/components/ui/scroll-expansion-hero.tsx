@@ -225,7 +225,9 @@ const ScrollExpandMedia = ({
                 className='w-screen h-screen object-cover object-center'
               />
             )}
-            <div className='absolute inset-0 bg-black/40' />
+            {/* Overlay très léger juste pour lisibilité du texte en bas — on ne
+                fonce plus la vidéo de paysage. */}
+            <div className='absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent' />
           </motion.div>
 
           <div className='container mx-auto flex flex-col items-center justify-start relative z-10'>
@@ -339,16 +341,16 @@ const ScrollExpandMedia = ({
 
               {titleImageSrc ? (
                 <motion.div
-                  className='absolute top-6 md:top-10 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center pointer-events-none'
+                  className='absolute top-2 md:top-4 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center pointer-events-none'
                   animate={{ opacity: 1 - scrollProgress * 1.6 }}
                   transition={{ duration: 0.1 }}
                 >
                   <img
                     src={titleImageSrc}
                     alt={titleImageAlt ?? 'Logo'}
-                    className='w-[52vw] max-w-[280px] md:max-w-[360px] h-auto select-none'
+                    className='w-[46vw] max-w-[240px] md:max-w-[300px] h-auto select-none'
                     style={{
-                      filter: 'drop-shadow(0 6px 24px rgba(0,0,0,0.55)) drop-shadow(0 0 12px rgba(0,0,0,0.35))',
+                      filter: 'drop-shadow(0 8px 32px rgba(0,0,0,0.65)) drop-shadow(0 0 16px rgba(255,255,255,0.25))',
                     }}
                     draggable={false}
                   />
