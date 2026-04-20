@@ -36,10 +36,14 @@ const SOURCE_TO_SLUG = {
   'liqueurs-artisanales-verveine-cadeau-9-1420x2048.png': 'absinthe-cbd-citron',
 };
 
-// Seuil en-dessous duquel un pixel est considéré comme "fond noir"
-// → converti en transparent. Les pixels de la bouteille (verre + étiquette +
-// bouchon doré) ont une luminosité bien supérieure.
-const DARK_LUMINOSITY_THRESHOLD = 28;
+// Double seuil pour préserver la luminosité ET les couleurs de la bouteille :
+// - lum ≤ HARD_THRESHOLD : pixel purement noir → alpha 0 (transparent)
+// - lum entre HARD et SOFT : alpha proportionnel (transition douce, préserve
+//   l'anti-aliasing des bords et évite le "halo noir" autour de la bouteille)
+// - lum ≥ SOFT_THRESHOLD : pixel laissé intact (alpha original, couleurs
+//   préservées → aucune modification sur la bouteille elle-même)
+const HARD_THRESHOLD = 12;
+const SOFT_THRESHOLD = 32;
 
 // Pour classifier : on lit la couleur dominante de la zone étiquette centrale
 async function detectDominantColor(inputPath) {
@@ -106,9 +110,14 @@ async function cleanAndCrop(inputPath, outputPath) {
     const g = newData[i + 1];
     const b = newData[i + 2];
     const lum = (r + g + b) / 3;
-    if (lum < DARK_LUMINOSITY_THRESHOLD) {
-      newData[i + 3] = 0; // alpha 0
+    if (lum <= HARD_THRESHOLD) {
+      newData[i + 3] = 0; // transparent total
+    } else if (lum < SOFT_THRESHOLD) {
+      // Transition douce : alpha proportionnel → bords préservés
+      const ratio = (lum - HARD_THRESHOLD) / (SOFT_THRESHOLD - HARD_THRESHOLD);
+      newData[i + 3] = Math.round(255 * ratio);
     }
+    // lum >= SOFT_THRESHOLD : alpha inchangé (couleurs bouteille préservées)
   }
 
   // Passe 2 : détection bbox sur pixels visibles
@@ -143,10 +152,42 @@ async function cleanAndCrop(inputPath, outputPath) {
       width: right - left + 1,
       height: bottom - top + 1,
     })
-    .webp({ quality: 90, alphaQuality: 90 })
+    .webp({ quality: 95, alphaQuality: 100, lossless: false, effort: 6 })
     .toFile(outputPath);
 
   return { width: right - left + 1, height: bottom - top + 1 };
+}
+
+/**
+ * Version non-croppée : on garde les dimensions originales du PNG, on remplace
+ * juste les pixels sombres par du transparent. Pas de crop, pas de recadrage —
+ * la bouteille reste à la même position et taille que dans la photo source.
+ */
+async function removeBlackBackgroundOnly(inputPath, outputPath) {
+  const { data, info } = await sharp(inputPath)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const { width, height, channels } = info;
+  const newData = Buffer.from(data);
+
+  for (let i = 0; i < newData.length; i += channels) {
+    const r = newData[i];
+    const g = newData[i + 1];
+    const b = newData[i + 2];
+    const lum = (r + g + b) / 3;
+    if (lum <= HARD_THRESHOLD) {
+      newData[i + 3] = 0;
+    } else if (lum < SOFT_THRESHOLD) {
+      const ratio = (lum - HARD_THRESHOLD) / (SOFT_THRESHOLD - HARD_THRESHOLD);
+      newData[i + 3] = Math.round(255 * ratio);
+    }
+  }
+
+  await sharp(newData, { raw: { width, height, channels } })
+    .webp({ quality: 95, alphaQuality: 100, lossless: false, effort: 6 })
+    .toFile(outputPath);
 }
 
 async function main() {
@@ -159,34 +200,18 @@ async function main() {
 
     console.log(`[import-cbd] ${filename} → ${slug}`);
 
-    // Version non-croppée (comme pour les autres 20cl du site)
     const outRaw = `${OUT_DIR}/${slug}-20cl.webp`;
-    // Version stack (déjà pré-croppée serrée)
     const outStack = `${OUT_DIR}/${slug}-20cl-stack.webp`;
 
-    // Pour la "raw" on garde un peu plus de marge (padding 30 au lieu de 4)
-    // pour ressembler aux autres -20cl.webp du site. Le crop final -stack
-    // sera serré pour l'empilement.
-    await cleanAndCrop(inputPath, outStack);
-    console.log(`[import-cbd] ✓ écrit ${outStack}`);
+    // 1) Version "raw" : dimensions originales + fond noir → transparent,
+    //    SANS crop ni modification de la composition.
+    await removeBlackBackgroundOnly(inputPath, outRaw);
+    console.log(`[import-cbd] ✓ écrit ${outRaw} (original, fond enlevé)`);
 
-    // Pour l'image non-croppée on refait un crop mais moins serré
-    // (padding ~50px) pour un rendu fiche produit équivalent aux autres.
-    const rawDims = await sharp(outStack).metadata();
-    // On prend la version stack et on l'étend avec du padding transparent
-    // pour simuler l'encombrement des autres -20cl.webp.
-    const rawPadding = 80;
-    await sharp(outStack)
-      .extend({
-        top: rawPadding,
-        bottom: rawPadding,
-        left: rawPadding,
-        right: rawPadding,
-        background: { r: 0, g: 0, b: 0, alpha: 0 },
-      })
-      .webp({ quality: 90, alphaQuality: 90 })
-      .toFile(outRaw);
-    console.log(`[import-cbd] ✓ écrit ${outRaw}`);
+    // 2) Version "stack" : croppée serrée pour l'empilement dans le
+    //    configurateur (parité avec les autres -stack.webp du site).
+    await cleanAndCrop(inputPath, outStack);
+    console.log(`[import-cbd] ✓ écrit ${outStack} (croppée pour pile)`);
   }
 
   console.log('[import-cbd] Terminé.');
