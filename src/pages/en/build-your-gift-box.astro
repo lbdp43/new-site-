@@ -69,40 +69,27 @@ const schema = [breadcrumb, productSchema];
 
   <section class="py-12 md:py-16">
     <div class="max-w-7xl mx-auto px-6">
-      <!-- Explanation -->
+      <!-- Explanation — 3 steps -->
       <div class="grid md:grid-cols-3 gap-6 mb-12">
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
-          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">1</div>
-          <h3 class="font-display text-lg text-forest-900 mb-1">Pick any 3 bottles</h3>
-          <p class="text-sm text-ink-700 leading-relaxed">From our full range — digestifs, aperitifs, CBD infusions, limited editions.</p>
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display text-lg">1</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Stack your bottles</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">3 or more, your choice. Click any bottle — digestifs, aperitifs, CBD infusions, limited editions.</p>
         </div>
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
-          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">2</div>
-          <h3 class="font-display text-lg text-forest-900 mb-1">Stackable bottles</h3>
-          <p class="text-sm text-ink-700 leading-relaxed">A patented 20 cl format that stacks naturally — prepared in our workshop in Saint-Didier-en-Velay.</p>
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display text-lg">2</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Stackable 20 cl format</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">Our patented format that stacks naturally — prepared in our workshop in Saint-Didier-en-Velay.</p>
         </div>
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
-          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">3</div>
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display text-lg">3</div>
           <h3 class="font-display text-lg text-forest-900 mb-1">Fast shipping</h3>
           <p class="text-sm text-ink-700 leading-relaxed">Free shipping above €65, dispatched within 2 to 3 business days across France.</p>
         </div>
       </div>
 
+      <!-- Builder (stack + grid + suggested trios included) -->
       <CoffretBuilder products={eligibleProducts} size={3} lang="en" client:load />
-    </div>
-  </section>
-
-  <section class="py-20 bg-forest-900 text-cream-100">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="font-display text-3xl md:text-4xl mb-6">Looking for the perfect trio?</h2>
-      <p class="text-cream-200/80 text-lg leading-relaxed mb-8">
-        Our "discovery" selection: L'Alchimie Végétale (the award winner),
-        Le Nectar d'Ostara (a floral aperitif) and Le Cerf'Gent (the bitter gentian).
-        A complete tour of the house.
-      </p>
-      <p class="text-cream-200/60 text-sm">
-        Or compose it to your own taste — there are no wrong choices.
-      </p>
     </div>
   </section>
 </Layout>

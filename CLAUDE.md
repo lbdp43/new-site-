@@ -205,27 +205,42 @@ la bascule" DOIT être ajoutée à la section "À faire APRÈS la bascule" de
 `docs/bascule-www.md` dans le même commit. Objectif : le jour J, il suffit
 de dérouler la liste sans avoir à retrouver les décisions éparpillées.
 
-## Coffret DIY — 3 bouteilles au choix
+## Coffret DIY — configurateur "Chute & rebond"
 
-Feature de différenciation : le visiteur compose son propre coffret cadeau en
-choisissant 3 bouteilles parmi la gamme (exception : accessoires). Implémenté
-depuis avril 2026.
+Feature de différenciation : le visiteur compose son propre coffret en
+**empilant** dynamiquement des bouteilles parmi la gamme. Refonte UX avril 2026
+depuis un design handoff professionnel (variante "Chute & rebond" choisie).
 
 - **UI** : `src/components/coffret/CoffretBuilder.tsx` (île React, client:load)
+  - Layout 2 colonnes desktop / 1 colonne mobile avec pile sticky à gauche
+  - Animation **Framer Motion** `<AnimatePresence>` + spring physics (stiffness
+    280, damping 18) pour l'effet "bouteille qui tombe et rebondit"
+  - Tilt déterministe par `uid` pour éviter une pile trop rigide
+  - Doublons autorisés (plusieurs fois la même bouteille via `uid` unique)
+  - Persistance localStorage (clé `lbdp-coffret-v2`)
+  - Pas de limite stricte — la "taille cible" est 3 (metadata WC), mais on
+    peut empiler 2, 4, 5… ou plus
 - **Pages** : `/composer-mon-coffret` (FR) et `/en/build-your-gift-box` (EN)
-- **Teaser** sur la homepage (FR + EN) — section après le carousel produits
-- **Intégration panier** : quand le visiteur valide, `cartActions.addItem` est
-  appelé **3 fois**, une par bouteille, avec `cart_item_data` portant les flags
-  `_coffret_diy: "3"`, `_coffret_position: "1/3"` et `_coffret_label`. Côté
-  WordPress/WooCommerce, ces métadonnées apparaissent dans l'admin de commande
-  (sous chaque ligne produit), signalant que les 3 bouteilles sont à emballer
-  ensemble en coffret cadeau.
-- **Pas de plugin WP nouveau requis** : la Store API native accepte
-  `cart_item_data` et WC Blocks le préserve en BO. Stock, TVA, livraison,
-  emails, WooPayments, EasyBee → fonctionnent comme d'habitude.
-- **Contenances** : par défaut le composant choisit la plus petite contenance
-  disponible du produit (`sizes[0]`). À ajuster si besoin dans
-  `composer-mon-coffret.astro` (mapper `defaultSize` par produit).
+- **Teaser homepage** (FR + EN) — après le carousel produits
+- **Photos** : utilise `p.sizeImages[20]` (format empilable 20 cl) quand dispo,
+  fallback sur `p.image` sinon
+- **Trios suggérés** (`src/data/coffret-trios.ts`) — 6 compositions curées
+  affichées sous le configurateur, clic → remplit la pile d'un coup
+- **Intégration panier** : à l'ajout, `cartActions.addItem` est appelé N fois
+  avec `cart_item_data` : `_coffret_diy: N`, `_coffret_position: i/N`,
+  `_coffret_label`, et optionnel `_coffret_gift_message`. Côté WooCommerce,
+  ces métadonnées apparaissent dans l'admin de commande sous chaque ligne.
+- **Pas de plugin WP requis** : la Store API native accepte `cart_item_data`
+  et WC Blocks le préserve en BO. Stock, TVA, livraison, emails, WooPayments,
+  EasyBee → fonctionnent comme d'habitude.
+- **Contenance commandée** : 20 cl (format empilable) si dispo côté WC,
+  sinon la plus petite taille. Ajustable dans la page `.astro` via le champ
+  `defaultSize` et `wcSizeAttribute`.
+
+Design handoff d'origine : `design_handoff_coffret_bouteilles/` (reçu en zip).
+Variante retenue : Chute & rebond. Variantes 2 (coffret bois) et 3 (vitrine)
+disponibles dans le handoff si on veut changer un jour — il suffit de
+remplacer le contenu de la colonne gauche.
 
 ## Fichiers critiques i18n
 

@@ -75,41 +75,27 @@ const schema = [breadcrumb, productSchema];
 
   <section class="py-12 md:py-16">
     <div class="max-w-7xl mx-auto px-6">
-      <!-- Bandeau d'explication -->
+      <!-- Bandeau d'explication — 3 étapes concises -->
       <div class="grid md:grid-cols-3 gap-6 mb-12">
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
-          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">1</div>
-          <h3 class="font-display text-lg text-forest-900 mb-1">Choisissez 3 bouteilles</h3>
-          <p class="text-sm text-ink-700 leading-relaxed">Parmi toute notre gamme — digestifs, apéritifs, infusions CBD, éditions limitées.</p>
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display text-lg">1</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Empilez vos bouteilles</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">3 ou plus selon votre envie. Toute la gamme est cliquable — digestifs, apéritifs, infusions CBD, éditions limitées.</p>
         </div>
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
-          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">2</div>
-          <h3 class="font-display text-lg text-forest-900 mb-1">Bouteilles empilables</h3>
-          <p class="text-sm text-ink-700 leading-relaxed">Un format 20 cl breveté qui s'empile naturellement — préparé dans notre atelier à Saint-Didier-en-Velay.</p>
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display text-lg">2</div>
+          <h3 class="font-display text-lg text-forest-900 mb-1">Format 20 cl empilable</h3>
+          <p class="text-sm text-ink-700 leading-relaxed">Notre format breveté qui s'empile naturellement — préparé dans notre atelier à Saint-Didier-en-Velay.</p>
         </div>
         <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
-          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display">3</div>
+          <div class="w-10 h-10 rounded-full bg-forest-100 text-forest-700 flex items-center justify-center mb-3 font-display text-lg">3</div>
           <h3 class="font-display text-lg text-forest-900 mb-1">Expédition rapide</h3>
           <p class="text-sm text-ink-700 leading-relaxed">Livraison offerte dès 65 €, sous 2 à 3 jours ouvrés en France métropolitaine.</p>
         </div>
       </div>
 
-      <!-- Builder -->
+      <!-- Builder (pile + grille + trios suggérés inclus) -->
       <CoffretBuilder products={eligibleProducts} size={3} lang="fr" client:load />
-    </div>
-  </section>
-
-  <section class="py-20 bg-forest-900 text-cream-100">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="font-display text-3xl md:text-4xl mb-6">Une idée du coffret parfait&nbsp;?</h2>
-      <p class="text-cream-200/80 text-lg leading-relaxed mb-8">
-        Notre sélection "pour découvrir" : L'Alchimie Végétale (la primée),
-        Le Nectar d'Ostara (un apéritif floral) et Le Cerf'Gent (la gentiane
-        amère). Un tour complet de la maison.
-      </p>
-      <p class="text-cream-200/60 text-sm">
-        Ou composez selon vos envies — il n'y a pas de mauvais choix.
-      </p>
     </div>
   </section>
 </Layout>
