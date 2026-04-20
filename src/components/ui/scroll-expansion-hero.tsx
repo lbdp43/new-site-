@@ -184,8 +184,12 @@ const ScrollExpandMedia = ({
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
-  const mediaWidth = 300 + scrollProgress * (isMobileState ? 650 : 1250);
-  const mediaHeight = 400 + scrollProgress * (isMobileState ? 200 : 400);
+  // Taille finale (scrollProgress = 1) : la photo prend TOUTE la largeur de
+  // l'écran et occupe la hauteur maximale possible du viewport.
+  const finalWidth = typeof window !== 'undefined' ? window.innerWidth : isMobileState ? 950 : 1550;
+  const finalHeight = typeof window !== 'undefined' ? window.innerHeight : isMobileState ? 600 : 800;
+  const mediaWidth = 300 + scrollProgress * (finalWidth - 300);
+  const mediaHeight = 400 + scrollProgress * (finalHeight - 400);
   const textTranslateX = scrollProgress * (isMobileState ? 180 : 150);
 
   const firstWord = title ? title.split(' ')[0] : '';
@@ -237,8 +241,8 @@ const ScrollExpandMedia = ({
                 style={{
                   width: `${mediaWidth}px`,
                   height: `${mediaHeight}px`,
-                  maxWidth: '95vw',
-                  maxHeight: '85vh',
+                  maxWidth: '100vw',
+                  maxHeight: '100vh',
                   boxShadow: '0px 0px 50px rgba(0, 0, 0, 0.3)',
                 }}
               >
