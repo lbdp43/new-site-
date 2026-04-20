@@ -20,8 +20,10 @@ export const ui = {
   fr: {
     // Navigation principale
     'nav.home': 'Accueil',
+    'nav.maison': 'La Maison',
     'nav.story': 'Notre histoire',
     'nav.shop': 'Boutique',
+    'nav.shop-all': 'Toute la boutique',
     'nav.lumiere': 'Lumière Obscure',
     'nav.plants': 'Nos plantes',
     'nav.cocktails': 'Cocktails',
@@ -143,8 +145,10 @@ export const ui = {
   en: {
     // Main navigation
     'nav.home': 'Home',
+    'nav.maison': 'The House',
     'nav.story': 'Our story',
     'nav.shop': 'Shop',
+    'nav.shop-all': 'All bottles',
     'nav.lumiere': 'Dark Light',
     'nav.plants': 'Our plants',
     'nav.cocktails': 'Cocktails',

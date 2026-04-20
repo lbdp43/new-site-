@@ -13,6 +13,7 @@
     "preview": "astro preview",
     "sync:stock": "node scripts/sync-wc-stock.mjs",
     "generate:products": "node scripts/generate-products.mjs",
+    "crop:stack": "node scripts/crop-stack-images.mjs",
     "indexnow:submit": "node scripts/indexnow-submit.mjs",
     "astro": "astro"
   },
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
     "@tailwindcss/typography": "^0.5.19",
+    "sharp": "^0.34.5",
     "typescript": "^5.9.3"
   }
 }

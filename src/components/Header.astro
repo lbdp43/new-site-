@@ -11,15 +11,50 @@ interface Props {
 const { lang = 'fr' } = Astro.props;
 const tr = (key: UIKey) => t(key, lang);
 
-// Navigation construite dynamiquement selon la langue
-const navItems: { labelKey: UIKey; href: string }[] = [
-  { labelKey: 'nav.story', href: localizedPath('/notre-histoire', lang) },
-  { labelKey: 'nav.shop', href: localizedPath('/boutique', lang) },
-  { labelKey: 'nav.lumiere', href: localizedPath('/lumiere-obscure', lang) },
-  { labelKey: 'nav.plants', href: localizedPath('/nos-plantes', lang) },
-  { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
+/**
+ * Navigation à 2 niveaux : items racine + sous-menus optionnels.
+ *
+ * Regroupement pensé pour que la barre principale reste aérée (5 items
+ * racine seulement), tandis que les pages secondaires sont accessibles
+ * via le dropdown du parent logique :
+ *
+ *   Maison         → Notre histoire, Nos plantes, Journal (blog)
+ *   Boutique       → Toute la boutique, Lumière Obscure, Cocktails
+ *   Ateliers       (direct)
+ *   Pros           (direct)
+ *   Contact        (direct)
+ */
+interface NavChild {
+  labelKey: UIKey;
+  href: string;
+  description?: UIKey;
+}
+interface NavItem {
+  labelKey: UIKey;
+  href: string;
+  children?: NavChild[];
+}
+
+const navItems: NavItem[] = [
+  {
+    labelKey: 'nav.maison',
+    href: localizedPath('/notre-histoire', lang),
+    children: [
+      { labelKey: 'nav.story', href: localizedPath('/notre-histoire', lang) },
+      { labelKey: 'nav.plants', href: localizedPath('/nos-plantes', lang) },
+      { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
+    ],
+  },
+  {
+    labelKey: 'nav.shop',
+    href: localizedPath('/boutique', lang),
+    children: [
+      { labelKey: 'nav.shop-all', href: localizedPath('/boutique', lang) },
+      { labelKey: 'nav.lumiere', href: localizedPath('/lumiere-obscure', lang) },
+      { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
+    ],
+  },
   { labelKey: 'nav.workshops', href: localizedPath('/ateliers', lang) },
-  { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
   { labelKey: 'nav.pros', href: localizedPath('/professionnels', lang) },
   { labelKey: 'nav.contact', href: localizedPath('/contact', lang) },
 ];
@@ -48,30 +83,64 @@ const shopHref = localizedPath('/boutique', lang);
        l'image award respirer sans concurrence visuelle. Apparaît avec
        transition à la fin du scroll du hero. -->
   <div class="relative header-glass-body header-main-collapsible">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-8">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-5 flex items-center justify-between gap-4">
       <a href={homeHref} class="flex items-center gap-3 group shrink-0" aria-label={`${site.name} — ${tr('cta.back-home')}`}>
         <img
           src="/images/brand/logo-lbdp.png"
           alt={site.name}
-          class="h-10 md:h-12 w-auto max-w-[220px] sm:max-w-[260px] object-contain shrink-0 group-hover:opacity-80 transition-opacity"
-          width="260"
-          height="48"
+          class="h-9 md:h-11 w-auto max-w-[180px] sm:max-w-[220px] object-contain shrink-0 group-hover:opacity-80 transition-opacity"
+          width="240"
+          height="44"
           fetchpriority="high"
         />
       </a>
 
-      <nav class="hidden lg:flex items-center gap-8 text-sm">
+      <!-- Nav regroupée en 5 items (avec dropdowns sur les 2 parents qui
+           ont des enfants). Visible à partir de lg (1024px) maintenant que
+           la nav est moins chargée. -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm">
         {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="relative text-ink-700 hover:text-forest-700 transition-colors font-medium nav-link"
-          >
-            {tr(item.labelKey)}
-          </a>
+          item.children ? (
+            <div class="relative group/nav">
+              <a
+                href={item.href}
+                class="relative text-ink-700 hover:text-forest-700 transition-colors font-medium nav-link whitespace-nowrap inline-flex items-center gap-1 py-2"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                {tr(item.labelKey)}
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-60 group-hover/nav:rotate-180 transition-transform">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </a>
+              <!-- Dropdown : apparaît au hover/focus du parent.
+                   Pont invisible (padding-top) pour traverser le gap sans
+                   que la souris quitte le group. -->
+              <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible group-focus-within/nav:opacity-100 group-focus-within/nav:visible transition-all duration-200 z-50 min-w-[220px]">
+                <div class="bg-cream-50/98 backdrop-blur-md rounded-xl border border-forest-100 shadow-xl py-2 overflow-hidden">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block px-5 py-2.5 text-sm text-ink-700 hover:bg-cream-100 hover:text-forest-700 transition-colors whitespace-nowrap"
+                    >
+                      {tr(child.labelKey)}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class="relative text-ink-700 hover:text-forest-700 transition-colors font-medium nav-link whitespace-nowrap py-2"
+            >
+              {tr(item.labelKey)}
+            </a>
+          )
         ))}
       </nav>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 md:gap-3 shrink-0">
         <!-- Language switcher (desktop) -->
         <a
           href={switchTargetPath}
@@ -83,9 +152,11 @@ const shopHref = localizedPath('/boutique', lang);
         </a>
 
         <CartIcon client:load />
+        <!-- CTA "Découvrir la boutique" : visible à partir de lg (1024px)
+             car la nav tient maintenant confortablement en lg. -->
         <a
           href={shopHref}
-          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-forest-700 hover:bg-forest-800 text-cream-100 text-sm font-medium transition-all shadow-[0_0_0_1px_rgba(205,182,132,0.2),0_4px_14px_-4px_rgba(10,107,67,0.4)] hover:shadow-[0_0_0_1px_rgba(205,182,132,0.6),0_8px_22px_-6px_rgba(205,182,132,0.4)]"
+          class="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-forest-700 hover:bg-forest-800 text-cream-100 text-sm font-medium transition-all shadow-[0_0_0_1px_rgba(205,182,132,0.2),0_4px_14px_-4px_rgba(10,107,67,0.4)] hover:shadow-[0_0_0_1px_rgba(205,182,132,0.6),0_8px_22px_-6px_rgba(205,182,132,0.4)] whitespace-nowrap"
         >
           {tr('nav.discover-shop')}
         </a>
@@ -107,16 +178,37 @@ const shopHref = localizedPath('/boutique', lang);
     <div class="absolute inset-x-0 bottom-0 h-px gold-hairline opacity-0 transition-opacity duration-500" id="header-gold-line"></div>
   </div>
 
-  <!-- Mobile menu -->
+  <!-- Mobile menu — avec accordéons sur les items parents -->
   <div id="mobile-menu" class="hidden lg:hidden border-t border-gold-500/20 bg-cream-50/95 backdrop-blur-md">
-    <nav class="flex flex-col px-6 py-4 gap-1">
+    <nav class="flex flex-col px-6 py-4 gap-0">
       {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="py-3 text-ink-700 hover:text-forest-700 border-b border-forest-100/60 last:border-0"
-        >
-          {tr(item.labelKey)}
-        </a>
+        item.children ? (
+          <details class="group/mob border-b border-forest-100/60">
+            <summary class="py-3 flex items-center justify-between cursor-pointer text-ink-700 hover:text-forest-700 list-none">
+              <span>{tr(item.labelKey)}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-60 group-open/mob:rotate-180 transition-transform">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </summary>
+            <div class="pb-3 pl-4 border-l border-forest-100 ml-1 flex flex-col gap-0.5">
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  class="py-2 text-sm text-ink-500 hover:text-forest-700"
+                >
+                  {tr(child.labelKey)}
+                </a>
+              ))}
+            </div>
+          </details>
+        ) : (
+          <a
+            href={item.href}
+            class="py-3 text-ink-700 hover:text-forest-700 border-b border-forest-100/60"
+          >
+            {tr(item.labelKey)}
+          </a>
+        )
       ))}
       <a
         href={switchTargetPath}
