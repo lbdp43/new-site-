@@ -16,6 +16,10 @@ export type WcStockStatus = 'instock' | 'outofstock' | 'onbackorder';
 export interface WcLiveProduct {
   stockStatus: WcStockStatus;
   stockQuantity: number | null;
+  /** Prix par contenance (cl → EUR). Renseigné pour les produits variables
+   *  lorsque `sync-wc-stock.mjs` a pu lire les variations WC. Clés = strings
+   *  car JSON. */
+  prices?: Record<string, number>;
 }
 
 interface WcLiveData {
@@ -69,6 +73,29 @@ export function isOnBackorder(wcId?: number): boolean {
 export function getStockQuantity(wcId?: number): number | null {
   if (!wcId) return null;
   return data.products[String(wcId)]?.stockQuantity ?? null;
+}
+
+/** Prix par contenance en cl (synced depuis les variations WC au prebuild).
+ *  Retourne `{}` si aucun prix par format n'est disponible — l'UI peut alors
+ *  retomber sur le range priceMin/priceMax. */
+export function getSizePrices(wcId?: number): Record<number, number> {
+  if (!wcId) return {};
+  const entry = data.products[String(wcId)];
+  if (!entry?.prices) return {};
+  const out: Record<number, number> = {};
+  for (const [cl, price] of Object.entries(entry.prices)) {
+    const clNum = Number(cl);
+    if (Number.isFinite(clNum) && Number.isFinite(price) && price > 0) {
+      out[clNum] = price;
+    }
+  }
+  return out;
+}
+
+/** Prix d'une contenance donnée (cl). Retourne null si non disponible. */
+export function getSizePrice(wcId: number | undefined, cl: number): number | null {
+  const prices = getSizePrices(wcId);
+  return prices[cl] ?? null;
 }
 
 /** Méta-info sur la fraîcheur des données (utile pour un badge admin). */

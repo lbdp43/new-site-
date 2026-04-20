@@ -212,15 +212,19 @@ const proArguments = [
           Tout est fait à la main,<br />dans nos chais de Saint-Didier
         </h2>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-        <img src="/images/gallery/production-01.webp" alt="Unité de production La Brasserie des Plantes" loading="lazy" class="aspect-square w-full object-cover rounded-lg lg:col-span-2 lg:row-span-2" />
-        <img src="/images/gallery/atelier-01.webp" alt="Préparation des plantes" loading="lazy" class="aspect-square w-full object-cover rounded-lg" />
-        <img src="/images/gallery/atelier-02.webp" alt="Élaboration artisanale dans notre atelier" loading="lazy" class="aspect-square w-full object-cover rounded-lg" />
-        <img src="/images/gallery/evenement-01.webp" alt="Équipe en dégustation" loading="lazy" class="aspect-square w-full object-cover rounded-lg" />
-        <img src="/images/gallery/atelier-03.webp" alt="Préparation des produits" loading="lazy" class="aspect-square w-full object-cover rounded-lg" />
-        <img src="/images/gallery/production-02.webp" alt="Unité de production" loading="lazy" class="aspect-square w-full object-cover rounded-lg" />
-        <img src="/images/gallery/atelier-04.webp" alt="Photo atelier" loading="lazy" class="aspect-square w-full object-cover rounded-lg" />
-        <img src="/images/gallery/atelier-05.webp" alt="Vue atelier" loading="lazy" class="aspect-square w-full object-cover rounded-lg" />
+      <div class="aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl bg-forest-950">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/videos/atelier-brasserie-poster.jpg"
+          aria-label="Dans l'atelier de la Brasserie des Plantes — Saint-Didier-en-Velay"
+          class="w-full h-full object-cover"
+        >
+          <source src="/videos/atelier-brasserie.mp4" type="video/mp4" />
+        </video>
       </div>
     </div>
   </section>

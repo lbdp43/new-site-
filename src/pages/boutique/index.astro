@@ -65,20 +65,193 @@ const itemListSchema = {
     </div>
   </section>
 
-  {order.map((r) => (
-    <section id={r} class="py-16 bg-white odd:bg-cream-50/60">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="mb-10 max-w-2xl">
-          <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
-            Gamme — {productsByRange[r].length} références
+  <!-- Conteneur grille : sidebar sticky à gauche (lg+), contenu produits à droite.
+       Sur mobile, la sidebar est masquée — la chip nav du hero sert de
+       raccourci entre gammes. -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-12 grid lg:grid-cols-[240px_minmax(0,1fr)] gap-10 lg:gap-12">
+      <!-- Sidebar (desktop only) -->
+      <aside class="hidden lg:block" aria-label="Navigation boutique">
+        <div class="sticky top-24 space-y-8">
+          <div>
+            <a
+              href="#top"
+              class="inline-flex items-center gap-2 text-sm font-display text-forest-900 border-b border-forest-300 hover:border-forest-700 pb-0.5 transition-colors"
+            >
+              Voir tous nos produits
+            </a>
           </div>
-          <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-3">
-            {ranges[r].name}
-          </h2>
-          <p class="text-ink-700 leading-relaxed">{ranges[r].description}</p>
+
+          <nav aria-label="Nos catégories">
+            <div class="text-[10px] uppercase tracking-[0.25em] text-forest-600 font-medium mb-4">
+              Nos catégories
+            </div>
+            <ul class="space-y-0.5">
+              {order.map((r) => (
+                <li>
+                  <a
+                    href={`#${r}`}
+                    data-shop-cat={r}
+                    class="shop-cat-link block py-2 border-b border-forest-100/70 text-sm text-ink-700 hover:text-forest-900 transition-colors"
+                  >
+                    <span class="flex items-center justify-between gap-3">
+                      <span>{ranges[r].name}</span>
+                      <span class="text-[11px] text-ink-500">({productsByRange[r].length})</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <!-- Vu récemment — mêmes entrées localStorage que la fiche produit.
+               Le bloc reste caché tant que l'historique est vide. -->
+          <div id="shop-recently-viewed" class="hidden">
+            <div class="flex items-center justify-between mb-4 gap-2">
+              <div class="text-[10px] uppercase tracking-[0.25em] text-forest-600 font-medium">
+                Vu récemment
+              </div>
+              <button
+                type="button"
+                id="shop-recently-viewed-clear"
+                class="text-[10px] text-ink-500 hover:text-forest-700 underline decoration-dotted underline-offset-4"
+                aria-label="Effacer l'historique"
+              >
+                Effacer
+              </button>
+            </div>
+            <ul id="shop-recently-viewed-list" class="space-y-3"></ul>
+          </div>
         </div>
-        <ProductMasonry items={productsByRange[r]} />
+      </aside>
+
+      <!-- Contenu principal : sections par gamme -->
+      <div class="space-y-16">
+        {order.map((r) => (
+          <section id={r} class="scroll-mt-24">
+            <div class="mb-8 max-w-2xl">
+              <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+                Gamme — {productsByRange[r].length} références
+              </div>
+              <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-3">
+                {ranges[r].name}
+              </h2>
+              <p class="text-ink-700 leading-relaxed">{ranges[r].description}</p>
+            </div>
+            <ProductMasonry items={productsByRange[r]} />
+          </section>
+        ))}
       </div>
-    </section>
-  ))}
+    </div>
+  </div>
+
+  <script>
+    // ─── Sidebar boutique : "Vu récemment" + highlight catégorie active ────
+    //
+    // 1) Lit localStorage (même clé que la fiche produit) et rend jusqu'à
+    //    5 vignettes dans la sidebar. La section reste cachée si vide.
+    // 2) Active un état visuel sur le lien catégorie correspondant à la
+    //    section actuellement à l'écran (IntersectionObserver).
+    (() => {
+      const STORAGE_KEY = 'lbdp-recently-viewed-v1';
+      const MAX_DISPLAY = 5;
+
+      type Entry = {
+        slug: string;
+        name: string;
+        image: string;
+        priceMin: number;
+        priceMax: number;
+        range: string;
+        viewedAt: number;
+      };
+
+      const escapeHtml = (s: string) =>
+        s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+
+      const renderRecent = () => {
+        const section = document.getElementById('shop-recently-viewed');
+        const list = document.getElementById('shop-recently-viewed-list');
+        if (!section || !list) return;
+
+        let entries: Entry[] = [];
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          entries = raw ? JSON.parse(raw) : [];
+        } catch {
+          entries = [];
+        }
+        entries = (Array.isArray(entries) ? entries : [])
+          .filter((e) => e && typeof e.slug === 'string')
+          .slice(0, MAX_DISPLAY);
+
+        if (entries.length === 0) {
+          section.classList.add('hidden');
+          return;
+        }
+
+        list.innerHTML = entries.map((p) => `
+          <li>
+            <a href="/boutique/${encodeURIComponent(p.slug)}" class="group flex items-center gap-3">
+              <div class="flex-none w-12 h-14 rounded-md bg-white border border-forest-100/60 overflow-hidden">
+                <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy" class="w-full h-full object-contain p-1" />
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="font-display text-xs text-forest-900 leading-tight line-clamp-2 group-hover:text-forest-700 transition-colors">${escapeHtml(p.name)}</div>
+                <div class="text-[10px] text-gold-600 mt-0.5">${p.priceMin === p.priceMax ? `${p.priceMin} €` : `dès ${p.priceMin} €`}</div>
+              </div>
+            </a>
+          </li>
+        `).join('');
+
+        section.classList.remove('hidden');
+      };
+
+      renderRecent();
+
+      document.getElementById('shop-recently-viewed-clear')?.addEventListener('click', () => {
+        try { localStorage.removeItem(STORAGE_KEY); } catch {}
+        const section = document.getElementById('shop-recently-viewed');
+        section?.classList.add('hidden');
+      });
+
+      // Highlight du lien catégorie correspondant à la section à l'écran.
+      const catLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.shop-cat-link'));
+      const activeClasses = ['text-forest-900', 'font-medium', 'bg-forest-50', 'px-2', '-mx-2', 'rounded'];
+      const setActive = (id: string | null) => {
+        catLinks.forEach((a) => {
+          const on = a.dataset.shopCat === id;
+          a.classList.toggle('text-forest-900', on);
+          a.classList.toggle('font-medium', on);
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const sections = catLinks
+          .map((a) => document.getElementById(a.dataset.shopCat || ''))
+          .filter((el): el is HTMLElement => !!el);
+
+        const visibility = new Map<string, number>();
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              visibility.set(e.target.id, e.intersectionRatio);
+            }
+            // Choisit la section avec le ratio le plus élevé
+            let bestId: string | null = null;
+            let bestRatio = 0;
+            for (const [id, ratio] of visibility) {
+              if (ratio > bestRatio) {
+                bestRatio = ratio;
+                bestId = id;
+              }
+            }
+            setActive(bestRatio > 0.05 ? bestId : null);
+          },
+          { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1], rootMargin: '-96px 0px -40% 0px' }
+        );
+        sections.forEach((s) => io.observe(s));
+      }
+    })();
+  </script>
 </Layout>

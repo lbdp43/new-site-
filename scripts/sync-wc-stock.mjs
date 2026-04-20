@@ -14,8 +14,13 @@
  *     generatedAt: "2026-04-20T17:00:00.000Z",
  *     source: "wc-api" | "fallback" | "empty",
  *     products: {
- *       "123": { stockStatus: "instock" | "outofstock" | "onbackorder",
- *                stockQuantity: number | null }
+ *       "123": {
+ *         stockStatus: "instock" | "outofstock" | "onbackorder",
+ *         stockQuantity: number | null,
+ *         // Prix par contenance (cl → prix EUR). Renseigné uniquement pour
+ *         // les produits variables. Clés = int en cl (20, 50, 70, 150…).
+ *         prices?: { "20": 9, "50": 17, "70": 22, "150": 75 }
+ *       }
  *     }
  *   }
  *
@@ -105,6 +110,50 @@ async function fetchProductsPage(page) {
   const totalPages = Number(res.headers.get('x-wp-totalpages') || 1);
   const items = await res.json();
   return { items, totalPages };
+}
+
+/** Récupère toutes les variations d'un produit variable, avec leur prix et
+ *  l'attribut de contenance. Retourne un objet { [cl]: priceEUR } ou {} si
+ *  erreur / pas de variations / aucun prix trouvé.
+ */
+async function fetchVariationPrices(productId) {
+  try {
+    const url = new URL(`/wp-json/wc/v3/products/${productId}/variations`, WC_BASE);
+    url.searchParams.set('per_page', '100');
+
+    const res = await fetchWithTimeout(url.toString(), {
+      headers: { Authorization: authHeader, Accept: 'application/json' },
+    });
+    if (!res.ok) return {};
+
+    const variations = await res.json();
+    if (!Array.isArray(variations)) return {};
+
+    const prices = {};
+    for (const v of variations) {
+      const priceNum = Number(v.price);
+      if (!Number.isFinite(priceNum) || priceNum <= 0) continue;
+      // Trouve l'attribut de contenance — 1er attribut qui matche /contenance|gravure/i
+      // ou à défaut le 1er attribut tout court. Parse le nombre (cl).
+      const attrs = Array.isArray(v.attributes) ? v.attributes : [];
+      const sizeAttr =
+        attrs.find((a) => /contenance|gravure/i.test(String(a?.name || ''))) ||
+        attrs[0];
+      if (!sizeAttr) continue;
+      const option = String(sizeAttr.option || '');
+      const clMatch = option.match(/(\d+)\s*cl/i);
+      if (!clMatch) continue;
+      const cl = parseInt(clMatch[1], 10);
+      if (!Number.isFinite(cl)) continue;
+      // En cas de doublons (2 variations 70cl), on garde le prix le plus bas.
+      if (!(cl in prices) || priceNum < prices[cl]) {
+        prices[cl] = priceNum;
+      }
+    }
+    return prices;
+  } catch {
+    return {};
+  }
 }
 
 /** Lit l'ensemble des wcId présents dans les fichiers .md de la collection
@@ -205,6 +254,29 @@ async function main() {
     process.exit(0);
   }
 
+  // Étape 2 : pour chaque produit variable, récupère les prix par contenance.
+  // On parallélise par batches de 6 pour éviter de saturer le WP (et être
+  // gentil avec le mutualisé). Les erreurs ponctuelles ne bloquent pas.
+  const variableProducts = rawWcProducts.filter((p) => p.type === 'variable');
+  const BATCH = 6;
+  let variationsOK = 0;
+  for (let i = 0; i < variableProducts.length; i += BATCH) {
+    const slice = variableProducts.slice(i, i + BATCH);
+    const results = await Promise.all(
+      slice.map((p) => fetchVariationPrices(p.id).then((prices) => ({ id: p.id, prices })))
+    );
+    for (const r of results) {
+      if (r.prices && Object.keys(r.prices).length > 0) {
+        const entry = products[String(r.id)];
+        if (entry) {
+          // JSON.stringify convertira les clés int en strings — comportement voulu.
+          entry.prices = r.prices;
+          variationsOK += 1;
+        }
+      }
+    }
+  }
+
   const output = {
     generatedAt: new Date().toISOString(),
     source: 'wc-api',
@@ -233,7 +305,7 @@ async function main() {
     : '';
   console.log(
     `[sync-wc-stock] ✓ ${count} produits synchronisés en ${elapsed}s ` +
-    `(${outOfStock} en rupture)${draftNote}`
+    `(${outOfStock} en rupture, ${variationsOK} avec prix par contenance)${draftNote}`
   );
 }
 

@@ -1,6 +1,143 @@
 {
-  "generatedAt": "1970-01-01T00:00:00.000Z",
-  "source": "empty",
-  "note": "Placeholder initial. Sera écrasé au premier build avec clés WC.",
-  "products": {}
+  "generatedAt": "2026-04-20T20:01:03.853Z",
+  "source": "wc-api",
+  "note": "Seeded from public Store API for dev — overwritten on Vercel prebuild.",
+  "products": {
+    "65": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 16,
+        "50": 29,
+        "70": 34
+      }
+    },
+    "69": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 16,
+        "50": 28,
+        "70": 33
+      }
+    },
+    "70": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 16,
+        "50": 29,
+        "70": 34,
+        "150": 75
+      }
+    },
+    "71": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 17,
+        "50": 30,
+        "70": 36,
+        "150": 77
+      }
+    },
+    "72": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 16,
+        "50": 29,
+        "70": 34
+      }
+    },
+    "348": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 22,
+        "50": 45,
+        "70": 55,
+        "150": 115
+      }
+    },
+    "616": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 17,
+        "70": 34
+      }
+    },
+    "626": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 16,
+        "70": 34
+      }
+    },
+    "629": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 18,
+        "70": 39
+      }
+    },
+    "2547": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "75": 70
+      }
+    },
+    "2553": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "75": 50
+      }
+    },
+    "2947": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 16,
+        "70": 27
+      }
+    },
+    "3617": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 16,
+        "70": 27
+      }
+    },
+    "4030": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 16,
+        "70": 27
+      }
+    },
+    "4037": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 16,
+        "70": 27
+      }
+    },
+    "4042": {
+      "stockStatus": "instock",
+      "stockQuantity": null,
+      "prices": {
+        "20": 17,
+        "50": 30,
+        "70": 36
+      }
+    }
+  }
 }

@@ -58,13 +58,19 @@ const familyLabels: Record<string, string> = {
 
   <section class="pb-24">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="aspect-[5/2] rounded-3xl overflow-hidden shadow-xl mb-16">
-        <img
-          src="/images/stories/paysage-plantes.webp"
-          alt="Paysage botanique de Haute-Loire — plantes médicinales utilisées par la Brasserie des Plantes"
+      <div class="aspect-[5/2] rounded-3xl overflow-hidden shadow-xl mb-16 bg-forest-50">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/videos/plante-verveine-poster.jpg"
+          aria-label="Étienne, cofondateur, prépare la verveine fraîche — plante emblématique de la Brasserie des Plantes"
           class="w-full h-full object-cover"
-          loading="lazy"
-        />
+        >
+          <source src="/videos/plante-verveine.mp4" type="video/mp4" />
+        </video>
       </div>
 
       <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-20">

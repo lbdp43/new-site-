@@ -269,10 +269,10 @@ remplacer le contenu de la colonne gauche.
 | `src/data/products.ts` | Thin wrapper — importe `products.generated.json` + définit types + ranges + helpers |
 | `src/data/products.generated.json` | Généré au prebuild par `generate-products.mjs`. Ne pas éditer à la main. |
 | `scripts/generate-products.mjs` | Script prebuild : compile les .md → JSON consommable sync |
-| `scripts/sync-wc-stock.mjs` | Script prebuild : fetch stock WC + auto-draft des nouveaux produits WC |
+| `scripts/sync-wc-stock.mjs` | Script prebuild : fetch stock WC + prix par contenance (variations) + auto-draft des nouveaux produits WC |
 | `scripts/indexnow-submit.mjs` | Script postbuild : POST sitemap à IndexNow (Bing/Yandex) |
-| `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, etc. |
-| `src/data/wc-live.json` | Snapshot stock live (régénéré à chaque build, committé) |
+| `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, `getSizePrices`, etc. |
+| `src/data/wc-live.json` | Snapshot stock + prix par contenance live (régénéré à chaque build, committé) |
 | `public/admin/index.html` + `public/admin/config.yml` | Interface CMS (Sveltia) + config collections blog |
 | `docs/cms-admin.md` | Guide utilisateur du CMS (auth GitHub, rédaction, SEO) |
 | `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande, /admin) + priorités différenciées |
@@ -303,15 +303,26 @@ laissés vides. Helper `emptyToUndefined` dispo dans `content.config.ts`.
   panier. Astro ne partage pas le Context React entre îles séparées — on
   utilise donc un **store niveau module** + `useSyncExternalStore` dans
   `cart-store.tsx`. Ne pas remplacer par un Context React.
-- **Stock live au build** : `scripts/sync-wc-stock.mjs` s'exécute au
+- **Stock + prix live au build** : `scripts/sync-wc-stock.mjs` s'exécute au
   `prebuild` et lit `/wp-json/wc/v3/products` avec `WC_CONSUMER_KEY` +
-  `WC_CONSUMER_SECRET`. Le résultat va dans `src/data/wc-live.json`
-  (committé). Les helpers de `src/lib/wc-live.ts` le consomment pour
-  injecter le vrai `availability` dans le schema Product + badges UI
-  "Rupture temporaire" / "Sur commande". Sans clés (dev local), le
-  script préserve le fichier existant et sort en code 0 — le build ne
-  plante jamais. Les clés `WC_CONSUMER_*` sont maintenant obligatoires
-  côté **Vercel** (Production + Preview) pour un sync réel.
+  `WC_CONSUMER_SECRET`. Pour chaque produit variable, il appelle en plus
+  `/wp-json/wc/v3/products/{id}/variations` pour récupérer **le prix par
+  contenance** (parse l'attribut `Contenance` / `Gravure` → `{[cl]: priceEUR}`).
+  Le résultat va dans `src/data/wc-live.json` (committé). Les helpers de
+  `src/lib/wc-live.ts` le consomment pour injecter le vrai `availability`
+  dans le schema Product, les badges UI "Rupture temporaire" / "Sur commande",
+  et l'affichage du prix du format sélectionné sur la fiche produit
+  (`getSizePrices(wcId)`). Sans clés (dev local), le script préserve le
+  fichier existant et sort en code 0 — le build ne plante jamais. Les clés
+  `WC_CONSUMER_*` sont obligatoires côté **Vercel** (Production + Preview)
+  pour un sync réel.
+- **Fiche produit — prix dynamique + notes à droite + "Vu récemment"** :
+  la fiche boutique `/boutique/[slug]` affiche le prix du format sélectionné
+  + prix au litre entre parenthèses (`22 € (31,43 €/L)`), les notes de
+  dégustation et le conseil de service directement dans la colonne droite
+  du hero (plus en bas de page), et une section "Vu récemment" (localStorage,
+  clé `lbdp-recently-viewed-v1`, 6 produits max) qui apparaît dès qu'on a
+  consulté au moins une autre fiche.
 - **IndexNow au postbuild** : `scripts/indexnow-submit.mjs` s'exécute
   APRÈS `astro build` et POST les URLs du sitemap à `api.indexnow.org`
   (protocole Bing + Yandex). **Conditionné par `INDEXNOW_ENABLED=true`**
