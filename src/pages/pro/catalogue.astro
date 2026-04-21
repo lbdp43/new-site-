@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../data/site';
+
+/**
+ * Viewer catalogue pro — affiche le PDF fusionné (catalogue général + coffrets
+ * entreprise) en iframe pleine largeur avec toolbar désactivée (`#toolbar=0`).
+ *
+ * Objectif : consultation en ligne sans bouton "Télécharger" visible dans
+ * le viewer PDF du navigateur. NB : le PDF reste techniquement accessible
+ * via l'URL directe ou l'inspecteur réseau — c'est un frein UX, pas une
+ * protection DRM. Acceptable pour un catalogue commercial.
+ *
+ * Page volontairement pas indexée (noindex via le champ noindex du Layout).
+ */
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Professionnels', item: `${site.url}/professionnels` },
+    { '@type': 'ListItem', position: 3, name: 'Catalogue', item: `${site.url}/pro/catalogue` },
+  ],
+};
+---
+<Layout
+  title="Catalogue Professionnels 2025 — La Brasserie des Plantes"
+  description="Catalogue complet des liqueurs, formats et coffrets entreprise — réservé aux partenaires professionnels."
+  schema={[breadcrumb]}
+>
+  <!-- Bandeau léger : breadcrumb + CTA retour -->
+  <section class="bg-cream-50 border-b border-forest-100/60 py-5">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4 flex-wrap">
+      <nav class="text-xs text-ink-500" aria-label="Fil d'Ariane">
+        <a href="/" class="hover:text-forest-700">Accueil</a>
+        <span class="mx-2">/</span>
+        <a href="/professionnels" class="hover:text-forest-700">Professionnels</a>
+        <span class="mx-2">/</span>
+        <span class="text-forest-700">Catalogue 2025</span>
+      </nav>
+      <div class="flex items-center gap-4 text-xs text-ink-500">
+        <span class="hidden sm:inline">Catalogue réservé aux partenaires pros</span>
+        <a
+          href="/professionnels#contact"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors"
+        >
+          Demander un devis
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Viewer PDF — iframe avec toolbar désactivée. Le `#toolbar=0&navpanes=0`
+       masque l'UI native (incluant le bouton download) dans Chrome/Edge/Firefox.
+       Sur Safari iOS/macOS le paramètre est ignoré (PDF viewer différent) —
+       accepté comme compromis (lecture en ligne fluide prioritaire sur DRM). -->
+  <section
+    id="catalogue-viewer"
+    class="relative bg-forest-950 select-none"
+    oncontextmenu="return false;"
+  >
+    <iframe
+      src="/catalogues/catalogue-pro-2025.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH"
+      title="Catalogue professionnels 2025 — La Brasserie des Plantes"
+      class="block w-full border-0"
+      style="height: calc(100vh - 70px);"
+      loading="lazy"
+    ></iframe>
+  </section>
+
+  <!-- Bandeau bas : rappel contact + retour -->
+  <section class="bg-forest-900 text-cream-100 py-10">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <p class="text-sm md:text-base text-cream-200/80 leading-relaxed mb-5">
+        Vous avez trouvé des références qui vous intéressent ? Contactez-nous
+        pour un devis personnalisé — nous revenons vers vous sous 48 heures.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a
+          href="/professionnels#contact"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 text-forest-900 hover:bg-cream-100 font-medium transition-colors"
+        >
+          Demander un devis
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a
+          href={`tel:${site.phone}`}
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream-100/40 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors"
+        >
+          {site.phoneDisplay}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Désactive le raccourci Ctrl/Cmd+S (save) sur la page viewer. UX plutôt
+  // que DRM : un utilisateur déterminé contournera, mais ça empêche le geste
+  // réflexe "je sauvegarde le PDF".
+  document.addEventListener('keydown', (e) => {
+    const isSave = (e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S');
+    if (isSave) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  });
+</script>
