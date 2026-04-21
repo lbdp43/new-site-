@@ -67,19 +67,6 @@ export const coffretTrios: CoffretTrio[] = [
     slugs: ['fleche-ardente', 'pralicoquine', 'zeleste'],
   },
   {
-    id: 'cbd',
-    title: {
-      fr: 'Détente Lumière Obscure',
-      en: 'Dark Light Relaxation',
-    },
-    description: {
-      fr: "Les trois CBD en un coffret. Menthe, verveine et absinthe — la gamme chanvre complète, pour une soirée détente.",
-      en: "All three CBD liqueurs in one box. Mint, verbena and absinthe — the full hemp range, for a relaxed evening.",
-    },
-    slugs: ['menthe-cbd-ortie', 'verveine-cbd-aurone', 'absinthe-cbd-citron'],
-    badge: { fr: 'Gamme CBD', en: 'CBD range' },
-  },
-  {
     id: 'montagne',
     title: {
       fr: 'Esprit Montagne',

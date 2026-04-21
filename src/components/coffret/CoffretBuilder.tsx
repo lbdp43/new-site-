@@ -33,6 +33,9 @@ export interface CoffretProduct {
   tagline?: string;
   wcId: number;
   defaultSize?: number;
+  /** Libellé EXACT de la variation WC (ex: "Empilable 20cl"), pour matcher
+   *  la variation côté Store API. Si absent, on retombe sur `${defaultSize}cl`. */
+  defaultSizeLabel?: string;
   wcSizeAttribute?: string;
 }
 
@@ -113,7 +116,7 @@ export default function CoffretBuilder({
   size = 3,
   lang = 'fr',
   preselect,
-  allowGiftMessage = true,
+  allowGiftMessage = false,
 }: Props) {
   const t = L[lang];
   const { addItem } = useCart();
@@ -209,30 +212,20 @@ export default function CoffretBuilder({
     setStatus('idle');
 
     try {
-      const coffretSize = stack.length;
-      for (let i = 0; i < stack.length; i++) {
-        const item = stack[i];
-        const variation = item.defaultSize
-          ? [{ attribute: item.wcSizeAttribute ?? 'Contenance', value: `${item.defaultSize}cl` }]
+      // Le coffret = simplement N bouteilles 20cl ajoutées au panier, comme
+      // si on cliquait sur la pill "Empilable 20cl" de chaque fiche produit.
+      // Aucune metadata coffret spéciale : WC traite ces lignes comme des
+      // commandes standards, donc pas de risque d'incompatibilité.
+      for (const item of stack) {
+        const sizeValue = item.defaultSizeLabel ?? (item.defaultSize ? `${item.defaultSize}cl` : undefined);
+        const variation = sizeValue
+          ? [{ attribute: item.wcSizeAttribute ?? 'Contenance', value: sizeValue }]
           : undefined;
-
-        const cartMeta: Record<string, string> = {
-          _coffret_diy: String(coffretSize),
-          _coffret_position: `${i + 1}/${coffretSize}`,
-          _coffret_label:
-            lang === 'fr'
-              ? `Coffret DIY ${coffretSize} bouteilles`
-              : `DIY ${coffretSize}-bottle box`,
-        };
-        if (giftMessage.trim()) {
-          cartMeta._coffret_gift_message = giftMessage.trim().slice(0, 200);
-        }
 
         await addItem({
           id: item.wcId,
           quantity: 1,
           variation,
-          cart_item_data: cartMeta,
         });
       }
       setStatus('success');

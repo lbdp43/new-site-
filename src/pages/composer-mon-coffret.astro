@@ -5,44 +5,57 @@ import CoffretBuilder, { type CoffretProduct } from '../components/coffret/Coffr
 import { products } from '../data/products';
 import { site } from '../data/site';
 
-// Filtrer : bouteilles 20cl empilables uniquement. Donc on exclut :
+// Filtrer : bouteilles 20cl empilables uniquement. On exclut :
 // - accessoire (coffrets/flasques, pas des liqueurs 20cl)
 // - edition-limitee (les cuvées ne sont pas déclinées en 20cl)
+// - lumiere-obscure (gamme CBD pas encore shootée en 20cl empilable)
 // - les produits sans wcId (pas achetables via panier)
 const eligibleProducts: CoffretProduct[] = products
   .filter(
     (p) =>
       p.range !== 'accessoire' &&
       p.range !== 'edition-limitee' &&
+      p.range !== 'lumiere-obscure' &&
       p.wcId !== undefined
   )
-  .map((p) => ({
-    slug: p.slug,
-    name: p.name,
-    range: p.range,
-    priceMin: p.priceMin,
-    image: p.image,
-    // Photo du format empilable 20cl — on utilise la version pré-croppée
-    // (`-20cl-stack.webp` générée par scripts/crop-stack-images.mjs) qui
-    // supprime tout le transparent autour de la bouteille → empilement
-    // propre bout-à-bout. Fallback sur la version non-croppée ou l'image
-    // principale si pas disponible (ex: gamme Lumière Obscure pas encore
-    // shootée en 20cl empilable).
-    stackImage: p.sizeImages?.[20]
-      ? p.sizeImages[20].replace('-20cl.webp', '-20cl-stack.webp')
-      : undefined,
-    alcohol: p.alcohol,
-    tagline: p.tagline,
-    wcId: p.wcId as number,
-    // Par défaut on commande la contenance 20cl (format empilable) si dispo,
-    // sinon la plus petite disponible.
-    defaultSize: p.sizeImages?.[20]
+  .map((p) => {
+    // Détermine la contenance par défaut : 20cl si on a la photo empilable,
+    // sinon la plus petite des sizes déclarées.
+    const defaultSize = p.sizeImages?.[20]
       ? 20
       : p.sizes && p.sizes.length > 0
         ? parseInt(p.sizes[0])
+        : undefined;
+    // Cherche le LIBELLÉ exact de cette contenance dans p.sizes (ex:
+    // "Empilable 20cl", "70cl", "Magnum 150cl"). WooCommerce matche la
+    // variation sur ce libellé exact — si on envoie juste "20cl" alors que
+    // WC a enregistré "Empilable 20cl", l'ajout panier échoue.
+    const defaultSizeLabel =
+      defaultSize != null && p.sizes
+        ? p.sizes.find((s) => parseInt(s.replace(/[^0-9]/g, ''), 10) === defaultSize)
+        : undefined;
+    return {
+      slug: p.slug,
+      name: p.name,
+      range: p.range,
+      priceMin: p.priceMin,
+      image: p.image,
+      // Photo du format empilable 20cl — on utilise la version pré-croppée
+      // (`-20cl-stack.webp` générée par scripts/crop-stack-images.mjs) qui
+      // supprime tout le transparent autour de la bouteille → empilement
+      // propre bout-à-bout. Fallback sur la version non-croppée ou l'image
+      // principale si pas disponible.
+      stackImage: p.sizeImages?.[20]
+        ? p.sizeImages[20].replace('-20cl.webp', '-20cl-stack.webp')
         : undefined,
-    wcSizeAttribute: p.wcSizeAttribute,
-  }));
+      alcohol: p.alcohol,
+      tagline: p.tagline,
+      wcId: p.wcId as number,
+      defaultSize,
+      defaultSizeLabel,
+      wcSizeAttribute: p.wcSizeAttribute,
+    };
+  });
 
 const breadcrumb = {
   '@context': 'https://schema.org',
