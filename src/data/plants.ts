@@ -1,12 +1,13 @@
-// Inventaire des plantes et ingrédients botaniques utilisés dans toute la gamme
-// La Brasserie des Plantes. Source : `src/content/products/*.md` (composition frontmatter).
+// Inventaire (non exhaustif) des plantes et ingrédients botaniques utilisés
+// dans la gamme La Brasserie des Plantes.
+// Source : `src/content/products/*.md` (composition frontmatter) + catalogue pro.
 //
 // ⚠️ Ce fichier est la source de vérité pour /nos-plantes. Quand un produit
-// ajoute / enlève une plante, mettre à jour `usedIn` ici.
+// ajoute / enlève un ingrédient, mettre à jour `usedIn` ici.
 //
-// Convention : on exclut les accessoires (coffret, flasque) et les ingrédients
-// non-botaniques purs (charbon végétal colorant, pralines, amandes torréfiées —
-// ces derniers sont cités sur leurs fiches produit, pas ici).
+// Convention : certaines recettes reposent sur des ingrédients que nous
+// préférons garder pour nous (secrets d'assemblage). Ce fichier en liste
+// une bonne partie, pas la totalité.
 
 export interface Plant {
   name: string;
@@ -157,7 +158,7 @@ export const plants: Plant[] = [
     family: 'aromatique',
     role: 'Montagnard · amer fin',
     description:
-      "Plante reine des Alpes. Nous le travaillons en partenariat avec un cueilleur de Barcelonnette, sous certification bio. Amertume noble, caractère minéral, profil très recherché en digestif de montagne.",
+      "Plante reine des Alpes. Nous le travaillons en partenariat avec un cueilleur de Barcelonnette. Amertume noble, caractère minéral, profil très recherché en digestif de montagne.",
     usedIn: "L'Essence des Alpes",
     season: 'Juillet à août',
     signature: true,
@@ -229,7 +230,7 @@ export const plants: Plant[] = [
     description:
       "L'écorce emblématique des apéritifs amers classiques (Dubonnet, Lillet…). Nous la marions à la gentiane pour un profil apéritif à boire givré ou en tonic — profondeur amère, finale tonique.",
     usedIn: "Le Cerf'Gent",
-    season: "Importée d'Amérique du Sud — bio certifié",
+    season: "Importée d'Amérique du Sud",
     signature: true,
   },
   {
@@ -264,7 +265,7 @@ export const plants: Plant[] = [
     description:
       "Zestes pour la richesse aromatique, jus pour l'acidité. Utilisé dans notre trio d'agrumes (Zéleste), dans le Cerf'Gent pour équilibrer l'amer, et en écorces dans notre liqueur CBD citron.",
     usedIn: "Le Zéleste, Le Cerf'Gent, CBD Absinthe Citron",
-    season: "Toute l'année — bio Sicile",
+    season: "Toute l'année",
   },
   {
     name: 'Orange',
@@ -318,7 +319,7 @@ export const plants: Plant[] = [
     description:
       "Cannelle de Ceylan, plus fine que la cannelle chinoise (Cassia). Elle apporte la chaleur boisée qui structure l'amer apéritif du Cerf'Gent.",
     usedIn: "Le Cerf'Gent",
-    season: 'Importée — bio',
+    season: 'Importée',
     signature: true,
   },
   {
@@ -329,7 +330,7 @@ export const plants: Plant[] = [
     description:
       "La noix de muscade, râpée fraîche avant macération. Sa chaleur balsamique complète la cannelle dans l'assemblage du Cerf'Gent.",
     usedIn: "Le Cerf'Gent",
-    season: 'Importée — bio',
+    season: 'Importée',
     signature: true,
   },
   {
@@ -340,7 +341,7 @@ export const plants: Plant[] = [
     description:
       "Gousse fendue, macérée longuement. Elle enveloppe les fruits rouges de notre Flèche Ardente d'une douceur crémeuse — pour un digestif qui se boit autant sur glace que sur un dessert au chocolat.",
     usedIn: "La Flèche Ardente",
-    season: 'Importée — bio Madagascar',
+    season: 'Importée de Madagascar',
     signature: true,
   },
 
@@ -376,6 +377,26 @@ export const plants: Plant[] = [
       "Cueillie sauvage dans les forêts du Velay. Son profil doux, légèrement boisé, complète le trio de fruits rouges — un clin d'œil au terroir de Haute-Loire.",
     usedIn: "La Flèche Ardente",
     season: 'Juillet à août',
+    signature: true,
+  },
+  {
+    name: 'Pitaya',
+    latin: 'Hylocereus undatus',
+    family: 'fruit',
+    role: 'Fruit exotique · rond',
+    description:
+      "Le fruit du dragon — chair rose nacrée, goût doux entre la poire et le kiwi. Touche exotique qui rehausse le trio de fruits rouges de la Flèche Ardente, sans jamais voler la vedette aux baies locales.",
+    usedIn: "La Flèche Ardente",
+    signature: true,
+  },
+  {
+    name: 'Amande',
+    latin: 'Prunus dulcis',
+    family: 'fruit',
+    role: 'Praline · gourmand',
+    description:
+      "Travaillée en praline — amandes caramélisées longuement pour obtenir des notes chaudes de caramel et de fruits secs. Signature de la Pralicoquine, notre apéritif gourmand qui dialogue aussi bien avec un café qu'avec un dessert au chocolat.",
+    usedIn: "La Pralicoquine",
     signature: true,
   },
 

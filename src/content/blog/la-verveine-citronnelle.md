@@ -46,4 +46,4 @@ Deux façons de la goûter chez soi :
 
 ---
 
-*La Brasserie des Plantes cultive la verveine citronnelle depuis 2021 sur ses parcelles de Saint-Didier-en-Velay. Nos feuilles sont certifiées issues de l'agriculture biologique.*
+*La Brasserie des Plantes cultive la verveine citronnelle depuis 2021 sur ses parcelles de Saint-Didier-en-Velay, sans pesticide de synthèse.*

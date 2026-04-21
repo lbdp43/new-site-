@@ -19,7 +19,7 @@ const plantsListSchema = {
   '@type': 'ItemList',
   name: 'Plants and botanicals used at La Brasserie des Plantes',
   description:
-    'Aromatic herbs, roots, barks, flowers, citrus, spices and fruits used in our craft liqueurs. Full inventory, organically grown, harvested close to Haute-Loire (France).',
+    'Aromatic herbs, roots, barks, flowers, citrus, spices and fruits used in our craft liqueurs. Much of what we work with — the rest is an assembly secret.',
   numberOfItems: plants.length,
   inLanguage: 'en-US',
   itemListElement: plants.map((p, i) => {
@@ -48,19 +48,17 @@ const sortedPlants = [...plants].sort((a, b) => {
   return a.name.localeCompare(b.name, 'fr');
 });
 
-const totalPlants = plants.length;
-const signatureCount = plants.filter((p) => p.signature).length;
 ---
 <Layout
   lang="en"
-  title={`Our plants — ${totalPlants} botanicals | La Brasserie des Plantes`}
-  description={`Verbena, lemon balm, wild thyme, caraway, hyssop, gentian, génépi, elderflower… ${totalPlants} plants, roots, flowers, citrus and spices in our craft liqueurs. All organically grown, harvested in Haute-Loire, France.`}
+  title="Our plants — around forty botanicals | La Brasserie des Plantes"
+  description="Verbena, lemon balm, wild thyme, caraway, hyssop, gentian, génépi, elderflower, dragon fruit, almond… about forty plants, roots, barks, flowers, citrus, spices and fruits in our craft liqueurs from Haute-Loire, France."
   schema={schema}
 >
   <PageHeader
     kicker="Botany"
-    title="All the plants in<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>our liqueurs</em>"
-    subtitle={`${totalPlants} botanical ingredients — verbena, wild thyme, caraway, lemon balm, hyssop, gentian, génépi, elderflower, nettle, hemp… All organically grown, many harvested within 20 km of the workshop.`}
+    title="The plants behind<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>our liqueurs</em>"
+    subtitle="Verbena, wild thyme, caraway, lemon balm, hyssop, gentian, génépi, elderflower, nettle, hemp, almond, dragon fruit… around forty botanical ingredients, many harvested a few kilometres from our workshop."
     breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Our plants' }]}
   />
 
@@ -84,33 +82,27 @@ const signatureCount = plants.filter((p) => p.signature).length;
       </div>
 
       <!-- Intro -->
-      <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-12">
+      <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-16">
         <p>
           A liqueur is a landscape in a bottle. Some of our recipes rest on
-          three plants — <em>L'Herbe des Druides</em>, that is verbena, wild
-          thyme, caraway, and that's it. Others are goldsmith blends:
-          <em>L'Alchimie Végétale</em> combines <strong class="font-medium text-forest-800">27
-          plants, roots, barks and spices</strong> on its own, crowned World's
-          Best Digestif in 2025.
+          three plants — <em>L'Herbe des Druides</em>: verbena, wild thyme,
+          caraway, and that's it. Some are accord trios: <em>Le Zéleste</em>
+          brings together three citrus zests (yellow lemon, lime, orange);
+          <em>Le Menthor</em> a trio of mints (peppermint, spearmint,
+          Korean mint). And then the grand blends — <em>L'Alchimie
+          Végétale</em>, <strong class="font-medium text-forest-800">27 plants, roots, barks and spices</strong>,
+          crowned World's Best Digestif in 2025.
         </p>
         <p>
-          Across the entire range, we work with <strong class="font-medium text-forest-800">{totalPlants}
-          botanical ingredients</strong> — of which {signatureCount} appear in
-          only one signature liqueur. Organic farming mandatory, origin known,
-          producer picked one by one.
+          Across the entire range, we work with
+          <strong class="font-medium text-forest-800">around forty botanical
+          ingredients</strong> — aromatics, roots, barks, flowers, citrus,
+          spices, fruits. Some are grown or foraged a few kilometres from the
+          workshop; others come from further afield when the plant demands it.
+          Known origin every time, producer picked one by one. And of course
+          <em>La Pralicoquine</em> with its caramelised almonds — because a
+          gourmand liqueur has its place too.
         </p>
-      </div>
-
-      <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-16 text-center">
-        {(['aromatique', 'fleur', 'racine', 'ecorce', 'agrume', 'epice', 'fruit', 'autre'] as const)
-          .map((fam) => ({ fam, count: plants.filter((p) => p.family === fam).length }))
-          .filter((x) => x.count > 0)
-          .map(({ fam, count }) => (
-            <div class="p-4 rounded-2xl bg-cream-100/60 border border-forest-100/60">
-              <div class="font-display text-3xl text-forest-800 leading-none">{count}</div>
-              <div class="text-[10px] uppercase tracking-[0.15em] text-ink-500 mt-2">{familyLabelsEn[fam]}{count > 1 ? 's' : ''}</div>
-            </div>
-          ))}
       </div>
 
       <!-- Plants grid -->
@@ -158,6 +150,14 @@ const signatureCount = plants.filter((p) => p.signature).length;
           );
         })}
       </div>
+
+      <!-- Closing — we don't tell everything -->
+      <div class="mt-12 max-w-3xl mx-auto text-center">
+        <p class="text-base md:text-lg text-ink-600 italic leading-relaxed">
+          … and a few more we keep to ourselves. Assembly secrets are part of
+          the craft too.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -167,26 +167,32 @@ const signatureCount = plants.filter((p) => p.signature).length;
       <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Our approach</div>
       <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
         Terroir first,<br />
-        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">plant second</em>
+        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">living heritage next</em>
       </h2>
       <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
         <p>
           We never write a recipe without knowing where the plants come from.
           We work with <a href="/en/journal/producteurs-partenaires-bio-velay" class="text-forest-700 font-medium underline decoration-forest-300 underline-offset-4 hover:text-forest-900">foragers
           and market gardeners</a> we pick one by one: every plant has a
-          grower, every grower is met. Certified organic, always.
+          grower, every grower is met.
         </p>
         <p>
-          When possible, local — some of our plants come from Haute-Loire
-          and neighbouring departments. When a plant needs a different
-          terroir, we go where it really grows: Alpine génépi (Barcelonnette),
-          organic Sicilian citrus, imported certified-organic liquorice and
-          cinchona bark.
+          We try to source as close to home as possible — a good share of our
+          plants come from Haute-Loire and neighbouring departments. Not
+          always: some demand a different terroir (Alpine génépi, for
+          instance), others come from further afield depending on the season
+          and the quality of the moment (citrus, liquorice, cinchona bark).
+          We'd rather be honest about that than promise something we
+          couldn't keep for every batch.
         </p>
         <p>
-          Never synthetic flavourings, never artificial colourings. The colour
-          of a liqueur must come from the plant that composes it, not from
-          a jar.
+          Our rule is plants first: <strong class="font-medium text-forest-800">no
+          added flavouring, no preservative</strong>. The colours you see in our
+          bottles always come from an ingredient that's actually drunk — vegetal
+          charcoal for the deep black of Gorgeon des Machurés, cochineal for
+          the natural pink of Pralicoquine, macerated red fruits for the Flèche
+          Ardente, the plants' own chlorophyll for the green of Herbe des
+          Druides.
         </p>
       </div>
     </div>

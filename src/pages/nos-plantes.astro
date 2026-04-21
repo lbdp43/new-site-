@@ -19,7 +19,7 @@ const plantsListSchema = {
   '@type': 'ItemList',
   name: 'Plantes et ingrédients botaniques de La Brasserie des Plantes',
   description:
-    "Plantes aromatiques, racines, écorces, fleurs, agrumes, épices et fruits utilisés dans nos liqueurs artisanales. Inventaire complet, en agriculture biologique, récolté au plus près de la Haute-Loire.",
+    "Plantes aromatiques, racines, écorces, fleurs, agrumes, épices et fruits utilisés dans nos liqueurs artisanales. Une bonne partie de la gamme, cueillie ou cultivée au plus près de la Haute-Loire — le reste, secret d'assemblage.",
   numberOfItems: plants.length,
   itemListElement: plants.map((p, i) => ({
     '@type': 'ListItem',
@@ -56,18 +56,16 @@ const sortedPlants = [...plants].sort((a, b) => {
   return a.name.localeCompare(b.name, 'fr');
 });
 
-const totalPlants = plants.length;
-const signatureCount = plants.filter((p) => p.signature).length;
 ---
 <Layout
-  title={`Nos plantes — ${totalPlants} ingrédients botaniques | La Brasserie des Plantes`}
-  description={`Verveine, mélisse, serpolet, carvi, hysope, gentiane, génépi, sureau… ${totalPlants} plantes, racines, fleurs, agrumes et épices dans nos liqueurs artisanales, toutes en agriculture biologique, récoltées en Haute-Loire.`}
+  title="Nos plantes — une quarantaine d'ingrédients botaniques | La Brasserie des Plantes"
+  description="Verveine, mélisse, serpolet, carvi, hysope, gentiane, génépi, sureau, pitaya, amande… une quarantaine de plantes, racines, écorces, fleurs, agrumes, épices et fruits qui composent nos liqueurs artisanales de Haute-Loire."
   schema={schema}
 >
   <PageHeader
     kicker="Botanique"
-    title="Toutes les plantes de<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>nos liqueurs</em>"
-    subtitle={`${totalPlants} ingrédients botaniques — verveine, serpolet, carvi, mélisse, hysope, gentiane, génépi, sureau, ortie, chanvre… Toutes en agriculture biologique, une bonne partie cueillies à moins de 20 km de l'atelier.`}
+    title="Les plantes qui composent<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>nos liqueurs</em>"
+    subtitle="Verveine, serpolet, carvi, mélisse, hysope, gentiane, génépi, sureau, ortie, chanvre, amande, pitaya… Une quarantaine d'ingrédients botaniques, dont une bonne partie cueillis à quelques kilomètres de l'atelier."
     breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Nos plantes' }]}
   />
 
@@ -90,35 +88,28 @@ const signatureCount = plants.filter((p) => p.signature).length;
         </video>
       </div>
 
-      <!-- Intro + chiffres -->
-      <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-12">
+      <!-- Intro -->
+      <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-16">
         <p>
           Une liqueur, c'est un paysage en bouteille. Certaines de nos
           recettes tiennent sur trois plantes — <em>L'Herbe des Druides</em>,
-          c'est verveine, serpolet, carvi, point. D'autres sont des
-          assemblages d'orfèvrerie : <em>L'Alchimie Végétale</em> compose
-          à elle seule <strong class="font-medium text-forest-800">27 plantes, racines, écorces
-          et épices</strong>, couronnée Meilleur Digestif du Monde en 2025.
+          c'est verveine, serpolet, carvi, point. D'autres sont des trios
+          d'accord : <em>Le Zéleste</em>, c'est un trio de zestes (citron
+          jaune, citron vert, orange) ; <em>Le Menthor</em>, un trio de menthes
+          (poivrée, verte, agastache). Et puis il y a les grands assemblages —
+          <em>L'Alchimie Végétale</em>, <strong class="font-medium text-forest-800">27 plantes, racines,
+          écorces et épices</strong>, couronnée Meilleur Digestif du Monde en 2025.
         </p>
         <p>
-          Au total, à travers toute la gamme, nous travaillons
-          <strong class="font-medium text-forest-800">{totalPlants} ingrédients
-          botaniques</strong> — dont {signatureCount} qui ne figurent que dans
-          une seule liqueur signature. Agriculture biologique obligatoire,
-          origine connue, producteur choisi un par un.
+          À travers toute la gamme, nous travaillons avec
+          <strong class="font-medium text-forest-800">une quarantaine d'ingrédients
+          botaniques</strong> — aromatiques, racines, écorces, fleurs, agrumes,
+          épices, fruits. Certains sont cultivés ou cueillis à quelques
+          kilomètres de l'atelier, d'autres viennent de plus loin quand la
+          plante l'exige. Origine connue à chaque fois, producteur choisi
+          un par un. Et bien sûr, <em>La Pralicoquine</em> et ses amandes
+          caramélisées — parce qu'une liqueur gourmande a aussi sa place.
         </p>
-      </div>
-
-      <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-16 text-center">
-        {(['aromatique', 'fleur', 'racine', 'ecorce', 'agrume', 'epice', 'fruit', 'autre'] as const)
-          .map((fam) => ({ fam, count: plants.filter((p) => p.family === fam).length }))
-          .filter((x) => x.count > 0)
-          .map(({ fam, count }) => (
-            <div class="p-4 rounded-2xl bg-cream-100/60 border border-forest-100/60">
-              <div class="font-display text-3xl text-forest-800 leading-none">{count}</div>
-              <div class="text-[10px] uppercase tracking-[0.15em] text-ink-500 mt-2">{familyLabels[fam]}{count > 1 ? 's' : ''}</div>
-            </div>
-          ))}
       </div>
 
       <!-- Grille plantes -->
@@ -163,6 +154,14 @@ const signatureCount = plants.filter((p) => p.signature).length;
           </article>
         ))}
       </div>
+
+      <!-- Clôture de la liste : on ne dit pas tout -->
+      <div class="mt-12 max-w-3xl mx-auto text-center">
+        <p class="text-base md:text-lg text-ink-600 italic leading-relaxed">
+          … et bien d'autres, que nous gardons pour nous. Les secrets d'assemblage
+          font aussi partie du métier.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -172,27 +171,32 @@ const signatureCount = plants.filter((p) => p.signature).length;
       <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Notre démarche</div>
       <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
         Le terroir d'abord,<br />
-        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">la plante ensuite</em>
+        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">le patrimoine vivant ensuite</em>
       </h2>
       <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
         <p>
           Nous n'écrivons jamais une recette sans savoir d'où viennent les
           plantes. Nous travaillons avec des <a href="/blog/producteurs-partenaires-bio-velay" class="text-forest-700 font-medium underline decoration-forest-300 underline-offset-4 hover:text-forest-900">cueilleurs
           et des maraîchers</a> que nous sélectionnons un par un : chaque
-          plante a son récoltant, chaque récoltant est rencontré. Certifié
-          bio obligatoire.
+          plante a son récoltant, chaque récoltant est rencontré.
         </p>
         <p>
-          Quand c'est possible, c'est local — une partie de nos plantes
-          vient de Haute-Loire et des départements voisins. Quand la plante
-          exige un autre terroir, on va le chercher là où il pousse
-          vraiment : génépi des Alpes (Barcelonnette), agrumes bio de Sicile,
-          réglisse et quinquina d'importation bio certifiée.
+          On essaie de travailler au plus près, quand c'est possible — une
+          bonne partie de nos plantes vient de Haute-Loire et des départements
+          voisins. Pas toujours : certaines imposent leur terroir (le génépi
+          des Alpes, par exemple), d'autres viennent de plus loin selon la
+          saison et la qualité du moment (agrumes, réglisse, quinquina). On
+          préfère être honnêtes là-dessus plutôt que d'afficher des
+          promesses qu'on ne tiendrait pas à chaque cuvée.
         </p>
         <p>
-          Jamais d'arômes de synthèse, jamais de colorants artificiels. La
-          couleur d'une liqueur doit venir de la plante qui la compose, pas
-          d'un pot.
+          Notre règle, c'est la plante avant tout : <strong class="font-medium text-forest-800">pas
+          d'arôme ajouté, pas de conservateur</strong>. Les couleurs qu'on voit
+          dans nos bouteilles viennent toujours d'un ingrédient qui se boit —
+          le charbon végétal pour le noir profond du Gorgeon des Machurés, la
+          cochenille pour le rose naturel de la Pralicoquine, les fruits rouges
+          macérés pour la Flèche Ardente, la chlorophylle des plantes pour le
+          vert de l'Herbe des Druides.
         </p>
       </div>
     </div>

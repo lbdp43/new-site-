@@ -107,7 +107,7 @@ export const plantsEn: Record<string, PlantEn> = {
   'Génépi': {
     role: 'Mountain · fine bitter',
     description:
-      "The queen plant of the Alps. We work it with a certified-organic forager in Barcelonnette. Noble bitterness, mineral character, highly sought-after profile for mountain digestifs.",
+      "The queen plant of the Alps. We work it in partnership with a forager from Barcelonnette. Noble bitterness, mineral character, highly sought-after profile for mountain digestifs.",
     usedIn: "L'Essence des Alpes",
     season: 'July to August',
   },
@@ -151,7 +151,7 @@ export const plantsEn: Record<string, PlantEn> = {
     description:
       "The iconic bark of classic bitter aperitifs (Dubonnet, Lillet…). We pair it with gentian for a chilled or tonic-served aperitif — bitter depth, tonic finish.",
     usedIn: "Le Cerf'Gent",
-    season: 'Imported — organic certified',
+    season: 'Imported from South America',
   },
   'Réglisse': {
     role: 'Sweetness · roundness',
@@ -172,7 +172,7 @@ export const plantsEn: Record<string, PlantEn> = {
     description:
       "Zest for aromatic richness, juice for acidity. Used in our citrus trio (Zéleste), in Cerf'Gent to balance the bitter, and as peels in our CBD citrus liqueur.",
     usedIn: "Le Zéleste, Le Cerf'Gent, CBD Absinthe Citron",
-    season: 'Year-round — organic Sicily',
+    season: 'Year-round',
   },
   'Orange': {
     role: 'Zest · sweet warmth',
@@ -207,21 +207,21 @@ export const plantsEn: Record<string, PlantEn> = {
     description:
       "Ceylon cinnamon, finer than Chinese cassia. It brings the woody warmth that structures the bitter aperitif profile of Cerf'Gent.",
     usedIn: "Le Cerf'Gent",
-    season: 'Imported — organic',
+    season: 'Imported',
   },
   'Muscade': {
     role: 'Spiced · balsamic',
     description:
       "Nutmeg, freshly grated before maceration. Its balsamic warmth complements cinnamon in the Cerf'Gent blend.",
     usedIn: "Le Cerf'Gent",
-    season: 'Imported — organic',
+    season: 'Imported',
   },
   'Vanille': {
     role: 'Creamy · sweet',
     description:
       "Split pod, macerated slowly. It wraps the red fruits of our Flèche Ardente in a creamy softness — for a digestif that works both on ice and with a chocolate dessert.",
     usedIn: "La Flèche Ardente",
-    season: 'Imported — organic Madagascar',
+    season: 'Imported from Madagascar',
   },
   'Cassis': {
     role: 'Red fruit · powerful',
@@ -243,6 +243,18 @@ export const plantsEn: Record<string, PlantEn> = {
       "Wild-foraged in Velay forests. Its sweet, faintly woody profile rounds off the red-fruit trio — a nod to the Haute-Loire terroir.",
     usedIn: "La Flèche Ardente",
     season: 'July to August',
+  },
+  'Pitaya': {
+    role: 'Exotic fruit · round',
+    description:
+      "Dragon fruit — pearly pink flesh, a mellow flavour between pear and kiwi. An exotic touch that lifts the red-fruit trio of La Flèche Ardente without ever stealing the show from the local berries.",
+    usedIn: "La Flèche Ardente",
+  },
+  'Amande': {
+    role: 'Praline · gourmand',
+    description:
+      "Worked as praline — almonds slowly caramelised to reach warm notes of toffee and dried fruit. The signature of La Pralicoquine, our gourmand aperitif that sits just as naturally next to an espresso as a chocolate dessert.",
+    usedIn: "La Pralicoquine",
   },
   'Chanvre (CBD)': {
     role: 'Terpenes · relaxing',
