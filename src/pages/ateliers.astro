@@ -341,12 +341,12 @@ const fmtDate = (iso: string) => {
         </h2>
         <p class="text-ink-700 leading-relaxed mb-6">
           Notre atelier est installé dans une ancienne boulangerie, au cœur
-          du village. La brasserie est à <strong>1 heure en TER de Saint-Étienne</strong>,
-          environ 1 h 30 de Lyon en voiture.
+          du village. La brasserie est à <strong>30 minutes de Saint-Étienne</strong>
+          en voiture, environ 1 h 15 de Lyon.
         </p>
         <div class="space-y-2 text-sm text-ink-700 mb-6">
           <div><strong class="text-forest-800">Adresse</strong> : 18 Grand Place, 43140 Saint-Didier-en-Velay, Haute-Loire</div>
-          <div><strong class="text-forest-800">Accès TER</strong> : gare de Saint-Didier-en-Velay (1h depuis Saint-Étienne)</div>
+          <div><strong class="text-forest-800">Accès</strong> : en voiture uniquement (pas de gare sur la commune)</div>
           <div><strong class="text-forest-800">Parking</strong> : Place du village, gratuit</div>
         </div>
         <a
@@ -359,8 +359,19 @@ const fmtDate = (iso: string) => {
           Voir sur Google Maps
         </a>
       </div>
-      <div class="aspect-square rounded-2xl overflow-hidden">
-        <img src="/images/ateliers/liqueur-6.jpg" alt="L'atelier de la Brasserie des Plantes à Saint-Didier-en-Velay" loading="lazy" class="w-full h-full object-cover" />
+      <div class="aspect-square rounded-2xl overflow-hidden bg-forest-950">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/videos/boutique-sortie-poster.jpg"
+          aria-label="Sortie de la boutique de La Brasserie des Plantes à Saint-Didier-en-Velay"
+          class="w-full h-full object-cover"
+        >
+          <source src="/videos/boutique-sortie.mp4" type="video/mp4" />
+        </video>
       </div>
     </div>
   </section>
