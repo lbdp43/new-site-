@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import ScrollExpandMedia from '../../components/ui/scroll-expansion-hero';
 import InstagramFeed from '../../components/InstagramFeed.astro';
 import GoogleReviewsEmbed from '../../components/GoogleReviewsEmbed.astro';
 import ProductCarousel from '../../components/ProductCarousel.astro';
@@ -115,48 +114,46 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
   schema={schema}
   hasHero={true}
 >
-  {/* Invisible H1 for SEO — the hero uses an image logo, but a text H1 is still needed */}
-  <h1 class="sr-only">La Brasserie des Plantes — Organic botanical liqueurs from Auvergne, World's Best Digestif 2025</h1>
+  <!-- HERO VIDEO fullscreen — same pattern as /professionnels -->
+  <section class="relative min-h-[100dvh] w-full overflow-hidden bg-forest-950">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="/videos/lbdp-pro-poster.jpg"
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+      <source src="/videos/lbdp-pro.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/40 to-forest-950/80"></div>
 
-  <!-- HERO : scroll-expansion — award photo + short background video -->
-  <ScrollExpandMedia
-    client:load
-    mediaType="image"
-    mediaSrc="/images/stories/world-drinks-awards-2025.webp"
-    bgVideoSrc="/videos/hero-accueil.mp4"
-    bgVideoPoster="/videos/hero-accueil-poster.jpg"
-    titleImageSrc="/images/brand/logo-clair-transparent.webp"
-    titleImageAlt="La Brasserie des Plantes — Craft, Terroir, Passion — Haute-Loire, France"
-    date="Haute-Loire · since 2021"
-    scrollToExpand="Scroll to discover"
-    textClass="text-cream-50"
-  >
-    <div class="max-w-3xl mx-auto text-center">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-600 text-xs font-medium tracking-wide uppercase mb-6 animate-soft-pulse">
+    <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-cream-100 py-20 min-h-[100dvh]">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/20 border border-gold-500/50 text-gold-400 text-xs font-medium tracking-[0.2em] uppercase mb-8 backdrop-blur-sm">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
         World's Best Digestif 2025
       </div>
-      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
-        Three friends, one terroir<br />
-        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">27 plants</em>
-      </h2>
-      <p class="text-lg text-ink-700 leading-relaxed mb-10 max-w-2xl mx-auto">
-        From Saint-Didier-en-Velay, Étienne, Guillaume and Bastien craft
-        liqueurs and infusions from the forgotten plants of Auvergne.
-        Their flagship, <em>L'Alchimie Végétale</em>, was named
-        World's Best Digestif 2025 at the World Drinks Awards in London.
+      <h1 class="font-display leading-[1.05] mb-6">
+        <em class="not-italic text-cream-50 font-normal block whitespace-nowrap text-[14vw] sm:text-6xl md:text-7xl lg:text-8xl" style="font-family: var(--font-script);">La Brasserie des Plantes</em>
+        <span class="text-gold-400 block text-4xl md:text-6xl lg:text-7xl mt-3 leading-tight">Craft, Terroir<br />Passion</span>
+      </h1>
+      <p class="text-lg md:text-xl text-cream-100/90 max-w-2xl leading-relaxed mb-10">
+        From Saint-Didier-en-Velay, we craft liqueurs and infusions from the
+        forgotten plants of Auvergne. L'Alchimie Végétale was named
+        <strong class="text-gold-300 font-medium">World's Best Digestif 2025</strong>
+        at the World Drinks Awards in London.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href={localizedPath('/boutique', 'en')} class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-all hover:shadow-lg">
+        <a href={localizedPath('/boutique', 'en')} class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-cream-50 text-forest-900 hover:bg-cream-100 font-medium transition-all shadow-xl">
           Visit the shop
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
         </a>
-        <a href={localizedPath('/notre-histoire', 'en')} class="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 font-medium transition-colors">
+        <a href={localizedPath('/notre-histoire', 'en')} class="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-cream-100/50 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors backdrop-blur-sm">
           Our story
         </a>
       </div>
     </div>
-  </ScrollExpandMedia>
+  </section>
 
   <!-- PRODUCT CAROUSEL — quick discovery after the hero -->
   <ProductCarousel
