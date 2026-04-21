@@ -319,17 +319,27 @@ const ScrollExpandMedia = ({
                     </div>
                   )
                 ) : (
-                  <div className='relative w-full h-full flex items-center justify-center'>
-                    {/* Image visible de bord à bord (object-contain) — au
-                        plein scroll sur mobile portrait, l'image landscape
-                        (1600×776) tient toute la largeur et laisse de la
-                        place en haut/bas où le paysage reste visible.
+                  <div className='relative w-full h-full overflow-hidden rounded-xl'>
+                    {/* Mobile : object-contain + scale 1.3 pour agrandir
+                        l'image sans la couper (overflow caché par le
+                        conteneur). On voit mieux la bouteille + "Meilleur
+                        Digestif du Monde" + médaille World Drinks Awards.
+                        Desktop : object-cover inchangé, rendu hero immersif
+                        plein écran sans bandes noires.
                         Opacity animée : invisible au repos, fade-in au scroll. */}
                     <img
                       src={mediaSrc}
                       alt={title || 'Media content'}
-                      className='max-w-full max-h-full w-auto h-auto object-contain rounded-xl transition-opacity duration-150'
-                      style={{ opacity: scrollProgress }}
+                      className='w-full h-full object-contain md:object-cover rounded-xl transition-opacity duration-150'
+                      style={{
+                        opacity: scrollProgress,
+                        // Zoom +30% sur mobile uniquement (overflow caché par
+                        // le parent `overflow-hidden rounded-xl`) pour que la
+                        // bouteille et la médaille lisent mieux. Desktop
+                        // reste à l'échelle naturelle.
+                        transform: isMobileState ? 'scale(1.3)' : undefined,
+                        transformOrigin: 'center center',
+                      }}
                     />
                   </div>
                 )}
