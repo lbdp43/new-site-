@@ -234,6 +234,58 @@ SEO et pour éviter les oublis.
       pour renforcer les signaux NAP et le SEO local (voir note "tourisme"
       dans le backlog).
 
+### Stratégique — SEO & visibilité long terme
+
+Ces chantiers ne sont pas urgents mais rapportent gros sur 3-6 mois. À caler
+quand le site est stabilisé et les urgences techniques réglées.
+
+- [ ] **Link building presse** — relance des 13 médias qui nous ont déjà
+      couverts (liste complète dans `src/data/press.ts`) : Zoomdici, Le Bonbon
+      Lyon, M Lyon, La Commère 43, France 3 ARA, France Bleu, Réussir, Likora,
+      M Lyon, etc. Objectif : une nouvelle mention / article par trimestre
+      (nouvelle distinction, lancement produit, saison). Plus d'articles
+      = plus de backlinks = meilleure autorité domaine.
+
+- [ ] **Annuaires spiritueux spécialisés** — inscription gratuite sur les
+      annuaires métier : [Spiritueux-France](https://spiritueux-france.fr),
+      [Distillerie.org](https://distillerie.org), [La Revue du Spiritueux](https://revuedespiritueux.fr),
+      [Tastings.com](https://tastings.com), [Distiller.com](https://distiller.com).
+      Fournit des backlinks thématiques de qualité. ~30 min par annuaire,
+      à étaler sur 2-3 semaines.
+
+- [ ] **Nouvel audit SEO complet post-bascule**
+      Relancer un audit complet via la skill `seo-audit` sur
+      `https://www.labrasseriedesplantes.fr` (une fois indexé par Google).
+      Score cible : > 92/100. Vérifier que tous les fixes pré-bascule sont
+      bien appliqués en prod (H1 uniques, PNG→WebP, vidéo pro compressée,
+      titles/meta raccourcis).
+
+- [ ] **Schema.org — validation Rich Results**
+      Une fois sur `www.`, passer les URLs clés dans
+      [Rich Results Test](https://search.google.com/test/rich-results) pour
+      détection effective : Product (fiches boutique), LocalBusiness (home),
+      Recipe (cocktails), Event (ateliers), FAQPage (pros + faq). Tous
+      doivent apparaître comme "éligibles aux rich snippets" dans Google.
+
+- [ ] **CWV field data (CrUX) via Google API**
+      Une fois 28 jours de trafic accumulés en `www.`, configurer l'API CrUX
+      (voir skill `seo-google`) pour suivre les Core Web Vitals réels
+      (LCP/INP/CLS) par page. Permet de prioriser les optimisations
+      d'images / JS selon ce que vivent vraiment les utilisateurs.
+
+- [ ] **Google Business Profile — activité régulière**
+      Sur [business.google.com](https://business.google.com), poster 1 photo
+      + 1 post par semaine (Google pénalise les fiches dormantes). Inciter
+      les visiteurs de la boutique à laisser un avis via QR code en caisse.
+      Objectif : dépasser les 50 avis Google en 6 mois (signal fort pour
+      le Local Pack).
+
+- [ ] **Contenu saisonnier / blog cadence**
+      Publier 1 article de blog par mois (déjà câblé via le CMS Sveltia).
+      Thèmes qui convertissent : recettes cocktail saisonnières, portraits
+      de plantes, backstage atelier, recettes cuisine aux liqueurs. Chaque
+      article = nouvelle surface pour captrer du longue-traîne.
+
 ---
 
 ## ⚠️ Plan de rollback si ça casse
