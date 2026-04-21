@@ -32,7 +32,7 @@ const workshopsSchema = [
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: 'Réalisez votre liqueur artisanale',
-    description: "Initiez-vous à la production de spiritueux et fabriquez votre propre liqueur artisanale avec Étienne et Guillaume, artisans macérateurs.",
+    description: "Initiez-vous à la production de spiritueux et fabriquez votre propre liqueur artisanale avec Étienne, artisan macérateur.",
     location: {
       '@type': 'Place',
       name: 'La Brasserie des Plantes',
@@ -60,7 +60,7 @@ const workshopsSchema = [
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: "Dégustez des liqueurs d'exception",
-    description: "Découvrez les secrets de la macération et dégustez six liqueurs exceptionnelles avec Étienne et Guillaume.",
+    description: "Découvrez les secrets de la macération et dégustez six liqueurs exceptionnelles avec Étienne.",
     location: {
       '@type': 'Place',
       name: 'La Brasserie des Plantes',
@@ -91,21 +91,21 @@ const workshops = [
     id: 'liqueur',
     kicker: 'Atelier pratique',
     title: 'Réalisez votre liqueur artisanale',
-    subtitle: "Initiez-vous à la production de spiritueux et fabriquez votre liqueur avec Étienne et Guillaume, artisans macérateurs.",
+    subtitle: "Initiez-vous à la production de spiritueux et fabriquez votre liqueur avec Étienne, artisan macérateur.",
     price: 75,
     duration: '2 h',
     participants: '2 à 6 personnes',
     ageMin: 18,
     language: 'Français',
     includes: [
-      '2 h de découverte avec Étienne & Guillaume',
+      '2 h de découverte avec Étienne',
       'Des connaissances en fabrication de liqueur',
       'Votre liqueur artisanale (50 cl) à emporter',
     ],
     steps: [
       "Visite du lieu de macération où vous allez travailler.",
       "Dégustation des 6 liqueurs de la gamme Brasserie des Plantes.",
-      "Choix de vos arômes et saveurs parmi une belle sélection de plantes — Étienne & Guillaume vous guident pour le dosage.",
+      "Choix de vos arômes et saveurs parmi une belle sélection de plantes — Étienne vous guide pour le dosage.",
       "Création de votre liqueur dans un bocal type Parfait de 1 L (vous repartez avec 50 cl).",
       "Transmission de toutes les instructions pour l'améliorer chez vous : temps de repos, dosage en sucre, mise en bouteille.",
     ],
@@ -117,14 +117,14 @@ const workshops = [
     id: 'visite',
     kicker: 'Visite & dégustation',
     title: "Dégustez des liqueurs d'exception",
-    subtitle: "Découvrez les secrets de la macération et dégustez six liqueurs exceptionnelles — 1 h 30 dans les coulisses de la maison.",
+    subtitle: "Découvrez les secrets de la macération et dégustez six liqueurs exceptionnelles avec Étienne — 1 h 30 dans les coulisses de la maison.",
     price: 17,
     duration: '1 h 30',
     participants: '2 à 7 personnes',
     ageMin: 18,
     language: 'Français',
     includes: [
-      '1 h 30 de découverte avec Étienne & Guillaume',
+      '1 h 30 de découverte avec Étienne',
       'Des connaissances en fabrication de liqueur',
       'Une savoureuse dégustation de 6 liqueurs',
     ],
@@ -135,7 +135,8 @@ const workshops = [
       "Questions-réponses autour de la conservation et de la mise en bouteille.",
     ],
     image: '/images/ateliers/visite-1.jpg',
-    gallery: ['/images/ateliers/visite-2.jpg', '/images/ateliers/visite-3.jpg', '/images/ateliers/visite-4.jpg'],
+    gallery: ['/images/ateliers/visite-2.jpg', '/images/ateliers/visite-3.jpg', '/images/ateliers/visite-4.jpg', '/images/ateliers/visite-5.jpg'],
+    flipped: true, // image à droite, texte à gauche (alternance visuelle)
     bookingUrl: WECANDOO_VISITE,
   },
 ];
@@ -159,31 +160,42 @@ const fmtDate = (iso: string) => {
 ---
 <Layout
   title="Ateliers & dégustations | Réalisez votre liqueur — La Brasserie des Plantes"
-  description="Deux ateliers en Haute-Loire avec Étienne et Guillaume : réalisez votre propre liqueur artisanale (2h, 75 €) ou venez pour une visite-dégustation de nos six liqueurs (1h30, 17 €). 23 avis clients."
+  description="Deux ateliers en Haute-Loire avec Étienne, artisan macérateur : réalisez votre propre liqueur artisanale (2h, 75 €) ou venez pour une visite-dégustation de nos six liqueurs (1h30, 17 €). 23 avis clients."
   schema={[breadcrumb, ...workshopsSchema]}
 >
-  <!-- HERO — photo large + intro + CTA dates -->
+  <!-- HERO — vidéo YouTube Wecandoo en fond (3H8FSvDwjnM) + contenu sur overlay
+       doux pour garder la vidéo bien visible. -->
   <section class="relative min-h-[70vh] md:min-h-[80vh] overflow-hidden bg-forest-950 flex items-end">
-    <img
-      src="/images/ateliers/liqueur-2.jpg"
-      alt="Atelier de fabrication de liqueurs à la Brasserie des Plantes — Saint-Didier-en-Velay"
-      class="absolute inset-0 w-full h-full object-cover opacity-70"
-    />
-    <div class="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-forest-950/10"></div>
+    <!-- YouTube bg, responsive via wrapper 16:9 recouvrant toute la section -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <iframe
+        src="https://www.youtube.com/embed/3H8FSvDwjnM?autoplay=1&mute=1&loop=1&playlist=3H8FSvDwjnM&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1"
+        title="Atelier La Brasserie des Plantes — vidéo Wecandoo"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full"
+        style="width: 177.78vh; height: 56.25vw; border: 0;"
+      ></iframe>
+    </div>
+    <!-- Ombrage 2 couches : une teinte globale qui unifie + un dégradé plus
+         marqué côté texte (en bas-gauche) pour que la typo blanche ressorte
+         sans complètement cacher la vidéo. -->
+    <div class="absolute inset-0 bg-forest-950/35 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-tr from-forest-950/85 via-forest-950/50 to-transparent pointer-events-none"></div>
 
-    <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-16 md:py-24 text-cream-100">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/50 text-gold-400 text-xs font-medium tracking-[0.2em] uppercase mb-6 backdrop-blur-sm">
+    <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-16 md:py-24 text-cream-50">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/30 border border-gold-500/60 text-gold-300 text-xs font-medium tracking-[0.2em] uppercase mb-6 backdrop-blur-sm">
         Ateliers & dégustations
       </div>
-      <h1 class="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 max-w-3xl">
+      <h1 class="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 max-w-3xl text-cream-50" style="text-shadow: 0 3px 28px rgba(0,0,0,0.75), 0 1px 2px rgba(0,0,0,0.5);">
         Venez créer votre liqueur,<br />
-        <em class="not-italic text-gold-400 font-normal" style="font-family: var(--font-script);">ou simplement déguster.</em>
+        <em class="not-italic text-gold-300 font-normal" style="font-family: var(--font-script); text-shadow: 0 3px 28px rgba(0,0,0,0.75), 0 1px 2px rgba(0,0,0,0.5);">ou simplement déguster.</em>
       </h1>
-      <p class="text-lg md:text-xl text-cream-100/90 max-w-2xl leading-relaxed mb-8">
-        Étienne & Guillaume ouvrent leur atelier de Saint-Didier-en-Velay
-        aux curieux. Deux formats : un atelier pratique de 2 h pour fabriquer
-        votre propre liqueur (75 €), et une visite-dégustation de 1 h 30 pour
-        découvrir les coulisses de la maison (17 €).
+      <p class="text-lg md:text-xl text-cream-50 max-w-2xl leading-relaxed mb-8" style="text-shadow: 0 2px 16px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.5);">
+        Étienne ouvre l'atelier de Saint-Didier-en-Velay aux curieux. Deux
+        formats : un atelier pratique de 2 h pour fabriquer votre propre
+        liqueur (75 €), et une visite-dégustation de 1 h 30 pour découvrir
+        les coulisses de la maison (17 €).
       </p>
       <div class="flex flex-wrap gap-3">
         <a href="#workshops" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 text-forest-900 hover:bg-cream-100 font-medium transition-colors">
@@ -219,8 +231,8 @@ const fmtDate = (iso: string) => {
         {workshops.map((w) => (
           <article id={w.id} class="bg-white rounded-3xl overflow-hidden border border-forest-100/60 shadow-sm">
             <div class="grid lg:grid-cols-2">
-              <!-- Image principale -->
-              <div class="aspect-[4/3] lg:aspect-auto lg:min-h-[400px] relative overflow-hidden bg-forest-950">
+              <!-- Image principale (ordre alterné selon w.flipped) -->
+              <div class={`aspect-[4/3] lg:aspect-auto lg:min-h-[400px] relative overflow-hidden bg-forest-950 ${w.flipped ? 'lg:order-2' : ''}`}>
                 <img
                   src={w.image}
                   alt={w.title}
@@ -235,8 +247,8 @@ const fmtDate = (iso: string) => {
                 </div>
               </div>
 
-              <!-- Contenu -->
-              <div class="p-7 md:p-10 flex flex-col">
+              <!-- Contenu (ordre alterné selon w.flipped) -->
+              <div class={`p-7 md:p-10 flex flex-col ${w.flipped ? 'lg:order-1' : ''}`}>
                 <h3 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-3">
                   {w.title}
                 </h3>
@@ -353,32 +365,31 @@ const fmtDate = (iso: string) => {
     </div>
   </section>
 
-  <!-- ARTISANS -->
+  <!-- ARTISAN -->
   <section class="py-20 bg-cream-50">
     <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-[320px_1fr] gap-10 items-center">
       <div class="aspect-square rounded-2xl overflow-hidden max-w-[320px] mx-auto w-full">
-        <img src="/images/ateliers/artisans.jpg" alt="Étienne et Guillaume, fondateurs de la Brasserie des Plantes" loading="lazy" class="w-full h-full object-cover" />
+        <img src="/images/ateliers/artisans.jpg" alt="Étienne, artisan macérateur de la Brasserie des Plantes" loading="lazy" class="w-full h-full object-cover" />
       </div>
       <div>
         <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
-          Vos hôtes
+          Votre hôte
         </div>
         <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-5">
-          <em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">Étienne & Guillaume</em>,<br />
-          artisans macérateurs
+          <em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">Étienne</em>,<br />
+          artisan macérateur
         </h2>
         <div class="text-ink-700 leading-relaxed space-y-4 text-base">
           <p>
-            Amis d'enfance de Saint-Didier-en-Velay, ils ont fait les bancs
-            du collège ensemble. Étienne est ingénieur en biotechnologie
-            végétale, Guillaume a ouvert un bar-restaurant à Saint-Étienne —
-            ils montent La Brasserie des Plantes en 2021 pour produire des
-            liqueurs macérées à base de plantes d'Auvergne.
+            Originaire de Saint-Didier-en-Velay, Étienne connaît son coin
+            comme sa poche. Ingénieur en biotechnologie végétale de
+            formation, il a monté La Brasserie des Plantes pour produire
+            des liqueurs macérées à base de plantes d'Auvergne.
           </p>
           <p>
-            Leur atelier est installé dans une ancienne boulangerie, au cœur
-            du village. Précis, organisés, passionnés — ils ont à cœur de
-            partager leur savoir-faire : culture des plantes, arômes,
+            Son atelier est installé dans une ancienne boulangerie, au cœur
+            du village. Précis, organisé, passionné — il a à cœur de
+            partager son savoir-faire : culture des plantes, arômes,
             processus de macération, mise en bouteille.
           </p>
         </div>
@@ -406,16 +417,16 @@ const fmtDate = (iso: string) => {
       <!-- Grid masonry d'avis — colonnes responsives -->
       <div class="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
         {allReviews.map((r) => (
-          <figure class="break-inside-avoid p-6 rounded-2xl bg-cream-50 border border-forest-100/60">
+          <figure class="break-inside-avoid p-6 rounded-2xl bg-cream-50 border border-forest-100/60 text-center">
+            <svg class="w-6 h-6 mx-auto mb-3 text-gold-500/60" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
             <blockquote class="text-sm md:text-[15px] text-ink-700 leading-relaxed italic">
-              «&nbsp;{r.content}&nbsp;»
+              {r.content}
             </blockquote>
-            <figcaption class="mt-4 pt-4 border-t border-forest-100 flex items-center justify-between gap-2 text-xs">
-              <div>
-                <div class="font-medium text-forest-900 not-italic">{r.name}</div>
-                <div class="text-ink-500 italic">{r.workshop}</div>
+            <figcaption class="mt-4 pt-4 border-t border-forest-100 text-xs">
+              <div class="font-medium text-forest-900 not-italic">{r.name}</div>
+              <div class="text-ink-500 italic mt-0.5">
+                {r.workshop} · <time class="not-italic">{fmtDate(r.date)}</time>
               </div>
-              <time class="text-ink-500 text-[11px]">{fmtDate(r.date)}</time>
             </figcaption>
           </figure>
         ))}
