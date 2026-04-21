@@ -138,7 +138,21 @@ const itemListSchema = {
               </h2>
               <p class="text-ink-700 leading-relaxed">{ranges[r].description}</p>
             </div>
-            <ProductMasonry items={productsByRange[r]} />
+            <ProductMasonry
+              items={productsByRange[r]}
+              promoCard={r === 'accessoire' ? {
+                href: '/composer-mon-coffret',
+                title: 'Composer mon coffret',
+                tagline: 'Plusieurs bouteilles 20cl au choix — empilables, prêtes à offrir.',
+                priceLabel: 'dès 48 €',
+                badge: 'Sur mesure',
+                stackImages: [
+                  '/images/products/sizes/alchimie-vegetale-20cl-stack.webp',
+                  '/images/products/sizes/nectar-ostara-20cl-stack.webp',
+                  '/images/products/sizes/cerf-gent-20cl-stack.webp',
+                ],
+              } : undefined}
+            />
           </section>
         ))}
       </div>

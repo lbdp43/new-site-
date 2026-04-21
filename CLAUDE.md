@@ -145,8 +145,7 @@ gitignore. Ne **jamais** commiter de secret.
    contenance, serving…) → passe `draft: false` → Publish
 5. Commit auto → Vercel redeploy → fiche publique en 90s
 
-Chaque produit a un `wcId` (ID numérique WooCommerce). `coffret-original`
-n'en a pas (bouton "bientôt disponible"). À créer côté WP pour débloquer.
+Chaque produit a un `wcId` (ID numérique WooCommerce).
 
 **Attribut de variation** :
 - Par défaut : `"Contenance"` (attribut local WC, **pas** `pa_contenance`)
@@ -337,8 +336,6 @@ laissés vides. Helper `emptyToUndefined` dispo dans `content.config.ts`.
   qui miroite le schema Zod de `src/content.config.ts`. Si tu ajoutes
   un champ au schema, ajoute-le aussi dans `config.yml`. Doc complète
   dans `docs/cms-admin.md`.
-- **Fiche produit `coffret-original`** : pas de `wcId`. Ajouter quand le
-  produit sera créé côté WP.
 - **SIZE_IMAGES dans products.ts** : une photo différente par contenance,
   téléchargées depuis le WP legacy. Format `.webp` (convertis depuis PNG
   pour perf).

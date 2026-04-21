@@ -1,7 +1,7 @@
 ---
 name: "Verveine CBD Aurone"
 range: lumiere-obscure
-priceMin: 17
+priceMin: 34
 priceMax: 34
 image: /images/products/verveine-cbd-aurone.png
 alcohol: 30
@@ -16,10 +16,7 @@ tasting:
   palate: "Verveine dominante, chanvre en fond."
   finish: "Persistante, légèrement camphrée."
 serving: "Digestif, à température ambiante."
-sizes: [Empilable 20cl, 70cl]
-sizeImages:
-  - size: 20
-    image: /images/products/sizes/verveine-cbd-aurone-20cl.webp
+sizes: [70cl]
 wcId: 616
 order: 2
 ---

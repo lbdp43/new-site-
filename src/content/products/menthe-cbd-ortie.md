@@ -1,7 +1,7 @@
 ---
 name: "Menthe CBD Ortie"
 range: lumiere-obscure
-priceMin: 16
+priceMin: 34
 priceMax: 34
 image: /images/products/menthe-cbd-ortie.png
 alcohol: 21
@@ -16,10 +16,7 @@ tasting:
   palate: "Herbacé, thé à la menthe, assez doux."
   finish: "Longue menthe verte."
 serving: "Apéritif, frais, en long drink ou pur."
-sizes: [Empilable 20cl, 70cl]
-sizeImages:
-  - size: 20
-    image: /images/products/sizes/menthe-cbd-ortie-20cl.webp
+sizes: [70cl]
 wcId: 626
 order: 1
 ---

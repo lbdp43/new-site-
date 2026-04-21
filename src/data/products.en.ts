@@ -312,16 +312,6 @@ export const productsEn: Record<string, ProductEn> = {
     serving: 'Best enjoyed as a comparative tasting.',
   },
 
-  'coffret-original': {
-    subtitle: 'Alternative six-flask set',
-    composition: ['6 × 4 cl flasks — Original selection'],
-    usage: 'Discovery or gift',
-    tagline: 'Another way into the house — six flasks of originals.',
-    description:
-      'Our second discovery set, with six of our liqueurs in 4 cl flasks. A different journey from the Initiation set, to complement or to give.',
-    serving: 'Best enjoyed as a comparative tasting.',
-  },
-
   'flasque-entonnoir': {
     subtitle: 'Pocket flask + funnel',
     composition: [],

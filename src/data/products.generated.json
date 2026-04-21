@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-20T19:21:14.294Z",
-  "productCount": 19,
+  "generatedAt": "2026-04-21T08:44:53.012Z",
+  "productCount": 18,
   "draftCount": 0,
   "products": [
     {
@@ -419,7 +419,7 @@
       "slug": "menthe-cbd-ortie",
       "name": "Menthe CBD Ortie",
       "range": "lumiere-obscure",
-      "priceMin": 16,
+      "priceMin": 34,
       "priceMax": 34,
       "image": "/images/products/menthe-cbd-ortie.png",
       "alcohol": 21,
@@ -435,23 +435,19 @@
         "Ortie"
       ],
       "sizes": [
-        "Empilable 20cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Menthe verte, herbe fraîche.",
         "palate": "Herbacé, thé à la menthe, assez doux.",
         "finish": "Longue menthe verte."
-      },
-      "sizeImages": {
-        "20": "/images/products/sizes/menthe-cbd-ortie-20cl.webp"
       }
     },
     {
       "slug": "verveine-cbd-aurone",
       "name": "Verveine CBD Aurone",
       "range": "lumiere-obscure",
-      "priceMin": 17,
+      "priceMin": 34,
       "priceMax": 34,
       "image": "/images/products/verveine-cbd-aurone.png",
       "alcohol": 30,
@@ -467,23 +463,19 @@
         "Chanvre (CBD, sans THC)"
       ],
       "sizes": [
-        "Empilable 20cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Verveine citronnée, touche résineuse.",
         "palate": "Verveine dominante, chanvre en fond.",
         "finish": "Persistante, légèrement camphrée."
-      },
-      "sizeImages": {
-        "20": "/images/products/sizes/verveine-cbd-aurone-20cl.webp"
       }
     },
     {
       "slug": "absinthe-cbd-citron",
       "name": "CBD Absinthe Citron",
       "range": "lumiere-obscure",
-      "priceMin": 18,
+      "priceMin": 39,
       "priceMax": 39,
       "image": "/images/products/absinthe-cbd-citron.png",
       "alcohol": 37,
@@ -500,16 +492,12 @@
         "Graines de coriandre"
       ],
       "sizes": [
-        "Empilable 20cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Chanvre, foin vert, citron.",
         "palate": "Très verte, herbacée, avec l'absinthe en fond mentholé.",
         "finish": "Chanvre persistant."
-      },
-      "sizeImages": {
-        "20": "/images/products/sizes/absinthe-cbd-citron-20cl.webp"
       }
     },
     {
@@ -584,26 +572,6 @@
       "description": "Six de nos liqueurs signatures, en format 4 cl, présentées dans un écrin. Le meilleur moyen de découvrir la gamme ou de l'offrir.",
       "composition": [
         "6 flacons de 4 cl — sélection Initiation"
-      ],
-      "sizes": [
-        "6×4cl"
-      ]
-    },
-    {
-      "slug": "coffret-original",
-      "name": "Coffret Original",
-      "range": "accessoire",
-      "priceMin": 24,
-      "priceMax": 24,
-      "image": "/images/products/coffret-initiation.webp",
-      "alcohol": 0,
-      "usage": "Découverte ou cadeau",
-      "tagline": "Une autre entrée dans la maison — six flacons d'originales.",
-      "serving": "À déguster en dégustation comparée.",
-      "order": 2,
-      "description": "Notre second coffret de découverte, composé de six liqueurs de la maison en flacons de 4 cl. Un parcours différent de l'Initiation, pour compléter ou offrir.",
-      "composition": [
-        "6 flacons de 4 cl — sélection Originale"
       ],
       "sizes": [
         "6×4cl"

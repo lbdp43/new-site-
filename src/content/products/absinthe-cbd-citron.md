@@ -1,7 +1,7 @@
 ---
 name: "CBD Absinthe Citron"
 range: lumiere-obscure
-priceMin: 18
+priceMin: 39
 priceMax: 39
 image: /images/products/absinthe-cbd-citron.png
 alcohol: 37
@@ -17,10 +17,7 @@ tasting:
   palate: "Très verte, herbacée, avec l'absinthe en fond mentholé."
   finish: "Chanvre persistant."
 serving: "Digestif, à température ambiante. Pour amateurs avertis."
-sizes: [Empilable 20cl, 70cl]
-sizeImages:
-  - size: 20
-    image: /images/products/sizes/absinthe-cbd-citron-20cl.webp
+sizes: [70cl]
 wcId: 629
 order: 3
 ---
