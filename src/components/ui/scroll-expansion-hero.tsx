@@ -333,11 +333,12 @@ const ScrollExpandMedia = ({
                       className='w-full h-full object-contain md:object-cover rounded-xl transition-opacity duration-150'
                       style={{
                         opacity: scrollProgress,
-                        // Zoom +30% sur mobile uniquement (overflow caché par
-                        // le parent `overflow-hidden rounded-xl`) pour que la
-                        // bouteille et la médaille lisent mieux. Desktop
-                        // reste à l'échelle naturelle.
-                        transform: isMobileState ? 'scale(1.3)' : undefined,
+                        // Zoom mobile uniquement (overflow caché par le parent
+                        // `overflow-hidden rounded-xl`) pour que la bouteille
+                        // et la médaille lisent bien. 1.3 × 1.3 ≈ 1.7, soit
+                        // +70% par rapport à la taille naturelle. Desktop
+                        // reste à l'échelle 1.
+                        transform: isMobileState ? 'scale(1.7)' : undefined,
                         transformOrigin: 'center center',
                       }}
                     />
