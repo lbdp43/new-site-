@@ -286,6 +286,19 @@ quand le site est stabilisé et les urgences techniques réglées.
       de plantes, backstage atelier, recettes cuisine aux liqueurs. Chaque
       article = nouvelle surface pour captrer du longue-traîne.
 
+- [ ] **Email automatique demande d'avis après commande**
+      Mettre en place un mail transactionnel qui part automatiquement
+      X jours après la livraison d'une commande WooCommerce (typiquement
+      7 jours), invitant le client à laisser un avis. Deux pistes :
+      1. **Plugin WC natif** : "AutomateWoo" ou "Mailpoet" avec trigger
+         "X jours après Completed order" → template email + lien vers
+         la fiche Google Business Profile (ou Trustpilot, Featurable…)
+      2. **Workflow n8n / Zapier** : webhook WooCommerce → délai →
+         envoi via SMTP WP avec lien avis.
+      Objectif : convertir chaque commande en ~30% de nouveaux avis
+      Google, ce qui booste fortement le Local Pack SEO et la
+      crédibilité en fiche produit.
+
 ---
 
 ## ⚠️ Plan de rollback si ça casse
