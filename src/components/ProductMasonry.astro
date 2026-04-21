@@ -64,20 +64,22 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
           </span>
         )}
 
-        {/* Bouteilles empilables — visuel 3-stack qui évoque le résultat */}
-        <div class="aspect-[5/6] relative overflow-hidden flex items-end justify-center pb-6">
-          <div class="relative transition-transform duration-500 group-hover:-translate-y-1" style="width: 38%;">
+        {/* Bouteilles empilables — visuel 3-stack centré. Largeur bouteille
+            ~32% de la carte : assez généreux pour que le stack soit lisible,
+            assez compact pour tenir dans aspect [5/6] avec padding. */}
+        <div class="aspect-[5/6] relative overflow-hidden flex items-center justify-center p-5">
+          <div class="relative flex flex-col items-center transition-transform duration-500 group-hover:-translate-y-1" style="width: 32%;">
             {promoCard.stackImages.slice(0, 3).map((src, idx) => (
               <img
                 src={src}
                 alt=""
                 loading="lazy"
-                class="relative block mx-auto w-full h-auto"
-                style={`margin-top: ${idx === 0 ? '0' : '-27%'}; filter: drop-shadow(0 6px 10px rgba(10, 107, 67, 0.2)); z-index: ${3 - idx};`}
+                class="block w-full h-auto"
+                style={`margin-top: ${idx === 0 ? '0' : '-27%'}; filter: drop-shadow(0 6px 10px rgba(10, 107, 67, 0.2)); z-index: ${3 - idx}; position: relative;`}
               />
             ))}
             <div
-              class="mx-auto mt-1 h-1.5 rounded-full pointer-events-none"
+              class="mt-1 h-1.5 rounded-full pointer-events-none"
               style="width: 80%; background: radial-gradient(ellipse, rgba(10, 107, 67, 0.28), transparent 65%);"
               aria-hidden="true"
             ></div>
