@@ -374,7 +374,7 @@ const ScrollExpandMedia = ({
                   <img
                     src={titleImageSrc}
                     alt={titleImageAlt ?? 'Logo'}
-                    className='w-[42vw] max-w-[220px] md:max-w-[300px] h-auto select-none'
+                    className='w-[60vw] max-w-[308px] md:max-w-[420px] h-auto select-none'
                     style={{
                       /* Drop-shadow discrète : le logo est en blanc, une ombre
                          foncée renforce sa lisibilité sur le ciel clair du paysage. */
