@@ -1,0 +1,138 @@
+---
+/**
+ * PressStrip — bandeau "Ils parlent de nous" pour la homepage.
+ *
+ * Déduplique les entrées de `src/data/press.ts` par source, garde pour
+ * chaque outlet l'article le plus récent (pour le lien), et mappe vers
+ * un logo dans `/images/press/<slug>.png`. Les outlets sans logo
+ * (Likora, sources Facebook only) sont affichés en texte.
+ */
+import { pressMentions } from '../data/press';
+
+/** Mapping source name → { slug (logo), fallback text }. Le slug pointe sur
+ *  public/images/press/<slug>.png quand il est renseigné. */
+const outletMeta: Record<string, { slug?: string; label: string }> = {
+  'World Liqueur Awards (officiel)': { slug: 'world-liqueur-awards', label: 'World Liqueur Awards' },
+  'Zoomdici': { slug: 'zoomdici', label: 'Zoomdici' },
+  'Le Bonbon Lyon': { slug: 'le-bonbon', label: 'Le Bonbon' },
+  'M Lyon': { slug: 'm-lyon', label: 'M Lyon' },
+  'La Commère 43': { slug: 'la-commere-43', label: 'La Commère 43' },
+  'France 3 Auvergne-Rhône-Alpes': { slug: 'france-3', label: 'France 3' },
+  'France Bleu Saint-Étienne Loire': { slug: 'france-bleu', label: 'France Bleu' },
+  'CMA Auvergne-Rhône-Alpes (vidéo)': { slug: 'cma-ara', label: 'Chambre de Métiers ARA' },
+  'Haute-Loire Tourisme (Facebook)': { slug: 'haute-loire-tourisme', label: 'Haute-Loire Tourisme' },
+  'Loire Semène Tourisme': { slug: 'haute-loire-tourisme', label: 'Loire-Semène Tourisme' },
+  'Likora (blog spécialisé)': { label: 'Likora' },
+  'Velay Attractivité': { slug: 'velay-attractivite', label: 'Velay Attractivité' },
+  'Réussir — Agriculture Massif Central': { slug: 'reussir', label: 'Réussir' },
+};
+
+// Ordre d'apparition : les outlets avec le plus d'articles d'abord, puis
+// les plus récents. Les outlets institutionnels (facebook-only) passent
+// derrière.
+type OutletEntry = {
+  source: string;
+  label: string;
+  slug?: string;
+  url: string;        // lien vers l'article le plus récent
+  count: number;      // nombre d'articles de cet outlet
+  latestDate: string; // ISO
+};
+
+const byOutlet = new Map<string, OutletEntry>();
+for (const m of pressMentions) {
+  const meta = outletMeta[m.source];
+  if (!meta) continue; // source inconnue → on ignore (évite un logo cassé)
+  const existing = byOutlet.get(m.source);
+  if (!existing) {
+    byOutlet.set(m.source, {
+      source: m.source,
+      label: meta.label,
+      slug: meta.slug,
+      url: m.url,
+      count: 1,
+      latestDate: m.date,
+    });
+  } else {
+    existing.count += 1;
+    if (m.date > existing.latestDate) {
+      existing.latestDate = m.date;
+      existing.url = m.url;
+    }
+  }
+}
+
+const outlets = Array.from(byOutlet.values()).sort((a, b) => {
+  // Les outlets avec logo d'abord
+  const aHas = a.slug ? 1 : 0;
+  const bHas = b.slug ? 1 : 0;
+  if (aHas !== bHas) return bHas - aHas;
+  // Puis par nombre d'articles décroissant
+  if (a.count !== b.count) return b.count - a.count;
+  // Puis par date du plus récent article
+  return b.latestDate.localeCompare(a.latestDate);
+});
+
+const totalMentions = pressMentions.length;
+---
+<section class="py-16 md:py-20 bg-cream-50 border-y border-forest-100/60">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-10 md:mb-12 max-w-2xl mx-auto">
+      <div class="text-[10px] md:text-xs uppercase tracking-[0.35em] text-gold-600 font-medium mb-3">
+        Presse
+      </div>
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-3">
+        Ils parlent de nous
+      </h2>
+      <p class="text-sm md:text-base text-ink-700 leading-relaxed">
+        {totalMentions} articles et reportages vérifiés — presse nationale, régionale, radio, télé
+        et curateurs spécialisés.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap justify-center items-start gap-x-6 gap-y-8 md:gap-x-10 md:gap-y-10 max-w-5xl mx-auto">
+      {outlets.map((o) => (
+        <a
+          href={o.url}
+          target="_blank"
+          rel="noopener nofollow"
+          title={`${o.label} — ${o.count} article${o.count > 1 ? 's' : ''}`}
+          class="group flex flex-col items-center justify-start gap-2 w-24 md:w-28 transition-transform hover:-translate-y-1"
+        >
+          {o.slug ? (
+            <img
+              src={`/images/press/${o.slug}.png`}
+              alt={`Logo ${o.label}`}
+              loading="lazy"
+              width="56"
+              height="56"
+              class="h-10 md:h-12 w-auto object-contain"
+            />
+          ) : (
+            <div class="h-10 md:h-12 flex items-center justify-center px-2 rounded-md bg-forest-50 border border-forest-200/70">
+              <span class="font-display text-xs md:text-sm text-forest-900 tracking-wide uppercase">
+                {o.label}
+              </span>
+            </div>
+          )}
+          <span class="text-[10px] md:text-[11px] uppercase tracking-wider text-ink-500 group-hover:text-forest-700 text-center leading-tight transition-colors">
+            {o.label}
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-10 md:mt-12 text-center">
+      <a
+        href="/presse"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 text-sm font-medium transition-colors"
+      >
+        Voir toute la revue de presse
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

@@ -188,10 +188,13 @@ const ScrollExpandMedia = ({
   // l'écran et occupe la hauteur maximale possible du viewport.
   const finalWidth = typeof window !== 'undefined' ? window.innerWidth : isMobileState ? 950 : 1550;
   const finalHeight = typeof window !== 'undefined' ? window.innerHeight : isMobileState ? 600 : 800;
-  // Card initiale plus compacte (320 au lieu de 400) pour laisser de la place
-  // au logo "Brasserie des Plantes" au-dessus dans le ciel.
-  const mediaWidth = 300 + scrollProgress * (finalWidth - 300);
-  const mediaHeight = 320 + scrollProgress * (finalHeight - 320);
+  // Card initiale : ratio proche de l'image source (1600×776 ≈ 2:1) pour
+  // que object-cover ne rogne presque rien. Plus large que haute → responsive
+  // mobile sans couper les côtés (badge, feuillage).
+  const initialWidth = isMobileState ? 320 : 420;
+  const initialHeight = isMobileState ? 170 : 220;
+  const mediaWidth = initialWidth + scrollProgress * (finalWidth - initialWidth);
+  const mediaHeight = initialHeight + scrollProgress * (finalHeight - initialHeight);
   const textTranslateX = scrollProgress * (isMobileState ? 180 : 150);
 
   const firstWord = title ? title.split(' ')[0] : '';
@@ -250,7 +253,9 @@ const ScrollExpandMedia = ({
                   height: `${mediaHeight}px`,
                   maxWidth: '100vw',
                   maxHeight: 'calc(100vh - 140px)',
-                  boxShadow: '0px 0px 50px rgba(0, 0, 0, 0.3)',
+                  // Ombre qui grandit avec le scroll — au départ, la carte est
+                  // totalement transparente, donc pas d'ombre flottante bizarre.
+                  boxShadow: `0px 0px ${scrollProgress * 50}px rgba(0, 0, 0, ${scrollProgress * 0.3})`,
                 }}
               >
                 {mediaType === 'video' ? (
@@ -314,18 +319,17 @@ const ScrollExpandMedia = ({
                     </div>
                   )
                 ) : (
-                  <div className='relative w-full h-full'>
+                  <div className='relative w-full h-full flex items-center justify-center'>
+                    {/* Image visible de bord à bord (object-contain) — au
+                        plein scroll sur mobile portrait, l'image landscape
+                        (1600×776) tient toute la largeur et laisse de la
+                        place en haut/bas où le paysage reste visible.
+                        Opacity animée : invisible au repos, fade-in au scroll. */}
                     <img
                       src={mediaSrc}
                       alt={title || 'Media content'}
-                      className='w-full h-full object-cover rounded-xl'
-                    />
-
-                    <motion.div
-                      className='absolute inset-0 bg-black/40 rounded-xl'
-                      initial={{ opacity: 0.7 }}
-                      animate={{ opacity: 0.7 - scrollProgress * 0.3 }}
-                      transition={{ duration: 0.2 }}
+                      className='max-w-full max-h-full w-auto h-auto object-contain rounded-xl transition-opacity duration-150'
+                      style={{ opacity: scrollProgress }}
                     />
                   </div>
                 )}

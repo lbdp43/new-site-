@@ -472,8 +472,8 @@ const parsedAwards = (product.awards || []).map(parseAward);
               </div>
               <ul class="text-sm text-ink-700 leading-relaxed space-y-1.5">
                 {product.composition.map((c) => (
-                  <li class="flex items-start gap-2">
-                    <svg class="w-3.5 h-3.5 mt-1 text-forest-500 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c0 5-4 8-4 13h8c0-5-4-8-4-13z"/></svg>
+                  <li class="flex items-start gap-3">
+                    <span class="flex-none w-1.5 h-1.5 rounded-full bg-gold-500 mt-2" aria-hidden="true"></span>
                     <span>{c}</span>
                   </li>
                 ))}

@@ -5,6 +5,7 @@ import ScrollExpandMedia from '../components/ui/scroll-expansion-hero';
 import InstagramFeed from '../components/InstagramFeed.astro';
 import GoogleReviewsEmbed from '../components/GoogleReviewsEmbed.astro';
 import ProductCarousel from '../components/ProductCarousel.astro';
+import PressStrip from '../components/PressStrip.astro';
 import { site } from '../data/site';
 import { featuredProducts, products } from '../data/products';
 
@@ -466,6 +467,12 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
       </a>
     </div>
   </section>
+
+  <!-- ILS PARLENT DE NOUS — bandeau presse avec logos des médias qui
+       nous ont couverts. Les logos sont récupérés depuis les apple-touch-icon
+       des sites (ou Google favicons en fallback) et stockés dans
+       /public/images/press/. Clic → article le plus récent de ce média. -->
+  <PressStrip />
 
   <!-- PRODUITS VEDETTES — sélection mise en avant en toute fin de page -->
   <section class="py-24 bg-gradient-to-b from-forest-50/50 to-cream-50">
