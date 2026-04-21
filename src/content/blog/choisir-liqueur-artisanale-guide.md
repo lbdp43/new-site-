@@ -113,7 +113,7 @@ Plus le lot est petit, plus :
 - les plantes peuvent être locales (on n'a pas besoin de 10 tonnes de verveine),
 - le producteur peut répondre personnellement à vos questions.
 
-**Notre règle** : toute personne qui nous écrit sur Instagram ou par mail a une réponse sous 48h, signée par un des trois associés. Essayez avec un industriel.
+**Notre règle** : toute personne qui nous écrit sur Instagram ou par mail a une réponse sous 48h, signée par l'un des deux fondateurs. Essayez avec un industriel.
 
 ## 3. Choisir selon l'usage : notre classification
 
@@ -121,15 +121,15 @@ Voici comment on recommande nos 18 liqueurs selon le moment :
 
 ### Pour l'apéritif
 
-- **Amer classique** (en remplacement d'une Suze) : [Cerf'Gent](/boutique/cerf-gent), 16 %, à servir givré ou avec du tonic.
-- **Floral et frais** : [Nectar d'Ostara](/boutique/nectar-ostara), 17 %, avec un crémant ou simplement sur glace.
-- **Gourmand** : [Pralicoquine](/boutique/pralicoquine), praline amande, sur glace en digestif-apéritif.
-- **Agrumes vibrants** : [Zéleste](/boutique/zeleste), avec du tonic et un zeste d'orange.
+- **Amer classique** (en remplacement d'une Suze) : [Cerf'Gent](/boutique/cerf-gent), 15 %, à servir givré ou avec du tonic — Médaille d'Or CGA Paris 2025.
+- **Floral et frais** : [Nectar d'Ostara](/boutique/nectar-ostara), 24 %, avec un crémant ou simplement sur glace.
+- **Gourmand** : [Pralicoquine](/boutique/pralicoquine), 15 %, praline amande, sur glace en digestif-apéritif.
+- **Agrumes vibrants** : [Zéleste](/boutique/zeleste), 17,5 %, avec du tonic et un zeste d'orange.
 
 ### Pour le digestif
 
-- **Le palmarès** : [L'Alchimie Végétale](/boutique/alchimie-vegetale) 42 %, **Meilleur Digestif du Monde 2025**. 27 plantes, signature de la maison.
-- **L'alternative florale** : [L'Herbe des Druides](/boutique/herbe-des-druides), 40 %, verveine citronnée, wild thym, caraway.
+- **Le palmarès** : [L'Alchimie Végétale](/boutique/alchimie-vegetale) 50 %, **Meilleur Digestif du Monde 2025**. 27 plantes, signature de la maison.
+- **L'alternative florale** : [L'Herbe des Druides](/boutique/herbe-des-druides), 28 %, verveine, serpolet, carvi — multi-médaillée au Concours de Lyon.
 - **Le rare** : [L'Alchimie Cuvée Michel](/boutique/alchimie-cuvee-michel), hommage numéroté, édition limitée.
 
 ### Pour le cocktail
@@ -156,7 +156,7 @@ Commencez par **une liqueur que vous pouvez boire en long drink**. C'est plus pa
 
 ### Si vous êtes amateur confirmé
 
-Montez en complexité : digestif sec en fin de repas, petit verre à température ambiante. Essayez [L'Herbe des Druides](/boutique/herbe-des-druides) — verveine, caraway, thym sauvage. 40 %, 27 plantes secondaires. Un bestiaire botanique dans 4 cl.
+Montez en complexité : digestif sec en fin de repas, petit verre à température ambiante. Essayez [L'Herbe des Druides](/boutique/herbe-des-druides) — verveine, serpolet (thym sauvage), carvi. 28 %, trois plantes emblématiques du Velay, cinq médailles. Un condensé de terroir dans 4 cl.
 
 ### Si vous cherchez un cadeau
 

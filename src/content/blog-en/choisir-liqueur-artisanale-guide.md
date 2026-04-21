@@ -113,7 +113,7 @@ The smaller the batch, the more:
 - plants can be local (no need for 10 tonnes of verbena),
 - the producer can personally answer your questions.
 
-**Our rule**: anyone who writes to us on Instagram or via email gets a reply within 48h, signed by one of the three partners. Try that with an industrial group.
+**Our rule**: anyone who writes to us on Instagram or via email gets a reply within 48h, signed by one of the two founders. Try that with an industrial group.
 
 ## 3. Picking by use: our classification
 
@@ -121,15 +121,15 @@ Here's how we recommend our 18 liqueurs by moment:
 
 ### For aperitif
 
-- **Classic bitter** (as a Suze alternative): [Cerf'Gent](/en/shop/cerf-gent), 16%, serve frozen or with tonic.
-- **Floral and fresh**: [Nectar d'Ostara](/en/shop/nectar-ostara), 17%, with crémant or simply on ice.
-- **Indulgent**: [Pralicoquine](/en/shop/pralicoquine), praline-almond, on ice as a digestif-aperitif.
-- **Vibrant citrus**: [Zéleste](/en/shop/zeleste), with tonic and an orange peel.
+- **Classic bitter** (as a Suze alternative): [Cerf'Gent](/en/shop/cerf-gent), 15%, serve frozen or with tonic — Gold Medal at the CGA Paris 2025.
+- **Floral and fresh**: [Nectar d'Ostara](/en/shop/nectar-ostara), 24%, with crémant or simply on ice.
+- **Indulgent**: [Pralicoquine](/en/shop/pralicoquine), 15%, praline-almond, on ice as a digestif-aperitif.
+- **Vibrant citrus**: [Zéleste](/en/shop/zeleste), 17.5%, with tonic and an orange peel.
 
 ### For digestif
 
-- **The trophy**: [L'Alchimie Végétale](/en/shop/alchimie-vegetale) 42%, **World's Best Digestif 2025**. 27 plants, our signature.
-- **The floral alternative**: [L'Herbe des Druides](/en/shop/herbe-des-druides), 40%, lemon verbena, wild thyme, caraway.
+- **The trophy**: [L'Alchimie Végétale](/en/shop/alchimie-vegetale) 50%, **World's Best Digestif 2025**. 27 plants, our signature.
+- **The floral alternative**: [L'Herbe des Druides](/en/shop/herbe-des-druides), 28%, verbena, wild thyme (serpolet), caraway — multi-medalled at the Lyon competition.
 - **The rare one**: [L'Alchimie Cuvée Michel](/en/shop/alchimie-cuvee-michel), numbered tribute, limited edition.
 
 ### For cocktails
@@ -156,7 +156,7 @@ Start with **a liqueur you can drink as a long drink**. More forgiving than a ne
 
 ### If you're an experienced amateur
 
-Step up complexity: neat digestif at end of meal, small glass at room temperature. Try [L'Herbe des Druides](/en/shop/herbe-des-druides) — verbena, caraway, wild thyme. 40%, 27 supporting plants. A botanical bestiary in 4 cl.
+Step up complexity: neat digestif at end of meal, small glass at room temperature. Try [L'Herbe des Druides](/en/shop/herbe-des-druides) — verbena, wild thyme (serpolet), caraway. 28%, three emblematic plants of the Velay, five medals. A terroir snapshot in 4 cl.
 
 ### If you're gift-hunting
 

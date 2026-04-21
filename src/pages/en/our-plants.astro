@@ -14,12 +14,12 @@ const breadcrumbSchema = {
   ],
 };
 
-// ItemList schema — each plant is a DefinedTerm for AI search + semantic SEO
 const plantsListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Plants used at La Brasserie des Plantes',
-  description: 'Aromatic and medicinal plants, roots and spices used in our craft liqueurs.',
+  name: 'Plants and botanicals used at La Brasserie des Plantes',
+  description:
+    'Aromatic herbs, roots, barks, flowers, citrus, spices and fruits used in our craft liqueurs. Full inventory, organically grown, harvested close to Haute-Loire (France).',
   numberOfItems: plants.length,
   inLanguage: 'en-US',
   itemListElement: plants.map((p, i) => {
@@ -39,50 +39,88 @@ const plantsListSchema = {
 };
 
 const schema = [breadcrumbSchema, plantsListSchema];
+
+const familyOrder = ['aromatique', 'fleur', 'racine', 'ecorce', 'agrume', 'epice', 'fruit', 'autre'] as const;
+const sortedPlants = [...plants].sort((a, b) => {
+  const fa = familyOrder.indexOf(a.family as typeof familyOrder[number]);
+  const fb = familyOrder.indexOf(b.family as typeof familyOrder[number]);
+  if (fa !== fb) return fa - fb;
+  return a.name.localeCompare(b.name, 'fr');
+});
+
+const totalPlants = plants.length;
+const signatureCount = plants.filter((p) => p.signature).length;
 ---
 <Layout
   lang="en"
-  title="Our plants | Verbena, lemon balm, caraway, hyssop — La Brasserie des Plantes"
-  description="Discover the plants in our liqueurs: verbena, lemon balm, caraway, hyssop, southernwood, mint, gentian… 27 botanicals from Auvergne, organically grown."
+  title={`Our plants — ${totalPlants} botanicals | La Brasserie des Plantes`}
+  description={`Verbena, lemon balm, wild thyme, caraway, hyssop, gentian, génépi, elderflower… ${totalPlants} plants, roots, flowers, citrus and spices in our craft liqueurs. All organically grown, harvested in Haute-Loire, France.`}
   schema={schema}
 >
   <PageHeader
     kicker="Botany"
-    title="The plants of<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>our mountains</em>"
-    subtitle="Verbena, lemon balm, caraway, lemon thyme, hyssop, southernwood… More than 27 plants, roots, barks and spices go into our liqueurs. All organically grown, harvested close to Haute-Loire."
+    title="All the plants in<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>our liqueurs</em>"
+    subtitle={`${totalPlants} botanical ingredients — verbena, wild thyme, caraway, lemon balm, hyssop, gentian, génépi, elderflower, nettle, hemp… All organically grown, many harvested within 20 km of the workshop.`}
     breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Our plants' }]}
   />
 
   <section class="pb-24">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="aspect-[5/2] rounded-3xl overflow-hidden shadow-xl mb-16">
-        <img
-          src="/images/stories/paysage-plantes.webp"
-          alt="Botanical landscape in Haute-Loire — medicinal plants used by La Brasserie des Plantes"
+
+      <!-- Verbena video -->
+      <div class="aspect-[5/2] rounded-3xl overflow-hidden shadow-xl mb-16 bg-forest-50">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/videos/plante-verveine-poster.jpg"
+          aria-label="Étienne, co-founder, preparing fresh verbena — signature plant of La Brasserie des Plantes"
           class="w-full h-full object-cover"
-          loading="lazy"
-        />
+        >
+          <source src="/videos/plante-verveine.mp4" type="video/mp4" />
+        </video>
       </div>
 
-      <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-20">
+      <!-- Intro -->
+      <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-12">
         <p>
-          A liqueur is a landscape in a bottle. That is why we only work with
-          plants whose origin we know: our own parcels, or those of neighbouring
-          producers we choose one by one. Organic farming is non-negotiable.
+          A liqueur is a landscape in a bottle. Some of our recipes rest on
+          three plants — <em>L'Herbe des Druides</em>, that is verbena, wild
+          thyme, caraway, and that's it. Others are goldsmith blends:
+          <em>L'Alchimie Végétale</em> combines <strong class="font-medium text-forest-800">27
+          plants, roots, barks and spices</strong> on its own, crowned World's
+          Best Digestif in 2025.
         </p>
         <p>
-          Below are twelve of the plants most often featured in our blends —
-          each with its story, its season, and the liqueurs it composes.
+          Across the entire range, we work with <strong class="font-medium text-forest-800">{totalPlants}
+          botanical ingredients</strong> — of which {signatureCount} appear in
+          only one signature liqueur. Organic farming mandatory, origin known,
+          producer picked one by one.
         </p>
       </div>
 
+      <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-16 text-center">
+        {(['aromatique', 'fleur', 'racine', 'ecorce', 'agrume', 'epice', 'fruit', 'autre'] as const)
+          .map((fam) => ({ fam, count: plants.filter((p) => p.family === fam).length }))
+          .filter((x) => x.count > 0)
+          .map(({ fam, count }) => (
+            <div class="p-4 rounded-2xl bg-cream-100/60 border border-forest-100/60">
+              <div class="font-display text-3xl text-forest-800 leading-none">{count}</div>
+              <div class="text-[10px] uppercase tracking-[0.15em] text-ink-500 mt-2">{familyLabelsEn[fam]}{count > 1 ? 's' : ''}</div>
+            </div>
+          ))}
+      </div>
+
+      <!-- Plants grid -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {plants.map((plant) => {
+        {sortedPlants.map((plant) => {
           const en = plantsEn[plant.name];
           return (
             <article class="p-7 rounded-2xl bg-cream-50 border border-forest-100/60 hover:border-forest-300 hover:shadow-lg transition-all">
               <div class="flex items-start justify-between mb-3 gap-3">
-                <div>
+                <div class="min-w-0">
                   <h2 class="font-display text-2xl text-forest-900 leading-tight">{plant.name}</h2>
                   {plant.latin && (
                     <div class="text-xs italic text-ink-500 mt-1">{plant.latin}</div>
@@ -92,16 +130,27 @@ const schema = [breadcrumbSchema, plantsListSchema];
                   {familyLabelsEn[plant.family]}
                 </span>
               </div>
+              {en?.role && (
+                <div class="text-xs font-medium text-gold-700 mb-3 tracking-wide">
+                  {en.role}
+                </div>
+              )}
               <p class="text-sm text-ink-700 leading-relaxed mb-4">{en?.description ?? plant.description}</p>
               <div class="pt-3 border-t border-forest-100/80 space-y-2">
                 <div class="text-xs">
-                  <span class="text-ink-500 uppercase tracking-wide">Used in</span>
-                  <div class="text-forest-800 font-medium mt-0.5">{en?.usedIn ?? plant.usedIn}</div>
+                  <span class="text-ink-500 uppercase tracking-wide">In our liqueurs</span>
+                  <div class="text-forest-800 font-medium mt-0.5 leading-snug">{en?.usedIn ?? plant.usedIn}</div>
                 </div>
                 {(en?.season ?? plant.season) && (
                   <div class="text-xs">
                     <span class="text-ink-500 uppercase tracking-wide">Season</span>
                     <div class="text-ink-700 mt-0.5">{en?.season ?? plant.season}</div>
+                  </div>
+                )}
+                {plant.signature && (
+                  <div class="mt-3 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold-500/15 text-gold-700 text-[10px] font-medium tracking-wide uppercase">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+                    Signature plant
                   </div>
                 )}
               </div>
@@ -112,18 +161,56 @@ const schema = [breadcrumbSchema, plantsListSchema];
     </div>
   </section>
 
+  <!-- Our approach -->
+  <section class="py-20 bg-cream-50">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Our approach</div>
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+        Terroir first,<br />
+        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">plant second</em>
+      </h2>
+      <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
+        <p>
+          We never write a recipe without knowing where the plants come from.
+          We work with <a href="/en/journal/producteurs-partenaires-bio-velay" class="text-forest-700 font-medium underline decoration-forest-300 underline-offset-4 hover:text-forest-900">foragers
+          and market gardeners</a> we pick one by one: every plant has a
+          grower, every grower is met. Certified organic, always.
+        </p>
+        <p>
+          When possible, local — some of our plants come from Haute-Loire
+          and neighbouring departments. When a plant needs a different
+          terroir, we go where it really grows: Alpine génépi (Barcelonnette),
+          organic Sicilian citrus, imported certified-organic liquorice and
+          cinchona bark.
+        </p>
+        <p>
+          Never synthetic flavourings, never artificial colourings. The colour
+          of a liqueur must come from the plant that composes it, not from
+          a jar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
   <section class="py-20 bg-forest-900 text-cream-100">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h2 class="font-display text-3xl md:text-4xl mb-6">
-        And the other fifteen?
+        And what's next?
       </h2>
-      <p class="text-cream-200/80 leading-relaxed text-lg mb-8">
-        Some are our little secrets — rare accords, blended for a single
-        liqueur. The best way to discover them: taste.
+      <p class="text-cream-200/80 leading-relaxed text-lg mb-8 max-w-xl mx-auto">
+        Our list grows every season — limited editions, special cuvées,
+        collaborations with new growers. The best way to discover what's
+        happening in our tanks: taste.
       </p>
-      <a href="/en/shop" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
-        Explore the shop
-      </a>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/en/shop" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
+          Explore the shop
+        </a>
+        <a href="/en/workshops" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream-100/40 hover:border-cream-100/70 text-cream-100 font-medium transition-colors">
+          Tasting workshop
+        </a>
+      </div>
     </div>
   </section>
 </Layout>

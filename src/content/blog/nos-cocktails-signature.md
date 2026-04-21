@@ -8,7 +8,7 @@ cover: /images/cocktails/spritz-efflorescent.webp
 readingTime: "6 min"
 ---
 
-Nos liqueurs se boivent très bien pures, glacées, en digestif ou en apéritif. Mais elles prennent une autre dimension **en mixologie** — où leurs 27 plantes peuvent dialoguer avec d'autres ingrédients.
+Nos liqueurs se boivent très bien pures, glacées, en digestif ou en apéritif. Mais elles prennent une autre dimension **en mixologie** — où leurs plantes signatures (verveine, sureau, gentiane, menthe, hysope…) peuvent dialoguer avec d'autres ingrédients.
 
 Voici **cinq recettes signatures**, travaillées avec des barmen partenaires à Saint-Étienne, Lyon et Annecy. Toutes sont dosées pour **un verre**.
 

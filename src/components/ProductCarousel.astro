@@ -94,7 +94,7 @@ const track = [...items, ...items];
       data-speed={speed}
       data-reverse={reverse ? 'true' : 'false'}
       class="product-slider flex overflow-x-auto gap-5 md:gap-6 py-4 px-6 md:px-10"
-      style="scroll-behavior:auto;scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-x;-webkit-overflow-scrolling:touch;"
+      style="scroll-behavior:auto;scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;"
     >
       {track.map((p, i) => {
         const isClone = i >= items.length;

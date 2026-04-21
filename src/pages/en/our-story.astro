@@ -1,9 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import { GlowCard } from '../../components/ui/spotlight-card';
 import { site } from '../../data/site';
 
+// ─── Schema.org ───────────────────────────────────────────────────────
 const schema = [
   {
     '@context': 'https://schema.org',
@@ -11,7 +11,45 @@ const schema = [
     name: `Our story — ${site.name}`,
     url: `${site.url}/en/our-story`,
     inLanguage: 'en-US',
+    description:
+      "The story of La Brasserie des Plantes, founded in 2021 by Étienne and Guillaume in Saint-Didier-en-Velay, Haute-Loire. Craft organic liqueurs, World's Best Digestif 2025.",
     about: { '@id': `${site.url}#localbusiness` },
+    mainEntity: [
+      { '@id': `${site.url}#etienne` },
+      { '@id': `${site.url}#guillaume` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${site.url}#etienne`,
+    name: 'Étienne',
+    jobTitle: 'Co-founder, craft distiller',
+    description:
+      "Co-founder of La Brasserie des Plantes. Trained in plant biotechnology in Toulouse, he composes the recipes, selects the plants and oversees the entire production.",
+    worksFor: { '@id': `${site.url}#localbusiness` },
+    knowsAbout: [
+      'Plant biotechnology',
+      'Maceration techniques',
+      'Craft liqueur blending',
+      'Haute-Loire botany',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${site.url}#guillaume`,
+    name: 'Guillaume',
+    jobTitle: 'Co-founder, pairings and uses',
+    description:
+      "Co-founder of La Brasserie des Plantes. A former restaurateur in Saint-Étienne, he designs the pairings, the brand voice and the on-trade partnerships.",
+    worksFor: { '@id': `${site.url}#localbusiness` },
+    knowsAbout: [
+      'Mixology',
+      'Food-and-liqueur pairings',
+      'Hospitality',
+      'On-trade development',
+    ],
   },
   {
     '@context': 'https://schema.org',
@@ -23,62 +61,124 @@ const schema = [
   },
 ];
 
-const team = [
+const productsWithMedals = [
   {
-    name: 'Étienne',
-    role: 'Plant biotechnologist & production',
-    image: '/images/team/portrait-etienne.webp',
-    bio: "Trained in plant biotechnology in Toulouse, Étienne composes, chooses, blends and runs production. He is the workshop's nose — the one who translates botany into flavour.",
+    product: "L'Herbe des Druides",
+    slug: 'herbe-des-druides',
+    tagline: 'Verbena · wild thyme · caraway',
+    note: 'Our most-medalled liqueur — 3× Gold in Lyon, Silver in Paris, Silver in London.',
+    medals: [
+      { year: '2023', tier: 'gold', competition: 'Concours International de Lyon' },
+      { year: '2024', tier: 'gold', competition: 'Concours International de Lyon' },
+      { year: '2024', tier: 'silver', competition: 'Concours Général Agricole — Paris' },
+      { year: '2025', tier: 'silver', competition: 'World Drinks Awards — London' },
+      { year: '2026', tier: 'gold', competition: 'Concours International de Lyon' },
+    ],
   },
   {
-    name: 'Guillaume',
-    role: 'Pairings & uses',
-    image: '/images/team/portrait-guillaume.webp',
-    bio: "A former restaurateur and bar manager in Saint-Étienne, Guillaume imagines pairings, moments and recipes. He thinks about how our liqueurs meet at the table and behind the bar.",
+    product: "Le Cerf'Gent",
+    slug: 'cerf-gent',
+    tagline: 'Bitter aperitif · gentian · cinchona',
+    note: "Our bitter aperitif, built on yellow gentian and cinchona — awarded Gold at France's Concours Général Agricole on its very first entry.",
+    medals: [
+      { year: '2025', tier: 'gold', competition: 'Concours Général Agricole — Paris' },
+    ],
   },
+  {
+    product: "L'Essence des Alpes",
+    slug: 'essence-des-alpes',
+    tagline: 'Génépi · spruce tips · hyssop',
+    note: "Our Alpine tribute to génépi, spruce tips and hyssop — awarded Silver at the Concours International de Lyon.",
+    medals: [
+      { year: '2026', tier: 'silver', competition: 'Concours International de Lyon' },
+    ],
+  },
+];
+
+const innovationAward = {
+  year: '2023',
+  title: 'Artinov Haute-Loire Award',
+  subtitle: "Chamber of Crafts — Craft innovation",
+  what: 'For our tap dispenser (in-house invention for pro bar service).',
+};
+
+const tierStyles: Record<string, { bg: string; text: string; border: string }> = {
+  gold: { bg: 'bg-gold-500/15', text: 'text-gold-700', border: 'border-gold-500/40' },
+  silver: { bg: 'bg-ink-200/40', text: 'text-ink-600', border: 'border-ink-300/60' },
+};
+
+const galleryPhotos = [
+  { src: '/images/stories/service-verre.webp', alt: "Serving L'Alchimie Végétale in a tulip glass — tasting moment", aspect: 'aspect-[3/2]', objectPos: '' },
+  { src: '/images/stories/salon-origine-auvergne.webp', alt: 'Guillaume at the Origine Auvergne trade show — La Brasserie des Plantes stand', aspect: 'aspect-[3/2]', objectPos: '' },
+  { src: '/images/gallery/saint-etienne.webp', alt: "Li'Cœur with Étienne and Guillaume — tasting rendez-vous", aspect: 'aspect-square', objectPos: '' },
+  { src: '/images/stories/atelier-1.webp', alt: 'Étienne bottling a batch in the workshop', aspect: 'aspect-[3/2]', objectPos: '' },
+  { src: '/images/gallery/atelier-04.webp', alt: "L'Alchimie Végétale — World's Best Digestif 2025 story", aspect: 'aspect-[3/4]', objectPos: 'object-[center_70%]' },
+  { src: '/images/stories/atelier-2.webp', alt: 'Hand-bottling close-up — green liqueur', aspect: 'aspect-[3/2]', objectPos: '' },
+  { src: '/images/gallery/evenement-02.webp', alt: "Étienne in a meadow of wild flowers — among the plants that go into our liqueurs", aspect: 'aspect-[3/4]', objectPos: '' },
+  { src: '/images/gallery/production-01.webp', alt: 'Our Christmas market stand — all the bottles under fairy lights', aspect: 'aspect-square', objectPos: '' },
+  { src: '/images/gallery/evenement-01.webp', alt: 'Guillaume tasting with a customer — Concours International de Lyon stand', aspect: 'aspect-[3/4]', objectPos: '' },
+  { src: '/images/gallery/evenement-05.webp', alt: 'Public event — meeting and tasting', aspect: 'aspect-square', objectPos: '' },
 ];
 ---
 <Layout
   lang="en"
   title="Our story — La Brasserie des Plantes, Haute-Loire"
-  description="Two childhood friends, a shared passion for the plants of Auvergne. The story of La Brasserie des Plantes, from Saint-Didier-en-Velay, France, since 2021."
+  description="Two childhood friends, a shared passion for the plants of Auvergne. La Brasserie des Plantes, from Saint-Didier-en-Velay, France — founded in 2021, seven international medals, World's Best Digestif 2025."
   schema={schema}
 >
   <PageHeader
     kicker="Our story"
     title="Two friends,<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>one terroir</em>"
-    subtitle="From Saint-Didier-en-Velay, France, we bring the forgotten plants of Haute-Loire back to life, as liqueurs and infusions."
+    subtitle="From Saint-Didier-en-Velay, France, we bring back the forgotten plants of Haute-Loire, as liqueurs and infusions. A village project that eventually carried off the title of World's Best Digestif."
     breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Our story' }]}
   />
 
-  <!-- Group portrait -->
-  <section class="pb-20">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="aspect-[3/2] rounded-3xl overflow-hidden shadow-2xl">
-        <img
-          src="/images/team/portrait-groupe.webp"
-          alt="Étienne and Guillaume — founders of La Brasserie des Plantes, in front of their workshop in Haute-Loire"
-          class="w-full h-full object-cover"
-          loading="lazy"
-        />
+  <!-- Hero banner video : Étienne and Guillaume, making of -->
+  <section class="relative w-full bg-forest-950 overflow-hidden">
+    <div class="relative aspect-[21/9] md:aspect-[21/8] w-full">
+      <video
+        autoplay
+        muted
+        playsinline
+        preload="metadata"
+        poster="/videos/duo-making-of-poster.jpg"
+        aria-label="Étienne and Guillaume, co-founders, in the La Brasserie des Plantes workshop"
+        class="absolute inset-0 w-full h-full object-cover object-top"
+      >
+        <source src="/videos/duo-making-of.mp4" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/30 to-forest-950/80"></div>
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6 gap-3 md:gap-5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cream-50/15 border border-cream-100/30 text-cream-100 text-[10px] md:text-xs font-medium tracking-[0.25em] uppercase backdrop-blur-sm">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>
+          In Haute-Loire · Since 2021
+        </div>
+        <p class="text-cream-50 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.05] drop-shadow-lg max-w-3xl">
+          <em class="not-italic font-normal" style="font-family: var(--font-script);">
+            We've known each other<br class="hidden sm:inline" /> for over twenty years.
+          </em>
+        </p>
+        <p class="text-cream-100/85 text-sm md:text-lg leading-relaxed max-w-xl">
+          Two childhood friends. One terroir. Ten international distinctions, and liqueurs made four-handed.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- Key figures -->
-  <section class="py-12 border-y border-forest-100/60 bg-cream-100/40">
+  <section class="py-14 border-y border-forest-100/60 bg-cream-100/40">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
       <div>
         <div class="font-display text-4xl md:text-5xl text-forest-800">2021</div>
         <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">Year founded</div>
       </div>
       <div>
-        <div class="font-display text-4xl md:text-5xl text-forest-800">27+</div>
-        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">Plants blended</div>
-      </div>
-      <div>
         <div class="font-display text-4xl md:text-5xl text-forest-800">18</div>
         <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">References in range</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl md:text-5xl text-forest-800">10</div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">International distinctions</div>
       </div>
       <div>
         <div class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gold-500/15 text-gold-600">
@@ -92,7 +192,7 @@ const team = [
     </div>
   </section>
 
-  <!-- Narrative -->
+  <!-- Narrative — the early days -->
   <section class="py-20 bg-cream-50">
     <div class="max-w-3xl mx-auto px-6">
       <div class="prose prose-lg max-w-none text-ink-700 space-y-6 leading-relaxed">
@@ -114,8 +214,8 @@ const team = [
           pastures, its plants. A knowledge waiting to be brought back to
           light — that of grandmothers who prepared lemon balm for the cold,
           macerated gentian for the stomach, perfumed their liqueurs with
-          hyssop or southernwood. In {site.founded} they decided to combine
-          their expertise: scientific rigour on one side, the sensitivity of
+          hyssop or southernwood. In 2021 they decided to combine their
+          expertise: scientific rigour on one side, the sensitivity of
           service and taste on the other. La Brasserie des Plantes was born
           — craft, from Auvergne, uncompromising.
         </p>
@@ -123,8 +223,56 @@ const team = [
     </div>
   </section>
 
-  <!-- Image + text: forgotten plants -->
+  <!-- Crowdfunding — Ulule -->
   <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src="/images/stories/duo-bouteille-nature.webp"
+            alt="Étienne and Guillaume celebrating a bottle of La Brasserie des Plantes in the Haute-Loire fields"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">The launch</div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+          Launched by the people<br />
+          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">who believed first</em>
+        </h2>
+        <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
+          <p>
+            Étienne had just moved back to Haute-Loire; Guillaume had just
+            closed his bar-restaurant in Saint-Étienne. And
+            <strong class="font-medium text-forest-800">we launched the whole
+            thing ourselves, just the two of us, in our workshop</strong> —
+            no team, no long contact list, just two childhood friends and the
+            urge to bring the region's forgotten plants back to life.
+          </p>
+          <p>
+            To actually get the project off the ground, we ran
+            <strong class="font-medium text-forest-800">a crowdfunding campaign
+            on Ulule</strong>. Friends from Saint-Étienne and Saint-Didier,
+            curious visitors met at Velay farmers' markets, strangers who simply
+            liked the pitch — each pre-ordered their first bottles or chipped
+            in a few euros so we could get going.
+            <strong class="font-medium text-forest-800">It's thanks to those
+            people, too</strong>, that we were able to build the company.
+          </p>
+          <p>
+            This is where our rule comes from: <em>every order has a name,
+            every bottle has a story</em>. Because at the very beginning, we
+            knew every name and every story, one by one.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Forgotten plants -->
+  <section class="py-20 bg-cream-50">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
       <div class="order-2 md:order-1">
         <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">The terroir</div>
@@ -135,17 +283,25 @@ const team = [
         <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
           <p>
             Our approach boils down to one idea: give back their place to
-            plants our grandmothers knew well — caraway, lemon balm,
-            scented verbena, lemon thyme, hyssop, southernwood, yellow
-            gentian — and that had disappeared from cupboards and
-            recipe books.
+            plants our grandmothers knew well. Lemon verbena, wild thyme
+            (serpolet), caraway, lemon balm, hyssop, southernwood, yellow
+            gentian, génépi, elderflower, dandelion, nettle — every liqueur
+            tells its own little bouquet.
           </p>
           <p>
-            Medicinal plants, aromatic herbs, sometimes bitter, always
-            steeped in history. More than <strong class="font-medium text-forest-800">27 plants,
-            roots, barks and spices</strong> go into our liqueurs — all
-            chosen for their character, their seasonality, their rootedness
-            in the Velay landscape.
+            Some recipes are simple, signatures of a terroir: <em>L'Herbe
+            des Druides</em> uses only three plants (verbena, wild thyme,
+            caraway). Others are complex blends: <em>L'Alchimie Végétale</em>
+            combines <strong class="font-medium text-forest-800">27 plants,
+            roots, barks and spices</strong> on its own. Across the entire
+            range, we work with about <strong class="font-medium text-forest-800">forty
+            botanical ingredients</strong> — aromatic, medicinal, sometimes
+            bitter, always steeped in history.
+          </p>
+          <p>
+            <a href="/en/our-plants" class="text-forest-700 font-medium hover:text-forest-900 underline decoration-forest-300 underline-offset-4">
+              See every plant we work with and which liqueurs they go into →
+            </a>
           </p>
         </div>
       </div>
@@ -162,14 +318,14 @@ const team = [
     </div>
   </section>
 
-  <!-- Image + text: craft -->
-  <section class="py-20 bg-cream-50">
+  <!-- Craft -->
+  <section class="py-20 bg-white">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
       <div>
         <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
           <img
-            src="/images/stories/atelier-1.webp"
-            alt="Bottling step in our craft workshop in Saint-Didier-en-Velay"
+            src="/images/stories/etienne-degustation.webp"
+            alt="Étienne checks a batch through a tasting tube in the Saint-Didier-en-Velay workshop"
             class="w-full h-full object-cover"
             loading="lazy"
           />
@@ -183,9 +339,10 @@ const team = [
         </h2>
         <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
           <p>
-            We work organically. Some of our raw material comes from our own
-            parcels, the rest is harvested by neighbouring producers we choose
-            for their seriousness — and whom we know by their first name.
+            We work organically. Our plants come from <strong class="font-medium text-forest-800">foragers
+            and market gardeners</strong> we pick one by one — met, questioned,
+            visited. Sometimes close to the workshop, sometimes further away
+            when the plant requires it (Alpine génépi, organic citrus).
           </p>
           <p>
             No artificial flavour, no preservative, no colouring: craft,
@@ -197,120 +354,253 @@ const team = [
     </div>
   </section>
 
-  <!-- Workshop photo grid -->
-  <section class="py-20 bg-forest-900 text-cream-100">
+  <!-- Distinctions -->
+  <section class="py-20 bg-gradient-to-b from-cream-50 to-gold-500/10 border-y border-gold-500/30">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-12 max-w-3xl mx-auto">
-        <div class="text-xs uppercase tracking-[0.25em] text-gold-400 font-medium mb-3">Our workshop</div>
-        <h2 class="font-display text-3xl md:text-4xl leading-tight mb-4 text-cream-100">
-          In the cellars of Saint-Didier-en-Velay
+      <div class="text-center mb-14 max-w-3xl mx-auto">
+        <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">Recognition</div>
+        <h2 class="font-display text-3xl md:text-5xl text-forest-900 mb-6 leading-tight">
+          Seven distinctions<br />
+          <em class="not-italic text-gold-600 font-normal" style="font-family: var(--font-script);">in four years</em>
         </h2>
-        <p class="text-cream-200/80 leading-relaxed">
-          A small craft workshop in the heart of the village. Composition tanks,
-          a semi-automatic bottling line — and many gestures, patiently repeated.
+        <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+          <p>
+            Recognition that reaches far beyond our Velay valleys. Each of these
+            medals rewards long, patient, often invisible work — three to four
+            years of formulation for a finished recipe.
+          </p>
+          <p>
+            Three liqueurs have been distinguished so far:
+            <strong class="font-medium text-forest-800">L'Herbe des Druides</strong>,
+            our most-medalled liqueur with <strong class="font-medium text-forest-800">three
+            Gold medals at the Concours International de Lyon</strong>, Silver at
+            France's Concours Général Agricole and Silver at the World Drinks
+            Awards in London; <strong class="font-medium text-forest-800">Le Cerf'Gent</strong>,
+            our bitter aperitif, <strong class="font-medium text-forest-800">Gold in Paris
+            in 2025</strong>; and <strong class="font-medium text-forest-800">L'Essence
+            des Alpes</strong>, <strong class="font-medium text-forest-800">Silver at the
+            Concours International de Lyon in 2026</strong>. Without mentioning
+            <em>L'Alchimie Végétale</em>, crowned World's Best Digestif.
+          </p>
+        </div>
+      </div>
+
+      <!-- Flagship WDA -->
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div>
+          <div class="aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl">
+            <img
+              src="/images/stories/world-drinks-awards-2025.webp"
+              alt="L'Alchimie Végétale — World's Best Digestif 2025 at the World Drinks Awards"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/50 text-gold-700 text-xs font-medium tracking-[0.15em] uppercase mb-4">
+            ★ World title
+          </div>
+          <h3 class="font-display text-2xl md:text-3xl text-forest-900 mb-4 leading-tight">
+            World's Best Digestif 2025
+          </h3>
+          <div class="space-y-4 text-ink-700 leading-relaxed">
+            <p>
+              In April 2025, our flagship — <em>L'Alchimie Végétale</em>,
+              50 % vol., 27 plants — was crowned <strong class="text-gold-700">World's
+              Best Digestif</strong> at the World Drinks Awards in London,
+              across all digestif categories.
+            </p>
+            <p>
+              Behind this award stand three years of formulations, setbacks,
+              restarts — and the conviction that craft has its place in a
+              world that moves too fast.
+            </p>
+          </div>
+          <div class="mt-6">
+            <a href="/en/shop/alchimie-vegetale" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+              Discover L'Alchimie Végétale
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medals by product -->
+      <div class="grid md:grid-cols-3 gap-6">
+        {productsWithMedals.map((p) => (
+          <article class="p-6 rounded-2xl bg-white border border-forest-100/60 hover:shadow-md transition-shadow flex flex-col">
+            <div class="mb-4">
+              <h3 class="font-display text-2xl text-forest-900 leading-tight mb-1">
+                <a href={`/en/shop/${p.slug}`} class="hover:text-forest-700 transition-colors">
+                  {p.product}
+                </a>
+              </h3>
+              <div class="text-xs uppercase tracking-[0.2em] text-gold-600 font-medium">
+                {p.tagline}
+              </div>
+            </div>
+            {p.note && (
+              <p class="text-sm text-ink-600 italic leading-relaxed mb-4">{p.note}</p>
+            )}
+            <ul class="space-y-2.5 flex-1">
+              {p.medals.map((m) => {
+                const t = tierStyles[m.tier];
+                return (
+                  <li class="flex items-start gap-3">
+                    <span class={`flex-none mt-0.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-full ${t.bg} ${t.text} text-[10px] font-medium tracking-wide uppercase`}>
+                      {m.tier === 'gold' ? 'Gold' : 'Silver'} {m.year}
+                    </span>
+                    <span class="text-sm text-ink-700 leading-snug">{m.competition}</span>
+                  </li>
+                );
+              })}
+            </ul>
+            <a href={`/en/shop/${p.slug}`} class="mt-5 pt-4 border-t border-forest-100/60 text-sm text-forest-700 font-medium hover:text-forest-900 inline-flex items-center gap-1.5">
+              View the product
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <!-- Innovation award -->
+      <div class="mt-8 p-6 rounded-2xl bg-forest-50/60 border border-forest-200/60 flex flex-col sm:flex-row gap-5 items-start">
+        <div class="flex-none inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-forest-500/15 text-forest-700">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5 2 7-6.5-4.5-6.5 4.5 2-7L2 9h7z"/></svg>
+        </div>
+        <div class="flex-1">
+          <div class="text-xs uppercase tracking-[0.2em] text-forest-700 font-medium mb-1">Innovation award · {innovationAward.year}</div>
+          <h3 class="font-display text-xl text-forest-900 leading-tight mb-1">{innovationAward.title}</h3>
+          <div class="text-sm text-ink-500 mb-2">{innovationAward.subtitle}</div>
+          <p class="text-sm text-ink-700 leading-relaxed">{innovationAward.what}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team — alternating layout -->
+  <section class="py-24 bg-forest-50/40">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16 max-w-2xl mx-auto">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">The team</div>
+        <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight">The hands behind the bottles</h2>
+        <p class="text-ink-600 mt-4 leading-relaxed">
+          Two founders, two complementary views. Everything you taste in
+          the bottle has passed through one and through the other.
         </p>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-        <img src="/images/gallery/production-01.webp" alt="Craft production — plant maceration" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
-        <img src="/images/stories/atelier-2.webp" alt="Hand-bottling a green liqueur" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
-        <img src="/images/gallery/atelier-01.webp" alt="Plant preparation in our workshop" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
-        <img src="/images/gallery/production-02.webp" alt="Maceration tanks in our workshop" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
-        <img src="/images/gallery/atelier-03.webp" alt="Product preparation — Saint-Didier-en-Velay workshop" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
-        <img src="/images/gallery/atelier-05.webp" alt="Workshop view — La Brasserie des Plantes" loading="lazy" class="aspect-[4/5] w-full object-cover rounded-xl" />
+
+      <!-- Étienne : photo left, text right -->
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+        <div>
+          <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+            <img
+              src="/images/team/portrait-etienne.webp"
+              alt="Portrait of Étienne, co-founder of La Brasserie des Plantes, plant biotechnologist"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">Co-founder</div>
+          <h3 class="font-display text-4xl md:text-5xl text-forest-900 mb-4 leading-tight">Étienne</h3>
+          <div class="text-sm text-forest-700 font-medium mb-5 tracking-wide">
+            Plant biotechnologist · Production
+          </div>
+          <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+            <p>
+              Trained in plant biotechnology in Toulouse, Étienne is the
+              nose of the house — the one who translates botany into flavour.
+              He composes the recipes, picks the plants, tunes the maceration
+              times.
+            </p>
+            <p>
+              His signature: slow, ancient-school blending, by stages. It
+              took him four years to stabilise <em>L'Alchimie Végétale</em>,
+              the 27-plant recipe that ended up winning the world title
+              in 2025.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guillaume : text left, photo right -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="order-2 md:order-1">
+          <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">Co-founder</div>
+          <h3 class="font-display text-4xl md:text-5xl text-forest-900 mb-4 leading-tight">Guillaume</h3>
+          <div class="text-sm text-forest-700 font-medium mb-5 tracking-wide">
+            Pairings and uses · On-trade development
+          </div>
+          <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+            <p>
+              A former restaurateur in Saint-Étienne — bar, menu, evening
+              service — Guillaume thinks about moments, pairings, uses. He
+              designs the cocktail recipes, the food-and-liqueur accords and
+              the brand voice.
+            </p>
+            <p>
+              He is also the one who travels across Auvergne-Rhône-Alpes to
+              meet independent wine merchants, restaurants and corporate
+              buyers. If a customer writes us on a Wednesday night, chances
+              are Guillaume will answer.
+            </p>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+            <img
+              src="/images/team/portrait-guillaume.webp"
+              alt="Portrait of Guillaume, co-founder of La Brasserie des Plantes, former restaurateur"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- World Drinks Awards -->
-  <section class="py-20 bg-gradient-to-b from-cream-50 to-gold-500/10 border-y border-gold-500/30">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <div class="aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl">
-          <img
-            src="/images/stories/world-drinks-awards-2025.webp"
-            alt="L'Alchimie Végétale — World's Best Digestif 2025 at the World Liqueur Awards"
-            class="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </div>
-      <div>
-        <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">Recognition</div>
-        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
-          World's Best<br />
-          <em class="not-italic text-gold-600 font-normal" style="font-family: var(--font-script);">Digestif 2025</em>
+  <!-- Gallery — varied photos -->
+  <section class="py-20 bg-cream-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12 max-w-2xl mx-auto">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">In pictures</div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-4">
+          Daily life<br class="sm:hidden" />
+          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">at the workshop</em>
         </h2>
-        <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
-          <p>
-            In April 2025, our flagship — <em>L'Alchimie Végétale</em>,
-            50 % vol., 27 plants — was crowned <strong class="text-gold-600">World's Best
-            Digestif</strong> at the World Drinks Awards in London, in the
-            digestive liqueur category.
-          </p>
-          <p>
-            International recognition that reaches far beyond our mountains,
-            and that confirms what we suspected: the plants from our region,
-            prepared with patience, have nothing to envy the great houses.
-          </p>
-          <p>
-            Behind this award stand three years of formulations, setbacks and
-            restarts. And above all the conviction that craft has its place
-            in a world that moves too fast.
-          </p>
-        </div>
-        <div class="mt-8">
-          <a href="/boutique/alchimie-vegetale" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
-            Discover L'Alchimie Végétale
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
+        <p class="text-ink-600 leading-relaxed">
+          Workshop, markets, trade shows, tastings — a few moments caught
+          on our village-sized adventure.
+        </p>
       </div>
-    </div>
-  </section>
-
-  <!-- Team -->
-  <section class="py-24 bg-forest-50/40">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">The team</div>
-        <h2 class="font-display text-4xl md:text-5xl text-forest-900">The hands behind the bottles</h2>
-      </div>
-      <div class="grid md:grid-cols-3 gap-8 stagger" style="--stagger-delay: 140ms;">
-        {team.map((m) => (
-          <GlowCard
-            client:load
-            glowColor="gold"
-            customSize
-            padding="none"
-            className="overflow-hidden bg-white !aspect-auto w-full"
-          >
-            <div class="aspect-square overflow-hidden">
-              <img
-                src={m.image}
-                alt={`Portrait of ${m.name}, co-founder of La Brasserie des Plantes`}
-                class="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-6">
-              <h3 class="font-display text-2xl text-forest-900 mb-1">{m.name}</h3>
-              <div class="text-sm text-gold-600 font-medium mb-4">{m.role}</div>
-              <p class="text-sm text-ink-700 leading-relaxed">{m.bio}</p>
-            </div>
-          </GlowCard>
+      <div class="columns-2 md:columns-3 gap-4 [column-fill:_balance]">
+        {galleryPhotos.map((photo) => (
+          <div class="mb-4 break-inside-avoid overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow">
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              class:list={[photo.aspect, 'w-full object-cover', photo.objectPos]}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         ))}
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="py-20 bg-cream-50">
+  <section class="py-20 bg-white">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6">
         Come and meet us.
       </h2>
       <p class="text-lg text-ink-700 mb-8 leading-relaxed">
-        Our workshop is open in Saint-Didier-en-Velay, Monday to Saturday.
+        Our workshop is open in Saint-Didier-en-Velay, Wednesday to Saturday.
         We also run mixology workshops — another way to discover our liqueurs.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
