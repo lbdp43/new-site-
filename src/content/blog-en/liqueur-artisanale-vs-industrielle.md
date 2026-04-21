@@ -97,7 +97,7 @@ Why does this matter for you? Because:
 
 - **Quality control is manual** at our scale. Every tank tasted before bottling, every lot tasted at 3 stages.
 - **Plants can be local**. There aren't 10 tonnes of organic mountain verbena in France. There are a few hundred kilos per year, and that's plenty for our production.
-- **The producer can personally reply**. Write to us via [contact](/en/contact): you'll get an answer signed by Étienne, Guillaume or Bastien within 48 h.
+- **The producer can personally reply**. Write to us via [contact](/en/contact): you'll get an answer signed by Étienne or Guillaume within 48 h.
 
 ## 6. Traceability: detailed origin from field to bottle
 

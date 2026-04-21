@@ -1,8 +1,8 @@
 ---
 title: "L'embouteillage à la main — pourquoi nous refusons d'automatiser totalement"
-description: "Chaque bouteille qui quitte notre atelier passe entre nos six mains. Pourquoi cette lenteur volontaire — et ce qu'elle change, concrètement, pour la qualité."
+description: "Chaque bouteille qui quitte notre atelier passe entre nos quatre mains. Pourquoi cette lenteur volontaire — et ce qu'elle change, concrètement, pour la qualité."
 date: 2024-07-22
-author: "Bastien"
+author: "La Brasserie des Plantes"
 category: Fabrication
 cover: /images/stories/atelier-1.jpg
 readingTime: "5 min"
@@ -56,7 +56,7 @@ Voici une journée typique d'embouteillage à la Brasserie des Plantes, en péri
 - **13 h 30** : reprise, deuxième série
 - **17 h** : fin — environ **1 200 bouteilles prêtes à sortir**
 
-Étienne au remplissage, Bastien au bouchage, Guillaume à l'étiquetage et au carton. Personne n'est derrière une machine complète — nous sommes toujours **dans** le process.
+Étienne au remplissage et au bouchage, Guillaume à l'étiquetage et au carton. Personne n'est derrière une machine complète — nous sommes toujours **dans** le process.
 
 ## Ce que ça change pour le client
 
@@ -74,7 +74,7 @@ Nous ne prétendons pas que **l'artisanat à la main** est intrinsèquement sup�
 
 La question, pour nous, est : **à quelle échelle voulons-nous rester ?** Et la réponse, pour l'instant, c'est : *à l'échelle où nos mains peuvent encore tout faire*.
 
-Quand ce ne sera plus possible, il faudra choisir. Pour l'instant, les six mains suffisent.
+Quand ce ne sera plus possible, il faudra choisir. Pour l'instant, les quatre mains suffisent.
 
 ---
 

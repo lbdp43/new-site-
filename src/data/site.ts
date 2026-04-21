@@ -37,7 +37,7 @@ export const site = {
 
   // Identité
   founded: "2021",
-  founders: ["Etienne", "Guillaume", "Bastien"],
+  founders: ["Etienne", "Guillaume"],
 
   // Distinction
   award: {

@@ -97,7 +97,7 @@ Pourquoi c'est important pour vous ? Parce que :
 
 - **Le contrôle qualité est manuel** à notre échelle. Chaque cuve est dégustée avant embouteillage, chaque lot goûté à 3 étapes.
 - **Les plantes peuvent être locales**. Il n'existe pas en France 10 tonnes de verveine bio de montagne. Il y a quelques centaines de kilos par an, et c'est largement suffisant pour notre production.
-- **Le producteur peut répondre personnellement**. Écrivez-nous via [le formulaire de contact](/contact) : vous aurez une réponse signée par Étienne, Guillaume ou Bastien sous 48 h.
+- **Le producteur peut répondre personnellement**. Écrivez-nous via [le formulaire de contact](/contact) : vous aurez une réponse signée par Étienne ou Guillaume sous 48 h.
 
 ## 6. La traçabilité : origine détaillée du champ à la bouteille
 

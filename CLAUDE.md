@@ -139,7 +139,7 @@ gitignore. Ne **jamais** commiter de secret.
 1. Création côté WooCommerce (nom, prix, variations, stock) — comme d'habitude
 2. Au prochain build, `sync-wc-stock.mjs` détecte le nouveau `wcId`, crée un
    stub `src/content/products/<slug>.md` avec `draft: true`
-3. Guillaume/Étienne/Bastien ouvre `/admin/` → collection "Produits" → la
+3. Guillaume/Étienne ouvre `/admin/` → collection "Produits" → la
    nouvelle fiche apparaît avec badge "draft"
 4. Remplit les champs éditoriaux (description, tasting, photos par
    contenance, serving…) → passe `draft: false` → Publish

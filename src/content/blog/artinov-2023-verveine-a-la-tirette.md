@@ -2,7 +2,7 @@
 title: "Artinov 2023 — notre verveine à la tirette, lauréate Innovation de savoir-faire"
 description: "En 2023, la Chambre de Métiers et de l'Artisanat de Haute-Loire a récompensé notre système de tirage pression pour liqueur végétale. Retour sur une idée simple : servir la liqueur comme on sert la bière."
 date: 2023-11-28
-author: "Bastien"
+author: "La Brasserie des Plantes"
 category: Fabrication
 cover: /images/gallery/production-01.jpg
 readingTime: "5 min"

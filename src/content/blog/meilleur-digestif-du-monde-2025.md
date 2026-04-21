@@ -35,4 +35,4 @@ Nous travaillons depuis janvier sur une **cuvée millésimée 2025**, avec une l
 
 Merci à tous ceux qui nous ont accompagnés. On continue.
 
-*— Étienne, Guillaume et Bastien*
+*— Étienne et Guillaume*

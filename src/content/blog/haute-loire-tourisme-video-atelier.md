@@ -2,7 +2,7 @@
 title: "Visite vidéo de l'atelier par Haute-Loire Tourisme"
 description: "L'office de tourisme de Haute-Loire a filmé une visite de notre atelier à Saint-Didier-en-Velay en octobre 2023. Coulisses du tournage, ce qui n'est pas dans la vidéo."
 date: 2023-10-20
-author: "Bastien"
+author: "La Brasserie des Plantes"
 category: Fabrication
 cover: /images/stories/atelier-1.jpg
 readingTime: "4 min"
@@ -49,7 +49,7 @@ Pour nous, cela a des effets concrets :
 
 L'atelier filmé en 2023 n'a presque pas changé. Nous avons ajouté **deux cuves supplémentaires** (pour absorber le pic de production post-World Drinks Awards 2025) et installé **la tireuse pression** qui nous a valu le prix Artinov — mais la configuration générale est la même.
 
-C'est volontaire. Nous pourrions agrandir, mécaniser, accélérer. Nous préférons rester à une échelle où **tout est fait à la main** et où **chaque bouteille passe entre nos six mains** avant de partir.
+C'est volontaire. Nous pourrions agrandir, mécaniser, accélérer. Nous préférons rester à une échelle où **tout est fait à la main** et où **chaque bouteille passe entre nos quatre mains** avant de partir.
 
 ## Venir nous voir
 

@@ -38,7 +38,7 @@ Quatre ans plus tard, nous relisons cet article avec l'affection qu'on porte aux
 **Ce qui a changé :**
 - De 3 références → **18 références** aujourd'hui
 - De 11 cavistes → **plus de 100 points de vente** en France
-- De 2 personnes → **3 personnes** (Bastien a rejoint en 2023)
+- Toujours une équipe resserrée : **Étienne et Guillaume**
 - De "jeunes entrepreneurs à suivre" → **Meilleur Digestif du Monde 2025**
 
 **Ce qui n'a pas changé :**

@@ -35,4 +35,4 @@ Since January we've been working on a **2025 vintage cuvée**, with a slight var
 
 Thanks to everyone who has walked with us. We carry on.
 
-*— Étienne, Guillaume and Bastien*
+*— Étienne and Guillaume*

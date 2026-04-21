@@ -1,6 +1,6 @@
 ---
-title: "Trois amis, une brasserie — comment la Brasserie des Plantes est née"
-description: "Étienne, Guillaume et Bastien racontent les débuts : l'école à Saint-Didier-en-Velay, les premiers essais au garage, l'arrivée de la production artisanale en Haute-Loire."
+title: "Deux amis, une brasserie — comment la Brasserie des Plantes est née"
+description: "Étienne et Guillaume racontent les débuts : l'école à Saint-Didier-en-Velay, les premiers essais au garage, l'arrivée de la production artisanale en Haute-Loire."
 date: 2025-02-05
 updated: 2026-04-18
 author: "Guillaume"
@@ -29,11 +29,9 @@ Le ratio verveine / serpolet / carvi de *L'Herbe des Druides* se stabilise au te
 
 En mars 2021, **La Brasserie des Plantes** est déclarée au greffe de Haute-Loire. Atelier loué à Saint-Didier, cuves achetées d'occasion, première série mise en bouteille en juillet. Onze cavistes locaux prennent les premières palettes.
 
-## L'arrivée de Bastien, septembre 2023
+## La rigueur de production, clé des médailles
 
-Étienne et Guillaume savent très bien formuler et vendre. Ils sont moins à l'aise avec la **rigueur industrielle** — le respect millimétré des dosages, la traçabilité, la répétabilité.
-
-En 2023, **Bastien** les rejoint. Originaire des Hautes-Alpes, il a travaillé plusieurs années chez un spiritueux bio alpin. Il apporte ce qu'il faut : les fiches techniques, les registres, les procédures de nettoyage, l'œil sur la propreté des cuves. Sans lui, pas de médailles — les concours regardent autant le produit que la constance.
+Savoir formuler et vendre ne suffit pas. La **rigueur industrielle** — dosages millimétrés, traçabilité, répétabilité — s'apprend. Au fil des années, Étienne structure les fiches techniques, les registres, les procédures de nettoyage, l'œil sur la propreté des cuves. Sans cette exigence, pas de médailles : les concours regardent autant le produit que la constance.
 
 ## Le déclic : Londres, avril 2025
 
@@ -46,7 +44,7 @@ La suite — la demande qui double, les distributeurs étrangers qui appellent, 
 - **Saint-Didier-en-Velay**. Nous n'avons pas quitté le village. L'atelier est à 300 mètres de l'école où Étienne et Guillaume se sont rencontrés.
 - **Les plantes**. Toujours bio, beaucoup produites par nous ou par nos voisins partenaires.
 - **L'embouteillage à la main**. Un remplisseur semi-automatique pour les grosses séries, un embouteillage manuel pour les éditions limitées. Chaque bouchon est posé à la main.
-- **La taille de l'équipe**. Trois. Étienne, Guillaume, Bastien. Ça suffit.
+- **La taille de l'équipe**. Deux. Étienne et Guillaume. Ça suffit.
 
 ---
 

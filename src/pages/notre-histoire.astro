@@ -25,9 +25,9 @@ const schema = [
 const team = [
   {
     name: 'Étienne',
-    role: 'Biotechnologue des plantes',
+    role: 'Biotechnologue des plantes & production',
     image: '/images/team/portrait-etienne.webp',
-    bio: "Formé à Toulouse en biotechnologie végétale, Étienne compose, choisit et assemble. C'est le nez de la Brasserie — celui qui traduit la botanique en saveur.",
+    bio: "Formé à Toulouse en biotechnologie végétale, Étienne compose, choisit, assemble et conduit la production. C'est le nez de la Brasserie — celui qui traduit la botanique en saveur.",
   },
   {
     name: 'Guillaume',
@@ -35,22 +35,16 @@ const team = [
     image: '/images/team/portrait-guillaume.webp',
     bio: "Venu de la restauration et du bar à Saint-Étienne, Guillaume pense les accords, les moments, les recettes. Il imagine comment nos liqueurs se rencontrent, à table ou au comptoir.",
   },
-  {
-    name: 'Bastien',
-    role: 'Production & rigueur',
-    image: '/images/team/portrait-bastien.webp',
-    bio: "Arrivé des Hautes-Alpes en septembre 2023, Bastien apporte le geste et la rigueur de production. C'est lui qui veille à ce que chaque bouteille quitte l'atelier à la hauteur de l'exigence.",
-  },
 ];
 ---
 <Layout
   title="Notre histoire — La Brasserie des Plantes, Haute-Loire"
-  description="Trois amis, une passion pour les plantes d'Auvergne. L'aventure de la Brasserie des Plantes depuis Saint-Didier-en-Velay, depuis 2021."
+  description="Deux amis d'enfance, une passion pour les plantes d'Auvergne. L'aventure de la Brasserie des Plantes depuis Saint-Didier-en-Velay, depuis 2021."
   schema={schema}
 >
   <PageHeader
     kicker="Notre histoire"
-    title="Trois amis,<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>un terroir</em>"
+    title="Deux amis,<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>un terroir</em>"
     subtitle="Depuis Saint-Didier-en-Velay, nous faisons revivre les plantes oubliées de la Haute-Loire, en liqueurs et en infusions."
     breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Notre histoire' }]}
   />
@@ -61,7 +55,7 @@ const team = [
       <div class="aspect-[3/2] rounded-3xl overflow-hidden shadow-2xl">
         <img
           src="/images/team/portrait-groupe.webp"
-          alt="Étienne, Guillaume et Bastien — fondateurs de la Brasserie des Plantes, devant leur atelier en Haute-Loire"
+          alt="Étienne et Guillaume — fondateurs de la Brasserie des Plantes, devant leur atelier en Haute-Loire"
           class="w-full h-full object-cover"
           loading="lazy"
         />
@@ -121,9 +115,7 @@ const team = [
           d'aurone. En {site.founded}, ils décident d'assembler
           leurs expertises : la rigueur scientifique d'un côté, la sensibilité
           du service et du goût de l'autre. La Brasserie des Plantes naît —
-          artisanale, auvergnate, sans compromis. Bastien, originaire des
-          Hautes-Alpes, les rejoint en septembre 2023 pour prendre en main
-          la production.
+          artisanale, auvergnate, sans compromis.
         </p>
       </div>
     </div>
@@ -175,7 +167,7 @@ const team = [
         <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
           <img
             src="/images/stories/atelier-1.webp"
-            alt="Bastien à l'embouteillage dans notre atelier de Saint-Didier-en-Velay"
+            alt="Étape d'embouteillage dans notre atelier artisanal de Saint-Didier-en-Velay"
             class="w-full h-full object-cover"
             loading="lazy"
           />
@@ -197,7 +189,7 @@ const team = [
           <p>
             Aucun arôme artificiel, aucun conservateur, aucun colorant :
             le savoir-faire, la patience et le temps font le reste. Chaque
-            bouteille est remplie, bouchée, étiquetée à la main — à six
+            bouteille est remplie, bouchée, étiquetée à la main — à quatre
             mains, pour être précis.
           </p>
         </div>

@@ -1,6 +1,6 @@
 ---
-title: "Three friends, one liqueur house — how La Brasserie des Plantes was born"
-description: "Étienne, Guillaume and Bastien tell the story: school in Saint-Didier-en-Velay, the early garage experiments, and the rise of a botanical liqueur house in Haute-Loire."
+title: "Two friends, one liqueur house — how La Brasserie des Plantes was born"
+description: "Étienne and Guillaume tell the story: school in Saint-Didier-en-Velay, the early garage experiments, and the rise of a botanical liqueur house in Haute-Loire."
 date: 2025-02-05
 updated: 2026-04-19
 author: "Guillaume"
@@ -29,11 +29,9 @@ The verbena / wild thyme / caraway ratio for *L'Herbe des Druides* stabilises at
 
 In March 2021, **La Brasserie des Plantes** is registered with the Haute-Loire commercial court. A workshop is rented in Saint-Didier, second-hand tanks bought, the first series bottled in July. Eleven local wine merchants take the first pallets.
 
-## Bastien joins, September 2023
+## Production rigour, the key to the medals
 
-Étienne and Guillaume know how to formulate and how to sell. They are less at ease with **industrial rigour** — precise dosing, traceability, repeatability.
-
-In 2023, **Bastien** joins them. Originally from the Southern French Alps, he has spent several years at an organic Alpine spirits maker. He brings what's needed: the technical sheets, the logs, the cleaning procedures, an eye on the cleanliness of the tanks. Without him, no medals — competitions look as much at the product as at consistency.
+Formulating and selling isn't enough. **Industrial rigour** — precise dosing, traceability, repeatability — has to be learned. Over the years, Étienne builds up the technical sheets, the logs, the cleaning procedures, an eye on the cleanliness of the tanks. Without this standard, no medals — competitions look as much at the product as at consistency.
 
 ## The turning point: London, April 2025
 
@@ -46,7 +44,7 @@ What followed — demand doubling, foreign distributors calling, press articles,
 - **Saint-Didier-en-Velay.** We haven't left the village. The workshop is 300 metres from the school where Étienne and Guillaume met.
 - **The plants.** Still organic, many grown by us or by neighbouring partner farmers.
 - **Hand bottling.** A semi-automatic filler for the larger runs, hand bottling for the limited editions. Every cork is placed by hand.
-- **Team size.** Three. Étienne, Guillaume, Bastien. That's enough.
+- **Team size.** Two. Étienne and Guillaume. That's enough.
 
 ---
 

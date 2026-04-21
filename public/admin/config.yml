@@ -61,7 +61,6 @@ collections:
         options:
           - { label: "Étienne", value: "Étienne" }
           - { label: "Guillaume", value: "Guillaume" }
-          - { label: "Bastien", value: "Bastien" }
           - { label: "La Brasserie des Plantes (compte collectif)", value: "La Brasserie des Plantes" }
       - { name: cover, label: "Image de couverture (16:9 recommandé)", widget: image, required: false, choose_url: true }
       - name: category
@@ -189,7 +188,6 @@ collections:
         options:
           - { label: "Étienne", value: "Étienne" }
           - { label: "Guillaume", value: "Guillaume" }
-          - { label: "Bastien", value: "Bastien" }
           - { label: "La Brasserie des Plantes (brand)", value: "La Brasserie des Plantes" }
       - { name: cover, label: "Cover image (16:9)", widget: image, required: false, choose_url: true }
       - name: category
