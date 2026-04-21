@@ -94,14 +94,7 @@ A shrub omnipresent in Auvergne hedgerows. We use its **flowers** in spring and 
 - **Our foragers**: 2 professional foragers (trained by the **Livradois-Forez Regional Natural Park**).
 - **Use at our house**: heart of [Nectar d'Ostara](/en/shop/nectar-ostara) (flowers) and some limited editions (berries).
 
-### 7. Common poppy (*Papaver rhoeas*)
-
-- **Origin**: cereal fields, meadows, path edges.
-- **Profile**: delicate floral, almost praline note, soft enveloping finish.
-- **Harvest**: June, by hand, in small quantities.
-- **Use at our house**: softness in [Pralicoquine](/en/shop/pralicoquine), balancing the praline-almond.
-
-### 8. Wild blueberry (*Vaccinium myrtillus*)
+### 7. Wild blueberry (*Vaccinium myrtillus*)
 
 Not the cultivated blueberry (North American), but this one: **small, black, wild, from mid-mountain undergrowth**.
 
@@ -110,14 +103,14 @@ Not the cultivated blueberry (North American), but this one: **small, black, wil
 - **Harvest**: August, metal comb for professionals, hand for small gathers.
 - **Use at our house**: limited editions only, confidential production.
 
-### 9. Fruits from our orchards
+### 8. Fruits from a partner grower
 
 A final partnership with an **organic arboriculturist on the Rhône slopes** (30 km from the workshop) supplies us:
 
 - **Bitter orange** — zest only, used in [Zéleste](/en/shop/zeleste) for its citrus bitterness.
 - **Heritage apples** (Canada reinette, rose of Berne) — some limited editions.
 
-### 10-12. Imported plants (and why)
+### 9-11. Imported plants (and why)
 
 Let's be transparent: **some plants don't grow in France** and we import them from European organic wholesalers specialised in herbalism. This is the case for:
 
@@ -136,7 +129,7 @@ A quick overview of what happens on our side through the seasons:
 | Period | Harvests | What's happening at the workshop |
 |--------|----------|----------------------------------|
 | **April-May** | Elderflower, first verbena, wild garlic | Start of spring compositions |
-| **June-July** | Lemon balm, verbena (1st pass), poppy, rare aromatics | Peak production — tonnes of plants come in |
+| **June-July** | Lemon balm, verbena (1st pass), rare aromatics | Peak production — tonnes of plants come in |
 | **August-September** | Verbena (2nd pass), wild thyme, blueberry, elderberry | Fruit-forward limited edition prep |
 | **October-November** | Gentian (root), final fruits | Last big harvest of the year |
 | **December-March** | Garden rest | Final assemblages, tests, tastings, N+1 planning |

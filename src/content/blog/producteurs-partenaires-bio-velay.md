@@ -29,7 +29,7 @@ La **gentiane jaune** (clé du Cerf'Gent) vient de gentianaïres professionnels 
 Plusieurs exploitations, majoritairement bio, qui produisent nos **verveine, mélisse, carvi, anis, coriandre, sauge, basilic, hysope et thym**. Toutes entre Saint-Étienne et Le Puy-en-Velay, dans un rayon de 40 km.
 
 ### Les cueilleurs de sauvage
-Des cueilleurs professionnels (profession officielle, avec formation PNR) qui nous fournissent le **serpolet** sauvage, les **fleurs de coquelicot** et le **sureau noir** sauvage, au rythme des saisons.
+Des cueilleurs professionnels (profession officielle, avec formation PNR) qui nous fournissent le **serpolet** sauvage et le **sureau noir** sauvage, au rythme des saisons.
 
 ### Les apiculteurs
 Pour nos **miels** (miel de châtaignier en cocktails, miel de forêt dans certaines éditions limitées) — apiculteurs du Pilat et du Velay.

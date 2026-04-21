@@ -16,7 +16,7 @@ C'est ce type de couverture — hors presse régionale, à destination d'un publ
 
 ## Ce que l'article raconte
 
-Likora identifie d'entrée **le trio de plantes signature** : la **verveine odorante**, le **carvi** et la **mélisse**. Puis il élargit la palette à six plantes plus rares : *fleur de coquelicot*, *thym-citron*, *thym*, *fleur de sureau*. Ce sont les ingrédients qui donnent à nos liqueurs leur identité — ceux qu'on retrouve, dans des proportions variées, dans les quatre références alors disponibles : *L'Herbe des Druides*, *Le Gorgeon des Machurés*, *Le Nectar d'Ostara*, et les prémices de *L'Alchimie Végétale*.
+Likora identifie d'entrée **le trio de plantes signature** : la **verveine odorante**, le **carvi** et la **mélisse**. Puis il élargit la palette à plusieurs plantes plus rares : *thym-citron*, *thym*, *fleur de sureau*. Ce sont les ingrédients qui donnent à nos liqueurs leur identité — ceux qu'on retrouve, dans des proportions variées, dans les quatre références alors disponibles : *L'Herbe des Druides*, *Le Gorgeon des Machurés*, *Le Nectar d'Ostara*, et les prémices de *L'Alchimie Végétale*.
 
 L'article insiste sur la **démarche** : plantes récoltées chez des cueilleurs et maraîchers voisins, majoritairement en bio, macérations longues, aucun arôme ajouté.
 
@@ -51,7 +51,7 @@ C'est un public plus petit, mais beaucoup plus précis — et ce sont souvent le
 Ce que Likora avait identifié en 2022 tient toujours :
 
 - **Plantes signature** : verveine, carvi, mélisse, serpolet — colonne vertébrale de nos recettes
-- **Fruits & fleurs** : coquelicot, sureau, bleuet — dans les déclinaisons plus fraîches
+- **Fruits & fleurs** : sureau, bleuet — dans les déclinaisons plus fraîches
 - **Aromatiques** : thym, thym-citron, hysope — pour la profondeur
 
 Ce qui a changé depuis : nous avons ajouté la gamme **Lumière Obscure** (CBD), la gamme **Apéritif** (15–17,5°), et plusieurs **éditions limitées**. Le cœur, lui, reste intact.

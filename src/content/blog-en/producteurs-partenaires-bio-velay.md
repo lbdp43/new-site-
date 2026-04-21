@@ -29,7 +29,7 @@ The **yellow gentian** (key to Cerf'Gent) comes from professional gentian harves
 Several farms, most of them organic, that produce our **verbena, lemon balm, caraway, anise, coriander, sage, basil, hyssop and thyme**. All between Saint-Étienne and Le Puy-en-Velay, in a 40 km radius.
 
 ### Wild foragers
-Professional foragers (official profession, with regional park training) who supply us with wild **serpolet**, **poppy flowers** and wild **elderberry**, at the rhythm of the seasons.
+Professional foragers (official profession, with regional park training) who supply us with wild **serpolet** and wild **elderberry**, at the rhythm of the seasons.
 
 ### Beekeepers
 For our **honeys** (chestnut honey in cocktails, forest honey in some limited editions) — beekeepers in the Pilat and Velay.

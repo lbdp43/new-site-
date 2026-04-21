@@ -94,14 +94,7 @@ Arbuste omniprésent dans les haies auvergnates. On utilise ses **fleurs** au pr
 - **Nos cueilleurs** : 2 cueilleurs professionnels (formés par le **Parc Naturel Régional du Livradois-Forez**).
 - **Usage chez nous** : cœur du [Nectar d'Ostara](/boutique/nectar-ostara) (fleurs) et de certaines éditions limitées (baies).
 
-### 7. Le coquelicot (*Papaver rhoeas*)
-
-- **Origine** : champs de céréales, prairies, bords de chemins.
-- **Profil** : floral délicat, note presque praline, finale douce et enveloppante.
-- **Récolte** : juin, à la main, par petites quantités.
-- **Usage chez nous** : douceur dans notre [Pralicoquine](/boutique/pralicoquine), équilibre la praline amande.
-
-### 8. La myrtille sauvage (*Vaccinium myrtillus*)
+### 7. La myrtille sauvage (*Vaccinium myrtillus*)
 
 Pas la myrtille de culture (bleuet nord-américain), celle-là : **petite, noire, sauvage, des sous-bois de moyenne montagne**.
 
@@ -110,14 +103,14 @@ Pas la myrtille de culture (bleuet nord-américain), celle-là : **petite, noire
 - **Récolte** : août, peigne métallique pour les pros, main pour les petites cueillettes.
 - **Usage chez nous** : éditions limitées uniquement, production confidentielle.
 
-### 9. Les fruits d'un arboriculteur partenaire
+### 8. Les fruits d'un arboriculteur partenaire
 
 Un **arboriculteur sur les pentes du Rhône** (à 30 km de l'atelier) nous fournit :
 
 - **Bigarade (orange amère)** — zeste uniquement, utilisé dans [Zéleste](/boutique/zeleste) pour son amertume agrumes.
 - **Pommes anciennes** (reinette du Canada, rose de Berne) — certaines éditions limitées.
 
-### 10-12. Les plantes importées (et pourquoi)
+### 9-11. Les plantes importées (et pourquoi)
 
 Soyons transparents : **certaines plantes ne poussent pas en France** et nous les importons par des grossistes européens bio spécialisés en herboristerie. C'est le cas pour :
 
@@ -136,7 +129,7 @@ Un aperçu rapide de ce qui arrive à l'atelier au fil des saisons :
 | Période | Récoltes | Ce qu'il se passe à l'atelier |
 |--------|---------|-------------------------------|
 | **Avril-mai** | Fleurs de sureau, premières verveines, ail des ours | Démarrage des premières compositions printanières |
-| **Juin-juillet** | Mélisse, verveine (1re passe), coquelicot, aromatiques rares | Pic de production — les plantes rentrent à l'atelier |
+| **Juin-juillet** | Mélisse, verveine (1re passe), aromatiques rares | Pic de production — les plantes rentrent à l'atelier |
 | **Août-septembre** | Verveine (2e passe), serpolet, myrtille, baies de sureau | Préparation des éditions limitées fruitées |
 | **Octobre-novembre** | Gentiane (racine), derniers fruits | Dernière grosse récolte de l'année |
 | **Décembre-mars** | Saison calme chez les producteurs | Assemblages finaux, tests, dégustations, visites chez les partenaires |
