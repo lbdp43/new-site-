@@ -264,6 +264,8 @@ remplacer le contenu de la colonne gauche.
 | `src/pages/panier.astro` | Route `/panier` |
 | `src/pages/commande.astro` | Route `/commande` |
 | `src/pages/commande/confirmation.astro` | Route `/commande/confirmation` |
+| `src/pages/blog/index.astro` | Route `/blog` (label UI "Actualité" côté FR). Hero staggered (BlogHeroIntro) + filtre catégories client-side (Fabrication / Terroir / Actualité / Plantes / Recettes). |
+| `src/components/BlogHeroIntro.tsx` | Hero éditorial staggered (flou → net) pour /blog — kicker + titre + script + paragraphe d'intro. |
 | `src/content/products/*.md` | **Source de vérité éditoriale** des fiches produit (1 fichier par SKU). Éditable via Sveltia CMS. |
 | `src/data/products.ts` | Thin wrapper — importe `products.generated.json` + définit types + ranges + helpers |
 | `src/data/products.generated.json` | Généré au prebuild par `generate-products.mjs`. Ne pas éditer à la main. |
@@ -295,6 +297,20 @@ pour préserver l'API côté templates.
 Aussi : schema Zod toujours en `.nullish()` (pas `.optional()`) pour
 accepter les `null` que Sveltia injecte sur les champs optionnels
 laissés vides. Helper `emptyToUndefined` dispo dans `content.config.ts`.
+
+## Page "Actualité" (ex-Journal)
+
+Avril 2026 : la section blog/chroniques s'appelle **"Actualité"** côté UI FR
+(`nav.journal` → `"Actualité"` dans `src/i18n/ui.ts`). **L'URL reste `/blog`** —
+on n'a pas renommé les routes pour éviter de casser des liens externes et des
+vieux partages. Côté EN, l'URL est `/en/journal/*` et le label reste "Journal".
+
+Le hero `/blog` utilise `BlogHeroIntro` (stagger flou → net) suivi d'un filtre
+client-side par catégorie (Fabrication / Terroir / Actualité / Plantes /
+Recettes). Pas de galerie 3D parallaxe (retirée), pas de bouton "Voir tous les
+articles" (retiré). Ligne éditoriale : on ne cultive pas nos plantes nous-mêmes,
+on travaille avec des cueilleurs et maraîchers partenaires, la plupart en bio —
+toujours formuler en ce sens dans les articles (référence : `producteurs-partenaires-bio-velay.md`).
 
 ## Gotchas
 

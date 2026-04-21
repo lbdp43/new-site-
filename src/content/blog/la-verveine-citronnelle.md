@@ -4,7 +4,7 @@ description: "Originaire d'Amérique du Sud, cultivée en France depuis le XVIII
 date: 2025-06-12
 author: "Étienne"
 category: Plantes
-cover: /images/stories/plantes.jpg
+cover: /images/stories/duo-bouteille-nature.webp
 readingTime: "6 min"
 ---
 
@@ -14,7 +14,7 @@ Il y a des plantes qu'on ne voit pas assez. La verveine citronnelle (*Aloysia ci
 
 Originaire du Pérou et du Chili, la verveine citronnelle arrive en Europe à la fin du XVIIIᵉ siècle, rapportée par les botanistes espagnols. Elle s'acclimate d'abord dans le sud de la France, puis remonte peu à peu vers le nord, poussée par la mode des eaux-de-vie et des infusions digestives.
 
-En Haute-Loire, elle pousse dans les jardins abrités, souvent contre un mur au sud. Elle craint le gel en dessous de −10°C, ce qui en fait une plante fragile chez nous — nous la protégeons chaque hiver sous paillage.
+En Haute-Loire, elle pousse dans les jardins abrités, souvent contre un mur au sud. Elle craint le gel en dessous de −10°C, ce qui en fait une plante fragile chez nous — nos maraîchers partenaires la protègent chaque hiver sous paillage.
 
 ## Un profil aromatique unique
 
@@ -33,9 +33,9 @@ Les deux extraits sont ensuite assemblés, dilués à 32% vol., et laissés repo
 
 ## Quand la récolter
 
-La verveine citronnelle se récolte **juste avant la floraison**, en juillet ou début août selon les années. Plus tôt, elle manque d'intensité ; plus tard, elle développe une amertume indésirable. Nous la coupons par temps sec, en matinée, dès que la rosée s'est évaporée — c'est le moment où la concentration en huiles essentielles est la plus haute.
+La verveine citronnelle se récolte **juste avant la floraison**, en juillet ou début août selon les années. Plus tôt, elle manque d'intensité ; plus tard, elle développe une amertume indésirable. Nos maraîchers la coupent par temps sec, en matinée, dès que la rosée s'est évaporée — c'est le moment où la concentration en huiles essentielles est la plus haute.
 
-Les feuilles sont ensuite séchées à l'ombre, sur claies, dans une pièce ventilée. Jamais de séchage industriel : la chaleur détruirait une partie des arômes.
+Les feuilles sont séchées à l'ombre, sur claies, dans une pièce ventilée. Jamais de séchage industriel : la chaleur détruirait une partie des arômes.
 
 ## En cocktail
 
@@ -46,4 +46,4 @@ Deux façons de la goûter chez soi :
 
 ---
 
-*La Brasserie des Plantes cultive la verveine citronnelle depuis 2021 sur ses parcelles de Saint-Didier-en-Velay, sans pesticide de synthèse.*
+*La Brasserie des Plantes travaille la verveine citronnelle depuis 2021, en la sourçant auprès de maraîchers partenaires de Haute-Loire et des environs.*

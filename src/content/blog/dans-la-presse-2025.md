@@ -5,7 +5,7 @@ date: 2025-06-20
 updated: 2026-04-18
 author: "Guillaume"
 category: Actualité
-cover: /images/stories/world-drinks-awards-2025.jpg
+cover: /images/gallery/evenement-06.webp
 readingTime: "4 min"
 ---
 

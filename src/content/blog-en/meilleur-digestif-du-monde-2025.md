@@ -25,7 +25,7 @@ Second, **confidence**. When you start in 2021 in a village of 3,000 people, you
 
 ## What it doesn't change
 
-The recipe stays the same. **Exactly the same.** We resisted the temptation to adjust anything after the award — that would betray what pleased the jury. Plants still come from our parcels or from our usual organic partners. The craft remains hand-made, in small batches.
+The recipe stays the same. **Exactly the same.** We resisted the temptation to adjust anything after the award — that would betray what pleased the jury. Plants still come from our partner foragers and market gardeners, mostly organic. The craft remains hand-made, in small batches.
 
 The award doesn't change our public price either. L'Alchimie Végétale stays at €22 for the 20 cl and €115 for the magnum. Some have asked why — because we want our neighbours, our friends, our early customers to be able to keep buying it.
 

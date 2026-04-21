@@ -60,9 +60,9 @@ export const instagramPosts: InstagramPost[] = [
   },
   {
     id: 'placeholder-4',
-    image: '/images/team/portrait-groupe.jpg',
+    image: '/videos/duo-making-of-poster.jpg',
     url: instagramProfileUrl,
-    caption: "Trois amis, un terroir, 27 plantes. Merci pour vos messages après l'annonce du prix 🙏",
+    caption: "Deux amis, un terroir, 27 plantes. Merci pour vos messages après l'annonce du prix 🙏",
     date: '2025-05-02',
   },
   {

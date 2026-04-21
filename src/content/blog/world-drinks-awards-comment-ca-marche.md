@@ -5,7 +5,7 @@ date: 2025-05-10
 updated: 2026-04-18
 author: "Guillaume"
 category: Actualité
-cover: /images/stories/world-drinks-awards-2025.jpg
+cover: /images/stories/etienne-degustation.webp
 readingTime: "7 min"
 ---
 

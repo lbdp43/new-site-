@@ -32,7 +32,7 @@ export const ui = {
     'nav.plants': 'Nos plantes',
     'nav.cocktails': 'Cocktails',
     'nav.workshops': 'Ateliers',
-    'nav.journal': 'Journal',
+    'nav.journal': 'Actualité',
     'nav.pros': 'Pros',
     'nav.contact': 'Contact',
     'nav.discover-shop': 'Découvrir la boutique',

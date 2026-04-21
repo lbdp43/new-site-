@@ -1,18 +1,18 @@
 ---
 title: "The plants in our liqueurs: a botanical journey through Haute-Loire"
-description: "Lemon verbena, yellow gentian, elderberry, lemon balm, wild thyme… 12 plants that make up our liqueurs, grown or foraged between 400 and 1,600 m altitude in Haute-Loire, France. An illustrated botanical journey, species by species."
+description: "Lemon verbena, yellow gentian, elderberry, lemon balm, wild thyme… 12 plants that make up our liqueurs, grown or foraged by our partners between 400 and 1,600 m altitude in Haute-Loire, France."
 date: 2026-04-20
 author: "Étienne"
 category: Plants
 cover: /images/stories/paysage-plantes.webp
-readingTime: "11 min"
+readingTime: "10 min"
 ---
 
 When people ask us **what makes our liqueurs different** from those of larger houses, the answer is one word: the **plants**.
 
-Not "some plants". **Our plants** — the ones we grow ourselves on three parcels less than 5 km from the workshop, the ones our [organic partner farmers](/en/journal/producteurs-partenaires-bio-velay) harvest at 1,200 metres on the Margeride plateau, the ones professional foragers gather in spring on the Pilat slopes.
+We don't grow them ourselves. We work with partner **foragers** and **market gardeners** — [people we picked one by one](/en/journal/producteurs-partenaires-bio-velay), most of them organic, who harvest in Haute-Loire and neighbouring départements. Their fields, their slopes, their undergrowth: that's our terroir.
 
-This guide is the botanical journey of a bottle. **12 signature plants**, their identity, their precise origin, and which of our liqueurs they end up in.
+This guide is the botanical journey of a bottle. **12 signature plants**, their identity, their origin, and which of our liqueurs they end up in.
 
 ## Why Haute-Loire is an exceptional botanical terroir
 
@@ -26,9 +26,9 @@ This is why Europe's great liqueur houses — Chartreuse (Isère), Bénédictine
 
 **Saint-Didier-en-Velay**, where our workshop is, sits at **740 metres altitude**, on the Haute-Loire / Loire border, 30 km from Saint-Étienne and 40 km from Le Puy-en-Velay. Between the Cévennes range to the south and the Pilat mountains to the north.
 
-## The 6 plants we grow ourselves
+## Plants grown by our partner market gardeners
 
-About **40% of our plants** come from our own parcels. Three fields, all within 5 km of the workshop, cultivated without chemical treatment since planting.
+The biggest share of our raw material comes from **market gardeners and growers in the Velay and its neighbours**, most of them organic, who deliver at the rhythm of each harvest.
 
 ### 1. Lemon verbena (*Aloysia citrodora*)
 
@@ -59,7 +59,7 @@ The European cousin of verbena — softer, more "honey", less citric.
 
 ### 4. Rare aromatics
 
-On a dedicated parcel, we grow **4 uncommon aromatic plants**:
+Some of our partner market gardeners also grow **uncommon aromatic plants**:
 
 - **Southernwood** (*Artemisia abrotanum*) — southern wormwood, lemon-absinthe-light profile.
 - **Hyssop** (*Hyssopus officinalis*) — bitter, spicy, widely used in monastic elixirs.

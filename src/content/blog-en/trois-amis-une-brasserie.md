@@ -5,7 +5,7 @@ date: 2025-02-05
 updated: 2026-04-19
 author: "Guillaume"
 category: Terroir
-cover: /images/team/portrait-groupe.jpg
+cover: /videos/duo-making-of-poster.jpg
 readingTime: "7 min"
 ---
 
@@ -42,7 +42,7 @@ What followed — demand doubling, foreign distributors calling, press articles,
 ## What hasn't changed
 
 - **Saint-Didier-en-Velay.** We haven't left the village. The workshop is 300 metres from the school where Étienne and Guillaume met.
-- **The plants.** Still organic, many grown by us or by neighbouring partner farmers.
+- **The plants.** Mostly organic, all harvested by our neighbouring partner foragers and market gardeners.
 - **Hand bottling.** A semi-automatic filler for the larger runs, hand bottling for the limited editions. Every cork is placed by hand.
 - **Team size.** Two. Étienne and Guillaume. That's enough.
 

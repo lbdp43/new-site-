@@ -5,7 +5,7 @@ date: 2025-02-05
 updated: 2026-04-18
 author: "Guillaume"
 category: Terroir
-cover: /images/team/portrait-groupe.jpg
+cover: /videos/duo-making-of-poster.jpg
 readingTime: "7 min"
 ---
 

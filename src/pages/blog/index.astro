@@ -2,60 +2,96 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import InstagramFeed from '../../components/InstagramFeed.astro';
-import BlogHeroGallery, { type BlogHeroItem } from '../../components/BlogHeroGallery';
+import BlogHeroIntro from '../../components/BlogHeroIntro';
 import { site } from '../../data/site';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
-// Items pour le hero 3D — on passe TOUS les articles pour que la galerie soit complète
-const heroItems: BlogHeroItem[] = posts.map((p) => ({
-  href: `/blog/${p.id}`,
-  cover: p.data.cover || '/images/stories/paysage-plantes.webp',
-  title: p.data.title,
-  category: p.data.category,
-}));
+// Catégories présentes, triées par volume décroissant
+const categoryCounts = posts.reduce<Record<string, number>>((acc, p) => {
+  acc[p.data.category] = (acc[p.data.category] ?? 0) + 1;
+  return acc;
+}, {});
+const categories = Object.entries(categoryCounts)
+  .sort(([, a], [, b]) => b - a)
+  .map(([name, count]) => ({ name, count }));
 
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
-    { '@type': 'ListItem', position: 2, name: 'Journal', item: `${site.url}/blog` },
+    { '@type': 'ListItem', position: 2, name: 'Actualité', item: `${site.url}/blog` },
   ],
 };
 
 const blogSchema = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  name: `Journal — ${site.name}`,
+  name: `Actualité — ${site.name}`,
   url: `${site.url}/blog`,
   publisher: { '@id': `${site.url}#localbusiness` },
 };
 ---
 <Layout
-  title="Journal | Plantes, recettes, terroir — La Brasserie des Plantes"
-  description="Notre journal : rencontres avec les plantes, recettes de cocktails, récits d'atelier, coulisses de la fabrication. Un regard d'artisans sur la botanique et le terroir auvergnat."
+  title="Actualité | Plantes, recettes, terroir — La Brasserie des Plantes"
+  description="Notre actualité : rencontres avec les plantes, recettes de cocktails, récits d'atelier, coulisses de la fabrication. Un regard d'artisans sur la botanique et le terroir auvergnat."
   schema={[breadcrumb, blogSchema]}
 >
-  {/* Hero immersif — galerie 3D parallaxe qui se redresse au scroll */}
-  {heroItems.length > 0 && <BlogHeroGallery client:load items={heroItems} />}
+  <!-- Hero éditorial — entrée staggered (flou → net) -->
+  <div class="bg-white">
+    <BlogHeroIntro
+      client:load
+      kicker="Actualité"
+      title="Chroniques"
+      scriptSuffix="de la Brasserie"
+      intro="Nos rencontres avec les plantes, les recettes que nous aimons, les coulisses de notre travail. Un article, une histoire, sans calendrier forcé."
+    />
+  </div>
 
   <section id="blog-grid" class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-6 text-center mb-12">
+    <div class="max-w-6xl mx-auto px-6 text-center mb-10">
       <div class="text-[10px] uppercase tracking-[0.35em] text-gold-600 font-medium mb-3">
         Tous les articles
       </div>
-      <h2 class="font-display text-3xl md:text-4xl text-forest-900">
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900" data-blog-count>
         {posts.length} chroniques à explorer
       </h2>
     </div>
+
+    <!-- Filtre catégories -->
+    <div class="max-w-6xl mx-auto px-6 mb-10">
+      <div class="flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Filtrer par catégorie">
+        <button
+          type="button"
+          data-filter="all"
+          class="blog-filter-btn inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs uppercase tracking-[0.15em] font-medium border border-forest-800 bg-forest-800 text-cream-100 transition-colors"
+          aria-pressed="true"
+        >
+          Tous <span class="text-cream-200/70 font-normal normal-case tracking-normal">({posts.length})</span>
+        </button>
+        {categories.map(({ name, count }) => (
+          <button
+            type="button"
+            data-filter={name}
+            class="blog-filter-btn inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs uppercase tracking-[0.15em] font-medium border border-forest-200 bg-cream-50 text-forest-800 hover:border-forest-800 transition-colors"
+            aria-pressed="false"
+          >
+            {name} <span class="text-ink-500 font-normal normal-case tracking-normal">({count})</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
     <div class="max-w-6xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-blog-grid>
         {posts.map((post) => (
           <a
             href={`/blog/${post.id}`}
+            data-blog-card
+            data-category={post.data.category}
             class="group flex flex-col rounded-2xl bg-cream-50 border border-forest-100/60 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
             {post.data.cover && (
@@ -88,11 +124,64 @@ const blogSchema = {
         ))}
       </div>
 
+      <p class="text-center text-ink-500 py-12 hidden" data-blog-empty>
+        Aucun article dans cette catégorie pour l'instant.
+      </p>
+
       {posts.length === 0 && (
         <p class="text-center text-ink-500 py-20">Les premiers articles arrivent bientôt.</p>
       )}
     </div>
   </section>
+
+  <script>
+    // Filtre client-side — pas de React dépendance, simple show/hide
+    (() => {
+      const buttons = document.querySelectorAll<HTMLButtonElement>('.blog-filter-btn');
+      const cards = document.querySelectorAll<HTMLElement>('[data-blog-card]');
+      const empty = document.querySelector<HTMLElement>('[data-blog-empty]');
+      const countEl = document.querySelector<HTMLElement>('[data-blog-count]');
+      const totalLabel = countEl?.textContent ?? '';
+
+      const setActive = (btn: HTMLButtonElement) => {
+        buttons.forEach((b) => {
+          const isActive = b === btn;
+          b.setAttribute('aria-pressed', String(isActive));
+          if (isActive) {
+            b.classList.remove('border-forest-200', 'bg-cream-50', 'text-forest-800', 'hover:border-forest-800');
+            b.classList.add('border-forest-800', 'bg-forest-800', 'text-cream-100');
+          } else {
+            b.classList.remove('border-forest-800', 'bg-forest-800', 'text-cream-100');
+            b.classList.add('border-forest-200', 'bg-cream-50', 'text-forest-800', 'hover:border-forest-800');
+          }
+        });
+      };
+
+      const applyFilter = (filter: string) => {
+        let visible = 0;
+        cards.forEach((card) => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('hidden', !match);
+          if (match) visible++;
+        });
+        if (empty) empty.classList.toggle('hidden', visible > 0);
+        if (countEl) {
+          if (filter === 'all') {
+            countEl.textContent = totalLabel;
+          } else {
+            countEl.textContent = `${visible} article${visible > 1 ? 's' : ''} · ${filter}`;
+          }
+        }
+      };
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          setActive(btn);
+          applyFilter(btn.dataset.filter ?? 'all');
+        });
+      });
+    })();
+  </script>
 
   <InstagramFeed variant="dark" kicker="Au jour le jour" title="Sur Instagram" />
 </Layout>

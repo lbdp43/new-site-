@@ -4,7 +4,7 @@ description: "En avril 2022, le blog spécialisé Likora publiait l'un des tout 
 date: 2022-04-13
 author: "Guillaume"
 category: Terroir
-cover: /images/stories/plantes.jpg
+cover: /images/gallery/evenement-04.webp
 readingTime: "5 min"
 ---
 
@@ -18,7 +18,7 @@ C'est ce type de couverture — hors presse régionale, à destination d'un publ
 
 Likora identifie d'entrée **le trio de plantes signature** : la **verveine odorante**, le **carvi** et la **mélisse**. Puis il élargit la palette à six plantes plus rares : *fleur de coquelicot*, *thym-citron*, *thym*, *fleur de sureau*. Ce sont les ingrédients qui donnent à nos liqueurs leur identité — ceux qu'on retrouve, dans des proportions variées, dans les quatre références alors disponibles : *L'Herbe des Druides*, *Le Gorgeon des Machurés*, *Le Nectar d'Ostara*, et les prémices de *L'Alchimie Végétale*.
 
-L'article insiste sur la **démarche agricole** : plantes majoritairement cultivées sur nos parcelles ou chez des producteurs bio voisins, macérations longues, aucun arôme ajouté.
+L'article insiste sur la **démarche** : plantes récoltées chez des cueilleurs et maraîchers voisins, majoritairement en bio, macérations longues, aucun arôme ajouté.
 
 ## Les notes de dégustation Likora, par produit
 

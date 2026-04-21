@@ -1,18 +1,18 @@
 ---
 title: "Les plantes de nos liqueurs : voyage botanique en Haute-Loire"
-description: "Verveine citronnée, gentiane jaune, sureau, mélisse, serpolet… 12 plantes qui composent nos liqueurs, cultivées ou cueillies entre 400 et 1 600 m d'altitude en Haute-Loire. Un voyage botanique illustré, département par département."
+description: "Verveine citronnée, gentiane jaune, sureau, mélisse, serpolet… 12 plantes qui composent nos liqueurs, cueillies ou cultivées par nos partenaires entre 400 et 1 600 m d'altitude en Haute-Loire."
 date: 2026-04-20
 author: "Étienne"
 category: Plantes
 cover: /images/stories/paysage-plantes.webp
-readingTime: "11 min"
+readingTime: "10 min"
 ---
 
 Quand on nous demande **ce qui fait la différence** entre nos liqueurs et celles des grandes maisons, la réponse tient en un mot : les **plantes**.
 
-Pas "des plantes". **Nos plantes** — celles qu'on cultive nous-mêmes sur trois parcelles à moins de 5 km de l'atelier, celles que nos [producteurs partenaires bio](/blog/producteurs-partenaires-bio-velay) récoltent à 1 200 mètres sur les plateaux de la Margeride, celles que les cueilleurs professionnels ramassent au printemps dans les pentes du Pilat.
+Nous ne les cultivons pas nous-mêmes. Nous travaillons avec des **cueilleurs** et des **maraîchers partenaires** — [des gens qu'on a choisis un par un](/blog/producteurs-partenaires-bio-velay), la plupart en bio, qui récoltent en Haute-Loire et dans les départements voisins. Leurs champs, leurs versants, leurs sous-bois : c'est ça, notre terroir.
 
-Ce guide est le voyage botanique d'une bouteille. **12 plantes signatures**, leur identité, leur origine précise, et dans quelles liqueurs on les retrouve.
+Ce guide est le voyage botanique d'une bouteille. **12 plantes signatures**, leur identité, leur origine, et dans quelles liqueurs on les retrouve.
 
 ## Pourquoi la Haute-Loire est un terroir botanique exceptionnel
 
@@ -26,18 +26,18 @@ C'est pour ça que les grandes maisons liquoristes européennes — Chartreuse (
 
 **Saint-Didier-en-Velay**, où nous avons notre atelier, se trouve à **740 mètres d'altitude**, sur la frontière Haute-Loire / Loire, à 30 km de Saint-Étienne et 40 km du Puy-en-Velay. Entre la chaîne des Cévennes au sud et les monts du Pilat au nord.
 
-## Les 6 plantes que nous cultivons
+## Les plantes cultivées par nos maraîchers partenaires
 
-Environ **40 % de nos plantes** viennent de nos propres parcelles. Trois champs, tous à moins de 5 km de l'atelier, cultivés sans traitement chimique depuis leur mise en culture.
+La plus grande part de notre matière première vient de **maraîchers et producteurs du Velay et de ses voisins**, majoritairement en bio, qui nous livrent au rythme des récoltes.
 
 ### 1. La verveine citronnée (*Aloysia citrodora*)
 
-**Notre plante totem.** C'est celle qu'on récolte le plus, celle qui parfume notre atelier en juillet-août quand on fait les premiers lots.
+**Notre plante totem.** C'est celle qui rentre le plus à l'atelier, celle qui l'embaume en juillet-août quand démarrent les premiers lots.
 
 - **Origine botanique** : Amérique du Sud, naturalisée dans le Sud de la France au 19e siècle.
 - **Profil aromatique** : citron, mélisse, légère note mentholée en finale.
-- **Récolte** : 3 passes par an, toujours à la main, le matin avant que le soleil ne fasse évaporer les huiles essentielles.
-- **Usage chez nous** : signature de [L'Herbe des Druides](/boutique/herbe-des-druides). Présente dans 14 de nos 18 liqueurs en composition secondaire.
+- **Récolte** : plusieurs passes par an, toujours à la main, le matin avant que le soleil ne fasse évaporer les huiles essentielles.
+- **Usage chez nous** : signature de [L'Herbe des Druides](/boutique/herbe-des-druides). Présente en composition secondaire dans la plupart de nos liqueurs.
 
 ### 2. La mélisse officinale (*Melissa officinalis*)
 
@@ -54,21 +54,21 @@ Le **thym sauvage de montagne** — pas le thym commun des supermarchés. Bien p
 
 - **Origine** : sauvage dans les pentes rocailleuses de la Haute-Loire.
 - **Profil** : thym concentré, note poivrée, finale résineuse.
-- **Récolte** : juillet-août, au moment de la floraison, sur des pentes sud.
+- **Récolte** : juillet-août, au moment de la floraison, sur des pentes sud, par nos cueilleurs.
 - **Usage chez nous** : touche camphrée dans [L'Herbe des Druides](/boutique/herbe-des-druides) et [L'Alchimie Végétale](/boutique/alchimie-vegetale).
 
 ### 4. Les aromatiques rares
 
-Sur une parcelle dédiée, nous cultivons **4 plantes aromatiques peu communes** :
+Chez certains maraîchers partenaires, on trouve aussi **des aromatiques moins courantes** :
 
-- **Aurone** (*Artemisia abrotanum*) — armoise sud, profil citron-absinthe léger.
+- **Aurone** (*Artemisia abrotanum*) — armoise du sud, profil citron-absinthe léger.
 - **Hysope** (*Hyssopus officinalis*) — amère, épicée, très utilisée dans les élixirs monastiques.
 - **Thym citron** (*Thymus × citriodorus*) — hybride naturel, thym + verveine.
 - **Estragon mexicain** (*Tagetes lucida*) — goût anisé, plus subtil que l'estragon classique.
 
-Ces 4 plantes sont les "touches de finition" dans nos compositions les plus complexes.
+Ces plantes sont les "touches de finition" dans nos compositions les plus complexes.
 
-## Les 6 plantes cueillies ou cultivées par nos partenaires
+## Les plantes sauvages, cueillies par nos partenaires
 
 ### 5. La gentiane jaune (*Gentiana lutea*)
 
@@ -110,9 +110,9 @@ Pas la myrtille de culture (bleuet nord-américain), celle-là : **petite, noire
 - **Récolte** : août, peigne métallique pour les pros, main pour les petites cueillettes.
 - **Usage chez nous** : éditions limitées uniquement, production confidentielle.
 
-### 9. Les fruits de nos vergers
+### 9. Les fruits d'un arboriculteur partenaire
 
-Un dernier partenariat avec un **arboriculteur bio sur les pentes du Rhône** (à 30 km de l'atelier) nous fournit :
+Un **arboriculteur sur les pentes du Rhône** (à 30 km de l'atelier) nous fournit :
 
 - **Bigarade (orange amère)** — zeste uniquement, utilisé dans [Zéleste](/boutique/zeleste) pour son amertume agrumes.
 - **Pommes anciennes** (reinette du Canada, rose de Berne) — certaines éditions limitées.
@@ -131,15 +131,15 @@ Environ **15 % de notre matière première** est ainsi importée. **Nous ne pré
 
 ## Le calendrier de récolte
 
-Un aperçu rapide de ce qui se passe chez nous au fil des saisons :
+Un aperçu rapide de ce qui arrive à l'atelier au fil des saisons :
 
 | Période | Récoltes | Ce qu'il se passe à l'atelier |
 |--------|---------|-------------------------------|
 | **Avril-mai** | Fleurs de sureau, premières verveines, ail des ours | Démarrage des premières compositions printanières |
-| **Juin-juillet** | Mélisse, verveine (1re passe), coquelicot, aromatiques rares | Pic de production — les tonnes de plantes rentrent à l'atelier |
+| **Juin-juillet** | Mélisse, verveine (1re passe), coquelicot, aromatiques rares | Pic de production — les plantes rentrent à l'atelier |
 | **Août-septembre** | Verveine (2e passe), serpolet, myrtille, baies de sureau | Préparation des éditions limitées fruitées |
 | **Octobre-novembre** | Gentiane (racine), derniers fruits | Dernière grosse récolte de l'année |
-| **Décembre-mars** | Repos du jardin | Assemblages finaux, tests, dégustations, planification N+1 |
+| **Décembre-mars** | Saison calme chez les producteurs | Assemblages finaux, tests, dégustations, visites chez les partenaires |
 
 ## Les plantes "oubliées" que nous faisons renaître
 
@@ -180,8 +180,8 @@ C'est pour ça qu'on ne cherche pas à produire à la tonne. Le Velay n'est pas 
 
 **Pour aller plus loin** :
 - [Comment choisir une liqueur artisanale — le guide complet](/blog/choisir-liqueur-artisanale-guide)
-- [Nos 11 producteurs partenaires bio du Velay](/blog/producteurs-partenaires-bio-velay) — portrait d'un écosystème
+- [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — portrait d'un écosystème
 - [Plantes oubliées du Velay : 7 espèces qui reviennent dans nos verres](/blog/plantes-oubliees-du-velay)
 - [Découvrez les 12 plantes de notre gamme](/nos-plantes) — fiches détaillées
 
-Ou parcourez [la gamme complète](/boutique) — 18 liqueurs, toutes issues de cet écosystème végétal auvergnat.
+Ou parcourez [la gamme complète](/boutique) — toutes issues de cet écosystème végétal auvergnat.

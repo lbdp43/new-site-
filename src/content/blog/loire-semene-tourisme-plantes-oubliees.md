@@ -4,7 +4,7 @@ description: "L'office de tourisme Loire Semène a repris l'expression 'plantes 
 date: 2023-07-08
 author: "Guillaume"
 category: Terroir
-cover: /images/stories/paysage-plantes.webp
+cover: /images/stories/salon-origine-auvergne.webp
 readingTime: "3 min"
 ---
 

@@ -38,12 +38,11 @@ C'est ce climat qui fait la différence dans nos macérations.
 
 ## Ce qui nous rattache au territoire
 
-Concrètement, quelques chiffres :
+Concrètement, quelques repères :
 
-- **3 parcelles** à Saint-Didier-en-Velay et alentours
-- **11 producteurs partenaires** (voir [notre article sur la filière](/blog/producteurs-partenaires-bio-velay))
-- **2 apiculteurs** du Pilat et du Velay
-- **2 gentianaïres** de la Margeride
+- **Des cueilleurs et maraîchers partenaires** en Haute-Loire et dans les départements voisins (voir [notre article sur la filière](/blog/producteurs-partenaires-bio-velay))
+- **Des apiculteurs** du Pilat et du Velay
+- **Des gentianaïres** de la Margeride
 - **100 % de nos embouteillages** réalisés dans notre atelier de Saint-Didier-en-Velay
 
 ## Une histoire pas finie

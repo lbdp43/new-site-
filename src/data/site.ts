@@ -80,7 +80,7 @@ export const nav = [
   { label: "Nos plantes", href: "/nos-plantes" },
   { label: "Cocktails", href: "/cocktails" },
   { label: "Ateliers", href: "/ateliers" },
-  { label: "Journal", href: "/blog" },
+  { label: "Actualité", href: "/blog" },
   { label: "Pros", href: "/professionnels" },
   { label: "Contact", href: "/contact" },
 ] as const;

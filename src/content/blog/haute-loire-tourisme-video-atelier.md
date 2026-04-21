@@ -4,7 +4,7 @@ description: "L'office de tourisme de Haute-Loire a filmé une visite de notre a
 date: 2023-10-20
 author: "La Brasserie des Plantes"
 category: Fabrication
-cover: /images/stories/atelier-1.jpg
+cover: /images/stories/atelier-2.jpg
 readingTime: "4 min"
 ---
 

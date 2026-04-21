@@ -25,7 +25,7 @@ Ensuite, **la confiance**. Quand on démarre en 2021 dans un village de 3 000 ha
 
 ## Ce que cela ne change pas
 
-La recette reste la même. **Exactement la même.** Nous avons résisté à la tentation d'ajuster quoi que ce soit après le prix — ce serait trahir ce qui a plu au jury. Les plantes viennent toujours de nos parcelles ou de nos partenaires bio habituels. L'élaboration reste faite à la main, en petits lots.
+La recette reste la même. **Exactement la même.** Nous avons résisté à la tentation d'ajuster quoi que ce soit après le prix — ce serait trahir ce qui a plu au jury. Les plantes viennent toujours de nos cueilleurs et maraîchers partenaires, majoritairement en bio. L'élaboration reste faite à la main, en petits lots.
 
 Le prix ne change pas non plus notre prix public. L'Alchimie Végétale reste à 22 € la 20 cl et 115 € le magnum. Certains nous ont demandé pourquoi — parce que nous voulons que nos voisins, nos amis, nos clients des débuts puissent continuer à l'acheter.
 

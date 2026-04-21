@@ -19,7 +19,7 @@ const plantsListSchema = {
   '@type': 'ItemList',
   name: 'Plants and botanicals used at La Brasserie des Plantes',
   description:
-    'Aromatic herbs, roots, barks, flowers, citrus, spices and fruits used in our craft liqueurs. Much of what we work with — the rest is an assembly secret.',
+    'Aromatic herbs, roots, barks, flowers, citrus, spices and fruits used in our craft liqueurs. Sourced from hand-picked foragers and market gardeners in Haute-Loire and beyond, mostly from organic farming.',
   numberOfItems: plants.length,
   inLanguage: 'en-US',
   itemListElement: plants.map((p, i) => {
@@ -58,7 +58,7 @@ const sortedPlants = [...plants].sort((a, b) => {
   <PageHeader
     kicker="Botany"
     title="The plants behind<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>our liqueurs</em>"
-    subtitle="Verbena, wild thyme, caraway, lemon balm, hyssop, gentian, génépi, elderflower, nettle, hemp, almond, dragon fruit… around forty botanical ingredients, many harvested a few kilometres from our workshop."
+    subtitle="Verbena, wild thyme, caraway, lemon balm, hyssop, gentian, génépi, elderflower, nettle, hemp, almond, dragon fruit… around forty botanical ingredients, sourced from foragers and market gardeners we pick one by one."
     breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Our plants' }]}
   />
 
@@ -97,11 +97,11 @@ const sortedPlants = [...plants].sort((a, b) => {
           Across the entire range, we work with
           <strong class="font-medium text-forest-800">around forty botanical
           ingredients</strong> — aromatics, roots, barks, flowers, citrus,
-          spices, fruits. Some are grown or foraged a few kilometres from the
-          workshop; others come from further afield when the plant demands it.
-          Known origin every time, producer picked one by one. And of course
-          <em>La Pralicoquine</em> with its caramelised almonds — because a
-          gourmand liqueur has its place too.
+          spices, fruits. We don't grow our own plants: we source them from
+          foragers and market gardeners we pick one by one. Most come from
+          organic farming; some grow a few kilometres from the workshop,
+          others come from further afield when the plant demands it. Known
+          origin every time, producer met in person.
         </p>
       </div>
 
@@ -166,8 +166,8 @@ const sortedPlants = [...plants].sort((a, b) => {
     <div class="max-w-3xl mx-auto px-6">
       <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Our approach</div>
       <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
-        Terroir first,<br />
-        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">living heritage next</em>
+        Terroir,<br />
+        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">living heritage</em>
       </h2>
       <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
         <p>
@@ -182,17 +182,14 @@ const sortedPlants = [...plants].sort((a, b) => {
           always: some demand a different terroir (Alpine génépi, for
           instance), others come from further afield depending on the season
           and the quality of the moment (citrus, liquorice, cinchona bark).
-          We'd rather be honest about that than promise something we
-          couldn't keep for every batch.
+          Most come from <strong class="font-medium text-forest-800">organic
+          farming</strong> — that's what we aim for, even though not every
+          plant is there yet.
         </p>
         <p>
           Our rule is plants first: <strong class="font-medium text-forest-800">no
-          added flavouring, no preservative</strong>. The colours you see in our
-          bottles always come from an ingredient that's actually drunk — vegetal
-          charcoal for the deep black of Gorgeon des Machurés, cochineal for
-          the natural pink of Pralicoquine, macerated red fruits for the Flèche
-          Ardente, the plants' own chlorophyll for the green of Herbe des
-          Druides.
+          added flavouring, no colouring</strong>. What's in the bottle is what
+          went into the tank.
         </p>
       </div>
     </div>
