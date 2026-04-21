@@ -3,7 +3,7 @@ name: "Verveine CBD Aurone"
 range: lumiere-obscure
 priceMin: 34
 priceMax: 34
-image: /images/products/verveine-cbd-aurone.png
+image: /images/products/verveine-cbd-aurone.webp
 alcohol: 30
 composition:
   - Verveine

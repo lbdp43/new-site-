@@ -3,7 +3,7 @@ name: "Menthe CBD Ortie"
 range: lumiere-obscure
 priceMin: 34
 priceMax: 34
-image: /images/products/menthe-cbd-ortie.png
+image: /images/products/menthe-cbd-ortie.webp
 alcohol: 21
 composition:
   - Menthe verte

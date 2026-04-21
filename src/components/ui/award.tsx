@@ -241,12 +241,12 @@ export function Awards({
           >
             {levelLabels[level]}
           </div>
-          <h1
+          <h3
             style={{ color: c.title }}
             className={cn("text-sm md:text-base font-black tracking-tight leading-tight")}
           >
             {title}
-          </h1>
+          </h3>
           <div
             style={{ backgroundColor: c.fill }}
             className="mx-auto my-1 h-[1px] w-16 opacity-70"

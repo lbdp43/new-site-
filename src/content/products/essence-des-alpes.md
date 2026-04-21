@@ -3,7 +3,7 @@ name: "L'Essence des Alpes"
 range: brasserie
 priceMin: 17
 priceMax: 36
-image: /images/products/essence-des-alpes.png
+image: /images/products/essence-des-alpes.webp
 alcohol: 32
 composition:
   - Génépi bio (partenariat Barcelonnette)

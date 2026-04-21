@@ -14,7 +14,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: site.name,
   url: site.url,
-  logo: new URL('/logo.png', site.url).toString(),
+  logo: new URL('/logo.webp', site.url).toString(),
   email: site.email,
   telephone: site.phone,
   foundingDate: site.founded,
@@ -32,9 +32,9 @@ const localBusinessSchema = {
   description: site.defaultDescription,
   image: [
     new URL('/og-default.jpg', site.url).toString(),
-    new URL('/images/brand/logo-complet-fond-blanc.png', site.url).toString(),
+    new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
   ],
-  logo: new URL('/images/brand/logo-complet-fond-blanc.png', site.url).toString(),
+  logo: new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
   url: site.url,
   telephone: site.phone,
   email: site.email,
@@ -110,8 +110,8 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
 ---
 <Layout
   lang="en"
-  title="La Brasserie des Plantes | Organic craft liqueurs — Haute-Loire, France"
-  description="Organic craft liqueurs and botanical infusions from the Auvergne mountains. L'Alchimie Végétale — World's Best Digestif 2025 at the World Drinks Awards. Independent craft liqueur house in Haute-Loire, France."
+  title="La Brasserie des Plantes — Craft liqueurs, Haute-Loire"
+  description="Organic craft liqueurs from the Auvergne mountains. L'Alchimie Végétale: World's Best Digestif 2025 (World Drinks Awards). Made in Haute-Loire, France."
   schema={schema}
   hasHero={true}
 >
@@ -125,7 +125,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
     mediaSrc="/images/stories/world-drinks-awards-2025.webp"
     bgVideoSrc="/videos/lbdp-intro.mp4"
     bgVideoPoster="/videos/lbdp-intro-poster.jpg"
-    titleImageSrc="/images/brand/logo-clair-transparent.png"
+    titleImageSrc="/images/brand/logo-clair-transparent.webp"
     titleImageAlt="La Brasserie des Plantes — Craft, Terroir, Passion — Haute-Loire, France"
     date="Haute-Loire · since 2021"
     scrollToExpand="Scroll to discover"

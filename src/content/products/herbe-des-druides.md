@@ -3,7 +3,7 @@ name: "L'Herbe des Druides"
 range: brasserie
 priceMin: 16
 priceMax: 75
-image: /images/products/herbe-des-druides.png
+image: /images/products/herbe-des-druides.webp
 image2: /images/products/herbe-des-druides-2.webp
 alcohol: 28
 composition:

@@ -5,7 +5,7 @@ date: 2025-03-02
 updated: 2026-04-18
 author: "Guillaume"
 category: Actualité
-cover: /images/products/cerf-gent.png
+cover: /images/products/cerf-gent.webp
 readingTime: "5 min"
 ---
 

@@ -60,7 +60,7 @@ export default defineConfig({
       // "URL noindex dans le sitemap" qui dégrade la confiance du crawler.
       // /admin/* = interface CMS (Sveltia), jamais indexable non plus.
       filter: (page) =>
-        !/\/(panier|commande|admin)(\/|$)/.test(new URL(page).pathname),
+        !/\/(panier|commande|admin|pro\/catalogue)(\/|$)/.test(new URL(page).pathname),
       // Différencie la priorité : home + boutique = 1.0, fiches produit 0.9,
       // Lumière Obscure + cocktails + ateliers 0.8, contenu secondaire 0.7,
       // pages légales 0.3. Changefreq adapté selon la fréquence d'update.

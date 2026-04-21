@@ -3,7 +3,7 @@ name: "Le Zéleste"
 range: aperitif
 priceMin: 16
 priceMax: 27
-image: /images/products/zeleste.png
+image: /images/products/zeleste.webp
 alcohol: 17.5
 composition:
   - Citron jaune (zestes + jus)

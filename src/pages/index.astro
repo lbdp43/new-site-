@@ -18,7 +18,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: site.name,
   url: site.url,
-  logo: new URL('/logo.png', site.url).toString(),
+  logo: new URL('/logo.webp', site.url).toString(),
   email: site.email,
   telephone: site.phone,
   foundingDate: site.founded,
@@ -39,9 +39,9 @@ const localBusinessSchema = {
   description: site.defaultDescription,
   image: [
     new URL('/og-default.jpg', site.url).toString(),
-    new URL('/images/brand/logo-complet-fond-blanc.png', site.url).toString(),
+    new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
   ],
-  logo: new URL('/images/brand/logo-complet-fond-blanc.png', site.url).toString(),
+  logo: new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
   url: site.url,
   telephone: site.phone,
   email: site.email,
@@ -125,7 +125,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
 ---
 <Layout
   title="La Brasserie des Plantes | Liqueurs artisanales bio — Haute-Loire"
-  description="Liqueurs et infusions artisanales de plantes d'Auvergne. L'Alchimie Végétale, Meilleur Digestif du Monde 2025 aux World Drinks Awards. Producteur indépendant en Haute-Loire."
+  description="Liqueurs artisanales de plantes d'Auvergne. L'Alchimie Végétale, Meilleur Digestif du Monde 2025 (World Drinks Awards). Haute-Loire, bio."
   schema={schema}
   hasHero={true}
 >
@@ -139,7 +139,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
     mediaSrc="/images/stories/world-drinks-awards-2025.webp"
     bgVideoSrc="/videos/lbdp-intro.mp4"
     bgVideoPoster="/videos/lbdp-intro-poster.jpg"
-    titleImageSrc="/images/brand/logo-clair-transparent.png"
+    titleImageSrc="/images/brand/logo-clair-transparent.webp"
     titleImageAlt="La Brasserie des Plantes — Artisanat, Terroir, Passion — Haute-Loire"
     date="Haute-Loire · depuis 2021"
     scrollToExpand="Faites défiler pour découvrir"

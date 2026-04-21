@@ -4,7 +4,7 @@ description: "Notre gamme CBD associe le chanvre à trois plantes signatures. To
 date: 2024-05-22
 author: "Étienne"
 category: Plantes
-cover: /images/products/menthe-cbd-ortie.png
+cover: /images/products/menthe-cbd-ortie.webp
 readingTime: "8 min"
 ---
 

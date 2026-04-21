@@ -3,7 +3,7 @@ name: "La Lime des Prés"
 range: brasserie
 priceMin: 16
 priceMax: 33
-image: /images/products/lime-des-pres.png
+image: /images/products/lime-des-pres.webp
 image2: /images/products/lime-des-pres-2.webp
 alcohol: 18
 composition:

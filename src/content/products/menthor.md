@@ -3,7 +3,7 @@ name: "Le Menthor"
 range: aperitif
 priceMin: 16
 priceMax: 27
-image: /images/products/menthor.png
+image: /images/products/menthor.webp
 alcohol: 17.5
 composition:
   - Menthe poivrée (fraîcheur dominante)

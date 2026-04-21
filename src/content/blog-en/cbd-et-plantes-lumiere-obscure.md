@@ -4,7 +4,7 @@ description: "Our CBD range pairs hemp with three signature plants. A tour of th
 date: 2024-05-22
 author: "Étienne"
 category: Plants
-cover: /images/products/menthe-cbd-ortie.png
+cover: /images/products/menthe-cbd-ortie.webp
 readingTime: "8 min"
 ---
 

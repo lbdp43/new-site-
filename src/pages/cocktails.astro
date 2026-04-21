@@ -48,8 +48,8 @@ const toneColors: Record<string, string> = {
 };
 ---
 <Layout
-  title="Cocktails aux liqueurs de plantes | Recettes maison — La Brasserie des Plantes"
-  description="5 recettes de cocktails créées par nos soins : Spritz Efflorescent, Verveine Printanière, Philtre d'Éros, Black Mule, Bonbon au Citron. Mixologie aux plantes d'Auvergne."
+  title="Cocktails aux liqueurs de plantes — La Brasserie des Plantes"
+  description="Cinq recettes de cocktails maison : Spritz Efflorescent, Verveine Printanière, Philtre d'Éros, Black Mule, Bonbon au Citron. Mixologie aux plantes."
   schema={schema}
 >
   <PageHeader
@@ -79,7 +79,7 @@ const toneColors: Record<string, string> = {
                 loading="lazy"
               />
               <img
-                src={`/images/products/${c.liqueurProductSlug}${c.liqueurProductSlug === 'gorgeon-des-machures' ? '.webp' : '.png'}`}
+                src={`/images/products/${c.liqueurProductSlug}.webp`}
                 alt={`Liqueur ${c.liqueurName} — utilisée dans ${c.name}`}
                 class="absolute inset-0 w-full h-full object-contain p-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 ease-out bg-white"
                 loading="lazy"

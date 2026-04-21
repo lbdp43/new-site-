@@ -3,7 +3,7 @@ name: "Le Cerf'Gent"
 range: aperitif
 priceMin: 16
 priceMax: 27
-image: /images/products/cerf-gent.png
+image: /images/products/cerf-gent.webp
 alcohol: 15
 composition:
   - Gentiane

@@ -3,7 +3,7 @@ name: "La Flèche Ardente"
 range: brasserie
 priceMin: 16
 priceMax: 34
-image: /images/products/fleche-ardente.png
+image: /images/products/fleche-ardente.webp
 image2: /images/products/fleche-ardente-2.webp
 alcohol: 27
 composition:

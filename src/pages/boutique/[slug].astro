@@ -149,7 +149,7 @@ const parseAward = (raw: string): ParsedAward => {
 const parsedAwards = (product.awards || []).map(parseAward);
 ---
 <Layout
-  title={`${product.name} ${product.alcohol ? product.alcohol + '°' : ''} | ${rangeInfo.name} — La Brasserie des Plantes`}
+  title={`${product.name}${product.alcohol ? ' ' + product.alcohol + '°' : ''} | Brasserie des Plantes`}
   description={metaDescription}
   ogImage={product.image}
   ogType="product"

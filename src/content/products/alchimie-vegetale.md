@@ -3,7 +3,7 @@ name: "L'Alchimie Végétale"
 range: brasserie
 priceMin: 22
 priceMax: 115
-image: /images/products/alchimie-vegetale.png
+image: /images/products/alchimie-vegetale.webp
 image2: /images/products/alchimie-vegetale-2.webp
 alcohol: 50
 composition:

@@ -3,7 +3,7 @@ name: "CBD Absinthe Citron"
 range: lumiere-obscure
 priceMin: 39
 priceMax: 39
-image: /images/products/absinthe-cbd-citron.png
+image: /images/products/absinthe-cbd-citron.webp
 alcohol: 37
 composition:
   - Chanvre (CBD, dominant, sans THC)

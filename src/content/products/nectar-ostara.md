@@ -3,7 +3,7 @@ name: "Le Nectar d'Ostara"
 range: brasserie
 priceMin: 16
 priceMax: 34
-image: /images/products/nectar-ostara.png
+image: /images/products/nectar-ostara.webp
 image2: /images/products/nectar-ostara-2.webp
 alcohol: 24
 composition:

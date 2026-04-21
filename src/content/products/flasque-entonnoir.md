@@ -3,7 +3,7 @@ name: "Flasque 20cl + Entonnoir"
 range: accessoire
 priceMin: 20
 priceMax: 25
-image: /images/products/flasque-entonnoir.png
+image: /images/products/flasque-entonnoir.webp
 alcohol: 0
 composition: []
 usage: Accessoire

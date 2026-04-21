@@ -3,7 +3,7 @@ name: "La Pralicoquine"
 range: aperitif
 priceMin: 16
 priceMax: 27
-image: /images/products/pralicoquine.png
+image: /images/products/pralicoquine.webp
 alcohol: 15
 composition:
   - Pralines

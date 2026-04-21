@@ -25,7 +25,7 @@ const collectionSchema = {
 const totalMentions = Object.values(pressByYear).reduce((s, arr) => s + arr.length, 0);
 ---
 <Layout
-  title={`Revue de presse | ${totalMentions} articles qui parlent de nous — ${site.name}`}
+  title={`Revue de presse — ${totalMentions} articles — ${site.name}`}
   description={`${totalMentions} articles et reportages sur La Brasserie des Plantes : presse nationale, régionale, spécialisée et institutionnelle, de 2021 à aujourd'hui.`}
   schema={[breadcrumb, collectionSchema]}
 >
