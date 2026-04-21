@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
-import { products, ranges, type ProductRange } from '../data/products';
 import { Awards } from '@/components/ui/award';
 import { GlowCard } from '../components/ui/spotlight-card';
 
@@ -15,39 +14,48 @@ const breadcrumb = {
   ],
 };
 
-// FAQ pros — répond aux questions récurrentes des cavistes, CHR, épiceries
+// FAQ pros — reformulée selon les règles 2025 (zone desservie, min 12 bouteilles
+// ou 1 BIB, pas de formation cocktail, échantillons offerts à la commande)
 const faq = [
   {
     q: "Quel délai de réponse pour une demande de devis ?",
-    a: "Nous revenons vers vous sous 48 heures ouvrées avec un devis personnalisé, les fiches produits imprimables et, sur demande, des échantillons expédiés à notre charge pour dégustation.",
+    a: "Nous revenons vers vous sous 48 heures ouvrées avec un devis personnalisé, les fiches produits imprimables et, sur demande, des échantillons à dégustation.",
+  },
+  {
+    q: "Quelle est votre zone de livraison directe ?",
+    a: "Nous livrons en direct tout l'arc Auvergne-Rhône-Alpes : Haute-Loire, Ardèche, Loire (Saint-Étienne, Roanne), Rhône (Lyon), Drôme (Valence), Puy-de-Dôme (Clermont-Ferrand) et Allier (Vichy, Montluçon). Hors zone : contactez-nous, nous vous établissons un devis transport. Le transport est à votre charge en-dessous d'un certain seuil de commande (détails sur devis).",
+  },
+  {
+    q: "Livrez-vous à l'étranger ?",
+    a: "Oui, nous livrons hors de France sur demande — Belgique, Suisse, Luxembourg et autres destinations possibles. Prenez contact avec nous pour étudier ensemble les conditions de transport et les frais associés.",
   },
   {
     q: "Y a-t-il un minimum de commande ?",
-    a: "Pour une première commande : 6 bouteilles minimum, tous formats confondus. Pour les Bag-in-Box 5 L : pas de minimum. Au-delà de 12 unités, nous proposons des remises volumiques.",
+    a: "Sur notre zone desservie en direct : 12 bouteilles minimum (tous formats mélangés) ou 1 Bag-in-Box 5 L. Au-delà d'un certain volume, des remises sont possibles — à voir directement avec votre commercial.",
   },
   {
-    q: "Proposez-vous des échantillons et des dégustations sur place ?",
-    a: "Oui. Nous fournissons gratuitement des échantillons 5 cl pour une première rencontre, et nous nous déplaçons pour des dégustations chez nos partenaires CHR (visite tous les 15 jours) et cavistes (tous les 1,5 à 2 mois).",
+    q: "Proposez-vous des échantillons et des dégustations ?",
+    a: "Dégustations gratuites sur place chez nos partenaires dans la zone desservie (nous nous déplaçons). Échantillons : nous en fournissons à la commande, pas systématiquement en envoi gratuit hors partenariat établi.",
   },
   {
     q: "Quels formats sont disponibles pour les professionnels ?",
-    a: "Trois formats : la bouteille 70 cl (carte, vente au détail), le Bag-in-Box 5 L (comptoir, mise en verre, prépas cocktails) et des coffrets personnalisables dès 10 unités (cadeaux d'affaires, CE).",
+    a: "Toutes nos références existent en Empilable 20 cl, 50 cl, 70 cl (ou 75 cl selon la référence), Magnum 1,5 L, Jéroboam 3 L, Bag-in-Box 5 L, tubes à essai 2 cl, et coffrets (Initiation 6 × 4 cl, Bouteille + Verres gravés).",
   },
   {
-    q: "La tireuse pression est-elle fournie ?",
-    a: "Oui. Notre système de tirage pression primé (Artinov 2023) est prêté contre caution aux partenaires qui prennent des BIB 5 L régulièrement. Installation et formation assurées gratuitement.",
+    q: "La tireuse pression est-elle fournie pour les BIB 5 L ?",
+    a: "Oui, notre système de tirage pression (primé Artinov 2023) est disponible pour les partenaires qui prennent des BIB régulièrement. Conditions et caution : à voir directement avec votre commercial.",
   },
   {
     q: "Que faire des produits non écoulés ?",
-    a: "Nous faisons des avoirs et des échanges systématiques sur les produits non écoulés, sans limite de durée. Pas de stock dormant, pas de pression commerciale — nos partenariats sont faits pour durer.",
+    a: "Nous faisons des avoirs et des échanges sur les produits non écoulés — pas de stock dormant chez nos partenaires. La règle est la même pour tous les types de clients (bars, cavistes, CE).",
   },
   {
-    q: "Livrez-vous en France entière ?",
-    a: "Oui, via transporteur assuré pour le B2B. Frais de port offerts à partir de 300 € HT en France métropolitaine. Livraison sous 3 à 5 jours ouvrés. Nous livrons également en Belgique, Suisse et Luxembourg.",
+    q: "Quels supports de vente fournissez-vous ?",
+    a: "Flyers, présentoirs, fiches produit imprimées, plaques aluminium — nous adaptons les supports à votre point de vente. Les disponibilités se voient directement avec votre commercial.",
   },
   {
-    q: "Proposez-vous une formation pour les barmen ?",
-    a: "Oui. Nos ateliers carte cocktails (1h30, sur place ou chez vous) présentent nos liqueurs, leurs accords et nos cinq cocktails signatures. Inclus gratuitement pour les partenaires CHR dès la première commande.",
+    q: "Quel est le délai d'expédition ?",
+    a: "3 à 5 jours ouvrés après validation de la commande en France métropolitaine. Sur notre zone desservie en direct, le délai peut être plus court selon le planning de tournée du commercial.",
   },
 ];
 
@@ -61,56 +69,121 @@ const faqSchema = {
   })),
 };
 
-// Formats disponibles pour les pros — pas de prix affichés publiquement
-const formats = [
+// 4 cibles — catégories de pros que nous servons
+const targets = [
   {
-    name: "Bouteille 70 cl",
-    use: "Carte, boutique, coffret, cadeau",
-    note: "Format classique pour mise en vente au détail ou en carte au verre.",
+    kicker: 'CHR',
+    title: 'Bars & restaurants',
+    text: 'Mise en verre à la carte, apéritifs et digestifs signature, cocktails avec nos liqueurs primées. Formats 70 cl, BIB 5 L (service quotidien), Magnum pour événements.',
+    bullets: ['Dégustations gratuites sur place', 'PLV adaptée au bar', 'Visite commerciale régulière'],
+    icon: 'glass',
   },
   {
-    name: "Bag-in-Box 5 L",
-    use: "Comptoir, mise en verre, prépas cocktails",
-    note: "Zéro casse, zéro oxydation, conservation optimale. Idéal pour le service quotidien.",
+    kicker: 'Retail',
+    title: 'Cavistes & épiceries fines',
+    text: 'Gamme complète en 70 cl, cuvées d\'exception (Alchimie Prestige, Herbe des Druides fût de chêne), coffrets cadeaux. Rotation fluide grâce aux distinctions internationales.',
+    bullets: ['Fiches produit imprimées', 'Mise en avant récompenses', 'Animations dégustation'],
+    icon: 'bottle',
   },
   {
-    name: "Coffrets & éditions limitées",
-    use: "Cadeaux d'affaires, CE, boutiques",
-    note: "Coffrets d'initiation, cuvées numérotées, personnalisation possible dès 10 unités.",
+    kicker: 'Cadeaux',
+    title: 'Comités d\'entreprise & événements',
+    text: 'Cadeaux d\'affaires, fin d\'année, mariages, EVJF/EVG, séminaires. Du tube à essai 2 cl (cadeau invités) au coffret Bouteille + Verres gravés, personnalisable.',
+    bullets: ['Coffret Initiation 6 × 4 cl', 'Tubes 2 cl pour invités', 'Devis sur mesure'],
+    icon: 'gift',
+  },
+  {
+    kicker: 'B2B',
+    title: 'Distributeurs de boissons',
+    text: 'Nous travaillons avec des distributeurs sur la région Auvergne-Rhône-Alpes pour étendre notre couverture. Partenariats long terme, grilles tarifaires dédiées, co-animation du territoire.',
+    bullets: ['Partenariats exclusifs', 'Grille tarifaire distributeur', 'Co-animation terrain'],
+    icon: 'truck',
   },
 ];
 
-const proArguments = [
+// Zone desservie en direct — arc ARA groupé par département pour un rendu
+// lisible (colonne département + villes clés dessous, façon index éditorial).
+const deliveryZones = [
+  { dpt: 'Haute-Loire', code: '43', cities: ['Le Puy-en-Velay', 'Saint-Didier-en-Velay'] },
+  { dpt: 'Loire', code: '42', cities: ['Saint-Étienne', 'Roanne'] },
+  { dpt: 'Rhône', code: '69', cities: ['Lyon'] },
+  { dpt: 'Drôme', code: '26', cities: ['Valence'] },
+  { dpt: 'Ardèche', code: '07', cities: ['Annonay', 'Tournon'] },
+  { dpt: 'Puy-de-Dôme', code: '63', cities: ['Clermont-Ferrand'] },
+  { dpt: 'Allier', code: '03', cities: ['Vichy', 'Montluçon'] },
+];
+
+// Formats produits — issu directement du catalogue 2025
+const formats = [
   {
-    title: "Un produit primé",
-    text: "L'Alchimie Végétale : Meilleur Digestif du Monde 2025 aux World Drinks Awards. L'Herbe des Druides : Or à Lyon, Argent à Paris. Le Cerf'Gent : Médaille d'Or. Des distinctions qui vendent en carte.",
-    icon: "award",
+    name: 'Empilable 20 cl',
+    use: 'Coffret personnalisé, découverte',
+    note: 'Notre format signature, bouteilles qui s\'empilent naturellement pour composer un coffret.',
   },
   {
-    title: "Plusieurs formats",
-    text: "70 cl pour le détail et la carte, Bag-in-Box 5 L pour le comptoir et la mise en verre, coffrets pour les cadeaux d'affaires et les CE. Un format pour chaque usage.",
-    icon: "package",
+    name: '50 cl',
+    use: 'Offre cadeau intermédiaire',
+    note: 'Format raffiné, disponible sur la quasi-totalité de la gamme.',
   },
   {
-    title: "Un suivi dédié",
-    text: "Visite tous les 15 jours pour les bars/restaurants, tous les 1,5 à 2 mois pour les caves. Échantillons, dégustations sur place, avoirs et échanges systématiques sur produits non écoulés.",
-    icon: "handshake",
+    name: '70 cl / 75 cl',
+    use: 'Carte, vente au détail',
+    note: 'Le format historique. 75 cl sur les cuvées d\'exception (Alchimie Prestige, Herbe des Druides fût de chêne).',
   },
   {
-    title: "Un ancrage territorial",
-    text: "Artisanat Haute-Loire, 27+ plantes en agriculture biologique, circuits courts avec nos producteurs partenaires. Une histoire à raconter à vos clients — qui la demanderont.",
-    icon: "sprout",
+    name: 'Magnum 1,5 L',
+    use: 'Événements, tables généreuses',
+    note: 'Alchimie Végétale, Herbe des Druides, Gorgeon des Machurés — pièces de présentation.',
   },
+  {
+    name: 'Jéroboam 3 L',
+    use: 'Exceptionnel, sur commande',
+    note: 'Format grand apparat, pour mariages, inaugurations, cuvées anniversaires.',
+  },
+  {
+    name: 'Bag-in-Box 5 L',
+    use: 'Comptoir CHR, mise en verre',
+    note: 'Zéro casse, zéro oxydation, tirage pression compatible. La solution du service quotidien.',
+  },
+  {
+    name: 'Tubes à essai 2 cl',
+    use: 'Cadeaux invités, événements',
+    note: 'Mariages, EVJF/EVG, séminaires d\'entreprise — toute la gamme est disponible en tube 2 cl.',
+  },
+  {
+    name: 'Coffret Initiation',
+    use: '6 × 4 cl, découverte complète',
+    note: 'Six flacons de 4 cl dans un écrin élégant, parfait pour initier ou offrir.',
+  },
+  {
+    name: 'Coffret Bouteille + Verres',
+    use: 'Cadeau prestige',
+    note: 'Une 50 cl au choix + 2 verres gravés Brasserie des Plantes.',
+  },
+];
+
+// Équipe commerciale — 3 commerciaux qui se partagent la zone
+const salesTeam = [
+  { name: 'Loïc Adier', role: 'Commercial Cavistes & CHR' },
+  { name: 'Alban Lilio', role: 'Commercial Cavistes & CHR' },
+  { name: 'Guillaume Poré', role: 'Commercial Cavistes & CHR' },
+];
+
+// Formats événementiels — pour EVJF/EVG/corporate
+const eventFormats = [
+  { title: 'Mariages', note: 'Tubes 2 cl personnalisés aux couleurs des mariés, cadeaux d\'invités, coffrets pour parents & témoins.' },
+  { title: 'EVJF / EVG', note: 'Dégustation d\'équipe, coffret Initiation pour une soirée autour de six liqueurs emblématiques.' },
+  { title: 'Séminaires & comités', note: 'Cadeaux d\'entreprise personnalisés, Coffret Initiation ou Coffret Bouteille + Verres — fin d\'année, incentive, recrutement.' },
+  { title: 'Inaugurations & remises', note: 'Magnum 1,5 L ou Jéroboam 3 L en pièce de présentation, gravure personnalisée possible.' },
 ];
 ---
 <Layout
-  title="Professionnels | Cavistes, restaurateurs, bars — La Brasserie des Plantes"
-  description="Distribution directe pour CHR (cafés, hôtels, restaurants), cavistes et épiceries fines. Plusieurs formats (70 cl, Bag-in-Box 5 L, coffrets), produits primés, suivi personnalisé. Haute-Loire."
+  title="Professionnels | Cavistes, bars, restaurants, CE — La Brasserie des Plantes"
+  description="Distribution directe en Auvergne-Rhône-Alpes pour cavistes, bars, restaurants, comités d'entreprise et distributeurs. Tous formats disponibles (20 cl à Jéroboam, BIB 5 L, coffrets, tubes à essai). Produits primés à l'international."
   schema={[breadcrumb, faqSchema]}
 >
-  <!-- HERO VIDÉO -->
+  <!-- HERO VIDÉO plein écran — entrée immersive -->
   <section class="relative min-h-[100dvh] w-full overflow-hidden bg-forest-950">
-    <!-- Vidéo en background -->
     <video
       autoplay
       muted
@@ -121,11 +194,9 @@ const proArguments = [
     >
       <source src="/videos/lbdp-pro.mp4" type="video/mp4" />
     </video>
-    <!-- Overlay sombre pour la lisibilité -->
     <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/40 to-forest-950/80"></div>
 
-    <!-- Contenu centré -->
-    <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-cream-100">
+    <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-cream-100 py-20">
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/20 border border-gold-500/50 text-gold-400 text-xs font-medium tracking-[0.2em] uppercase mb-8 backdrop-blur-sm">
         Espace Professionnels
       </div>
@@ -134,66 +205,75 @@ const proArguments = [
         <span class="text-gold-400">pour les pros</span>
       </h1>
       <p class="text-lg md:text-xl text-cream-100/90 max-w-2xl leading-relaxed mb-10">
-        Cavistes, restaurateurs, bars, épiceries fines —
-        distribution directe en Haute-Loire, plusieurs formats (70 cl, BIB 5 L, coffrets),
-        produits primés à l'international.
+        Cavistes, bars, restaurants, comités d'entreprise, distributeurs —
+        distribution directe en Auvergne-Rhône-Alpes, liqueurs artisanales
+        primées à l'international, fabriquées à la main en Haute-Loire.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="#contact" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-cream-50 text-forest-900 hover:bg-cream-100 font-medium transition-all shadow-xl">
-          Devenir revendeur
+          Demander un devis
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
         </a>
-        <a href="#formats" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-cream-100/50 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors backdrop-blur-sm">
-          Nos formats
+        <a href="/catalogues/catalogue-pro-2025.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-cream-100/50 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors backdrop-blur-sm">
+          Télécharger le catalogue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </a>
       </div>
-
     </div>
   </section>
 
-  <!-- ARGUMENTS PRO -->
+  <!-- POUR QUI — 4 cibles principales -->
   <section class="py-24 bg-cream-50">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-16 max-w-3xl mx-auto">
+      <div class="text-center mb-14 max-w-3xl mx-auto">
         <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
-          Pourquoi nous
+          Pour qui
         </div>
         <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight mb-6">
-          Quatre raisons de<br />travailler ensemble
+          Quatre manières de<br />travailler avec nous
         </h2>
         <p class="text-lg text-ink-700 leading-relaxed">
-          Nous sommes trois. Nous embouteillons à la main. Nous connaissons
-          chacun de nos clients. Voilà ce que nous offrons — et ce qui fait
-          la différence en linéaire.
+          Nous distribuons en direct sur la région Auvergne-Rhône-Alpes et
+          par partenariat distributeur au-delà. Adaptation des formats et du
+          suivi selon votre métier.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 stagger" style="--stagger-delay: 120ms;">
-        {proArguments.map((arg) => (
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {targets.map((t) => (
           <GlowCard
             client:load
             glowColor="gold"
             customSize
             padding="none"
-            className="bg-white !aspect-auto w-full"
+            className="bg-white !aspect-auto w-full h-full"
           >
-            <div class="p-8">
-              <div class="w-14 h-14 rounded-full bg-forest-700 text-cream-100 flex items-center justify-center mb-5">
-                {arg.icon === 'award' && (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            <div class="p-6 flex flex-col h-full">
+              <div class="w-11 h-11 rounded-full bg-forest-700 text-cream-100 flex items-center justify-center mb-4 flex-none">
+                {t.icon === 'glass' && (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 9a4 4 0 0 1-3 4 4 4 0 0 1-3-4L8 2z"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
                 )}
-                {arg.icon === 'package' && (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                {t.icon === 'bottle' && (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4v4l2 2v12a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V8l2-2V2z"/></svg>
                 )}
-                {arg.icon === 'handshake' && (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17a4 4 0 0 1-4-4V5a2 2 0 0 0-4 0v12a8 8 0 0 0 16 0V5a2 2 0 0 0-4 0v8a4 4 0 0 1-4 4"/></svg>
+                {t.icon === 'gift' && (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
                 )}
-                {arg.icon === 'sprout' && (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>
+                {t.icon === 'truck' && (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
                 )}
               </div>
-              <h3 class="font-display text-2xl text-forest-900 mb-3">{arg.title}</h3>
-              <p class="text-ink-700 leading-relaxed">{arg.text}</p>
+              <div class="text-gold-600 font-display italic text-xs mb-2">— {t.kicker}</div>
+              <h3 class="font-display text-xl text-forest-900 leading-tight mb-3">{t.title}</h3>
+              <p class="text-ink-700 text-sm leading-relaxed mb-4">{t.text}</p>
+              <ul class="text-xs text-ink-500 space-y-1.5 mt-auto pt-3 border-t border-forest-100/60">
+                {t.bullets.map((b) => (
+                  <li class="flex items-start gap-2">
+                    <svg class="w-3 h-3 text-gold-600 flex-none mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </GlowCard>
         ))}
@@ -201,151 +281,237 @@ const proArguments = [
     </div>
   </section>
 
-  <!-- GALERIE PRODUCTION -->
-  <section class="py-20 bg-forest-900 text-cream-100">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-12 max-w-3xl mx-auto">
-        <div class="text-xs uppercase tracking-[0.25em] text-gold-400 font-medium mb-3">
-          Notre atelier
+  <!-- Bandeau vidéo atelier — placé APRÈS "Quatre manières" pour montrer
+       l'atelier avant de parler des conditions de livraison. -->
+  <section class="bg-forest-900">
+    <div class="aspect-[21/9] md:aspect-[21/8] w-full max-h-[75vh] overflow-hidden">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/videos/atelier-brasserie-poster.jpg"
+        aria-label="Dans l'atelier de la Brasserie des Plantes — Saint-Didier-en-Velay"
+        class="w-full h-full object-cover"
+      >
+        <source src="/videos/atelier-brasserie.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </section>
+
+  <!-- ZONE DESSERVIE — éditorial : entête centré, grille 7 départements,
+       2 cartes hors zone + export en dessous. Pas de schéma décoratif. -->
+  <section id="zone" class="py-24 bg-cream-50 border-y border-forest-100/60">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14 max-w-3xl mx-auto">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+          Livraison
         </div>
-        <h2 class="font-display text-4xl md:text-5xl leading-tight mb-4">
-          Tout est fait à la main,<br />dans nos chais de Saint-Didier
+        <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight mb-6">
+          Notre zone directe :<br /><em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">Auvergne-Rhône-Alpes</em>
         </h2>
+        <p class="text-lg text-ink-700 leading-relaxed">
+          Notre équipe commerciale livre en direct sur sept départements de
+          l'arc Auvergne-Rhône-Alpes. Visite régulière, dégustations gratuites
+          sur place, tournées calées autour de Saint-Didier-en-Velay.
+        </p>
       </div>
-      <div class="aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl bg-forest-950">
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="/videos/atelier-brasserie-poster.jpg"
-          aria-label="Dans l'atelier de la Brasserie des Plantes — Saint-Didier-en-Velay"
-          class="w-full h-full object-cover"
-        >
-          <source src="/videos/atelier-brasserie.mp4" type="video/mp4" />
-        </video>
+
+      <!-- Statistiques rapides -->
+      <div class="grid grid-cols-3 gap-4 max-w-3xl mx-auto mb-14 text-center">
+        <div class="py-5 px-3 rounded-2xl bg-white border border-forest-100/60">
+          <div class="font-display text-3xl md:text-4xl text-forest-900 leading-none mb-1">7</div>
+          <div class="text-[10px] md:text-xs uppercase tracking-wider text-ink-500">Départements</div>
+        </div>
+        <div class="py-5 px-3 rounded-2xl bg-white border border-forest-100/60">
+          <div class="font-display text-3xl md:text-4xl text-forest-900 leading-none mb-1">10+</div>
+          <div class="text-[10px] md:text-xs uppercase tracking-wider text-ink-500">Villes desservies</div>
+        </div>
+        <div class="py-5 px-3 rounded-2xl bg-white border border-forest-100/60">
+          <div class="font-display text-3xl md:text-4xl text-forest-900 leading-none mb-1">3-5 j.</div>
+          <div class="text-[10px] md:text-xs uppercase tracking-wider text-ink-500">Délai livraison</div>
+        </div>
+      </div>
+
+      <!-- Grille des 7 départements -->
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4 mb-14">
+        {deliveryZones.map((z) => (
+          <div class="p-4 rounded-xl bg-white border border-forest-100/60 hover:border-gold-500/50 transition-colors">
+            <div class="flex items-baseline gap-1.5 mb-2">
+              <span class="text-[10px] font-mono text-gold-600 tracking-wider">{z.code}</span>
+            </div>
+            <div class="font-display text-sm text-forest-900 leading-tight mb-2">{z.dpt}</div>
+            <ul class="space-y-0.5">
+              {z.cities.map((c) => (
+                <li class="text-[11px] text-ink-600 leading-tight">{c}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <!-- 2 cartes hors zone : France & Export -->
+      <div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+        <div class="p-6 rounded-2xl bg-white border border-forest-100/60">
+          <div class="flex items-start gap-4">
+            <div class="flex-none w-10 h-10 rounded-full bg-forest-50 text-forest-700 flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            </div>
+            <div>
+              <div class="font-display text-base text-forest-900 mb-1.5">Hors zone ARA — reste de la France</div>
+              <p class="text-sm text-ink-700 leading-relaxed">
+                Livraison France métropolitaine via transporteur assuré. Nous
+                établissons un devis transport adapté à votre volume. Transport
+                à votre charge en-dessous de 500-600 € HT de commande.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-forest-100/60">
+          <div class="flex items-start gap-4">
+            <div class="flex-none w-10 h-10 rounded-full bg-forest-50 text-forest-700 flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <div class="font-display text-base text-forest-900 mb-1.5">Export — Europe & au-delà</div>
+              <p class="text-sm text-ink-700 leading-relaxed">
+                Belgique, Suisse, Luxembourg et autres destinations possibles
+                sur demande. Prenez contact pour étudier ensemble transport,
+                douane et conditions commerciales.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FORMATS PRO -->
+  <!-- FORMATS PRO — catalogue complet -->
   <section id="formats" class="py-24 bg-cream-50">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14 max-w-3xl mx-auto">
         <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
           Nos formats pros
         </div>
-        <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight mb-4">
+        <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight mb-6">
           Un format pour chaque usage
         </h2>
-        <p class="text-lg text-ink-700 max-w-2xl mx-auto leading-relaxed">
-          Du flacon 70 cl au Bag-in-Box 5 L, en passant par les coffrets
-          personnalisables — nous adaptons nos conditionnements à votre métier.
+        <p class="text-lg text-ink-700 leading-relaxed">
+          Du tube 2 cl pour vos invités au Jéroboam 3 L pour vos
+          pièces de présentation — toutes nos références sont disponibles
+          dans l'ensemble de ces formats.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {formats.map((f) => (
-          <article class="p-8 rounded-2xl bg-cream-100 border border-forest-100/60 hover:shadow-lg hover:border-gold-500/40 transition-all">
-            <div class="w-12 h-12 rounded-full bg-forest-800 text-gold-400 flex items-center justify-center mb-5 font-display text-lg">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <article class="p-6 rounded-2xl bg-white border border-forest-100/60 hover:shadow-lg hover:border-gold-500/40 transition-all">
+            <div class="w-11 h-11 rounded-full bg-forest-800 text-gold-400 flex items-center justify-center mb-4">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
             </div>
-            <h3 class="font-display text-2xl text-forest-900 mb-2">{f.name}</h3>
-            <div class="text-xs uppercase tracking-wider text-gold-600 font-medium mb-3">{f.use}</div>
+            <h3 class="font-display text-lg text-forest-900 leading-tight mb-1">{f.name}</h3>
+            <div class="text-[11px] uppercase tracking-wider text-gold-600 font-medium mb-2">{f.use}</div>
             <p class="text-ink-700 text-sm leading-relaxed">{f.note}</p>
           </article>
         ))}
       </div>
 
-      <div class="mt-10 text-center">
-        <p class="text-ink-700 leading-relaxed max-w-2xl mx-auto mb-6">
-          Grille tarifaire, conditions de livraison et remises volumiques
-          communiquées sur demande — réservées à nos partenaires professionnels.
+      <div class="mt-12 p-6 md:p-8 rounded-2xl bg-white border border-forest-100/60 text-center">
+        <p class="text-ink-700 leading-relaxed max-w-2xl mx-auto mb-5">
+          <strong class="text-forest-900">Minimum de commande sur notre zone directe :</strong>
+          12 bouteilles (tous formats mélangés) ou 1 Bag-in-Box 5 L. Grille
+          tarifaire et remises volumiques communiquées sur demande par votre
+          commercial.
         </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/catalogues/catalogue-pro-2025.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 text-sm font-medium transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Catalogue général (PDF)
+          </a>
+          <a href="/catalogues/coffrets-entreprise-2025.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 text-sm font-medium transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Coffrets entreprise (PDF)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉVÉNEMENTS & ATELIERS — corporate, EVJF/EVG, mariages -->
+  <section id="evenements" class="py-24 bg-gradient-to-b from-cream-100 to-cream-50 border-y border-forest-100/60">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14 max-w-3xl mx-auto">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+          Événements
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight mb-6">
+          Mariages, EVJF/EVG,<br /><em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">séminaires d'entreprise</em>
+        </h2>
+        <p class="text-lg text-ink-700 leading-relaxed">
+          Des formats pensés pour vos moments marquants — du petit tube 2 cl
+          offert à vos invités au Jéroboam 3 L qui fait l'effet au milieu de
+          la table.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        {eventFormats.map((e) => (
+          <div class="p-7 rounded-2xl bg-white border border-forest-100/60 hover:border-gold-500/50 hover:shadow-lg transition-all">
+            <h3 class="font-display text-xl text-forest-900 mb-3">{e.title}</h3>
+            <p class="text-sm text-ink-700 leading-relaxed">{e.note}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10 text-center">
         <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
-          Demander un devis
+          Parler de votre projet
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- CAS D'USAGE -->
-  <section class="py-24 bg-gradient-to-b from-cream-100 to-cream-50 border-y border-forest-100/60">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-12">
+  <!-- ÉQUIPE COMMERCIALE -->
+  <section class="py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-14 max-w-3xl mx-auto">
         <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
-          Ils nous font confiance
+          Votre interlocuteur
         </div>
-        <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight">
-          Pour qui travaillons-nous ?
+        <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight mb-6">
+          Trois commerciaux<br />pour la zone Auvergne-Rhône-Alpes
         </h2>
+        <p class="text-lg text-ink-700 leading-relaxed">
+          Ils passent vous voir régulièrement (environ 1 mois pour les bars
+          et restaurants, 1,5 à 2 mois pour les cavistes) et coordonnent
+          dégustations, prises de commande et suivi SAV. Hors zone, le
+          lien se maintient par email et téléphone.
+        </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <GlowCard client:load glowColor="gold" customSize padding="none" className="bg-white !aspect-auto w-full">
-          <div class="p-8">
-            <div class="text-gold-600 font-display italic text-sm mb-3">— CHR</div>
-            <h3 class="font-display text-2xl text-forest-900 mb-3">Bars & restaurants</h3>
-            <p class="text-ink-700 text-sm leading-relaxed mb-4">
-              Mise en verre à la carte, cocktails signature, apéritifs et
-              digestifs. Suivi rapproché (visite tous les 15 jours), conseil
-              accords et mises en scène au bar.
-            </p>
-            <ul class="text-xs text-ink-500 space-y-1.5">
-              {["Échantillons gratuits", "Formation carte cocktails", "PLV sur demande"].map((i) => (
-                <li class="flex items-center gap-2">
-                  <svg class="w-3.5 h-3.5 text-gold-600 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-                  <span>{i}</span>
-                </li>
-              ))}
-            </ul>
+      <div class="grid sm:grid-cols-3 gap-5">
+        {salesTeam.map((m) => (
+          <div class="p-6 rounded-2xl bg-cream-50 border border-forest-100/60 text-center">
+            <div class="w-16 h-16 rounded-full bg-forest-700 text-cream-100 flex items-center justify-center mx-auto mb-4 font-display text-xl">
+              {m.name.split(' ').map((w) => w[0]).join('')}
+            </div>
+            <div class="font-display text-lg text-forest-900 mb-1">{m.name}</div>
+            <div class="text-xs uppercase tracking-wider text-gold-600 font-medium">{m.role}</div>
           </div>
-        </GlowCard>
+        ))}
+      </div>
 
-        <GlowCard client:load glowColor="gold" customSize padding="none" className="bg-white !aspect-auto w-full">
-          <div class="p-8">
-            <div class="text-gold-600 font-display italic text-sm mb-3">— Retail</div>
-            <h3 class="font-display text-2xl text-forest-900 mb-3">Cavistes & épiceries fines</h3>
-            <p class="text-ink-700 text-sm leading-relaxed mb-4">
-              Gamme complète en 70 cl et éditions limitées. Suivi tous les 1,5
-              à 2 mois, récupération des stocks dormants, avoirs systématiques.
-            </p>
-            <ul class="text-xs text-ink-500 space-y-1.5">
-              {["Fiches produit imprimées", "Animations dégustation", "Mise en avant récompenses"].map((i) => (
-                <li class="flex items-center gap-2">
-                  <svg class="w-3.5 h-3.5 text-gold-600 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-                  <span>{i}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </GlowCard>
-
-        <GlowCard client:load glowColor="gold" customSize padding="none" className="bg-white !aspect-auto w-full">
-          <div class="p-8">
-            <div class="text-gold-600 font-display italic text-sm mb-3">— Gift</div>
-            <h3 class="font-display text-2xl text-forest-900 mb-3">Comités d'entreprise & coffrets</h3>
-            <p class="text-ink-700 text-sm leading-relaxed mb-4">
-              Coffrets personnalisables pour cadeaux d'affaires, fêtes de fin
-              d'année, incentives. Dès 10 unités, devis sur mesure.
-            </p>
-            <ul class="text-xs text-ink-500 space-y-1.5">
-              {["Coffret d'initiation", "Personnalisation possible", "Livraison groupée"].map((i) => (
-                <li class="flex items-center gap-2">
-                  <svg class="w-3.5 h-3.5 text-gold-600 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-                  <span>{i}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </GlowCard>
+      <div class="mt-10 text-center text-sm text-ink-500 italic max-w-2xl mx-auto">
+        Vous n'êtes pas encore partenaire ? Passez par le formulaire de contact
+        ci-dessous, nous vous orientons vers le commercial qui couvre votre
+        secteur.
       </div>
     </div>
   </section>
 
-  <!-- DISTINCTIONS — badges médailles interactifs -->
+  <!-- DISTINCTIONS — médailles internationales -->
   <section class="py-20 bg-gradient-to-b from-cream-50 via-gold-500/5 to-cream-50 border-y border-gold-500/20 overflow-hidden">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-14">
@@ -356,8 +522,8 @@ const proArguments = [
           Des arguments de vente solides
         </h2>
         <p class="text-ink-700 max-w-2xl mx-auto leading-relaxed">
-          Quatre distinctions internationales en trois ans — des supports de vente
-          prêts à mettre en carte.
+          Plusieurs distinctions internationales — des supports de vente
+          prêts à mettre en carte ou en rayon.
         </p>
       </div>
       <div class="flex flex-wrap justify-center gap-2 md:gap-3 max-w-2xl mx-auto">
@@ -401,7 +567,7 @@ const proArguments = [
     </div>
   </section>
 
-  <!-- FAQ PRO -->
+  <!-- FAQ PRO — 10 questions réelles -->
   <section id="faq-pro" class="py-24 bg-cream-50">
     <div class="max-w-3xl mx-auto px-6">
       <div class="text-center mb-12">
@@ -415,7 +581,7 @@ const proArguments = [
       <div class="space-y-3">
         {faq.map((item, i) => (
           <details
-            class="group rounded-xl bg-cream-100 border border-forest-100/60 overflow-hidden transition-colors hover:border-gold-500/50"
+            class="group rounded-xl bg-white border border-forest-100/60 overflow-hidden transition-colors hover:border-gold-500/50"
             {...(i === 0 ? { open: true } : {})}
           >
             <summary class="list-none cursor-pointer flex items-start justify-between gap-4 px-6 py-5 font-display text-lg md:text-xl text-forest-900 select-none">
@@ -436,35 +602,40 @@ const proArguments = [
     <div class="max-w-4xl mx-auto px-6 text-center">
       <div class="text-xs uppercase tracking-[0.25em] text-gold-400 font-medium mb-4">Contact pro</div>
       <h2 class="font-display text-4xl md:text-5xl leading-tight mb-8">
-        Parlons de votre établissement.
+        Parlons de votre projet.
       </h2>
       <p class="text-lg text-cream-200/80 mb-12 leading-relaxed max-w-2xl mx-auto">
-        Un mot sur votre activité, votre volume estimé, vos besoins
-        particuliers — et nous revenons vers vous sous 48h avec des
-        échantillons et un devis personnalisé.
+        Un mot sur votre activité (bar, resto, caviste, CE, distributeur),
+        votre zone, votre volume estimé — nous revenons vers vous sous
+        48 heures avec un devis personnalisé.
       </p>
 
-      <div class="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-        <a href="mailto:labrasseriedesplantes@gmail.com?subject=Partenariat%20professionnel" class="group p-8 rounded-2xl bg-forest-800/60 border border-cream-100/10 hover:border-gold-500/50 transition-all">
-          <svg class="w-8 h-8 mb-4 mx-auto text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <div class="font-display text-lg mb-1">Email direct</div>
-          <div class="text-sm text-cream-200/70 break-all group-hover:text-cream-100">{site.email}</div>
+      <div class="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+        <a href={`mailto:${site.email}?subject=Partenariat%20professionnel`} class="group p-6 rounded-2xl bg-forest-800/60 border border-cream-100/10 hover:border-gold-500/50 transition-all">
+          <svg class="w-7 h-7 mb-3 mx-auto text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div class="font-display text-base mb-1">Email direct</div>
+          <div class="text-xs text-cream-200/70 break-all group-hover:text-cream-100">{site.email}</div>
         </a>
-        <a href={`tel:${site.phone}`} class="group p-8 rounded-2xl bg-forest-800/60 border border-cream-100/10 hover:border-gold-500/50 transition-all">
-          <svg class="w-8 h-8 mb-4 mx-auto text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <div class="font-display text-lg mb-1">Téléphone</div>
-          <div class="text-sm text-cream-200/70 group-hover:text-cream-100">{site.phoneDisplay}</div>
+        <a href={`tel:${site.phone}`} class="group p-6 rounded-2xl bg-forest-800/60 border border-cream-100/10 hover:border-gold-500/50 transition-all">
+          <svg class="w-7 h-7 mb-3 mx-auto text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div class="font-display text-base mb-1">Téléphone</div>
+          <div class="text-xs text-cream-200/70 group-hover:text-cream-100">{site.phoneDisplay}</div>
+        </a>
+        <a href="/catalogues/catalogue-pro-2025.pdf" target="_blank" rel="noopener" class="group p-6 rounded-2xl bg-forest-800/60 border border-cream-100/10 hover:border-gold-500/50 transition-all">
+          <svg class="w-7 h-7 mb-3 mx-auto text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <div class="font-display text-base mb-1">Catalogue PDF</div>
+          <div class="text-xs text-cream-200/70 group-hover:text-cream-100">Télécharger (2025)</div>
         </a>
       </div>
 
-      <div class="mt-12 flex items-center justify-center gap-8 text-cream-200/60 text-xs">
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-cream-200/60 text-xs">
         <div class="flex items-center gap-2">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
           Réponse sous 48h
         </div>
         <div class="flex items-center gap-2">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-          Échantillons gratuits
+          Dégustation gratuite en zone
         </div>
         <div class="flex items-center gap-2">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
