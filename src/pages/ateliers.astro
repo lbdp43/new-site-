@@ -32,7 +32,7 @@ const workshopsSchema = [
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: 'Réalisez votre liqueur artisanale',
-    description: "Initiez-vous à la production de spiritueux et fabriquez votre propre liqueur artisanale avec Étienne, artisan macérateur.",
+    description: "Initiez-vous à la production de spiritueux et fabriquez votre propre liqueur artisanale avec Étienne, artisan liquoriste.",
     location: {
       '@type': 'Place',
       name: 'La Brasserie des Plantes',
@@ -91,7 +91,7 @@ const workshops = [
     id: 'liqueur',
     kicker: 'Atelier pratique',
     title: 'Réalisez votre liqueur artisanale',
-    subtitle: "Initiez-vous à la production de spiritueux et fabriquez votre liqueur avec Étienne, artisan macérateur.",
+    subtitle: "Initiez-vous à la production de spiritueux et fabriquez votre liqueur avec Étienne, artisan liquoriste.",
     price: 75,
     duration: '2 h',
     participants: '2 à 6 personnes',
@@ -160,7 +160,7 @@ const fmtDate = (iso: string) => {
 ---
 <Layout
   title="Ateliers & dégustations | Réalisez votre liqueur — La Brasserie des Plantes"
-  description="Deux ateliers en Haute-Loire avec Étienne, artisan macérateur : réalisez votre propre liqueur artisanale (2h, 75 €) ou venez pour une visite-dégustation de nos six liqueurs (1h30, 17 €). 23 avis clients."
+  description="Deux ateliers en Haute-Loire avec Étienne, artisan liquoriste : réalisez votre propre liqueur artisanale (2h, 75 €) ou venez pour une visite-dégustation de nos six liqueurs (1h30, 17 €). 23 avis clients."
   schema={[breadcrumb, ...workshopsSchema]}
 >
   <!-- HERO — vidéo YouTube Wecandoo en fond (3H8FSvDwjnM) + contenu sur overlay
@@ -380,7 +380,7 @@ const fmtDate = (iso: string) => {
   <section class="py-20 bg-cream-50">
     <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-[320px_1fr] gap-10 items-center">
       <div class="aspect-square rounded-2xl overflow-hidden max-w-[320px] mx-auto w-full">
-        <img src="/images/ateliers/artisans.jpg" alt="Étienne, artisan macérateur de la Brasserie des Plantes" loading="lazy" class="w-full h-full object-cover" />
+        <img src="/images/ateliers/artisans.jpg" alt="Étienne, artisan liquoriste de la Brasserie des Plantes" loading="lazy" class="w-full h-full object-cover" />
       </div>
       <div>
         <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
@@ -388,7 +388,7 @@ const fmtDate = (iso: string) => {
         </div>
         <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-5">
           <em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">Étienne</em>,<br />
-          artisan macérateur
+          artisan liquoriste
         </h2>
         <div class="text-ink-700 leading-relaxed space-y-4 text-base">
           <p>
