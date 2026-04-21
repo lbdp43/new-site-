@@ -5,7 +5,7 @@ date: 2025-06-20
 updated: 2026-04-18
 author: "Guillaume"
 category: Actualité
-cover: /images/gallery/evenement-06.webp
+cover: /images/press-covers/france-3.jpg
 readingTime: "4 min"
 ---
 

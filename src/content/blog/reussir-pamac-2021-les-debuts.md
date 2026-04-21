@@ -4,7 +4,7 @@ description: "En mai 2021, Réussir - Agriculture Massif Central publiait l'un d
 date: 2021-05-12
 author: "Guillaume"
 category: Terroir
-cover: /images/gallery/evenement-07.webp
+cover: /images/press-covers/reussir-pamac.jpg
 readingTime: "4 min"
 ---
 

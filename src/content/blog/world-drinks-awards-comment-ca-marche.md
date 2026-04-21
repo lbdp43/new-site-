@@ -5,7 +5,7 @@ date: 2025-05-10
 updated: 2026-04-18
 author: "Guillaume"
 category: Actualité
-cover: /images/stories/etienne-degustation.webp
+cover: /images/press-covers/le-bonbon-wda.jpg
 readingTime: "7 min"
 ---
 
