@@ -367,35 +367,40 @@ const ScrollExpandMedia = ({
 
               {titleImageSrc ? (
                 <motion.div
-                  className='absolute top-2 md:top-4 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center pointer-events-none'
+                  /* inset-x-0 + flex justify-center : centrage basé sur la
+                     largeur du viewport, indépendant du container mx-auto
+                     parent qui peut introduire un biais asymétrique. */
+                  className='absolute inset-x-0 top-2 md:top-4 z-20 flex justify-center pointer-events-none'
                   animate={{ opacity: 1 - scrollProgress * 1.6 }}
                   transition={{ duration: 0.1 }}
                 >
-                  {/* Fond assombri radial derrière le logo : renforce le
-                      contraste des plantes à l'intérieur du V (blanches,
-                      fines, noyées dans le paysage clair en temps normal).
-                      Sans bord net — radial-gradient qui s'estompe vers les
-                      extérieurs pour se fondre dans la vidéo. */}
-                  <div
-                    className='absolute inset-0 -m-8 md:-m-12 pointer-events-none'
-                    aria-hidden='true'
-                    style={{
-                      background:
-                        'radial-gradient(ellipse at center, rgba(10, 30, 20, 0.45) 0%, rgba(10, 30, 20, 0.25) 45%, rgba(10, 30, 20, 0) 75%)',
-                    }}
-                  />
-                  <img
-                    src={titleImageSrc}
-                    alt={titleImageAlt ?? 'Logo'}
-                    className='relative w-[66vw] max-w-[352px] md:max-w-[480px] h-auto select-none'
-                    style={{
-                      /* Drop-shadow renforcée en combinaison avec le halo
-                         radial : le logo blanc + le V doré ressortent
-                         nettement, même contre un ciel clair. */
-                      filter: 'drop-shadow(0 8px 28px rgba(0,0,0,0.65)) drop-shadow(0 0 14px rgba(0,0,0,0.45))',
-                    }}
-                    draggable={false}
-                  />
+                  <div className='relative inline-flex items-center justify-center'>
+                    {/* Fond assombri radial derrière le logo : renforce le
+                        contraste des plantes à l'intérieur du V (blanches,
+                        fines, noyées dans le paysage clair en temps normal).
+                        Sans bord net — radial-gradient qui s'estompe vers
+                        les extérieurs pour se fondre dans la vidéo. */}
+                    <div
+                      className='absolute inset-0 -m-8 md:-m-12 pointer-events-none'
+                      aria-hidden='true'
+                      style={{
+                        background:
+                          'radial-gradient(ellipse at center, rgba(10, 30, 20, 0.45) 0%, rgba(10, 30, 20, 0.25) 45%, rgba(10, 30, 20, 0) 75%)',
+                      }}
+                    />
+                    <img
+                      src={titleImageSrc}
+                      alt={titleImageAlt ?? 'Logo'}
+                      className='relative w-[66vw] max-w-[352px] md:max-w-[480px] h-auto select-none'
+                      style={{
+                        /* Drop-shadow renforcée en combinaison avec le halo
+                           radial : le logo blanc + le V doré ressortent
+                           nettement, même contre un ciel clair. */
+                        filter: 'drop-shadow(0 8px 28px rgba(0,0,0,0.65)) drop-shadow(0 0 14px rgba(0,0,0,0.45))',
+                      }}
+                      draggable={false}
+                    />
+                  </div>
                 </motion.div>
               ) : (
                 <div
