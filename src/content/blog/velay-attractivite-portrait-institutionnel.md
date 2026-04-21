@@ -4,7 +4,7 @@ description: "L'office d'attractivité territoriale du Velay a publié un portra
 date: 2024-11-08
 author: "Guillaume"
 category: Terroir
-cover: /images/press-covers/velay-attractivite.jpg
+cover: /images/gallery/saint-etienne.jpg
 readingTime: "4 min"
 ---
 
