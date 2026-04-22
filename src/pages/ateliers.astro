@@ -27,62 +27,83 @@ const breadcrumb = {
 };
 
 // Schema Event pour les 2 ateliers — aide à l'indexation "ateliers near me"
+// startDate = premier samedi à venir (les ateliers sont récurrents toute l'année
+// via Wecandoo ; on donne une date concrète pour rester éligible au rich result
+// Event Google, et eventStatus EventScheduled).
+const nextSaturday = (() => {
+  const d = new Date();
+  const daysUntilSat = (6 - d.getUTCDay() + 7) % 7 || 7;
+  d.setUTCDate(d.getUTCDate() + daysUntilSat);
+  d.setUTCHours(14, 0, 0, 0);
+  return d.toISOString();
+})();
+const eventEndSaturday = (() => {
+  const d = new Date();
+  const daysUntilSat = (6 - d.getUTCDay() + 7) % 7 || 7;
+  d.setUTCDate(d.getUTCDate() + daysUntilSat);
+  d.setUTCHours(16, 0, 0, 0);
+  return d.toISOString();
+})();
+
+const workshopLocation = {
+  '@type': 'Place',
+  name: 'La Brasserie des Plantes',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '18 Grand Place',
+    addressLocality: 'Saint-Didier-en-Velay',
+    postalCode: '43140',
+    addressRegion: 'Haute-Loire',
+    addressCountry: 'FR',
+  },
+};
+
 const workshopsSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: 'Réalisez votre liqueur artisanale',
     description: "Initiez-vous à la production de spiritueux et fabriquez votre propre liqueur artisanale avec Étienne, artisan liquoriste.",
-    location: {
-      '@type': 'Place',
-      name: 'La Brasserie des Plantes',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '18 Grand Place',
-        addressLocality: 'Saint-Didier-en-Velay',
-        postalCode: '43140',
-        addressRegion: 'Haute-Loire',
-        addressCountry: 'FR',
-      },
-    },
+    image: `${site.url}/images/ateliers/liqueur-1.jpg`,
+    startDate: nextSaturday,
+    endDate: eventEndSaturday,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    inLanguage: 'fr-FR',
+    location: workshopLocation,
     offers: {
       '@type': 'Offer',
       price: '75',
       priceCurrency: 'EUR',
       url: WECANDOO_LIQUEUR,
       availability: 'https://schema.org/InStock',
+      validFrom: new Date().toISOString(),
     },
     duration: 'PT2H',
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    organizer: { '@type': 'Organization', name: site.name, url: site.url },
+    organizer: { '@id': `${site.url}#localbusiness` },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: "Dégustez des liqueurs d'exception",
     description: "Découvrez les secrets de la macération et dégustez six liqueurs exceptionnelles avec Étienne.",
-    location: {
-      '@type': 'Place',
-      name: 'La Brasserie des Plantes',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '18 Grand Place',
-        addressLocality: 'Saint-Didier-en-Velay',
-        postalCode: '43140',
-        addressRegion: 'Haute-Loire',
-        addressCountry: 'FR',
-      },
-    },
+    image: `${site.url}/images/ateliers/visite-1.jpg`,
+    startDate: nextSaturday,
+    endDate: eventEndSaturday,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    inLanguage: 'fr-FR',
+    location: workshopLocation,
     offers: {
       '@type': 'Offer',
       price: '17',
       priceCurrency: 'EUR',
       url: WECANDOO_VISITE,
       availability: 'https://schema.org/InStock',
+      validFrom: new Date().toISOString(),
     },
     duration: 'PT1H30M',
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    organizer: { '@type': 'Organization', name: site.name, url: site.url },
+    organizer: { '@id': `${site.url}#localbusiness` },
   },
 ];
 

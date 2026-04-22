@@ -38,4 +38,26 @@ wcId: 70
 order: 2
 ---
 
-Notre best-seller. L'Herbe des Druides est une liqueur à la verveine, à 28°, adoucie par le serpolet (thym sauvage de nos pentes) et épicée par le carvi. Une expression florale, sauvage, où les notes épicées viennent tempérer l'alcool. À servir en apéritif avec un zeste, ou en digestif pur.
+Notre best-seller. L'Herbe des Druides est une liqueur à la **verveine**, à 28°, adoucie par le **serpolet** (thym sauvage des pentes du Velay) et épicée par le **carvi** (cumin des prés auvergnat). Une expression florale, sauvage, où les notes épicées viennent tempérer l'alcool.
+
+## Trois plantes, aucun arôme ajouté
+
+La recette tient sur trois plantes, récoltées chez nos [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) de Haute-Loire et de la Loire. La **verveine odorante** (*Aloysia citrodora*) est notre plante totem — elle donne le haut du nez, ce parfum citronné sans acidité, enrichi de nérol et de linalol. Le **serpolet** sauvage (*Thymus serpyllum*), cueilli sur des pentes rocailleuses au moment de la floraison, apporte la concentration thymée et une note résineuse. Le **carvi** (*Carum carvi*), cumin du Velay, pose la structure épicée en bouche et ancre la finale.
+
+Pas d'arôme ajouté, pas de colorant : la couleur vert pâle vient de la chlorophylle des plantes macérées. Macération froide longue, filtration lente, repos minimum deux mois.
+
+## Cinq distinctions internationales
+
+- **Or 2023, 2024, 2026** — Concours International de Lyon
+- **Argent 2024** — Concours Général Agricole, Salon de l'Agriculture Paris
+- **Argent 2025** — World Drinks Awards, Londres
+
+Le [Concours International de Lyon](https://concours-vinslyon.com/) nous a décerné trois médailles d'or sur les trois cuvées présentées, ce qui place la verveine-serpolet-carvi parmi les rares recettes à avoir un palmarès aussi stable. Lire [le récit de la première médaille 2023](/blog/premiere-medaille-or-concours-lyon-2023).
+
+## Comment la servir
+
+**En apéritif givré** : au congélateur quelques heures, servi à 0°C dans un verre tulipé. Les huiles essentielles prennent de l'épaisseur. Avec un zeste de citron jaune pour accentuer la verveine.
+
+**En digestif pur** : à température ambiante, un fond de verre après un repas riche. Le carvi aide.
+
+**En cocktail** : base de notre [Verveine Printanière](/cocktails#verveine-printaniere) — 4 cl, citron vert, sirop de sucre de canne, eau pétillante, feuilles fraîches.

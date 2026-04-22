@@ -65,4 +65,4 @@ Concrètement, cinq choses :
 
 ---
 
-**À lire aussi :** [Trois amis, une brasserie](/blog/trois-amis-une-brasserie) · [Verveine, serpolet, carvi — les plantes oubliées du Velay](/blog/plantes-oubliees-du-velay) · [L'Alchimie Végétale, 27 plantes](/blog/alchimie-vegetale-27-plantes-composition).
+**À lire aussi :** [Trois amis, une brasserie](/blog/trois-amis-une-brasserie) · [Les plantes oubliées du Velay](/blog/plantes-oubliees-du-velay) · [L'Alchimie Végétale, 27 plantes](/blog/alchimie-vegetale-27-plantes-composition) · [Portrait par Velay Attractivité](/blog/velay-attractivite-portrait-institutionnel) · [Visite vidéo par Haute-Loire Tourisme](/blog/haute-loire-tourisme-video-atelier) · [Premiers pas racontés par Réussir](/blog/reussir-pamac-2021-les-debuts).

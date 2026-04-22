@@ -46,7 +46,10 @@ const articleSchema = {
   dateModified: (post.data.updated ?? post.data.date).toISOString(),
   author: authorSchema,
   publisher: { '@id': `${site.url}#localbusiness` },
-  image: post.data.cover ? new URL(post.data.cover, site.url).toString() : undefined,
+  // Toujours fournir une image (fallback OG par défaut) pour garantir
+  // l'éligibilité au rich result Article même si un article arrive sans cover.
+  image: new URL(post.data.cover ?? '/og-default.jpg', site.url).toString(),
+  wordCount: (post.body ?? '').split(/\s+/).filter(Boolean).length,
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': `${site.url}/blog/${post.id}`,

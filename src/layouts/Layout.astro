@@ -30,6 +30,13 @@ interface Props {
    *  le hero respirer. Sur les autres pages, le header reste visible en
    *  permanence. */
   hasHero?: boolean;
+  /** Image à précharger en priorité (candidat LCP). Typiquement le poster
+   *  d'une vidéo hero ou la première image au-dessus de la ligne de flottaison.
+   *  Génère un <link rel="preload" as="image" fetchpriority="high"> dans le head. */
+  preloadImage?: string;
+  /** Vidéo à précharger (en plus de son poster) — uniquement pour le hero
+   *  critique above-the-fold. Génère un <link rel="preload" as="video">. */
+  preloadVideo?: string;
 }
 
 const {
@@ -42,6 +49,8 @@ const {
   ogType = 'website',
   lang: langProp,
   hasHero = false,
+  preloadImage,
+  preloadVideo,
 } = Astro.props;
 
 // Détection de la langue — priorité à la prop, sinon détection par URL
@@ -94,6 +103,14 @@ const alternates = getHreflangLinks(frEquivalentPath, 'fr', site.url);
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- LCP booster : préchargement du poster vidéo / image hero en haute priorité -->
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+    )}
+    {preloadVideo && (
+      <link rel="preload" as="video" href={preloadVideo} type="video/mp4" />
+    )}
 
     <!-- Fonts (locaux — déclarés dans global.css, WOFF2 avec fallback TTF) -->
     <link rel="preload" href="/fonts/Joane-Regular.woff2" as="font" type="font/woff2" crossorigin />

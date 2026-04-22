@@ -29,3 +29,11 @@ Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
+
+# ChatGPT web search (crawler temps réel, distinct de GPTBot depuis mi-2024)
+User-agent: OAI-SearchBot
+Allow: /
+
+# Yeti — crawler Naver (compat IndexNow)
+User-agent: Yeti
+Allow: /

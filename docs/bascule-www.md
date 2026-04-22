@@ -135,14 +135,23 @@ SEO et pour éviter les oublis.
   inscrit → créer un compte sur [bing.com/webmasters](https://www.bing.com/webmasters)
   et vérifier la propriété via DNS TXT ou fichier HTML.
 
-- [ ] **Vérifier le `site` dans astro.config.mjs**
-  Si après bascule, les URLs du sitemap pointent encore sur l'apex
-  `https://labrasseriedesplantes.fr/...` alors que le domaine canonique
-  est `www.`, IndexNow soumettra les mauvaises URLs. Vérifier `site`
-  dans `astro.config.mjs` + `site.url` dans `src/data/site.ts`.
-  Si on veut `www.` en canonique : changer pour `https://www.labrasseriedesplantes.fr`
-  partout + redirection apex → www. dans Vercel (déjà au point 4.2 du plan
-  de bascule).
+- [ ] **⚠️ CRITIQUE — Mettre à jour `site.url` dans tout le code**
+  Aujourd'hui `site.url = "https://labrasseriedesplantes.fr"` (sans `www.`).
+  **Tous les `@id`, canonicals, hreflang, URLs absolues Schema.org** en
+  dépendent — si `www.` devient le canonique sans mise à jour, tous les
+  signaux pointent vers la mauvaise variante pendant quelques jours.
+
+  **Fichiers à toucher en même temps que la bascule DNS** :
+  1. `src/data/site.ts` → `url: "https://www.labrasseriedesplantes.fr"`
+  2. `astro.config.mjs` → `site: 'https://www.labrasseriedesplantes.fr'`
+  3. `public/robots.txt` → `Sitemap: https://www.labrasseriedesplantes.fr/sitemap-index.xml`
+  4. `public/llms.txt` et `public/llms-full.txt` (auto-régénéré au build)
+     → vérifier que les URLs internes sont bien sur `www.`
+  5. Script `scripts/indexnow-submit.mjs` → lit `process.env.PUBLIC_SITE_URL`
+     ou la config — vérifier qu'il cible `www.`
+
+  Commit + push : Vercel redéploie en ~2 min, le sitemap et tous les
+  schemas se mettent à jour automatiquement.
 
 - [ ] **Activer IndexNow**
   IndexNow = protocole Bing/Yandex pour l'indexation quasi-instantanée.
@@ -188,10 +197,12 @@ SEO et pour éviter les oublis.
 - [ ] **Schema.org — validation post-bascule**
   Passer `https://www.labrasseriedesplantes.fr` dans :
   - [Schema Markup Validator](https://validator.schema.org/) — doit valider
-    `LocalBusiness`, `Product` sur les fiches, `BlogPosting` sur les articles.
+    `LocalBusiness`, `Product` sur les fiches, `BlogPosting` sur les articles,
+    `Event` sur `/ateliers` (avec `startDate` + `eventStatus` déjà présents
+    depuis l'audit SEO avril 2026).
   - [Rich Results Test](https://search.google.com/test/rich-results) —
     doit détecter au moins : Product, LocalBusiness, Breadcrumb, FAQ (sur
-    `/faq`), Recipe (sur les cocktails).
+    `/faq`), Recipe (sur les cocktails), Event (sur `/ateliers`).
 
 - [ ] **Régénérer les clés REST API WC "Astro site"**
   WP Admin → WooCommerce → Réglages → Avancé → API REST → supprimer
@@ -233,6 +244,61 @@ SEO et pour éviter les oublis.
 - [ ] **Annuaires tourisme (Haute-Loire)** — ajout dans ~10 annuaires locaux
       pour renforcer les signaux NAP et le SEO local (voir note "tourisme"
       dans le backlog).
+
+### Issues SEO reportées de l'audit avril 2026 — à vérifier après bascule
+
+Ces items sont **conditionnés à la bascule** : on ne peut pas les faire ou les
+mesurer sur `test.*`. Référence : `seo-audit-2026-04-22/ACTION-PLAN.md`.
+
+- [ ] **CrUX field data — revalider LCP sur le domaine live**
+  L'audit lab indiquait LCP home 7,3 s (mobile). Les fixes appliqués
+  (preload du poster vidéo hero + `preload="none"` sur les vidéos hors
+  écran + inline CSS auto < 4 KB) devraient amener le LCP sous 2,5 s —
+  à confirmer avec le CrUX réel 28 jours après la bascule via
+  [PageSpeed Insights](https://pagespeed.web.dev) sur quelques URLs clés
+  (home, fiche produit Alchimie, article plantes-liqueur-haute-loire).
+  Si LCP > 3 s persiste : passer les `<img>` critiques sur `<Image>`
+  Astro avec `widths={[320, 640, 960]}` pour srcsets responsives
+  (gain estimé −200 à −400 KB sur fiche produit + blog).
+
+- [ ] **YouTube dans `sameAs` schemas**
+  Le `sameAs` de `localBusinessSchema` ne liste que Instagram + Facebook.
+  Corrélation citation IA la plus forte (~0,74) pour les marques avec
+  présence YouTube. Décider :
+  - Option A : créer un canal YouTube LBDP minimal (2-3 vidéos : duo
+    making-of, visite atelier, présentation de L'Alchimie Végétale),
+    uploader les vidéos déjà produites, déclarer le canal dans
+    `src/data/site.ts` → `site.social.youtube` + l'ajouter dans les
+    `sameAs` de `src/pages/index.astro` et `src/pages/en/index.astro`.
+  - Option B : attendre d'avoir des vidéos "éditorialisées" avant de
+    créer le canal.
+
+- [ ] **Fiche Wikidata**
+  Démarche externe, ~2 h. Critères éligibilité OK (presse nationale
+  France 3 + France Bleu + Le Bonbon + prix international World Drinks
+  Awards 2025). Un Q-number ancre la marque comme entité nommée dans
+  tous les LLMs entraînés sur Wikidata — signal très fort pour GEO.
+  Champs minimum : nom, type (entreprise artisanale liquoriste),
+  fondation (2021), fondateurs (Étienne + Guillaume), siège
+  (Saint-Didier-en-Velay), distinction (World's Best Digestive 2025).
+
+- [ ] **Auteurs : noms de famille complets ou `sameAs`**
+  Aujourd'hui les schemas Person (`src/pages/notre-histoire.astro` +
+  `src/pages/blog/[...slug].astro`) déclarent les fondateurs par prénom
+  uniquement (Étienne, Guillaume). Pour ancrer l'entité Author dans le
+  Knowledge Graph : soit ajouter le nom de famille dans `name`, soit
+  ajouter un `sameAs` vers le profil LinkedIn ou Instagram perso.
+
+- [ ] **Envisager `<Image>` Astro pour la galerie produit**
+  Gain −386 KB sur fiche Alchimie Végétale mobile, −193 KB sur article
+  blog, −94 KB logo header. Refactor non-trivial (test visuel obligatoire
+  sur toutes les pages) — à caler après la bascule une fois que le
+  trafic réel dicte les priorités.
+
+- [ ] **Mesurer la progression du score SEO**
+  Relancer la skill `seo-audit` sur `https://www.labrasseriedesplantes.fr`
+  une fois stabilisée. Score actuel staging : 74/100. Cible post-bascule
+  après application des fixes SEO + optim performance : > 85/100.
 
 ### Stratégique — SEO & visibilité long terme
 

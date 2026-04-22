@@ -74,14 +74,23 @@ export function getHtmlLang(lang: Lang): string {
  * Usage dans Layout.astro :
  *   const alternates = getHreflangLinks(Astro.url.pathname, currentLang, siteUrl);
  */
+/** Normalise un chemin pour toujours se terminer par `/` (aligné avec le sitemap généré). */
+function withTrailingSlash(path: string): string {
+  if (!path) return '/';
+  if (path.endsWith('/')) return path;
+  // ne pas ajouter de slash si query string ou hash (pas le cas dans ce projet, par sécurité)
+  if (path.includes('?') || path.includes('#')) return path;
+  return path + '/';
+}
+
 export function getHreflangLinks(currentPath: string, currentLang: Lang, siteUrl: string) {
   const frPath = currentLang === 'fr' ? currentPath : alternateLangPath(currentPath, 'en', 'fr');
   const enPath = currentLang === 'en' ? currentPath : alternateLangPath(currentPath, 'fr', 'en');
 
   return [
-    { hreflang: 'fr', href: new URL(frPath, siteUrl).toString() },
-    { hreflang: 'en', href: new URL(enPath, siteUrl).toString() },
-    { hreflang: 'x-default', href: new URL(frPath, siteUrl).toString() },
+    { hreflang: 'fr', href: new URL(withTrailingSlash(frPath), siteUrl).toString() },
+    { hreflang: 'en', href: new URL(withTrailingSlash(enPath), siteUrl).toString() },
+    { hreflang: 'x-default', href: new URL(withTrailingSlash(frPath), siteUrl).toString() },
   ];
 }
 

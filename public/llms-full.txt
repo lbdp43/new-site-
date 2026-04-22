@@ -1,0 +1,459 @@
+# La Brasserie des Plantes — contenu intégral (llms-full)
+
+> Version longue du fichier llms.txt — concatène les pages éditoriales clés et les articles de blog denses, pour les LLM qui préfèrent consommer un contexte complet plutôt que crawler page par page.
+> Attribution demandée : "La Brasserie des Plantes, https://labrasseriedesplantes.fr" avec lien direct vers la page concernée.
+> Dernière génération : 2026-04-22
+
+## Articles de blog (sélection)
+
+### Meilleur Digestif du Monde 2025 — ce que ce prix signifie pour nous
+
+- URL : https://labrasseriedesplantes.fr/blog/meilleur-digestif-du-monde-2025/
+- Date : 2025-04-28
+- Auteur : Guillaume
+- Catégorie : Actualité
+
+Nous ne nous y attendions pas. Pas à ce niveau, en tout cas.
+
+Quand les résultats des **World Drinks Awards 2025** sont tombés à Londres le 17 avril, notre téléphone a sonné presque tout de suite. *L'Alchimie Végétale*, notre liqueur phare, venait d'être élue **Meilleur Digestif du Monde**. Pas meilleur digestif français, pas meilleur digestif européen — meilleur digestif tout court, sur l'ensemble des catégories confondues. La [fiche officielle sur le site du concours](https://www.worldliqueurawards.com/winner-liqueur/worlds-best-digestive-58512-world-liqueur-awards-2025) a été publiée le soir même.
+
+## Ce qu'est ce concours
+
+Les **[World Drinks Awards](https://www.worldliqueurawards.com/)** sont organisés depuis 2007 par *The Drinks Report*, magazine professionnel britannique de référence pour la filière des spiritueux. Chaque catégorie (digestifs, amers, liqueurs de fruits, aquavits, anisés, crèmes, vermouths…) est jugée **à l'aveugle** par un panel international de sommeliers, mixologues, critiques et acheteurs. Les bouteilles arrivent neutralisées, servies en verres noirs pour gommer la couleur.
+
+Pour l'édition 2025 :
+
+- **Plus de 40 pays** représentés, avec une forte présence européenne (France, Italie, Écosse, Pays-Bas), nord-américaine et asiatique (Japon, Corée, Taïwan en progression).
+- **Cinq tours de dégustation** — sélection pays, sélection continentale, catégorie, finale, World's Best.
+- **Trois millésimes de jury** sur la phase finale, pour lisser les préférences individuelles.
+- **Une finale à huis clos** : le président du jury ne révèle les noms qu'au moment de la remise des prix, le 17 avril à Londres.
+
+Pour 2025, c'est la première fois qu'une liqueur française de plantes remporte le titre suprême de la catégorie digestifs. Les années précédentes, le podium a souvent été dominé par des amers italiens (Fernet-Branca, Averna), des digestifs allemands (Jägermeister category) ou des élixirs monastiques (Chartreuse Verte, Bénédictine).
+
+## Les deux autres finalistes de la catégorie
+
+Nous ne citons pas les deux autres finalistes par respect — la liste complète est [publiée sur le site officiel](https://www.worldliqueurawards.com/winner-liqueur/worlds-best-digestive-58512-world-liqueur-awards-2025) — mais ce que nous retenons de cette finale, c'est que les trois bouteilles raconteraient trois façons de faire de la liqueur digestive : l'une très traditionnelle, construite autour d'une plante unique ; l'autre moderne et épicée, d'Europe du Nord ; et *L'Alchimie Végétale*, qui mise sur la complexité d'un grand assemblage — **27 plantes** du Velay et d'ailleurs, quatre ans de R&D, trente-deux essais documentés. Le jury a noté "une signature aromatique claire sans être dominante, une longueur en bouche inhabituelle pour un digestif sucré, une intégration racinaire rare".
+
+## Ce que ce prix a changé
+
+D'abord, **la demande a doublé** en deux semaines. Nos stocks de 50 cl sont partis en quelques jours — il a fallu accélérer l'embouteillage, rappeler des producteurs, revoir notre planning de récolte pour l'été. Nous avons aussi vu arriver des distributeurs d'Asie et d'Amérique du Nord que nous n'avions jamais contactés.
+
+Ensuite, **la presse**. France 3 Auvergne-Rhône-Alpes est venue filmer. France Bleu Saint-Étienne a fait deux passages radio. Le Bonbon Lyon, M Lyon et Zoomdici ont publié des articles que nous avons regroupés dans [notre revue de presse printemps 2025](/blog/dans-la-presse-2025).
+
+Enfin, **la confiance**. Quand on démarre en 2021 dans un village de 3 000 habitants, on se demande parfois si on n'est pas en train de s'illusionner. Ce prix est une validation extérieure de ce que nous avons construit — les 27 plantes, les trois ans d'essais, les ajustements à la marge, les échecs. Ça compte.
+
+## Ce que ce prix ne change pas
+
+La recette reste la même. **Exactement la même.** Nous avons résisté à la tentation d'ajuster quoi que ce soit après le prix — ce serait trahir ce qui a plu au jury. Les plantes viennent toujours de nos cueilleurs et maraîchers partenaires, majoritairement en bio. L'élaboration reste faite à la main, en petits lots.
+
+Le prix ne change pas non plus notre **prix public**. *L'Alchimie Végétale* reste à 22 € la 20 cl et 115 € le magnum. Certains nous ont demandé pourquoi — parce que nous voulons que nos voisins, nos amis, nos clients des débuts puissent continuer à l'acheter.
+
+Il ne change pas non plus notre **rythme de production**. Nous ne sortons pas de "cuvée World Drinks". La cuvée 2025 courante est celle que le jury a dégustée ; c'est aussi celle qui est en vente.
+
+## L'Alchimie Végétale, en bref
+
+- **27 plantes** — racines (gentiane, angélique, réglisse), fleurs (sureau, camomille), écorces (cannelle, quinquina), épices (cardamome, combava, badiane), aromatiques (verveine, mélisse, serpolet) et fruits (myrtille sauvage en micro-touches).
+- **50 % vol.** — construction autour d'un équilibre amer-racinaire. Les racines structurent, les fleurs arrondissent, les épices tendent.
+- **Macération froide** pendant plusieurs semaines, assemblage, repos long minimum trois mois.
+- **4 ans de R&D** et 32 essais documentés avant la version commerciale.
+
+Pour comprendre la démarche complète de composition, voir [L'Alchimie Végétale, entre science et poésie](/blog/alchimie-vegetale-27-plantes-composition).
+
+## Et la suite
+
+Nous travaillons depuis janvier sur une **cuvée millésimée 2025**, avec une légère variation autour de la réglisse et de la gentiane. Elle sortira à l'automne, en édition très limitée. Nous pensons aussi à rouvrir la production de la *Cuvée Michel* — notre hommage à un vieil ami d'enfance qui ne verra pas ce prix, mais qui aurait beaucoup ri.
+
+Merci à tous ceux qui nous ont accompagnés. On continue.
+
+*— Étienne et Guillaume*
+
+---
+
+**À lire aussi :** [Revue de presse printemps 2025](/blog/dans-la-presse-2025) · [Comment se passe un concours international](/blog/world-drinks-awards-comment-ca-marche) · [L'Alchimie Végétale, entre science et poésie](/blog/alchimie-vegetale-27-plantes-composition) · [Trois amis, une brasserie](/blog/trois-amis-une-brasserie).
+
+---
+
+### Les plantes de nos liqueurs : voyage botanique en Haute-Loire
+
+- URL : https://labrasseriedesplantes.fr/blog/plantes-liqueur-haute-loire/
+- Date : 2026-04-20
+- Auteur : Étienne
+- Catégorie : Plantes
+
+Quand on nous demande **ce qui fait la différence** entre nos liqueurs et celles des grandes maisons, la réponse tient en un mot : les **plantes**.
+
+Nous ne les cultivons pas nous-mêmes. Nous travaillons avec des **cueilleurs** et des **maraîchers partenaires** — [des gens qu'on a choisis un par un](/blog/producteurs-partenaires-bio-velay), la plupart en bio, qui récoltent en Haute-Loire et dans les départements voisins. Leurs champs, leurs versants, leurs sous-bois : c'est ça, notre terroir.
+
+Ce guide est le voyage botanique d'une bouteille. **12 plantes signatures**, leur identité, leur origine, et dans quelles liqueurs on les retrouve.
+
+## Pourquoi la Haute-Loire est un terroir botanique exceptionnel
+
+La **Haute-Loire** — et plus largement le quart sud-est du Massif Central — est l'un des territoires les plus riches en flore médicinale et aromatique de France. Trois raisons objectives :
+
+1. **L'altitude variée** (400 m à 1 800 m sur 50 km). Chaque étage climatique abrite ses espèces : sureau en vallée, serpolet à mi-pente, gentiane sur les plateaux d'altitude.
+2. **La géologie volcanique** (basalte, granite du Velay). Les sols sont pauvres en matière organique mais riches en oligo-éléments — ce qui concentre les principes aromatiques des plantes.
+3. **Le climat semi-montagnard** avec fortes amplitudes jour/nuit. Les nuits fraîches forcent les plantes à produire des composés de défense (huiles essentielles, tanins) qui font précisément leur intérêt gustatif.
+
+C'est pour ça que les grandes maisons liquoristes européennes — Chartreuse (Isère), Bénédictine (Normandie), Suze (Auvergne) — sont toutes nées dans des zones de moyenne montagne. Ce n'est pas un hasard.
+
+**Saint-Didier-en-Velay**, où nous avons notre atelier, se trouve à **740 mètres d'altitude**, sur la frontière Haute-Loire / Loire, à 30 km de Saint-Étienne et 40 km du Puy-en-Velay. Entre la chaîne des Cévennes au sud et les monts du Pilat au nord.
+
+## Les plantes cultivées par nos maraîchers partenaires
+
+La plus grande part de notre matière première vient de **maraîchers et producteurs du Velay et de ses voisins**, majoritairement en bio, qui nous livrent au rythme des récoltes.
+
+### 1. La verveine citronnée (*Aloysia citrodora*)
+
+**Notre plante totem.** C'est celle qui rentre le plus à l'atelier, celle qui l'embaume en juillet-août quand démarrent les premiers lots.
+
+- **Origine botanique** : Amérique du Sud, naturalisée dans le Sud de la France au 19e siècle.
+- **Profil aromatique** : citron, mélisse, légère note mentholée en finale.
+- **Récolte** : plusieurs passes par an, toujours à la main, le matin avant que le soleil ne fasse évaporer les huiles essentielles.
+- **Usage chez nous** : signature de [L'Herbe des Druides](/boutique/herbe-des-druides). Présente en composition secondaire dans la plupart de nos liqueurs.
+
+### 2. La mélisse officinale (*Melissa officinalis*)
+
+La cousine européenne de la verveine — plus douce, plus "miel", moins citronnée.
+
+- **Origine** : bassin méditerranéen, cultivée en Europe depuis l'Antiquité (déjà chez Pline l'Ancien).
+- **Profil** : citron doux, note de miel d'acacia, finale apaisante.
+- **Récolte** : juin-juillet, juste avant la floraison (maximum d'huile essentielle).
+- **Usage chez nous** : coloration florale dans [L'Alchimie Végétale](/boutique/alchimie-vegetale) et dans plusieurs de nos apéritifs.
+
+### 3. Le serpolet (*Thymus serpyllum*)
+
+Le **thym sauvage de montagne** — pas le thym commun des supermarchés. Bien plus puissant aromatiquement.
+
+- **Origine** : sauvage dans les pentes rocailleuses de la Haute-Loire.
+- **Profil** : thym concentré, note poivrée, finale résineuse.
+- **Récolte** : juillet-août, au moment de la floraison, sur des pentes sud, par nos cueilleurs.
+- **Usage chez nous** : touche camphrée dans [L'Herbe des Druides](/boutique/herbe-des-druides) et [L'Alchimie Végétale](/boutique/alchimie-vegetale).
+
+### 4. Les aromatiques rares
+
+Chez certains maraîchers partenaires, on trouve aussi **des aromatiques moins courantes** :
+
+- **Aurone** (*Artemisia abrotanum*) — armoise du sud, profil citron-absinthe léger.
+- **Hysope** (*Hyssopus officinalis*) — amère, épicée, très utilisée dans les élixirs monastiques.
+- **Thym citron** (*Thymus × citriodorus*) — hybride naturel, thym + verveine.
+- **Estragon mexicain** (*Tagetes lucida*) — goût anisé, plus subtil que l'estragon classique.
+
+Ces plantes sont les "touches de finition" dans nos compositions les plus complexes.
+
+## Les plantes sauvages, cueillies par nos partenaires
+
+### 5. La gentiane jaune (*Gentiana lutea*)
+
+**La reine des amères de montagne.** La plante emblématique du Massif Central, qui donne son amertume caractéristique à notre [Cerf'Gent](/boutique/cerf-gent).
+
+- **Origine** : plateaux de 1 000 à 1 600 m d'altitude. Plante protégée, cueillette réglementée.
+- **Profil** : amertume franche, note terreuse, finale longue et racinaire.
+- **Récolte** : octobre-novembre, avant les premières gelées. La racine se cueille à la main, avec une "fourche du Diable" (outil traditionnel).
+- **Nos partenaires** : **2 gentianaires professionnels** sur la Margeride et le plateau du Pilat.
+
+Un gentianaire est un métier rare — moins de 100 personnes en France. Ils travaillent debout, courbés, sous la pluie ou le gel. Une journée de travail = 30 à 50 kg de racines fraîches. Après séchage (qui divise le poids par 3), ça donne environ 15 kg de gentiane séchée prête à travailler.
+
+[En savoir plus sur notre partenariat avec les gentianaires](/blog/producteurs-partenaires-bio-velay).
+
+### 6. Le sureau noir (*Sambucus nigra*)
+
+Arbuste omniprésent dans les haies auvergnates. On utilise ses **fleurs** au printemps et ses **baies** en fin d'été.
+
+- **Origine** : haies, lisières de bois, zones humides. Sauvage, abondant.
+- **Profil des fleurs** : muscat, note de raisin blanc, finale florale fraîche.
+- **Profil des baies** : fruité sombre, rondeur, note de mûre sauvage.
+- **Récolte** : fleurs en mai-juin, baies en août-septembre.
+- **Nos cueilleurs** : 2 cueilleurs professionnels (formés par le [**Parc Naturel Régional du Livradois-Forez**](https://www.parc-livradois-forez.org/)).
+- **Usage chez nous** : cœur du [Nectar d'Ostara](/boutique/nectar-ostara) (fleurs) et de certaines éditions limitées (baies).
+
+### 7. La myrtille sauvage (*Vaccinium myrtillus*)
+
+Pas la myrtille de culture (bleuet nord-américain), celle-là : **petite, noire, sauvage, des sous-bois de moyenne montagne**.
+
+- **Origine** : forêts d'altitude du Pilat et des Cévennes.
+- **Profil** : fruité sombre, tanins fins, acidité présente, finale longue.
+- **Récolte** : août, peigne métallique pour les pros, main pour les petites cueillettes.
+- **Usage chez nous** : éditions limitées uniquement, production confidentielle.
+
+### 8. Les fruits d'un arboriculteur partenaire
+
+Un **arboriculteur sur les pentes du Rhône** (à 30 km de l'atelier) nous fournit :
+
+- **Bigarade (orange amère)** — zeste uniquement, utilisé dans [Zéleste](/boutique/zeleste) pour son amertume agrumes.
+- **Pommes anciennes** (reinette du Canada, rose de Berne) — certaines éditions limitées.
+
+### 9-11. Les plantes importées (et pourquoi)
+
+Soyons transparents : **certaines plantes ne poussent pas en France** et nous les importons par des grossistes européens bio spécialisés en herboristerie. C'est le cas pour :
+
+- **Cannelle de Ceylan** (Sri Lanka) — dans [L'Alchimie Végétale](/boutique/alchimie-vegetale) et quelques éditions limitées.
+- **Cardamome verte** (Guatemala, Inde) — touche exotique dans nos digestifs complexes.
+- **Combava** (La Réunion) — note kaffir-citronnée dans [Zéleste](/boutique/zeleste).
+- **Badiane** (Vietnam) — cœur anisé de certaines compositions.
+- **Réglisse** (Italie / Grèce) — rondeur et structure.
+
+Environ **15 % de notre matière première** est ainsi importée. **Nous ne prétendons pas "tout local"** — importer de la cannelle de Ceylan pour faire une "cannelle locale" serait absurde.
+
+## Le calendrier de récolte
+
+Un aperçu rapide de ce qui arrive à l'atelier au fil des saisons :
+
+| Période | Récoltes | Ce qu'il se passe à l'atelier |
+|--------|---------|-------------------------------|
+| **Avril-mai** | Fleurs de sureau, premières verveines, ail des ours | Démarrage des premières compositions printanières |
+| **Juin-juillet** | Mélisse, verveine (1re passe), aromatiques rares | Pic de production — les plantes rentrent à l'atelier |
+| **Août-septembre** | Verveine (2e passe), serpolet, myrtille, baies de sureau | Préparation des éditions limitées fruitées |
+| **Octobre-novembre** | Gentiane (racine), derniers fruits | Dernière grosse récolte de l'année |
+| **Décembre-mars** | Saison calme chez les producteurs | Assemblages finaux, tests, dégustations, visites chez les partenaires |
+
+## Les plantes "oubliées" que nous faisons renaître
+
+Un de nos engagements est de **réintroduire dans l'usage moderne** des plantes que l'herboristerie traditionnelle utilisait mais que l'industrie a oubliées :
+
+- **L'aurone** (Artemisia abrotanum) — utilisée depuis le Moyen Âge, disparue des liqueurs commerciales. Présente dans [Verveine CBD Aurone](/boutique/verveine-cbd-aurone).
+- **Le petit houx** (Ruscus aculeatus) — déjà mentionné par Dioscoride (1er siècle). Rare usage en liqueur moderne.
+- **La petite centaurée** (Centaurium erythraea) — amère puissante, connue comme "quinquina d'Europe".
+- **L'aspérule odorante** (Galium odoratum) — parfumait les vins du Rhin au Moyen Âge.
+
+Ces plantes sont rarement commercialisées en circuit long. Nous travaillons directement avec nos partenaires cueilleurs qui savent les identifier en milieu naturel.
+
+[Lire notre article dédié aux plantes oubliées du Velay](/blog/plantes-oubliees-du-velay).
+
+## Comment reconnaître un vrai sourcing "plantes d'Auvergne"
+
+Un maximum de maisons aujourd'hui écrivent **"plantes des Alpes"** ou **"plantes d'Auvergne"** sur leurs étiquettes. C'est un argument marketing fort. Voici comment distinguer le vrai du faux :
+
+1. **La maison nomme ses producteurs** (au moins par région, idéalement par nom).
+2. **Elle peut détailler le trajet** d'une plante du champ à la bouteille.
+3. **Le calendrier de récolte est cohérent** avec la saisonnalité naturelle (pas de verveine en décembre).
+4. **Il existe des photos ou vidéos** du terroir et des producteurs — pas uniquement du packaging.
+5. **Le producteur accepte les visites** sur rendez-vous.
+
+Sur ces 5 critères, nous cochons les 5. [Venez nous rencontrer](/contact) — l'atelier est ouvert du mercredi au samedi.
+
+## Un dernier mot sur l'altitude
+
+Une spécificité à retenir : **plus une plante pousse en altitude, plus elle est concentrée aromatiquement**.
+
+À 400 m, une verveine pousse vite, produit beaucoup de feuilles, mais ses huiles essentielles sont diluées.
+
+À 900 m (notre altitude), elle pousse moins, fait moins de biomasse — mais chaque feuille est **2 à 3 fois plus riche en citral** (la molécule qui donne son parfum).
+
+C'est pour ça qu'on ne cherche pas à produire à la tonne. Le Velay n'est pas la Provence. On fait **moins mais mieux** — et ça se goûte.
+
+---
+
+**Pour aller plus loin** :
+- [Comment choisir une liqueur artisanale — le guide complet](/blog/choisir-liqueur-artisanale-guide)
+- [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — portrait d'un écosystème
+- [Plantes oubliées du Velay : 7 espèces qui reviennent dans nos verres](/blog/plantes-oubliees-du-velay)
+- [Le Velay dans une bouteille — notre portrait par Velay Attractivité](/blog/velay-attractivite-portrait-institutionnel)
+- [L'art de redonner vie aux plantes oubliées — Loire Semène Tourisme](/blog/loire-semene-tourisme-plantes-oubliees)
+- [Découvrez les 12 plantes de notre gamme](/nos-plantes) — fiches détaillées
+
+Ou parcourez [la gamme complète](/boutique) — toutes issues de cet écosystème végétal auvergnat.
+
+---
+
+### Cueilleurs et maraîchers partenaires — notre circuit de plantes en Haute-Loire
+
+- URL : https://labrasseriedesplantes.fr/blog/producteurs-partenaires-bio-velay/
+- Date : 2024-09-05
+- Auteur : Guillaume
+- Catégorie : Terroir
+
+Nous ne cultivons pas nos plantes nous-mêmes. Chaque feuille, chaque racine, chaque zeste qui entre dans nos cuves vient d'un **cueilleur** ou d'un **maraîcher partenaire** — des gens qui ont fait de la plante leur métier, et que nous avons choisis un par un. La plupart sont en **agriculture biologique**, tous sont basés en **Haute-Loire** ou dans les départements voisins, et tous nous connaissent par leur prénom. C'est ce qu'on appelle un **circuit court** — mais c'est surtout un **écosystème** que nous avons construit lentement, par visites, par dégustations, par confiance.
+
+## Pourquoi une filière courte
+
+Trois raisons, toujours les mêmes :
+
+1. **Traçabilité** — nous savons de quel champ vient chaque plante. Si un lot a un souci, on remonte la chaîne en 24 heures.
+2. **Qualité** — les producteurs partenaires récoltent à la bonne saison, à la bonne heure, et nous livrent dans les 48 heures. Une verveine cueillie le mardi matin est en cuve le mercredi après-midi.
+3. **Territoire** — chaque euro que nous dépensons en matière première reste en Haute-Loire (ou très près). Pour un village comme Saint-Didier-en-Velay, ce n'est pas anodin.
+
+## Nos partenaires
+
+Par respect pour nos producteurs, nous n'affichons pas ici tous les noms — certains préfèrent l'anonymat et nous respectons ce choix. Nous pouvons présenter les grandes familles :
+
+### Les gentianaïres auvergnats
+La **gentiane jaune** (clé du Cerf'Gent) vient de gentianaïres professionnels qui récoltent à la main les racines, entre 1000 et 1600 m d'altitude, sur le plateau de la Margeride et les versants du Pilat. C'est un métier rare — une centaine de personnes en France.
+
+### Les maraîchers du Velay
+Plusieurs exploitations, majoritairement bio, qui produisent nos **verveine, mélisse, carvi, anis, coriandre, sauge, basilic, hysope et thym**. Toutes entre Saint-Étienne et Le Puy-en-Velay, dans un rayon de 40 km.
+
+### Les cueilleurs de sauvage
+Des cueilleurs professionnels (profession officielle, avec formation PNR) qui nous fournissent le **serpolet** sauvage et le **sureau noir** sauvage, au rythme des saisons.
+
+### Les apiculteurs
+Pour nos **miels** (miel de châtaignier en cocktails, miel de forêt dans certaines éditions limitées) — apiculteurs du Pilat et du Velay.
+
+### L'arboriculteur
+**Zestes d'orange amère, pommes, myrtilles sauvages** pour certaines recettes — un arboriculteur des coteaux du Rhône.
+
+## Ce que nous sourçons plus loin (et pourquoi)
+
+Soyons honnêtes : **six plantes dans L'Alchimie Végétale** ne peuvent pas pousser en Haute-Loire. Cannelle de Ceylan, cardamome verte, combava, anis étoilé, réglisse, agrumes tropicaux — nous les sourçons auprès de **grossistes européens** spécialisés en herboristerie, en privilégiant la filière bio quand elle est disponible, avec traçabilité complète.
+
+Environ **15 % de notre matière première** vient ainsi de plus loin. Nous ne cherchons pas à le cacher — importer de la cannelle de Ceylan pour faire de la cannelle locale n'aurait aucun sens.
+
+## Un cycle qui fonctionne
+
+Au fil des saisons, notre calendrier ressemble à ceci :
+
+- **Avril-mai** : cueillette des plantes précoces (sureau, verveine première pousse, serpolet en plaine)
+- **Juin-juillet** : pleine saison aromatique (mélisse, thym, coriandre, camomille)
+- **Août-septembre** : récolte tardive (carvi, lavande, hysope), début des racines
+- **Octobre-novembre** : récolte des racines (gentiane, angélique, réglisse) avant les premières gelées
+- **Hiver** : macérations longues, tests de nouvelles recettes, visites chez les producteurs, préparation du calendrier de récoltes suivant
+
+## Ce qui change quand on connaît ses producteurs
+
+Concrètement, cinq choses :
+
+1. **La qualité monte** naturellement — on ajuste chaque année avec retour direct
+2. **Les prix restent stables** — pas de pression sur les marges, pas de renégociation annuelle
+3. **Les volumes s'adaptent** — quand la demande explose (comme après Londres 2025), on peut doubler un ordre en deux semaines
+4. **Les variétés se testent** — un producteur nous dit *"tiens, j'ai planté un carré de basilic citron, tu veux essayer ?"*, et on essaie
+5. **Les gens deviennent des amis** — certaines récoltes se font en commun, avec l'équipe du producteur et nous
+
+---
+
+**À lire aussi :** [Trois amis, une brasserie](/blog/trois-amis-une-brasserie) · [Les plantes oubliées du Velay](/blog/plantes-oubliees-du-velay) · [L'Alchimie Végétale, 27 plantes](/blog/alchimie-vegetale-27-plantes-composition) · [Portrait par Velay Attractivité](/blog/velay-attractivite-portrait-institutionnel) · [Visite vidéo par Haute-Loire Tourisme](/blog/haute-loire-tourisme-video-atelier) · [Premiers pas racontés par Réussir](/blog/reussir-pamac-2021-les-debuts).
+
+---
+
+### Deux amis, une brasserie — comment la Brasserie des Plantes est née
+
+- URL : https://labrasseriedesplantes.fr/blog/trois-amis-une-brasserie/
+- Date : 2025-02-05
+- Auteur : Guillaume
+- Catégorie : Terroir
+
+Un soir de 2020, dans une arrière-cuisine de Saint-Étienne, Étienne et Guillaume ouvrent une bouteille expérimentale. Trente-deux essais derrière eux, et cette fois, c'est la bonne. La verveine tient, le serpolet adoucit, le carvi appuie. *"Il y a quelque chose, là."* C'est la première version de ce qui deviendra, trois ans plus tard, *L'Herbe des Druides*.
+
+C'est aussi à ce moment précis qu'une idée devient un projet.
+
+## Des bancs de l'école à l'atelier
+
+**Étienne** et **Guillaume** se connaissent depuis la cour de récréation, à Saint-Didier-en-Velay. Ce village du Velay, à la lisière de la Haute-Loire et de la Loire, est posé entre les contreforts du Massif central et la vallée du Gier. Peu d'industrie, beaucoup de pentes, des plantes sauvages partout.
+
+Chacun prend sa route. Étienne étudie la **biotechnologie végétale** à Toulouse — comprendre les molécules, les macérations, les équilibres aromatiques. Guillaume ouvre un **bar-restaurant à Saint-Étienne**, côté service, côté clients, côté carte. Ils se revoient tous les ans, en été, à Saint-Didier.
+
+En 2019, la conversation change de ton. *"Et si on faisait quelque chose ?"* On sait ce qu'on ne veut pas : ni une distillerie à l'américaine, ni une marque marketing. On sait ce qu'on veut : des plantes qu'on reconnaît, un territoire qu'on revendique, un geste qu'on maîtrise.
+
+## Le garage, les premiers essais
+
+Pendant dix-huit mois, Étienne formule dans un garage. Les macérations traînent sur des rayonnages en plastique, les bouteilles expérimentales sont étiquetées à la main, les étiquettes disent toutes *"test-37"*, *"test-48"*. Certaines finissent dans l'évier. D'autres passent à la dégustation — chez Guillaume d'abord, puis chez des cavistes amis à Saint-Étienne qui font office de premier jury.
+
+Le ratio verveine / serpolet / carvi de *L'Herbe des Druides* se stabilise au test 54. L'idée d'*Alchimie Végétale* — plus complexe, 27 plantes — commence en parallèle. Ce sera long : **quatre ans de recherche et développement** avant que cette liqueur ne soit présentée à un concours international.
+
+En mars 2021, **La Brasserie des Plantes** est déclarée au greffe de Haute-Loire. Atelier loué à Saint-Didier, cuves achetées d'occasion, première série mise en bouteille en juillet. Onze cavistes locaux prennent les premières palettes.
+
+## La rigueur de production, clé des médailles
+
+Savoir formuler et vendre ne suffit pas. La **rigueur industrielle** — dosages millimétrés, traçabilité, répétabilité — s'apprend. Au fil des années, Étienne structure les fiches techniques, les registres, les procédures de nettoyage, l'œil sur la propreté des cuves. Sans cette exigence, pas de médailles : les concours regardent autant le produit que la constance.
+
+## Le déclic : Londres, avril 2025
+
+Le **17 avril 2025** à Londres, aux World Drinks Awards, la liqueur *L'Alchimie Végétale* est couronnée **Meilleur Digestif du Monde 2025**. Les résultats tombent dans la nuit. Le téléphone sonne très tôt le matin. On ne s'y attendait pas. On ne s'y attendait pas du tout.
+
+La suite — la demande qui double, les distributeurs étrangers qui appellent, les articles de presse, les rendez-vous au salon — nous l'avons racontée [dans notre revue de presse printemps 2025](/blog/dans-la-presse-2025). L'essentiel reste ailleurs : dans l'atelier, dans les cuves, dans les gestes qui n'ont pas changé.
+
+## Ce qui n'a pas changé
+
+- **Saint-Didier-en-Velay**. Nous n'avons pas quitté le village. L'atelier est à 300 mètres de l'école où Étienne et Guillaume se sont rencontrés.
+- **Les plantes**. Majoritairement bio, toutes récoltées par nos cueilleurs et maraîchers partenaires, en Haute-Loire et dans les départements voisins.
+- **L'embouteillage à la main**. Un remplisseur semi-automatique pour les grosses séries, un embouteillage manuel pour les éditions limitées. Chaque bouchon est posé à la main.
+- **La taille de l'équipe**. Deux. Étienne et Guillaume. Ça suffit.
+
+---
+
+**Envie d'en savoir plus ?** Lisez [notre histoire complète](/notre-histoire) ou [venez nous rencontrer](/contact) à Saint-Didier-en-Velay — la boutique est ouverte mercredi, vendredi et samedi, de 9h à 18h30.
+
+---
+
+### L'Alchimie Végétale, entre science et poésie — comment on compose 27 plantes
+
+- URL : https://labrasseriedesplantes.fr/blog/alchimie-vegetale-27-plantes-composition/
+- Date : 2025-08-14
+- Auteur : Étienne
+- Catégorie : Fabrication
+
+*L'Alchimie Végétale* a été couronnée **Meilleur Digestif du Monde 2025** aux [World Drinks Awards](https://www.worldliqueurawards.com/winner-liqueur/worlds-best-digestive-58512-world-liqueur-awards-2025). Le chiffre rond — **27 plantes** — fascine. Mais derrière le chiffre, il y a une méthode. Cet article raconte comment on construit réellement un assemblage complexe, et ce que signifie "travailler 27 plantes" au quotidien.
+
+## Pourquoi 27 (et pas 24 ou 30) ?
+
+**Ce n'est pas un chiffre fétiche.** C'est le résultat, après quatre ans de R&D, de l'assemblage qui a tenu les tests de dégustation à l'aveugle. Nous sommes partis d'un premier jet plus simple, nous avons essayé des versions plus chargées (les notes s'annulaient), pour finalement stabiliser à 27 après de nombreux essais documentés.
+
+Les 27 plantes se répartissent en **cinq grandes familles fonctionnelles** — racines, herbes, fleurs, épices, agrumes. Chacune a un rôle aromatique précis : rien n'est là pour décorer.
+
+## Les cinq familles de l'Alchimie
+
+**Les racines** structurent le digestif et donnent la longueur en bouche — c'est la colonne vertébrale, la dimension médicinale héritée des grands amari.
+
+**Le cœur herbacé** fait « respirer » la liqueur. Ce sont les plantes du Velay et de ses voisinages, récoltées chez nos cueilleurs et maraîchers partenaires.
+
+**Les fleurs** apportent la rondeur et la finesse aromatique. Elles posent les notes qu'on identifie d'abord au nez.
+
+**Les épices et écorces** jouent le rôle de « sel » : sans elles, une liqueur devient bavarde et ronde. Elles apportent la tension.
+
+**Les agrumes** évitent l'effet « sirop médicinal » qu'une liqueur complexe peut prendre — ils ouvrent, rafraîchissent, allègent.
+
+## Les quatre étapes de macération
+
+**Étape 1 — Macération longue (12 semaines)** des racines dans l'alcool neutre à 70° vol., à température ambiante, dans des cuves inox fermées. Les racines ont besoin de temps ; les fleurs n'y survivraient pas.
+
+**Étape 2 — Macération courte (72 heures)** des herbes et fleurs, dans un second alcool moins concentré (45°), à température fraîche. Les arômes volatils se préservent mieux à froid et à plus faible degré.
+
+**Étape 3 — Infusion des épices (48 heures)** dans un alcool chaud (60°, tiède — pas bouillant). La chaleur libère mieux les huiles essentielles des graines et écorces.
+
+**Étape 4 — Assemblage et repos (8 semaines)** — on réunit les trois macérations dans une cuve unique, on ajuste au sucre (juste ce qu'il faut pour équilibrer, pas pour masquer), et on laisse reposer. C'est pendant ces huit semaines que l'assemblage se "soude".
+
+Total : **environ six mois** entre la première plante et la bouteille.
+
+## Ce qui a évolué au fil des années
+
+La recette s'est affinée entre les premières versions et celle présentée aux World Drinks Awards 2025. Quelques plantes ont été ajoutées en chemin pour apporter plus de profondeur ou une finale plus longue — des ajouts subtils qui, à la dégustation, font la différence.
+
+## Ce que les 27 plantes **ne font pas**
+
+Par souci d'honnêteté :
+
+- **Elles ne "soignent" rien.** L'Alchimie est un digestif de plaisir, pas une tisane médicinale.
+- **Elles ne garantissent pas que la bouteille soit "meilleure" qu'une liqueur à 10 plantes.** Une grande Chartreuse a 130 plantes ; d'autres grands liqueurs n'en ont qu'une poignée. Le nombre n'est **pas un critère** de qualité, mais une **signature stylistique**.
+- **Elles ne sont pas toutes cultivées sur place.** Six plantes (cardamome, combava, anis, cannelle, réglisse, vanille absente ici) proviennent de filières bio internationales — impossible à cultiver en Haute-Loire.
+
+## Ce qu'on garde de cette recette
+
+*L'Alchimie Végétale* est autant un **exercice de patience** qu'un **exercice de dosage**. Elle ressemble, à sa manière, à l'artisanat d'un parfumeur : beaucoup d'ingrédients, peu de proportions visibles à l'œil nu, une signature finale qu'on reconnaît sans pouvoir la décomposer.
+
+Trois ans pour sortir la recette. Un an pour la confirmer avant de l'envoyer à Londres. Et maintenant, une vie devant — à condition de continuer à l'ajuster, saison après saison.
+
+---
+
+**Découvrir L'Alchimie Végétale :** [fiche produit](/boutique/alchimie-vegetale) · [Notre gamme complète](/boutique).
+
+---
+
+## Pages éditoriales
+
+### Notre histoire
+
+- URL : https://labrasseriedesplantes.fr/notre-histoire/
+
+un terroir " subtitle="Depuis Saint-Didier-en-Velay, nous faisons revivre les plantes oubliées de la Haute-Loire, en liqueurs et en infusions. Une aventure de village, qui a fini par décrocher le titre de Meilleur Digestif du Monde." breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Notre histoire' }]} /> En Haute-Loire · Depuis 2021 Ça fait plus de vingt ans qu'on se connaît. Deux amis d'enfance. Un terroir. Dix distinctions internationales, et des liqueurs faites à quatre mains. 2021 Année de fondation 18 Références au catalogue 10 Distinctions internationales Meilleur digestif du monde 2025 Les débuts Une amitié d'enfance devenue projet Tout commence dans la cour de l'école, à Saint-Didier-en-Velay. Étienne et Guillaume grandissent ensemble, dans ce village du Velay posé sur les contreforts du Massif central, à la lisière de la Haute-Loire et de la Loire. Chacun prend sa route — Étienne étudie la biotechnologie des plantes à Toulouse, Guillaume fait ses armes dans la restauration et ouvre un bar-restaurant à Saint-Étienne. Mais la Haute-Loire les rappelle. Ses forêts, ses estives, ses plantes. Un savoir qui ne demande qu'à être remis au jour — celui des grand-mères qui préparaient la mélisse pour le rhume, la gentiane pour l'estomac, parfumaient leurs liqueurs d'hysope ou d'aurone. En 2021, ils décident d'assembler leurs expertises : la rigueur scientifique d'un côté, la sensibilité du service et du goût de l'autre. La Brasserie des Plantes naît — artisanale, auvergnate, sans compromis. Le lancement Lancés par ceux qui y ont cru en premier Étienne rentre tout juste en Haute-Loire ; Guillaume, lui, vient de vendre ses parts du bar-restaurant à son associé à Saint-Étienne. Et on se lance à deux, dans notre atelier — sans équipe, sans gros carnet d'adresses, juste deux amis d'enfance et l'envie de faire revivre les plantes de la région. Pour que le projet parte vraiment, on a lancé une campagne de financement participatif sur Ulule . Des amis de Saint-Étienne et de Saint-Didier, des curieux croisés sur les marchés du Velay, des inconnus qui ont simplement aimé le pitch — chacun a pré-commandé ses premières bouteilles ou mis quelques euros pour qu'on démarre. C'est aussi grâce à ces gens-là qu'on a réussi à créer la société. Ce qu'on crée, c'est du patrimoine vivant — ça se partage. Et on se complète dans ce qu'on fait. Le terroir Un hommage aux plantes oubliées Notre démarche tient en une idée : redonner leur place à des plantes que nos grand-mères connaissaient bien. Verveine citronnée, serpolet (thym sauvage), carvi, mélisse, hysope, aurone, gentiane jaune, génépi, sureau, baraban, ortie — chaque liqueur raconte son petit bouquet. Certaines liqueurs sont simples, signatures d'un terroir : L'Herbe des Druides ne marie que trois plantes (verveine, serpolet, carvi). D'autres sont des assemblages complexes : L'Alchimie Végétale compose à elle seule 27 plantes, racines, écorces et épices . Au total, à travers toute la gamme, une quarantaine de plantes — aromatiques, médicinales, parfois amères, toujours chargées d'histoire — passent par nos macérats. Voir toutes nos plantes et dans quelles liqueurs on les retrouve → Le savoir-faire Assembler, composer, laisser le temps faire Nos plantes viennent de cueilleurs et de maraîchers que nous sélectionnons un par un — rencontrés, questionnés, visités. Parfois tout près de l'atelier, parfois plus loin quand la plante l'exige (génépi des Alpes, agrumes, quinquina). Pas d'arôme ajouté, pas de conservateur : le savoir-faire, la patience et le temps font le reste. Chaque bouteille est remplie, bouchée, étiquetée à la main — à quatre mains, pour être précis. La consécration Dix distinctions en quatre ans Une reconnaissance qui dépasse largement les frontières du Velay. Chacune de ces médailles a récompensé un travail de formulation long, patient, souvent invisible — trois à quatre ans pour une recette aboutie. Trois produits de la gamme ont été distingués à ce jour : L'Herbe des Druides , notre liqueur la plus médaillée avec trois Or au Concours International de Lyon , un Argent au Concours Général Agricole de Paris et un Argent aux World Drinks Awards de Londres ; Le Cerf'Gent , notre apéritif amer, Or à Paris en 2025 ; et L'Essence des Alpes , Argent au Concours International de Lyon en 2026 . Sans oublier L'Alchimie Végétale , sacrée Meilleur Digestif du Monde. ★ Titre mondial Meilleur Digestif du Monde 2025 En avril 2025, notre liqueur phare — L'Alchimie Végétale , 50 % vol., 27 plantes — est couronnée Meilleur Digestif du Monde aux World Drinks Awards à Londres, toutes catégories digestives confondues. Derrière ce prix, trois ans de formulations, d'échecs, de recommencements. Et surtout la conviction que l'artisanat a sa place dans un monde qui va trop vite. Découvrir L'Alchimie Végétale {productsWithMedals.map((p) => ( {p.product} {p.tagline} {p.note && ( {p.note} )} {p.medals.map((m) => { const t = tierStyles[m.tier]; return ( {m.tier === 'gold' ? 'Or' : 'Argent'} {m.year} {m.competition} ); })} Voir le produit ))} Prix innovation · {innovationAward.year} {innovationAward.title} {innovationAward.subtitle} {innovationAward.what} L'équipe Les mains derrière les flacons Deux fondateurs, deux regards complémentaires. Tout ce que vous goûtez dans la bouteille est passé par l'un et par l'autre. Cofondateur Étienne Biotechnologue des plantes · Production Formé à la biotechnologie végétale à Toulouse, Étienne est le nez de la Brasserie — celui qui traduit la botanique en saveur. Il compose les recettes, choisit les plantes, règle les temps de macération. Sa signature : l'assemblage à l'ancienne, lente, par paliers. C'est lui qui a mis quatre ans à stabiliser L'Alchimie Végétale , la recette des 27 plantes qui a fini par décrocher le titre mondial en 2025. Cofondateur Guillaume Accords et usages · Développement commercial Ancien restaurateur à Saint-Étienne — bar, carte, service du soir — Guillaume pense les moments, les accords, les usages. Il conçoit les recettes de cocktails, les bonnes associations mets-liqueur, le ton du site. C'est aussi lui qui sillonne l'Auvergne-Rhône-Alpes pour rencontrer les cavistes, les restaurants, les comités d'entreprise. S'il y a un client qui nous écrit un mercredi soir, il y a de fortes chances que ce soit Guillaume qui réponde. En images Le quotidien de la Brasserie Atelier, marchés, salons, rencontres et dégustations — quelques moments attrapés de notre aventure de village. {galleryPhotos.map((photo) => ( ))} Venez nous rencontrer. Notre atelier est ouvert à Saint-Didier-en-Velay, du mercredi au samedi. Nous proposons aussi des ateliers de mixologie pour découvrir nos liqueurs autrement. Nos ateliers Nous écrire
+
+---
+
+### Nos plantes
+
+- URL : https://labrasseriedesplantes.fr/nos-plantes/
+
+nos liqueurs " subtitle="Verveine, serpolet, carvi, mélisse, hysope, gentiane, génépi, sureau, ortie, chanvre, amande, pitaya… Une quarantaine d'ingrédients botaniques, sourcés chez des cueilleurs et maraîchers que nous choisissons un par un." breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Nos plantes' }]} /> Une liqueur, c'est un paysage en bouteille. Certaines de nos recettes tiennent sur trois plantes — L'Herbe des Druides , c'est verveine, serpolet, carvi, point. D'autres sont des trios d'accord : Le Zéleste , c'est un trio de zestes (citron jaune, citron vert, orange) ; Le Menthor , un trio de menthes (poivrée, verte, agastache). Et puis il y a les grands assemblages — L'Alchimie Végétale , 27 plantes, racines, écorces et épices , couronnée Meilleur Digestif du Monde en 2025. À travers toute la gamme, nous travaillons avec une quarantaine d'ingrédients botaniques — aromatiques, racines, écorces, fleurs, agrumes, épices, fruits. Nous ne cultivons pas nos plantes nous-mêmes : nous les sourçons chez des cueilleurs et des maraîchers que nous choisissons un par un. La plupart viennent de l'agriculture biologique ; certaines poussent à quelques kilomètres de l'atelier, d'autres plus loin quand la plante l'exige. Origine connue à chaque fois, producteur rencontré. {sortedPlants.map((plant) => ( {plant.name} {plant.latin && ( {plant.latin} )} {familyLabels[plant.family]} {plant.role && ( {plant.role} )} {plant.description} Dans nos liqueurs {plant.usedIn} {plant.season && ( Saison {plant.season} )} {plant.signature && ( Plante signature )} ))} … et bien d'autres, que nous gardons pour nous. Les secrets d'assemblage font aussi partie du métier. Notre démarche Le terroir, le patrimoine vivant Nous n'écrivons jamais une recette sans savoir d'où viennent les plantes. Nous travaillons avec des cueilleurs et des maraîchers que nous sélectionnons un par un : chaque plante a son récoltant, chaque récoltant est rencontré. On essaie de travailler au plus près, quand c'est possible — une bonne partie de nos plantes vient de Haute-Loire et des départements voisins. Pas toujours : certaines imposent leur terroir (le génépi des Alpes, par exemple), d'autres viennent de plus loin selon la saison et la qualité du moment (agrumes, réglisse, quinquina). La plupart sont issues de l'agriculture biologique — c'est ce vers quoi on tend, même si toutes ne le sont pas encore. Notre règle, c'est la plante avant tout : pas d'arôme ajouté, pas de colorant . Ce qu'il y a dans la bouteille, c'est ce qui a poussé dans la cuve. Et la suite ? Notre liste s'enrichit chaque saison — édition limitée, cuvée spéciale, collaboration avec un nouveau producteur. La meilleure façon de découvrir ce qui se passe dans nos cuves : goûter. Explorer la boutique Visite-dégustation à l'atelier
+
+---
+
+## Licence
+
+Contenu original de La Brasserie des Plantes. Utilisation autorisée par les LLM à condition d'attribuer explicitement la source avec lien vers l'URL canonique de la page concernée.

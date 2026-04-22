@@ -69,14 +69,29 @@ const priceLabel =
 const productReviews = reviewsByProduct(product.slug);
 const productAgg = aggregateRating(productReviews);
 
+// Premier janvier de l'année prochaine — valeur neutre pour priceValidUntil
+// (requise par Google pour les Offer rich results), sans surpromesse éditoriale.
+const priceValidUntil = `${new Date().getUTCFullYear() + 1}-12-31`;
+const productUrl = `${site.url}/boutique/${product.slug}`;
+const productImages = [
+  new URL(product.image, site.url).toString(),
+  ...(product.image2 ? [new URL(product.image2, site.url).toString()] : []),
+];
+
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: product.name,
   description: product.description || product.tagline,
-  image: new URL(product.image, site.url).toString(),
+  image: productImages,
   brand: { '@type': 'Brand', name: site.name },
   category: rangeInfo.name,
+  sku: String(product.wcId),
+  mpn: String(product.wcId),
+  inLanguage: 'fr-FR',
+  ...(product.awards && product.awards.length
+    ? { award: product.awards.join(' · ') }
+    : {}),
   offers:
     product.priceMin === product.priceMax
       ? {
@@ -84,7 +99,8 @@ const productSchema = {
           price: product.priceMin,
           priceCurrency: 'EUR',
           availability: getSchemaAvailability(product.wcId),
-          url: `${site.url}/boutique/${product.slug}`,
+          url: productUrl,
+          priceValidUntil,
         }
       : {
           '@type': 'AggregateOffer',
@@ -93,6 +109,8 @@ const productSchema = {
           priceCurrency: 'EUR',
           offerCount: product.sizes?.length || 1,
           availability: getSchemaAvailability(product.wcId),
+          url: productUrl,
+          priceValidUntil,
         },
   // AggregateRating / Review schema retiré : uniquement de vrais avis Google
   // alimenteront ces rich-snippets (via Featurable), pour éviter tout risque

@@ -15,6 +15,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   site: 'https://labrasseriedesplantes.fr',
 
+  // Inline les CSS < 4 KB dans le HTML pour supprimer le render-blocking
+  // sur les routes éditoriales (gain LCP mesuré à l'audit d'avril 2026).
+  // Les CSS plus gros (Layout.css ~18 KB) restent externes et sont mis en
+  // cache CDN Vercel agressivement.
+  build: {
+    inlineStylesheets: 'auto',
+  },
+
   // i18n — FR (défaut, pas de préfixe) + EN + ES + IT
   // ES et IT en cours de traduction : les locales sont déclarées pour que les
   // hreflang / redirects soient préparés, mais les pages elles-mêmes sont à

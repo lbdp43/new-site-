@@ -91,7 +91,7 @@ Arbuste omniprésent dans les haies auvergnates. On utilise ses **fleurs** au pr
 - **Profil des fleurs** : muscat, note de raisin blanc, finale florale fraîche.
 - **Profil des baies** : fruité sombre, rondeur, note de mûre sauvage.
 - **Récolte** : fleurs en mai-juin, baies en août-septembre.
-- **Nos cueilleurs** : 2 cueilleurs professionnels (formés par le **Parc Naturel Régional du Livradois-Forez**).
+- **Nos cueilleurs** : 2 cueilleurs professionnels (formés par le [**Parc Naturel Régional du Livradois-Forez**](https://www.parc-livradois-forez.org/)).
 - **Usage chez nous** : cœur du [Nectar d'Ostara](/boutique/nectar-ostara) (fleurs) et de certaines éditions limitées (baies).
 
 ### 7. La myrtille sauvage (*Vaccinium myrtillus*)
@@ -175,6 +175,8 @@ C'est pour ça qu'on ne cherche pas à produire à la tonne. Le Velay n'est pas 
 - [Comment choisir une liqueur artisanale — le guide complet](/blog/choisir-liqueur-artisanale-guide)
 - [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — portrait d'un écosystème
 - [Plantes oubliées du Velay : 7 espèces qui reviennent dans nos verres](/blog/plantes-oubliees-du-velay)
+- [Le Velay dans une bouteille — notre portrait par Velay Attractivité](/blog/velay-attractivite-portrait-institutionnel)
+- [L'art de redonner vie aux plantes oubliées — Loire Semène Tourisme](/blog/loire-semene-tourisme-plantes-oubliees)
 - [Découvrez les 12 plantes de notre gamme](/nos-plantes) — fiches détaillées
 
 Ou parcourez [la gamme complète](/boutique) — toutes issues de cet écosystème végétal auvergnat.

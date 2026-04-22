@@ -42,10 +42,10 @@ La suite — la demande qui double, les distributeurs étrangers qui appellent, 
 ## Ce qui n'a pas changé
 
 - **Saint-Didier-en-Velay**. Nous n'avons pas quitté le village. L'atelier est à 300 mètres de l'école où Étienne et Guillaume se sont rencontrés.
-- **Les plantes**. Toujours bio, beaucoup produites par nous ou par nos voisins partenaires.
+- **Les plantes**. Majoritairement bio, toutes récoltées par nos cueilleurs et maraîchers partenaires, en Haute-Loire et dans les départements voisins.
 - **L'embouteillage à la main**. Un remplisseur semi-automatique pour les grosses séries, un embouteillage manuel pour les éditions limitées. Chaque bouchon est posé à la main.
 - **La taille de l'équipe**. Deux. Étienne et Guillaume. Ça suffit.
 
 ---
 
-**Envie d'en savoir plus ?** Lisez [notre histoire complète](/notre-histoire) ou [venez nous rencontrer](/contact) à Saint-Didier-en-Velay — nous sommes ouverts du lundi au samedi.
+**Envie d'en savoir plus ?** Lisez [notre histoire complète](/notre-histoire) ou [venez nous rencontrer](/contact) à Saint-Didier-en-Velay — la boutique est ouverte mercredi, vendredi et samedi, de 9h à 18h30.

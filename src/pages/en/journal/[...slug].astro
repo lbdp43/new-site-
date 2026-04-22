@@ -44,7 +44,8 @@ const articleSchema = {
   dateModified: (post.data.updated ?? post.data.date).toISOString(),
   author: authorSchema,
   publisher: { '@id': `${site.url}#localbusiness` },
-  image: post.data.cover ? new URL(post.data.cover, site.url).toString() : undefined,
+  image: new URL(post.data.cover ?? '/og-default.jpg', site.url).toString(),
+  wordCount: (post.body ?? '').split(/\s+/).filter(Boolean).length,
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': `${site.url}/en/journal/${post.id}`,

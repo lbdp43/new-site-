@@ -8,23 +8,9 @@ import { site } from '../../data/site';
 import { featuredProducts, products } from '../../data/products';
 import { localizedPath } from '../../i18n/utils';
 
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: site.name,
-  url: site.url,
-  logo: new URL('/logo.webp', site.url).toString(),
-  email: site.email,
-  telephone: site.phone,
-  foundingDate: site.founded,
-  founders: site.founders.map((f) => ({ '@type': 'Person', name: f })),
-  sameAs: [site.social.instagram, site.social.facebook],
-  award: `${site.award.title} ${site.award.year} — ${site.award.issuer}`,
-};
-
 const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': ['LocalBusiness', 'Organization'],
   '@id': `${site.url}#localbusiness`,
   name: site.name,
   alternateName: site.shortName,
@@ -105,14 +91,15 @@ const videoSchema = {
   publisher: { '@id': `${site.url}#localbusiness` },
 };
 
-const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSchema];
+const schema = [localBusinessSchema, websiteSchema, videoSchema];
 ---
 <Layout
   lang="en"
   title="La Brasserie des Plantes — Craft liqueurs, Haute-Loire"
-  description="Organic craft liqueurs from Auvergne, France. L'Alchimie Végétale: World's Best Digestif 2025 (World Drinks Awards). Made in Haute-Loire."
+  description="Craft botanical liqueurs handmade in Haute-Loire, France. L'Alchimie Végétale: World's Best Digestif 2025 (World Drinks Awards). Online shop with EU-wide shipping, workshop visits in Saint-Didier-en-Velay."
   schema={schema}
   hasHero={true}
+  preloadImage="/videos/lbdp-pro-poster.jpg"
 >
   <!-- HERO VIDEO fullscreen — same pattern as /professionnels -->
   <section class="relative min-h-[100dvh] w-full overflow-hidden bg-forest-950">
@@ -121,6 +108,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
       muted
       loop
       playsinline
+      preload="metadata"
       poster="/videos/lbdp-pro-poster.jpg"
       class="absolute inset-0 w-full h-full object-cover"
     >
@@ -307,7 +295,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="none"
         poster="/videos/lbdp-intro-poster.jpg"
         class="absolute inset-0 w-full h-full object-cover"
       >

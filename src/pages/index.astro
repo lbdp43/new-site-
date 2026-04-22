@@ -12,26 +12,12 @@ import { featuredProducts, products } from '../data/products';
 // alimenté uniquement par de VRAIS avis Google (via Featurable, une fois le
 // widgetId renseigné dans site.ts) pour éviter tout risque de rich-snippet
 // trompeur. Les avis internes restent affichés côté UI pour la preuve sociale.
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: site.name,
-  url: site.url,
-  logo: new URL('/logo.webp', site.url).toString(),
-  email: site.email,
-  telephone: site.phone,
-  foundingDate: site.founded,
-  founders: site.founders.map((f) => ({ '@type': 'Person', name: f })),
-  sameAs: [site.social.instagram, site.social.facebook],
-  award: `${site.award.title} ${site.award.year} — ${site.award.issuer}`,
-};
-
-// LocalBusiness enrichi — image riche, horaires structurés, paiements, zone
-// servie, fondateurs, lien GBP. Signal SEO majeur pour Google Maps et pour
-// les AI (citations "où trouver / adresse / horaires").
+// LocalBusiness + Organization fusionnés dans un seul bloc pour éviter la
+// double entité dans le Knowledge Graph. On garde toutes les propriétés
+// (horaires, paiements, zone, fondateurs, GBP) et on y ajoute l'award.
 const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': ['LocalBusiness', 'Organization'],
   '@id': `${site.url}#localbusiness`,
   name: site.name,
   alternateName: site.shortName,
@@ -120,13 +106,14 @@ const videoSchema = {
   publisher: { '@id': `${site.url}#localbusiness` },
 };
 
-const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSchema];
+const schema = [localBusinessSchema, websiteSchema, videoSchema];
 ---
 <Layout
   title="La Brasserie des Plantes | Liqueurs artisanales bio — Haute-Loire"
-  description="Liqueurs artisanales de plantes d'Auvergne. L'Alchimie Végétale, Meilleur Digestif du Monde 2025 (World Drinks Awards). Haute-Loire, bio."
+  description="Liqueurs artisanales de plantes d'Auvergne, faites main en Haute-Loire. L'Alchimie Végétale, Meilleur Digestif du Monde 2025 (World Drinks Awards). Boutique en ligne, livraison offerte dès 65 €, visites atelier à Saint-Didier-en-Velay."
   schema={schema}
   hasHero={true}
+  preloadImage="/videos/lbdp-pro-poster.jpg"
 >
   <!-- HERO VIDÉO plein écran — même pattern que /professionnels : vidéo en
        background + overlay sombre + contenu centré (badge + H1 + intro + CTAs). -->
@@ -136,6 +123,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
       muted
       loop
       playsinline
+      preload="metadata"
       poster="/videos/lbdp-pro-poster.jpg"
       class="absolute inset-0 w-full h-full object-cover"
     >
@@ -250,7 +238,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="none"
         poster="/videos/lbdp-intro-poster.jpg"
         class="absolute inset-0 w-full h-full object-cover"
       >
@@ -406,7 +394,7 @@ const schema = [organizationSchema, localBusinessSchema, websiteSchema, videoSch
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
           poster="/videos/boutique-sortie-poster.jpg"
           aria-label="Sortie de la boutique de La Brasserie des Plantes à Saint-Didier-en-Velay"
           class="w-full h-full object-cover"
