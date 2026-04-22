@@ -184,19 +184,25 @@ const fmtDate = (iso: string) => {
   description="Deux ateliers en Haute-Loire avec Étienne : fabriquez votre liqueur (2h, 75 €) ou visite-dégustation de six liqueurs (1h30, 17 €). 23 avis clients."
   schema={[breadcrumb, ...workshopsSchema]}
 >
-  <!-- HERO — vidéo YouTube Wecandoo en fond (3H8FSvDwjnM) + contenu sur overlay
-       doux pour garder la vidéo bien visible. -->
+  <!-- HERO — vidéo locale `atelier-brasserie.mp4` en loop muet. Auparavant
+       un iframe YouTube qui dépendait d'un domaine externe (bloqué par
+       certains adblockers, lenteur de chargement, et on ne le maîtrise pas
+       si la vidéo est supprimée). La version locale est fiable, plus rapide
+       à charger, et cache-friendly sur Vercel CDN. -->
   <section class="relative min-h-[70vh] md:min-h-[80vh] overflow-hidden bg-forest-950 flex items-end">
-    <!-- YouTube bg, responsive via wrapper 16:9 recouvrant toute la section -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <iframe
-        src="https://www.youtube.com/embed/3H8FSvDwjnM?autoplay=1&mute=1&loop=1&playlist=3H8FSvDwjnM&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1"
-        title="Atelier La Brasserie des Plantes — vidéo Wecandoo"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full"
-        style="width: 177.78vh; height: 56.25vw; border: 0;"
-      ></iframe>
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/videos/atelier-brasserie-poster.webp"
+        aria-label="Atelier La Brasserie des Plantes — production de liqueurs à Saint-Didier-en-Velay"
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/videos/atelier-brasserie.mp4" type="video/mp4" />
+      </video>
     </div>
     <!-- Ombrage 2 couches : une teinte globale qui unifie + un dégradé plus
          marqué côté texte (en bas-gauche) pour que la typo blanche ressorte
