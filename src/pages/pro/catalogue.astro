@@ -56,17 +56,22 @@ const breadcrumb = {
   <!-- Viewer PDF — iframe avec toolbar désactivée. Le `#toolbar=0&navpanes=0`
        masque l'UI native (incluant le bouton download) dans Chrome/Edge/Firefox.
        Sur Safari iOS/macOS le paramètre est ignoré (PDF viewer différent) —
-       accepté comme compromis (lecture en ligne fluide prioritaire sur DRM). -->
+       accepté comme compromis (lecture en ligne fluide prioritaire sur DRM).
+
+       `view=Fit` = page entière (pas `FitH` qui étirait à la largeur écran
+       et rendait le PDF illisible sur grand moniteur). L'iframe est bornée
+       à 960 px max centrée : rendu "lecteur de document" classique, lisible
+       sans zoom sur tous les formats d'écran. -->
   <section
     id="catalogue-viewer"
-    class="relative bg-forest-950 select-none"
+    class="relative bg-forest-950 select-none py-6 md:py-8"
     oncontextmenu="return false;"
   >
     <iframe
-      src="/catalogues/catalogue-pro-2025.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH"
+      src="/catalogues/catalogue-pro-2025.pdf#toolbar=0&navpanes=0&scrollbar=1&view=Fit"
       title="Catalogue professionnels 2025 — La Brasserie des Plantes"
-      class="block w-full border-0"
-      style="height: calc(100vh - 70px);"
+      class="block w-full mx-auto border-0 shadow-2xl rounded-sm bg-white"
+      style="max-width: 960px; height: calc(100vh - 140px);"
       loading="lazy"
     ></iframe>
   </section>
