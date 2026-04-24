@@ -25,8 +25,8 @@
           "value": "camera=(), microphone=(), geolocation=(), payment=(self \"https://js.stripe.com\" \"https://hooks.stripe.com\")"
         },
         {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; media-src 'self' blob: https://*.labrasseriedesplantes.fr; connect-src 'self' https://labrasseriedesplantes.fr https://www.labrasseriedesplantes.fr https://api.stripe.com https://js.stripe.com https://hooks.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self' https://js.stripe.com"
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.stripe.com https://*.stripe.network https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; media-src 'self' blob: https://*.labrasseriedesplantes.fr; connect-src 'self' https://*.labrasseriedesplantes.fr https://*.stripe.com https://*.stripe.network https://maps.googleapis.com; frame-src https://*.stripe.com https://*.stripe.network https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self' https://*.stripe.com"
         }
       ]
     },
