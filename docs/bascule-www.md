@@ -204,6 +204,22 @@ SEO et pour éviter les oublis.
     doit détecter au moins : Product, LocalBusiness, Breadcrumb, FAQ (sur
     `/faq`), Recipe (sur les cocktails), Event (sur `/ateliers`).
 
+- [ ] **Repasser la CSP en mode enforce**
+  Après l'audit SEO avril 2026, une CSP a été ajoutée dans `vercel.json`
+  mais elle bloquait plusieurs domaines Stripe (`m.stripe.com`,
+  `r.stripe.com`, `m.stripe.network`…) nécessaires au Payment Element
+  → "Failed to fetch" au checkout. La CSP a été passée en
+  **`Content-Security-Policy-Report-Only`** avec wildcards élargis
+  (`*.stripe.com`, `*.stripe.network`, `*.labrasseriedesplantes.fr`) —
+  elle observe sans bloquer.
+
+  **Après la bascule** : valider un checkout réel avec 1-2 € en
+  production puis repasser le header en `Content-Security-Policy`
+  (enforce) si aucune requête critique n'a été signalée comme bloquée
+  dans les DevTools console pendant le test. En cas de doute, garder
+  en Report-Only — la sécurité dégradée est minime (HSTS + X-Frame +
+  Permissions-Policy restent en place).
+
 - [ ] **Régénérer les clés REST API WC "Astro site"**
   WP Admin → WooCommerce → Réglages → Avancé → API REST → supprimer
   les anciennes (qui ont transité par les conversations Claude). Créer une
