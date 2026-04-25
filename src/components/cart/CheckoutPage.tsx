@@ -233,9 +233,49 @@ function CheckoutInner() {
       });
 
       const status = result.payment_result.payment_status;
+      const paymentDetails = result.payment_result.payment_details ?? [];
+      const detailsMap: Record<string, string> = Object.fromEntries(
+        paymentDetails.map((d) => [d.key, d.value]),
+      );
+
+      // 3D Secure / SCA — WooPayments renvoie un client_secret dans
+      // payment_details quand la banque demande une authentification.
+      // Le front doit appeler stripe.confirmCardPayment() pour finaliser.
+      // Sans ça, le PaymentIntent reste en `requires_action` et la carte
+      // n'est jamais débitée → commande en "En attente de paiement".
+      const clientSecret =
+        detailsMap.payment_intent_client_secret ??
+        detailsMap.client_secret ??
+        detailsMap.payment_intent_secret;
+
+      if (clientSecret) {
+        const { error: confirmError, paymentIntent } =
+          await stripe.confirmCardPayment(clientSecret);
+
+        if (confirmError) {
+          setFormError(
+            confirmError.message ??
+              "L'authentification 3D Secure a échoué. Réessaie ou utilise une autre carte.",
+          );
+          return;
+        }
+
+        if (paymentIntent?.status === "succeeded" || paymentIntent?.status === "processing") {
+          setCart(null);
+          window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
+            result.order_key,
+          )}`;
+          return;
+        }
+
+        setFormError(
+          `Paiement non finalisé (statut Stripe : ${paymentIntent?.status ?? "inconnu"}). Réessaie.`,
+        );
+        return;
+      }
 
       if (status === "success") {
-        // Panier vidé côté serveur, on le vide côté client aussi.
+        // Pas de 3DS — paiement direct accepté.
         setCart(null);
         window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
           result.order_key,
@@ -243,12 +283,9 @@ function CheckoutInner() {
         return;
       }
 
-      // 3D Secure / action supplémentaire requise.
+      // Fallback : redirection externe (rare, pattern WC Stripe legacy).
       const redirectUrl = result.payment_result.redirect_url;
       if (redirectUrl) {
-        // Si WooCommerce renvoie un client_secret pour confirmation Stripe.js,
-        // on aura besoin d'ajuster selon le vrai payload. Pour l'instant,
-        // on redirige simplement vers l'URL fournie (pattern WC Stripe).
         window.location.href = redirectUrl;
         return;
       }
