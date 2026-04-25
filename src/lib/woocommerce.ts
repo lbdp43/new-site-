@@ -58,7 +58,17 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const nonce = getNonce();
   if (nonce) headers.set("Nonce", nonce);
 
-  const res = await fetch(`${STORE_API}${path}`, { ...init, headers });
+  let res: Response;
+  try {
+    res = await fetch(`${STORE_API}${path}`, { ...init, headers });
+  } catch (err) {
+    // fetch() lui-même a rejeté (network, CORS preflight, CSP…).
+    // On enrichit le message générique "Failed to fetch" avec le contexte utile.
+    const reason = err instanceof Error ? err.message : "erreur réseau";
+    throw new Error(
+      `Impossible de joindre le serveur de paiement (${reason}). Vérifie ta connexion et réessaie. Si le problème persiste, contacte-nous.`,
+    );
+  }
 
   // Met à jour le Cart-Token / Nonce si WC en renvoie de nouveaux.
   const newToken = res.headers.get("Cart-Token");
@@ -66,11 +76,26 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const newNonce = res.headers.get("Nonce");
   if (newNonce) setNonce(newNonce);
 
-  const body = await res.json().catch(() => null);
+  // Essaie d'abord JSON, sinon récupère le texte brut (pour les 500 HTML).
+  const rawText = await res.text();
+  let body: unknown = null;
+  try {
+    body = rawText ? JSON.parse(rawText) : null;
+  } catch {
+    body = null;
+  }
 
   if (!res.ok) {
     const err = body as WcStoreError | null;
-    throw new Error(err?.message || `WooCommerce Store API error (${res.status})`);
+    if (err?.message) {
+      throw new Error(err.message);
+    }
+    // Pas de JSON parsable — log la réponse brute pour diagnostic + message lisible.
+    if (rawText) {
+      console.error(`[WC] ${res.status} ${path} — body brut :`, rawText.slice(0, 500));
+    }
+    const ctx = res.status >= 500 ? "Erreur serveur de paiement" : "Erreur de paiement";
+    throw new Error(`${ctx} (HTTP ${res.status}). Réessaie ou contacte-nous si ça persiste.`);
   }
 
   return body as T;
