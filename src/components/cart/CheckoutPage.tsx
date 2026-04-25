@@ -201,6 +201,13 @@ function CheckoutInner() {
       // Payload spécifique à WooPayments (et non au plugin Stripe Gateway) :
       //   payment_method = "woocommerce_payments"
       //   payment_data[] = { key: "wcpay-payment-method", value: "pm_xxx" }
+      //
+      // ⚠️ `wcpay-payment-method-type` est OBLIGATOIRE (paymentMethod.type côté
+      // Stripe = "card" / "sepa_debit" / etc.) — sans ce champ, WooPayments
+      // 10.7+ plante côté serveur avec :
+      //   "WC_Payment_Gateway_WCPay::get_payment_method_types(): Return value
+      //    must be of type array, null returned"
+      // (cf. fatal-errors-2026-04-25.log, ligne 1).
       const result = await wc.checkout({
         billing_address: billing,
         shipping_address: effectiveShipping,
@@ -208,6 +215,7 @@ function CheckoutInner() {
         payment_method: "woocommerce_payments",
         payment_data: [
           { key: "wcpay-payment-method", value: paymentMethod.id },
+          { key: "wcpay-payment-method-type", value: paymentMethod.type ?? "card" },
           { key: "wc-woocommerce_payments-new-payment-method", value: "false" },
         ],
       });

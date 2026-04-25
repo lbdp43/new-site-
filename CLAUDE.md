@@ -93,10 +93,16 @@ transporteur EasyBee) reste géré par WooCommerce côté serveur.
      "payment_method": "woocommerce_payments",
      "payment_data": [
        { "key": "wcpay-payment-method", "value": "pm_xxx" },
+       { "key": "wcpay-payment-method-type", "value": "card" },
        { "key": "wc-woocommerce_payments-new-payment-method", "value": "false" }
      ]
    }
    ```
+   ⚠️ **`wcpay-payment-method-type` est obligatoire** — sans ce champ,
+   WooPayments 10.7+ plante avec une `TypeError` fatale dans
+   `get_payment_method_types()` (return null sur un type déclaré `array`).
+   Diagnostiqué le 25 avril 2026 — voir `seo-audit-2026-04-22/` (HAR
+   reçu) et le fichier `fatal-errors-*.log` côté WP.
 5. WooPayments crée la commande côté WP, débite la carte, envoie les emails,
    notifie EasyBee. Redirection vers `/commande/confirmation?order=XXX&key=YYY`.
 
