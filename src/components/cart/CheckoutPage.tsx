@@ -198,16 +198,22 @@ function CheckoutInner() {
       }
 
       // Envoie la commande à WooCommerce Store API.
-      // Payload spécifique à WooPayments (et non au plugin Stripe Gateway) :
-      //   payment_method = "woocommerce_payments"
-      //   payment_data[] = { key: "wcpay-payment-method", value: "pm_xxx" }
+      // Payload spécifique à WooPayments (et non au plugin Stripe Gateway).
       //
-      // ⚠️ `wcpay-payment-method-type` est OBLIGATOIRE (paymentMethod.type côté
-      // Stripe = "card" / "sepa_debit" / etc.) — sans ce champ, WooPayments
-      // 10.7+ plante côté serveur avec :
-      //   "WC_Payment_Gateway_WCPay::get_payment_method_types(): Return value
-      //    must be of type array, null returned"
-      // (cf. fatal-errors-2026-04-25.log, ligne 1).
+      // ⚠️ Liste complète des clés que WooPayments lit côté serveur quand
+      // on passe par le chemin Legacy de la Store API. Sans ces champs, la
+      // fonction `WC_Payment_Gateway_WCPay::get_payment_method_types()` peut
+      // retourner null sur un type hint `: array` → TypeError fatale (cf.
+      // fatal-errors-2026-04-25.log, ligne 6 et suivantes).
+      //
+      //   - wcpay-payment-method        : pm_xxx renvoyé par Stripe Elements
+      //   - wcpay-payment-method-type   : type Stripe ("card", "sepa_debit"…)
+      //   - wcpay-fingerprint           : empreinte device anti-fraude (vide
+      //                                   accepté quand pas de Stripe Radar)
+      //   - wcpay-fraud-prevention-token: token anti-CSRF WooPayments (vide
+      //                                   accepté en absence de session)
+      //   - wcpay-payment-country       : code pays facturation (compliance)
+      //   - wc-woocommerce_payments-new-payment-method : booléen "save card?"
       const result = await wc.checkout({
         billing_address: billing,
         shipping_address: effectiveShipping,
@@ -216,6 +222,9 @@ function CheckoutInner() {
         payment_data: [
           { key: "wcpay-payment-method", value: paymentMethod.id },
           { key: "wcpay-payment-method-type", value: paymentMethod.type ?? "card" },
+          { key: "wcpay-fingerprint", value: "" },
+          { key: "wcpay-fraud-prevention-token", value: "" },
+          { key: "wcpay-payment-country", value: billing.country || "FR" },
           { key: "wc-woocommerce_payments-new-payment-method", value: "false" },
         ],
       });
