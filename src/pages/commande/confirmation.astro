@@ -59,4 +59,17 @@ const orderKey = url.searchParams.get('key') ?? '';
       </div>
     </div>
   </section>
+
+  <!-- Filet de sécurité : si l'utilisateur atterrit ici (paiement réussi ou
+       arrivée depuis l'email de confirmation), on purge la session WC locale
+       (Cart-Token + Nonce + cache state). Le prochain ajout au panier
+       démarrera proprement avec un nouveau panier. -->
+  <script type="module">
+    try {
+      window.localStorage.removeItem('lbdp_cart_token');
+      window.localStorage.removeItem('lbdp_wc_nonce');
+    } catch {
+      /* localStorage indispo (private mode strict) — pas grave */
+    }
+  </script>
 </Layout>

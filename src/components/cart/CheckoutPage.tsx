@@ -295,7 +295,12 @@ function CheckoutInner() {
         const intentStatus = paymentIntent?.status ?? setupIntent?.status;
 
         if (intentStatus === "succeeded" || intentStatus === "processing") {
+          // Vide le panier ET la session WC (Cart-Token + Nonce dans
+          // localStorage). Sans clearSession(), le prochain `getCart()`
+          // ressort le panier en cache → l'icône panier en header garde
+          // les anciens items même après un paiement réussi.
           setCart(null);
+          wc.clearSession();
           window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
             result.order_key,
           )}`;
@@ -311,6 +316,7 @@ function CheckoutInner() {
       if (status === "success") {
         // Pas de 3DS — paiement direct accepté.
         setCart(null);
+        wc.clearSession();
         window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
           result.order_key,
         )}`;
