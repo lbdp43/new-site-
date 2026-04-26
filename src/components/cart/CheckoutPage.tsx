@@ -233,24 +233,26 @@ function CheckoutInner() {
       });
 
       const status = result.payment_result.payment_status;
-      const paymentDetails = result.payment_result.payment_details ?? [];
-      const detailsMap: Record<string, string> = Object.fromEntries(
-        paymentDetails.map((d) => [d.key, d.value]),
-      );
+      const redirectUrl = result.payment_result.redirect_url ?? "";
 
-      // 3D Secure / SCA — WooPayments renvoie un client_secret dans
-      // payment_details quand la banque demande une authentification.
-      // Le front doit appeler stripe.confirmCardPayment() pour finaliser.
-      // Sans ça, le PaymentIntent reste en `requires_action` et la carte
-      // n'est jamais débitée → commande en "En attente de paiement".
-      const clientSecret =
-        detailsMap.payment_intent_client_secret ??
-        detailsMap.client_secret ??
-        detailsMap.payment_intent_secret;
+      // 3D Secure / SCA — WooPayments encode le client_secret dans le
+      // champ `redirect` avec un format spécial :
+      //   #wcpay-confirm-pi:{order_id}:{client_secret}:{nonce}[:{pm_id}]
+      //   #wcpay-confirm-si:{order_id}:{client_secret}:{nonce}[:{pm_id}]
+      // Référence : woocommerce-payments includes/class-wc-payment-gateway-wcpay.php:1933-1950.
+      //
+      // Quand ce hash est présent, il faut OBLIGATOIREMENT appeler
+      // stripe.confirmCardPayment(clientSecret) pour exécuter le challenge
+      // 3DS (popup banque), sinon le PaymentIntent reste en
+      // `requires_action` et la carte n'est jamais débitée.
+      const wcpayMatch = redirectUrl.match(/^#wcpay-confirm-(pi|si):([^:]+):([^:]+):([^:]+)/);
+      if (wcpayMatch) {
+        const [, intentType, , clientSecret] = wcpayMatch;
 
-      if (clientSecret) {
-        const { error: confirmError, paymentIntent } =
-          await stripe.confirmCardPayment(clientSecret);
+        const { error: confirmError, paymentIntent, setupIntent } =
+          intentType === "si"
+            ? await stripe.confirmCardSetup(clientSecret)
+            : await stripe.confirmCardPayment(clientSecret);
 
         if (confirmError) {
           setFormError(
@@ -260,7 +262,10 @@ function CheckoutInner() {
           return;
         }
 
-        if (paymentIntent?.status === "succeeded" || paymentIntent?.status === "processing") {
+        const intentStatus = paymentIntent?.status ?? setupIntent?.status;
+        if (intentStatus === "succeeded" || intentStatus === "processing") {
+          // Paiement validé côté Stripe — WooPayments mettra la commande
+          // à jour via webhook (ou le polling de la confirmation page).
           setCart(null);
           window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
             result.order_key,
@@ -269,7 +274,7 @@ function CheckoutInner() {
         }
 
         setFormError(
-          `Paiement non finalisé (statut Stripe : ${paymentIntent?.status ?? "inconnu"}). Réessaie.`,
+          `Paiement non finalisé (statut Stripe : ${intentStatus ?? "inconnu"}). Réessaie.`,
         );
         return;
       }
@@ -284,8 +289,7 @@ function CheckoutInner() {
       }
 
       // Fallback : redirection externe (rare, pattern WC Stripe legacy).
-      const redirectUrl = result.payment_result.redirect_url;
-      if (redirectUrl) {
+      if (redirectUrl && !redirectUrl.startsWith("#")) {
         window.location.href = redirectUrl;
         return;
       }
