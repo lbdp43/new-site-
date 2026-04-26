@@ -1,0 +1,312 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { products } from '../data/products';
+
+const title = "Liqueurs artisanales françaises — Brasserie des Plantes (Haute-Loire)";
+const description = "Qu'est-ce qu'une liqueur artisanale ? Définition, fabrication, différences avec une liqueur industrielle. Notre gamme de liqueurs artisanales aux plantes d'Auvergne, Meilleur Digestif du Monde 2025.";
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Liqueurs artisanales', item: `${site.url}/liqueurs-artisanales` },
+  ],
+};
+
+const faq = [
+  {
+    q: "Qu'est-ce qu'une liqueur artisanale ?",
+    a: "Une liqueur artisanale est un spiritueux sucré (15° à 50° en moyenne) obtenu par macération d'ingrédients naturels — plantes, fruits, écorces, racines, épices — dans de l'alcool neutre, suivie d'un assemblage et d'un repos. À la différence des liqueurs industrielles qui partent souvent d'arômes standardisés, l'artisan travaille la matière brute et accepte les variations de millésime, de récolte et de terroir.",
+  },
+  {
+    q: "Quelle différence entre une liqueur artisanale et une liqueur industrielle ?",
+    a: "L'industriel fabrique à partir d'extraits aromatiques standardisés livrés en fûts métalliques, dosés au gramme près pour garantir une identité gustative constante. L'artisan macère des plantes fraîches ou séchées (verveine, gentiane, menthe…), avec des variations naturelles d'une cuvée à l'autre. Côté procédé, l'artisan utilise des macérations longues (semaines à mois), un embouteillage souvent manuel, et des lots beaucoup plus petits.",
+  },
+  {
+    q: "Comment reconnaître une vraie liqueur artisanale ?",
+    a: "Cinq signaux : (1) l'étiquette nomme les producteurs ou la région d'origine des plantes, (2) la mention « sans arôme ajouté ni colorant de synthèse » apparaît clairement, (3) le profil aromatique varie d'une cuvée à l'autre (millésimage), (4) le prix au litre est plus élevé qu'une liqueur industrielle, (5) l'atelier accepte les visites sur rendez-vous.",
+  },
+  {
+    q: "Quel est le degré d'alcool d'une liqueur artisanale ?",
+    a: "Variable selon la recette : les apéritifs amers ou floraux titrent généralement entre 15° et 22°, les liqueurs signature autour de 25° à 35°, et les digestifs de prestige (type assemblage de 27 plantes) montent jusqu'à 50°. Le degré influence la conservation, la mâche en bouche et l'usage (pur, allongé, en cocktail).",
+  },
+  {
+    q: "Comment se conserve une liqueur artisanale ?",
+    a: "Plusieurs années non ouverte, à l'abri de la lumière et de la chaleur. Une fois ouverte, comptez 12 à 18 mois pour conserver l'intégralité des arômes. Au-delà, la liqueur reste consommable mais s'assouplit — certains amateurs apprécient cette évolution.",
+  },
+  {
+    q: "Les liqueurs artisanales sont-elles bio ?",
+    a: "Pas systématiquement. Chez La Brasserie des Plantes, la majorité des plantes vient de cueilleurs et de maraîchers en agriculture biologique en Haute-Loire et dans les départements voisins. Toutes ne le sont pas (certaines plantes rares ou ingrédients tropicaux comme la cannelle de Ceylan). Nous privilégions le bio à chaque fois que c'est possible.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Liqueurs artisanales françaises — Définition, fabrication, gamme La Brasserie des Plantes',
+  description,
+  inLanguage: 'fr-FR',
+  author: { '@id': `${site.url}#localbusiness` },
+  publisher: { '@id': `${site.url}#localbusiness` },
+  image: new URL('/og-default.jpg', site.url).toString(),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${site.url}/liqueurs-artisanales` },
+};
+
+const featured = products.filter((p) => p.seoCategory && p.range !== 'accessoire' && p.range !== 'lumiere-obscure').slice(0, 8);
+---
+<Layout
+  title={title}
+  description={description}
+  schema={[breadcrumb, articleSchema, faqSchema]}
+>
+  <!-- Fil d'Ariane + H1 -->
+  <section class="bg-cream-50 border-b border-forest-100/60 py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <nav class="text-xs text-ink-500 mb-6" aria-label="Fil d'Ariane">
+        <a href="/" class="hover:text-forest-700">Accueil</a>
+        <span class="mx-2">/</span>
+        <span class="text-forest-700">Liqueurs artisanales</span>
+      </nav>
+      <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">
+        Le guide complet
+      </div>
+      <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-forest-900 mb-6 leading-[1.1]">
+        Liqueurs artisanales <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">françaises</em>
+      </h1>
+      <p class="text-lg md:text-xl text-ink-700 leading-relaxed max-w-3xl">
+        Qu'est-ce qui distingue vraiment une liqueur artisanale d'une production
+        industrielle ? Tout ce qu'il faut savoir avant d'acheter — définition,
+        fabrication, qualité des ingrédients, prix, conservation. Plus notre
+        gamme de liqueurs artisanales aux plantes d'Auvergne, dont
+        <em>L'Alchimie Végétale</em>, élue
+        <strong class="font-medium text-forest-800">Meilleur Digestif du Monde 2025</strong>
+        aux World Drinks Awards.
+      </p>
+    </div>
+  </section>
+
+  <!-- Définition -->
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg max-w-none
+                prose-headings:font-display prose-headings:text-forest-900
+                prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-ink-700 prose-p:leading-relaxed
+                prose-a:text-forest-700 prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-forest-900 prose-strong:font-medium">
+      <h2>Définition : qu'est-ce qu'une liqueur artisanale ?</h2>
+      <p>
+        Une <strong>liqueur</strong> est un spiritueux sucré obtenu par macération
+        d'ingrédients végétaux ou de fruits dans de l'alcool, à un degré
+        compris entre 15° et 55° en général. Le terme <strong>« artisanale »</strong>
+        n'est pas une mention légale protégée en France — il décrit plutôt une
+        approche de fabrication : <em>petits lots, ingrédients bruts, gestes manuels,
+        pas d'arôme de synthèse</em>.
+      </p>
+      <p>
+        Concrètement, une liqueur artisanale française se reconnaît à quatre
+        signes : la <strong>matière première</strong> (plantes ou fruits frais ou
+        séchés, identifiés par variété et par origine), le <strong>procédé</strong>
+        (macération longue à froid, parfois suivie d'une infusion à chaud, jamais
+        d'extraction industrielle au CO₂ supercritique), la <strong>taille des
+        lots</strong> (de quelques centaines à quelques milliers de bouteilles
+        par cuvée, contre des millions en industriel), et la <strong>main</strong>
+        qui pose les bouchons — souvent celle du producteur lui-même.
+      </p>
+
+      <h2>Comment fabrique-t-on une liqueur artisanale ?</h2>
+      <p>
+        Le cycle d'une liqueur artisanale s'étale sur plusieurs mois. Voici les
+        cinq étapes que nous suivons à La Brasserie des Plantes :
+      </p>
+      <ol>
+        <li>
+          <strong>Sélection et récolte des plantes.</strong> Verveine, serpolet,
+          gentiane jaune, mélisse, menthe poivrée… Chaque ingrédient a sa
+          fenêtre de récolte (avant floraison, en pleine maturité, après les
+          premières gelées pour les racines). Les plantes nous arrivent fraîches
+          ou séchées de nos
+          <a href="/blog/producteurs-partenaires-bio-velay">cueilleurs et maraîchers
+          partenaires</a>.
+        </li>
+        <li>
+          <strong>Macération à froid.</strong> Les plantes sont plongées dans un
+          alcool neutre à fort degré (60° à 70° selon la recette), pendant
+          plusieurs semaines. Le froid extrait lentement les huiles essentielles
+          et les principes aromatiques sans les dénaturer, à la différence d'une
+          extraction à chaud qui « brûle » les notes les plus volatiles.
+        </li>
+        <li>
+          <strong>Filtration et assemblage.</strong> On sépare les plantes du
+          macérat, puis on assemble les différents extraits — chaque plante
+          est macérée séparément pour pouvoir doser précisément. C'est ici
+          que la maîtrise de l'artisan se joue : la
+          <a href="/boutique/alchimie-vegetale">Liqueur digestive aux 27 plantes</a>
+          repose sur 27 macérations distinctes assemblées au gramme près.
+        </li>
+        <li>
+          <strong>Dilution et sucrage.</strong> Le concentré est ramené au degré
+          final (24°, 28°, 32° selon la recette) avec de l'eau de source, puis
+          sucré au sirop de canne en quantité minimale.
+        </li>
+        <li>
+          <strong>Repos et embouteillage.</strong> La liqueur repose en cuve trois
+          mois minimum pour que les arômes se marient. Puis embouteillage à la
+          main, capsulage, étiquetage — chaque flacon passe entre nos mains.
+        </li>
+      </ol>
+
+      <h2>Liqueur artisanale vs liqueur industrielle : 5 différences clés</h2>
+      <p>
+        L'audit comparatif détaillé est dans
+        <a href="/blog/liqueur-artisanale-vs-industrielle">notre article dédié</a>
+        ; voici les cinq signaux les plus parlants :
+      </p>
+      <ul>
+        <li>
+          <strong>Matière première.</strong> Plantes fraîches/séchées entières
+          (artisanal) vs extraits aromatiques en fûts standardisés (industriel).
+        </li>
+        <li>
+          <strong>Variation de cuvée.</strong> L'artisan accepte les variations
+          de millésime ; l'industriel garantit une identité strictement constante
+          d'année en année — cela impose les arômes synthétiques.
+        </li>
+        <li>
+          <strong>Sucre.</strong> L'artisan dose le sucre selon la plante (souvent
+          80–150 g/L) ; l'industriel monte à 200–350 g/L pour masquer les défauts
+          de la matière première.
+        </li>
+        <li>
+          <strong>Couleur.</strong> L'artisan préfère un colorant naturel qui se
+          boit (charbon végétal, fruits rouges macérés) ou la couleur intrinsèque
+          des plantes ; l'industriel utilise du caramel E150 ou du E133.
+        </li>
+        <li>
+          <strong>Traçabilité.</strong> L'artisan peut vous nommer ses
+          producteurs ; l'industriel achète sur des marchés spot anonymes.
+        </li>
+      </ul>
+
+      <h2>Combien coûte une liqueur artisanale ?</h2>
+      <p>
+        Comptez entre <strong>16 € et 26 € pour un format 50 cl</strong> (apéritif
+        ou liqueur signature) et entre <strong>22 € et 115 €</strong> pour un
+        digestif de prestige selon le format (du 20 cl au magnum 1,5 L). Ce prix
+        couvre : la matière première payée au juste prix aux producteurs (souvent
+        2 à 4 fois plus cher que pour de l'extrait industriel), le temps de
+        macération (capital immobilisé pendant des mois), le travail manuel
+        d'embouteillage (vs ligne automatisée à 6 000 bouteilles/heure), et les
+        petits volumes qui ne permettent pas d'amortir les frais fixes comme
+        l'industriel.
+      </p>
+      <p>
+        À 22 € le format 20 cl (10 verres de 2 cl), un digestif artisanal
+        revient à environ <strong>2,20 € le verre</strong> — soit le prix d'un
+        café en terrasse à Paris.
+      </p>
+
+      <h2>Notre gamme de liqueurs artisanales</h2>
+      <p>
+        Toutes nos liqueurs sont conçues, macérées et embouteillées à la main
+        dans notre atelier de Saint-Didier-en-Velay (Haute-Loire). Voici les
+        principales :
+      </p>
+    </div>
+  </section>
+
+  <!-- Cards produits avec keywords SEO -->
+  <section class="bg-cream-50 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-6">
+        {featured.map((p) => (
+          <a
+            href={`/boutique/${p.slug}`}
+            class="group flex gap-4 bg-white rounded-2xl border border-forest-100/60 p-5 hover:shadow-lg hover:border-forest-300 transition-all"
+          >
+            <div class="flex-none w-24 h-24 bg-cream-50 rounded-xl flex items-center justify-center">
+              <img src={p.image} alt={`${p.seoCategory ?? p.name} — ${p.name}`} class="max-h-full max-w-full object-contain" loading="lazy" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] uppercase tracking-[0.2em] text-forest-600 font-medium mb-1">
+                {p.seoCategory ?? 'Liqueur artisanale'}
+              </div>
+              <h3 class="font-display text-xl text-forest-900 leading-tight mb-1">{p.name}</h3>
+              <p class="text-xs text-ink-700 leading-snug line-clamp-2">{p.tagline ?? p.usage}</p>
+              <div class="mt-2 text-sm text-forest-700 font-medium">
+                À partir de {p.priceMin} €
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/boutique" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium">
+          Voir toutes les liqueurs artisanales
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3 text-center">
+        Foire aux questions
+      </div>
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-10 text-center leading-tight">
+        Tout ce que vous voulez savoir sur la <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">liqueur artisanale</em>
+      </h2>
+      <div class="space-y-3">
+        {faq.map((f) => (
+          <details class="group rounded-2xl bg-cream-50 border border-forest-100/60 px-6 py-4 hover:border-forest-300 transition-colors">
+            <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
+              <h3 class="font-display text-lg text-forest-900 leading-tight">{f.q}</h3>
+              <svg class="flex-none mt-1 w-5 h-5 text-forest-700 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </summary>
+            <p class="text-ink-700 leading-relaxed mt-3" set:html={f.a} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- À lire aussi -->
+  <section class="py-16 bg-cream-100/60">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl text-forest-900 mb-6">Pour aller plus loin</h2>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/blog/liqueur-artisanale-vs-industrielle" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Liqueur artisanale vs industrielle — 7 différences
+        </a>
+        <a href="/blog/choisir-liqueur-artisanale-guide" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Choisir une liqueur artisanale — guide complet
+        </a>
+        <a href="/liqueurs-de-plantes" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Liqueurs de plantes
+        </a>
+        <a href="/liqueur-digestive" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Liqueur digestive
+        </a>
+        <a href="/notre-histoire" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Qui sommes-nous
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

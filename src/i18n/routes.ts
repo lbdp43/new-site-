@@ -25,6 +25,10 @@ export const routeMap = {
   '/lumiere-obscure': { fr: '/lumiere-obscure', en: '/en/dark-light', es: '/es/luz-oscura', it: '/it/luce-oscura' },
   '/nos-plantes': { fr: '/nos-plantes', en: '/en/our-plants', es: '/es/nuestras-plantas', it: '/it/le-nostre-piante' },
   '/cocktails': { fr: '/cocktails', en: '/en/cocktails', es: '/es/cocteles', it: '/it/cocktail' },
+  // Pages-piliers SEO (keywords commerciaux haute valeur)
+  '/liqueurs-artisanales': { fr: '/liqueurs-artisanales', en: '/en/craft-liqueurs', es: '/es/licores-artesanales', it: '/it/liquori-artigianali' },
+  '/liqueurs-de-plantes': { fr: '/liqueurs-de-plantes', en: '/en/botanical-liqueurs', es: '/es/licores-de-plantas', it: '/it/liquori-di-piante' },
+  '/liqueur-digestive': { fr: '/liqueur-digestive', en: '/en/digestif', es: '/es/licor-digestivo', it: '/it/liquore-digestivo' },
   '/ateliers': { fr: '/ateliers', en: '/en/workshops', es: '/es/talleres', it: '/it/laboratori' },
   '/professionnels': { fr: '/professionnels', en: '/en/trade', es: '/es/profesionales', it: '/it/professionisti' },
   '/composer-mon-coffret': { fr: '/composer-mon-coffret', en: '/en/build-your-gift-box', es: '/es/componer-mi-estuche', it: '/it/componi-il-tuo-cofanetto' },

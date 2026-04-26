@@ -1,0 +1,319 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { products } from '../data/products';
+
+const title = "Liqueur digestive — Meilleur Digestif du Monde 2025 | La Brasserie des Plantes";
+const description = "Quel digestif après un repas ? Liqueur digestive aux 27 plantes (Meilleur Digestif du Monde 2025), gentiane, génépi, verveine, menthe — guide complet de la liqueur digestive artisanale française.";
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Liqueur digestive', item: `${site.url}/liqueur-digestive` },
+  ],
+};
+
+const faq = [
+  {
+    q: "Qu'est-ce qu'une liqueur digestive ?",
+    a: "Une liqueur digestive est un spiritueux pris en fin de repas, traditionnellement pour faciliter la digestion. Le titre alcoolique varie de 25° à 50°, et la composition repose sur des plantes amères (gentiane, quinquina, angélique), aromatiques (menthe, anis, mélisse) ou racinaires. La tradition française remonte aux liqueurs monastiques (Chartreuse, Bénédictine) du XVI<sup>e</sup> au XVIII<sup>e</sup> siècle.",
+  },
+  {
+    q: "Quelle est la meilleure liqueur digestive ?",
+    a: "En 2025, c'est notre Alchimie Végétale qui a été élue Meilleur Digestif du Monde aux World Drinks Awards de Londres. Mais « meilleure » dépend de vos goûts : préférez la gentiane si vous aimez l'amertume franche, la menthe pour la fraîcheur, l'absinthe pour la complexité anisée, ou un grand assemblage (type Alchimie Végétale ou Chartreuse) pour la richesse aromatique.",
+  },
+  {
+    q: "Comment se boit une liqueur digestive ?",
+    a: "Trois usages classiques : (1) à 3°C en sortie de congélateur, dans un petit verre tulipé — le froid ouvre les notes racinaires et tend la bouche ; (2) à température ambiante (15-18°C) pour un digestif riche et complexe (Alchimie Végétale, Chartreuse) ; (3) un trait dans un café long pour finir un repas en douceur. Toujours en petite quantité — 2 à 3 cl par verre.",
+  },
+  {
+    q: "Quel est le degré d'alcool d'une liqueur digestive ?",
+    a: "De 25° pour les digestifs floraux (sureau, fleur d'oranger) à 50° pour les grands assemblages (notre Alchimie Végétale titre 50°, la Chartreuse Verte 55°). Les amers à la gentiane se situent autour de 16-22°. Plus le degré est élevé, plus la liqueur conserve longtemps son potentiel aromatique.",
+  },
+  {
+    q: "Liqueur digestive ou digestif : quelle différence ?",
+    a: "« Digestif » est le mot générique pour tout alcool servi en fin de repas — cela inclut les eaux-de-vie (cognac, calvados, marc, génépi alpin), les liqueurs digestives (à base de plantes ou de fruits, sucrées) et les amers italiens (Amaro). « Liqueur digestive » désigne précisément la sous-catégorie sucrée à base de macération de plantes.",
+  },
+  {
+    q: "Une liqueur digestive aide-t-elle vraiment à digérer ?",
+    a: "Pour les vraies bases médicales, parlez-en à votre médecin. Cela dit, certaines plantes (gentiane, angélique, menthe poivrée, mélisse, anis) ont un long usage en herboristerie pour stimuler les sucs digestifs et apaiser les ballonnements — c'est même pour ça que les ordres monastiques ont historiquement développé ces formules. Le verre en fin de repas reprend cette tradition.",
+  },
+  {
+    q: "Combien coûte une liqueur digestive de qualité ?",
+    a: "Pour un digestif artisanal français, comptez 22 € à 35 € pour un format 50 cl moyen, et jusqu'à 80-115 € pour les magnums ou éditions limitées. Les grandes marques industrielles type Chartreuse Verte tournent autour de 50 € le 70 cl ; notre Alchimie Végétale (Meilleur Digestif du Monde 2025) est à 22 € le 20 cl et 115 € le magnum.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Liqueur digestive — Le guide de la liqueur digestive artisanale',
+  description,
+  inLanguage: 'fr-FR',
+  author: { '@id': `${site.url}#localbusiness` },
+  publisher: { '@id': `${site.url}#localbusiness` },
+  image: new URL('/images/stories/world-drinks-awards-2025.jpg', site.url).toString(),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${site.url}/liqueur-digestive` },
+};
+
+const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
+const slugs = ['alchimie-vegetale', 'cerf-gent', 'essence-des-alpes', 'menthor', 'gorgeon-des-machures', 'herbe-des-druides'];
+const featured = slugs.map((s) => productBySlug[s]).filter(Boolean);
+---
+<Layout
+  title={title}
+  description={description}
+  schema={[breadcrumb, articleSchema, faqSchema]}
+>
+  <!-- Fil d'Ariane + H1 -->
+  <section class="bg-cream-50 border-b border-forest-100/60 py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <nav class="text-xs text-ink-500 mb-6" aria-label="Fil d'Ariane">
+        <a href="/" class="hover:text-forest-700">Accueil</a>
+        <span class="mx-2">/</span>
+        <span class="text-forest-700">Liqueur digestive</span>
+      </nav>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-700 text-xs font-medium tracking-[0.2em] uppercase mb-4">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+        Meilleur Digestif du Monde 2025
+      </div>
+      <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-forest-900 mb-6 leading-[1.1]">
+        Liqueur <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">digestive</em>
+      </h1>
+      <p class="text-lg md:text-xl text-ink-700 leading-relaxed max-w-3xl">
+        Le digestif est l'art français de finir un repas. Une liqueur digestive
+        bien faite, prise à 3°C en petit verre, c'est trois siècles de
+        tradition monastique condensés dans 4 cl. Notre
+        <a href="/boutique/alchimie-vegetale" class="underline decoration-gold-500 underline-offset-4">Alchimie Végétale</a>,
+        assemblage de 27 plantes, a été élue
+        <strong class="font-medium text-forest-800">Meilleur Digestif du Monde 2025</strong>
+        aux World Drinks Awards de Londres. Voici comment choisir, déguster
+        et servir une vraie liqueur digestive.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tradition + comment servir -->
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg max-w-none
+                prose-headings:font-display prose-headings:text-forest-900
+                prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-ink-700 prose-p:leading-relaxed
+                prose-a:text-forest-700 prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-forest-900 prose-strong:font-medium">
+      <h2>Qu'est-ce qu'une liqueur digestive exactement ?</h2>
+      <p>
+        Une <strong>liqueur digestive</strong> est un spiritueux sucré, à base
+        de macération de plantes (racines, écorces, feuilles, fleurs, épices),
+        servi traditionnellement en fin de repas. Le titre alcoolique varie de
+        <strong>25° à 50°</strong>, et la formule mise sur des plantes
+        <em>carminatives</em> (qui aident à évacuer les gaz) et <em>cholérétiques</em>
+        (qui stimulent la sécrétion biliaire) — gentiane, angélique, mélisse,
+        menthe, anis, fenouil, badiane.
+      </p>
+      <p>
+        À ne pas confondre avec un <strong>digestif</strong> au sens large, qui
+        peut désigner aussi une eau-de-vie (cognac, calvados, marc), un amer
+        italien (Fernet, Averna) ou même un vin doux fortifié (porto, banyuls).
+        La liqueur digestive est la sous-catégorie <em>sucrée à base de plantes</em>.
+      </p>
+
+      <h2>D'où vient la tradition de la liqueur digestive ?</h2>
+      <p>
+        Tout commence dans les <strong>infirmeries monastiques</strong> du
+        Moyen-Âge. Les Chartreux d'Isère mettent au point l'<em>Élixir
+        Végétal</em> à 130 plantes au début du XVII<sup>e</sup> siècle (manuscrit
+        attribué à 1605), comme remède universel. Les Bénédictins de Fécamp font
+        de même au XVI<sup>e</sup>. Les ordres voient ces formules comme une
+        <strong>application pratique de la pharmacopée</strong> — l'alcool
+        servant à extraire et conserver les principes actifs des plantes
+        médicinales.
+      </p>
+      <p>
+        Au XIX<sup>e</sup> siècle, ces élixirs sortent des monastères. La
+        <strong>Chartreuse</strong> devient un digestif de table laïque, la
+        <strong>Bénédictine</strong> est commercialisée à grande échelle, et
+        partout en France les régions de moyenne montagne (Auvergne,
+        Massif Central, Alpes, Pyrénées) développent leur propre digestif local
+        à partir de la flore endémique : génépi en Savoie, gentiane en Auvergne,
+        verveine et serpolet en Velay.
+      </p>
+
+      <h2>Comment se boit une liqueur digestive ?</h2>
+      <p>
+        Trois grands usages, selon la liqueur et le moment :
+      </p>
+      <h3>1. À 3°C en digestif pur (les apéritifs amers et la gentiane)</h3>
+      <p>
+        Sortez la bouteille du congélateur 5 minutes avant. Servez 2-3 cl dans
+        un petit verre tulipé. Le froid <strong>tend la bouche</strong>, ouvre
+        les notes racinaires (gentiane, angélique) et adoucit la perception
+        de l'alcool. Idéal pour
+        <a href="/boutique/cerf-gent">notre Cerf'Gent</a> à la gentiane jaune
+        ou pour
+        <a href="/boutique/essence-des-alpes">L'Essence des Alpes</a> au génépi.
+      </p>
+      <h3>2. À température ambiante (les grands assemblages)</h3>
+      <p>
+        Servir trop froid un digestif complexe à 50° comme
+        <a href="/boutique/alchimie-vegetale">L'Alchimie Végétale</a> écrase
+        une partie de la palette aromatique. Préférez un service à <strong>15-18°C</strong>
+        — le verre dans le creux de la main, lentement. Les 27 plantes
+        s'expriment alors par couches successives : floral en attaque,
+        racinaire au cœur, épicé en finale.
+      </p>
+      <h3>3. En café long ou en cocktail</h3>
+      <p>
+        <strong>Un trait dans un café long</strong> juste après un repas est une
+        recette signature de la maison — ça finit à la fois le repas et le café.
+        Côté cocktails : un <em>spritz amer</em> avec
+        <a href="/boutique/cerf-gent">Cerf'Gent</a> + tonic Fever-Tree + zeste
+        d'orange amère, ou un <em>Black Mule</em> au
+        <a href="/boutique/gorgeon-des-machures">Gorgeon</a>.
+      </p>
+
+      <h2>Choisir sa liqueur digestive : 4 critères</h2>
+      <ol>
+        <li>
+          <strong>Le profil aromatique recherché.</strong> Amer franc → gentiane.
+          Frais → menthe ou verveine. Floral → fleurs de sureau ou Nectar
+          d'Ostara. Anisé/herbacé → absinthe ou génépi. Complexité maximale →
+          assemblage de 20+ plantes (Alchimie Végétale, Chartreuse).
+        </li>
+        <li>
+          <strong>Le degré.</strong> 15-22° pour un apéritif amer servi
+          à l'apéro <em>et</em> au digestif (Cerf'Gent), 25-35° pour une
+          liqueur signature (Herbe des Druides à 28°), 40-55° pour un
+          digestif de prestige.
+        </li>
+        <li>
+          <strong>L'origine et la traçabilité.</strong> Une liqueur digestive
+          artisanale française nomme ses plantes et sa région. Évitez les
+          étiquettes vagues type « plantes du monde » sans précision.
+        </li>
+        <li>
+          <strong>Le rapport qualité/prix.</strong> Comptez 25-35 € le 50 cl
+          pour un digestif artisanal français correct. En dessous de 18 €,
+          c'est presque toujours industriel. Au-dessus de 80 €, c'est de la
+          gastronomie ou un format magnum.
+        </li>
+      </ol>
+
+      <h2>Notre Alchimie Végétale, Meilleur Digestif du Monde 2025</h2>
+      <p>
+        En avril 2025, notre liqueur signature
+        <a href="/boutique/alchimie-vegetale">L'Alchimie Végétale</a> a été
+        élue <strong>Meilleur Digestif du Monde</strong> aux World Drinks
+        Awards de Londres — le concours international de référence pour les
+        spiritueux, jugé à l'aveugle par un panel de sommeliers, mixologues
+        et critiques internationaux.
+      </p>
+      <p>
+        La recette : <strong>27 plantes</strong>, racines, écorces et épices
+        macérées une à une, puis assemblées au gramme près. Quatre ans de
+        recherche et développement, trente-deux essais documentés, pour
+        arriver à l'équilibre actuel — racines en colonne vertébrale,
+        herbacé pour l'oxygène, fleurs pour la rondeur, épices pour la
+        tension. Voir le récit complet :
+        <a href="/blog/meilleur-digestif-du-monde-2025">ce que ce prix signifie pour nous</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Sélection digestifs -->
+  <section class="bg-cream-50 py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-4">
+          Notre sélection de liqueurs digestives
+        </h2>
+        <p class="text-ink-700 max-w-2xl mx-auto">
+          Six digestifs différents pour six moments — du plus complexe au plus
+          rafraîchissant.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {featured.map((p) => (
+          <a href={`/boutique/${p.slug}`} class="group bg-white rounded-2xl border border-forest-100/60 p-5 hover:shadow-lg hover:border-forest-300 transition-all">
+            <div class="aspect-square bg-cream-50 rounded-xl flex items-center justify-center mb-4">
+              <img src={p.image} alt={`${p.seoCategory ?? p.name} — ${p.name}`} class="max-h-full max-w-full object-contain p-4" loading="lazy" />
+            </div>
+            <div class="text-[10px] uppercase tracking-[0.2em] text-forest-600 font-medium mb-1">
+              {p.seoCategory ?? 'Liqueur digestive'} · {p.alcohol}°
+            </div>
+            <h3 class="font-display text-xl text-forest-900 leading-tight mb-2">{p.name}</h3>
+            <p class="text-sm text-ink-700 leading-snug mb-3 line-clamp-2">{p.tagline ?? ''}</p>
+            <div class="text-sm text-forest-700 font-medium">À partir de {p.priceMin} €</div>
+          </a>
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/boutique" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium">
+          Voir toutes nos liqueurs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3 text-center">
+        Foire aux questions
+      </div>
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-10 text-center leading-tight">
+        Tout sur la <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">liqueur digestive</em>
+      </h2>
+      <div class="space-y-3">
+        {faq.map((f) => (
+          <details class="group rounded-2xl bg-cream-50 border border-forest-100/60 px-6 py-4 hover:border-forest-300 transition-colors">
+            <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
+              <h3 class="font-display text-lg text-forest-900 leading-tight">{f.q}</h3>
+              <svg class="flex-none mt-1 w-5 h-5 text-forest-700 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </summary>
+            <p class="text-ink-700 leading-relaxed mt-3" set:html={f.a} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="py-16 bg-cream-100/60">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl text-forest-900 mb-6">Pour aller plus loin</h2>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/blog/meilleur-digestif-du-monde-2025" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Meilleur Digestif du Monde 2025 — l'histoire
+        </a>
+        <a href="/blog/alchimie-vegetale-27-plantes-composition" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          L'Alchimie Végétale — composition des 27 plantes
+        </a>
+        <a href="/liqueurs-de-plantes" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Liqueurs de plantes
+        </a>
+        <a href="/liqueurs-artisanales" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Liqueurs artisanales (le guide)
+        </a>
+        <a href="/blog/servir-liqueur-aux-plantes-guide" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Comment servir une liqueur
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

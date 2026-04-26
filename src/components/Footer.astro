@@ -32,6 +32,18 @@ const aboutBlurb = lang === 'en'
 
 const findUsLabel = lang === 'en' ? 'Find us' : 'Nous trouver';
 const navTitle = lang === 'en' ? 'Navigation' : 'Navigation';
+const exploreTitle = lang === 'en' ? 'Discover' : 'Découvrir';
+const explorePillars = lang === 'en'
+  ? [
+      { label: 'Craft liqueurs', href: '/en/craft-liqueurs' },
+      { label: 'Botanical liqueurs', href: '/en/botanical-liqueurs' },
+      { label: 'Digestif', href: '/en/digestif' },
+    ]
+  : [
+      { label: 'Liqueurs artisanales', href: '/liqueurs-artisanales' },
+      { label: 'Liqueurs de plantes', href: '/liqueurs-de-plantes' },
+      { label: 'Liqueur digestive', href: '/liqueur-digestive' },
+    ];
 const paymentLabel = lang === 'en' ? 'Secure payment' : 'Paiement sécurisé';
 const paymentMethodsAria = lang === 'en' ? 'Accepted payment methods' : 'Moyens de paiement acceptés';
 const sslLabel = lang === 'en' ? 'SSL secured' : 'SSL sécurisé';
@@ -40,7 +52,7 @@ const hoursDisplay = lang === 'en'
   : site.hoursDisplay;
 ---
 <footer class="bg-forest-900 text-cream-100 mt-24">
-  <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
+  <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-5 gap-10">
     <div class="md:col-span-2">
       <div class="mb-4">
         <img
@@ -64,6 +76,19 @@ const hoursDisplay = lang === 'en'
           <li>
             <a href={item.href} class="text-cream-200/80 hover:text-cream-100 transition-colors">
               {tr(item.labelKey)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-display text-lg text-cream-100 mb-4">{exploreTitle}</h3>
+      <ul class="space-y-2 text-sm">
+        {explorePillars.map((p) => (
+          <li>
+            <a href={p.href} class="text-cream-200/80 hover:text-cream-100 transition-colors">
+              {p.label}
             </a>
           </li>
         ))}

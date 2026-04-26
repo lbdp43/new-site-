@@ -1,0 +1,333 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { products } from '../data/products';
+
+const title = "Liqueurs de plantes — Élixirs végétaux artisanaux | La Brasserie des Plantes";
+const description = "Verveine, gentiane, menthe, sureau, génépi, absinthe… Découvrez nos liqueurs de plantes artisanales d'Auvergne. Quarantaine de plantes, racines, fleurs et écorces, sans arôme ni colorant ajouté.";
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Liqueurs de plantes', item: `${site.url}/liqueurs-de-plantes` },
+  ],
+};
+
+const faq = [
+  {
+    q: "Qu'est-ce qu'une liqueur de plantes ?",
+    a: "Une liqueur de plantes est un spiritueux sucré obtenu en faisant macérer des plantes (feuilles, fleurs, racines, écorces) dans de l'alcool, généralement entre 15° et 50°. Selon la composition, on parle d'élixir végétal (assemblage complexe inspiré des grandes liqueurs monastiques), d'amer (dominante racinaire et amère, type gentiane), de digestif (formule pensée pour la fin de repas) ou de liqueur de fleurs (sureau, coquelicot, fleur d'oranger).",
+  },
+  {
+    q: "Quelle différence entre une liqueur de plantes et un élixir végétal ?",
+    a: "Le terme « élixir » est historiquement réservé aux assemblages complexes de plus de 15 plantes, souvent issus de la tradition monastique (Chartreuse, Bénédictine, Élixir du Suédois). Une « liqueur de plantes » au sens large peut tenir sur 1 à 10 plantes (verveine, menthe, génépi…). Notre Alchimie Végétale, à 27 plantes, entre dans la catégorie élixir.",
+  },
+  {
+    q: "Les liqueurs de plantes sont-elles bonnes pour la santé ?",
+    a: "L'alcool reste de l'alcool — à consommer avec modération. Cela dit, certaines plantes (gentiane, verveine, menthe, mélisse, angélique) ont un long usage en herboristerie pour favoriser la digestion. Une liqueur de plantes prise en petite quantité après un repas reprend cette tradition. Nous ne formulons aucune allégation thérapeutique.",
+  },
+  {
+    q: "Comment choisir sa liqueur de plantes ?",
+    a: "Cinq critères : (1) la plante dominante (citronnée et fraîche pour la verveine, amère pour la gentiane, mentholée pour la menthe), (2) le degré (15-22° pour un apéritif, 25-35° pour une liqueur signature, jusqu'à 50° pour un digestif de prestige), (3) l'usage (apéritif givré, digestif pur, base cocktail, cuisine), (4) l'origine et la traçabilité des plantes, (5) la mention « sans arôme ajouté ni colorant ».",
+  },
+  {
+    q: "Avec quelles plantes faites-vous vos liqueurs ?",
+    a: "Une quarantaine d'espèces : verveine odorante, mélisse, serpolet, menthe poivrée, gentiane jaune, génépi, hysope, aurone, sureau, coquelicot, anis vert, carvi, coriandre, sauge ananas, basilic, thym citron, estragon mexicain, racine d'angélique, réglisse, écorce de quinquina, cardamome, cannelle de Ceylan, combava, badiane… Le détail des 12 plantes signature est dans notre page Nos plantes.",
+  },
+  {
+    q: "Vos plantes sont-elles bio et locales ?",
+    a: "Une bonne partie oui : nos cueilleurs et maraîchers partenaires sont majoritairement en agriculture biologique, basés en Haute-Loire et dans les départements voisins. Toutes ne sont pas locales : 6 plantes dans L'Alchimie Végétale (cardamome, combava, anis étoilé, cannelle, réglisse, agrumes tropicaux) sont importées via grossistes européens spécialisés en herboristerie. Nous ne le cachons pas — importer de la cannelle de Ceylan pour faire « du local » n'aurait aucun sens.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Liqueurs de plantes — Élixirs végétaux artisanaux',
+  description,
+  inLanguage: 'fr-FR',
+  author: { '@id': `${site.url}#localbusiness` },
+  publisher: { '@id': `${site.url}#localbusiness` },
+  image: new URL('/og-default.jpg', site.url).toString(),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${site.url}/liqueurs-de-plantes` },
+};
+
+// Tableau famille → plante → produit (pour la grille thématique).
+const families = [
+  {
+    family: 'Liqueur de verveine',
+    desc: "La plante totem du Velay. Citronnée, fraîche, légèrement mentholée en finale. Aussi bien en digestif pur qu'en spritz d'été.",
+    productSlug: 'herbe-des-druides',
+  },
+  {
+    family: 'Liqueur de gentiane',
+    desc: "La grande amère du Massif Central. Racines récoltées entre 1000 et 1600 m d'altitude par les gentianaïres de la Margeride.",
+    productSlug: 'cerf-gent',
+  },
+  {
+    family: 'Liqueur de menthe',
+    desc: "Trio de menthes (poivrée, verte, agastache coréenne) pour une mentholée complexe, jamais agressive. Parfait en post-dîner.",
+    productSlug: 'menthor',
+  },
+  {
+    family: "Liqueur de fleurs de sureau",
+    desc: "Cueillette de printemps. Note de muscat, raisin blanc, finale florale — la liqueur d'apéritif la plus rafraîchissante de la gamme.",
+    productSlug: 'nectar-ostara',
+  },
+  {
+    family: "Liqueur de génépi",
+    desc: "Génépi de plein champ alpin. Amer aromatique de haute montagne, à boire très frais en digestif.",
+    productSlug: 'essence-des-alpes',
+  },
+  {
+    family: "Liqueur d'absinthe",
+    desc: "Absinthe macérée colorée au charbon végétal — le noir profond du Gorgeon. Notes anisées, herbacées, finale longue.",
+    productSlug: 'gorgeon-des-machures',
+  },
+  {
+    family: "Liqueur d'agrumes",
+    desc: "Trio de zestes : citron jaune, citron vert, orange amère, plus une touche de combava. Apéritif vif, idéal en spritz.",
+    productSlug: 'zeleste',
+  },
+  {
+    family: "Liqueur de fruits rouges",
+    desc: "Macération longue de fruits rouges sauvages. Couleur rubis naturelle, mâche en bouche, finale veloutée. Sublime sur un dessert chocolaté.",
+    productSlug: 'fleche-ardente',
+  },
+];
+
+const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
+---
+<Layout
+  title={title}
+  description={description}
+  schema={[breadcrumb, articleSchema, faqSchema]}
+>
+  <!-- Fil d'Ariane + H1 -->
+  <section class="bg-cream-50 border-b border-forest-100/60 py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <nav class="text-xs text-ink-500 mb-6" aria-label="Fil d'Ariane">
+        <a href="/" class="hover:text-forest-700">Accueil</a>
+        <span class="mx-2">/</span>
+        <span class="text-forest-700">Liqueurs de plantes</span>
+      </nav>
+      <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">
+        Élixirs végétaux artisanaux
+      </div>
+      <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-forest-900 mb-6 leading-[1.1]">
+        Liqueurs <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">de plantes</em>
+      </h1>
+      <p class="text-lg md:text-xl text-ink-700 leading-relaxed max-w-3xl">
+        Verveine, gentiane, menthe, sureau, génépi, absinthe — la liqueur de
+        plantes ne se résume pas à un goût. C'est un voyage botanique en
+        bouteille, héritage de l'herboristerie, des élixirs monastiques et du
+        terroir des moyennes montagnes. Notre gamme repose sur une
+        <strong class="font-medium text-forest-800">quarantaine de plantes,
+        racines, fleurs et écorces</strong>, récoltées par nos
+        <a href="/blog/producteurs-partenaires-bio-velay" class="underline decoration-forest-300 underline-offset-4">cueilleurs et maraîchers partenaires</a>
+        en Haute-Loire et au-delà.
+      </p>
+    </div>
+  </section>
+
+  <!-- Définitions + tradition -->
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg max-w-none
+                prose-headings:font-display prose-headings:text-forest-900
+                prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-ink-700 prose-p:leading-relaxed
+                prose-a:text-forest-700 prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-forest-900 prose-strong:font-medium">
+      <h2>Liqueur de plantes, élixir végétal, amer botanique : quelle différence ?</h2>
+      <p>
+        Les trois termes désignent des cousines proches. <strong>« Liqueur de
+        plantes »</strong> est la catégorie générique : tout spiritueux sucré
+        obtenu par macération de matière végétale dans l'alcool. Quand
+        l'assemblage est complexe (15 plantes ou plus) et inspiré de la
+        tradition monastique, on parle volontiers d'<strong>élixir végétal</strong>
+        — c'est le cas de la Chartreuse Verte (130 plantes), de la Bénédictine
+        (27 plantes) ou, à plus petite échelle, de notre
+        <a href="/boutique/alchimie-vegetale">Alchimie Végétale</a> (27 plantes).
+        L'<strong>amer botanique</strong> désigne plutôt la sous-catégorie
+        dominée par les racines amères (gentiane, quinquina, angélique) et
+        s'apparente aux grandes maisons italiennes (Fernet, Averna).
+      </p>
+
+      <h2>D'où vient la tradition de la liqueur de plantes ?</h2>
+      <p>
+        La macération de plantes médicinales dans l'alcool remonte à
+        l'<strong>herboristerie médiévale</strong>. Les ordres religieux —
+        Chartreux, Bénédictins, Trappistes — ont systématisé la pratique entre
+        le XVI<sup>e</sup> et le XVIII<sup>e</sup> siècle, dans les
+        infirmeries monastiques, comme remèdes digestifs et fortifiants. Les
+        formules originales étaient <em>secrètes</em> et reposaient sur 30 à 130
+        plantes selon les recettes.
+      </p>
+      <p>
+        Au XIX<sup>e</sup> siècle, ces élixirs sortent des monastères : la
+        <strong>Suze</strong> (1889) et le <strong>Salers</strong> (1885)
+        popularisent la liqueur de gentiane française ; la
+        <strong>Chartreuse</strong> devient un digestif laïque. À la même
+        époque, le <strong>Velay et le Massif Central</strong> deviennent
+        l'épicentre de la liqueur de plantes en France grâce à leur richesse
+        botanique exceptionnelle (relief volcanique, altitude variée, climat
+        semi-montagnard concentrent les huiles essentielles).
+      </p>
+
+      <h2>Pourquoi la Haute-Loire est un terroir botanique exceptionnel</h2>
+      <p>
+        Nos plantes viennent en majorité de Haute-Loire et des départements
+        voisins (Loire, Puy-de-Dôme, Ardèche, Cantal). Trois raisons font de
+        ce territoire l'un des plus riches en flore médicinale et aromatique
+        de France :
+      </p>
+      <ul>
+        <li>
+          <strong>L'altitude variée</strong> (400 m à 1 800 m sur 50 km).
+          Chaque étage climatique abrite ses espèces : sureau en vallée,
+          serpolet à mi-pente, gentiane sur les plateaux d'altitude.
+        </li>
+        <li>
+          <strong>La géologie volcanique</strong> (basalte, granite). Les sols
+          sont pauvres en matière organique mais riches en oligo-éléments —
+          ce qui concentre les principes aromatiques.
+        </li>
+        <li>
+          <strong>Le climat semi-montagnard</strong> avec fortes amplitudes
+          jour/nuit. Les nuits fraîches forcent les plantes à produire des
+          composés de défense (huiles essentielles, tanins) qui font
+          précisément leur intérêt gustatif.
+        </li>
+      </ul>
+      <p>
+        C'est pour ces raisons que les grandes maisons liquoristes européennes
+        — Chartreuse (Isère), Bénédictine (Normandie), Suze (Auvergne) —
+        sont toutes nées dans des zones de moyenne montagne. Ce n'est pas un
+        hasard. Lire le détail dans notre article
+        <a href="/blog/plantes-liqueur-haute-loire">12 plantes, voyage botanique en Haute-Loire</a>.
+      </p>
+
+      <h2>Notre règle : la plante avant tout</h2>
+      <p>
+        Sur l'ensemble de notre gamme nous appliquons trois engagements :
+      </p>
+      <ul>
+        <li>
+          <strong>Pas d'arôme ajouté.</strong> Le goût vient uniquement des
+          plantes macérées. Aucun extrait industriel.
+        </li>
+        <li>
+          <strong>Pas de colorant.</strong> Les couleurs naturelles sont celles
+          de la plante (chlorophylle pour le vert de
+          <a href="/boutique/herbe-des-druides">L'Herbe des Druides</a>) ou
+          d'un ingrédient qui se boit (charbon végétal pour le noir du
+          <a href="/boutique/gorgeon-des-machures">Gorgeon des Machurés</a>).
+        </li>
+        <li>
+          <strong>Plantes majoritairement bio</strong> de cueilleurs et
+          maraîchers partenaires de Haute-Loire et des départements voisins.
+          On tend vers le bio à chaque cuvée, même si toutes les plantes ne
+          le sont pas encore.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Grille familles de liqueurs -->
+  <section class="bg-cream-50 py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-4">
+          8 familles de liqueurs de plantes
+        </h2>
+        <p class="text-ink-700 max-w-2xl mx-auto">
+          Chaque liqueur de plantes a sa personnalité, son usage, son moment.
+          Choisissez par plante dominante :
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-5">
+        {families.map((f) => {
+          const p = productBySlug[f.productSlug];
+          if (!p) return null;
+          return (
+            <a href={`/boutique/${p.slug}`} class="group flex gap-5 bg-white rounded-2xl border border-forest-100/60 p-6 hover:shadow-lg hover:border-forest-300 transition-all">
+              <div class="flex-none w-28 h-28 bg-cream-50 rounded-xl flex items-center justify-center">
+                <img src={p.image} alt={`${f.family} — ${p.name}`} class="max-h-full max-w-full object-contain" loading="lazy" />
+              </div>
+              <div class="flex-1">
+                <div class="text-[10px] uppercase tracking-[0.2em] text-forest-600 font-medium mb-1">
+                  {f.family}
+                </div>
+                <h3 class="font-display text-xl text-forest-900 leading-tight mb-2">{p.name}</h3>
+                <p class="text-sm text-ink-700 leading-snug mb-3">{f.desc}</p>
+                <div class="text-sm text-forest-700 font-medium">À partir de {p.priceMin} €</div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3 text-center">
+        Foire aux questions
+      </div>
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-10 text-center leading-tight">
+        Tout sur la <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">liqueur de plantes</em>
+      </h2>
+      <div class="space-y-3">
+        {faq.map((f) => (
+          <details class="group rounded-2xl bg-cream-50 border border-forest-100/60 px-6 py-4 hover:border-forest-300 transition-colors">
+            <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
+              <h3 class="font-display text-lg text-forest-900 leading-tight">{f.q}</h3>
+              <svg class="flex-none mt-1 w-5 h-5 text-forest-700 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </summary>
+            <p class="text-ink-700 leading-relaxed mt-3" set:html={f.a} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="py-16 bg-cream-100/60">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl text-forest-900 mb-6">Pour aller plus loin</h2>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/nos-plantes" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          40 plantes utilisées
+        </a>
+        <a href="/blog/plantes-liqueur-haute-loire" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          12 plantes du Velay — voyage botanique
+        </a>
+        <a href="/liqueurs-artisanales" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Liqueurs artisanales (le guide)
+        </a>
+        <a href="/liqueur-digestive" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Liqueur digestive
+        </a>
+        <a href="/blog/producteurs-partenaires-bio-velay" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
+          Nos cueilleurs &amp; maraîchers
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

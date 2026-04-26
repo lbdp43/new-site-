@@ -77,6 +77,10 @@ export default defineConfig({
         if (p === '/' || p === '/boutique' || p === '/boutique/') {
           item.priority = 1.0;
           item.changefreq = 'daily';
+        } else if (/^\/(liqueurs-artisanales|liqueurs-de-plantes|liqueur-digestive)\/?$/.test(p)) {
+          // Pages-piliers SEO — keywords commerciaux haute valeur
+          item.priority = 0.95;
+          item.changefreq = 'weekly';
         } else if (p.startsWith('/boutique/')) {
           item.priority = 0.9;
           item.changefreq = 'weekly';
