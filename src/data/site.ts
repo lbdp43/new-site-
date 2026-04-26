@@ -39,6 +39,28 @@ export const site = {
   founded: "2021",
   founders: ["Etienne", "Guillaume"],
 
+  // Slogan court — utilisé dans le schema LocalBusiness + meta génériques
+  slogan: "Liquoristes artisanaux du Velay — liqueurs bio aux plantes d'Auvergne",
+
+  // Keywords — exploités par LocalBusiness schema (Knowledge Graph) et
+  // crawlers IA (llms.txt). Cible les requêtes génériques de la profession
+  // sur lesquelles la marque peut se positionner (longue traîne qualifiée
+  // + ancrage local).
+  keywords: [
+    "liqueur artisanale",
+    "liqueur artisanale bio",
+    "liqueur de plantes",
+    "liqueurs artisanales Auvergne",
+    "liqueurs artisanales Haute-Loire",
+    "digestif artisanal",
+    "spiritueux artisanal France",
+    "liquoriste artisanal",
+    "liqueur de verveine artisanale",
+    "infusion alcoolisée",
+    "coffret cadeau liqueur artisanale",
+    "Saint-Didier-en-Velay",
+  ],
+
   // Distinction
   award: {
     title: "Meilleur Digestif du Monde",
@@ -68,9 +90,15 @@ export const site = {
   },
 
   // SEO defaults
+  // NOTE : description enrichie pour cibler "liqueur artisanale bio",
+  // "digestif artisanal", "liquoriste artisanal" sans bourrage. Tient en ~155
+  // caractères pour rester dans la limite des SERP Google sans troncature.
   defaultDescription:
-    "Liqueurs et infusions artisanales de plantes d'Auvergne. Producteur indépendant en Haute-Loire. L'Alchimie Végétale, Meilleur Digestif du Monde 2025 aux World Drinks Awards.",
-  defaultOgImage: "/og-default.jpg",
+    "Liqueurs artisanales bio aux plantes d'Auvergne. Liquoristes indépendants en Haute-Loire — L'Alchimie Végétale, Meilleur Digestif du Monde 2025.",
+  // ⚠️ Tant que /og-default.jpg n'a pas été créé en 1200×630 dans public/,
+  // on pointe vers le logo couleur (qui existe). Voir docs/audit-seo-2026-04.md
+  // pour le brief de création de la vraie image OG.
+  defaultOgImage: "/images/brand/logo-complet-fond-blanc.webp",
 } as const;
 
 export const nav = [

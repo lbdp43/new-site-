@@ -379,6 +379,37 @@ toujours formuler en ce sens dans les articles (référence : `producteurs-parte
   tester sans débiter un vrai client, passe par une vraie petite transaction
   (1-2 €) puis rembourse depuis l'admin WooCommerce.
 
+## Audit SEO — avril 2026
+
+Audit complet : `docs/audit-seo-2026-04.md`. Corrections critiques déjà
+appliquées dans le commit qui a créé ce fichier :
+
+- `getHreflangLinks` (`src/i18n/utils.ts`) émet maintenant les 4 langues
+  (FR + EN + ES + IT + x-default). Bug auparavant : seuls FR/EN étaient
+  émis, donc Google ne pouvait pas relier `/es/` et `/it/` à leurs
+  équivalents. `translatedPages` contient désormais `es` et `it`.
+- `Layout.astro` passe la vraie langue source à `getHreflangLinks`, émet
+  `og:locale:alternate` pour toutes les autres langues, et ajoute
+  systématiquement `<meta name="robots" content="index, follow,
+  max-image-preview:large, max-snippet:-1, max-video-preview:-1">` sur
+  les pages indexables.
+- `getOgLocale('en')` renvoie `en_GB` (audience européenne).
+- `defaultOgImage` pointe vers `/images/brand/logo-complet-fond-blanc.webp`
+  (qui existe) au lieu de `/og-default.jpg` (fichier manquant qui cassait
+  tous les partages sociaux). **TODO** : créer une vraie image OG 1200×630.
+- `WebSite` schema (home FR + EN) intègre un `SearchAction` (sitelinks
+  search box éligible) ciblant `/boutique?q=…`.
+- `LocalBusiness` schema enrichi : `slogan`, `keywords` (12 mots-clés
+  génériques de la profession), `alternateName` étendu.
+- Title / description optimisés sur home FR, home EN et boutique FR pour
+  "liqueur artisanale bio", "digestif artisanal", "liquoriste artisanal".
+- Bloc texte SEO ajouté en bas de `/boutique` pour porter les requêtes
+  longue traîne.
+
+Restent ouverts : migration vers `<Image>` Astro pour AVIF/srcset,
+redirections 301 WP→Astro à pré-remplir avant bascule www., article pilier
+"Qu'est-ce qu'une liqueur artisanale ?", création vraie image OG.
+
 ## Sécurité — notes importantes
 
 - **Headers de sécurité** configurés dans `vercel.json` (HSTS, X-Frame-Options,

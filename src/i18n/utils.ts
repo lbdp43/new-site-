@@ -51,9 +51,12 @@ export function useTranslations(lang: Lang) {
  * Retourne la locale BCP47 pour une langue.
  */
 export function getOgLocale(lang: Lang): string {
+  // en_GB plutôt que en_US : audience cible majoritairement européenne
+  // (FR, BE, CH, LU + visiteurs UK). Signal géographique plus pertinent
+  // pour Google côté EN.
   const map: Record<Lang, string> = {
     fr: 'fr_FR',
-    en: 'en_US',
+    en: 'en_GB',
     es: 'es_ES',
     it: 'it_IT',
   };
@@ -84,14 +87,29 @@ function withTrailingSlash(path: string): string {
 }
 
 export function getHreflangLinks(currentPath: string, currentLang: Lang, siteUrl: string) {
-  const frPath = currentLang === 'fr' ? currentPath : alternateLangPath(currentPath, 'en', 'fr');
-  const enPath = currentLang === 'en' ? currentPath : alternateLangPath(currentPath, 'fr', 'en');
+  // Calcule le chemin FR canonique (pivot pour toutes les conversions)
+  const frPath = currentLang === 'fr'
+    ? currentPath
+    : alternateLangPath(currentPath, currentLang, 'fr');
 
-  return [
-    { hreflang: 'fr', href: new URL(withTrailingSlash(frPath), siteUrl).toString() },
-    { hreflang: 'en', href: new URL(withTrailingSlash(enPath), siteUrl).toString() },
-    { hreflang: 'x-default', href: new URL(withTrailingSlash(frPath), siteUrl).toString() },
-  ];
+  // Génère un alternate par langue déclarée, en n'émettant que si la page
+  // a effectivement une traduction publiée (évite de pointer vers une page
+  // 404). FR est toujours considérée présente (langue source).
+  const langs: Lang[] = ['fr', 'en', 'es', 'it'];
+  const alternates = langs
+    .filter((lang) => lang === 'fr' || hasTranslation(frPath, lang))
+    .map((lang) => {
+      const path = lang === 'fr' ? frPath : localizedPath(frPath, lang);
+      return { hreflang: lang, href: new URL(withTrailingSlash(path), siteUrl).toString() };
+    });
+
+  // x-default → version FR (langue par défaut du site)
+  alternates.push({
+    hreflang: 'x-default',
+    href: new URL(withTrailingSlash(frPath), siteUrl).toString(),
+  });
+
+  return alternates;
 }
 
 /**
@@ -122,6 +140,10 @@ export const translatedPages: Record<Lang, string[]> = {
     '/en/cookie-policy',
     '/en/build-your-gift-box',
   ],
+  // ES et IT : seule la home existe pour l'instant. Étendre cette liste à
+  // chaque nouvelle page traduite (sinon les hreflang ne seront pas émis).
+  es: ['/es/'],
+  it: ['/it/'],
 };
 
 export function hasTranslation(frPath: string, targetLang: Lang): boolean {
