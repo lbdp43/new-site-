@@ -1,6 +1,7 @@
 ---
 name: "L'Essence des Alpes"
 range: brasserie
+seoCategory: "Liqueur de génépi artisanale"
 priceMin: 17
 priceMax: 36
 image: /images/products/essence-des-alpes.webp

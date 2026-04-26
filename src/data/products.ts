@@ -43,6 +43,10 @@ export interface Product {
   wcSizeAttribute?: string;
   defaultSize?: number;
   order?: number;
+  /** Catégorie SEO descriptive (mot-clé cible du produit), ex :
+   *  "Liqueur de verveine artisanale". Utilisée comme kicker en haut
+   *  du H1, dans le <title>, la meta description et schema.category. */
+  seoCategory?: string;
 }
 
 // Metadata des 5 gammes — reste en code (texte SEO stable, non éditable via

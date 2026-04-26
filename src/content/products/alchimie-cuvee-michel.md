@@ -1,6 +1,7 @@
 ---
 name: "L'Alchimie Végétale — Cuvée Michel"
 range: edition-limitee
+seoCategory: "Liqueur digestive édition limitée"
 priceMin: 70
 priceMax: 70
 image: /images/products/alchimie-cuvee-michel.webp

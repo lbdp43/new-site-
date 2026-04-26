@@ -1,6 +1,7 @@
 ---
 name: "L'Alchimie Végétale"
 range: brasserie
+seoCategory: "Liqueur digestive aux 27 plantes"
 priceMin: 22
 priceMax: 115
 image: /images/products/alchimie-vegetale.webp

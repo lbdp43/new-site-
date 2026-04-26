@@ -159,6 +159,8 @@ function main() {
       if (!isEmpty(frontmatter.serving)) product.serving = String(frontmatter.serving).trim();
       if (!isEmpty(frontmatter.wcSizeAttribute))
         product.wcSizeAttribute = String(frontmatter.wcSizeAttribute).trim();
+      if (!isEmpty(frontmatter.seoCategory))
+        product.seoCategory = String(frontmatter.seoCategory).trim();
 
       // Numbers optionnels
       if (!isEmpty(frontmatter.wcId)) product.wcId = Number(frontmatter.wcId);

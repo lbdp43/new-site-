@@ -1,6 +1,7 @@
 ---
 name: "Le Menthor"
 range: aperitif
+seoCategory: "Liqueur de menthe artisanale"
 priceMin: 16
 priceMax: 27
 image: /images/products/menthor.webp

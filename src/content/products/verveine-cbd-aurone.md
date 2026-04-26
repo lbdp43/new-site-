@@ -1,6 +1,7 @@
 ---
 name: "Verveine CBD Aurone"
 range: lumiere-obscure
+seoCategory: "Infusion CBD verveine et aurone (sans THC)"
 priceMin: 34
 priceMax: 34
 image: /images/products/verveine-cbd-aurone.webp

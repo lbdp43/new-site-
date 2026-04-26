@@ -1,6 +1,7 @@
 ---
 name: "La Flèche Ardente"
 range: brasserie
+seoCategory: "Liqueur de fruits rouges artisanale"
 priceMin: 16
 priceMax: 34
 image: /images/products/fleche-ardente.webp

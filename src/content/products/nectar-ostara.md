@@ -1,6 +1,7 @@
 ---
 name: "Le Nectar d'Ostara"
 range: brasserie
+seoCategory: "Liqueur de fleurs de sureau"
 priceMin: 16
 priceMax: 34
 image: /images/products/nectar-ostara.webp

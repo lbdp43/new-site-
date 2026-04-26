@@ -1,6 +1,7 @@
 ---
 name: "Le Cerf'Gent"
 range: aperitif
+seoCategory: "Liqueur de gentiane artisanale"
 priceMin: 16
 priceMax: 27
 image: /images/products/cerf-gent.webp

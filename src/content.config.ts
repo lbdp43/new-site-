@@ -76,6 +76,11 @@ const products = defineCollection({
     highlight: emptyToUndefined(z.string()),
     serving: emptyToUndefined(z.string()),
     wcSizeAttribute: emptyToUndefined(z.string()),
+    /** Catégorie SEO descriptive (mot-clé cible). Ex : "Liqueur de
+     *  verveine artisanale", "Liqueur de gentiane" — apparaît en kicker
+     *  au-dessus du H1 + dans le <title>, la meta description, le schema
+     *  Product.category. Sans casser le branding du nom de marque. */
+    seoCategory: emptyToUndefined(z.string()),
 
     // ─── Numbers optionnels (nullish → undefined) ────────────────
     wcId: z.number().nullish().transform((v) => v ?? undefined),

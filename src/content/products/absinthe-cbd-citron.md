@@ -1,6 +1,7 @@
 ---
 name: "CBD Absinthe Citron"
 range: lumiere-obscure
+seoCategory: "Infusion CBD absinthe-citron (sans THC)"
 priceMin: 39
 priceMax: 39
 image: /images/products/absinthe-cbd-citron.webp

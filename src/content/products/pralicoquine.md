@@ -1,6 +1,7 @@
 ---
 name: "La Pralicoquine"
 range: aperitif
+seoCategory: "Liqueur d'amande artisanale"
 priceMin: 16
 priceMax: 27
 image: /images/products/pralicoquine.webp

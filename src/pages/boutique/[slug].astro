@@ -85,7 +85,9 @@ const productSchema = {
   description: product.description || product.tagline,
   image: productImages,
   brand: { '@type': 'Brand', name: site.name },
-  category: rangeInfo.name,
+  // category SEO si renseigné (ex "Liqueur de verveine artisanale"),
+  // sinon fallback sur le nom de la gamme.
+  category: product.seoCategory || rangeInfo.name,
   sku: String(product.wcId),
   mpn: String(product.wcId),
   inLanguage: 'fr-FR',
@@ -137,9 +139,13 @@ const truncate = (s: string, max = 155) => {
   const lastSpace = cut.lastIndexOf(' ');
   return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut).trimEnd() + '…';
 };
-const metaDescription = product.description
-  ? truncate(product.description, 155)
-  : `${product.name} — ${product.alcohol}° — ${product.tagline || ''} La Brasserie des Plantes, Haute-Loire.`;
+// On préfixe la meta description avec la catégorie SEO si dispo
+// (ex : "Liqueur de verveine artisanale — L'Herbe des Druides…")
+// pour densifier le mot-clé en SERP.
+const metaDescriptionRaw = product.description
+  ? `${product.seoCategory ? product.seoCategory + ' — ' : ''}${product.description}`
+  : `${product.seoCategory ? product.seoCategory + ' — ' : ''}${product.name} — ${product.alcohol}° — ${product.tagline || ''} La Brasserie des Plantes, Haute-Loire.`;
+const metaDescription = truncate(metaDescriptionRaw, 158);
 
 // Parseur simple des distinctions pour les convertir en badges médailles.
 // Le niveau (or / argent / bronze) détermine la couleur métallique du badge.
@@ -167,7 +173,9 @@ const parseAward = (raw: string): ParsedAward => {
 const parsedAwards = (product.awards || []).map(parseAward);
 ---
 <Layout
-  title={`${product.name}${product.alcohol ? ' ' + product.alcohol + '°' : ''} | Brasserie des Plantes`}
+  title={product.seoCategory
+    ? `${product.seoCategory} — ${product.name}${product.alcohol ? ' ' + product.alcohol + '°' : ''} | La Brasserie des Plantes`
+    : `${product.name}${product.alcohol ? ' ' + product.alcohol + '°' : ''} | La Brasserie des Plantes`}
   description={metaDescription}
   ogImage={product.image}
   ogType="product"
@@ -201,7 +209,9 @@ const parsedAwards = (product.awards || []).map(parseAward);
             id="main-slide"
             data-slide="0"
             src={product.sizeImages?.[70] || product.image}
-            alt={`${product.name} — liqueur artisanale aux plantes de Haute-Loire`}
+            alt={product.seoCategory
+              ? `${product.seoCategory} — ${product.name}, ${product.alcohol}° — Bouteille La Brasserie des Plantes (Haute-Loire)`
+              : `${product.name} — liqueur artisanale aux plantes de Haute-Loire`}
             class="gallery-slide absolute inset-0 w-full h-full object-contain p-10 transition-opacity duration-500 ease-in-out opacity-100"
             fetchpriority="high"
           />
@@ -302,7 +312,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
       <!-- Info produit -->
       <div>
         <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
-          {rangeInfo.name}
+          {product.seoCategory ?? rangeInfo.name}
         </div>
         <h1 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight mb-4">
           {product.name}

@@ -1,6 +1,7 @@
 ---
 name: "Coffret Initiation"
 range: accessoire
+seoCategory: "Coffret cadeau découverte liqueurs artisanales"
 priceMin: 24
 priceMax: 24
 image: /images/products/coffret-initiation.webp

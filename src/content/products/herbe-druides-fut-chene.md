@@ -1,6 +1,7 @@
 ---
 name: "L'Herbe des Druides — Finition fût de chêne"
 range: edition-limitee
+seoCategory: "Liqueur de verveine vieillie en fût de chêne"
 priceMin: 50
 priceMax: 50
 image: /images/products/herbe-druides-fut-chene.webp

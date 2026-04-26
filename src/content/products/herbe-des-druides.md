@@ -1,6 +1,7 @@
 ---
 name: "L'Herbe des Druides"
 range: brasserie
+seoCategory: "Liqueur de verveine artisanale"
 priceMin: 16
 priceMax: 75
 image: /images/products/herbe-des-druides.webp

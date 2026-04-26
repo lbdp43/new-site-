@@ -21,7 +21,9 @@ const breadcrumbSchema = {
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Liqueurs artisanales La Brasserie des Plantes',
+  name: 'Liqueurs artisanales aux plantes — La Brasserie des Plantes',
+  description:
+    "Catalogue complet de liqueurs artisanales françaises produites à la main en Haute-Loire : liqueur de verveine, liqueur de gentiane, liqueur de menthe, liqueurs digestives, infusions CBD. Meilleur Digestif du Monde 2025 (World Drinks Awards).",
   numberOfItems: products.length,
   itemListElement: products.map((p, i) => ({
     '@type': 'ListItem',
@@ -30,11 +32,28 @@ const itemListSchema = {
     name: p.name,
   })),
 };
+
+// CollectionPage — donne un signal sémantique fort pour le ranking sur
+// "boutique liqueurs artisanales" / "achat liqueur de plantes".
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Boutique de liqueurs artisanales aux plantes',
+  description:
+    "Achetez en ligne nos liqueurs artisanales aux plantes : verveine (L'Herbe des Druides), gentiane (Le Cerf'Gent), menthe (Le Menthor), agrumes (Le Zéleste), praline-amande (La Pralicoquine), assemblage 27 plantes (L'Alchimie Végétale, Meilleur Digestif du Monde 2025).",
+  url: `${site.url}/boutique`,
+  inLanguage: 'fr-FR',
+  isPartOf: { '@id': `${site.url}#localbusiness` },
+  about: {
+    '@type': 'Thing',
+    name: 'Liqueurs artisanales aux plantes — production en Haute-Loire',
+  },
+};
 ---
 <Layout
-  title="Boutique | Liqueurs artisanales aux plantes — La Brasserie des Plantes"
-  description="Découvrez nos 18 liqueurs artisanales aux plantes d'Auvergne : gamme signature, apéritifs, infusions CBD, éditions limitées. Livraison offerte dès 65 €."
-  schema={[breadcrumbSchema, itemListSchema]}
+  title="Boutique liqueurs artisanales — Verveine, Gentiane, Menthe, Digestif | La Brasserie des Plantes"
+  description="Achetez en ligne nos liqueurs artisanales aux plantes d'Auvergne : liqueur de verveine, liqueur de gentiane, liqueur de menthe, digestif aux 27 plantes (Meilleur Digestif du Monde 2025). Fabriqué main en Haute-Loire. Livraison offerte dès 65 €."
+  schema={[breadcrumbSchema, itemListSchema, collectionSchema]}
 >
   <section class="bg-white border-b border-forest-100/60 py-20">
     <div class="max-w-7xl mx-auto px-6">
@@ -44,11 +63,13 @@ const itemListSchema = {
         <span class="text-forest-700">Boutique</span>
       </nav>
       <h1 class="font-display text-5xl md:text-6xl text-forest-900 mb-4 leading-tight">
-        Notre boutique
+        Boutique de <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">liqueurs artisanales</em>
       </h1>
       <p class="text-lg text-ink-700 max-w-2xl leading-relaxed mb-8">
-        Dix-huit références réparties en plusieurs gammes, toutes conçues et
-        embouteillées à la main en Haute-Loire. Livraison offerte dès 65 €.
+        Liqueur de verveine, de gentiane, de menthe, de fruits rouges, digestif
+        aux 27 plantes (Meilleur Digestif du Monde 2025) — toutes nos liqueurs
+        artisanales sont conçues et embouteillées à la main en Haute-Loire.
+        Livraison offerte dès 65 €.
       </p>
       <nav class="flex flex-wrap gap-3" aria-label="Nos gammes">
         {order.map((r) => (

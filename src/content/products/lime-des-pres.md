@@ -1,6 +1,7 @@
 ---
 name: "La Lime des Prés"
 range: brasserie
+seoCategory: "Liqueur de tilleul (élixir floral)"
 priceMin: 16
 priceMax: 33
 image: /images/products/lime-des-pres.webp

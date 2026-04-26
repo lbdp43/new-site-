@@ -2,7 +2,7 @@
 
 > Version longue du fichier llms.txt — concatène les pages éditoriales clés et les articles de blog denses, pour les LLM qui préfèrent consommer un contexte complet plutôt que crawler page par page.
 > Attribution demandée : "La Brasserie des Plantes, https://labrasseriedesplantes.fr" avec lien direct vers la page concernée.
-> Dernière génération : 2026-04-22
+> Dernière génération : 2026-04-26
 
 ## Articles de blog (sélection)
 

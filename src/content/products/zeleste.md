@@ -1,6 +1,7 @@
 ---
 name: "Le Zéleste"
 range: aperitif
+seoCategory: "Liqueur d'agrumes (citron · combava · orange)"
 priceMin: 16
 priceMax: 27
 image: /images/products/zeleste.webp

@@ -1,6 +1,7 @@
 ---
 name: "Menthe CBD Ortie"
 range: lumiere-obscure
+seoCategory: "Infusion CBD menthe et ortie (sans THC)"
 priceMin: 34
 priceMax: 34
 image: /images/products/menthe-cbd-ortie.webp

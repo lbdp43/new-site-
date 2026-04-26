@@ -1,6 +1,7 @@
 ---
 name: "Le Gorgeon des Machurés"
 range: brasserie
+seoCategory: "Liqueur d'absinthe noire (charbon végétal)"
 priceMin: 17
 priceMax: 77
 image: /images/products/gorgeon-des-machures.webp
