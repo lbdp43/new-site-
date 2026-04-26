@@ -117,7 +117,15 @@ export default function MiniCartDrawer() {
                         onClick={closeMiniCart}
                         className="flex-none w-16 h-16 rounded-lg overflow-hidden bg-white border border-forest-100"
                       >
-                        <img src={img.thumbnail} alt={img.alt || item.name} className="w-full h-full object-contain p-1" />
+                        <img
+                          src={img.thumbnail}
+                          alt={img.alt || item.name}
+                          width={64}
+                          height={64}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-contain p-1"
+                        />
                       </a>
                     )}
                     <div className="flex-1 min-w-0">

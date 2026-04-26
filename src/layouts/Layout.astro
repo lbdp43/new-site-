@@ -128,6 +128,45 @@ const otherLocales: Lang[] = (['fr', 'en', 'es', 'it'] as Lang[]).filter((l) => 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/images/brand/logo-lbdp.webp" />
 
+    <!--
+      Preconnect — réduit le TTFB de la première requête vers chaque tiers.
+      WC Store API : appelée dès que le panier s'hydrate (cart-store.tsx).
+      Stripe : chargé sur /commande mais l'init handshake est long, on ouvre
+      le canal en avance.
+    -->
+    <link rel="preconnect" href="https://www.labrasseriedesplantes.fr" crossorigin />
+    <link rel="dns-prefetch" href="https://www.labrasseriedesplantes.fr" />
+    <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+    <link rel="dns-prefetch" href="https://js.stripe.com" />
+
+    <!--
+      Speculation Rules API (Chrome 121+, Edge) — prerender les pages internes
+      survolées plus de 200ms. Gain INP/FCP énorme sur le clic suivant. On
+      exclut les pages transactionnelles (panier/commande/admin) et les ancres.
+      Ignoré silencieusement par les navigateurs qui ne supportent pas.
+    -->
+    <script
+      type="speculationrules"
+      set:html={JSON.stringify({
+        prerender: [
+          {
+            where: {
+              and: [
+                { href_matches: '/*' },
+                { not: { href_matches: '/panier*' } },
+                { not: { href_matches: '/commande*' } },
+                { not: { href_matches: '/admin*' } },
+                { not: { href_matches: '/*\\?*' } },
+                { not: { selector_matches: '[rel~="external"]' } },
+                { not: { selector_matches: '[rel~="nofollow"]' } },
+              ],
+            },
+            eagerness: 'moderate',
+          },
+        ],
+      })}
+    />
+
     {schema && (
       <script
         type="application/ld+json"
