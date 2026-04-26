@@ -6,7 +6,7 @@ export const site = {
   shortName: "LBDP",
   tagline: "Liqueurs artisanales de plantes — Haute-Loire",
   baseline: "Artisans liquoristes depuis 2021, à Saint-Didier-en-Velay.",
-  url: "https://labrasseriedesplantes.fr",
+  url: "https://www.labrasseriedesplantes.fr",
   locale: "fr_FR",
 
   // NAP unifié (choix utilisateur)
