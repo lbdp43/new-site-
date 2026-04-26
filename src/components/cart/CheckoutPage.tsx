@@ -245,11 +245,32 @@ function CheckoutInner() {
       //   #wcpay-confirm-si:{order_id}:{client_secret}:{nonce}[:{pm_id}]
       // Référence : woocommerce-payments includes/class-wc-payment-gateway-wcpay.php:1933-1950.
       //
-      // On utilise un match TRÈS laxiste qui capture tout ce qui ressemble
-      // à un client_secret Stripe (`pi_xxx_secret_yyy` ou `seti_xxx_secret_yyy`)
-      // dans le redirect_url, peu importe le format exact du wrapper.
-      const wcpayMatch = redirectUrl.match(/^#wcpay-confirm-(pi|si):/i);
-      const clientSecretMatch = redirectUrl.match(/(pi_[A-Za-z0-9]+_secret_[A-Za-z0-9]+|seti_[A-Za-z0-9]+_secret_[A-Za-z0-9]+)/);
+      // ⚠️ PIÈGE — ce hash N'arrive PAS dans `redirect_url` côté Store API !
+      // `WC StoreApi\Payments\PaymentResult::set_redirect_url()` passe la
+      // valeur dans `esc_url_raw()` qui retire les hash fragments → le
+      // champ devient vide. Le gateway result complet (avec son champ
+      // `redirect`) est par contre mergé dans `payment_details` via
+      // `Legacy.php`. Donc le hash arrive en `payment_details.redirect`.
+      //
+      // On regarde dans les 2 endroits par sécurité (selon l'évolution
+      // de WC + WooPayments). On utilise un match TRÈS laxiste qui
+      // capture tout ce qui ressemble à un client_secret Stripe
+      // (`pi_xxx_secret_yyy` ou `seti_xxx_secret_yyy`).
+      const paymentDetailsArr = result.payment_result.payment_details ?? [];
+      const detailsMap: Record<string, string> = Object.fromEntries(
+        paymentDetailsArr.map((d) => [d.key, d.value]),
+      );
+      const detailsRedirect = detailsMap.redirect ?? "";
+
+      const sources = [detailsRedirect, redirectUrl];
+      let wcpayMatch: RegExpMatchArray | null = null;
+      let clientSecretMatch: RegExpMatchArray | null = null;
+      for (const src of sources) {
+        if (!wcpayMatch) wcpayMatch = src.match(/^#wcpay-confirm-(pi|si):/i);
+        if (!clientSecretMatch) {
+          clientSecretMatch = src.match(/(pi_[A-Za-z0-9]+_secret_[A-Za-z0-9]+|seti_[A-Za-z0-9]+_secret_[A-Za-z0-9]+)/);
+        }
+      }
 
       if (wcpayMatch || clientSecretMatch) {
         const intentType = wcpayMatch?.[1]?.toLowerCase() ?? (clientSecretMatch?.[1]?.startsWith("seti_") ? "si" : "pi");
