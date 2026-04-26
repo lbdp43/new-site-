@@ -54,7 +54,7 @@ export interface Product {
 export const ranges: Record<ProductRange, { name: string; baseline: string; description: string }> = {
   brasserie: {
     name: 'Gamme Classique',
-    baseline: "Nos liqueurs signature — digestifs et apéritifs aux plantes oubliées d'Auvergne.",
+    baseline: "Nos liqueurs signature — digestifs et apéritifs aux plantes oubliées.",
     description:
       "Le cœur de notre savoir-faire. Des liqueurs de 18 à 50°, conçues autour d'assemblages complexes de plantes médicinales et aromatiques. Digestifs de prestige, liqueurs florales, fruits rouges — la gamme couvre toute une palette de moments.",
   },

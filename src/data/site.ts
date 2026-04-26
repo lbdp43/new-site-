@@ -40,7 +40,7 @@ export const site = {
   founders: ["Etienne", "Guillaume"],
 
   // Slogan court — utilisé dans le schema LocalBusiness + meta génériques
-  slogan: "Liquoristes artisanaux du Velay — liqueurs bio aux plantes d'Auvergne",
+  slogan: "Liquoristes artisanaux du Velay — liqueurs bio aux plantes oubliées",
 
   // Keywords — exploités par LocalBusiness schema (Knowledge Graph) et
   // crawlers IA (llms.txt). Cible les requêtes génériques de la profession
@@ -50,8 +50,8 @@ export const site = {
     "liqueur artisanale",
     "liqueur artisanale bio",
     "liqueur de plantes",
-    "liqueurs artisanales Auvergne",
-    "liqueurs artisanales Haute-Loire",
+    "liqueur de plantes oubliées",
+    "liquoriste artisanal Haute-Loire",
     "digestif artisanal",
     "spiritueux artisanal France",
     "liquoriste artisanal",
@@ -94,7 +94,7 @@ export const site = {
   // "digestif artisanal", "liquoriste artisanal" sans bourrage. Tient en ~155
   // caractères pour rester dans la limite des SERP Google sans troncature.
   defaultDescription:
-    "Liqueurs artisanales bio aux plantes d'Auvergne. Liquoristes indépendants en Haute-Loire — L'Alchimie Végétale, Meilleur Digestif du Monde 2025.",
+    "Liqueurs artisanales bio aux plantes oubliées. Liquoristes indépendants en Haute-Loire, atelier à Saint-Didier-en-Velay — L'Alchimie Végétale, Meilleur Digestif du Monde 2025.",
   // ⚠️ Tant que /og-default.jpg n'a pas été créé en 1200×630 dans public/,
   // on pointe vers le logo couleur (qui existe). Voir docs/audit-seo-2026-04.md
   // pour le brief de création de la vraie image OG.
