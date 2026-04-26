@@ -232,10 +232,6 @@ function CheckoutInner() {
         ],
       });
 
-      // Log complet pour debug — visible en console DevTools (Chrome → F12).
-      // À garder tant qu'on n'a pas validé un paiement complet en prod.
-      console.log("[checkout] WC Store API response:", result);
-
       const status = result.payment_result.payment_status;
       const redirectUrl = result.payment_result.redirect_url ?? "";
 
@@ -277,14 +273,11 @@ function CheckoutInner() {
         const clientSecret = clientSecretMatch?.[1];
 
         if (!clientSecret) {
-          console.error("[checkout] redirect_url contient un wcpay-confirm mais pas de client_secret parsable :", redirectUrl);
           setFormError(
             "Réponse WooPayments incomplète (3DS sans client_secret). Recharge la page et réessaie.",
           );
           return;
         }
-
-        console.log(`[checkout] 3DS challenge: type=${intentType}, secret=${clientSecret.slice(0, 20)}…`);
 
         const { error: confirmError, paymentIntent, setupIntent } =
           intentType === "si"
@@ -292,7 +285,6 @@ function CheckoutInner() {
             : await stripe.confirmCardPayment(clientSecret);
 
         if (confirmError) {
-          console.error("[checkout] Stripe 3DS error:", confirmError);
           setFormError(
             confirmError.message ??
               "L'authentification 3D Secure a échoué. Réessaie ou utilise une autre carte.",
@@ -301,7 +293,6 @@ function CheckoutInner() {
         }
 
         const intentStatus = paymentIntent?.status ?? setupIntent?.status;
-        console.log(`[checkout] 3DS done, intent status = ${intentStatus}`);
 
         if (intentStatus === "succeeded" || intentStatus === "processing") {
           setCart(null);
@@ -319,7 +310,6 @@ function CheckoutInner() {
 
       if (status === "success") {
         // Pas de 3DS — paiement direct accepté.
-        console.log("[checkout] success direct (no 3DS)");
         setCart(null);
         window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
           result.order_key,

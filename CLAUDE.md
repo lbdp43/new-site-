@@ -107,8 +107,18 @@ transporteur EasyBee) reste géré par WooCommerce côté serveur.
    top-level du JSON n'atterrit pas dans `$_POST['payment_method']`,
    que la fonction WooPayments lit côté PHP. Diagnostiqué le 25 avril
    2026 — voir `fatal-errors-2026-04-25.log` côté WP.
-5. WooPayments crée la commande côté WP, débite la carte, envoie les emails,
-   notifie EasyBee. Redirection vers `/commande/confirmation?order=XXX&key=YYY`.
+5. **3D Secure / SCA** — la réponse contient un hash de confirmation
+   `#wcpay-confirm-pi:{order_id}:{client_secret}:{nonce}` que le front
+   doit extraire pour appeler `stripe.confirmCardPayment(clientSecret)`.
+   ⚠️ Ce hash n'arrive PAS dans `payment_result.redirect_url` (qui est
+   strippé par `esc_url_raw()` dans `WC StoreApi\Payments\PaymentResult`),
+   il arrive dans `payment_result.payment_details[].redirect`. CheckoutPage
+   gère les 2 sources par sécurité. Sans ça, le PaymentIntent reste en
+   `requires_action`, la carte n'est pas débitée et la commande WC
+   reste en "En attente de paiement" indéfiniment. Diagnostiqué le 26
+   avril 2026.
+6. WooPayments crée la commande, débite la carte (après 3DS), envoie les
+   emails, notifie EasyBee. Redirection vers `/commande/confirmation?order=XXX&key=YYY`.
 
 ## Variables d'environnement
 
