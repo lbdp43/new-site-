@@ -63,13 +63,15 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site.url).toString
 const ogImageUrl = new URL(ogImage, site.url).toString();
 const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 
-// hreflang — on calcule le chemin FR équivalent pour pouvoir générer les alternates
-// Si on est sur /en/xxx, il faut retrouver le /xxx FR correspondant.
-const frEquivalentPath = lang === 'en'
-  ? alternateLangPath(Astro.url.pathname, 'en', 'fr')
-  : Astro.url.pathname;
+// hreflang — getHreflangLinks gère maintenant les 4 langues nativement et
+// recalcule le chemin FR canonique en interne. On lui passe directement la
+// vraie langue source pour qu'il puisse générer les alternates EN/ES/IT
+// correctement, y compris quand la page courante est /es/ ou /it/.
+const alternates = getHreflangLinks(Astro.url.pathname, lang, site.url);
 
-const alternates = getHreflangLinks(frEquivalentPath, 'fr', site.url);
+// og:locale:alternate — on déclare toutes les autres langues du site
+// (et pas seulement EN), aligné avec hreflang.
+const otherLocales: Lang[] = (['fr', 'en', 'es', 'it'] as Lang[]).filter((l) => l !== lang);
 ---
 <!doctype html>
 <html lang={htmlLang}>
@@ -81,7 +83,10 @@ const alternates = getHreflangLinks(frEquivalentPath, 'fr', site.url);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {noindex
+      ? <meta name="robots" content="noindex, follow" />
+      : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    }
 
     <!-- hreflang — versions linguistiques alternatives -->
     {alternates.map((alt) => (
@@ -96,8 +101,9 @@ const alternates = getHreflangLinks(frEquivalentPath, 'fr', site.url);
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:locale" content={ogLocale} />
-    {lang === 'fr' && <meta property="og:locale:alternate" content="en_US" />}
-    {lang === 'en' && <meta property="og:locale:alternate" content="fr_FR" />}
+    {otherLocales.map((l) => (
+      <meta property="og:locale:alternate" content={getOgLocale(l)} />
+    ))}
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />

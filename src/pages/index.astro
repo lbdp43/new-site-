@@ -20,10 +20,15 @@ const localBusinessSchema = {
   '@type': ['LocalBusiness', 'Organization'],
   '@id': `${site.url}#localbusiness`,
   name: site.name,
-  alternateName: site.shortName,
+  alternateName: [site.shortName, 'Liquoristes artisanaux du Velay'],
   description: site.defaultDescription,
+  slogan: site.slogan,
+  // Keywords lus par le Knowledge Graph et certains crawlers IA. Mots-clés
+  // génériques de la profession (liqueur artisanale, digestif artisanal…)
+  // ancrés sur le terroir local (Auvergne, Haute-Loire).
+  keywords: site.keywords.join(', '),
   image: [
-    new URL('/og-default.jpg', site.url).toString(),
+    new URL(site.defaultOgImage, site.url).toString(),
     new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
   ],
   logo: new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
@@ -85,9 +90,21 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: site.name,
+  alternateName: 'Liqueurs artisanales La Brasserie des Plantes',
   url: site.url,
   inLanguage: 'fr-FR',
   publisher: { '@id': `${site.url}#localbusiness` },
+  // SearchAction → éligibilité au "sitelinks search box" Google. La cible
+  // pointe vers /boutique avec un paramètre ?q= (filtrage côté client sur
+  // les 18 produits).
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${site.url}/boutique?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
 };
 
 // VideoObject — vidéo de présentation atelier (lbdp-pro.mp4), indexable par
