@@ -232,6 +232,10 @@ function CheckoutInner() {
         ],
       });
 
+      // Log complet pour debug — visible en console DevTools (Chrome → F12).
+      // À garder tant qu'on n'a pas validé un paiement complet en prod.
+      console.log("[checkout] WC Store API response:", result);
+
       const status = result.payment_result.payment_status;
       const redirectUrl = result.payment_result.redirect_url ?? "";
 
@@ -241,13 +245,25 @@ function CheckoutInner() {
       //   #wcpay-confirm-si:{order_id}:{client_secret}:{nonce}[:{pm_id}]
       // Référence : woocommerce-payments includes/class-wc-payment-gateway-wcpay.php:1933-1950.
       //
-      // Quand ce hash est présent, il faut OBLIGATOIREMENT appeler
-      // stripe.confirmCardPayment(clientSecret) pour exécuter le challenge
-      // 3DS (popup banque), sinon le PaymentIntent reste en
-      // `requires_action` et la carte n'est jamais débitée.
-      const wcpayMatch = redirectUrl.match(/^#wcpay-confirm-(pi|si):([^:]+):([^:]+):([^:]+)/);
-      if (wcpayMatch) {
-        const [, intentType, , clientSecret] = wcpayMatch;
+      // On utilise un match TRÈS laxiste qui capture tout ce qui ressemble
+      // à un client_secret Stripe (`pi_xxx_secret_yyy` ou `seti_xxx_secret_yyy`)
+      // dans le redirect_url, peu importe le format exact du wrapper.
+      const wcpayMatch = redirectUrl.match(/^#wcpay-confirm-(pi|si):/i);
+      const clientSecretMatch = redirectUrl.match(/(pi_[A-Za-z0-9]+_secret_[A-Za-z0-9]+|seti_[A-Za-z0-9]+_secret_[A-Za-z0-9]+)/);
+
+      if (wcpayMatch || clientSecretMatch) {
+        const intentType = wcpayMatch?.[1]?.toLowerCase() ?? (clientSecretMatch?.[1]?.startsWith("seti_") ? "si" : "pi");
+        const clientSecret = clientSecretMatch?.[1];
+
+        if (!clientSecret) {
+          console.error("[checkout] redirect_url contient un wcpay-confirm mais pas de client_secret parsable :", redirectUrl);
+          setFormError(
+            "Réponse WooPayments incomplète (3DS sans client_secret). Recharge la page et réessaie.",
+          );
+          return;
+        }
+
+        console.log(`[checkout] 3DS challenge: type=${intentType}, secret=${clientSecret.slice(0, 20)}…`);
 
         const { error: confirmError, paymentIntent, setupIntent } =
           intentType === "si"
@@ -255,6 +271,7 @@ function CheckoutInner() {
             : await stripe.confirmCardPayment(clientSecret);
 
         if (confirmError) {
+          console.error("[checkout] Stripe 3DS error:", confirmError);
           setFormError(
             confirmError.message ??
               "L'authentification 3D Secure a échoué. Réessaie ou utilise une autre carte.",
@@ -263,9 +280,9 @@ function CheckoutInner() {
         }
 
         const intentStatus = paymentIntent?.status ?? setupIntent?.status;
+        console.log(`[checkout] 3DS done, intent status = ${intentStatus}`);
+
         if (intentStatus === "succeeded" || intentStatus === "processing") {
-          // Paiement validé côté Stripe — WooPayments mettra la commande
-          // à jour via webhook (ou le polling de la confirmation page).
           setCart(null);
           window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
             result.order_key,
@@ -281,6 +298,7 @@ function CheckoutInner() {
 
       if (status === "success") {
         // Pas de 3DS — paiement direct accepté.
+        console.log("[checkout] success direct (no 3DS)");
         setCart(null);
         window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
           result.order_key,
