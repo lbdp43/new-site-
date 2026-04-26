@@ -217,7 +217,7 @@ export const plants: Plant[] = [
     family: 'racine',
     role: 'Amer franc · colonne vertébrale',
     description:
-      "La grande racine des montagnes d'Auvergne. Amertume franche, profonde, presque végétale — c'est elle qui donne à notre apéritif sa colonne vertébrale, en accord avec le quinquina.",
+      "La grande racine des hauts pâturages (Cantal, Jura, Alpes). Amertume franche, profonde, presque végétale — c'est elle qui donne à notre apéritif sa colonne vertébrale, en accord avec le quinquina.",
     usedIn: "Le Cerf'Gent",
     season: 'Récolte de septembre à novembre',
     signature: true,
