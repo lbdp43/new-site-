@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: LBDP Astro CORS
- * Description: Autorise le site Astro (test.labrasseriedesplantes.fr + localhost:4321) à dialoguer avec la WooCommerce Store API depuis un navigateur. Expose aussi les headers Cart-Token / Nonce nécessaires au panier.
- * Version:     1.1.0
+ * Description: Autorise le site Astro (www. + apex + test.labrasseriedesplantes.fr + localhost:4321) à dialoguer avec la WooCommerce Store API depuis un navigateur. Expose aussi les headers Cart-Token / Nonce nécessaires au panier.
+ * Version:     1.2.0
  * Author:      La Brasserie des Plantes
  *
  * =====================================================================
@@ -13,6 +13,10 @@
  *  Pour retirer le CORS : désactive simplement le plugin.
  *
  *  CHANGELOG
+ *  1.2.0 — Ajoute www.labrasseriedesplantes.fr et l'apex
+ *          (labrasseriedesplantes.fr) à la liste des origines autorisées,
+ *          en préparation de la bascule DNS du site front Astro sur le
+ *          domaine principal.
  *  1.1.0 — Ajoute les headers CORS dès l'action `init` (avant que WC
  *          ait le temps de wp_die() en cas d'erreur fatale). Sans ça,
  *          un 500 dans WooPayments arrivait sans Access-Control-Allow-
@@ -30,8 +34,10 @@ defined( 'ABSPATH' ) || exit;
  */
 function lbdp_astro_allowed_origins() : array {
     return [
-        'https://test.labrasseriedesplantes.fr',
-        'http://localhost:4321',  // Astro dev
+        'https://www.labrasseriedesplantes.fr',  // domaine principal Astro (post-bascule)
+        'https://labrasseriedesplantes.fr',      // apex (redirige vers www. côté Vercel)
+        'https://test.labrasseriedesplantes.fr', // staging Astro
+        'http://localhost:4321',                 // Astro dev
         'http://127.0.0.1:4321',
     ];
 }
