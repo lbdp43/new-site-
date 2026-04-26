@@ -4,6 +4,7 @@ import { site } from '../data/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AgeGate from '../components/AgeGate.astro';
+import MiniCartDrawer from '../components/cart/MiniCartDrawer';
 import {
   getLangFromUrl,
   getOgLocale,
@@ -135,5 +136,7 @@ const alternates = getHreflangLinks(frEquivalentPath, 'fr', site.url);
       <slot />
     </main>
     <Footer lang={lang} />
+    <!-- Mini-panier slide-in (overlay sur toutes les pages) -->
+    <MiniCartDrawer client:idle />
   </body>
 </html>

@@ -1,20 +1,39 @@
 import { useEffect } from "react";
-import { ensureCartLoaded, formatMoney, useCart } from "../../lib/cart-store";
+import {
+  ensureCartLoaded,
+  formatMoney,
+  openMiniCart,
+  subscribeCrossTabSync,
+  useCart,
+} from "../../lib/cart-store";
 
 export default function CartIcon() {
   const { itemCount, total, minorUnit, currencySymbol } = useCart();
 
   useEffect(() => {
     ensureCartLoaded();
+    // Synchro entre onglets : si un autre onglet modifie le panier (checkout
+    // réussi, ajout, suppression…), refresh ici aussi.
+    return subscribeCrossTabSync();
   }, []);
 
-  const label = itemCount > 0
-    ? `Panier — ${itemCount} article${itemCount > 1 ? "s" : ""}`
-    : "Panier vide";
+  const label =
+    itemCount > 0
+      ? `Panier — ${itemCount} article${itemCount > 1 ? "s" : ""}`
+      : "Panier vide";
+
+  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    // Ctrl/Cmd-clic ou clic milieu → laisse passer au lien "Voir le panier".
+    // Sinon, ouvre le mini-panier slide-in.
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    openMiniCart();
+  }
 
   return (
-    <a
-      href="/panier"
+    <button
+      type="button"
+      onClick={handleClick}
       aria-label={label}
       className="relative inline-flex items-center gap-2 px-3 py-2 rounded-full text-ink-700 hover:text-forest-800 transition-colors"
     >
@@ -46,6 +65,6 @@ export default function CartIcon() {
       <span className="hidden md:inline text-xs font-medium tabular-nums">
         {formatMoney(total, minorUnit, currencySymbol)}
       </span>
-    </a>
+    </button>
   );
 }

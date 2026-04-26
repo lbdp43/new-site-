@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCart } from "../../lib/cart-store";
+import { openMiniCart, useCart } from "../../lib/cart-store";
 
 interface Props {
   /** ID numérique WooCommerce (product OU variation). Sans ça, le bouton est désactivé. */
@@ -65,6 +65,8 @@ export default function AddToCartButton({
     try {
       await addItem({ id: wcId, quantity, variation });
       setAdded(true);
+      // Ouvre le mini-panier (slide-in à droite) avec le récap du panier.
+      openMiniCart();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Erreur lors de l'ajout au panier.");
     } finally {
@@ -152,15 +154,6 @@ export default function AddToCartButton({
         <p className="text-sm text-red-700" role="alert">
           {error}
         </p>
-      )}
-
-      {added && (
-        <a
-          href="/panier"
-          className="text-sm text-forest-800 underline hover:text-forest-900"
-        >
-          Voir mon panier →
-        </a>
       )}
 
       <span className="sr-only" aria-live="polite">

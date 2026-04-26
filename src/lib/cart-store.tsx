@@ -1,6 +1,43 @@
 import { useSyncExternalStore } from "react";
 import { wc, type WcCart } from "./woocommerce";
 
+/* ──────────────────────────────────────────────────────────────────────
+ * MINI-CART DRAWER
+ * État booléen séparé du cart pour piloter l'ouverture/fermeture du
+ * MiniCartDrawer (panneau slide-in à droite). Géré au niveau module
+ * pour que n'importe quelle île React puisse l'ouvrir ou la fermer.
+ * ────────────────────────────────────────────────────────────────────── */
+
+let miniCartOpen = false;
+const miniCartListeners = new Set<() => void>();
+
+function emitMiniCart() {
+  for (const l of miniCartListeners) l();
+}
+
+export function openMiniCart() {
+  if (miniCartOpen) return;
+  miniCartOpen = true;
+  emitMiniCart();
+}
+
+export function closeMiniCart() {
+  if (!miniCartOpen) return;
+  miniCartOpen = false;
+  emitMiniCart();
+}
+
+export function useMiniCart(): boolean {
+  return useSyncExternalStore(
+    (l) => {
+      miniCartListeners.add(l);
+      return () => miniCartListeners.delete(l);
+    },
+    () => miniCartOpen,
+    () => false,
+  );
+}
+
 /**
  * Store de panier niveau module — partagé entre toutes les îles Astro (Header,
  * bouton Ajouter, page panier). Pas de React Context : chaque île est un arbre
@@ -56,6 +93,10 @@ async function run(fn: () => Promise<WcCart>) {
   try {
     const next = await fn();
     setState({ cart: next, loading: false, initialized: true });
+    // Auto-sélectionne le retrait en boutique si dispo et qu'aucun mode n'est
+    // déjà sélectionné. UX : ne pas pré-charger la facture avec les frais
+    // de port — le client choisit explicitement Colissimo s'il en a besoin.
+    void maybeAutoSelectPickup(next);
     return next;
   } catch (e) {
     setState({
@@ -67,9 +108,74 @@ async function run(fn: () => Promise<WcCart>) {
   }
 }
 
+/**
+ * Si le panier propose un mode "retrait/pickup" et que c'est PAS lui qui est
+ * actuellement sélectionné, on bascule dessus. WooCommerce sélectionne par
+ * défaut le mode défini en admin (souvent Colissimo) — sur le front on
+ * préfère que la valeur affichée par défaut soit la moins chère pour ne pas
+ * "imposer" la livraison payante.
+ */
+async function maybeAutoSelectPickup(cart: WcCart) {
+  const pkg = cart.shipping_rates?.[0];
+  if (!pkg) return;
+  const rates = pkg.shipping_rates ?? [];
+  if (rates.length < 2) return; // Un seul mode → pas de choix à imposer.
+
+  const isPickup = (r: { method_id?: string; rate_id: string; name: string }) => {
+    const id = (r.method_id ?? r.rate_id ?? "").toLowerCase();
+    const name = (r.name ?? "").toLowerCase();
+    return (
+      id.includes("local_pickup") ||
+      id.includes("pickup") ||
+      name.includes("retrait") ||
+      name.includes("pickup") ||
+      name.includes("boutique")
+    );
+  };
+
+  const pickup = rates.find(isPickup);
+  if (!pickup) return;
+  if (pickup.selected) return;
+
+  try {
+    const updated = await wc.selectShippingRate(pkg.package_id, pickup.rate_id);
+    setState({ cart: updated });
+  } catch {
+    /* silencieux — le user pourra basculer manuellement */
+  }
+}
+
 /** Met à jour le panier partagé avec une réponse déjà obtenue (ex: checkout). */
 export function setCart(cart: WcCart | null) {
   setState({ cart, initialized: true });
+  // Notifie les autres onglets ouverts (header de l'autre onglet va refresh).
+  try {
+    window.localStorage.setItem("lbdp_cart_synced_at", String(Date.now()));
+  } catch {
+    /* localStorage indispo */
+  }
+}
+
+/**
+ * À appeler depuis un composant monté très tôt (ex: CartIcon) pour écouter
+ * les changements localStorage faits par les AUTRES onglets ouverts (notamment
+ * la suppression du Cart-Token après checkout sur un autre onglet, ou les
+ * synchros explicites via `lbdp_cart_synced_at`). Quand un changement est
+ * détecté, on refresh le panier dans l'onglet courant.
+ */
+export function subscribeCrossTabSync(): () => void {
+  if (typeof window === "undefined") return () => {};
+  const handler = (e: StorageEvent) => {
+    if (
+      e.key === "lbdp_cart_token" ||
+      e.key === "lbdp_wc_nonce" ||
+      e.key === "lbdp_cart_synced_at"
+    ) {
+      void cartActions.refresh().catch(() => {});
+    }
+  };
+  window.addEventListener("storage", handler);
+  return () => window.removeEventListener("storage", handler);
 }
 
 export const cartActions = {
