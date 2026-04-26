@@ -88,15 +88,32 @@ function getServerSnapshot(): CartState {
   };
 }
 
-async function run(fn: () => Promise<WcCart>) {
+function hasShippingRates(c: WcCart | null): boolean {
+  return (c?.shipping_rates?.[0]?.shipping_rates?.length ?? 0) > 0;
+}
+
+async function run(fn: () => Promise<WcCart>, options: { autoPickup?: boolean } = {}) {
+  // Auto-pickup : on ne bascule sur le retrait boutique que la **première
+  // fois** qu'on voit des shipping_rates dans la session (typiquement
+  // l'ajout du premier produit). Sur les opérations suivantes — changement
+  // d'adresse, sélection explicite d'un autre mode, ajout d'item après
+  // hydratation — on respecte le choix de l'utilisateur, sinon on écrase
+  // sa sélection en boucle.
+  //
+  // Bug avant le 26 avril 2026 : maybeAutoSelectPickup tournait à chaque
+  // mutation. Quand l'utilisateur cliquait "Forfait", on partait avec
+  // flat_rate, WC répondait OK, puis on relançait maybeAutoSelectPickup
+  // qui détectait que pickup n'était plus selected → 2e requête qui
+  // remettait pickup. Résultat visuel : "je clique Forfait, ça repasse
+  // sur Retrait".
+  const previousHadRates = hasShippingRates(state.cart);
   setState({ loading: true, error: null });
   try {
     const next = await fn();
     setState({ cart: next, loading: false, initialized: true });
-    // Auto-sélectionne le retrait en boutique si dispo et qu'aucun mode n'est
-    // déjà sélectionné. UX : ne pas pré-charger la facture avec les frais
-    // de port — le client choisit explicitement Colissimo s'il en a besoin.
-    void maybeAutoSelectPickup(next);
+    if (!previousHadRates && options.autoPickup !== false) {
+      void maybeAutoSelectPickup(next);
+    }
     return next;
   } catch (e) {
     setState({
@@ -190,10 +207,15 @@ export const cartActions = {
   updateItem: (key: string, quantity: number) => run(() => wc.updateItem(key, quantity)),
   removeItem: (key: string) => run(() => wc.removeItem(key)),
   applyCoupon: (code: string) => run(() => wc.applyCoupon(code)),
+  // autoPickup: false → respect du choix utilisateur. Sans ça, si l'utilisateur
+  // sélectionne explicitement Forfait/Colissimo, le run() relancerait
+  // maybeAutoSelectPickup juste après et écraserait la sélection.
   selectShippingRate: (packageId: number, rateId: string) =>
-    run(() => wc.selectShippingRate(packageId, rateId)),
+    run(() => wc.selectShippingRate(packageId, rateId), { autoPickup: false }),
+  // autoPickup: false → un changement d'adresse client (code postal, ville…)
+  // ne doit jamais réinitialiser le mode de livraison choisi explicitement.
   updateCustomer: (args: Parameters<typeof wc.updateCustomer>[0]) =>
-    run(() => wc.updateCustomer(args)),
+    run(() => wc.updateCustomer(args), { autoPickup: false }),
 };
 
 /** Hook d'accès depuis n'importe quelle île React. */
