@@ -557,7 +557,12 @@ redirections 301 WP→Astro à pré-remplir avant bascule www., article pilier
    9 dead-ends résolus, 6 orphans réactivés.
 
 **Restent ouverts post-bascule** :
-- Plan 301 WP→Astro à pré-remplir dans `vercel.json` (priorité haute pré-J)
+- ~~Plan 301 WP→Astro à pré-remplir dans `vercel.json`~~ ✅ **FAIT le
+  2026-04-27** : 32 redirections 301 configurées (18 fiches produit
+  `/shop/X` → `/boutique/X` avec mapping de slugs, 10 pages WP →
+  équivalent Astro, 4 wildcards catch-all `/produit-categorie/*` etc.).
+  Inertes tant que www. pointe sur WP. Activation = jour de la bascule
+  DNS. Voir `docs/bascule-www.md` pour la liste exacte.
 - ~~CSP `report-only` → `enforced`~~ ✅ **FAIT le 2026-04-27** : enforced
   sur le site public (avec `upgrade-insecure-requests`) + override
   permissif sur `/admin/*` pour Sveltia (unpkg + auth.sveltia.app +

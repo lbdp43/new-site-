@@ -54,5 +54,167 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/shop/lalchimie-vegetale/:path*",
+      "destination": "/boutique/alchimie-vegetale",
+      "permanent": true
+    },
+    {
+      "source": "/shop/lalchimie-vegetale-cuvee-michel/:path*",
+      "destination": "/boutique/alchimie-cuvee-michel",
+      "permanent": true
+    },
+    {
+      "source": "/shop/lherbe-des-druides/:path*",
+      "destination": "/boutique/herbe-des-druides",
+      "permanent": true
+    },
+    {
+      "source": "/shop/lherbe-des-druides-finition-fut-de-chene/:path*",
+      "destination": "/boutique/herbe-druides-fut-chene",
+      "permanent": true
+    },
+    {
+      "source": "/shop/cerfgent/:path*",
+      "destination": "/boutique/cerf-gent",
+      "permanent": true
+    },
+    {
+      "source": "/shop/lessence-des-alpes/:path*",
+      "destination": "/boutique/essence-des-alpes",
+      "permanent": true
+    },
+    {
+      "source": "/shop/le-gorgeon-des-machures/:path*",
+      "destination": "/boutique/gorgeon-des-machures",
+      "permanent": true
+    },
+    {
+      "source": "/shop/le-nectar-dostara/:path*",
+      "destination": "/boutique/nectar-ostara",
+      "permanent": true
+    },
+    {
+      "source": "/shop/la-fleche-ardente/:path*",
+      "destination": "/boutique/fleche-ardente",
+      "permanent": true
+    },
+    {
+      "source": "/shop/la-lime-des-pres/:path*",
+      "destination": "/boutique/lime-des-pres",
+      "permanent": true
+    },
+    {
+      "source": "/shop/la-pralicoquine/:path*",
+      "destination": "/boutique/pralicoquine",
+      "permanent": true
+    },
+    {
+      "source": "/shop/le-menthor/:path*",
+      "destination": "/boutique/menthor",
+      "permanent": true
+    },
+    {
+      "source": "/shop/zeleste/:path*",
+      "destination": "/boutique/zeleste",
+      "permanent": true
+    },
+    {
+      "source": "/shop/verveine-cbd-aurone/:path*",
+      "destination": "/boutique/verveine-cbd-aurone",
+      "permanent": true
+    },
+    {
+      "source": "/shop/menthe-cbd-ortie/:path*",
+      "destination": "/boutique/menthe-cbd-ortie",
+      "permanent": true
+    },
+    {
+      "source": "/shop/absinthe-cbd-citron/:path*",
+      "destination": "/boutique/absinthe-cbd-citron",
+      "permanent": true
+    },
+    {
+      "source": "/shop/coffret-initiation/:path*",
+      "destination": "/boutique/coffret-initiation",
+      "permanent": true
+    },
+    {
+      "source": "/shop/flasque/:path*",
+      "destination": "/boutique/flasque-entonnoir",
+      "permanent": true
+    },
+    {
+      "source": "/shop",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/shop/",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/nos-cocktails/:path*",
+      "destination": "/cocktails",
+      "permanent": true
+    },
+    {
+      "source": "/nous-contacter/:path*",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/cart/:path*",
+      "destination": "/panier",
+      "permanent": true
+    },
+    {
+      "source": "/checkout/:path*",
+      "destination": "/commande",
+      "permanent": true
+    },
+    {
+      "source": "/politique-de-cookies-ue/:path*",
+      "destination": "/politique-cookies",
+      "permanent": true
+    },
+    {
+      "source": "/conditions-generales-de-vente/:path*",
+      "destination": "/cgv",
+      "permanent": true
+    },
+    {
+      "source": "/politique-de-retour/:path*",
+      "destination": "/cgv",
+      "permanent": true
+    },
+    {
+      "source": "/my-account/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/produit-categorie/:path*",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/:path*",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/etiquette-produit/:path*",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/:path*",
+      "destination": "/boutique",
+      "permanent": true
+    }
   ]
 }

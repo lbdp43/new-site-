@@ -234,6 +234,23 @@ SEO et pour éviter les oublis.
   → `/boutique/alchimie-vegetale`. En général 10-20 URLs à rediriger en
   masse.
 
+  **⚠️ Plan 301 préchargé (2026-04-27)** : 32 redirections déjà
+  configurées dans `vercel.json` à partir de l'inventaire des sitemaps
+  WP (`/sitemap_index.xml` extrait le 2026-04-27). Couvre les 18 fiches
+  produit `/shop/X` → `/boutique/X` (avec mapping de slugs : `cerfgent`
+  → `cerf-gent`, `lalchimie-vegetale` → `alchimie-vegetale`, etc.), les
+  10 pages WP indexées (`/cart/` → `/panier/`, `/checkout/` → `/commande/`,
+  `/nos-cocktails/` → `/cocktails/`, `/nous-contacter/` → `/contact/`,
+  `/conditions-generales-de-vente/` → `/cgv/`, `/my-account/` → `/`),
+  + 4 wildcards catch-all (`/produit-categorie/*`, `/product-category/*`,
+  `/etiquette-produit/*`, `/product-tag/*`) qui redirigent vers `/boutique`.
+
+  **Inertes tant que `www.` pointe sur WP** — Vercel ne reçoit aucune
+  requête sur ces paths. Activation = jour de la bascule DNS. Après
+  bascule, faire `curl -I https://www.labrasseriedesplantes.fr/shop/cerfgent/`
+  et vérifier `HTTP/2 308` (Vercel utilise 308 = équivalent SEO 301)
+  + `location: /boutique/cerf-gent`.
+
 ### Dans le mois qui suit
 
 - [ ] **Pas de chute de trafic anormale**
