@@ -328,9 +328,46 @@ vieux partages. Côté EN, l'URL est `/en/journal/*` et le label reste "Journal"
 Le hero `/blog` utilise `BlogHeroIntro` (stagger flou → net) suivi d'un filtre
 client-side par catégorie (Fabrication / Terroir / Actualité / Plantes /
 Recettes). Pas de galerie 3D parallaxe (retirée), pas de bouton "Voir tous les
-articles" (retiré). Ligne éditoriale : on ne cultive pas nos plantes nous-mêmes,
-on travaille avec des cueilleurs et maraîchers partenaires, la plupart en bio —
-toujours formuler en ce sens dans les articles (référence : `producteurs-partenaires-bio-velay.md`).
+articles" (retiré).
+
+## ⚠️ Règle d'or sourcing plantes — TOUS supports (site + articles + meta + alt)
+
+**On ne cultive pas nos plantes nous-mêmes**, on travaille avec des cueilleurs
+et maraîchers partenaires, la plupart en bio. **On ne peut pas dire que les
+plantes sont "locales", "du coin", ni "d'Auvergne / de Haute-Loire" comme un
+claim global** — environ 15 % de la matière première vient de filières bio plus
+lointaines (cardamome, combava, anis étoilé, cannelle, réglisse, agrumes
+tropicaux, génépi alpin, etc.).
+
+**Référence de formulation correcte :** `src/content/blog/producteurs-partenaires-bio-velay.md`
++ `src/pages/nos-plantes.astro` lignes 107-112.
+
+**Formulations BANNIES (faux ou trompeur)** — à grep avant tout commit SEO/marketing :
+- "liqueurs aux plantes d'Auvergne" / "plantes de Haute-Loire" (sous-entend que TOUTES le sont)
+- "plantes oubliées d'Auvergne" / "plantes oubliées de la Haute-Loire"
+- "plantes locales" sans qualifieur, "**Locale**" en bullet point seul
+- "récoltées au plus près de nos montagnes" (le possessif "nos" est trompeur)
+- "Plantes d'Auvergne, récoltées à la main" (sublabel sur badges)
+- "culture des plantes" appliqué à NOUS (on ne cultive pas)
+- EN : "plants of Auvergne", "plants from Auvergne", "harvested in Haute-Loire"
+  comme claim global, "hand-harvested in our Auvergne mountains"
+
+**Formulations OK** :
+- "Liqueurs artisanales **de plantes** — Haute-Loire" (Haute-Loire qualifie la maison, pas les plantes)
+- "fabriquées **en** Haute-Loire" / "macération et embouteillage à Saint-Didier-en-Velay" (vrai pour la production)
+- "plantes oubliées sourcées chez nos cueilleurs et maraîchers partenaires (la plupart en bio)"
+- "**Une bonne partie** de nos plantes vient de Haute-Loire et des départements voisins" (avec qualifieur explicite)
+- "Plantes du Velay" dans un article qui parle SPÉCIFIQUEMENT des plantes locales (verveine, serpolet, carvi, gentiane) — c'est exact pour ces espèces
+- Mentionner l'ancrage géographique de la maison (Saint-Didier-en-Velay, Haute-Loire) — c'est juste
+
+Historique :
+- PR #5 (2026-04-26) : 1ère passe sur le site (alt, meta, badges, taglines)
+- Commit suivant (2026-04-27) : 3 articles d'actualité oubliés du PR #5
+  (`cerfgent-or-salon-agriculture-2025.md` "**Locale**" trompeur,
+  `velay-attractivite-portrait-institutionnel.md` "plantes locales valorisées",
+  `loire-semene-tourisme-plantes-oubliees.md` "utiliser des plantes locales")
+  + `ateliers.astro` ("culture des plantes" → "sélection des plantes")
+  + hero `index.astro` + sous-titre `notre-histoire.astro` qui restaient.
 
 ## Gotchas
 

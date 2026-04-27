@@ -26,7 +26,7 @@ La Suze est une grande marque française, connue depuis 1889. Nous n'avons aucun
 - **Artisanale** : macération à froid, pas d'extraction industrielle
 - **Plus complexe** : cinq épices + quinquina + gentiane, là où la Suze mise sur une structure plus directe
 - **Plus amère** : nous poussons l'amertume plus loin, pour les amateurs qui cherchent ce profil
-- **Locale** : notre gentiane vient de nos partenaires auvergnats, pas d'un sourcing industriel
+- **Gentiane locale** : nos racines viennent de gentianaïres auvergnats partenaires, pas d'un sourcing industriel (le quinquina et certaines épices, eux, sont importés via des filières bio sélectionnées — [voir notre transparence sourcing](/blog/producteurs-partenaires-bio-velay))
 
 ## Ce que le jury 2025 a noté
 
