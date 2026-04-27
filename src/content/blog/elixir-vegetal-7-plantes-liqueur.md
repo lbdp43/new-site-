@@ -2,6 +2,7 @@
 title: "Élixir végétal : 7 plantes qui transforment une eau-de-vie en liqueur"
 description: "Verveine, gentiane, génépi, mélisse, anis, écorces et fleurs — voici les 7 familles de plantes qui font la différence entre une simple eau-de-vie et un vrai élixir végétal artisanal. Histoire, usages, identification."
 date: 2026-04-26
+updated: 2026-04-27
 author: "Étienne"
 category: Plantes
 cover: /images/stories/plantes.webp
@@ -14,7 +15,7 @@ Le mot "élixir" vient de l'arabe *al-iksīr*, lui-même issu du grec *xêrion* 
 
 L'élixir n'est pas légalement défini en France — c'est un terme d'usage. Trois caractéristiques le distinguent d'une simple liqueur de plantes :
 
-1. **La complexité d'assemblage** : minimum une vingtaine de plantes, souvent plus (Bénédictine 27 plantes, [notre Alchimie Végétale](/boutique/alchimie-vegetale) 27 plantes, Chartreuse Verte 130 plantes).
+1. **La complexité d'assemblage** : minimum une vingtaine de plantes, souvent plus ([Bénédictine](https://www.benedictine.com/) 27 plantes, [notre Alchimie Végétale](/boutique/alchimie-vegetale) 27 plantes, [Chartreuse](https://www.chartreuse.fr/) Verte 130 plantes).
 2. **L'héritage monastique ou apothicaire** : la formule originelle est généralement un remède digestif ou fortifiant développé entre le XVI<sup>e</sup> et le XVIII<sup>e</sup> siècle.
 3. **Le degré d'alcool élevé** : 40° à 55° en général, pour bien extraire et conserver les principes actifs.
 

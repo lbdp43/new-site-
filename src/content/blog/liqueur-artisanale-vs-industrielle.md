@@ -83,15 +83,15 @@ Nos étiquettes mentionnent toujours la liste complète des ingrédients. **Zér
 ### Industriel
 
 Pour donner des ordres de grandeur publics :
-- **Grand Marnier** : ~20 millions de bouteilles/an.
+- [**Grand Marnier**](https://www.grand-marnier.com/) : ~20 millions de bouteilles/an.
 - **Chambord** (racheté par Brown-Forman) : ~4 millions/an.
-- **Suze** (Pernod Ricard) : ~5 millions/an en France.
-- **Cointreau** : ~13 millions/an.
+- [**Suze**](https://www.suze.com/) (Pernod Ricard) : ~5 millions/an en France.
+- [**Cointreau**](https://www.cointreau.com/) : ~13 millions/an.
 
 ### Artisanal
 
-- **Chartreuse** (grande maison artisanale française) : ~1,5 million/an toutes cuvées confondues.
-- **Bénédictine** : quelques centaines de milliers/an.
+- [**Chartreuse**](https://www.chartreuse.fr/) (grande maison artisanale française) : ~1,5 million/an toutes cuvées confondues.
+- [**Bénédictine**](https://www.benedictine.com/) : quelques centaines de milliers/an.
 - **Nous**, La Brasserie des Plantes : **entre 30 000 et 40 000 bouteilles/an** réparties sur 18 références. Certaines éditions limitées comme [L'Alchimie Cuvée Michel](/boutique/alchimie-cuvee-michel) ne dépassent pas **500 bouteilles/an**.
 
 Pourquoi c'est important pour vous ? Parce que :

@@ -33,10 +33,7 @@ const localBusinessSchema = {
   // génériques de la profession (liqueur artisanale, digestif artisanal…)
   // ancrés sur le terroir local (Auvergne, Haute-Loire).
   keywords: site.keywords.join(', '),
-  image: [
-    new URL(site.defaultOgImage, site.url).toString(),
-    new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
-  ],
+  image: [new URL(site.defaultOgImage, site.url).toString()],
   logo: new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
   url: site.url,
   telephone: site.phone,
@@ -69,10 +66,10 @@ const localBusinessSchema = {
     propertyID: 'Google Place ID',
     value: site.googleBusiness.placeId,
   },
-  // Horaires simples (compact, lisibles par Google)
-  openingHours: site.hours,
-  // Horaires structurés (plus riches, utilisés par Google Maps + assistants
-  // vocaux : "quand est-ce que La Brasserie des Plantes est ouverte ?")
+  // Horaires structurés uniquement — plus riches que `openingHours` (string),
+  // utilisés par Google Maps + assistants vocaux ("quand est-ce que La
+  // Brasserie des Plantes est ouverte ?"). On ne duplique plus avec
+  // `openingHours` simple — l'audit schema avait flagué le doublon.
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
@@ -87,8 +84,9 @@ const localBusinessSchema = {
     { '@type': 'Country', name: 'Switzerland' },
     { '@type': 'Country', name: 'Luxembourg' },
   ],
-  // VAT number (SIRET sert aussi d'identifiant français)
-  vatID: site.siret,
+  // SIRET = identifiant fiscal français (taxID). PAS de vatID : un VAT
+  // intracommunautaire FR est calculé (FR + clé + SIREN), différent du
+  // SIRET. À ajouter le jour où LBDP fournit son numéro TVA réel.
   taxID: site.siret,
   // AggregateRating Google injecté seulement si Featurable a répondu OK.
   // Spread conditionnel : la propriété n'est pas émise du tout si null.

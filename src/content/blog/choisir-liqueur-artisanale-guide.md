@@ -17,7 +17,7 @@ Ce guide est celui qu'on aurait voulu trouver quand on a commencé, en 2021. Il 
 
 ## 1. Qu'est-ce qu'une liqueur, exactement ?
 
-La réglementation européenne (**règlement UE 2019/787**) est précise :
+La réglementation européenne ([**règlement UE 2019/787**](https://eur-lex.europa.eu/eli/reg/2019/787/oj)) est précise :
 
 > Une liqueur est une boisson spiritueuse contenant au minimum **15 % vol.** d'alcool et au moins **100 g de sucre par litre**, obtenue par aromatisation d'une base alcoolique à partir de fruits, plantes, épices, fleurs ou crèmes.
 
@@ -30,7 +30,7 @@ Trois mots-clés à retenir :
 ### Les cousines à ne pas confondre
 
 - **Amer / Bitter / Digestif amer** : minimum 8 % de substances amères végétales (gentiane, quinquina, rhubarbe). Moins sucré qu'une liqueur classique.
-- **Élixir** : terme historique, souvent plus alcoolisé (35-45 %), parfois attribué à des liqueurs monastiques (Chartreuse, Bénédictine).
+- **Élixir** : terme historique, souvent plus alcoolisé (35-45 %), parfois attribué à des liqueurs monastiques ([Chartreuse](https://www.chartreuse.fr/), [Bénédictine](https://www.benedictine.com/)).
 - **Crème** : minimum 250 g/L de sucre — très douce, texture épaisse.
 - **Eau-de-vie / Spiritueux aux plantes** : ne respecte pas le seuil de sucre. Absinthe, pastis, gin appartiennent à cette catégorie.
 

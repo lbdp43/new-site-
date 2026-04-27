@@ -104,4 +104,51 @@ const schema = [breadcrumb, productSchema];
       <CoffretBuilder products={eligibleProducts} size={3} lang="fr" client:load />
     </div>
   </section>
+
+  <!-- Bloc éditorial en bas de page — densifie le contenu statique
+       (le builder au-dessus est une île React, son texte n'est pas
+       indexable par les crawlers qui n'exécutent pas JS) et donne au
+       visiteur le contexte du coffret après l'avoir manipulé. -->
+  <section class="py-12 md:py-16 bg-cream-50/60 border-t border-forest-100/60">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg max-w-none
+                prose-headings:font-display prose-headings:text-forest-900
+                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-3 prose-h2:tracking-tight
+                prose-p:text-ink-700 prose-p:leading-relaxed
+                prose-a:text-forest-700 prose-a:underline prose-a:decoration-forest-300 prose-a:underline-offset-4
+                prose-strong:text-forest-900 prose-strong:font-medium">
+      <p>
+        Le <strong>coffret personnalisé La Brasserie des Plantes</strong> est
+        un cadeau composé à la carte : vous choisissez <strong>trois bouteilles
+        empilables au format 20 cl</strong> parmi notre gamme de 18 références.
+        Les contenants sont conçus pour s'emboîter à la verticale — leur
+        empilement <em>"Chute &amp; rebond"</em> tient au design des bouchons
+        et des bases. Pas de boîte cadeau standard : la pile <em>est</em> le
+        cadeau.
+      </p>
+      <h2>Pour qui, pour quoi ?</h2>
+      <p>
+        Idéal pour <strong>découvrir trois recettes différentes sans
+        s'engager sur des grands formats</strong>, pour offrir à un amateur
+        curieux qui n'a jamais goûté nos liqueurs, ou pour composer une
+        dégustation à plusieurs. Trois familles à explorer librement :
+        digestifs amers (<a href="/boutique/cerf-gent">Cerf'Gent</a>,
+        <a href="/boutique/alchimie-vegetale">L'Alchimie Végétale</a>),
+        liqueurs herbacées (<a href="/boutique/herbe-des-druides">L'Herbe des
+        Druides</a>, Le Gorgeon des Machurés) et apéritifs floraux ou fruités
+        (Le Nectar d'Ostara, La Flèche Ardente, Le Zéleste).
+      </p>
+      <h2>Comment ça marche</h2>
+      <p>
+        Cliquez sur trois bouteilles dans la grille ci-dessus : elles
+        viennent se poser tour à tour dans la pile à gauche, avec un effet
+        d'animation. Vous pouvez retirer une bouteille en cliquant dessus
+        dans la pile, ou repartir d'un trio suggéré en un clic. Une fois
+        votre composition validée, ajoutez-la au panier — chaque bouteille
+        20 cl reste indépendante côté livraison et facturation
+        (<strong>livraison offerte dès 65 € d'achat</strong> en France
+        métropolitaine, Belgique, Suisse, Luxembourg). Possibilité d'ajouter
+        un mot personnalisé sur la commande.
+      </p>
+    </div>
+  </section>
 </Layout>

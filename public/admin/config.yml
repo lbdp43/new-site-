@@ -63,6 +63,7 @@ collections:
           - { label: "Guillaume", value: "Guillaume" }
           - { label: "La Brasserie des Plantes (compte collectif)", value: "La Brasserie des Plantes" }
       - { name: cover, label: "Image de couverture (16:9 recommandé)", widget: image, required: false, choose_url: true }
+      - { name: coverAlt, label: "Texte alternatif de l'image (accessibilité + SEO image — laisser vide = utilise le titre)", widget: string, required: false }
       - name: category
         label: "Catégorie"
         widget: select
@@ -190,6 +191,7 @@ collections:
           - { label: "Guillaume", value: "Guillaume" }
           - { label: "La Brasserie des Plantes (brand)", value: "La Brasserie des Plantes" }
       - { name: cover, label: "Cover image (16:9)", widget: image, required: false, choose_url: true }
+      - { name: coverAlt, label: "Image alt text (accessibility + image SEO — leave empty to fallback on title)", widget: string, required: false }
       - name: category
         label: "Category"
         widget: select

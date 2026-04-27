@@ -32,7 +32,7 @@ La liqueur part d'un alcool neutre (souvent issu de céréales) dans lequel on *
 
 - Liqueur de verveine (notre [Herbe des Druides](/boutique/herbe-des-druides))
 - Liqueur de fruits rouges ([Flèche Ardente](/boutique/fleche-ardente))
-- Liqueur de plantes ([Cerf'Gent](/boutique/cerf-gent), Chartreuse, Bénédictine)
+- Liqueur de plantes ([Cerf'Gent](/boutique/cerf-gent), [Chartreuse](https://www.chartreuse.fr/), [Bénédictine](https://www.benedictine.com/))
 - Crème de cassis, crème de pêche → liqueurs très sucrées (300+ g/L)
 
 **Repères** : 15° à 50°, **sucre obligatoire** (en France 100 g/L minimum pour s'appeler "liqueur"), couleur souvent issue d'une plante ou d'un fruit.
@@ -42,7 +42,7 @@ La liqueur part d'un alcool neutre (souvent issu de céréales) dans lequel on *
 L'**amer** est une liqueur dans laquelle l'amertume domine clairement, généralement par macération de **racines amères** (gentiane, quinquina, angélique) ou d'écorces. Le sucre y est moindre que dans une liqueur classique.
 
 - Amers italiens : Fernet-Branca, Averna, Amaro Montenegro
-- Amers français : Suze, Salers, Avèze, [Cerf'Gent](/boutique/cerf-gent)
+- Amers français : [Suze](https://www.suze.com/), Salers, Avèze, [Cerf'Gent](/boutique/cerf-gent)
 - Amers à orange : Aperol, Campari (frontière avec le vermouth)
 
 **Repères** : 14° à 40°, **dominante amère franche**, sucre dosé pour adoucir mais sans masquer l'amertume.
@@ -114,7 +114,7 @@ Méfiez-vous des étiquettes vagues type **"liqueur traditionnelle"** ou **"rece
 - Les **plantes nommées** sur l'étiquette (avec proportions ou ordre d'importance)
 - L'**origine géographique** des ingrédients clés
 - Les **mentions techniques** (macération à froid, embouteillage à la main, sans arôme ajouté)
-- Les **distinctions** (concours indépendants type World Drinks Awards, Concours Général Agricole)
+- Les **distinctions** (concours indépendants type [World Drinks Awards](https://www.worldliqueurawards.com/), [Concours Général Agricole](https://www.concours-general-agricole.fr/))
 
 C'est précisément pour ces raisons que nous documentons sur chaque page produit nos plantes, nos partenaires et nos méthodes — voir par exemple [la fiche complète de L'Alchimie Végétale](/boutique/alchimie-vegetale) ou [le récit des 27 plantes](/blog/alchimie-vegetale-27-plantes-composition).
 

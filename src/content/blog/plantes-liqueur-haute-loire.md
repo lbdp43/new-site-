@@ -2,6 +2,7 @@
 title: "Les plantes de nos liqueurs : voyage botanique"
 description: "Verveine citronnée, gentiane jaune, sureau, mélisse, serpolet… 12 plantes qui composent nos liqueurs, sourcées chez nos cueilleurs et maraîchers partenaires (la plupart en bio)."
 date: 2026-04-20
+updated: 2026-04-27
 author: "Étienne"
 category: Plantes
 cover: /images/stories/paysage-plantes.webp
@@ -16,7 +17,7 @@ Ce guide est le voyage botanique d'une bouteille. **12 plantes signatures**, leu
 
 ## Pourquoi la moyenne montagne, berceau historique des liqueurs de plantes
 
-Les grandes maisons liquoristes européennes — Chartreuse (Isère), Bénédictine (Normandie), Suze (Auvergne) — sont toutes nées dans des zones de moyenne montagne. Trois raisons botaniques expliquent cette géographie :
+Les grandes maisons liquoristes européennes — [Chartreuse](https://www.chartreuse.fr/) (Isère), [Bénédictine](https://www.benedictine.com/) (Normandie), [Suze](https://www.suze.com/) (Auvergne) — sont toutes nées dans des zones de moyenne montagne. Trois raisons botaniques expliquent cette géographie :
 
 1. **L'altitude variée**. Chaque étage climatique abrite ses espèces : sureau en vallée, serpolet à mi-pente, gentiane sur les plateaux d'altitude.
 2. **La géologie volcanique** (basalte, granite). Les sols sont pauvres en matière organique mais riches en oligo-éléments — ce qui concentre les principes aromatiques des plantes.
@@ -41,7 +42,7 @@ La plus grande part de notre matière première vient de **maraîchers et cueill
 
 La cousine européenne de la verveine — plus douce, plus "miel", moins citronnée.
 
-- **Origine** : bassin méditerranéen, cultivée en Europe depuis l'Antiquité (déjà chez Pline l'Ancien).
+- **Origine** : bassin méditerranéen, cultivée en Europe depuis l'Antiquité (déjà chez [Pline l'Ancien](https://fr.wikipedia.org/wiki/Pline_l%27Ancien)).
 - **Profil** : citron doux, note de miel d'acacia, finale apaisante.
 - **Récolte** : juin-juillet, juste avant la floraison (maximum d'huile essentielle).
 - **Usage chez nous** : coloration florale dans [L'Alchimie Végétale](/boutique/alchimie-vegetale) et dans plusieurs de nos apéritifs.
@@ -137,7 +138,7 @@ Un aperçu rapide de ce qui arrive à l'atelier au fil des saisons :
 Un de nos engagements est de **réintroduire dans l'usage moderne** des plantes que l'herboristerie traditionnelle utilisait mais que l'industrie a oubliées :
 
 - **L'aurone** (Artemisia abrotanum) — utilisée depuis le Moyen Âge, disparue des liqueurs commerciales. Présente dans [Verveine CBD Aurone](/boutique/verveine-cbd-aurone).
-- **Le petit houx** (Ruscus aculeatus) — déjà mentionné par Dioscoride (1er siècle). Rare usage en liqueur moderne.
+- **Le petit houx** (Ruscus aculeatus) — déjà mentionné par [Dioscoride](https://fr.wikipedia.org/wiki/Dioscoride) (1er siècle). Rare usage en liqueur moderne.
 - **La petite centaurée** (Centaurium erythraea) — amère puissante, connue comme "quinquina d'Europe".
 - **L'aspérule odorante** (Galium odoratum) — parfumait les vins du Rhin au Moyen Âge.
 

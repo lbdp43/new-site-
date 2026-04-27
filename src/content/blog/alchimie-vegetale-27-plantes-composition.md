@@ -5,7 +5,7 @@ date: 2025-08-14
 updated: 2026-04-27
 author: "Étienne"
 category: Fabrication
-cover: /images/products/alchimie-vegetale-2.jpg
+cover: /images/products/alchimie-vegetale-2.webp
 readingTime: "9 min"
 ---
 

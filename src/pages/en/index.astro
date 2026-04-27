@@ -23,10 +23,7 @@ const localBusinessSchema = {
   description: 'Craft botanical liqueurs and digestifs handmade in Haute-Loire, France. L\'Alchimie Végétale: World\'s Best Digestif 2025 (World Drinks Awards).',
   slogan: 'Craft botanical liqueurs from Auvergne',
   keywords: 'craft liqueur, botanical liqueur, artisan liqueur, French digestif, craft spirits France, Auvergne liqueur, Haute-Loire distillery, organic liqueur, plant-based liqueur',
-  image: [
-    new URL(site.defaultOgImage, site.url).toString(),
-    new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
-  ],
+  image: [new URL(site.defaultOgImage, site.url).toString()],
   logo: new URL('/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
   url: site.url,
   telephone: site.phone,
@@ -57,7 +54,8 @@ const localBusinessSchema = {
     propertyID: 'Google Place ID',
     value: site.googleBusiness.placeId,
   },
-  openingHours: site.hours,
+  // Horaires structurés uniquement (idem FR — le doublon openingHours
+  // avait été flagué par l'audit schema).
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
@@ -72,7 +70,8 @@ const localBusinessSchema = {
     { '@type': 'Country', name: 'Switzerland' },
     { '@type': 'Country', name: 'Luxembourg' },
   ],
-  vatID: site.siret,
+  // SIRET en taxID seulement (cf. FR — vatID retiré, à ajouter quand LBDP
+  // fournira son numéro TVA intracommunautaire FR + clé + SIREN).
   taxID: site.siret,
   ...(aggregateRating ? { aggregateRating } : {}),
 };

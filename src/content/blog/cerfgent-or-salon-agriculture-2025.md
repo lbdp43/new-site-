@@ -9,9 +9,9 @@ cover: /images/stories/etienne-degustation.webp
 readingTime: "5 min"
 ---
 
-Pendant que *L'Alchimie Végétale* se préparait pour Londres, un autre de nos flacons s'est discrètement glissé sur un podium national : **Le Cerf'Gent**, notre apéritif amer à la gentiane, a reçu la **Médaille d'Or au Concours Général Agricole 2025** — décerné dans le cadre du Salon de l'Agriculture à Paris fin février.
+Pendant que *L'Alchimie Végétale* se préparait pour Londres, un autre de nos flacons s'est discrètement glissé sur un podium national : **Le Cerf'Gent**, notre apéritif amer à la gentiane, a reçu la **Médaille d'Or au [Concours Général Agricole](https://www.concours-general-agricole.fr/) 2025** — décerné dans le cadre du Salon de l'Agriculture à Paris fin février.
 
-C'est un prix moins médiatique que celui des World Drinks Awards, mais tout aussi dur à obtenir : le Concours Général est le plus ancien concours agricole français (fondé en 1870), et ses jurys, composés de dégustateurs bénévoles agréés, notent à l'aveugle avec une rigueur toute bureaucratique.
+C'est un prix moins médiatique que celui des [World Drinks Awards](https://www.worldliqueurawards.com/), mais tout aussi dur à obtenir : le Concours Général est le plus ancien concours agricole français (fondé en 1870), et ses jurys, composés de dégustateurs bénévoles agréés, notent à l'aveugle avec une rigueur toute bureaucratique.
 
 ## Ce qu'est le Cerf'Gent
 
@@ -21,7 +21,7 @@ La gentiane est une grande plante de moyenne montagne — ses **racines sont ré
 
 ## Pourquoi une alternative à la Suze ?
 
-La Suze est une grande marque française, connue depuis 1889. Nous n'avons aucune ambition de la remplacer. Ce que nous proposons avec le Cerf'Gent, c'est une **autre lecture** de la gentiane :
+[La Suze](https://www.suze.com/) est une grande marque française, connue depuis 1889. Nous n'avons aucune ambition de la remplacer. Ce que nous proposons avec le Cerf'Gent, c'est une **autre lecture** de la gentiane :
 
 - **Artisanale** : macération à froid, pas d'extraction industrielle
 - **Plus complexe** : cinq épices + quinquina + gentiane, là où la Suze mise sur une structure plus directe

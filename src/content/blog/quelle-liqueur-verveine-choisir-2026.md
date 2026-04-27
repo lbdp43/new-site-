@@ -2,6 +2,7 @@
 title: "Quelle liqueur de verveine choisir en 2026 ? Comparatif des grandes maisons"
 description: "Verveine du Velay, Verveine du Forez, Verveine de Voiron, ou liqueur de verveine artisanale moderne ? Guide pour choisir sa liqueur de verveine en 2026 — différences, caractères, prix, accords."
 date: 2026-04-26
+updated: 2026-04-27
 author: "Guillaume"
 category: Plantes
 cover: /images/stories/duo-bouteille-nature.webp
@@ -22,7 +23,7 @@ Cette combinaison fait de la verveine une plante à la fois **fraîche en attaqu
 
 ## Les 4 grandes familles de liqueur de verveine
 
-### 1. La Verveine du Velay (Pagès)
+### 1. La Verveine du Velay ([Pagès](https://www.distilleriepages.com/))
 
 La plus connue, fondée en 1859 à Saint-Germain-Laprade (Haute-Loire). Décliné en deux versions : **verte** (55°, recette historique macérée et distillée) et **jaune** (40°, plus douce). Le profil est très **herbacé-mentholé**, avec une amertume notable issue d'autres plantes aromatiques.
 
@@ -71,7 +72,7 @@ Quand on a sorti notre première verveine en 2021, on s'est posé la question : 
 
 3. **Plantes traçables.** Toutes nos plantes viennent de [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) sélectionnés un par un, la plupart en bio. On peut vous nommer les producteurs.
 
-L'Herbe des Druides a été distinguée trois fois Médaille d'Or au Concours International de Lyon (2023, 2024, 2026) et Médaille d'Argent au World Drinks Awards 2025 à Londres.
+L'Herbe des Druides a été distinguée trois fois Médaille d'Or au [Concours International de Lyon](https://concours-vinslyon.com/) (2023, 2024, 2026) et Médaille d'Argent au [World Drinks Awards](https://www.worldliqueurawards.com/) 2025 à Londres.
 
 ## Comment servir sa liqueur de verveine
 

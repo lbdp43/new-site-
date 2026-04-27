@@ -23,7 +23,7 @@ Pour aller plus loin sur la cueillette, voir [notre article sur les producteurs 
 
 ### 1. La Suze (1889)
 
-La plus connue, fondée par Fernand Moureaux à Maisons-Alfort en 1889. Couleur jaune pâle, **15° d'alcool**, recette qui mêle gentiane, écorces et plantes amères.
+La plus connue, [fondée par Fernand Moureaux à Maisons-Alfort en 1889](https://www.suze.com/). Couleur jaune pâle, **15° d'alcool**, recette qui mêle gentiane, écorces et plantes amères.
 
 - **Profil** : amer franc en attaque, douceur sucrée notable en finale, **très accessible** pour qui découvre la gentiane
 - **Usage** : apéritif, longtemps servi pur ou avec une rondelle de citron, désormais souvent en spritz
@@ -86,7 +86,7 @@ On l'a sortie en 2024. Trois choix de départ :
 
 3. **Un assemblage qui dialogue avec la gentiane.** Quinquina pour la profondeur, zeste de citron pour le côté agrumes vivant, muscade-coriandre-cannelle pour la structure épicée. Six ingrédients, pas vingt — on veut que la gentiane reste l'étoile.
 
-Le Cerf'Gent a reçu la **Médaille d'Or au Concours Général Agricole de Paris 2025** (Salon de l'Agriculture). Le jury a noté "une amertume noble, sans agressivité, une structure épicée moderne qui dialogue avec une gentiane de grande qualité". Récit complet dans [notre article dédié](/blog/cerfgent-or-salon-agriculture-2025).
+Le Cerf'Gent a reçu la **Médaille d'Or au [Concours Général Agricole](https://www.concours-general-agricole.fr/) de Paris 2025** (Salon de l'Agriculture). Le jury a noté "une amertume noble, sans agressivité, une structure épicée moderne qui dialogue avec une gentiane de grande qualité". Récit complet dans [notre article dédié](/blog/cerfgent-or-salon-agriculture-2025).
 
 ## Comment servir une liqueur de gentiane
 
@@ -111,7 +111,7 @@ Toutes les gentianes françaises de qualité reposent sur la même zone de cueil
 - Climat semi-montagnard avec hivers froids
 - Tradition d'AOC fromagère qui préserve les prairies d'altitude
 
-C'est cette même zone qui fournit la racine pour la Suze, la Salers, l'Avèze, le Bonal et les artisans modernes. Ce n'est donc pas la **provenance** de la racine qui distingue les marques, mais la **recette** d'assemblage et la **politique de dosage** sucré.
+C'est cette même zone qui fournit historiquement la racine pour la Suze, la Salers, l'Avèze et le Bonal. Ce n'est donc pas tant la **provenance** de la racine qui distingue les marques entre elles, mais la **recette** d'assemblage et la **politique de dosage** sucré.
 
 ## Le mot de la fin
 

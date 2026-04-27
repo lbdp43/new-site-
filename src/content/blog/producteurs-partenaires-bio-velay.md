@@ -2,13 +2,14 @@
 title: "Cueilleurs et maraîchers partenaires — comment nous sourçons nos plantes"
 description: "Les plantes qui entrent dans nos liqueurs viennent de cueilleurs et de maraîchers partenaires, sélectionnés un par un, la plupart en agriculture biologique. Tour d'horizon de notre filière."
 date: 2024-09-05
+updated: 2026-04-27
 author: "Guillaume"
 category: Terroir
 cover: /images/gallery/evenement-03.webp
 readingTime: "6 min"
 ---
 
-Nous ne cultivons pas nos plantes nous-mêmes. Chaque feuille, chaque racine, chaque zeste qui entre dans nos cuves vient d'un **cueilleur** ou d'un **maraîcher partenaire** — des gens qui ont fait de la plante leur métier, et que nous avons choisis un par un. **La plupart sont en agriculture biologique — pas tous.** Tous nous connaissent par leur prénom. C'est un **écosystème** que nous avons construit lentement, par visites, par dégustations, par confiance.
+Nous ne cultivons pas nos plantes nous-mêmes. Chaque feuille, chaque racine, chaque zeste qui entre dans nos cuves vient d'un **cueilleur** ou d'un **maraîcher partenaire** — des gens qui ont fait de la plante leur métier, et que nous avons choisis un par un. **La plupart sont en [agriculture biologique](https://www.agencebio.org/) — pas tous.** Tous nous connaissent par leur prénom. C'est un **écosystème** que nous avons construit lentement, par visites, par dégustations, par confiance.
 
 ## Pourquoi des partenaires sélectionnés un par un
 
@@ -29,7 +30,7 @@ La **gentiane jaune** (clé du Cerf'Gent) vient de gentianaïres professionnels 
 Plusieurs exploitations, la plupart en bio, qui produisent nos **verveine, mélisse, carvi, anis, coriandre, sauge, basilic, hysope et thym**.
 
 ### Les cueilleurs de sauvage
-Des cueilleurs professionnels (profession officielle, avec formation Parc Naturel Régional) qui nous fournissent le **serpolet** sauvage et le **sureau noir** sauvage, au rythme des saisons.
+Des cueilleurs professionnels (profession officielle, avec formation [Parc Naturel Régional](https://www.parcs-naturels-regionaux.fr/)) qui nous fournissent le **serpolet** sauvage et le **sureau noir** sauvage, au rythme des saisons.
 
 ### Les apiculteurs
 Pour nos **miels** (miel de châtaignier en cocktails, miel de forêt dans certaines éditions limitées).

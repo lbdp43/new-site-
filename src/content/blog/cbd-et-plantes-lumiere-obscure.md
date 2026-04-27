@@ -18,8 +18,8 @@ Trois ans plus tard, notre gamme **[Lumière Obscure](/lumiere-obscure)** compte
 Tout commence par la réglementation. Le chanvre que nous utilisons est :
 
 - **Issu de variétés industrielles certifiées** (Cannabis sativa L., variétés inscrites au catalogue européen)
-- **Dosé à moins de 0,1 % de THC** — conformément à la législation française en vigueur depuis l'arrêté du 30 décembre 2021
-- **Riche en CBD** (cannabidiol), molécule **non psychotrope** et autorisée à la commercialisation depuis l'arrêt de la Cour de justice de l'Union européenne du 19 novembre 2020
+- **Dosé à moins de 0,1 % de THC** — conformément à la législation française en vigueur depuis l'[arrêté du 30 décembre 2021](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044570509)
+- **Riche en CBD** (cannabidiol), molécule **non psychotrope** et autorisée à la commercialisation depuis l'[arrêt de la Cour de justice de l'Union européenne du 19 novembre 2020](https://curia.europa.eu/juris/liste.jsf?num=C-663/18)
 
 Nos trois liqueurs sont donc **légalement classées comme liqueurs aromatisées** et non comme produits thérapeutiques. Nous ne revendiquons **aucune vertu médicale**. Ce sont des spiritueux de plaisir, qui explorent une note aromatique particulière.
 

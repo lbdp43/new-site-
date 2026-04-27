@@ -89,6 +89,20 @@ const priceLabel =
     ? `${product.priceMin}`
     : `${product.priceMin}–${product.priceMax}`;
 
+// Nettoyage Markdown → texte brut pour la description du schema Product.
+// Le body markdown du fichier .md contient des **gras**, [liens](/url),
+// ## titres, etc. Google les affiche tels quels dans le Knowledge Graph
+// si on les laisse, ce qui dégrade l'UX SERP. On strip → string plate
+// limitée à 5000 chars (limite raisonnable pour Product.description).
+const plainDescription = (product.description ?? '')
+  .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // [text](/url) → text
+  .replace(/#{1,6}\s+/g, '')                  // # H1 / ## H2 / etc.
+  .replace(/\*{1,3}([^*]+)\*{1,3}/g, '$1')   // *italic* / **bold** / ***
+  .replace(/\n+/g, ' ')                       // newlines → space
+  .replace(/\s+/g, ' ')                       // collapse whitespace
+  .trim()
+  .slice(0, 5000);
+
 // Avis produit + aggregate
 const productReviews = reviewsByProduct(product.slug);
 const productAgg = aggregateRating(productReviews);
@@ -106,7 +120,7 @@ const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: product.name,
-  description: product.description || product.tagline,
+  description: plainDescription || product.tagline,
   image: productImages,
   brand: { '@type': 'Brand', name: site.name },
   // category SEO si renseigné (ex "Liqueur de verveine artisanale"),
@@ -127,6 +141,7 @@ const productSchema = {
           availability: getSchemaAvailability(product.wcId),
           url: productUrl,
           priceValidUntil,
+          seller: { '@id': `${site.url}#localbusiness` },
         }
       : {
           '@type': 'AggregateOffer',
@@ -137,6 +152,7 @@ const productSchema = {
           availability: getSchemaAvailability(product.wcId),
           url: productUrl,
           priceValidUntil,
+          seller: { '@id': `${site.url}#localbusiness` },
         },
   // AggregateRating / Review schema retiré : uniquement de vrais avis Google
   // alimenteront ces rich-snippets (via Featurable), pour éviter tout risque

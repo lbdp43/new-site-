@@ -2,6 +2,7 @@
 title: "Comment reconnaître une vraie liqueur artisanale en magasin : checklist en 5 points"
 description: "Le mot 'artisanal' n'est pas protégé en France — n'importe qui peut l'écrire. Voici 5 signes concrets à vérifier sur l'étiquette pour distinguer une vraie liqueur artisanale d'une production industrielle déguisée."
 date: 2026-04-26
+updated: 2026-04-27
 author: "Guillaume"
 category: Fabrication
 cover: /images/gallery/atelier-03.webp
@@ -28,7 +29,7 @@ L'industriel a tendance à dissimuler ses ingrédients derrière des mentions va
 
 - ✅ "Sans arôme ajouté, sans colorant"
 - ✅ "100 % macération naturelle"
-- ⚠️ "Arômes naturels" — faux ami, ce sont des arômes industriels conformes au Codex Alimentarius
+- ⚠️ "Arômes naturels" — faux ami, ce sont des arômes industriels conformes au [Codex Alimentarius](https://www.fao.org/fao-who-codexalimentarius/fr/)
 - ❌ "Colorant E150" (caramel industriel) ou "E133" (bleu brillant)
 
 La couleur d'une liqueur artisanale doit venir d'**un ingrédient qui se boit** : chlorophylle naturelle des plantes (vert pâle), charbon végétal (noir profond comme [notre Gorgeon des Machurés](/boutique/gorgeon-des-machures)), fruits rouges macérés (rubis pour [La Flèche Ardente](/boutique/fleche-ardente)). Jamais de colorant de synthèse.
@@ -93,7 +94,7 @@ Un vrai signal porte sur les **plantes elles-mêmes** — pas la verrerie, pas l
 L'option la plus sûre pour acheter de la vraie liqueur artisanale française :
 
 1. **Achetez en direct chez le producteur** (en boutique ou sur le site officiel — les revendeurs honnêtes les listent souvent)
-2. **Privilégiez les concours indépendants** (Concours Général Agricole, Concours International de Lyon, World Drinks Awards) qui certifient une qualité minimale
+2. **Privilégiez les concours indépendants** ([Concours Général Agricole](https://www.concours-general-agricole.fr/), [Concours International de Lyon](https://concours-vinslyon.com/), [World Drinks Awards](https://www.worldliqueurawards.com/)) qui certifient une qualité minimale
 3. **Lisez les revues professionnelles** (Le Drinks Report, La Revue du Spiritueux) plutôt que la pub
 4. **Posez la question directement** : un vrai artisan a toujours envie de parler de son travail
 

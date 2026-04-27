@@ -8,6 +8,11 @@ const blogSchema = z.object({
   updated: z.coerce.date().optional(),
   author: z.enum(['Étienne', 'Guillaume', 'La Brasserie des Plantes']).default('La Brasserie des Plantes'),
   cover: z.string().optional(),
+  // Description alt de l'image cover (accessibilité + SEO image).
+  // Si absent, le template fallback sur `title` (comportement historique).
+  // À renseigner pour les articles dont le cover apporte une info distincte
+  // du titre (ex: photo d'atelier, plante, coulisses).
+  coverAlt: z.string().optional(),
   category: z.enum(['Plantes', 'Recettes', 'Terroir', 'Fabrication', 'Actualité']),
   readingTime: z.string().default('5 min'),
   // Recipes structurées (opt-in) — émet du schema Recipe @ Schema.org
@@ -50,6 +55,7 @@ const blogEn = defineCollection({
     updated: z.coerce.date().optional(),
     author: z.enum(['Étienne', 'Guillaume', 'La Brasserie des Plantes']).default('La Brasserie des Plantes'),
     cover: z.string().optional(),
+    coverAlt: z.string().optional(),
     category: z.enum(['Plants', 'Recipes', 'Terroir', 'Craft', 'News']),
     readingTime: z.string().default('5 min'),
   }),

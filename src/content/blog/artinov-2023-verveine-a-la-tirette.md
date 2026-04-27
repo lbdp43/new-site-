@@ -33,7 +33,7 @@ Résultat côté bar :
 
 ## L'angle Artinov
 
-Le jury d'Artinov, présidé par la **Chambre de Métiers et de l'Artisanat Haute-Loire**, a retenu notre candidature pour une raison simple : l'innovation est **techniquement originale** — appliquer la tireuse à un spiritueux — mais reste au service de **l'artisanat**. Ce n'est pas une innovation de rupture pour elle-même ; c'est un outil qui permet à un barman de mieux travailler avec nos liqueurs.
+Le jury d'Artinov, présidé par la [**Chambre de Métiers et de l'Artisanat**](https://www.artisanat.fr/) Haute-Loire, a retenu notre candidature pour une raison simple : l'innovation est **techniquement originale** — appliquer la tireuse à un spiritueux — mais reste au service de **l'artisanat**. Ce n'est pas une innovation de rupture pour elle-même ; c'est un outil qui permet à un barman de mieux travailler avec nos liqueurs.
 
 Le reportage vidéo tourné par la CMA dans notre atelier montre le système en action, et insiste sur l'aspect mise à l'échelle maîtrisée : petit producteur, gros débit au verre.
 

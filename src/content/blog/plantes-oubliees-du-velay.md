@@ -11,15 +11,15 @@ readingTime: "6 min"
 
 Quand on demande à quelqu'un de nommer une plante de montagne française, la réponse vient vite : le génépi, l'arnica, la gentiane. Plus rarement : la verveine odorante, le serpolet, l'aurone. Ce sont pourtant des plantes qui ont accompagné, pendant des siècles, la vie quotidienne des familles dans les campagnes françaises. On les retrouvait dans les tisanes du soir, dans les liqueurs des grand-mères, dans les placards de cuisine. Elles ont presque disparu du commerce — pas des jardins.
 
-## La verveine odorante (*Aloysia citrodora*)
+## La verveine odorante ([*Aloysia citrodora*](https://fr.wikipedia.org/wiki/Verveine_citronnelle))
 
-La plus connue de nos signatures. À ne pas confondre avec la **verveine officinale**, plus amère et plus ancienne médicinalement : la verveine odorante, elle, est une plante du sud — originaire du Chili, acclimatée au XVIIIᵉ siècle par Jussieu.
+La plus connue de nos signatures. À ne pas confondre avec la **verveine officinale**, plus amère et plus ancienne médicinalement : la verveine odorante, elle, est une plante du sud — originaire du Chili, acclimatée au XVIIIᵉ siècle par [Jussieu](https://fr.wikipedia.org/wiki/Antoine_Laurent_de_Jussieu).
 
 Ses feuilles froissées libèrent une **note citronnée éclatante**. À la dégustation, elle tire vers le melon vert et la verveine tilleul, avec une longueur florale.
 
 C'est elle qui construit le cœur de notre *Herbe des Druides* (28°) — que France Bleu a présentée dans sa rubrique *Le Produit du Jour*, en la qualifiant d'"expression la plus noble de la verveine artisanale". Elle entre aussi dans *L'Alchimie Végétale*, où elle se fond à 26 autres plantes.
 
-## Le serpolet (*Thymus serpyllum*)
+## Le serpolet ([*Thymus serpyllum*](https://fr.wikipedia.org/wiki/Serpolet))
 
 Cousin sauvage du thym commun, le serpolet pousse spontanément sur les pentes sèches et ensoleillées de moyenne montagne, partout en Europe. Petit, discret, il tapisse les pierres. Son parfum est plus mentholé, plus sauvage, que celui du thym — avec une **note camphrée** qui tempère joliment l'alcool d'une liqueur.
 
