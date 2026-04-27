@@ -27,15 +27,27 @@ const authorBios: Record<string, { role: string; description: string }> = {
   },
 };
 
+// Slug d'ancre fondateur sur /notre-histoire (kebab-case, sans accents)
+// — utilisé pour pointer chaque Person.url vers sa section bio dédiée.
+const founderAnchor = (name: string) =>
+  name
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+
 const authorSchema = authorBios[post.data.author]
   ? {
       '@type': 'Person',
       name: post.data.author,
       jobTitle: authorBios[post.data.author].role,
       description: authorBios[post.data.author].description,
+      // url vers la page "Notre histoire" + ancre fondateur — satisfait
+      // l'exigence Schema.org/Person.url (signal d'autorité auteur, requis
+      // par Google Rich Results Test).
+      url: `${site.url}/notre-histoire#${founderAnchor(post.data.author)}`,
       worksFor: { '@id': `${site.url}#localbusiness` },
     }
-  : { '@type': 'Organization', name: post.data.author };
+  : { '@type': 'Organization', name: post.data.author, url: site.url };
 
 const articleSchema = {
   '@context': 'https://schema.org',

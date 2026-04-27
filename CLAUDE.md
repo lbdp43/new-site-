@@ -559,8 +559,12 @@ redirections 301 WP→Astro à pré-remplir avant bascule www., article pilier
 **Restent ouverts post-bascule** :
 - Plan 301 WP→Astro à pré-remplir dans `vercel.json` (priorité haute pré-J)
 - CSP `report-only` → `enforced` (priorité haute, sécurité paiement)
-- Schema Product enrichi : `gtin` (EAN-13) — bloqué tant qu'on n'a pas de
-  codes EAN par SKU côté WooCommerce
+- Schema Product enrichi : `gtin` (EAN-13) — **NON applicable**. Confirmé
+  par Guillaume le 2026-04-27 : pas de code-barre EAN sur les bouteilles
+  LBDP. Les numéros de lot existent (logiciel de facturation) mais ne sont
+  pas un substitut au GTIN — Schema.org/gtin n'accepte que des EAN/UPC
+  globaux. Sujet à rouvrir si LBDP fait imprimer des EAN un jour (ou si
+  un distributeur exige le code-barre pour la grande distribution).
 - Images alt cover article : actuellement = title, pourrait être enrichi
   via un champ `coverAlt` au schema Zod
 - Pages thin content : `/composer-mon-coffret` (~3 phrases hors React),
