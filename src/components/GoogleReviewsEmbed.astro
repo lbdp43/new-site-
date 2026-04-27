@@ -3,9 +3,9 @@
  * GoogleReviewsEmbed — avis Google en temps réel via Featurable (gratuit)
  *
  * Fonctionnement :
- *  1. Si `featurableWidgetId` est renseigné dans `site.ts`, on fetche l'API
- *     Featurable (https://featurable.com/api/v1/widgets/{id}) au build pour
- *     récupérer la vraie note Google et les derniers avis. Zéro clé requise.
+ *  1. Si `featurableWidgetId` est renseigné dans `site.ts`, on récupère
+ *     les vrais avis Google via le helper `getFeaturableWidget()` (fetch
+ *     mémoïsé — partagé avec `buildAggregateRatingSchema()` côté schema).
  *  2. Sinon, on affiche les avis internes (reviews.ts) + un CTA "Laisser un
  *     avis Google" pointant vers la fiche Maps.
  *
@@ -13,33 +13,9 @@
  */
 import { site } from '../data/site';
 import { reviews, aggregateRating } from '../data/reviews';
+import { getFeaturableWidget } from '../lib/featurable';
 
-interface FeaturableReview {
-  reviewer: { displayName: string; profilePhotoUrl?: string };
-  starRating: number;
-  comment: string;
-  createTime: string;
-}
-
-interface FeaturableWidget {
-  totalReviewCount: number;
-  averageRating: number;
-  reviews: FeaturableReview[];
-}
-
-let liveData: FeaturableWidget | null = null;
-
-const id = site.googleBusiness.featurableWidgetId;
-if (id) {
-  try {
-    const res = await fetch(`https://featurable.com/api/v1/widgets/${id}`);
-    if (res.ok) {
-      liveData = (await res.json()) as FeaturableWidget;
-    }
-  } catch {
-    // offline build ou widget invalide — fallback sur les avis internes
-  }
-}
+const liveData = await getFeaturableWidget();
 
 /**
  * Google Maps renvoie les avis au format :

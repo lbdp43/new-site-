@@ -7,11 +7,17 @@ import ProductCarousel from '../components/ProductCarousel.astro';
 import PressStrip from '../components/PressStrip.astro';
 import { site } from '../data/site';
 import { featuredProducts, products } from '../data/products';
+import { buildAggregateRatingSchema } from '../lib/featurable';
 
-// Note : le schéma AggregateRating + Review a été retiré — il doit être
-// alimenté uniquement par de VRAIS avis Google (via Featurable, une fois le
-// widgetId renseigné dans site.ts) pour éviter tout risque de rich-snippet
-// trompeur. Les avis internes restent affichés côté UI pour la preuve sociale.
+// AggregateRating injecté UNIQUEMENT à partir des vrais avis Google
+// (via Featurable). Si l'API est down ou le widget non configuré, on
+// renvoie null et la propriété est omise du schema — pas d'invention
+// de valeurs (pénalité manuelle Google sur les rich-snippets factices).
+// On l'attache au LocalBusiness/Organization (brand-level), PAS au
+// Product schema (les avis Google ne sont pas split par SKU — attacher
+// la note brand sur chaque Product = inflation artificielle = sanction).
+const aggregateRating = await buildAggregateRatingSchema();
+
 // LocalBusiness + Organization fusionnés dans un seul bloc pour éviter la
 // double entité dans le Knowledge Graph. On garde toutes les propriétés
 // (horaires, paiements, zone, fondateurs, GBP) et on y ajoute l'award.
@@ -84,6 +90,9 @@ const localBusinessSchema = {
   // VAT number (SIRET sert aussi d'identifiant français)
   vatID: site.siret,
   taxID: site.siret,
+  // AggregateRating Google injecté seulement si Featurable a répondu OK.
+  // Spread conditionnel : la propriété n'est pas émise du tout si null.
+  ...(aggregateRating ? { aggregateRating } : {}),
 };
 
 const websiteSchema = {

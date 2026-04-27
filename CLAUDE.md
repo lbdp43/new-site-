@@ -293,6 +293,7 @@ remplacer le contenu de la colonne gauche.
 | `scripts/sync-wc-stock.mjs` | Script prebuild : fetch stock WC + prix par contenance (variations) + auto-draft des nouveaux produits WC |
 | `scripts/indexnow-submit.mjs` | Script postbuild : POST sitemap à IndexNow (Bing/Yandex) |
 | `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, `getSizePrices`, etc. |
+| `src/lib/featurable.ts` | Fetch (mémoïsé) des avis Google via Featurable au build. Expose `getFeaturableWidget()`, `getFeaturableAggregate()` et `buildAggregateRatingSchema()`. Single fetch partagé par `GoogleReviewsEmbed.astro` + le schema `LocalBusiness` (FR + EN home). |
 | `src/data/wc-live.json` | Snapshot stock + prix par contenance live (régénéré à chaque build, committé) |
 | `public/admin/index.html` + `public/admin/config.yml` | Interface CMS (Sveltia) + config collections blog |
 | `public/llms.txt` | Manifest IA (Markdown) — résumé structuré pour AI Overviews / ChatGPT / Perplexity. À garder synchronisé avec la gamme produits + distinctions |
@@ -558,11 +559,22 @@ redirections 301 WP→Astro à pré-remplir avant bascule www., article pilier
 **Restent ouverts post-bascule** :
 - Plan 301 WP→Astro à pré-remplir dans `vercel.json` (priorité haute pré-J)
 - CSP `report-only` → `enforced` (priorité haute, sécurité paiement)
-- Schema FAQPage / Product enrichi (`gtin`, `aggregateRating`)
+- Schema Product enrichi : `gtin` (EAN-13) — bloqué tant qu'on n'a pas de
+  codes EAN par SKU côté WooCommerce
 - Images alt cover article : actuellement = title, pourrait être enrichi
   via un champ `coverAlt` au schema Zod
 - Pages thin content : `/composer-mon-coffret` (~3 phrases hors React),
   enrichir le body Astro à 150-200 mots
+
+**`aggregateRating` (2026-04-27 soir)** : injecté dans le schema
+`LocalBusiness/Organization` des deux homes (FR + EN) à partir des **vrais
+avis Google** récupérés via Featurable au build. `ratingValue: 5`,
+`reviewCount: 38` à ce jour. Brand-level uniquement — **PAS** sur le
+Product schema (les avis ne sont pas split par SKU, attacher la note
+brand sur chaque produit = inflation artificielle = pénalité Google).
+Le helper partagé `src/lib/featurable.ts` mémoïse l'appel : 1 seul
+fetch pour les 116 pages générées. Si l'API Featurable est down, la
+propriété est simplement omise du schema (pas d'invention de valeurs).
 
 ## Sécurité — notes importantes
 

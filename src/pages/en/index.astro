@@ -7,6 +7,12 @@ import ProductCarousel from '../../components/ProductCarousel.astro';
 import { site } from '../../data/site';
 import { featuredProducts, products } from '../../data/products';
 import { localizedPath } from '../../i18n/utils';
+import { buildAggregateRatingSchema } from '../../lib/featurable';
+
+// AggregateRating Google (via Featurable) injecté côté EN comme côté FR —
+// même logique : seulement si l'API a répondu, attaché au LocalBusiness
+// (brand-level), pas au Product schema.
+const aggregateRating = await buildAggregateRatingSchema();
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
@@ -68,6 +74,7 @@ const localBusinessSchema = {
   ],
   vatID: site.siret,
   taxID: site.siret,
+  ...(aggregateRating ? { aggregateRating } : {}),
 };
 
 const websiteSchema = {
