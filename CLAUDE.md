@@ -299,7 +299,7 @@ remplacer le contenu de la colonne gauche.
 | `public/llms.txt` | Manifest IA (Markdown) — résumé structuré pour AI Overviews / ChatGPT / Perplexity. À garder synchronisé avec la gamme produits + distinctions |
 | `docs/cms-admin.md` | Guide utilisateur du CMS (auth GitHub, rédaction, SEO) |
 | `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande, /admin) + priorités différenciées + locales sitemap **alignées sur les codes courts** (`fr`, `en`, `es`, `it` — pas `fr-FR`) pour cohérence avec `getHreflangLinks` HTML |
-| `vercel.json` | Headers sécurité (HSTS, X-Frame, CSP-like) + noindex sur `test.*` |
+| `vercel.json` | Headers sécurité (HSTS, X-Frame, **CSP enforced** depuis 2026-04-27) + override CSP permissive sur `/admin/*` (pour Sveltia CMS qui charge unpkg.com + auth GitHub) + noindex sur `test.*` |
 | `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
 | `blog-audit-report.md` | Audit qualité 28 articles blog FR (2026-04-27) — scoring 100 pts, action queue priorisée |
 | `seo-technical-report.md` | Audit technique site (2026-04-27) — score 81/100, 5 issues pré-bascule www. |
@@ -558,7 +558,10 @@ redirections 301 WP→Astro à pré-remplir avant bascule www., article pilier
 
 **Restent ouverts post-bascule** :
 - Plan 301 WP→Astro à pré-remplir dans `vercel.json` (priorité haute pré-J)
-- CSP `report-only` → `enforced` (priorité haute, sécurité paiement)
+- ~~CSP `report-only` → `enforced`~~ ✅ **FAIT le 2026-04-27** : enforced
+  sur le site public (avec `upgrade-insecure-requests`) + override
+  permissif sur `/admin/*` pour Sveltia (unpkg + auth.sveltia.app +
+  api.github.com). Validé après un paiement Stripe réussi.
 - Schema Product enrichi : `gtin` (EAN-13) — **NON applicable**. Confirmé
   par Guillaume le 2026-04-27 : pas de code-barre EAN sur les bouteilles
   LBDP. Les numéros de lot existent (logiciel de facturation) mais ne sont
