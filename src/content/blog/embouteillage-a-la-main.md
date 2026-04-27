@@ -2,6 +2,7 @@
 title: "L'embouteillage à la main — pourquoi nous refusons d'automatiser totalement"
 description: "Chaque bouteille qui quitte notre atelier passe entre nos quatre mains. Pourquoi cette lenteur volontaire — et ce qu'elle change, concrètement, pour la qualité."
 date: 2024-07-22
+updated: 2026-04-27
 author: "La Brasserie des Plantes"
 category: Fabrication
 cover: /images/stories/atelier-1.jpg
@@ -79,3 +80,5 @@ Quand ce ne sera plus possible, il faudra choisir. Pour l'instant, les quatre ma
 ---
 
 **Voir le processus de plus près :** [Artinov 2023 — la tireuse pression](/blog/artinov-2023-verveine-a-la-tirette) · [Visite de l'atelier en vidéo](/blog/haute-loire-tourisme-video-atelier) · [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).
+
+**À lire aussi :** [Reconnaître une vraie liqueur artisanale — checklist en 5 points](/blog/reconnaitre-vraie-liqueur-artisanale-checklist) · [Liqueur artisanale vs industrielle — 7 différences clés](/blog/liqueur-artisanale-vs-industrielle) · [Comment choisir une liqueur artisanale — le guide complet](/blog/choisir-liqueur-artisanale-guide).

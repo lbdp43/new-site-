@@ -2,6 +2,7 @@
 title: "« L'art de redonner vie aux plantes oubliées » — portrait par Loire Semène Tourisme"
 description: "L'office de tourisme Loire Semène a repris l'expression 'plantes oubliées' pour titrer son portrait de la Brasserie des Plantes. Retour sur une formule qui nous colle à la peau."
 date: 2023-07-08
+updated: 2026-04-27
 author: "Guillaume"
 category: Terroir
 cover: /images/stories/salon-origine-auvergne.webp
@@ -21,7 +22,7 @@ Nous avons hésité avant de l'accepter. "Oubliées" sonne nostalgique — comme
 Mais l'expression a deux forces que nous avons fini par reconnaître :
 
 ### 1. Elle est **vraie**
-La verveine odorante, le serpolet sauvage, l'aurone, l'hysope : ces plantes existaient partout il y a 80 ans. On les trouvait chez l'herboriste du coin, dans les tisanes du dimanche, dans les liqueurs faites maison. Elles ont **réellement disparu du commerce** au profit d'arômes industriels plus stables, moins saisonniers, moins capricieux.
+La verveine odorante, le serpolet, l'aurone, l'hysope : ces plantes existaient partout il y a 80 ans. On les trouvait chez l'herboriste, dans les tisanes du dimanche, dans les liqueurs faites maison. Elles ont **réellement disparu du commerce** au profit d'arômes industriels plus stables, moins saisonniers, moins capricieux.
 
 ### 2. Elle est **mobilisatrice**
 "Oubliées" invite à la **reconquête**. C'est un mot qui donne envie de redécouvrir — un mot qui promet un retour, pas une perte.

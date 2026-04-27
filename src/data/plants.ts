@@ -41,7 +41,7 @@ export const plants: Plant[] = [
     family: 'aromatique',
     role: 'Thym sauvage · profondeur épicée',
     description:
-      "Le thym sauvage de nos estives du Velay. Plus fin et plus floral que le thym commun, il pousse à ras du sol sur les pelouses d'altitude. Présent dans notre trio signature avec la verveine et le carvi.",
+      "Cousin sauvage du thym commun, plus fin et plus floral. Il pousse à ras du sol sur les pelouses sèches de moyenne montagne. Présent dans notre trio signature avec la verveine et le carvi.",
     usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Machurés",
     season: 'Juillet à août',
   },
@@ -147,7 +147,7 @@ export const plants: Plant[] = [
     family: 'aromatique',
     role: 'Amer · terreux',
     description:
-      "Le nom auvergnat du pissenlit. On travaille surtout ses feuilles, amères et terreuses — une amertume de sous-bois, de terre humide de printemps. Plante cueillie localement.",
+      "Un des noms vernaculaires du pissenlit. On travaille surtout ses feuilles, amères et terreuses — une amertume de sous-bois, de terre humide de printemps.",
     usedIn: "Le Gorgeon des Machurés",
     season: 'Mars à mai',
     signature: true,

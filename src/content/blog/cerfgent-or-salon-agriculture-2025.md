@@ -2,7 +2,7 @@
 title: "Le Cerf'Gent — Médaille d'Or au Salon de l'Agriculture 2025"
 description: "Notre apéritif amer à la gentiane a reçu la Médaille d'Or au Concours Général Agricole 2025, Salon de l'Agriculture. Récit d'un prix rare en catégorie liqueur et hommage à la gentiane jaune."
 date: 2025-03-02
-updated: 2026-04-18
+updated: 2026-04-27
 author: "Guillaume"
 category: Actualité
 cover: /images/stories/etienne-degustation.webp
@@ -57,3 +57,7 @@ Qu'une petite maison artisanale peut entrer — avec une recette honnête, une m
 ---
 
 **Découvrir le Cerf'Gent :** [fiche produit](/boutique/cerf-gent) · **En carte chez les pros ?** [Devenez partenaire](/professionnels).
+
+---
+
+**À lire aussi :** [Liqueur de gentiane : Suze, Salers, Avèze, Cerf'Gent — les différences](/blog/liqueur-gentiane-suze-salers-difference) · [Comment choisir une liqueur artisanale — le guide complet](/blog/choisir-liqueur-artisanale-guide) · [Liqueur, digestif, eau-de-vie, amer — le vocabulaire](/blog/liqueur-digestif-eau-de-vie-amer-difference).

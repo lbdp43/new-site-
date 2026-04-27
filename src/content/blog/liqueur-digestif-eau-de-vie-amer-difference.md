@@ -2,6 +2,7 @@
 title: "Liqueur, digestif, eau-de-vie, amer : le vocabulaire pour ne plus se tromper"
 description: "Liqueur, digestif, eau-de-vie, amer, élixir, ratafia, alcoolat… Tous ces mots ne désignent pas la même chose. Glossaire pratique des spiritueux français — pour acheter sans se tromper et briller en société."
 date: 2026-04-26
+updated: 2026-04-27
 author: "Guillaume"
 category: Fabrication
 cover: /images/stories/etienne-degustation.webp
@@ -126,6 +127,8 @@ Avec ce vocabulaire, vous savez désormais répondre quand quelqu'un mélange "l
 **Pour aller plus loin :**
 - [Comment choisir une liqueur artisanale — le guide complet](/blog/choisir-liqueur-artisanale-guide)
 - [Liqueur artisanale vs industrielle — 7 différences clés](/blog/liqueur-artisanale-vs-industrielle)
+- [Liqueur de gentiane : Suze, Salers, Avèze, Cerf'Gent — les différences](/blog/liqueur-gentiane-suze-salers-difference)
+- [Quelle liqueur de verveine choisir en 2026 ?](/blog/quelle-liqueur-verveine-choisir-2026)
 - [Liqueurs artisanales — pilier](/liqueurs-artisanales)
 - [Liqueur digestive — pilier](/liqueur-digestive)
 - [Liqueurs de plantes — pilier](/liqueurs-de-plantes)

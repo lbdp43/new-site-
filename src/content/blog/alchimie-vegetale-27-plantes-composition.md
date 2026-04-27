@@ -2,7 +2,7 @@
 title: "L'Alchimie Végétale, entre science et poésie — comment on compose 27 plantes"
 description: "Dans les coulisses de L'Alchimie Végétale, Meilleur Digestif du Monde 2025. Cinq familles de plantes, quatre ans de R&D, 32 essais documentés. Un récit technique et honnête."
 date: 2025-08-14
-updated: 2026-04-18
+updated: 2026-04-27
 author: "Étienne"
 category: Fabrication
 cover: /images/products/alchimie-vegetale-2.jpg
@@ -21,7 +21,7 @@ Les 27 plantes se répartissent en **cinq grandes familles fonctionnelles** — 
 
 **Les racines** structurent le digestif et donnent la longueur en bouche — c'est la colonne vertébrale, la dimension médicinale héritée des grands amari.
 
-**Le cœur herbacé** fait « respirer » la liqueur. Ce sont les plantes aromatiques sourcées chez nos cueilleurs et maraîchers partenaires (la plupart en bio).
+**Le cœur herbacé** fait « respirer » la liqueur. Ce sont les plantes aromatiques sourcées chez [nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) (la plupart en bio).
 
 **Les fleurs** apportent la rondeur et la finesse aromatique. Elles posent les notes qu'on identifie d'abord au nez.
 
@@ -62,3 +62,7 @@ Trois ans pour sortir la recette. Un an pour la confirmer avant de l'envoyer à 
 ---
 
 **Découvrir L'Alchimie Végétale :** [fiche produit](/boutique/alchimie-vegetale) · [Notre gamme complète](/boutique).
+
+---
+
+**À lire aussi :** [Meilleur Digestif du Monde 2025 — récit du prix](/blog/meilleur-digestif-du-monde-2025) · [Coulisses des World Drinks Awards](/blog/world-drinks-awards-comment-ca-marche) · [Élixir végétal — 7 plantes d'une liqueur d'herboristerie](/blog/elixir-vegetal-7-plantes-liqueur) · [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).

@@ -2,6 +2,7 @@
 title: "Visite vidéo de l'atelier par Haute-Loire Tourisme"
 description: "L'office de tourisme de Haute-Loire a filmé une visite de notre atelier à Saint-Didier-en-Velay en octobre 2023. Coulisses du tournage, ce qui n'est pas dans la vidéo."
 date: 2023-10-20
+updated: 2026-04-27
 author: "La Brasserie des Plantes"
 category: Fabrication
 cover: /images/gallery/atelier-02.webp
@@ -58,3 +59,7 @@ L'atelier est situé au **18 Grand Place, 43140 Saint-Didier-en-Velay**. Nous re
 ---
 
 **Plus d'infos :** [Contact & horaires](/contact) · [Notre histoire complète](/notre-histoire) · [Ateliers de mixologie sur place](/ateliers).
+
+---
+
+**À lire aussi :** [L'embouteillage à la main — pourquoi nous refusons d'automatiser](/blog/embouteillage-a-la-main) · [Trois amis, une brasserie — comment tout a commencé](/blog/trois-amis-une-brasserie) · [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).

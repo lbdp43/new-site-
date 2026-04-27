@@ -2,6 +2,7 @@
 title: "Artinov 2023 — notre verveine à la tirette, lauréate Innovation de savoir-faire"
 description: "En 2023, la Chambre de Métiers et de l'Artisanat de Haute-Loire a récompensé notre système de tirage pression pour liqueur végétale. Retour sur une idée simple : servir la liqueur comme on sert la bière."
 date: 2023-11-28
+updated: 2026-04-27
 author: "La Brasserie des Plantes"
 category: Fabrication
 cover: /images/gallery/production-01.jpg
@@ -58,3 +59,7 @@ L'innovation, chez nous, c'est rarement spectaculaire. C'est plus souvent **un p
 ---
 
 **Pour les pros :** notre [espace dédié](/professionnels) détaille les formats BIB et la formation sur site. Pour une démo de la tireuse, [contactez-nous](/contact).
+
+---
+
+**À lire aussi :** [Quelle liqueur de verveine choisir en 2026 ? Comparatif](/blog/quelle-liqueur-verveine-choisir-2026) · [La verveine citronnelle, reine des digestifs](/blog/la-verveine-citronnelle) · [L'embouteillage à la main — pourquoi nous refusons d'automatiser](/blog/embouteillage-a-la-main).

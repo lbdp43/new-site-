@@ -1,4 +1,5 @@
 ---
+import { getEntry, getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { Awards } from '@/components/ui/award';
@@ -19,6 +20,29 @@ export function getStaticPaths() {
 
 const { product } = Astro.props;
 const rangeInfo = ranges[product.range];
+
+// Rendu Markdown du body de la fiche (description longue) via le pipeline
+// natif Astro — même processeur que le blog. Permet aux liens [text](/url),
+// au gras, aux H2/H3 et aux listes du body markdown d'être convertis en
+// HTML cliquable / formaté plutôt qu'affichés en raw text.
+const productEntry = await getEntry('products', product.slug);
+const { Content: ProductDescription } = productEntry
+  ? await render(productEntry)
+  : { Content: null };
+
+// Articles de blog qui mentionnent ce produit (lien `/boutique/<slug>` dans
+// le body). Construit au build : on lit toutes les entrées blog une fois,
+// on filtre par occurrence du lien dans le body brut.
+const productLinkRegex = new RegExp(`/boutique/${product.slug}(?:[)#?]|$)`);
+const allBlogPosts = await getCollection('blog');
+const relatedPosts = allBlogPosts
+  .filter((p) => productLinkRegex.test(p.body ?? ''))
+  .sort((a, b) => {
+    const dateA = (a.data.updated ?? a.data.date).getTime();
+    const dateB = (b.data.updated ?? b.data.date).getTime();
+    return dateB - dateA;
+  })
+  .slice(0, 6);
 
 // Prix par contenance (synchronisés depuis les variations WC au prebuild).
 // Les pills reçoivent leur prix en data-attribute ; le JS met à jour le prix
@@ -522,11 +546,65 @@ const parsedAwards = (product.awards || []).map(parseAward);
   )}
 
   <!-- Description -->
-  {product.description && (
+  {ProductDescription && (
     <section class="py-16 bg-white border-y border-forest-100/60">
       <div class="max-w-3xl mx-auto px-6">
         <h2 class="font-display text-3xl text-forest-900 mb-6">À propos</h2>
-        <div class="text-lg text-ink-700 leading-relaxed">{product.description}</div>
+        <div class="prose prose-lg max-w-none
+                    prose-headings:font-display prose-headings:text-forest-900
+                    prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:tracking-tight
+                    prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                    prose-p:text-ink-700 prose-p:leading-relaxed
+                    prose-a:text-forest-700 prose-a:font-medium prose-a:underline prose-a:decoration-forest-300 prose-a:underline-offset-4
+                    hover:prose-a:decoration-forest-700
+                    prose-strong:text-forest-900 prose-strong:font-medium
+                    prose-em:text-forest-800
+                    prose-ul:my-4 prose-ol:my-4 prose-li:my-1
+                    prose-hr:border-forest-200 prose-hr:my-10">
+          <ProductDescription />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Articles qui parlent de ce produit (maillage interne) -->
+  {relatedPosts.length > 0 && (
+    <section class="py-16 bg-cream-50/50">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+          Dans notre actualité
+        </div>
+        <h2 class="font-display text-3xl text-forest-900 mb-8">Articles qui parlent de {product.name}</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedPosts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group flex flex-col rounded-2xl overflow-hidden bg-white border border-forest-100/60 hover:shadow-cream-lg transition-all"
+            >
+              {post.data.cover && (
+                <div class="aspect-[16/10] overflow-hidden">
+                  <img
+                    src={post.data.cover}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div class="p-5 flex flex-col gap-2 flex-1">
+                <div class="text-[11px] uppercase tracking-[0.2em] text-forest-600 font-medium">
+                  {post.data.category}
+                </div>
+                <h3 class="font-display text-lg text-forest-900 leading-tight group-hover:text-forest-700 transition-colors">
+                  {post.data.title}
+                </h3>
+                <p class="text-sm text-ink-500 leading-relaxed line-clamp-3 mt-1">
+                  {post.data.description}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   )}

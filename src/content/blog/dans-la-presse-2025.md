@@ -2,7 +2,7 @@
 title: "La Brasserie des Plantes dans la presse — printemps 2025"
 description: "Revue de presse après notre titre Meilleur Digestif du Monde 2025 : Zoomdici, France 3, France Bleu, Le Bonbon Lyon, M Lyon. Retours sur les angles choisis par les rédactions."
 date: 2025-06-20
-updated: 2026-04-18
+updated: 2026-04-27
 author: "Guillaume"
 category: Actualité
 cover: /images/gallery/evenement-06.webp
@@ -60,3 +60,7 @@ Pour l'historique : la fiche officielle du prix sur le site du concours, avec le
 ## Ce qu'on garde de tout ça
 
 L'essentiel n'est pas dans les chiffres, mais dans une chose simple : chaque rédaction a posé la bonne question. *Pourquoi ces plantes-là ?* *Pourquoi ici ?* *Comment ?* Nous avons parfois l'impression qu'on parle d'un produit ; en réalité, nous parlons d'un **paysage, d'une amitié, et d'un geste qu'on répète**. Le reste est de la poésie journalistique — et parfois, elle est très juste.
+
+---
+
+**À lire aussi :** [Meilleur Digestif du Monde 2025 — récit du prix](/blog/meilleur-digestif-du-monde-2025) · [Le Cerf'Gent, Or au Salon de l'Agriculture 2025](/blog/cerfgent-or-salon-agriculture-2025) · [Coulisses des World Drinks Awards](/blog/world-drinks-awards-comment-ca-marche) · [Notre premier portrait de curateur — Likora 2022](/blog/likora-2022-portrait-de-curateur).

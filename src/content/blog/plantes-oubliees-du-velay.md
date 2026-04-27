@@ -2,7 +2,7 @@
 title: "Verveine, serpolet, carvi — les plantes oubliées qu'on remet en bouteille"
 description: "Retour sur les plantes que nous faisons revivre en liqueur : verveine odorante, serpolet, carvi, hysope, aurone, mélisse. Leurs histoires, leurs vertus, leurs accords."
 date: 2025-03-12
-updated: 2026-04-18
+updated: 2026-04-27
 author: "Étienne"
 category: Plantes
 cover: /images/stories/plantes.jpg
@@ -21,7 +21,7 @@ C'est elle qui construit le cœur de notre *Herbe des Druides* (28°) — que Fr
 
 ## Le serpolet (*Thymus serpyllum*)
 
-Cousin sauvage du thym commun, le serpolet pousse spontanément sur les pentes sèches et ensoleillées de moyenne montagne. Petit, discret, il tapisse les pierres. Son parfum est plus mentholé, plus sauvage, que celui du thym — avec une **note camphrée** qui tempère joliment l'alcool d'une liqueur.
+Cousin sauvage du thym commun, le serpolet pousse spontanément sur les pentes sèches et ensoleillées de moyenne montagne, partout en Europe. Petit, discret, il tapisse les pierres. Son parfum est plus mentholé, plus sauvage, que celui du thym — avec une **note camphrée** qui tempère joliment l'alcool d'une liqueur.
 
 On dit parfois que c'était la plante préférée des bergers — qu'ils le mâchaient pendant la transhumance pour se rafraîchir. Chez nous, il adoucit la verveine de *L'Herbe des Druides* et apporte sa note herbacée au *Gorgeon des Machurés*.
 
@@ -48,3 +48,5 @@ Enfin, pour une raison un peu plus intime : ces plantes ont une histoire. Nos gr
 ---
 
 **Pour aller plus loin :** notre gamme *Brasserie des Plantes* (L'Alchimie Végétale, L'Herbe des Druides, Le Gorgeon des Machurés, La Lime des Prés, Le Nectar d'Ostara, La Flèche Ardente) compose autour de ces botaniques.
+
+**À lire aussi :** [Élixir végétal — les 7 plantes d'une liqueur d'herboristerie](/blog/elixir-vegetal-7-plantes-liqueur) · [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) · [La verveine citronnelle, reine des digestifs](/blog/la-verveine-citronnelle) · [L'art de redonner vie aux plantes oubliées — Loire Semène Tourisme](/blog/loire-semene-tourisme-plantes-oubliees).

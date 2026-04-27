@@ -66,7 +66,7 @@ export const pressMentions: PressMention[] = [
     url: 'https://france3-regions.franceinfo.fr/auvergne-rhone-alpes/haute-loire/avec-leur-brasserie-de-plantes-deux-copains-de-haute-loire-remettent-la-liqueur-au-gout-du-jour-2852657.html',
     date: '2023-06-18',
     type: 'tv',
-    excerpt: "Reportage TV régional sur l'histoire d'amitié d'enfance entre Étienne et Guillaume et le choix de revaloriser les plantes oubliées du Velay.",
+    excerpt: "Reportage TV régional sur l'histoire d'amitié d'enfance entre Étienne et Guillaume et leur démarche autour des plantes oubliées.",
   },
   {
     title: "La Brasserie des Plantes à Saint-Didier-en-Velay — La Bonne Adresse",
@@ -124,7 +124,7 @@ export const pressMentions: PressMention[] = [
     url: 'https://www.facebook.com/LoireSemeneTourisme/posts/1520307696397328/',
     date: '2023-07-08',
     type: 'institutional',
-    excerpt: "Post éditorial de l'office de tourisme communautaire sur notre mission de revaloriser les plantes médicinales locales.",
+    excerpt: "Post éditorial de l'office de tourisme communautaire sur notre mission de revaloriser les plantes oubliées dans la palette des liquoristes français.",
   },
 
   // === 2022 — portraits de curateurs ===

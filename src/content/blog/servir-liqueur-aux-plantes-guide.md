@@ -2,6 +2,7 @@
 title: "Servir une liqueur aux plantes — températures, verres, accords"
 description: "Tout savoir pour servir nos liqueurs au meilleur moment : températures précises par référence, verres recommandés, accords en dégustation et en cocktail."
 date: 2024-02-14
+updated: 2026-04-27
 author: "Guillaume"
 category: Recettes
 cover: /images/cocktails/philtre-eros.webp
@@ -89,6 +90,8 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Verre** : verre à vin ou tumbler.  
 **Servir** : pur. À 3°C, le chanvre se tient ; plus chaud, il domine.  
 **Accord** : moments calmes, fin de soirée, lecture.
+
+Pour comprendre les accords aromatiques de la gamme CBD, lire [pourquoi marier le CBD à la menthe, la verveine et l'absinthe](/blog/cbd-et-plantes-lumiere-obscure).
 
 ## Les erreurs classiques
 

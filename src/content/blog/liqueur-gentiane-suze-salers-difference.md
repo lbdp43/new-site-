@@ -2,6 +2,7 @@
 title: "Liqueur de gentiane : différences entre Suze, Salers, Avèze et liqueur artisanale"
 description: "Suze, Salers, Avèze, Bonal, Cerf'Gent… Les liqueurs de gentiane françaises ont des caractères très différents. Comparatif complet pour choisir sa gentiane en 2026 — origines, recettes, accords."
 date: 2026-04-26
+updated: 2026-04-27
 author: "Guillaume"
 category: Plantes
 cover: /images/gallery/atelier-04.webp
@@ -73,7 +74,7 @@ Depuis 2018-2020, des liquoristes indépendants reprennent la gentiane en format
 | La gentiane la plus pure et droite | Salers |
 | L'équilibre sucré-amer modéré auvergnat | Avèze |
 | Un amer complexe type vermouth | Bonal |
-| Une gentiane moderne, traçable, en circuit court | [Cerf'Gent](/boutique/cerf-gent) |
+| Une gentiane moderne, traçable, à dosage contemporain | [Cerf'Gent](/boutique/cerf-gent) |
 
 ## Le Cerf'Gent : pourquoi nous avons fait notre propre gentiane
 

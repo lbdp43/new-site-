@@ -2,6 +2,7 @@
 title: "Lumière Obscure : pourquoi marier le CBD à la menthe, la verveine et l'absinthe"
 description: "Notre gamme CBD associe le chanvre à trois plantes signatures. Tour d'horizon du cadre légal (moins de 0,1 % THC), des accords aromatiques, et des attentes réalistes pour une liqueur au CBD."
 date: 2024-05-22
+updated: 2026-04-27
 author: "Étienne"
 category: Plantes
 cover: /images/products/menthe-cbd-ortie.webp
@@ -75,3 +76,7 @@ Notre gamme Lumière Obscure n'est pas là pour surfer sur une mode. Elle est l�
 ---
 
 **Découvrir la gamme :** [Menthe CBD Ortie](/boutique/menthe-cbd-ortie) · [Verveine CBD Aurone](/boutique/verveine-cbd-aurone) · [CBD Absinthe Citron](/boutique/absinthe-cbd-citron) · [Voir l'univers complet Lumière Obscure](/lumiere-obscure).
+
+---
+
+**À lire aussi :** [Les plantes de nos liqueurs — voyage botanique](/blog/plantes-liqueur-haute-loire) · [Servir une liqueur aux plantes — températures, verres, accords](/blog/servir-liqueur-aux-plantes-guide) · [Cinq cocktails signature — nos recettes](/blog/nos-cocktails-signature).

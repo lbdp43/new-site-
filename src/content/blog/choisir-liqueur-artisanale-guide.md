@@ -2,6 +2,7 @@
 title: "Comment choisir une liqueur artisanale : le guide complet de l'amateur éclairé"
 description: "Taux d'alcool, plante dominante, usage, sucre, traçabilité : les 5 critères qui comptent vraiment pour choisir une liqueur artisanale. Un guide de 10 minutes pour ne plus se tromper — par La Brasserie des Plantes, Meilleur Digestif du Monde 2025."
 date: 2026-04-20
+updated: 2026-04-27
 author: "Guillaume"
 category: Fabrication
 cover: /images/gallery/production-02.webp
@@ -218,6 +219,10 @@ Pour L'Alchimie Végétale (45 € / 70 cl), le coût de production est supérie
 
 **Pour aller plus loin** :
 - [Liqueur artisanale vs industrielle : ce qui change dans votre verre](/blog/liqueur-artisanale-vs-industrielle) — les 7 différences concrètes
+- [Reconnaître une vraie liqueur artisanale en magasin — checklist en 5 points](/blog/reconnaitre-vraie-liqueur-artisanale-checklist)
+- [Quelle liqueur de verveine choisir en 2026 ? Comparatif des grandes maisons](/blog/quelle-liqueur-verveine-choisir-2026)
+- [Liqueur de gentiane : Suze, Salers, Avèze, Cerf'Gent — les différences](/blog/liqueur-gentiane-suze-salers-difference)
+- [L'embouteillage à la main — pourquoi nous refusons d'automatiser](/blog/embouteillage-a-la-main)
 - [Les plantes de nos liqueurs — voyage botanique](/blog/plantes-liqueur-haute-loire) — notre approche botanique
 - [Trois amis, une liqueur house — notre histoire](/blog/trois-amis-une-brasserie) — comment la Brasserie des Plantes est née
 

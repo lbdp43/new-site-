@@ -2,6 +2,7 @@
 title: "Le Velay dans une bouteille — notre portrait par Velay Attractivité"
 description: "L'office d'attractivité territoriale du Velay a publié un portrait détaillé de la Brasserie des Plantes. Une lecture officielle de notre projet artisanal."
 date: 2024-11-08
+updated: 2026-04-27
 author: "Guillaume"
 category: Terroir
 cover: /images/gallery/saint-etienne.jpg
@@ -18,7 +19,7 @@ Velay Attractivité retient trois éléments de notre parcours :
 
 1. **Étienne et Guillaume sont revenus au pays.** Formés ailleurs (Toulouse et Saint-Étienne), ils sont revenus à Saint-Didier-en-Velay pour y créer une entreprise — ce qu'on appelle en développement territorial un "retour de talents", un signal positif pour un bassin rural qui perd plutôt ses jeunes.
 
-2. **Les plantes oubliées sont valorisées.** Notre démarche donne une **valeur économique** à des plantes que personne n'exploitait commercialement (verveine, serpolet, carvi sauvages), récoltées par nos cueilleurs et maraîchers partenaires (la plupart en bio, pas tous). Cela contribue à entretenir un savoir-faire et à **diversifier l'offre aromatique** disponible.
+2. **Les plantes oubliées sont valorisées.** Notre démarche donne une **valeur économique** à des plantes que peu de monde exploite commercialement (verveine odorante, serpolet, carvi, hysope, aurone), sourcées chez nos cueilleurs et maraîchers partenaires (la plupart en bio, pas tous). Cela contribue à entretenir un savoir-faire et à **remettre des plantes oubliées dans la palette des liquoristes français**.
 
 3. **La marque porte le territoire au-delà des frontières.** Depuis notre prix international de 2025, "Saint-Didier-en-Velay" apparaît dans des articles de Londres, Berlin, Montréal — ce qu'aucune campagne institutionnelle n'aurait pu acheter.
 
@@ -32,9 +33,9 @@ Quand un caviste lyonnais met *L'Alchimie Végétale* en devanture, il écrit en
 
 Pour ceux qui ne connaissent pas : le **Velay** est le pays historique du centre-sud du Massif central, qui couvre à peu près le département de la Haute-Loire, avec des débordements sur la Loire et le Puy-de-Dôme. Il est traversé par l'**ancienne voie romaine d'Agrippa**, aujourd'hui **Chemin de Saint-Jacques** (voie du Puy). Il compte trois villes principales : **Le Puy-en-Velay** (préfecture), **Yssingeaux**, et **Saint-Didier-en-Velay**, où nous sommes.
 
-Le relief est doux — plateaux volcaniques entre 800 et 1500 m — avec des vallées encaissées creusées par la Loire, le Lignon et l'Allier. Le climat est rude (étés courts, hivers longs, peu de pluie) — ce qui donne aux plantes aromatiques un **caractère plus concentré**, plus "nerveux", que les mêmes plantes cultivées en plaine.
+Le relief est doux — plateaux volcaniques entre 800 et 1500 m — avec des vallées encaissées creusées par la Loire, le Lignon et l'Allier. Le climat est rude (étés courts, hivers longs, peu de pluie) — un cadre singulier, dans lequel l'atelier prend racine.
 
-C'est ce climat qui fait la différence dans nos macérations.
+C'est ce cadre qui imprime sa signature à notre travail au quotidien.
 
 ## Ce qui nous rattache au territoire
 

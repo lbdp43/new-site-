@@ -2,7 +2,7 @@
 title: "Deux amis, une brasserie — comment la Brasserie des Plantes est née"
 description: "Étienne et Guillaume racontent les débuts : l'école à Saint-Didier-en-Velay, les premiers essais au garage, l'arrivée de la production artisanale en Haute-Loire."
 date: 2025-02-05
-updated: 2026-04-18
+updated: 2026-04-27
 author: "Guillaume"
 category: Terroir
 cover: /videos/duo-making-of-poster.jpg
@@ -15,7 +15,7 @@ C'est aussi à ce moment précis qu'une idée devient un projet.
 
 ## Des bancs de l'école à l'atelier
 
-**Étienne** et **Guillaume** se connaissent depuis la cour de récréation, à Saint-Didier-en-Velay. Ce village du Velay, à la lisière de la Haute-Loire et de la Loire, est posé entre les contreforts du Massif central et la vallée du Gier. Peu d'industrie, beaucoup de pentes, des plantes sauvages partout.
+**Étienne** et **Guillaume** se connaissent depuis la cour de récréation, à Saint-Didier-en-Velay. Ce village est posé entre les contreforts du Massif central et la vallée du Gier — peu d'industrie, beaucoup de pentes, et le calme dont on avait besoin pour démarrer.
 
 Chacun prend sa route. Étienne étudie la **biotechnologie végétale** à Toulouse — comprendre les molécules, les macérations, les équilibres aromatiques. Guillaume ouvre un **bar-restaurant à Saint-Étienne**, côté service, côté clients, côté carte. Ils se revoient tous les ans, en été, à Saint-Didier.
 
@@ -49,3 +49,7 @@ La suite — la demande qui double, les distributeurs étrangers qui appellent, 
 ---
 
 **Envie d'en savoir plus ?** Lisez [notre histoire complète](/notre-histoire) ou [venez nous rencontrer](/contact) à Saint-Didier-en-Velay — la boutique est ouverte mercredi, vendredi et samedi, de 9h à 18h30.
+
+---
+
+**À lire aussi :** [Notre premier portrait de curateur — Likora 2022](/blog/likora-2022-portrait-de-curateur) · [Première médaille d'or au Concours International de Lyon, 2023](/blog/premiere-medaille-or-concours-lyon-2023) · [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).

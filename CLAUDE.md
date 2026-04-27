@@ -295,10 +295,16 @@ remplacer le contenu de la colonne gauche.
 | `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, `getSizePrices`, etc. |
 | `src/data/wc-live.json` | Snapshot stock + prix par contenance live (régénéré à chaque build, committé) |
 | `public/admin/index.html` + `public/admin/config.yml` | Interface CMS (Sveltia) + config collections blog |
+| `public/llms.txt` | Manifest IA (Markdown) — résumé structuré pour AI Overviews / ChatGPT / Perplexity. À garder synchronisé avec la gamme produits + distinctions |
 | `docs/cms-admin.md` | Guide utilisateur du CMS (auth GitHub, rédaction, SEO) |
-| `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande, /admin) + priorités différenciées |
+| `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande, /admin) + priorités différenciées + locales sitemap **alignées sur les codes courts** (`fr`, `en`, `es`, `it` — pas `fr-FR`) pour cohérence avec `getHreflangLinks` HTML |
 | `vercel.json` | Headers sécurité (HSTS, X-Frame, CSP-like) + noindex sur `test.*` |
 | `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
+| `blog-audit-report.md` | Audit qualité 28 articles blog FR (2026-04-27) — scoring 100 pts, action queue priorisée |
+| `seo-technical-report.md` | Audit technique site (2026-04-27) — score 81/100, 5 issues pré-bascule www. |
+| `seo-content-report.md` | Audit éditorial pages statiques (2026-04-27) — score 72/100 |
+| `seo-schema-report.md` | Audit Schema.org (2026-04-27) — couverture, validations, code Recipe prêt à coller |
+| `seo-geo-report.md` | Audit GEO/AI (2026-04-27) — score 62/100, llms.txt template |
 
 ## Règle d'or CMS (Sveltia)
 
@@ -405,6 +411,33 @@ Historique :
   reussir, quelle-verveine, alchimie, plantes-oubliees-du-velay,
   trois-amis), fiches produit (alchimie-vegetale, cerf-gent,
   herbe-des-druides) + régénération `products.generated.json`.
+- Commit 2026-04-27 (soir, audit blog + SEO complet) :
+  - **Sprint A conformité (7 fixes)** : claim "circuit court" dans
+    `liqueur-gentiane-suze-salers-difference.md`, "En Haute-Loire elle
+    pousse / nos maraîchers la protègent" dans `la-verveine-citronnelle.md`,
+    "des plantes sauvages partout" dans `trois-amis-une-brasserie.md`,
+    "du coin" + "serpolet sauvage" dans `loire-semene-tourisme-plantes-oubliees.md`,
+    "moyenne montagne" → "moyenne montagne, partout en Europe" dans
+    `plantes-oubliees-du-velay.md`, 3 violations dans
+    `velay-attractivite-portrait-institutionnel.md` (verveine/serpolet/carvi
+    sauvages → liste neutralisée + climat ne donne plus "caractère plus
+    concentré aux plantes"), "Plante cueillie localement" + "nom auvergnat"
+    dans `src/data/plants.ts` (Baraban).
+  - **Sprint A-bis (5 fixes hors blog)** : "Le thym sauvage de nos estives
+    du Velay" dans `plants.ts` (Serpolet), alt "cueillies en Haute-Loire"
+    dans `notre-histoire.astro`, "Organic craft liqueurs" qualifie toute la
+    gamme dans `en/index.astro`, "nos 18 liqueurs artisanales bio" dans
+    `boutique/index.astro` ("bio" supprimé, "18" est le bon compte), FAQ
+    "sans aucune trace de THC" → aligné sur "THC < 0,1 % seuil légal arrêté
+    30 décembre 2021" (cohérence YMYL avec `lumiere-obscure.astro`),
+    `lumiere-obscure.astro:156` "CBD < 0,1 %" corrigé en "THC < 0,1 %",
+    excerpt presse "plantes médicinales locales" → "plantes oubliées dans
+    la palette des liquoristes français".
+- **Tous les claims sourcing géographiques sur les plantes ont été
+  audités et corrigés** au 2026-04-27 soir (28 articles blog + plants.ts +
+  press.ts + 4 pages statiques + FAQ). Le grep de vérification ne renvoie
+  plus que des matches légitimes (slugs URL, qualifs maison, citations
+  externes).
 
 ## Gotchas
 
@@ -432,6 +465,19 @@ Historique :
   du hero (plus en bas de page), et une section "Vu récemment" (localStorage,
   clé `lbdp-recently-viewed-v1`, 6 produits max) qui apparaît dès qu'on a
   consulté au moins une autre fiche.
+- **Fiche produit — section "À propos" rendue en HTML + maillage interne
+  vers le blog** : depuis 2026-04-27, le body markdown du fichier
+  `src/content/products/<slug>.md` est rendu via `getEntry('products', slug)`
+  + `render(entry)` (pipeline Markdown natif Astro, idem que le blog) au
+  lieu d'être affiché en raw text. Les liens `[texte](/url)`, gras,
+  H2/H3 et listes du body sont donc cliquables/formatés. Une section
+  **"Articles qui parlent de {nom du produit}"** est ajoutée juste après
+  "À propos" — elle liste jusqu'à 6 articles de blog dont le body
+  contient un lien vers `/boutique/<slug>` (relation construite au build
+  via `getCollection('blog').filter(...)`). Tri : dernière maj la plus
+  récente d'abord. Aucun travail manuel : un nouveau lien depuis un article
+  vers une fiche produit fait automatiquement apparaître l'article dans
+  la section dédiée du produit au prochain build.
 - **IndexNow au postbuild** : `scripts/indexnow-submit.mjs` s'exécute
   APRÈS `astro build` et POST les URLs du sitemap à `api.indexnow.org`
   (protocole Bing + Yandex). **Conditionné par `INDEXNOW_ENABLED=true`**
@@ -483,6 +529,40 @@ appliquées dans le commit qui a créé ce fichier :
 Restent ouverts : migration vers `<Image>` Astro pour AVIF/srcset,
 redirections 301 WP→Astro à pré-remplir avant bascule www., article pilier
 "Qu'est-ce qu'une liqueur artisanale ?", création vraie image OG.
+
+## Audit blog + SEO complet — 27 avril 2026 (soir)
+
+5 rapports générés à la racine du repo :
+- `blog-audit-report.md` (28 articles FR scorés sur 100, ~38 liens internes
+  recommandés)
+- `seo-technical-report.md`, `seo-content-report.md`, `seo-schema-report.md`,
+  `seo-geo-report.md`
+
+**Sprints exécutés dans le commit du 2026-04-27 soir :**
+
+1. **Sprint A — conformité éditoriale** : 7 claims sourcing plantes
+   corrigés dans 7 articles blog + `plants.ts`.
+2. **Sprint A-bis — conformité hors blog** : 5 claims supplémentaires
+   (plants.ts Serpolet, notre-histoire.astro alt, en/index.astro,
+   boutique/index.astro, faq.astro + lumiere-obscure.astro YMYL THC,
+   press.ts excerpt).
+3. **Sprint Quick Wins** : `public/llms.txt` réécrit (2 violations
+   corrigées + maj compteur articles), schema **Recipe ×5** ajouté à
+   `nos-cocktails-signature` (Zod + template + frontmatter), fallback
+   `og-default.jpg` (manquant) → `logo-complet-fond-blanc.webp` dans
+   `[...slug].astro`, hreflang sitemap aligné sur codes courts.
+4. **Sprint C — maillage interne** : ~38 liens internes ajoutés sur 16
+   articles (sections "À lire aussi" + transformations mention → lien).
+   9 dead-ends résolus, 6 orphans réactivés.
+
+**Restent ouverts post-bascule** :
+- Plan 301 WP→Astro à pré-remplir dans `vercel.json` (priorité haute pré-J)
+- CSP `report-only` → `enforced` (priorité haute, sécurité paiement)
+- Schema FAQPage / Product enrichi (`gtin`, `aggregateRating`)
+- Images alt cover article : actuellement = title, pourrait être enrichi
+  via un champ `coverAlt` au schema Zod
+- Pages thin content : `/composer-mon-coffret` (~3 phrases hors React),
+  enrichir le body Astro à 150-200 mots
 
 ## Sécurité — notes importantes
 

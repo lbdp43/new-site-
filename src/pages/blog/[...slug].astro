@@ -48,7 +48,7 @@ const articleSchema = {
   publisher: { '@id': `${site.url}#localbusiness` },
   // Toujours fournir une image (fallback OG par défaut) pour garantir
   // l'éligibilité au rich result Article même si un article arrive sans cover.
-  image: new URL(post.data.cover ?? '/og-default.jpg', site.url).toString(),
+  image: new URL(post.data.cover ?? '/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
   wordCount: (post.body ?? '').split(/\s+/).filter(Boolean).length,
   mainEntityOfPage: {
     '@type': 'WebPage',
@@ -67,13 +67,43 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 3, name: post.data.title, item: `${site.url}/blog/${post.id}` },
   ],
 };
+
+// Schema Recipe (opt-in via frontmatter `schemaRecipes:`). Un article
+// peut déclarer plusieurs recettes — chacune génère son propre bloc
+// JSON-LD pour éligibilité aux rich results Recipe / Recipe carousel.
+const recipeSchemas = (post.data.schemaRecipes ?? []).map((r) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Recipe',
+  name: r.name,
+  description: r.description,
+  author: authorSchema,
+  datePublished: post.data.date.toISOString(),
+  image: r.image
+    ? new URL(r.image, site.url).toString()
+    : new URL(post.data.cover ?? '/images/brand/logo-complet-fond-blanc.webp', site.url).toString(),
+  recipeCategory: r.recipeCategory,
+  recipeCuisine: 'Française',
+  recipeYield: r.recipeYield,
+  prepTime: r.prepTime,
+  totalTime: r.totalTime,
+  ...(r.keywords ? { keywords: r.keywords } : {}),
+  recipeIngredient: r.recipeIngredient,
+  recipeInstructions: r.recipeInstructions.map((step) => ({
+    '@type': 'HowToStep',
+    text: step,
+  })),
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${site.url}/blog/${post.id}`,
+  },
+}));
 ---
 <Layout
   title={`${post.data.title} | Actualité — ${site.name}`}
   description={post.data.description}
   ogImage={post.data.cover}
   ogType="article"
-  schema={[articleSchema, breadcrumb]}
+  schema={[articleSchema, breadcrumb, ...recipeSchemas]}
 >
   <article>
     <!-- En-tête -->

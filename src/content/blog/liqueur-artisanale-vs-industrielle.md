@@ -2,6 +2,7 @@
 title: "Liqueur artisanale vs industrielle : les 7 différences qui changent tout dans votre verre"
 description: "Matières premières, procédé de fabrication, sucre, colorants, taille des lots, traçabilité, prix : ce qui sépare vraiment une liqueur artisanale d'une production industrielle. Un décryptage transparent par La Brasserie des Plantes."
 date: 2026-04-20
+updated: 2026-04-27
 author: "Guillaume"
 category: Fabrication
 cover: /images/gallery/atelier-03.webp
@@ -190,6 +191,8 @@ Si les 4 sont cochés, vous êtes probablement face à une maison artisanale hon
 
 **Pour aller plus loin** :
 - [Comment choisir une liqueur artisanale — guide complet](/blog/choisir-liqueur-artisanale-guide) — les 5 critères objectifs
+- [Reconnaître une vraie liqueur artisanale en magasin — checklist en 5 points](/blog/reconnaitre-vraie-liqueur-artisanale-checklist)
+- [L'embouteillage à la main — pourquoi nous refusons d'automatiser](/blog/embouteillage-a-la-main)
 - [Les plantes de nos liqueurs — voyage botanique](/blog/plantes-liqueur-haute-loire)
 - [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay)
 - [Trois amis, une liqueur house — comment tout a commencé en 2021](/blog/trois-amis-une-brasserie)

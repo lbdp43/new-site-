@@ -10,6 +10,27 @@ const blogSchema = z.object({
   cover: z.string().optional(),
   category: z.enum(['Plantes', 'Recettes', 'Terroir', 'Fabrication', 'Actualité']),
   readingTime: z.string().default('5 min'),
+  // Recipes structurées (opt-in) — émet du schema Recipe @ Schema.org
+  // pour les articles de la catégorie "Recettes" qui contiennent des
+  // recettes complètes (cocktails). Un article peut en avoir plusieurs.
+  // Si présent, un bloc <script type="application/ld+json"> par recette
+  // est ajouté dans le <head> par le template [...slug].astro.
+  schemaRecipes: z
+    .array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        recipeYield: z.string().default('1 verre'),
+        prepTime: z.string().default('PT5M'),
+        totalTime: z.string().default('PT5M'),
+        recipeCategory: z.string().default('Cocktail'),
+        keywords: z.string().optional(),
+        recipeIngredient: z.array(z.string()),
+        recipeInstructions: z.array(z.string()),
+        image: z.string().optional(),
+      })
+    )
+    .optional(),
 });
 
 const blog = defineCollection({

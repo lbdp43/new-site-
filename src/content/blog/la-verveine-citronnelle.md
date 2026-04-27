@@ -2,6 +2,7 @@
 title: "La verveine citronnelle, reine des digestifs"
 description: "Originaire d'Amérique du Sud, cultivée en France depuis le XVIIIe siècle, la verveine citronnelle est l'une des plantes qui structurent notre Herbe des Druides. Histoire, vertus, récolte."
 date: 2025-06-12
+updated: 2026-04-27
 author: "Étienne"
 category: Plantes
 cover: /images/stories/duo-bouteille-nature.webp
@@ -14,7 +15,7 @@ Il y a des plantes qu'on ne voit pas assez. La verveine citronnelle (*Aloysia ci
 
 Originaire du Pérou et du Chili, la verveine citronnelle arrive en Europe à la fin du XVIIIᵉ siècle, rapportée par les botanistes espagnols. Elle s'acclimate d'abord dans le sud de la France, puis remonte peu à peu vers le nord, poussée par la mode des eaux-de-vie et des infusions digestives.
 
-En Haute-Loire, elle pousse dans les jardins abrités, souvent contre un mur au sud. Elle craint le gel en dessous de −10°C, ce qui en fait une plante fragile chez nous — nos maraîchers partenaires la protègent chaque hiver sous paillage.
+Elle pousse dans les jardins abrités, contre un mur au sud, et craint le gel en dessous de −10°C — d'où la nécessité de la protéger sous paillage l'hiver chez les maraîchers qui en cultivent.
 
 ## Un profil aromatique unique
 
@@ -33,7 +34,7 @@ Les deux extraits sont ensuite assemblés, dilués à 32% vol., et laissés repo
 
 ## Quand la récolter
 
-La verveine citronnelle se récolte **juste avant la floraison**, en juillet ou début août selon les années. Plus tôt, elle manque d'intensité ; plus tard, elle développe une amertume indésirable. Nos maraîchers la coupent par temps sec, en matinée, dès que la rosée s'est évaporée — c'est le moment où la concentration en huiles essentielles est la plus haute.
+La verveine citronnelle se récolte **juste avant la floraison**, en juillet ou début août selon les années. Plus tôt, elle manque d'intensité ; plus tard, elle développe une amertume indésirable. La coupe se fait par temps sec, en matinée, dès que la rosée s'est évaporée — c'est le moment où la concentration en huiles essentielles est la plus haute.
 
 Les feuilles sont séchées à l'ombre, sur claies, dans une pièce ventilée. Jamais de séchage industriel : la chaleur détruirait une partie des arômes.
 
@@ -47,3 +48,7 @@ Deux façons de la goûter chez soi :
 ---
 
 *La Brasserie des Plantes travaille la verveine citronnelle depuis 2021, en la sourçant auprès de maraîchers partenaires sélectionnés un par un (la plupart en bio).*
+
+---
+
+**À lire aussi :** [Quelle liqueur de verveine choisir en 2026 ? Comparatif](/blog/quelle-liqueur-verveine-choisir-2026) · [Artinov 2023 — notre verveine à la tirette](/blog/artinov-2023-verveine-a-la-tirette) · [Les plantes oubliées qu'on remet en bouteille](/blog/plantes-oubliees-du-velay) · [Élixir végétal — les 7 plantes d'une liqueur d'herboristerie](/blog/elixir-vegetal-7-plantes-liqueur).

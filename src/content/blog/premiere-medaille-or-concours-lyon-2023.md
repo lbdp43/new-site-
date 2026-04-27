@@ -2,6 +2,7 @@
 title: "Notre première médaille d'or : Concours International de Lyon, 2023"
 description: "En mars 2023, L'Herbe des Druides décrochait sa première médaille d'or au Concours International de Lyon, 18 mois après notre ouverture. Récit d'un premier jury international."
 date: 2023-03-22
+updated: 2026-04-27
 author: "Guillaume"
 category: Actualité
 cover: /images/products/herbe-des-druides-2.jpg
@@ -59,3 +60,7 @@ Tout ce qui a suivi — Paris, Londres, le Salon — est bâti sur ce premier ou
 ---
 
 **Découvrir les produits primés :** [L'Herbe des Druides](/boutique/herbe-des-druides), [Le Cerf'Gent](/boutique/cerf-gent), [L'Alchimie Végétale](/boutique/alchimie-vegetale).
+
+---
+
+**À lire aussi :** [Meilleur Digestif du Monde 2025 — récit du prix](/blog/meilleur-digestif-du-monde-2025) · [Le Cerf'Gent, Or au Salon de l'Agriculture 2025](/blog/cerfgent-or-salon-agriculture-2025) · [Coulisses des World Drinks Awards](/blog/world-drinks-awards-comment-ca-marche) · [Revue de presse 2025](/blog/dans-la-presse-2025).

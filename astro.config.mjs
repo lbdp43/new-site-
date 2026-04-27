@@ -53,14 +53,17 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
-      // i18n pour sitemap : déclare les 4 langues avec leurs alternate links
+      // i18n pour sitemap : déclare les 4 langues avec leurs alternate links.
+      // Les codes courts ('fr','en','es','it') sont alignés avec ce qu'émet
+      // getHreflangLinks() dans le <head> HTML — sans cohérence sitemap↔HTML,
+      // GSC remontait fr-FR et fr comme deux langues distinctes.
       i18n: {
         defaultLocale: 'fr',
         locales: {
-          fr: 'fr-FR',
-          en: 'en-US',
-          es: 'es-ES',
-          it: 'it-IT',
+          fr: 'fr',
+          en: 'en',
+          es: 'es',
+          it: 'it',
         },
       },
       // Exclut les pages transactionnelles (noindex) et la confirmation

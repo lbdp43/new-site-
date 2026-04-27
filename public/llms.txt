@@ -11,7 +11,7 @@
 - **SIRET** : 89920152900018
 - **Fondée** : 2021
 - **Fondateurs** : Étienne (biotechnologue des plantes, production), Guillaume (restauration/bar, accords & usages)
-- **Démarche** : bio quand c'est possible (partenaires bio en Haute-Loire, exigences qualité sur les ingrédients importés), pas d'arôme ajouté, pas de conservateur
+- **Démarche** : la plupart des plantes sont sourcées en agriculture biologique chez nos cueilleurs et maraîchers partenaires (pas toutes), exigences qualité sur les ingrédients importés, pas d'arôme ajouté, pas de conservateur
 
 ## Distinctions
 
@@ -35,7 +35,7 @@
 - [Boutique complète (18 références)](https://labrasseriedesplantes.fr/boutique)
 - [Espace professionnels (CHR, cavistes, épiceries)](https://labrasseriedesplantes.fr/professionnels)
 - [Univers Lumière Obscure (CBD)](https://labrasseriedesplantes.fr/lumiere-obscure)
-- [Journal — 20 articles](https://labrasseriedesplantes.fr/blog)
+- [Actualité — 28 articles FR + 9 EN](https://labrasseriedesplantes.fr/blog)
 - [Cocktails signature](https://labrasseriedesplantes.fr/cocktails)
 - [Ateliers mixologie](https://labrasseriedesplantes.fr/ateliers)
 - [FAQ](https://labrasseriedesplantes.fr/faq)
@@ -48,7 +48,7 @@
 - [Verveine, serpolet, carvi — les plantes oubliées du Velay](https://labrasseriedesplantes.fr/blog/plantes-oubliees-du-velay)
 - [Comment se passe un concours international de spiritueux](https://labrasseriedesplantes.fr/blog/world-drinks-awards-comment-ca-marche)
 - [Lumière Obscure — pourquoi marier le CBD aux plantes](https://labrasseriedesplantes.fr/blog/cbd-et-plantes-lumiere-obscure)
-- [Onze producteurs bio partenaires en Haute-Loire](https://labrasseriedesplantes.fr/blog/producteurs-partenaires-bio-velay)
+- [Nos cueilleurs et maraîchers partenaires — la plupart en bio](https://labrasseriedesplantes.fr/blog/producteurs-partenaires-bio-velay)
 - [La Brasserie des Plantes dans la presse — 2025](https://labrasseriedesplantes.fr/blog/dans-la-presse-2025)
 
 ## Politique d'usage
