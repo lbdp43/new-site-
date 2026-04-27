@@ -78,4 +78,4 @@ Quand ce ne sera plus possible, il faudra choisir. Pour l'instant, les quatre ma
 
 ---
 
-**Voir le processus de plus près :** [Artinov 2023 — la tireuse pression](/blog/artinov-2023-verveine-a-la-tirette) · [Visite de l'atelier par Haute-Loire Tourisme](/blog/haute-loire-tourisme-video-atelier) · [Producteurs partenaires bio](/blog/producteurs-partenaires-bio-velay).
+**Voir le processus de plus près :** [Artinov 2023 — la tireuse pression](/blog/artinov-2023-verveine-a-la-tirette) · [Visite de l'atelier en vidéo](/blog/haute-loire-tourisme-video-atelier) · [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).

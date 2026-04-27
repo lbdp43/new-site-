@@ -28,7 +28,7 @@ Pour 2025, c'est la première fois qu'une liqueur française de plantes remporte
 
 ## Les deux autres finalistes de la catégorie
 
-Nous ne citons pas les deux autres finalistes par respect — la liste complète est [publiée sur le site officiel](https://www.worldliqueurawards.com/winner-liqueur/worlds-best-digestive-58512-world-liqueur-awards-2025) — mais ce que nous retenons de cette finale, c'est que les trois bouteilles raconteraient trois façons de faire de la liqueur digestive : l'une très traditionnelle, construite autour d'une plante unique ; l'autre moderne et épicée, d'Europe du Nord ; et *L'Alchimie Végétale*, qui mise sur la complexité d'un grand assemblage — **27 plantes** du Velay et d'ailleurs, quatre ans de R&D, trente-deux essais documentés. Le jury a noté "une signature aromatique claire sans être dominante, une longueur en bouche inhabituelle pour un digestif sucré, une intégration racinaire rare".
+Nous ne citons pas les deux autres finalistes par respect — la liste complète est [publiée sur le site officiel](https://www.worldliqueurawards.com/winner-liqueur/worlds-best-digestive-58512-world-liqueur-awards-2025) — mais ce que nous retenons de cette finale, c'est que les trois bouteilles raconteraient trois façons de faire de la liqueur digestive : l'une très traditionnelle, construite autour d'une plante unique ; l'autre moderne et épicée, d'Europe du Nord ; et *L'Alchimie Végétale*, qui mise sur la complexité d'un grand assemblage — **27 plantes**, quatre ans de R&D, trente-deux essais documentés. Le jury a noté "une signature aromatique claire sans être dominante, une longueur en bouche inhabituelle pour un digestif sucré, une intégration racinaire rare".
 
 ## Ce que ce prix a changé
 

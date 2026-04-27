@@ -97,7 +97,7 @@ Above 30: rare, complex, signature of advanced craftsmanship. [L'Alchimie Végé
 **What to look for on the label or product page**:
 
 1. **The full plant list** — craft houses display it with pride. Industrial producers hide behind "natural flavourings" (= authorisation to use up to 300 different aromatic molecules, all "natural" in the chemical sense).
-2. **Origin of plants** — organic? Local? France? Imported? A liqueur "from Auvergne plants" should be able to name its [partner farms](/en/journal/producteurs-partenaires-bio-velay).
+2. **Origin of plants** — organic? Traceable? Imported? A craft producer should be able to name its [partner farms](/en/journal/producteurs-partenaires-bio-velay) or describe its supply chain.
 3. **No artificial colouring** (E102, E150d, E133) — colour should come from the plants themselves (chlorophyll for green, quercetin for yellow, anthocyanins for red).
 
 ### Criterion 5: traceability and batch size
@@ -110,7 +110,7 @@ A simple indicator: **how many bottles are produced per year**?
 
 The smaller the batch, the more:
 - quality control is fine-grained (every tank is tasted),
-- plants can be local (no need for 10 tonnes of verbena),
+- the raw material can be traced plant by plant (no need for 10 tonnes of verbena),
 - the producer can personally answer your questions.
 
 **Our rule**: anyone who writes to us on Instagram or via email gets a reply within 48h, signed by one of the two founders. Try that with an industrial group.
@@ -156,7 +156,7 @@ Start with **a liqueur you can drink as a long drink**. More forgiving than a ne
 
 ### If you're an experienced amateur
 
-Step up complexity: neat digestif at end of meal, small glass at room temperature. Try [L'Herbe des Druides](/en/shop/herbe-des-druides) — verbena, wild thyme (serpolet), caraway. 28%, three emblematic plants of the Velay, five medals. A terroir snapshot in 4 cl.
+Step up complexity: neat digestif at end of meal, small glass at room temperature. Try [L'Herbe des Druides](/en/shop/herbe-des-druides) — verbena, wild thyme (serpolet), caraway. 28%, three forgotten plants, five medals. A botanical snapshot in 4 cl.
 
 ### If you're gift-hunting
 
@@ -218,7 +218,7 @@ For L'Alchimie Végétale (€45 / 70 cl), the production cost alone exceeds €
 
 **Read next**:
 - [Craft vs industrial liqueur: the 7 real differences](/en/journal/liqueur-artisanale-vs-industrielle)
-- [The plants in our liqueurs — a Haute-Loire botanical journey](/en/journal/plantes-liqueur-haute-loire)
+- [The plants in our liqueurs — a botanical journey](/en/journal/plantes-liqueur-haute-loire)
 - [Three friends, one liqueur house — our story](/en/journal/trois-amis-une-brasserie)
 
-**Or start right here**: [browse the shop](/en/shop) — 18 liqueurs, 4 ranges, the largest botanical liqueur house in Auvergne.
+**Or start right here**: [browse the shop](/en/shop) — 18 liqueurs, 4 ranges.

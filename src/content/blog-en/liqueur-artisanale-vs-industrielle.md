@@ -96,7 +96,7 @@ Public orders of magnitude:
 Why does this matter for you? Because:
 
 - **Quality control is manual** at our scale. Every tank tasted before bottling, every lot tasted at 3 stages.
-- **Plants can be local**. There aren't 10 tonnes of organic mountain verbena in France. There are a few hundred kilos per year, and that's plenty for our production.
+- **The raw material can be traced plant by plant**. There aren't 10 tonnes of organic mountain verbena in France. There are a few hundred kilos per year, and that's plenty for our production.
 - **The producer can personally reply**. Write to us via [contact](/en/contact): you'll get an answer signed by Étienne or Guillaume within 48 h.
 
 ## 6. Traceability: detailed origin from field to bottle
@@ -110,11 +110,11 @@ It's not bad faith — it's a consequence of **multi-origin industrial sourcing*
 ### Craft (us)
 
 Our 11 partner producers are named:
-- 2 professional gentian harvesters on the Margeride and Pilat plateaus.
-- 4 organic aromatic farmers in Velay (verbena, coriander, mint, thyme).
-- 2 professional foragers (certified by the Livradois-Forez Park).
-- 2 beekeepers in Pilat and Velay (for our honeys).
-- 1 organic arboriculturist on the Rhône slopes.
+- 2 professional gentian harvesters (yellow gentian root, harvested at 1,000–1,600 m altitude).
+- 4 aromatic-plant growers (verbena, coriander, mint, thyme), most of them organic.
+- 2 certified professional foragers (trained by a Regional Natural Park, for wild elderflower and wild thyme).
+- 2 beekeepers (for our honeys).
+- 1 organic arboriculturist (bitter-orange zest, heritage apples).
 
 [Detailed article on our producers](/en/journal/producteurs-partenaires-bio-velay).
 
@@ -190,8 +190,8 @@ If all 4 are ticked, you're probably facing an honest craft house. If fewer than
 
 **Read next**:
 - [How to choose a craft liqueur — complete guide](/en/journal/choisir-liqueur-artisanale-guide) — the 5 objective criteria
-- [The plants in our liqueurs — a Haute-Loire botanical journey](/en/journal/plantes-liqueur-haute-loire)
-- [Eleven organic partner farmers — our plant network in Haute-Loire](/en/journal/producteurs-partenaires-bio-velay)
+- [The plants in our liqueurs — a botanical journey](/en/journal/plantes-liqueur-haute-loire)
+- [Partner foragers and growers — how we source our plants](/en/journal/producteurs-partenaires-bio-velay)
 - [Three friends, one liqueur house — how it all started in 2021](/en/journal/trois-amis-une-brasserie)
 
 Or **test it directly**: [build your own 3-bottle gift box](/en/build-your-gift-box) and compare for yourself.

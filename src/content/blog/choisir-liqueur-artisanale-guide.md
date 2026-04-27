@@ -97,7 +97,7 @@ Au-dessus de 30 : rare, complexe, signature d'un savoir-faire pointu. [L'Alchimi
 **Ce qu'il faut chercher sur l'étiquette ou la fiche produit** :
 
 1. **La liste complète des plantes** — les maisons artisanales l'affichent par fierté. Les industriels cachent derrière "arômes naturels" (= autorisation d'utiliser jusqu'à 300 molécules aromatiques différentes, toutes "naturelles" au sens chimique).
-2. **L'origine des plantes** — bio ? Local ? France ? Importation ? Une liqueur "aux plantes d'Auvergne" doit pouvoir nommer ses [producteurs](/blog/producteurs-partenaires-bio-velay).
+2. **L'origine des plantes** — bio ? Filière courte ? Importation ? Une maison artisanale doit pouvoir nommer ses [producteurs](/blog/producteurs-partenaires-bio-velay) ou décrire ses filières.
 3. **Absence de colorants artificiels** (E102, E150d, E133) — la couleur doit venir des plantes elles-mêmes (chlorophylle pour le vert, quercétine pour le jaune, anthocyanes pour le rouge).
 
 ### Critère n°5 : la traçabilité et la taille du lot
@@ -156,7 +156,7 @@ Commencez par **une liqueur que vous pouvez boire en long drink**. C'est plus pa
 
 ### Si vous êtes amateur confirmé
 
-Montez en complexité : digestif sec en fin de repas, petit verre à température ambiante. Essayez [L'Herbe des Druides](/boutique/herbe-des-druides) — verveine, serpolet (thym sauvage), carvi. 28 %, trois plantes emblématiques du Velay, cinq médailles. Un condensé de terroir dans 4 cl.
+Montez en complexité : digestif sec en fin de repas, petit verre à température ambiante. Essayez [L'Herbe des Druides](/boutique/herbe-des-druides) — verveine, serpolet (thym sauvage), carvi. 28 %, trois plantes oubliées, cinq médailles. Un condensé d'aromatique dans 4 cl.
 
 ### Si vous cherchez un cadeau
 

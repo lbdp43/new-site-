@@ -55,4 +55,4 @@ Il rappelle aussi que la presse agricole comprend parfois mieux les produits art
 
 ---
 
-**À lire aussi :** [Trois amis, une brasserie](/blog/trois-amis-une-brasserie) · [La Brasserie des Plantes dans la presse — 2025](/blog/dans-la-presse-2025) · [Verveine, serpolet, carvi — les plantes oubliées du Velay](/blog/plantes-oubliees-du-velay).
+**À lire aussi :** [Trois amis, une brasserie](/blog/trois-amis-une-brasserie) · [La Brasserie des Plantes dans la presse — 2025](/blog/dans-la-presse-2025) · [Verveine, serpolet, carvi — les plantes oubliées](/blog/plantes-oubliees-du-velay).

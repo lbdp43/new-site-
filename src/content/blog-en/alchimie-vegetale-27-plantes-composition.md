@@ -21,7 +21,7 @@ The 27 plants fall into **five functional families** — roots, herbs, flowers, 
 
 **The roots** structure the digestif and give the length on the palate — they are the backbone, the medicinal dimension inherited from the great amari.
 
-**The herbaceous heart** makes the liqueur "breathe". These are the plants of the Velay and its neighbours, harvested by our partner foragers and market gardeners.
+**The herbaceous heart** makes the liqueur "breathe". These are the aromatic plants harvested by our partner foragers and market gardeners (most of them organic).
 
 **The flowers** bring roundness and aromatic finesse. They lay down the notes we identify first on the nose.
 

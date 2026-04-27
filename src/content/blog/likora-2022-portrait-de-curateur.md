@@ -58,4 +58,4 @@ Ce qui a changé depuis : nous avons ajouté la gamme **Lumière Obscure** (CBD)
 
 ---
 
-**À lire aussi :** [Verveine, serpolet, carvi — les plantes oubliées du Velay](/blog/plantes-oubliees-du-velay) · [Les débuts racontés par Réussir 2021](/blog/reussir-pamac-2021-les-debuts).
+**À lire aussi :** [Verveine, serpolet, carvi — les plantes oubliées](/blog/plantes-oubliees-du-velay) · [Les débuts racontés par Réussir 2021](/blog/reussir-pamac-2021-les-debuts).

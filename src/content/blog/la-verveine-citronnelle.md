@@ -46,4 +46,4 @@ Deux façons de la goûter chez soi :
 
 ---
 
-*La Brasserie des Plantes travaille la verveine citronnelle depuis 2021, en la sourçant auprès de maraîchers partenaires de Haute-Loire et des environs.*
+*La Brasserie des Plantes travaille la verveine citronnelle depuis 2021, en la sourçant auprès de maraîchers partenaires sélectionnés un par un (la plupart en bio).*

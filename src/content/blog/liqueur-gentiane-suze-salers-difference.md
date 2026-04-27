@@ -79,7 +79,7 @@ Depuis 2018-2020, des liquoristes indépendants reprennent la gentiane en format
 
 On l'a sortie en 2024. Trois choix de départ :
 
-1. **Une gentiane traçable.** Notre racine vient de gentianaïres professionnels de la Margeride et du plateau du Pilat — entre 1 000 et 1 600 m d'altitude. On peut vous donner les noms des cueilleurs (qui préfèrent rester discrets, mais on les rencontre régulièrement).
+1. **Une gentiane traçable.** Notre racine vient de gentianaïres professionnels partenaires — récolte à la main entre 1 000 et 1 600 m d'altitude. On peut vous donner les noms des cueilleurs (qui préfèrent rester discrets, mais on les rencontre régulièrement).
 
 2. **Un dosage moins sucré.** Beaucoup de gentianes industrielles compensent l'amertume avec 200-280 g/L de sucre. On est à environ 130 g/L : on garde la franchise de l'amertume.
 

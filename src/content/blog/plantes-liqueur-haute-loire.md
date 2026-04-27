@@ -70,7 +70,7 @@ Ces plantes sont les "touches de finition" dans nos compositions les plus comple
 
 ### 5. La gentiane jaune (*Gentiana lutea*)
 
-**La reine des amères de montagne.** La plante emblématique du Massif Central, qui donne son amertume caractéristique à notre [Cerf'Gent](/boutique/cerf-gent).
+**La reine des amères de montagne.** La plante emblématique de moyenne montagne, qui donne son amertume caractéristique à notre [Cerf'Gent](/boutique/cerf-gent).
 
 - **Origine botanique** : plateaux de 1 000 à 1 600 m d'altitude. Plante protégée, cueillette réglementée.
 - **Profil** : amertume franche, note terreuse, finale longue et racinaire.
@@ -147,7 +147,7 @@ Ces plantes sont rarement commercialisées en circuit long. Nous travaillons dir
 
 ## Comment reconnaître un vrai sourcing artisanal
 
-Beaucoup de maisons écrivent aujourd'hui **"plantes des Alpes"** ou **"plantes d'Auvergne"** sur leurs étiquettes. C'est un argument marketing fort. Voici comment distinguer le vrai du faux :
+Beaucoup de maisons mettent en avant une origine régionale sur leurs étiquettes. C'est un argument marketing fort, parfois flou. Voici comment distinguer le vrai du faux :
 
 1. **La maison nomme ses producteurs** (au moins par catégorie, idéalement par nom).
 2. **Elle peut détailler le trajet** d'une plante du champ à la bouteille.

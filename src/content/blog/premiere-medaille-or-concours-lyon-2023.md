@@ -35,7 +35,7 @@ Ce qui nous a le plus marqués, c'est le mot **"tension"**. Dans le jargon des d
 Pour une jeune maison, une médaille d'or internationale, c'est un effet de levier immédiat :
 
 - **Cavistes** — trois cavistes de Lyon, Annecy et Clermont-Ferrand nous ont contactés dans les dix jours qui ont suivi l'annonce. La liste de nos partenaires est passée de 11 à 18 en un trimestre.
-- **Autorité** — le mot "primé" a commencé à apparaître dans les fiches des cavistes, et *L'Herbe des Druides* est passée de "jolie liqueur locale" à "verveine de référence" dans plusieurs cartes.
+- **Autorité** — le mot "primé" a commencé à apparaître dans les fiches des cavistes, et *L'Herbe des Druides* est passée de "jolie liqueur artisanale" à "verveine de référence" dans plusieurs cartes.
 - **Confiance** — c'est peut-être le plus important : on s'est dit qu'on pouvait envoyer *L'Alchimie Végétale*, beaucoup plus ambitieuse, aux concours plus exigeants. Sans cette médaille, on ne l'aurait probablement pas osé.
 
 ## La suite du palmarès

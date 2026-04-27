@@ -1,6 +1,6 @@
 ---
-title: "Verbena, wild thyme, caraway — the forgotten plants of the Velay"
-description: "A look at the emblematic plants of Haute-Loire that we bring back to life in liqueur. Scented verbena, wild thyme, caraway: their stories, their virtues, their pairings."
+title: "Verbena, wild thyme, caraway — the forgotten plants we bring back"
+description: "A look at the plants we bring back to life in liqueur: scented verbena, wild thyme, caraway, hyssop, southernwood, lemon balm. Their stories, their virtues, their pairings."
 date: 2025-03-12
 updated: 2026-04-19
 author: "Étienne"
@@ -9,11 +9,11 @@ cover: /images/stories/plantes.jpg
 readingTime: "6 min"
 ---
 
-When you ask someone to name a French mountain plant, the answer comes quickly: genepi, arnica, gentian. More rarely: scented verbena, wild thyme, southernwood. Yet these are plants that accompanied, for centuries, the everyday life of families in the **Velay**. You found them in evening herbal teas, in grandmothers' liqueurs, in kitchen cupboards. They've almost disappeared from commerce — not from gardens.
+When you ask someone to name a French mountain plant, the answer comes quickly: genepi, arnica, gentian. More rarely: scented verbena, wild thyme, southernwood. Yet these are plants that accompanied, for centuries, the everyday life of families in rural France. You found them in evening herbal teas, in grandmothers' liqueurs, in kitchen cupboards. They've almost disappeared from commerce — not from gardens.
 
 ## Scented verbena (*Aloysia citrodora*)
 
-The best known of our signatures. Not to be confused with **common verbena**, more bitter and older medicinally: scented verbena is a southern plant — native to Chile, acclimatised in France in the 18th century by Jussieu, and which found in Haute-Loire a land to its measure.
+The best known of our signatures. Not to be confused with **common verbena**, more bitter and older medicinally: scented verbena is a southern plant — native to Chile, acclimatised in France in the 18th century by Jussieu.
 
 Its crushed leaves release a **bright lemony note**. In tasting, it tilts towards green melon and lime-blossom verbena, with a floral length.
 
@@ -21,13 +21,13 @@ It builds the heart of our *Herbe des Druides* (28%) — which France Bleu featu
 
 ## Wild thyme (*Thymus serpyllum*)
 
-A wild cousin of common thyme, wild thyme grows spontaneously on the dry, sunny slopes of the Velay. Small, discreet, it carpets the stones. Its scent is more mentholated, more wild than thyme's — with a **camphor note** that nicely tempers the alcohol in a liqueur.
+A wild cousin of common thyme, wild thyme grows spontaneously on dry, sunny slopes in mid-mountain regions. Small, discreet, it carpets the stones. Its scent is more mentholated, more wild than thyme's — with a **camphor note** that nicely tempers the alcohol in a liqueur.
 
 It is sometimes said to have been the shepherds' favourite plant — chewed during transhumance to refresh themselves. At our place, it softens the verbena of *L'Herbe des Druides* and brings its herbaceous note to *Le Gorgeon des Machurés*.
 
 ## Caraway (*Carum carvi*)
 
-Long confused with cumin (which is why it is also called **meadow cumin**), caraway is an umbellifer whose seeds are used. Its aroma is deep, earthy, slightly aniseed — that's what gives Saint-Étienne aligot and certain Auvergne cheeses their character.
+Long confused with cumin (which is why it is also called **meadow cumin**), caraway is an umbellifer whose seeds are used. Its aroma is deep, earthy, slightly aniseed — that's what gives Saint-Étienne aligot and certain aged cheeses their character.
 
 In liqueur, caraway **anchors** the floral and mentholated notes. Without it, our blends would seem more "ethereal" but less complex. It's the bass in the harmony.
 
@@ -41,7 +41,7 @@ Each plant has its role. Around this core trio, we also work with:
 
 ## Why come back to these plants?
 
-First for reasons of **taste**: they offer a palette that industrial flavourings cannot reproduce. Then for a question of **territory**: working with plants that grow on our slopes, or with neighbouring producers, gives concrete meaning to the word "terroir".
+First for reasons of **taste**: they offer a palette that industrial flavourings cannot reproduce. Then for a question of **craft**: working with forgotten plants helps keep a living botanical heritage alive.
 
 Finally, for a slightly more intimate reason: these plants have a story. Our grandmothers knew them. To forget them is to forget a knowledge. To bottle them again is a way of giving back what was given to us.
 

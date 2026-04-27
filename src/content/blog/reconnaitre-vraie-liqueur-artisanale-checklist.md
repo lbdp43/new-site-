@@ -33,17 +33,17 @@ L'industriel a tendance à dissimuler ses ingrédients derrière des mentions va
 
 La couleur d'une liqueur artisanale doit venir d'**un ingrédient qui se boit** : chlorophylle naturelle des plantes (vert pâle), charbon végétal (noir profond comme [notre Gorgeon des Machurés](/boutique/gorgeon-des-machures)), fruits rouges macérés (rubis pour [La Flèche Ardente](/boutique/fleche-ardente)). Jamais de colorant de synthèse.
 
-## 3. L'origine géographique des plantes
+## 3. L'origine traçable des plantes
 
-**Le test** : la région des plantes principales est-elle nommée ?
+**Le test** : la matière première est-elle traçable plante par plante ?
 
-- ✅ "Verveine de Haute-Loire"
-- ✅ "Gentiane de la Margeride"
-- ✅ Origine précise nommée
+- ✅ Producteur ou filière nommée
+- ✅ Type de récolte précisé (cueillette sauvage, agriculture biologique, etc.)
+- ✅ Origine documentée (région ou pays selon la plante)
 - ❌ "Plantes du monde"
 - ❌ Aucune mention d'origine
 
-Une liqueur de plantes a un **terroir**, comme un vin. La concentration en huiles essentielles d'une verveine dépend de l'altitude, du climat et du sol où elle pousse. L'industriel achète en gros sur le marché mondial sans traçabilité ; l'artisan documente.
+Une liqueur de plantes a une **identité**, comme un vin. La concentration en huiles essentielles d'une verveine dépend de l'altitude, du climat et du sol où elle pousse. L'industriel achète en gros sur le marché mondial sans traçabilité ; l'artisan documente.
 
 Pour aller plus loin, voir [notre voyage botanique](/blog/plantes-liqueur-haute-loire).
 
@@ -86,7 +86,7 @@ Si les 5 critères ci-dessus sont validés, voici 3 indices "bonus" pour disting
 
 Attention : "sourcing local" peut très bien désigner **l'embouteillage** (= la bouteille en verre est française), pas la matière première. L'industrie use beaucoup de cette astuce sémantique.
 
-Un vrai signal local porte sur les **plantes elles-mêmes** — pas la verrerie, pas le carton, pas l'étiquette. Cherchez des mentions explicites comme "verveine cultivée en Haute-Loire" ou "gentiane du Massif Central".
+Un vrai signal porte sur les **plantes elles-mêmes** — pas la verrerie, pas le carton, pas l'étiquette. Cherchez des mentions explicites de la filière (producteur nommé, mode de culture, etc.).
 
 ## Et si vous voulez ne plus jamais vous tromper
 

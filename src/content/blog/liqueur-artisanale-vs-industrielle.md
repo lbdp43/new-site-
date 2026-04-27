@@ -110,11 +110,11 @@ Ce n'est pas de la mauvaise volonté — c'est une conséquence du **sourcing mu
 ### Artisanal (nous)
 
 Nos 11 producteurs partenaires sont identifiés :
-- 2 gentianaires professionnels sur le plateau de la Margeride et du Pilat.
-- 4 producteurs bio d'aromatiques en Velay (verveine, coriandre, menthe, thym).
-- 2 cueilleurs professionnels agréés (formés par le Parc du Livradois-Forez).
-- 2 apiculteurs en Pilat et Velay (pour nos miels).
-- 1 arboriculteur bio sur les pentes du Rhône.
+- 2 gentianaires professionnels (récolte de gentiane jaune entre 1 000 et 1 600 m d'altitude).
+- 4 producteurs d'aromatiques (verveine, coriandre, menthe, thym), la plupart en bio.
+- 2 cueilleurs professionnels agréés (formation Parc Naturel Régional, sureau et serpolet sauvages).
+- 2 apiculteurs (pour nos miels).
+- 1 arboriculteur bio (zestes d'orange amère, pommes anciennes).
 
 [Article détaillé sur nos producteurs](/blog/producteurs-partenaires-bio-velay).
 
@@ -190,8 +190,8 @@ Si les 4 sont cochés, vous êtes probablement face à une maison artisanale hon
 
 **Pour aller plus loin** :
 - [Comment choisir une liqueur artisanale — guide complet](/blog/choisir-liqueur-artisanale-guide) — les 5 critères objectifs
-- [Les plantes de nos liqueurs — voyage botanique en Haute-Loire](/blog/plantes-liqueur-haute-loire)
-- [Nos 11 producteurs partenaires bio du Velay](/blog/producteurs-partenaires-bio-velay)
+- [Les plantes de nos liqueurs — voyage botanique](/blog/plantes-liqueur-haute-loire)
+- [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay)
 - [Trois amis, une liqueur house — comment tout a commencé en 2021](/blog/trois-amis-une-brasserie)
 
 Ou **testez directement** : [composez votre coffret de 3 bouteilles](/composer-mon-coffret) parmi notre gamme, pour comparer par vous-même.

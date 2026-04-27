@@ -1,6 +1,6 @@
 ---
 title: "Le Velay dans une bouteille — notre portrait par Velay Attractivité"
-description: "L'office d'attractivité territoriale du Velay a publié un portrait détaillé de la Brasserie des Plantes. Une lecture officielle de notre ancrage en Haute-Loire."
+description: "L'office d'attractivité territoriale du Velay a publié un portrait détaillé de la Brasserie des Plantes. Une lecture officielle de notre projet artisanal."
 date: 2024-11-08
 author: "Guillaume"
 category: Terroir
@@ -40,10 +40,10 @@ C'est ce climat qui fait la différence dans nos macérations.
 
 Concrètement, quelques repères :
 
-- **Des cueilleurs et maraîchers partenaires** en Haute-Loire et dans les départements voisins (voir [notre article sur la filière](/blog/producteurs-partenaires-bio-velay))
-- **Des apiculteurs** du Pilat et du Velay
-- **Des gentianaïres** de la Margeride
-- **100 % de nos embouteillages** réalisés dans notre atelier de Saint-Didier-en-Velay
+- **Des cueilleurs et maraîchers partenaires** sélectionnés un par un, la plupart en agriculture biologique (voir [notre article sur la filière](/blog/producteurs-partenaires-bio-velay))
+- **Des apiculteurs partenaires** pour les miels (cocktails, éditions limitées)
+- **Des gentianaïres professionnels** pour la racine de gentiane jaune
+- **100 % de nos embouteillages** réalisés à la main dans notre atelier de Saint-Didier-en-Velay
 
 ## Une histoire pas finie
 
@@ -55,4 +55,4 @@ C'est exactement ce que nous essayons de faire, un flacon à la fois.
 
 ---
 
-**À lire aussi :** [Producteurs partenaires bio en Haute-Loire](/blog/producteurs-partenaires-bio-velay) · [Plantes oubliées du Velay](/blog/plantes-oubliees-du-velay) · [Trois amis, une brasserie](/blog/trois-amis-une-brasserie).
+**À lire aussi :** [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) · [Plantes oubliées](/blog/plantes-oubliees-du-velay) · [Trois amis, une brasserie](/blog/trois-amis-une-brasserie).

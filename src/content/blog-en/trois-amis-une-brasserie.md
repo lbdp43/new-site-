@@ -42,7 +42,7 @@ What followed — demand doubling, foreign distributors calling, press articles,
 ## What hasn't changed
 
 - **Saint-Didier-en-Velay.** We haven't left the village. The workshop is 300 metres from the school where Étienne and Guillaume met.
-- **The plants.** Mostly organic, all harvested by our neighbouring partner foragers and market gardeners.
+- **The plants.** Most of them organic, all harvested by our partner foragers and market gardeners (hand-picked one by one).
 - **Hand bottling.** A semi-automatic filler for the larger runs, hand bottling for the limited editions. Every cork is placed by hand.
 - **Team size.** Two. Étienne and Guillaume. That's enough.
 
