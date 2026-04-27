@@ -39,11 +39,11 @@ wcId: 70
 order: 2
 ---
 
-Notre best-seller. L'Herbe des Druides est une liqueur à la **verveine**, à 28°, adoucie par le **serpolet** (thym sauvage des pentes du Velay) et épicée par le **carvi** (cumin des prés auvergnat). Une expression florale, sauvage, où les notes épicées viennent tempérer l'alcool.
+Notre best-seller. L'Herbe des Druides est une liqueur à la **verveine**, à 28°, adoucie par le **serpolet** (thym sauvage de moyenne montagne) et épicée par le **carvi** (cumin des prés). Une expression florale, sauvage, où les notes épicées viennent tempérer l'alcool.
 
 ## Trois plantes, aucun arôme ajouté
 
-La recette tient sur trois plantes, récoltées chez nos [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) de Haute-Loire et de la Loire. La **verveine odorante** (*Aloysia citrodora*) est notre plante totem — elle donne le haut du nez, ce parfum citronné sans acidité, enrichi de nérol et de linalol. Le **serpolet** sauvage (*Thymus serpyllum*), cueilli sur des pentes rocailleuses au moment de la floraison, apporte la concentration thymée et une note résineuse. Le **carvi** (*Carum carvi*), cumin du Velay, pose la structure épicée en bouche et ancre la finale.
+La recette tient sur trois plantes, récoltées chez nos [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) (la plupart en bio). La **verveine odorante** (*Aloysia citrodora*) est notre plante totem — elle donne le haut du nez, ce parfum citronné sans acidité, enrichi de nérol et de linalol. Le **serpolet** sauvage (*Thymus serpyllum*), cueilli sur des pentes rocailleuses au moment de la floraison, apporte la concentration thymée et une note résineuse. Le **carvi** (*Carum carvi*) pose la structure épicée en bouche et ancre la finale.
 
 Pas d'arôme ajouté, pas de colorant : la couleur vert pâle vient de la chlorophylle des plantes macérées. Macération froide longue, filtration lente, repos minimum deux mois.
 

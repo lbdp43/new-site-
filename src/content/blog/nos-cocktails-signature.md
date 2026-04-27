@@ -87,7 +87,7 @@ Voici **cinq recettes signatures**, travaillées avec des barmen partenaires à 
 
 **Montage :** verre à vin. Glaçons, Cerf'Gent, vin blanc, sirop de miel. Zester le citron et jeter le zeste dans le verre. Top Prosecco. Piquer une branche de thym frais.
 
-**Pourquoi ça marche :** la gentiane et le miel de châtaignier sont tous deux auvergnats — ils se reconnaissent en bouche. Le Prosecco allège l'amertume sans l'effacer.
+**Pourquoi ça marche :** la gentiane racinaire et le miel de châtaignier ont des notes terriennes qui se reconnaissent en bouche. Le Prosecco allège l'amertume sans l'effacer.
 
 ## Règles générales pour mixer nos liqueurs
 

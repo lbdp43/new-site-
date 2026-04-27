@@ -27,7 +27,7 @@ On dit parfois que c'était la plante préférée des bergers — qu'ils le mâc
 
 ## Le carvi (*Carum carvi*)
 
-Longtemps confondu avec le cumin (c'est pourquoi on l'appelle aussi **cumin des prés**), le carvi est une ombellifère dont on utilise les graines. Son arôme est profond, terrien, légèrement anisé — c'est ce qui donne à l'aligot stéphanois et à certains fromages auvergnats leur caractère.
+Longtemps confondu avec le cumin (c'est pourquoi on l'appelle aussi **cumin des prés**), le carvi est une ombellifère dont on utilise les graines. Son arôme est profond, terrien, légèrement anisé — c'est ce qui donne à l'aligot stéphanois et à certains fromages affinés leur caractère.
 
 En liqueur, le carvi **ancre** les notes florales et mentholées. Sans lui, nos assemblages paraîtraient plus "éthérés" mais moins complexes. C'est la basse dans l'harmonie.
 
@@ -41,7 +41,7 @@ Chaque plante a son rôle. Autour de ce trio de base, nous travaillons aussi :
 
 ## Pourquoi revenir à ces plantes ?
 
-D'abord pour des raisons de **goût** : elles offrent une palette que les arômes industriels ne savent pas reproduire. Ensuite pour une question de **territoire** : travailler avec des plantes qui poussent sur nos pentes, ou chez les producteurs voisins, c'est donner un sens concret au mot "terroir".
+D'abord pour des raisons de **goût** : elles offrent une palette que les arômes industriels ne savent pas reproduire. Ensuite pour une question de **savoir-faire** : travailler avec des plantes oubliées, c'est entretenir un patrimoine botanique vivant.
 
 Enfin, pour une raison un peu plus intime : ces plantes ont une histoire. Nos grand-mères les connaissaient. Les oublier, c'est oublier un savoir. Les remettre en bouteille, c'est une manière de rendre ce qu'on nous a donné.
 

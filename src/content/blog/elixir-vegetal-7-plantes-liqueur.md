@@ -35,14 +35,14 @@ Sans racines, l'élixir manque de fond. Trop de racines, il devient médicinal e
 
 ### 2. Le cœur herbacé (l'oxygène de la liqueur)
 
-Les plantes aromatiques fraîches font "respirer" l'élixir. Elles sont l'identité régionale de la liqueur — celles du Velay pour les nôtres, celles des Alpes pour la Chartreuse.
+Les plantes aromatiques fraîches font "respirer" l'élixir. Elles signent l'identité de la liqueur — chaque maison compose la sienne (génépi pour la Chartreuse, anis pour la Bénédictine).
 
 - **Verveine odorante** (*Aloysia citrodora*) — citronnée, fraîche, pivot de [L'Herbe des Druides](/boutique/herbe-des-druides)
 - **Mélisse** (*Melissa officinalis*) — citron doux, finale apaisante
 - **Serpolet** (*Thymus serpyllum*) — thym sauvage de montagne, plus puissant que le thym commun
 - **Hysope** (*Hyssopus officinalis*) — amère et épicée, marqueur des élixirs monastiques
 
-Lire le détail des plantes du Velay dans [notre voyage botanique en Haute-Loire](/blog/plantes-liqueur-haute-loire).
+Lire le détail dans [notre voyage botanique](/blog/plantes-liqueur-haute-loire).
 
 ### 3. Les fleurs (la rondeur)
 
@@ -124,7 +124,7 @@ L'élixir végétal n'est pas qu'un alcool — c'est une concentration d'herbori
 
 **Pour aller plus loin :**
 - [L'Alchimie Végétale, entre science et poésie — composition des 27 plantes](/blog/alchimie-vegetale-27-plantes-composition)
-- [12 plantes du Velay — voyage botanique](/blog/plantes-liqueur-haute-loire)
+- [12 plantes — voyage botanique](/blog/plantes-liqueur-haute-loire)
 - [Liqueurs de plantes — le guide](/liqueurs-de-plantes)
 - [Liqueur digestive — guide complet](/liqueur-digestive)
 - [Découvrir L'Alchimie Végétale](/boutique/alchimie-vegetale)

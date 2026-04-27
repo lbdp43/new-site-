@@ -10,7 +10,7 @@ alcohol: 50
 composition:
   - 27 plantes, racines, écorces, fleurs et épices sélectionnées
 usage: Digestif de prestige
-tagline: "27 plantes, racines, écorces et épices — un hommage à la Haute-Loire."
+tagline: "27 plantes, racines, écorces et épices — un hommage à la tradition liquoriste artisanale."
 highlight: Meilleur Digestif du Monde 2025
 awards:
   - Meilleur Digestif du Monde 2025 — World Drinks Awards
@@ -33,13 +33,13 @@ wcId: 348
 order: 1
 ---
 
-Notre liqueur de prestige. Macérat complexe inspiré des grandes liqueurs monastiques, L'Alchimie Végétale assemble 27 plantes, racines, écorces et épices choisies une à une pour leur équilibre. Trois ans de formulation, un hommage aux savoir-faire de la Haute-Loire — et une reconnaissance mondiale en 2025.
+Notre liqueur de prestige. Macérat complexe inspiré des grandes liqueurs monastiques, L'Alchimie Végétale assemble 27 plantes, racines, écorces et épices choisies une à une pour leur équilibre. Trois ans de formulation, un hommage à la tradition liquoriste artisanale — et une reconnaissance mondiale en 2025.
 
 ## Le grand assemblage
 
-Cinq familles structurent la recette : les **racines** (gentiane jaune de la Margeride, angélique, réglisse) posent la colonne vertébrale et donnent la longueur en bouche. Le **cœur herbacé** (verveine odorante, mélisse, serpolet du Pilat) fait respirer la liqueur. Les **fleurs** (sureau, camomille) arrondissent et signent les notes qu'on identifie d'abord au nez. Les **épices et écorces** (cannelle de Ceylan, cardamome verte, combava, badiane, quinquina) jouent le rôle de sel — elles apportent la tension sans laquelle une liqueur devient bavarde. Enfin quelques **fruits rouges sauvages** (myrtille du Pilat, en micro-dose) posent des touches presque invisibles de fruité sombre.
+Cinq familles structurent la recette : les **racines** (gentiane jaune de moyenne montagne, angélique, réglisse) posent la colonne vertébrale et donnent la longueur en bouche. Le **cœur herbacé** (verveine odorante, mélisse, serpolet sauvage) fait respirer la liqueur. Les **fleurs** (sureau, camomille) arrondissent et signent les notes qu'on identifie d'abord au nez. Les **épices et écorces** (cannelle de Ceylan, cardamome verte, combava, badiane, quinquina) jouent le rôle de sel — elles apportent la tension sans laquelle une liqueur devient bavarde. Enfin quelques **fruits rouges sauvages** (myrtille, en micro-dose) posent des touches presque invisibles de fruité sombre.
 
-Les plantes viennent de [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) en Haute-Loire et aux environs, majoritairement en bio. Six ingrédients tropicaux (cardamome, combava, cannelle, badiane, réglisse, quinquina) sont sourcés chez des grossistes européens spécialisés avec traçabilité complète — pas d'arôme de synthèse, jamais.
+Les plantes viennent de [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) sélectionnés un par un, la plupart en bio. Six ingrédients tropicaux (cardamome, combava, cannelle, badiane, réglisse, quinquina) sont sourcés chez des grossistes européens spécialisés avec traçabilité complète — pas d'arôme de synthèse, jamais.
 
 ## Comment la servir
 

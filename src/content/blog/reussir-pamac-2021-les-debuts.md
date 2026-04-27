@@ -18,9 +18,9 @@ L'article, titré *"Entreprenariat : des liqueurs artisanales à base de plantes
 
 Avant *Réussir*, personne n'avait écrit sur nous. C'était le **premier miroir** qui nous renvoyait ce qu'on faisait, mis en mots par quelqu'un d'extérieur. On a appris trois choses en le lisant :
 
-1. **Ce que nous faisions ne tenait pas d'abord à un produit, mais à une chaîne** — des cueilleurs et maraîchers voisins jusqu'à la bouteille embouteillée à la main. Le journaliste avait compris ça tout de suite.
+1. **Ce que nous faisions ne tenait pas d'abord à un produit, mais à une chaîne** — des cueilleurs et maraîchers partenaires jusqu'à la bouteille embouteillée à la main. Le journaliste avait compris ça tout de suite.
 2. **"Plantes oubliées" était une expression qui parlait.** On hésitait à l'utiliser parce qu'elle semblait nostalgique. En la voyant imprimée, on a compris qu'elle disait quelque chose de juste.
-3. **L'angle agricole comptait autant que l'angle artisanal.** Nos producteurs partenaires — quelques exploitations bio du Velay — étaient aussi importants que notre propre atelier. L'article l'avait noté avant nous.
+3. **L'angle agricole comptait autant que l'angle artisanal.** Nos producteurs partenaires étaient aussi importants que notre propre atelier. L'article l'avait noté avant nous.
 
 ## Ce que disait l'article
 
@@ -43,7 +43,7 @@ Quatre ans plus tard, nous relisons cet article avec l'affection qu'on porte aux
 
 **Ce qui n'a pas changé :**
 - Saint-Didier-en-Velay
-- Les plantes, majoritairement bio, récoltées par nos cueilleurs et maraîchers voisins
+- Les plantes, la plupart en bio, récoltées par nos cueilleurs et maraîchers partenaires
 - L'embouteillage à la main
 - L'idée qu'une liqueur, c'est d'abord un **paysage mis en bouteille**
 

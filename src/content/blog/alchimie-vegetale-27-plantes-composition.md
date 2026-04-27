@@ -21,7 +21,7 @@ Les 27 plantes se répartissent en **cinq grandes familles fonctionnelles** — 
 
 **Les racines** structurent le digestif et donnent la longueur en bouche — c'est la colonne vertébrale, la dimension médicinale héritée des grands amari.
 
-**Le cœur herbacé** fait « respirer » la liqueur. Ce sont les plantes du Velay et de ses voisinages, récoltées chez nos cueilleurs et maraîchers partenaires.
+**Le cœur herbacé** fait « respirer » la liqueur. Ce sont les plantes aromatiques sourcées chez nos cueilleurs et maraîchers partenaires (la plupart en bio).
 
 **Les fleurs** apportent la rondeur et la finesse aromatique. Elles posent les notes qu'on identifie d'abord au nez.
 

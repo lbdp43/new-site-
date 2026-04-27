@@ -1,6 +1,6 @@
 ---
-title: "Les plantes de nos liqueurs : voyage botanique en Haute-Loire"
-description: "Verveine citronnée, gentiane jaune, sureau, mélisse, serpolet… 12 plantes qui composent nos liqueurs, cueillies ou cultivées par nos partenaires entre 400 et 1 600 m d'altitude en Haute-Loire."
+title: "Les plantes de nos liqueurs : voyage botanique"
+description: "Verveine citronnée, gentiane jaune, sureau, mélisse, serpolet… 12 plantes qui composent nos liqueurs, sourcées chez nos cueilleurs et maraîchers partenaires (la plupart en bio)."
 date: 2026-04-20
 author: "Étienne"
 category: Plantes
@@ -10,25 +10,23 @@ readingTime: "10 min"
 
 Quand on nous demande **ce qui fait la différence** entre nos liqueurs et celles des grandes maisons, la réponse tient en un mot : les **plantes**.
 
-Nous ne les cultivons pas nous-mêmes. Nous travaillons avec des **cueilleurs** et des **maraîchers partenaires** — [des gens qu'on a choisis un par un](/blog/producteurs-partenaires-bio-velay), la plupart en bio, qui récoltent en Haute-Loire et dans les départements voisins. Leurs champs, leurs versants, leurs sous-bois : c'est ça, notre terroir.
+Nous ne les cultivons pas nous-mêmes. Nous travaillons avec des **cueilleurs** et des **maraîchers partenaires** — [des gens qu'on a choisis un par un](/blog/producteurs-partenaires-bio-velay) — la plupart en bio, pas tous. Notre atelier, lui, est à **Saint-Didier-en-Velay** (Haute-Loire) : c'est là que la macération et l'embouteillage se font à la main.
 
-Ce guide est le voyage botanique d'une bouteille. **12 plantes signatures**, leur identité, leur origine, et dans quelles liqueurs on les retrouve.
+Ce guide est le voyage botanique d'une bouteille. **12 plantes signatures**, leur identité, leur usage, et dans quelles liqueurs on les retrouve.
 
-## Pourquoi la Haute-Loire est un terroir botanique exceptionnel
+## Pourquoi la moyenne montagne, berceau historique des liqueurs de plantes
 
-La **Haute-Loire** — et plus largement le quart sud-est du Massif Central — est l'un des territoires les plus riches en flore médicinale et aromatique de France. Trois raisons objectives :
+Les grandes maisons liquoristes européennes — Chartreuse (Isère), Bénédictine (Normandie), Suze (Auvergne) — sont toutes nées dans des zones de moyenne montagne. Trois raisons botaniques expliquent cette géographie :
 
-1. **L'altitude variée** (400 m à 1 800 m sur 50 km). Chaque étage climatique abrite ses espèces : sureau en vallée, serpolet à mi-pente, gentiane sur les plateaux d'altitude.
-2. **La géologie volcanique** (basalte, granite du Velay). Les sols sont pauvres en matière organique mais riches en oligo-éléments — ce qui concentre les principes aromatiques des plantes.
+1. **L'altitude variée**. Chaque étage climatique abrite ses espèces : sureau en vallée, serpolet à mi-pente, gentiane sur les plateaux d'altitude.
+2. **La géologie volcanique** (basalte, granite). Les sols sont pauvres en matière organique mais riches en oligo-éléments — ce qui concentre les principes aromatiques des plantes.
 3. **Le climat semi-montagnard** avec fortes amplitudes jour/nuit. Les nuits fraîches forcent les plantes à produire des composés de défense (huiles essentielles, tanins) qui font précisément leur intérêt gustatif.
 
-C'est pour ça que les grandes maisons liquoristes européennes — Chartreuse (Isère), Bénédictine (Normandie), Suze (Auvergne) — sont toutes nées dans des zones de moyenne montagne. Ce n'est pas un hasard.
-
-**Saint-Didier-en-Velay**, où nous avons notre atelier, se trouve à **740 mètres d'altitude**, sur la frontière Haute-Loire / Loire, à 30 km de Saint-Étienne et 40 km du Puy-en-Velay. Entre la chaîne des Cévennes au sud et les monts du Pilat au nord.
+**Saint-Didier-en-Velay**, où nous avons notre atelier, se trouve à **740 mètres d'altitude**.
 
 ## Les plantes cultivées par nos maraîchers partenaires
 
-La plus grande part de notre matière première vient de **maraîchers et producteurs du Velay et de ses voisins**, majoritairement en bio, qui nous livrent au rythme des récoltes.
+La plus grande part de notre matière première vient de **maraîchers et cueilleurs partenaires**, majoritairement en bio, qui nous livrent au rythme des récoltes.
 
 ### 1. La verveine citronnée (*Aloysia citrodora*)
 
@@ -52,9 +50,9 @@ La cousine européenne de la verveine — plus douce, plus "miel", moins citronn
 
 Le **thym sauvage de montagne** — pas le thym commun des supermarchés. Bien plus puissant aromatiquement.
 
-- **Origine** : sauvage dans les pentes rocailleuses de la Haute-Loire.
+- **Origine botanique** : pousse à l'état sauvage sur les pentes rocailleuses de moyenne montagne.
 - **Profil** : thym concentré, note poivrée, finale résineuse.
-- **Récolte** : juillet-août, au moment de la floraison, sur des pentes sud, par nos cueilleurs.
+- **Récolte** : juillet-août, au moment de la floraison, sur des pentes sud, par nos cueilleurs partenaires.
 - **Usage chez nous** : touche camphrée dans [L'Herbe des Druides](/boutique/herbe-des-druides) et [L'Alchimie Végétale](/boutique/alchimie-vegetale).
 
 ### 4. Les aromatiques rares
@@ -74,38 +72,38 @@ Ces plantes sont les "touches de finition" dans nos compositions les plus comple
 
 **La reine des amères de montagne.** La plante emblématique du Massif Central, qui donne son amertume caractéristique à notre [Cerf'Gent](/boutique/cerf-gent).
 
-- **Origine** : plateaux de 1 000 à 1 600 m d'altitude. Plante protégée, cueillette réglementée.
+- **Origine botanique** : plateaux de 1 000 à 1 600 m d'altitude. Plante protégée, cueillette réglementée.
 - **Profil** : amertume franche, note terreuse, finale longue et racinaire.
 - **Récolte** : octobre-novembre, avant les premières gelées. La racine se cueille à la main, avec une "fourche du Diable" (outil traditionnel).
-- **Nos partenaires** : **2 gentianaires professionnels** sur la Margeride et le plateau du Pilat.
+- **Nos partenaires** : **gentianaires professionnels** que nous sourçons un par un.
 
 Un gentianaire est un métier rare — moins de 100 personnes en France. Ils travaillent debout, courbés, sous la pluie ou le gel. Une journée de travail = 30 à 50 kg de racines fraîches. Après séchage (qui divise le poids par 3), ça donne environ 15 kg de gentiane séchée prête à travailler.
 
-[En savoir plus sur notre partenariat avec les gentianaires](/blog/producteurs-partenaires-bio-velay).
+[En savoir plus sur nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).
 
 ### 6. Le sureau noir (*Sambucus nigra*)
 
-Arbuste omniprésent dans les haies auvergnates. On utilise ses **fleurs** au printemps et ses **baies** en fin d'été.
+Arbuste très commun dans les haies de campagne. On utilise ses **fleurs** au printemps et ses **baies** en fin d'été.
 
-- **Origine** : haies, lisières de bois, zones humides. Sauvage, abondant.
+- **Origine botanique** : haies, lisières de bois, zones humides. Sauvage, abondant.
 - **Profil des fleurs** : muscat, note de raisin blanc, finale florale fraîche.
 - **Profil des baies** : fruité sombre, rondeur, note de mûre sauvage.
 - **Récolte** : fleurs en mai-juin, baies en août-septembre.
-- **Nos cueilleurs** : 2 cueilleurs professionnels (formés par le [**Parc Naturel Régional du Livradois-Forez**](https://www.parc-livradois-forez.org/)).
+- **Nos partenaires** : cueilleurs professionnels (formation Parc Naturel Régional).
 - **Usage chez nous** : cœur du [Nectar d'Ostara](/boutique/nectar-ostara) (fleurs) et de certaines éditions limitées (baies).
 
 ### 7. La myrtille sauvage (*Vaccinium myrtillus*)
 
 Pas la myrtille de culture (bleuet nord-américain), celle-là : **petite, noire, sauvage, des sous-bois de moyenne montagne**.
 
-- **Origine** : forêts d'altitude du Pilat et des Cévennes.
+- **Origine botanique** : forêts d'altitude.
 - **Profil** : fruité sombre, tanins fins, acidité présente, finale longue.
 - **Récolte** : août, peigne métallique pour les pros, main pour les petites cueillettes.
 - **Usage chez nous** : éditions limitées uniquement, production confidentielle.
 
 ### 8. Les fruits d'un arboriculteur partenaire
 
-Un **arboriculteur sur les pentes du Rhône** (à 30 km de l'atelier) nous fournit :
+Un **arboriculteur partenaire** nous fournit :
 
 - **Bigarade (orange amère)** — zeste uniquement, utilisé dans [Zéleste](/boutique/zeleste) pour son amertume agrumes.
 - **Pommes anciennes** (reinette du Canada, rose de Berne) — certaines éditions limitées.
@@ -145,19 +143,19 @@ Un de nos engagements est de **réintroduire dans l'usage moderne** des plantes 
 
 Ces plantes sont rarement commercialisées en circuit long. Nous travaillons directement avec nos partenaires cueilleurs qui savent les identifier en milieu naturel.
 
-[Lire notre article dédié aux plantes oubliées du Velay](/blog/plantes-oubliees-du-velay).
+[Lire notre article dédié aux plantes oubliées](/blog/plantes-oubliees-du-velay).
 
-## Comment reconnaître un vrai sourcing "plantes d'Auvergne"
+## Comment reconnaître un vrai sourcing artisanal
 
-Un maximum de maisons aujourd'hui écrivent **"plantes des Alpes"** ou **"plantes d'Auvergne"** sur leurs étiquettes. C'est un argument marketing fort. Voici comment distinguer le vrai du faux :
+Beaucoup de maisons écrivent aujourd'hui **"plantes des Alpes"** ou **"plantes d'Auvergne"** sur leurs étiquettes. C'est un argument marketing fort. Voici comment distinguer le vrai du faux :
 
-1. **La maison nomme ses producteurs** (au moins par région, idéalement par nom).
+1. **La maison nomme ses producteurs** (au moins par catégorie, idéalement par nom).
 2. **Elle peut détailler le trajet** d'une plante du champ à la bouteille.
 3. **Le calendrier de récolte est cohérent** avec la saisonnalité naturelle (pas de verveine en décembre).
-4. **Il existe des photos ou vidéos** du terroir et des producteurs — pas uniquement du packaging.
+4. **Il existe des photos ou vidéos** des producteurs — pas uniquement du packaging.
 5. **Le producteur accepte les visites** sur rendez-vous.
 
-Sur ces 5 critères, nous cochons les 5. [Venez nous rencontrer](/contact) — l'atelier est ouvert du mercredi au samedi.
+[Venez nous rencontrer](/contact) — l'atelier est ouvert du mercredi au samedi.
 
 ## Un dernier mot sur l'altitude
 
@@ -165,17 +163,17 @@ Une spécificité à retenir : **plus une plante pousse en altitude, plus elle e
 
 À 400 m, une verveine pousse vite, produit beaucoup de feuilles, mais ses huiles essentielles sont diluées.
 
-À 900 m (notre altitude), elle pousse moins, fait moins de biomasse — mais chaque feuille est **2 à 3 fois plus riche en citral** (la molécule qui donne son parfum).
+À 900 m, elle pousse moins, fait moins de biomasse — mais chaque feuille est **2 à 3 fois plus riche en citral** (la molécule qui donne son parfum).
 
-C'est pour ça qu'on ne cherche pas à produire à la tonne. Le Velay n'est pas la Provence. On fait **moins mais mieux** — et ça se goûte.
+C'est pour ça qu'on ne cherche pas à produire à la tonne. On fait **moins mais mieux** — et ça se goûte.
 
 ---
 
 **Pour aller plus loin** :
 - [Comment choisir une liqueur artisanale — le guide complet](/blog/choisir-liqueur-artisanale-guide)
 - [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — portrait d'un écosystème
-- [Plantes oubliées du Velay : 7 espèces qui reviennent dans nos verres](/blog/plantes-oubliees-du-velay)
-- [Le Velay dans une bouteille — notre portrait par Velay Attractivité](/blog/velay-attractivite-portrait-institutionnel)
+- [Plantes oubliées : 7 espèces qui reviennent dans nos verres](/blog/plantes-oubliees-du-velay)
+- [Notre portrait par Velay Attractivité](/blog/velay-attractivite-portrait-institutionnel)
 - [L'art de redonner vie aux plantes oubliées — Loire Semène Tourisme](/blog/loire-semene-tourisme-plantes-oubliees)
 - [Découvrez les 12 plantes de notre gamme](/nos-plantes) — fiches détaillées
 

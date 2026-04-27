@@ -4,7 +4,7 @@ import { site } from '../data/site';
 import { products } from '../data/products';
 
 const title = "Liqueurs de plantes — Élixirs végétaux artisanaux | La Brasserie des Plantes";
-const description = "Verveine, gentiane, menthe, sureau, génépi, absinthe… Découvrez nos liqueurs de plantes artisanales d'Auvergne. Quarantaine de plantes, racines, fleurs et écorces, sans arôme ni colorant ajouté.";
+const description = "Verveine, gentiane, menthe, sureau, génépi, absinthe… Découvrez nos liqueurs de plantes artisanales fabriquées en Haute-Loire. Quarantaine de plantes, racines, fleurs et écorces sourcées chez nos cueilleurs et maraîchers partenaires (la plupart en bio), sans arôme ni colorant ajouté.";
 
 const breadcrumb = {
   '@context': 'https://schema.org',
@@ -37,8 +37,8 @@ const faq = [
     a: "Une quarantaine d'espèces : verveine odorante, mélisse, serpolet, menthe poivrée, gentiane jaune, génépi, hysope, aurone, sureau, coquelicot, anis vert, carvi, coriandre, sauge ananas, basilic, thym citron, estragon mexicain, racine d'angélique, réglisse, écorce de quinquina, cardamome, cannelle de Ceylan, combava, badiane… Le détail des 12 plantes signature est dans notre page Nos plantes.",
   },
   {
-    q: "Vos plantes sont-elles bio et locales ?",
-    a: "Une bonne partie oui : nos cueilleurs et maraîchers partenaires sont majoritairement en agriculture biologique, basés en Haute-Loire et dans les départements voisins. Toutes ne sont pas locales : 6 plantes dans L'Alchimie Végétale (cardamome, combava, anis étoilé, cannelle, réglisse, agrumes tropicaux) sont importées via grossistes européens spécialisés en herboristerie. Nous ne le cachons pas — importer de la cannelle de Ceylan pour faire « du local » n'aurait aucun sens.",
+    q: "Vos plantes sont-elles bio ?",
+    a: "La plupart oui — nos cueilleurs et maraîchers partenaires sont majoritairement en agriculture biologique. Toutes ne le sont pas : certaines plantes ou ingrédients (cardamome, combava, anis étoilé, cannelle, réglisse, agrumes tropicaux) sont importés via grossistes européens spécialisés en herboristerie quand la plante l'exige. Nous privilégions le bio à chaque fois que c'est possible, sans sur-promesse.",
   },
 ];
 
@@ -68,12 +68,12 @@ const articleSchema = {
 const families = [
   {
     family: 'Liqueur de verveine',
-    desc: "La plante totem du Velay. Citronnée, fraîche, légèrement mentholée en finale. Aussi bien en digestif pur qu'en spritz d'été.",
+    desc: "Citronnée, fraîche, légèrement mentholée en finale. Aussi bien en digestif pur qu'en spritz d'été.",
     productSlug: 'herbe-des-druides',
   },
   {
     family: 'Liqueur de gentiane',
-    desc: "La grande amère du Massif Central. Racines récoltées entre 1000 et 1600 m d'altitude par les gentianaïres de la Margeride.",
+    desc: "La grande amère du Massif Central. Racines de gentiane jaune récoltées à la main entre 1 000 et 1 600 m d'altitude.",
     productSlug: 'cerf-gent',
   },
   {
@@ -187,18 +187,19 @@ const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
         semi-montagnard concentrent les huiles essentielles).
       </p>
 
-      <h2>Pourquoi la Haute-Loire est un terroir botanique exceptionnel</h2>
+      <h2>La moyenne montagne, berceau historique des liqueurs de plantes</h2>
       <p>
-        Nos plantes viennent en majorité de Haute-Loire et des départements
-        voisins (Loire, Puy-de-Dôme, Ardèche, Cantal). Trois raisons font de
-        ce territoire l'un des plus riches en flore médicinale et aromatique
-        de France :
+        Les grandes maisons liquoristes européennes — Chartreuse (Isère),
+        Bénédictine (Normandie), Suze (Auvergne) — sont toutes nées dans des
+        zones de moyenne montagne. Trois raisons botaniques expliquent cette
+        géographie de la liqueur :
       </p>
       <ul>
         <li>
-          <strong>L'altitude variée</strong> (400 m à 1 800 m sur 50 km).
-          Chaque étage climatique abrite ses espèces : sureau en vallée,
-          serpolet à mi-pente, gentiane sur les plateaux d'altitude.
+          <strong>L'altitude variée</strong> (400 m à 1 800 m sur quelques
+          dizaines de kilomètres). Chaque étage climatique abrite ses espèces :
+          sureau en vallée, serpolet à mi-pente, gentiane sur les plateaux
+          d'altitude.
         </li>
         <li>
           <strong>La géologie volcanique</strong> (basalte, granite). Les sols
@@ -212,13 +213,6 @@ const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
           précisément leur intérêt gustatif.
         </li>
       </ul>
-      <p>
-        C'est pour ces raisons que les grandes maisons liquoristes européennes
-        — Chartreuse (Isère), Bénédictine (Normandie), Suze (Auvergne) —
-        sont toutes nées dans des zones de moyenne montagne. Ce n'est pas un
-        hasard. Lire le détail dans notre article
-        <a href="/blog/plantes-liqueur-haute-loire">12 plantes, voyage botanique en Haute-Loire</a>.
-      </p>
 
       <h2>Notre règle : la plante avant tout</h2>
       <p>
@@ -238,9 +232,9 @@ const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
         </li>
         <li>
           <strong>Plantes majoritairement bio</strong> de cueilleurs et
-          maraîchers partenaires de Haute-Loire et des départements voisins.
-          On tend vers le bio à chaque cuvée, même si toutes les plantes ne
-          le sont pas encore.
+          maraîchers partenaires que nous sélectionnons un par un. On tend
+          vers le bio à chaque cuvée, même si toutes les plantes ne le sont
+          pas encore.
         </li>
       </ul>
     </div>
@@ -316,7 +310,7 @@ const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
           40 plantes utilisées
         </a>
         <a href="/blog/plantes-liqueur-haute-loire" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
-          12 plantes du Velay — voyage botanique
+          12 plantes — voyage botanique
         </a>
         <a href="/liqueurs-artisanales" class="inline-flex items-center px-5 py-3 rounded-full bg-white border border-forest-200 hover:border-forest-500 text-forest-800 text-sm font-medium">
           Liqueurs artisanales (le guide)

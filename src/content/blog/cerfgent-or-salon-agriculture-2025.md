@@ -26,7 +26,7 @@ La Suze est une grande marque française, connue depuis 1889. Nous n'avons aucun
 - **Artisanale** : macération à froid, pas d'extraction industrielle
 - **Plus complexe** : cinq épices + quinquina + gentiane, là où la Suze mise sur une structure plus directe
 - **Plus amère** : nous poussons l'amertume plus loin, pour les amateurs qui cherchent ce profil
-- **Gentiane locale** : nos racines viennent de gentianaïres auvergnats partenaires, pas d'un sourcing industriel (le quinquina et certaines épices, eux, sont importés via des filières bio sélectionnées — [voir notre transparence sourcing](/blog/producteurs-partenaires-bio-velay))
+- **Sourcing transparent** : nos racines de gentiane viennent de gentianaïres professionnels partenaires, pas d'un sourcing industriel. Le quinquina et certaines épices, eux, sont importés via des filières bio sélectionnées — [voir notre transparence sourcing](/blog/producteurs-partenaires-bio-velay)
 
 ## Ce que le jury 2025 a noté
 
@@ -52,7 +52,7 @@ Trois manières, par ordre de difficulté :
 
 ## Ce que dit ce prix
 
-Qu'une petite maison de Haute-Loire peut entrer — avec une recette honnête, une plante locale bien connue et un travail patient — dans le podium d'un concours national face à des maisons installées depuis un siècle. C'est ce type de prix qui ouvre des portes de cavistes haut de gamme et de restaurants étoilés que nous n'aurions pas contactés de nous-mêmes.
+Qu'une petite maison artisanale peut entrer — avec une recette honnête, une matière première sélectionnée plante par plante et un travail patient — dans le podium d'un concours national face à des maisons installées depuis un siècle. C'est ce type de prix qui ouvre des portes de cavistes haut de gamme et de restaurants étoilés que nous n'aurions pas contactés de nous-mêmes.
 
 ---
 

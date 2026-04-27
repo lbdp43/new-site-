@@ -18,7 +18,7 @@ Velay Attractivité retient trois éléments de notre parcours :
 
 1. **Étienne et Guillaume sont revenus au pays.** Formés ailleurs (Toulouse et Saint-Étienne), ils sont revenus à Saint-Didier-en-Velay pour y créer une entreprise — ce qu'on appelle en développement territorial un "retour de talents", un signal positif pour un bassin rural qui perd plutôt ses jeunes.
 
-2. **Les plantes du Velay et des départements voisins sont valorisées.** Notre démarche donne une **valeur économique** à des plantes que personne n'exploitait commercialement (verveine, serpolet, carvi sauvages), récoltées par nos cueilleurs et maraîchers partenaires. Cela incite d'autres producteurs à **diversifier leurs cultures** vers les aromatiques. (Toutes nos plantes ne sont pas locales — environ 15 % viennent de filières bio plus lointaines, [voir notre transparence sourcing](/blog/producteurs-partenaires-bio-velay).)
+2. **Les plantes oubliées sont valorisées.** Notre démarche donne une **valeur économique** à des plantes que personne n'exploitait commercialement (verveine, serpolet, carvi sauvages), récoltées par nos cueilleurs et maraîchers partenaires (la plupart en bio, pas tous). Cela contribue à entretenir un savoir-faire et à **diversifier l'offre aromatique** disponible.
 
 3. **La marque porte le territoire au-delà des frontières.** Depuis notre prix international de 2025, "Saint-Didier-en-Velay" apparaît dans des articles de Londres, Berlin, Montréal — ce qu'aucune campagne institutionnelle n'aurait pu acheter.
 

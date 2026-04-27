@@ -39,13 +39,13 @@ La couleur d'une liqueur artisanale doit venir d'**un ingrédient qui se boit** 
 
 - ✅ "Verveine de Haute-Loire"
 - ✅ "Gentiane de la Margeride"
-- ✅ "Plantes du Velay et du Pilat"
+- ✅ Origine précise nommée
 - ❌ "Plantes du monde"
 - ❌ Aucune mention d'origine
 
-Une liqueur de plantes a un **terroir**, comme un vin. La verveine du Velay n'a pas le même profil que celle de Provence ou du Maroc — la concentration en huiles essentielles dépend de l'altitude, du climat et du sol. L'industriel achète en gros sur le marché mondial sans traçabilité ; l'artisan documente.
+Une liqueur de plantes a un **terroir**, comme un vin. La concentration en huiles essentielles d'une verveine dépend de l'altitude, du climat et du sol où elle pousse. L'industriel achète en gros sur le marché mondial sans traçabilité ; l'artisan documente.
 
-Pour aller plus loin sur ce sujet, voir [notre voyage botanique en Haute-Loire](/blog/plantes-liqueur-haute-loire) qui détaille pourquoi le terroir auvergnat est exceptionnel.
+Pour aller plus loin, voir [notre voyage botanique](/blog/plantes-liqueur-haute-loire).
 
 ## 4. Les producteurs ou cueilleurs nommés
 
@@ -57,7 +57,7 @@ Pour aller plus loin sur ce sujet, voir [notre voyage botanique en Haute-Loire](
 - ❌ "Sourcing local" sans aucun détail
 - ❌ Site silencieux sur l'amont agricole
 
-Chez nous, on a [un article entier sur nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — gentianaïres de la Margeride, maraîchers du Velay, apiculteurs du Pilat, arboriculteur du Rhône. Tous sont rencontrés un par un.
+Chez nous, on a [un article entier sur nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — gentianaïres professionnels, maraîchers, apiculteurs, arboriculteur. Tous sont rencontrés un par un.
 
 ## 5. Le prix au litre cohérent
 

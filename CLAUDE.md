@@ -330,44 +330,81 @@ client-side par catégorie (Fabrication / Terroir / Actualité / Plantes /
 Recettes). Pas de galerie 3D parallaxe (retirée), pas de bouton "Voir tous les
 articles" (retiré).
 
-## ⚠️ Règle d'or sourcing plantes — TOUS supports (site + articles + meta + alt)
+## 🚨 Règle d'or sourcing plantes — TOUS supports (site + articles + meta + alt)
 
-**On ne cultive pas nos plantes nous-mêmes**, on travaille avec des cueilleurs
-et maraîchers partenaires, la plupart en bio. **On ne peut pas dire que les
-plantes sont "locales", "du coin", ni "d'Auvergne / de Haute-Loire" comme un
-claim global** — environ 15 % de la matière première vient de filières bio plus
-lointaines (cardamome, combava, anis étoilé, cannelle, réglisse, agrumes
-tropicaux, génépi alpin, etc.).
+**Règle absolue formulée par Guillaume (2026-04-27) :**
+> "Faut vraiment que sur Internet tu ne marques pas comme quoi les plantes
+> viennent de la région ou sont locales. La plupart de nos plantes sont bio,
+> pas tous. Mais tu ne peux pas dire que nos plantes sont cueillies ou
+> cultivées à proximité de Saint-Didier. Parce que c'est pas forcément le
+> cas pour tout. Donc tu peux pas jouer là-dessus.
+>
+> Un article ou une actualité en parle sur notre site internet — tu n'en
+> parles pas. Même si dans l'article externe il en a parlé."
+
+**Conséquences strictes** :
+1. **Aucun claim de proximité géographique** des plantes/cueilleurs/maraîchers
+   sur le site, dans aucun support (page, article blog, meta, alt, schema,
+   tagline, kicker). Pas de "Haute-Loire", "Velay", "Auvergne", "Massif
+   Central", "à proximité", "à quelques km", "près de l'atelier", "voisins",
+   "auvergnats", "départements voisins", "circuit court", "du territoire",
+   "du coin", "locales".
+2. **"La plupart de nos plantes sont bio, pas toutes"** — formulation à
+   utiliser. JAMAIS "100 % bio" ni "toutes bio".
+3. **Liens vers articles externes (presse) OK** — mais le label du lien et
+   le texte autour doivent être neutres. On ne reformule pas le claim de
+   l'article externe en notre nom.
+4. **Articles d'actualité écrits par nous** : même règle que les pages.
+   Pas de claim de proximité, même quand on cite/résume un article externe.
 
 **Référence de formulation correcte :** `src/content/blog/producteurs-partenaires-bio-velay.md`
-+ `src/pages/nos-plantes.astro` lignes 107-112.
++ `src/pages/nos-plantes.astro` (intro et "Notre démarche").
 
-**Formulations BANNIES (faux ou trompeur)** — à grep avant tout commit SEO/marketing :
-- "liqueurs aux plantes d'Auvergne" / "plantes de Haute-Loire" (sous-entend que TOUTES le sont)
-- "plantes oubliées d'Auvergne" / "plantes oubliées de la Haute-Loire"
-- "plantes locales" sans qualifieur, "**Locale**" en bullet point seul
-- "récoltées au plus près de nos montagnes" (le possessif "nos" est trompeur)
-- "Plantes d'Auvergne, récoltées à la main" (sublabel sur badges)
+**Formulations BANNIES** — à grep avant tout commit touchant à du contenu :
+- toute occurrence de "Haute-Loire", "Velay", "Auvergne", "Massif Central",
+  "Margeride", "Pilat", "Forez", "Cévennes" associée aux plantes/sourcing
+- "plantes locales", "du coin", "à proximité", "à quelques km", "près de
+  l'atelier", "voisins", "auvergnat(s)", "départements voisins"
+- "circuit court", "du territoire", "de la région"
+- "cueilleurs et maraîchers de Haute-Loire/du Velay/voisins"
+- "**Locale**" en bullet seul
+- "100 % bio", "tous bio", "toutes nos plantes en bio"
 - "culture des plantes" appliqué à NOUS (on ne cultive pas)
-- EN : "plants of Auvergne", "plants from Auvergne", "harvested in Haute-Loire"
-  comme claim global, "hand-harvested in our Auvergne mountains"
+- EN : "plants of Auvergne", "plants from Auvergne", "harvested in
+  Haute-Loire", "local plants", "harvested nearby"
 
 **Formulations OK** :
-- "Liqueurs artisanales **de plantes** — Haute-Loire" (Haute-Loire qualifie la maison, pas les plantes)
-- "fabriquées **en** Haute-Loire" / "macération et embouteillage à Saint-Didier-en-Velay" (vrai pour la production)
-- "plantes oubliées sourcées chez nos cueilleurs et maraîchers partenaires (la plupart en bio)"
-- "**Une bonne partie** de nos plantes vient de Haute-Loire et des départements voisins" (avec qualifieur explicite)
-- "Plantes du Velay" dans un article qui parle SPÉCIFIQUEMENT des plantes locales (verveine, serpolet, carvi, gentiane) — c'est exact pour ces espèces
-- Mentionner l'ancrage géographique de la maison (Saint-Didier-en-Velay, Haute-Loire) — c'est juste
+- "Liqueurs artisanales **de plantes** — Haute-Loire" (Haute-Loire qualifie
+  la MAISON, pas les plantes)
+- "fabriquées **en** Haute-Loire", "macération et embouteillage à
+  Saint-Didier-en-Velay" (production maison, c'est vrai)
+- "plantes oubliées sourcées chez nos cueilleurs et maraîchers partenaires,
+  la plupart en bio"
+- "La plupart de nos plantes sont en agriculture biologique — pas toutes"
+- Citer le nom d'une marque concurrente avec son ancrage (ex : "Verveine du
+  Velay (Pagès)" ou "Salers (auvergnat)") — c'est factuel sur le concurrent
+- Ancrage géographique du LIEU : "atelier à Saint-Didier-en-Velay" / "fondateurs
+  nés au pays" — vrai, n'engage pas la matière première
+
+**Commande de vérification (à lancer avant tout commit contenu) :**
+```bash
+grep -rn -i -E "(plantes?|cueilleurs?|maraîch|matière première).{0,80}(haute-?loire|velay|auvergne|massif central|d[ée]partements? voisins?|à proximit|à quelques km|près de l'atelier|locales?|circuit court|du territoire|auvergnat|du coin)" src/pages/ src/components/ src/data/ src/i18n/ src/content/ | grep -v "/admin/\|generated.json\|press.ts\|veille\|alt=\|partenaires-bio-velay\|aria-label="
+```
 
 Historique :
 - PR #5 (2026-04-26) : 1ère passe sur le site (alt, meta, badges, taglines)
-- Commit suivant (2026-04-27) : 3 articles d'actualité oubliés du PR #5
-  (`cerfgent-or-salon-agriculture-2025.md` "**Locale**" trompeur,
-  `velay-attractivite-portrait-institutionnel.md` "plantes locales valorisées",
-  `loire-semene-tourisme-plantes-oubliees.md` "utiliser des plantes locales")
-  + `ateliers.astro` ("culture des plantes" → "sélection des plantes")
-  + hero `index.astro` + sous-titre `notre-histoire.astro` qui restaient.
+- Commit 2026-04-27 (matin) : 3 articles d'actualité oubliés + hero index +
+  notre-histoire + ateliers
+- Commit 2026-04-27 (après-midi, après clarification stricte de Guillaume) :
+  retrait COMPLET de toute mention géographique appliquée aux plantes —
+  pages liqueurs-de-plantes / nos-plantes / liqueurs-artisanales /
+  boutique / cgv / faq / notre-histoire (schema + body), tous les articles
+  blog (10 articles modifiés : choisir-liqueur, nos-cocktails-signature,
+  likora, liqueur-artisanale-vs, plantes-liqueur-haute-loire (réécriture
+  intro + suppression bloc "Pourquoi la Haute-Loire"), elixir, reconnaitre,
+  reussir, quelle-verveine, alchimie, plantes-oubliees-du-velay,
+  trois-amis), fiches produit (alchimie-vegetale, cerf-gent,
+  herbe-des-druides) + régénération `products.generated.json`.
 
 ## Gotchas
 

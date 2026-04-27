@@ -19,7 +19,7 @@ const plantsListSchema = {
   '@type': 'ItemList',
   name: 'Plantes et ingrédients botaniques de La Brasserie des Plantes',
   description:
-    "Plantes aromatiques, racines, écorces, fleurs, agrumes, épices et fruits utilisés dans nos liqueurs artisanales. Sourcés chez des cueilleurs et maraîchers partenaires, en Haute-Loire et au-delà, avec une majorité issue de l'agriculture biologique.",
+    "Plantes aromatiques, racines, écorces, fleurs, agrumes, épices et fruits utilisés dans nos liqueurs artisanales. Sourcés chez nos cueilleurs et maraîchers partenaires, la plupart en agriculture biologique.",
   numberOfItems: plants.length,
   itemListElement: plants.map((p, i) => ({
     '@type': 'ListItem',
@@ -106,10 +106,9 @@ const sortedPlants = [...plants].sort((a, b) => {
           botaniques</strong> — aromatiques, racines, écorces, fleurs, agrumes,
           épices, fruits. Nous ne cultivons pas nos plantes nous-mêmes : nous
           les sourçons chez des cueilleurs et des maraîchers que nous
-          choisissons un par un. La plupart viennent de l'agriculture
-          biologique ; certaines poussent à quelques kilomètres de l'atelier,
-          d'autres plus loin quand la plante l'exige. Origine connue à chaque
-          fois, producteur rencontré.
+          choisissons un par un. La plupart sont en agriculture
+          biologique — pas tous. Origine connue à chaque fois, producteur
+          rencontré.
         </p>
       </div>
 
@@ -171,8 +170,8 @@ const sortedPlants = [...plants].sort((a, b) => {
     <div class="max-w-3xl mx-auto px-6">
       <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Notre démarche</div>
       <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
-        Le terroir,<br />
-        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">le patrimoine vivant</em>
+        La plante,<br />
+        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">avant tout</em>
       </h2>
       <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
         <p>
@@ -182,14 +181,12 @@ const sortedPlants = [...plants].sort((a, b) => {
           plante a son récoltant, chaque récoltant est rencontré.
         </p>
         <p>
-          On essaie de travailler au plus près, quand c'est possible — une
-          bonne partie de nos plantes vient de Haute-Loire et des départements
-          voisins. Pas toujours : certaines imposent leur terroir (le génépi
-          des Alpes, par exemple), d'autres viennent de plus loin selon la
-          saison et la qualité du moment (agrumes, réglisse, quinquina). La
-          plupart sont issues de <strong class="font-medium text-forest-800">l'agriculture
-          biologique</strong> — c'est ce vers quoi on tend, même si toutes ne
-          le sont pas encore.
+          La plupart de nos plantes sont issues de
+          <strong class="font-medium text-forest-800">l'agriculture
+          biologique</strong> — pas toutes, mais c'est ce vers quoi on tend
+          à chaque cuvée. Pour certaines plantes ou ingrédients (génépi,
+          agrumes, réglisse, quinquina, épices), on s'appuie sur des filières
+          spécialisées quand la plante l'exige.
         </p>
         <p>
           Notre règle, c'est la plante avant tout : <strong class="font-medium text-forest-800">pas

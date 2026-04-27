@@ -18,7 +18,7 @@ C'est ce type de couverture — hors presse régionale, à destination d'un publ
 
 Likora identifie d'entrée **le trio de plantes signature** : la **verveine odorante**, le **carvi** et la **mélisse**. Puis il élargit la palette à plusieurs plantes plus rares : *thym-citron*, *thym*, *fleur de sureau*. Ce sont les ingrédients qui donnent à nos liqueurs leur identité — ceux qu'on retrouve, dans des proportions variées, dans les quatre références alors disponibles : *L'Herbe des Druides*, *Le Gorgeon des Machurés*, *Le Nectar d'Ostara*, et les prémices de *L'Alchimie Végétale*.
 
-L'article insiste sur la **démarche** : plantes récoltées chez des cueilleurs et maraîchers voisins, majoritairement en bio, macérations longues, aucun arôme ajouté.
+L'article insiste sur la **démarche** : plantes récoltées chez nos cueilleurs et maraîchers partenaires, la plupart en bio, macérations longues, aucun arôme ajouté.
 
 ## Les notes de dégustation Likora, par produit
 

@@ -110,7 +110,7 @@ Un indicateur simple : **combien de bouteilles sont produites par an** ?
 
 Plus le lot est petit, plus :
 - le contrôle qualité est fin (chaque cuve est goûtée),
-- les plantes peuvent être locales (on n'a pas besoin de 10 tonnes de verveine),
+- la matière première peut être tracée plante par plante (on n'a pas besoin de 10 tonnes de verveine),
 - le producteur peut répondre personnellement à vos questions.
 
 **Notre règle** : toute personne qui nous écrit sur Instagram ou par mail a une réponse sous 48h, signée par l'un des deux fondateurs. Essayez avec un industriel.
@@ -203,7 +203,7 @@ Non — l'alcool à 18+ % est naturellement conservateur. **Une bouteille ouvert
 
 ### Qu'est-ce qui justifie le prix d'une liqueur artisanale ?
 
-- Matières premières bio / locales (3 à 5 × plus cher qu'en conventionnel industriel).
+- Matières premières en circuit sélectionné, en majorité bio (3 à 5 × plus cher qu'en conventionnel industriel).
 - Lots petits (pas d'économie d'échelle sur le verre, l'alcool neutre, les bouchons).
 - Temps de repos (nos liqueurs reposent 6 à 18 mois, pas production jour par jour).
 - Salaires de producteurs français (vs assemblage dans des unités automatisées).
@@ -212,13 +212,13 @@ Pour L'Alchimie Végétale (45 € / 70 cl), le coût de production est supérie
 
 ## 7. Notre recommandation en une phrase
 
-**Achetez 1 bouteille d'une maison artisanale qui nomme ses plantes, plutôt que 3 bouteilles industrielles qui n'en nomment aucune.** La différence en dégustation est abyssale, le coût par dégustation reste meilleur (on consomme moins, on savoure plus), et votre soutien va à une production européenne et locale.
+**Achetez 1 bouteille d'une maison artisanale qui nomme ses plantes, plutôt que 3 bouteilles industrielles qui n'en nomment aucune.** La différence en dégustation est abyssale, le coût par dégustation reste meilleur (on consomme moins, on savoure plus), et votre soutien va à une production artisanale française.
 
 ---
 
 **Pour aller plus loin** :
 - [Liqueur artisanale vs industrielle : ce qui change dans votre verre](/blog/liqueur-artisanale-vs-industrielle) — les 7 différences concrètes
-- [Les plantes de nos liqueurs — voyage botanique en Haute-Loire](/blog/plantes-liqueur-haute-loire) — notre terroir botanique
+- [Les plantes de nos liqueurs — voyage botanique](/blog/plantes-liqueur-haute-loire) — notre approche botanique
 - [Trois amis, une liqueur house — notre histoire](/blog/trois-amis-une-brasserie) — comment la Brasserie des Plantes est née
 
-**Ou commencez directement** : [parcourez la boutique](/boutique) — 18 liqueurs, 4 gammes, la plus grande maison botanique d'Auvergne.
+**Ou commencez directement** : [parcourez la boutique](/boutique) — 18 liqueurs, 4 gammes.

@@ -32,7 +32,7 @@ L'office de tourisme met en avant trois aspects :
 
 - **L'ancrage local** — que l'entreprise est née ici et crée de l'emploi ici (trois salariés, mais surtout une dizaine de producteurs partenaires)
 - **Le tourisme de savoir-faire** — que l'atelier est un **point d'intérêt touristique** inscrit dans les parcours découverte du territoire
-- **Le message écologique** — qu'intégrer des plantes du territoire (récoltées par nos cueilleurs partenaires) dans un produit commercial, c'est **maintenir une biodiversité** qui autrement se perdrait
+- **Le message écologique** — qu'intégrer des plantes oubliées (récoltées par nos cueilleurs partenaires) dans un produit commercial, c'est **maintenir une biodiversité** qui autrement se perdrait
 
 ## Le "tourisme de savoir-faire"
 

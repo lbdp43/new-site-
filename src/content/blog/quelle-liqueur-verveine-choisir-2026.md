@@ -24,7 +24,7 @@ Cette combinaison fait de la verveine une plante à la fois **fraîche en attaqu
 
 ### 1. La Verveine du Velay (Pagès)
 
-La plus connue, fondée en 1859 à Saint-Germain-Laprade (Haute-Loire). Décliné en deux versions : **verte** (55°, recette historique macérée et distillée) et **jaune** (40°, plus douce). Le profil est très **herbacé-mentholé**, avec une amertume notable issue d'autres plantes du Velay.
+La plus connue, fondée en 1859 à Saint-Germain-Laprade (Haute-Loire). Décliné en deux versions : **verte** (55°, recette historique macérée et distillée) et **jaune** (40°, plus douce). Le profil est très **herbacé-mentholé**, avec une amertume notable issue d'autres plantes aromatiques.
 
 - **Pour qui ?** Les amateurs de classiques puissants type Chartreuse Verte
 - **Prix** : 25-35 € le 70 cl
@@ -65,11 +65,11 @@ Depuis 2015, une nouvelle génération de petits liquoristes propose une approch
 
 Quand on a sorti notre première verveine en 2021, on s'est posé la question : pourquoi recommencer ce qui existe déjà ? La réponse est dans trois choix :
 
-1. **Trois plantes, pas une.** La verveine seule peut devenir lassante. On l'épaule avec le **serpolet** (thym sauvage des pentes du Velay) qui apporte la concentration thymée, et le **carvi** (cumin des prés auvergnat) qui pose la structure épicée. La verveine reste majoritaire mais on évite le profil mono-aromatique.
+1. **Trois plantes, pas une.** La verveine seule peut devenir lassante. On l'épaule avec le **serpolet** (thym sauvage de moyenne montagne) qui apporte la concentration thymée, et le **carvi** (cumin des prés) qui pose la structure épicée. La verveine reste majoritaire mais on évite le profil mono-aromatique.
 
 2. **28°, pas 40° ni 55°.** Plus accessible, plus facile à intégrer dans un cocktail, plus respectueux de la plante (moins d'alcool, plus de nez).
 
-3. **Plantes traçables.** Toutes nos plantes viennent de [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) en Haute-Loire et au-delà, majoritairement en bio. On peut vous nommer les producteurs.
+3. **Plantes traçables.** Toutes nos plantes viennent de [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) sélectionnés un par un, la plupart en bio. On peut vous nommer les producteurs.
 
 L'Herbe des Druides a été distinguée trois fois Médaille d'Or au Concours International de Lyon (2023, 2024, 2026) et Médaille d'Argent au World Drinks Awards 2025 à Londres.
 

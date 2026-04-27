@@ -33,11 +33,11 @@ wcId: 4030
 order: 1
 ---
 
-Un apéritif amer pour amateurs. La **gentiane** donne la colonne, le **quinquina** la profondeur, les épices (muscade, coriandre, cannelle, zestes de citron) la complexité. Un caractère puissant, authentique, à la hauteur des grandes eaux-de-vie amères d'Auvergne.
+Un apéritif amer pour amateurs. La **gentiane** donne la colonne, le **quinquina** la profondeur, les épices (muscade, coriandre, cannelle, zestes de citron) la complexité. Un caractère puissant, authentique, à la hauteur des grandes eaux-de-vie amères de tradition française.
 
 ## La gentiane jaune, reine des amères de montagne
 
-La clé du Cerf'Gent, c'est la **[gentiane jaune](/blog/plantes-liqueur-haute-loire#gentiane)** (*Gentiana lutea*) — la grande racine amère du Massif Central, récoltée entre 1 000 et 1 600 mètres d'altitude sur le plateau de la Margeride et les versants du Pilat. La cueillette est un métier rare : moins d'une centaine de **gentianaïres** professionnels en France, travaillant à la main avec la "fourche du Diable", un outil traditionnel permettant d'extraire la racine pivot sans fragmenter la plante. Nos partenaires récoltent en octobre-novembre, juste avant les premières gelées. Une journée de travail donne 30 à 50 kg de racines fraîches, qui deviennent environ 15 kg de gentiane séchée utilisable.
+La clé du Cerf'Gent, c'est la **[gentiane jaune](/blog/plantes-liqueur-haute-loire#gentiane)** (*Gentiana lutea*) — la grande racine amère de moyenne montagne, récoltée entre 1 000 et 1 600 mètres d'altitude. La cueillette est un métier rare : moins d'une centaine de **gentianaïres** professionnels en France, travaillant à la main avec la "fourche du Diable", un outil traditionnel permettant d'extraire la racine pivot sans fragmenter la plante. Nos partenaires récoltent en octobre-novembre, juste avant les premières gelées. Une journée de travail donne 30 à 50 kg de racines fraîches, qui deviennent environ 15 kg de gentiane séchée utilisable.
 
 L'[article sur nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) détaille le reste de la filière.
 
