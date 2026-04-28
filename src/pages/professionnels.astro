@@ -300,15 +300,17 @@ const eventFormats = [
         loop
         playsinline
         preload="metadata"
-        poster="/videos/atelier-brasserie-poster.webp"
+        poster="/videos/atelier-pro-poster.webp"
         aria-label="Dans l'atelier de la Brasserie des Plantes — Saint-Didier-en-Velay"
         class="w-full h-full object-cover"
       >
-        {/* WebM VP9 servi en priorité (Chrome, Firefox, Edge, Safari 16+)
-            — 2,9 MB vs 3,5 MB pour le MP4 = 17 % de bande passante en moins.
-            MP4 H.264 en fallback pour iOS/macOS Safari < 16 et legacy. */}
-        <source src="/videos/atelier-brasserie.webm" type="video/webm" />
-        <source src="/videos/atelier-brasserie.mp4" type="video/mp4" />
+        {/* Vidéo dédiée à la page Pros (RUSH_6 — Étienne accueillant une
+            visiteuse à l'atelier). WebM VP9 en priorité (Chrome, Firefox,
+            Edge, Safari 16+ — 2,9 MB), MP4 H.264 en fallback (3,5 MB) pour
+            iOS/macOS Safari < 16 et legacy. La page /ateliers utilise une
+            vidéo différente (atelier-brasserie.mp4). */}
+        <source src="/videos/atelier-pro.webm" type="video/webm" />
+        <source src="/videos/atelier-pro.mp4" type="video/mp4" />
       </video>
     </div>
   </section>
