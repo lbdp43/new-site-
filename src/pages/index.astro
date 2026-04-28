@@ -84,10 +84,13 @@ const localBusinessSchema = {
     { '@type': 'Country', name: 'Switzerland' },
     { '@type': 'Country', name: 'Luxembourg' },
   ],
-  // SIRET = identifiant fiscal français (taxID). PAS de vatID : un VAT
-  // intracommunautaire FR est calculé (FR + clé + SIREN), différent du
-  // SIRET. À ajouter le jour où LBDP fournit son numéro TVA réel.
+  // Identifiants légaux : taxID = SIRET (identifiant fiscal français),
+  // vatID = numéro TVA intracommunautaire FR (calculé à partir du SIREN
+  // selon l'algorithme officiel : FR + ((12 + 3 × (SIREN mod 97)) mod 97)
+  // + SIREN). Confirmé via API recherche-entreprises.api.gouv.fr le
+  // 2026-04-28.
   taxID: site.siret,
+  vatID: 'FR67899201529',
   // AggregateRating Google injecté seulement si Featurable a répondu OK.
   // Spread conditionnel : la propriété n'est pas émise du tout si null.
   ...(aggregateRating ? { aggregateRating } : {}),

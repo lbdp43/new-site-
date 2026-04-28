@@ -29,9 +29,18 @@ const schema = {
     <div class="max-w-3xl mx-auto px-6 prose prose-lg prose-headings:font-display prose-headings:text-forest-900 prose-h2:text-2xl prose-h2:mt-10 prose-a:text-forest-700 prose-strong:text-forest-900">
       <h2>Publisher</h2>
       <p>
-        <strong>{site.name}</strong><br />
-        Company ID (SIRET): {site.siret}<br />
-        Address: {site.address.street}, {site.address.postalCode} {site.address.city}, France<br />
+        <strong>Brasserie des Plantes</strong> (trade name: <em>{site.name}</em>)<br />
+        Simplified joint-stock company (SAS / Société par actions simplifiée under French law)<br />
+        Share capital: <em>to be completed</em><br />
+        SIREN: 899&nbsp;201&nbsp;529<br />
+        SIRET (head office): 89920152900018<br />
+        Trade register: RCS Le Puy-en-Velay 899&nbsp;201&nbsp;529<br />
+        Activity code (APE): 11.01Z (Distilled alcoholic beverages production)<br />
+        EU VAT number: FR67&nbsp;899&nbsp;201&nbsp;529<br />
+        Collective agreement: French food industry (IDCC 0493)<br />
+        Incorporation date: 15 May 2021<br />
+        Chair: NEMETIA (SIREN 941&nbsp;463&nbsp;119), legal entity<br />
+        Registered office: {site.address.street}, {site.address.postalCode} {site.address.city}, France<br />
         Phone: <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a><br />
         Email: <a href={`mailto:${site.email}`}>{site.email}</a>
       </p>

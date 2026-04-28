@@ -445,16 +445,28 @@ L'hébergeur déclaré était "Netlify, Inc." alors que `server: Vercel` dans le
 
 `/cgv` complète : rétractation 14j UE, frais de port, délais de livraison, garanties légales + vices cachés, médiateur consommation CNPM, loi française applicable, mention article L.3342-1.
 
-## ⚠️ À compléter par Guillaume avant la bascule
+## ✅ Mentions légales enrichies (28 avril, soir)
 
-L'audit a identifié 3 informations manquantes dans les mentions légales (non-bloquantes pour un site français existant en B2C, mais à compléter pour conformité stricte) :
+Données récupérées via l'API gouvernementale `recherche-entreprises.api.gouv.fr` à partir du SIREN 899 201 529 communiqué par Guillaume :
 
-1. **Forme juridique** de l'entreprise (SARL ? SAS ? EI ?)
-2. **Numéro RCS** + ville d'immatriculation
-3. **Capital social** (si SARL/SAS)
-4. **Numéro TVA intracommunautaire** (FR + clé + SIREN)
+| Champ | Valeur |
+|---|---|
+| Dénomination | Brasserie des Plantes (nom commercial : La Brasserie des Plantes) |
+| Forme juridique | SAS (Société par actions simplifiée), code INSEE 5710 |
+| SIREN | 899 201 529 |
+| SIRET (siège) | 89920152900018 |
+| RCS | Le Puy-en-Velay 899 201 529 |
+| Code APE | 11.01Z (Production de boissons alcooliques distillées) |
+| TVA intracommunautaire | FR67 899 201 529 (calculée selon l'algorithme officiel) |
+| Convention collective | Industries alimentaires (IDCC 0493) |
+| Date de création | 15 mai 2021 |
+| Présidence | NEMETIA (SIREN 941 463 119), personne morale |
+| Adresse siège | 18 Grand Place, 43140 Saint-Didier-en-Velay |
 
-Si Guillaume me les fournit, je les ajoute dans `/mentions-legales` et `/en/legal-notice` en 5 minutes.
+Le numéro de TVA a été ajouté dans le schema `LocalBusiness` (champ `vatID`) en plus du SIRET (`taxID`). Vérifié post-build : `"vatID": "FR67899201529"` injecté côté FR + EN.
+
+**Reste à compléter manuellement** (info non-publique via API) :
+- **Capital social** (montant en euros) — visible sur Pappers ou sur le K-bis. À me communiquer pour qu'on remplace l'`<em>à compléter</em>` actuel dans `/mentions-legales` et `/en/legal-notice`.
 
 ---
 
@@ -609,14 +621,11 @@ Voir `docs/bascule-www.md` section "À faire APRÈS la bascule" pour le détail.
 
 # À compléter par Guillaume
 
-Pour conformité stricte (recommandé mais non-bloquant immédiat) :
+Une seule info reste à compléter (non disponible via API publique) :
 
-1. **Forme juridique** de l'entreprise (SARL / SAS / EI) — à ajouter dans `/mentions-legales`
-2. **Numéro RCS** + ville d'immatriculation — idem
-3. **Capital social** (si applicable) — idem
-4. **Numéro TVA intracommunautaire** (FR + clé + SIREN) — idem + à exposer dans schema LocalBusiness
+- **Capital social** de la SAS Brasserie des Plantes (montant en euros). Visible sur Pappers, sur le K-bis ou dans les statuts. Une fois communiqué, je remplace l'`<em>à compléter</em>` dans `/mentions-legales` et `/en/legal-notice` en 30 secondes.
 
-À me communiquer dès que possible, je les intègre en 5 minutes.
+Tout le reste (forme juridique SAS, SIREN 899 201 529, SIRET, RCS Le Puy-en-Velay, code APE 11.01Z, TVA intracom FR67899201529, présidence NEMETIA, date création 15 mai 2021, adresse 18 Grand Place) a été récupéré via l'API gouvernementale officielle `recherche-entreprises.api.gouv.fr` à partir du SIREN, et intégré aux mentions légales FR + EN + au schema LocalBusiness des deux homes.
 
 ---
 

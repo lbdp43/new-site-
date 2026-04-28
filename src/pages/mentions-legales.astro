@@ -28,9 +28,18 @@ const schema = {
     <div class="max-w-3xl mx-auto px-6 prose prose-lg prose-headings:font-display prose-headings:text-forest-900 prose-h2:text-2xl prose-h2:mt-10 prose-a:text-forest-700 prose-strong:text-forest-900">
       <h2>Éditeur du site</h2>
       <p>
-        <strong>{site.name}</strong><br />
-        SIRET : {site.siret}<br />
-        Adresse : {site.address.street}, {site.address.postalCode} {site.address.city}, France<br />
+        <strong>Brasserie des Plantes</strong> (nom commercial : <em>{site.name}</em>)<br />
+        Société par actions simplifiée (SAS)<br />
+        Capital social : <em>à compléter</em><br />
+        SIREN : 899&nbsp;201&nbsp;529<br />
+        SIRET (siège) : 89920152900018<br />
+        RCS : Le Puy-en-Velay 899&nbsp;201&nbsp;529<br />
+        Code APE : 11.01Z (Production de boissons alcooliques distillées)<br />
+        TVA intracommunautaire : FR67&nbsp;899&nbsp;201&nbsp;529<br />
+        Convention collective : Industries alimentaires diverses (IDCC 0493)<br />
+        Date de création : 15 mai 2021<br />
+        Présidence : NEMETIA (SIREN 941&nbsp;463&nbsp;119), personne morale<br />
+        Adresse du siège : {site.address.street}, {site.address.postalCode} {site.address.city}, France<br />
         Téléphone : <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a><br />
         Email : <a href={`mailto:${site.email}`}>{site.email}</a>
       </p>

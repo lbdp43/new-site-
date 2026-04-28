@@ -741,15 +741,65 @@ cache-control (sur /images/*, /videos/*, /fonts/*): public, max-age=31536000, im
 </table>
 <h2 id="cgv-conforme">CGV ✅ CONFORME</h2>
 <p><code>/cgv</code> complète : rétractation 14j UE, frais de port, délais de livraison, garanties légales + vices cachés, médiateur consommation CNPM, loi française applicable, mention article L.3342-1.</p>
-<h2 id="a-completer-par-guillaume-avant-la-bascule">⚠️ À compléter par Guillaume avant la bascule</h2>
-<p>L'audit a identifié 3 informations manquantes dans les mentions légales (non-bloquantes pour un site français existant en B2C, mais à compléter pour conformité stricte) :</p>
-<ol>
-<li><strong>Forme juridique</strong> de l'entreprise (SARL ? SAS ? EI ?)</li>
-<li><strong>Numéro RCS</strong> + ville d'immatriculation</li>
-<li><strong>Capital social</strong> (si SARL/SAS)</li>
-<li><strong>Numéro TVA intracommunautaire</strong> (FR + clé + SIREN)</li>
-</ol>
-<p>Si Guillaume me les fournit, je les ajoute dans <code>/mentions-legales</code> et <code>/en/legal-notice</code> en 5 minutes.</p>
+<h2 id="mentions-legales-enrichies-28-avril-soir">✅ Mentions légales enrichies (28 avril, soir)</h2>
+<p>Données récupérées via l'API gouvernementale <code>recherche-entreprises.api.gouv.fr</code> à partir du SIREN 899 201 529 communiqué par Guillaume :</p>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Valeur</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dénomination</td>
+<td>Brasserie des Plantes (nom commercial : La Brasserie des Plantes)</td>
+</tr>
+<tr>
+<td>Forme juridique</td>
+<td>SAS (Société par actions simplifiée), code INSEE 5710</td>
+</tr>
+<tr>
+<td>SIREN</td>
+<td>899 201 529</td>
+</tr>
+<tr>
+<td>SIRET (siège)</td>
+<td>89920152900018</td>
+</tr>
+<tr>
+<td>RCS</td>
+<td>Le Puy-en-Velay 899 201 529</td>
+</tr>
+<tr>
+<td>Code APE</td>
+<td>11.01Z (Production de boissons alcooliques distillées)</td>
+</tr>
+<tr>
+<td>TVA intracommunautaire</td>
+<td>FR67 899 201 529 (calculée selon l'algorithme officiel)</td>
+</tr>
+<tr>
+<td>Convention collective</td>
+<td>Industries alimentaires (IDCC 0493)</td>
+</tr>
+<tr>
+<td>Date de création</td>
+<td>15 mai 2021</td>
+</tr>
+<tr>
+<td>Présidence</td>
+<td>NEMETIA (SIREN 941 463 119), personne morale</td>
+</tr>
+<tr>
+<td>Adresse siège</td>
+<td>18 Grand Place, 43140 Saint-Didier-en-Velay</td>
+</tr>
+</tbody>
+</table>
+<p>Le numéro de TVA a été ajouté dans le schema <code>LocalBusiness</code> (champ <code>vatID</code>) en plus du SIRET (<code>taxID</code>). Vérifié post-build : <code>"vatID": "FR67899201529"</code> injecté côté FR + EN.</p>
+<p><strong>Reste à compléter manuellement</strong> (info non-publique via API) :<br />
+- <strong>Capital social</strong> (montant en euros) — visible sur Pappers ou sur le K-bis. À me communiquer pour qu'on remplace l'<code>&lt;em&gt;à compléter&lt;/em&gt;</code> actuel dans <code>/mentions-legales</code> et <code>/en/legal-notice</code>.</p>
 <hr />
 <h1 id="13-plan-301-wpastro">13. Plan 301 WP→Astro</h1>
 <p><strong>Score : 100/100</strong> · 🟢 <strong>GO</strong> · CRITIQUE POUR LA BASCULE</p>
@@ -932,14 +982,11 @@ cache-control (sur /images/*, /videos/*, /fonts/*): public, max-age=31536000, im
 </ul>
 <hr />
 <h1 id="a-completer-par-guillaume">À compléter par Guillaume</h1>
-<p>Pour conformité stricte (recommandé mais non-bloquant immédiat) :</p>
-<ol>
-<li><strong>Forme juridique</strong> de l'entreprise (SARL / SAS / EI) — à ajouter dans <code>/mentions-legales</code></li>
-<li><strong>Numéro RCS</strong> + ville d'immatriculation — idem</li>
-<li><strong>Capital social</strong> (si applicable) — idem</li>
-<li><strong>Numéro TVA intracommunautaire</strong> (FR + clé + SIREN) — idem + à exposer dans schema LocalBusiness</li>
-</ol>
-<p>À me communiquer dès que possible, je les intègre en 5 minutes.</p>
+<p>Une seule info reste à compléter (non disponible via API publique) :</p>
+<ul>
+<li><strong>Capital social</strong> de la SAS Brasserie des Plantes (montant en euros). Visible sur Pappers, sur le K-bis ou dans les statuts. Une fois communiqué, je remplace l'<code>&lt;em&gt;à compléter&lt;/em&gt;</code> dans <code>/mentions-legales</code> et <code>/en/legal-notice</code> en 30 secondes.</li>
+</ul>
+<p>Tout le reste (forme juridique SAS, SIREN 899 201 529, SIRET, RCS Le Puy-en-Velay, code APE 11.01Z, TVA intracom FR67899201529, présidence NEMETIA, date création 15 mai 2021, adresse 18 Grand Place) a été récupéré via l'API gouvernementale officielle <code>recherche-entreprises.api.gouv.fr</code> à partir du SIREN, et intégré aux mentions légales FR + EN + au schema LocalBusiness des deux homes.</p>
 <hr />
 <h1 id="conclusion">Conclusion</h1>
 <p>Le site Astro <strong>est prêt pour la production</strong>. Les 15 catégories d'audit sont au vert, <strong>0 issue bloquante restante</strong>.</p>

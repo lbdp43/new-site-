@@ -70,9 +70,10 @@ const localBusinessSchema = {
     { '@type': 'Country', name: 'Switzerland' },
     { '@type': 'Country', name: 'Luxembourg' },
   ],
-  // SIRET en taxID seulement (cf. FR — vatID retiré, à ajouter quand LBDP
-  // fournira son numéro TVA intracommunautaire FR + clé + SIREN).
+  // taxID = SIRET, vatID = TVA intracom FR67899201529 (calculée à partir
+  // du SIREN, confirmée via API gouvernementale le 2026-04-28).
   taxID: site.siret,
+  vatID: 'FR67899201529',
   ...(aggregateRating ? { aggregateRating } : {}),
 };
 
