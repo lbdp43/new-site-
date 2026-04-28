@@ -39,7 +39,7 @@ wcId: 70
 order: 2
 ---
 
-Notre best-seller. L'Herbe des Druides est une liqueur à la **verveine**, à 28°, adoucie par le **serpolet** (thym sauvage de moyenne montagne) et épicée par le **carvi** (cumin des prés). Une expression florale, sauvage, où les notes épicées viennent tempérer l'alcool.
+Notre best-seller. L'Herbe des Druides est une **liqueur de verveine artisanale** à 28° d'alcool, adoucie par le **serpolet** (thym sauvage de moyenne montagne) et épicée par le **carvi** (cumin des prés). Une **liqueur naturelle** — sans arôme ni colorant ajouté — où la verveine et l'alcool dialoguent dans un équilibre floral, sauvage, tempéré par les notes épicées.
 
 ## Trois plantes, aucun arôme ajouté
 

@@ -1,0 +1,395 @@
+---
+/**
+ * Page-pilier YMYL : "Digestif naturel : les plantes qui aident à digérer"
+ *
+ * Cible SEO :
+ *  - "digestif naturel" (1-2.5k recherches/mois en France)
+ *  - "plante digestion" (1-3k/mois)
+ *  - longue traîne : "digestion plante", "infusion digestive", "tisane après repas"
+ *
+ * Volume potentiel cumulé : 3-5k visites organiques/mois quand bien classée.
+ *
+ * ⚠️ YMYL (Your Money Your Life — santé) : disclaimer médical obligatoire
+ *    en bas de page. Toutes les vertus sont présentées comme tradition
+ *    populaire / herboristerie, jamais comme allégation thérapeutique.
+ *    Lien vers source autorité (Vidal, OMS, monographies INRA) quand
+ *    pertinent.
+ *
+ * Schema émis : Article + FAQPage + BreadcrumbList. Ne PAS utiliser le
+ *    schema MedicalCondition (réservé aux contenus médicaux validés).
+ */
+
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+
+const title = "Digestif naturel : 7 plantes pour la digestion (guide complet)";
+const description = "Quelles plantes pour la digestion ? Verveine, gentiane, mélisse, carvi, anis, fenouil, camomille — guide des plantes digestives traditionnelles, leurs usages et nos liqueurs qui en contiennent. Le vrai digestif naturel français.";
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Digestif naturel', item: `${site.url}/digestif-naturel` },
+  ],
+};
+
+const faq = [
+  {
+    q: "Qu'est-ce qu'un digestif naturel ?",
+    a: "Un digestif naturel est une boisson — liqueur, infusion ou tisane — préparée à partir de plantes traditionnellement utilisées pour faciliter la digestion. La pharmacopée française reconnaît une vingtaine de plantes digestives, dont la verveine, la mélisse, la gentiane, le carvi, l'anis vert, le fenouil et la camomille. La plupart agissent en stimulant les sécrétions digestives (gentiane, racines amères) ou en calmant les spasmes intestinaux (mélisse, camomille).",
+  },
+  {
+    q: "Quelle est la meilleure plante pour digérer ?",
+    a: "Aucune plante n'est universellement « la meilleure » — chacune cible un inconfort différent. Pour stimuler la digestion (manque d'appétit, lourdeur en début de repas) : la gentiane jaune et le quinquina, très amers, sont les références traditionnelles. Pour calmer ballonnements et spasmes : le fenouil, l'anis vert et le carvi (carminatifs). Pour détendre après un repas riche : la verveine, la mélisse, la camomille (apaisantes).",
+  },
+  {
+    q: "Une liqueur digestive aide-t-elle vraiment à digérer ?",
+    a: "Les vertus digestives des plantes sont reconnues par la phytothérapie traditionnelle, mais les études cliniques sur la liqueur en tant que telle sont limitées. Ce qui est documenté : (1) les principes amers de la gentiane stimulent la sécrétion gastrique, (2) l'alcool en très petite quantité (4 cl) peut détendre la sphère gastrique, (3) la chaleur après ingestion accélère le ressenti de satiété. À nuancer : l'alcool excessif aggrave la digestion. Une liqueur digestive bien dosée (2-3 cl) reste un plaisir gastronomique avant tout, pas un médicament.",
+  },
+  {
+    q: "Quelles plantes éviter en cas de digestion difficile ?",
+    a: "Certaines plantes peuvent aggraver les remontées acides ou les ulcères : la menthe poivrée (relâche le sphincter œsophagien — à éviter en cas de RGO), la réglisse (à fortes doses, peut aggraver l'hypertension), l'absinthe (à éviter pendant la grossesse). Les liqueurs riches en alcool (>40°) peuvent aussi irriter une muqueuse fragile. En cas de troubles digestifs persistants, consultez un médecin avant d'utiliser des plantes en automédication.",
+  },
+  {
+    q: "Tisane ou liqueur — quelle différence pour la digestion ?",
+    a: "La tisane (infusion à l'eau chaude) extrait les principes hydrosolubles (tanins, certaines huiles essentielles, polyphénols). La liqueur (macération alcoolique) extrait davantage de principes lipophiles (huiles essentielles, alcaloïdes amers, résines). Pour les plantes amères digestives (gentiane, quinquina, angélique), la macération alcoolique est plus puissante. Pour les plantes apaisantes (mélisse, camomille, verveine), les deux supports fonctionnent. La liqueur a l'avantage du dosage précis et de la conservation longue.",
+  },
+  {
+    q: "À quel moment prendre un digestif naturel ?",
+    a: "Le timing classique est en fin de repas, après le dessert et le café — c'est le moment où l'estomac entame la phase de vidange et où le foie travaille le plus. Une liqueur amère (gentiane) prise 5-10 min après le dernier plat fluidifie la sensation de lourdeur. À jeûne, certaines plantes amères (chardon-Marie, artichaut) sont aussi utilisées en infusion 15-20 min avant le repas pour stimuler l'appétit.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Digestif naturel : 7 plantes pour la digestion',
+  description,
+  author: { '@id': `${site.url}#localbusiness` },
+  publisher: { '@id': `${site.url}#localbusiness` },
+  datePublished: '2026-04-28',
+  dateModified: '2026-04-28',
+  inLanguage: 'fr-FR',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${site.url}/digestif-naturel`,
+  },
+};
+
+const schema = [breadcrumb, articleSchema, faqSchema];
+
+// 7 plantes digestives, ordre : usage le plus emblématique d'abord
+const plantes = [
+  {
+    nom: 'Verveine',
+    latin: 'Aloysia citrodora / Verbena officinalis',
+    role: 'Apaisante, antispasmodique légère',
+    detail:
+      "La verveine est la plante d'après-repas la plus universelle en France. Citronnée et fraîche, elle détend la sphère digestive et calme les ballonnements liés au stress. Tradition documentée depuis l'Antiquité (Pline l'Ancien, naturaliste romain) — usage validé par la pharmacopée française moderne pour les troubles digestifs mineurs d'origine nerveuse.",
+    danslesnotres:
+      "Présente dans **L'Herbe des Druides** (notre best-seller à 28°), **L'Alchimie Végétale** (1 des 27 plantes), et la **Verveine CBD Aurone** (gamme Lumière Obscure).",
+    productSlug: 'herbe-des-druides',
+  },
+  {
+    nom: 'Gentiane jaune',
+    latin: 'Gentiana lutea',
+    role: 'Tonique amère, stimule sécrétions digestives',
+    detail:
+      "La racine de gentiane est la référence des amers européens. Son principe actif principal, l'amarogentine, est l'une des molécules les plus amères connues — détectable au palais à 1/58 millionième. Cette amertume stimule la sécrétion de salive, de sucs gastriques et de bile. Indication : digestion paresseuse, manque d'appétit.",
+    danslesnotres:
+      "Cœur de notre **Cerf'Gent** (Médaille d'Or Salon de l'Agriculture 2025), 15° d'alcool, dosage moins sucré que les gentianes industrielles. Aussi présente dans L'Alchimie Végétale.",
+    productSlug: 'cerf-gent',
+  },
+  {
+    nom: 'Mélisse',
+    latin: 'Melissa officinalis',
+    role: 'Calmante, antispasmodique digestive',
+    detail:
+      "Plante incontournable des herboristeries depuis le Moyen Âge — la fameuse « Eau de mélisse des Carmes » (1611) reste l'une des préparations digestives les plus anciennes encore commercialisées. La mélisse calme les spasmes intestinaux, atténue les nausées et les digestions difficiles d'origine nerveuse. Compatible avec les enfants et les personnes âgées (en infusion).",
+    danslesnotres:
+      "Présente dans **La Lime des Prés** (où elle remplace le citron pour un apéritif léger 18°) et dans L'Alchimie Végétale.",
+    productSlug: 'lime-des-pres',
+  },
+  {
+    nom: 'Carvi',
+    latin: 'Carum carvi',
+    role: 'Carminatif (anti-ballonnements)',
+    detail:
+      "Souvent confondu avec le cumin (d'où son nom de « cumin des prés »), le carvi est une ombellifère dont les graines sont utilisées en médecine traditionnelle scandinave et germanique pour réduire les flatulences et les ballonnements. Il fait partie des fameux « 4 graines carminatives » avec l'anis vert, le fenouil et la coriandre.",
+    danslesnotres:
+      "Présent dans **L'Herbe des Druides** (avec verveine et serpolet) où il pose la structure épicée. Aussi dans Le Gorgeon des Machurés.",
+    productSlug: 'herbe-des-druides',
+  },
+  {
+    nom: 'Anis vert',
+    latin: 'Pimpinella anisum',
+    role: 'Carminatif, anti-spasmodique',
+    detail:
+      "Connu depuis l'Égypte antique, l'anis vert est la plante carminative la plus consommée au monde — racine de tous les anisés (pastis, ouzo, sambuca, raki). Ses propriétés digestives sont reconnues par la pharmacopée européenne : il facilite l'expulsion des gaz intestinaux et calme les spasmes gastriques. Souvent associé au fenouil pour amplifier l'effet.",
+    danslesnotres:
+      "Une des 27 plantes de notre **Alchimie Végétale**, où il participe au cœur épicé.",
+    productSlug: 'alchimie-vegetale',
+  },
+  {
+    nom: 'Fenouil',
+    latin: 'Foeniculum vulgare',
+    role: 'Carminatif, antispasmodique',
+    detail:
+      "Cousin de l'anis et de l'aneth, le fenouil partage leurs propriétés digestives avec une note plus végétale et moins anisée. La graine est traditionnellement mâchée après les repas dans la cuisine indienne (mukhwas) — geste qui combine rafraîchissement de l'haleine et facilitation digestive. Reconnu par la pharmacopée européenne pour le traitement symptomatique des troubles digestifs mineurs.",
+    danslesnotres:
+      "Présent en assemblage subtil dans plusieurs cuvées de la gamme.",
+    productSlug: null,
+  },
+  {
+    nom: 'Camomille',
+    latin: 'Matricaria chamomilla / Chamaemelum nobile',
+    role: 'Anti-inflammatoire intestinal, calmante',
+    detail:
+      "Deux espèces commercialisées : la camomille allemande (Matricaria) et la camomille romaine (Chamaemelum), aux propriétés similaires. Reconnue depuis l'Antiquité égyptienne, elle est aujourd'hui la plante apaisante la plus étudiée scientifiquement. Indications digestives : ballonnements, légères douleurs gastriques, nausées de la grossesse (en infusion légère, à valider avec un médecin).",
+    danslesnotres:
+      "Une des fleurs de **L'Alchimie Végétale**, où elle apporte la rondeur. Aussi dans Le Nectar d'Ostara.",
+    productSlug: 'alchimie-vegetale',
+  },
+];
+---
+<Layout
+  title={title}
+  description={description}
+  schema={schema}
+>
+  <!-- Breadcrumb -->
+  <div class="bg-cream-50 py-5 border-b border-forest-100/60">
+    <div class="max-w-5xl mx-auto px-6 text-xs text-ink-500">
+      <a href="/" class="hover:text-forest-700">Accueil</a>
+      <span class="mx-2">/</span>
+      <span class="text-forest-700">Digestif naturel</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-b from-cream-100 via-cream-50 to-white py-20 md:py-28">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-xs uppercase tracking-[0.3em] text-forest-600 font-medium mb-4">
+        Guide complet
+      </div>
+      <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-forest-900 mb-6 leading-[1.1]">
+        Digestif <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">naturel</em>
+      </h1>
+      <p class="text-lg md:text-xl text-ink-700 leading-relaxed max-w-3xl">
+        Verveine, gentiane, mélisse, carvi, anis, fenouil, camomille —
+        sept plantes pour la digestion, leurs propriétés traditionnelles
+        documentées par la phytothérapie européenne, et nos liqueurs
+        artisanales qui en contiennent. Le vrai digestif naturel français,
+        sans arôme, sans colorant, juste l'alcool, l'eau et les plantes.
+      </p>
+    </div>
+  </section>
+
+  <!-- Intro générale -->
+  <section class="py-16 bg-white border-y border-forest-100/60">
+    <div class="max-w-3xl mx-auto px-6 prose prose-lg max-w-none
+                prose-headings:font-display prose-headings:text-forest-900
+                prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:tracking-tight
+                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-ink-700 prose-p:leading-relaxed
+                prose-a:text-forest-700 prose-a:underline prose-a:decoration-forest-300 prose-a:underline-offset-4
+                prose-strong:text-forest-900 prose-strong:font-medium">
+      <p>
+        En France, le réflexe d'un digestif naturel après un repas riche
+        est ancré dans la tradition gastronomique. Une infusion de verveine,
+        un fond de gentiane, deux feuilles de mélisse mâchées — chaque
+        région a ses gestes. Cette page rassemble <strong>les sept plantes
+        digestives les plus efficaces et les mieux documentées</strong>,
+        avec pour chacune un usage traditionnel, le mode d'action connu,
+        et nos liqueurs artisanales qui en contiennent.
+      </p>
+      <p>
+        L'usage des plantes pour la digestion est encadré par la
+        <a href="https://ansm.sante.fr/" target="_blank" rel="noopener">pharmacopée française</a>
+        et par les
+        <a href="https://www.ema.europa.eu/en/medicines/herbal" target="_blank" rel="noopener">monographies de l'EMA (European Medicines Agency)</a>,
+        qui reconnaissent les propriétés digestives de la verveine, la
+        mélisse, la gentiane, le carvi, l'anis, le fenouil et la camomille
+        au titre du « usage traditionnel bien établi ». Ce qui ne veut pas
+        dire « médicament » — mais « plante dont l'usage régulier sur
+        plusieurs siècles documente les effets digestifs ».
+      </p>
+    </div>
+  </section>
+
+  <!-- Plantes — fiches détaillées -->
+  <section class="py-16 bg-cream-50/40">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+          Le top 7
+        </div>
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight">
+          Sept plantes pour <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">la digestion</em>
+        </h2>
+      </div>
+
+      <div class="space-y-8">
+        {plantes.map((p, idx) => (
+          <article class="bg-white border border-forest-100/60 rounded-2xl p-6 md:p-8 hover:shadow-cream-lg transition-shadow">
+            <div class="flex items-baseline gap-3 mb-2">
+              <span class="font-display text-3xl text-gold-600">{idx + 1}</span>
+              <h3 class="font-display text-2xl md:text-3xl text-forest-900 leading-tight">{p.nom}</h3>
+            </div>
+            <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-ink-500 mb-4">
+              <span class="italic">{p.latin}</span>
+              <span class="text-forest-700 font-medium">{p.role}</span>
+            </div>
+            <p class="text-ink-700 leading-relaxed mb-3">{p.detail}</p>
+            <p class="text-sm text-ink-700 leading-relaxed pt-3 border-t border-forest-100/60" set:html={
+              p.danslesnotres.replace(/\*\*([^*]+)\*\*/g, '<strong class="font-medium text-forest-900">$1</strong>')
+            }>
+            </p>
+            {p.productSlug && (
+              <div class="mt-4">
+                <a
+                  href={`/boutique/${p.productSlug}`}
+                  class="inline-flex items-center gap-2 text-sm font-medium text-forest-700 hover:text-forest-900 transition-colors"
+                >
+                  Voir le produit
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tableau récap -->
+  <section class="py-16 bg-white border-y border-forest-100/60">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl text-forest-900 mb-3">
+        Tableau récapitulatif
+      </h2>
+      <p class="text-sm text-ink-500 mb-6 italic">
+        Choisir la plante selon le type d'inconfort digestif.
+      </p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b-2 border-forest-200 text-left">
+              <th class="py-3 pr-4 font-display text-forest-900">Inconfort</th>
+              <th class="py-3 pr-4 font-display text-forest-900">Plantes recommandées</th>
+              <th class="py-3 font-display text-forest-900">Notre liqueur</th>
+            </tr>
+          </thead>
+          <tbody class="text-ink-700">
+            <tr class="border-b border-forest-100">
+              <td class="py-3 pr-4 align-top">Manque d'appétit, digestion paresseuse</td>
+              <td class="py-3 pr-4 align-top">Gentiane, quinquina, artichaut</td>
+              <td class="py-3 align-top"><a href="/boutique/cerf-gent" class="text-forest-700 underline decoration-forest-300">Cerf'Gent</a></td>
+            </tr>
+            <tr class="border-b border-forest-100">
+              <td class="py-3 pr-4 align-top">Ballonnements, gaz</td>
+              <td class="py-3 pr-4 align-top">Anis, fenouil, carvi, coriandre</td>
+              <td class="py-3 align-top"><a href="/boutique/herbe-des-druides" class="text-forest-700 underline decoration-forest-300">Herbe des Druides</a></td>
+            </tr>
+            <tr class="border-b border-forest-100">
+              <td class="py-3 pr-4 align-top">Repas riche, lourdeur</td>
+              <td class="py-3 pr-4 align-top">Verveine, menthe, mélisse</td>
+              <td class="py-3 align-top"><a href="/boutique/alchimie-vegetale" class="text-forest-700 underline decoration-forest-300">Alchimie Végétale</a></td>
+            </tr>
+            <tr class="border-b border-forest-100">
+              <td class="py-3 pr-4 align-top">Digestion difficile d'origine nerveuse</td>
+              <td class="py-3 pr-4 align-top">Mélisse, verveine, camomille</td>
+              <td class="py-3 align-top"><a href="/boutique/lime-des-pres" class="text-forest-700 underline decoration-forest-300">La Lime des Prés</a></td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 align-top">Repas exceptionnel, longue dégustation</td>
+              <td class="py-3 pr-4 align-top">Assemblage 27 plantes</td>
+              <td class="py-3 align-top"><a href="/boutique/alchimie-vegetale" class="text-forest-700 underline decoration-forest-300">Alchimie Végétale</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 bg-cream-50">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">FAQ</div>
+      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-10 leading-tight">
+        Questions <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">fréquentes</em>
+      </h2>
+      <div class="space-y-6">
+        {faq.map((item) => (
+          <details class="group bg-white border border-forest-100/60 rounded-xl">
+            <summary class="cursor-pointer list-none flex items-start justify-between gap-4 p-5 md:p-6">
+              <h3 class="font-display text-lg md:text-xl text-forest-900 leading-tight pr-2">
+                {item.q}
+              </h3>
+              <svg class="flex-none w-5 h-5 text-forest-700 transition-transform group-open:rotate-45 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </summary>
+            <p class="px-5 md:px-6 pb-5 md:pb-6 text-ink-700 leading-relaxed">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer YMYL + L'abus dangereux -->
+  <section class="py-12 bg-white border-y border-forest-100/60">
+    <div class="max-w-3xl mx-auto px-6 space-y-4">
+      <div class="text-xs italic border-l-4 border-gold-500 pl-4 bg-gold-500/5 py-3 text-ink-700 leading-relaxed">
+        <strong class="not-italic font-medium text-forest-900">Avertissement médical.</strong>
+        Les informations de cette page reposent sur les usages traditionnels
+        documentés par la phytothérapie européenne et la pharmacopée française.
+        Elles ne constituent pas un avis médical et ne remplacent pas la
+        consultation d'un professionnel de santé. En cas de troubles digestifs
+        persistants, de grossesse, d'allaitement, ou de traitement médicamenteux
+        en cours, demandez conseil à votre médecin ou pharmacien avant l'usage
+        régulier de plantes.
+      </div>
+      <div class="text-xs italic border-l-4 border-forest-500 pl-4 bg-forest-50 py-3 text-ink-700 leading-relaxed">
+        <strong class="not-italic font-medium text-forest-900">L'abus d'alcool est dangereux pour la santé,
+        à consommer avec modération.</strong>
+        Vente d'alcool interdite aux mineurs. Une liqueur digestive est un
+        plaisir gastronomique, pas un médicament. Dose recommandée : 2 à 4 cl
+        par verre, en fin de repas.
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA boutique -->
+  <section class="py-16 bg-forest-900 text-cream-100 text-center">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="font-display text-3xl md:text-4xl mb-6 leading-tight">
+        Notre gamme de digestifs naturels
+      </h2>
+      <p class="text-cream-200/90 leading-relaxed mb-8 max-w-2xl mx-auto">
+        Dix-huit liqueurs artisanales, fabriquées à la main en Haute-Loire,
+        à partir d'une quarantaine de plantes — la plupart en agriculture
+        biologique. Sans arôme, sans colorant. Le vrai digestif naturel
+        français.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/boutique" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 text-forest-900 hover:bg-cream-100 font-medium transition-colors">
+          Voir toute la gamme
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="/liqueur-digestive" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream-100/40 text-cream-100 hover:bg-cream-100/10 font-medium transition-colors">
+          Notre guide liqueur digestive
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
