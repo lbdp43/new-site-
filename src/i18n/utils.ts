@@ -114,40 +114,100 @@ export function getHreflangLinks(currentPath: string, currentLang: Lang, siteUrl
 
 /**
  * Vérifie si une page existe dans une langue donnée.
- * Utile pour le language switcher : si la page EN n'existe pas, on masque le switch
- * ou on redirige vers la home EN.
+ * Utile pour le language switcher + l'émission des hreflang dans
+ * `getHreflangLinks` : si la page EN n'existe pas, on masque le switch
+ * et on n'émet PAS de hreflang vers une page 404.
  *
- * Note : liste statique car Astro ne permet pas l'introspection runtime des pages.
- * À maintenir à jour quand on ajoute des pages traduites.
+ * ⚠️ Bug historique fixé le 2026-04-28 : un `startsWith(p + '/')` trop
+ * laxiste matchait `/en/journal/n-importe-quoi` dès lors que `/en/journal`
+ * était dans la liste, ce qui faisait émettre 19 hreflang vers des
+ * articles inexistants (404 confirmée). Désormais, les slugs blog/shop
+ * sont listés explicitement et la comparaison est exacte.
+ *
+ * Liste statique (Astro ne permet pas l'introspection runtime des pages).
+ * À maintenir à jour quand on ajoute une page traduite — sinon les
+ * hreflang ne seront pas émis (silencieusement, pas d'erreur de build).
  */
+
+// Articles de blog traduits EN — miroir exact de `src/content/blog-en/*.md`.
+// 9 articles à date (28/04/2026). Les autres articles FR (28 au total)
+// n'émettent PAS de hreflang en attendant leur traduction.
+const enBlogSlugs = [
+  'alchimie-vegetale-27-plantes-composition',
+  'cbd-et-plantes-lumiere-obscure',
+  'choisir-liqueur-artisanale-guide',
+  'liqueur-artisanale-vs-industrielle',
+  'meilleur-digestif-du-monde-2025',
+  'plantes-liqueur-haute-loire',
+  'plantes-oubliees-du-velay',
+  'producteurs-partenaires-bio-velay',
+  'trois-amis-une-brasserie',
+] as const;
+
+// Fiches produit traduites EN — miroir exact de `src/content/products/*.md`
+// (tous les produits sont traduits, mêmes slugs FR/EN à date).
+const enShopSlugs = [
+  'absinthe-cbd-citron',
+  'alchimie-cuvee-michel',
+  'alchimie-vegetale',
+  'cerf-gent',
+  'coffret-initiation',
+  'essence-des-alpes',
+  'flasque-entonnoir',
+  'fleche-ardente',
+  'gorgeon-des-machures',
+  'herbe-des-druides',
+  'herbe-druides-fut-chene',
+  'lime-des-pres',
+  'menthe-cbd-ortie',
+  'menthor',
+  'nectar-ostara',
+  'pralicoquine',
+  'verveine-cbd-aurone',
+  'zeleste',
+] as const;
+
 export const translatedPages: Record<Lang, string[]> = {
   fr: [], // toutes les pages FR existent par défaut
   en: [
     '/en/',
-    '/en/our-story',
-    '/en/shop',
-    '/en/dark-light',
-    '/en/our-plants',
-    '/en/cocktails',
-    '/en/workshops',
-    '/en/trade',
-    '/en/contact',
-    '/en/journal',
-    '/en/faq',
-    '/en/press',
-    '/en/legal-notice',
-    '/en/terms-of-sale',
-    '/en/cookie-policy',
-    '/en/build-your-gift-box',
+    '/en/our-story/',
+    '/en/shop/',
+    '/en/dark-light/',
+    '/en/our-plants/',
+    '/en/cocktails/',
+    '/en/workshops/',
+    '/en/trade/',
+    '/en/contact/',
+    '/en/journal/',
+    '/en/faq/',
+    '/en/press/',
+    '/en/legal-notice/',
+    '/en/terms-of-sale/',
+    '/en/cookie-policy/',
+    '/en/build-your-gift-box/',
+    // Articles blog EN — slugs explicites
+    ...enBlogSlugs.map((s) => `/en/journal/${s}/`),
+    ...enBlogSlugs.map((s) => `/en/journal/${s}`),
+    // Fiches produit EN — slugs explicites
+    ...enShopSlugs.map((s) => `/en/shop/${s}/`),
+    ...enShopSlugs.map((s) => `/en/shop/${s}`),
   ],
   // ES et IT : seule la home existe pour l'instant. Étendre cette liste à
-  // chaque nouvelle page traduite (sinon les hreflang ne seront pas émis).
+  // chaque nouvelle page traduite.
   es: ['/es/'],
   it: ['/it/'],
 };
 
+/**
+ * Match exact (avec et sans trailing slash). Plus de match laxiste par
+ * préfixe — on liste explicitement chaque slug blog/shop traduit.
+ */
 export function hasTranslation(frPath: string, targetLang: Lang): boolean {
   if (targetLang === 'fr') return true;
   const translated = localizedPath(frPath, targetLang);
-  return translatedPages[targetLang].some((p) => p === translated || translated.startsWith(p + '/'));
+  // Normalise en variant avec slash et sans
+  const withSlash = translated.endsWith('/') ? translated : translated + '/';
+  const withoutSlash = translated.endsWith('/') ? translated.slice(0, -1) : translated;
+  return translatedPages[targetLang].some((p) => p === withSlash || p === withoutSlash);
 }

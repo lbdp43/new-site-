@@ -11,6 +11,15 @@ const schema = {
   inLanguage: 'fr-FR',
 };
 
+// État au 28 avril 2026 : le site n'utilise QUE des cookies strictement
+// nécessaires (essentiels), aucun script tiers de mesure d'audience ni de
+// marketing n'est chargé. La CNIL n'exige pas de bandeau de consentement
+// dans ce cas. Si on ajoute un jour Google Analytics, Meta Pixel ou autre
+// tracking non-essentiel, il faudra :
+//   1. Réintroduire les lignes ci-dessous
+//   2. Implémenter un bandeau de consentement granulaire (Klaro!,
+//      Tarteaucitron, Axeptio, Didomi…)
+//   3. Conditionner le chargement du script tiers à l'opt-in
 const cookies = [
   {
     name: 'lbdp_age_gate',
@@ -27,18 +36,18 @@ const cookies = [
     consent: false,
   },
   {
-    name: '_ga, _ga_*',
-    purpose: "Mesure d'audience anonymisée via Google Analytics 4 (IP anonymisée, pas de cross-site).",
-    type: 'Mesure d\'audience',
-    duration: '13 mois maximum (norme CNIL)',
-    consent: true,
+    name: 'lbdp-coffret-v2',
+    purpose: 'Mémorise la composition de votre coffret personnalisé en cours.',
+    type: 'Fonctionnel — strictement nécessaire',
+    duration: 'Permanent (effaçable depuis le configurateur)',
+    consent: false,
   },
   {
-    name: 'fbp',
-    purpose: 'Meta Pixel — uniquement si vous avez donné votre consentement (reciblage publicitaire).',
-    type: 'Marketing / réseaux sociaux',
-    duration: '3 mois',
-    consent: true,
+    name: 'lbdp-recently-viewed-v1',
+    purpose: 'Mémorise les fiches produit que vous avez consultées (max 6) pour la section "Vu récemment".',
+    type: 'Fonctionnel — strictement nécessaire',
+    duration: 'Permanent (effaçable depuis le navigateur)',
+    consent: false,
   },
 ];
 ---
@@ -64,7 +73,10 @@ const cookies = [
 
       <h2>Notre principe</h2>
       <p>
-        Nous utilisons le <strong>strict minimum</strong> de cookies nécessaires pour que le site fonctionne bien. Les cookies non essentiels (mesure d'audience, marketing) ne sont activés <strong>qu'avec votre consentement explicite</strong>, que vous pouvez retirer à tout moment depuis ce bandeau.
+        Nous utilisons le <strong>strict minimum</strong> de cookies nécessaires pour que le site fonctionne bien : panier, confirmation d'âge, configurateur de coffret, dernières fiches consultées. <strong>Aucun cookie de mesure d'audience (Google Analytics, Matomo…) ni de marketing/reciblage (Meta Pixel, Google Ads…) n'est utilisé sur ce site</strong>. Conformément aux recommandations CNIL, aucun bandeau de consentement n'est requis dans ce cas.
+      </p>
+      <p>
+        Si nous décidons un jour d'activer un outil de mesure d'audience ou de marketing, nous mettrons en place <strong>un bandeau de consentement granulaire opt-in</strong> respectant les recommandations CNIL (refuser aussi accessible qu'accepter, choix par finalité), et cette page sera mise à jour en conséquence.
       </p>
 
       <h2>Cookies utilisés sur ce site</h2>
@@ -102,17 +114,16 @@ const cookies = [
 
       <h2>Gérer mes préférences</h2>
       <p>
-        Vous pouvez à tout moment :
+        Étant donné que tous les cookies utilisés sont strictement nécessaires au fonctionnement du site, il n'y a pas de choix de préférences à effectuer. Vous pouvez en revanche :
       </p>
       <ul>
-        <li>Modifier votre choix via le bouton <strong>« Préférences cookies »</strong> en pied de page.</li>
-        <li>Supprimer les cookies déjà stockés depuis les réglages de votre navigateur (<a href="https://support.google.com/accounts/answer/61416" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies-preferences" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.microsoft.com/fr-fr/windows/supprimer-et-g%C3%A9rer-les-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Edge</a>).</li>
-        <li>Activer l'option « Do Not Track » de votre navigateur : nous la respectons automatiquement.</li>
+        <li>Supprimer les cookies déjà stockés depuis les réglages de votre navigateur (<a href="https://support.google.com/accounts/answer/61416" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies-preferences" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.microsoft.com/fr-fr/windows/supprimer-et-g%C3%A9rer-les-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Edge</a>). Le site continuera à fonctionner mais vous devrez reconfirmer votre âge à votre prochaine visite et votre panier sera vide.</li>
+        <li>Activer l'option « Do Not Track » de votre navigateur : nous la respectons automatiquement (sans impact ici puisque nous ne traçons pas).</li>
       </ul>
 
       <h2>Transfert de données hors UE</h2>
       <p>
-        Certains outils tiers (Google Analytics, Meta) peuvent transférer des données aux États-Unis. Ces transferts sont encadrés par les <strong>Clauses contractuelles types (SCC)</strong> adoptées par la Commission européenne, et ne sont actifs qu'avec votre consentement.
+        Le paiement est traité par <strong>Stripe (États-Unis)</strong> via WooPayments. Ce transfert est encadré par les <strong>Clauses contractuelles types (SCC)</strong> adoptées par la Commission européenne. Aucune autre donnée personnelle n'est transférée hors UE par ce site dans son fonctionnement nominal.
       </p>
 
       <h2>Vos droits</h2>

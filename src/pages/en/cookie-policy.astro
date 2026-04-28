@@ -11,6 +11,9 @@ const schema = {
   inLanguage: 'en-US',
 };
 
+// As of April 28, 2026: the site uses ONLY strictly necessary cookies.
+// No third-party analytics or marketing scripts are loaded. CNIL does
+// not require a consent banner in this case.
 const cookies = [
   {
     name: 'lbdp_age_gate',
@@ -27,18 +30,18 @@ const cookies = [
     consent: false,
   },
   {
-    name: '_ga, _ga_*',
-    purpose: 'Anonymised audience measurement via Google Analytics 4 (anonymised IP, no cross-site tracking).',
-    type: 'Audience measurement',
-    duration: '13 months max (CNIL standard)',
-    consent: true,
+    name: 'lbdp-coffret-v2',
+    purpose: 'Stores your in-progress custom gift box composition.',
+    type: 'Functional — strictly necessary',
+    duration: 'Permanent (clearable from configurator)',
+    consent: false,
   },
   {
-    name: 'fbp',
-    purpose: 'Meta Pixel — only if you have given your consent (ad retargeting).',
-    type: 'Marketing / social media',
-    duration: '3 months',
-    consent: true,
+    name: 'lbdp-recently-viewed-v1',
+    purpose: 'Stores recently viewed product pages (max 6) for the "Recently viewed" section.',
+    type: 'Functional — strictly necessary',
+    duration: 'Permanent (clearable from browser)',
+    consent: false,
   },
 ];
 ---
@@ -65,7 +68,10 @@ const cookies = [
 
       <h2>Our approach</h2>
       <p>
-        We use the <strong>strict minimum</strong> of cookies needed for the site to work properly. Non-essential cookies (audience measurement, marketing) are only activated <strong>with your explicit consent</strong>, which you can withdraw at any time from the banner.
+        We use the <strong>strict minimum</strong> of cookies needed for the site to work properly: cart, age confirmation, gift box configurator, recently viewed products. <strong>No audience measurement (Google Analytics, Matomo…) or marketing/retargeting cookies (Meta Pixel, Google Ads…) are used on this site</strong>. In line with CNIL recommendations, no consent banner is required in this case.
+      </p>
+      <p>
+        Should we ever activate an audience measurement or marketing tool, we will implement <strong>a granular opt-in consent banner</strong> following CNIL recommendations (refuse as accessible as accept, choice per purpose), and this page will be updated accordingly.
       </p>
 
       <h2>Cookies used on this site</h2>
@@ -103,17 +109,16 @@ const cookies = [
 
       <h2>Manage my preferences</h2>
       <p>
-        At any time you can:
+        Since all cookies used are strictly necessary, there is no preference choice to make. You can however:
       </p>
       <ul>
-        <li>Change your choice via the <strong>"Cookie preferences"</strong> button in the footer.</li>
-        <li>Delete already-stored cookies from your browser settings (<a href="https://support.google.com/accounts/answer/61416" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.microsoft.com/en-us/windows/delete-and-manage-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Edge</a>).</li>
-        <li>Enable "Do Not Track" in your browser: we honour it automatically.</li>
+        <li>Delete already-stored cookies from your browser settings (<a href="https://support.google.com/accounts/answer/61416" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.microsoft.com/en-us/windows/delete-and-manage-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Edge</a>). The site will keep working but you'll have to confirm your age again on next visit and your cart will be empty.</li>
+        <li>Enable "Do Not Track" in your browser: we honour it automatically (no-op here since we don't track).</li>
       </ul>
 
       <h2>Data transfer outside the EU</h2>
       <p>
-        Some third-party tools (Google Analytics, Meta) may transfer data to the United States. These transfers are covered by the <strong>Standard Contractual Clauses (SCC)</strong> adopted by the European Commission, and are only active with your consent.
+        Payment is processed by <strong>Stripe (United States)</strong> via WooPayments. This transfer is covered by the <strong>Standard Contractual Clauses (SCC)</strong> adopted by the European Commission. No other personal data is transferred outside the EU by this site in nominal operation.
       </p>
 
       <h2>Your rights</h2>
