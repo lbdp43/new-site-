@@ -53,49 +53,87 @@ const breadcrumb = {
     </div>
   </section>
 
-  <!-- Viewer PDF — iframe avec toolbar désactivée. Le `#toolbar=0&navpanes=0`
-       masque l'UI native (incluant le bouton download) dans Chrome/Edge/Firefox.
-       Sur Safari iOS/macOS le paramètre est ignoré (PDF viewer différent) —
-       accepté comme compromis (lecture en ligne fluide prioritaire sur DRM).
-
-       `view=Fit` = page entière (pas `FitH` qui étirait à la largeur écran
-       et rendait le PDF illisible sur grand moniteur). L'iframe est bornée
-       à 960 px max centrée : rendu "lecteur de document" classique, lisible
-       sans zoom sur tous les formats d'écran. -->
+  <!-- Viewer PDF — deux rendus distincts selon le device :
+       Desktop (md+) : <object>/<iframe> PDF avec toolbar désactivée.
+       Mobile (<md)  : gros bouton "Ouvrir le catalogue" qui déclenche le
+                       viewer PDF natif du téléphone. Les navigateurs mobile
+                       (Chrome Android, Safari iOS) BLOQUENT l'iframe/object
+                       PDF depuis 2023 → "Ce contenu est bloqué" au lieu du
+                       PDF. Le fallback dans <object> ne se déclenche pas
+                       non plus car techniquement l'iframe est "chargée",
+                       juste bloquée par le navigateur. Seule solution UX
+                       propre : afficher directement le lien plein écran. -->
   <section
     id="catalogue-viewer"
     class="relative bg-forest-950 select-none py-6 md:py-8"
     oncontextmenu="return false;"
   >
-    <object
-      data="/catalogues/catalogue-pro-2025.pdf#toolbar=0&navpanes=0&scrollbar=1&view=Fit"
-      type="application/pdf"
-      title="Catalogue professionnels 2025 — La Brasserie des Plantes"
-      class="block w-full mx-auto border-0 shadow-2xl rounded-sm bg-white"
-      style="max-width: 960px; height: calc(100vh - 140px);"
-    >
-      <iframe
-        src="/catalogues/catalogue-pro-2025.pdf#toolbar=0&navpanes=0&scrollbar=1&view=Fit"
+    <!-- Desktop : viewer intégré (iframe/object) -->
+    <div class="hidden md:block">
+      <object
+        data="/catalogues/catalogue-pro-2025.pdf#toolbar=0&navpanes=0&scrollbar=1&view=Fit"
+        type="application/pdf"
         title="Catalogue professionnels 2025 — La Brasserie des Plantes"
         class="block w-full mx-auto border-0 shadow-2xl rounded-sm bg-white"
         style="max-width: 960px; height: calc(100vh - 140px);"
-        loading="lazy"
-      ></iframe>
-      <div class="text-center py-12 px-6 bg-cream-50 max-w-2xl mx-auto rounded-lg">
-        <p class="text-ink-700 mb-4">
-          Votre navigateur ne peut pas afficher le PDF en ligne.
+      >
+        <iframe
+          src="/catalogues/catalogue-pro-2025.pdf#toolbar=0&navpanes=0&scrollbar=1&view=Fit"
+          title="Catalogue professionnels 2025 — La Brasserie des Plantes"
+          class="block w-full mx-auto border-0 shadow-2xl rounded-sm bg-white"
+          style="max-width: 960px; height: calc(100vh - 140px);"
+          loading="lazy"
+        ></iframe>
+        <div class="text-center py-12 px-6 bg-cream-50 max-w-2xl mx-auto rounded-lg">
+          <p class="text-ink-700 mb-4">
+            Votre navigateur ne peut pas afficher le PDF en ligne.
+          </p>
+          <a
+            href="/catalogues/catalogue-pro-2025.pdf"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors"
+          >
+            Ouvrir le catalogue dans un nouvel onglet
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        </div>
+      </object>
+    </div>
+
+    <!-- Mobile : gros bouton dédié (l'iframe PDF est bloquée par les
+         navigateurs mobile depuis 2023, mieux vaut ouvrir en plein écran) -->
+    <div class="md:hidden max-w-md mx-auto px-4">
+      <div class="text-center py-12 px-6 bg-cream-50 rounded-2xl shadow-xl">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-forest-800 text-cream-50 mb-5">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+            <line x1="9" y1="11" x2="15" y2="11"/>
+          </svg>
+        </div>
+        <h2 class="font-display text-2xl text-forest-900 mb-3 leading-tight">
+          Catalogue Pro 2025
+        </h2>
+        <p class="text-sm text-ink-700 mb-6 leading-relaxed">
+          Sur mobile, le catalogue s'ouvre en plein écran dans votre lecteur PDF pour une meilleure lecture.
         </p>
         <a
           href="/catalogues/catalogue-pro-2025.pdf"
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors"
+          class="inline-flex items-center gap-2 w-full justify-center px-6 py-4 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors"
         >
-          Ouvrir le catalogue dans un nouvel onglet
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          Ouvrir le catalogue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
         </a>
+        <p class="text-[11px] text-ink-500 mt-4">
+          Format PDF · Une fois ouvert, vous pourrez zoomer, pincer, feuilleter.
+        </p>
       </div>
-    </object>
+    </div>
+
     <noscript>
       <p class="text-center text-cream-100 py-6">
         <a href="/catalogues/catalogue-pro-2025.pdf" class="underline">Télécharger le catalogue PDF</a>
