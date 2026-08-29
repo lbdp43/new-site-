@@ -20,7 +20,8 @@ const navItems: { labelKey: UIKey; href: string }[] = [
   { labelKey: 'nav.plants', href: localizedPath('/nos-plantes', lang) },
   { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
   { labelKey: 'nav.workshops', href: localizedPath('/ateliers', lang) },
-  { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
+  // Actualité temporairement retirée (voir Header, sitemap filter, noindex).
+  // { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
   { labelKey: 'nav.pros', href: localizedPath('/professionnels', lang) },
   { labelKey: 'nav.contact', href: localizedPath('/contact', lang) },
 ];
@@ -106,6 +107,9 @@ const hoursDisplay = lang === 'en'
           <a href={`tel:${site.phone}`} class="hover:text-cream-100 transition-colors">
             {site.phoneDisplay}
           </a>
+          <div class="text-xs text-cream-200/60 mt-0.5">
+            {lang === 'en' ? '(Wed, Fri &amp; Sat — 9am–6:30pm)' : `(${site.hoursDisplay})`}
+          </div>
         </div>
         <div>
           <a href={`mailto:${site.email}`} class="hover:text-cream-100 transition-colors break-all">

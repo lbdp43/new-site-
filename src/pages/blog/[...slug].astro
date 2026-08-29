@@ -116,6 +116,7 @@ const recipeSchemas = (post.data.schemaRecipes ?? []).map((r) => ({
   ogImage={post.data.cover}
   ogType="article"
   schema={[articleSchema, breadcrumb, ...recipeSchemas]}
+  noindex={true}
 >
   <article>
     <!-- En-tête -->
