@@ -67,6 +67,19 @@ export default function AddToCartButton({
       setAdded(true);
       // Ouvre le mini-panier (slide-in à droite) avec le récap du panier.
       openMiniCart();
+      // GA4 e-commerce event (no-op silencieux si l'utilisateur n'a pas
+      // donné son consentement dans l'AgeGate — cf Layout.astro).
+      try {
+        (window as any).lbdpTrack?.('add_to_cart', {
+          currency: 'EUR',
+          items: [{
+            item_id: String(wcId),
+            item_name: productName,
+            item_variant: size,
+            quantity,
+          }],
+        });
+      } catch {}
     } catch (e) {
       setError(e instanceof Error ? e.message : "Erreur lors de l'ajout au panier.");
     } finally {

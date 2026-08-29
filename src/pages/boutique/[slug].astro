@@ -695,6 +695,22 @@ const parsedAwards = (product.awards || []).map(parseAward);
       range: rangeInfo.name,
     })}
   ></script>
+
+  <!-- GA4 event `view_item` — no-op silencieux si pas de consentement -->
+  <script is:inline define:vars={{ wcId: product.wcId, name: product.name, priceMin: product.priceMin, range: rangeInfo.name }}>
+    try {
+      window.lbdpTrack && window.lbdpTrack('view_item', {
+        currency: 'EUR',
+        value: priceMin,
+        items: [{
+          item_id: wcId ? String(wcId) : undefined,
+          item_name: name,
+          item_category: range,
+          price: priceMin,
+        }],
+      });
+    } catch (e) {}
+  </script>
 </Layout>
 
 <script>

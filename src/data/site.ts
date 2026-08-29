@@ -75,6 +75,13 @@ export const site = {
     facebook: "https://www.facebook.com/brasseriedesplantes",
   },
 
+  // Google Analytics 4 — activé UNIQUEMENT si le visiteur donne son consentement
+  // dans l'AgeGate (case à cocher décochée par défaut, conforme CNIL). Voir
+  // Layout.astro pour l'intégration Consent Mode v2 + wrapper window.lbdpTrack.
+  googleAnalytics: {
+    measurementId: 'G-DK89M6D81H',
+  },
+
   // Google Business Profile (GBP) — lien canonique vers la fiche Google
   // Remplace la valeur `placeId` une fois connue via le PlaceID Finder :
   // https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder

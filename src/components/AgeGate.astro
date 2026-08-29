@@ -3,11 +3,22 @@
  * AgeGate — vérification d'âge obligatoire pour site vendant de l'alcool (Loi Évin).
  * Modal plein écran affiché au premier chargement. Stocke le choix dans localStorage
  * pour ne pas bloquer les visites suivantes (valable 30 jours).
+ *
+ * Depuis août 2026 : combine aussi le consentement Google Analytics 4 en un seul
+ * écran (Option 2 : 3 boutons distincts au lieu d'une case à cocher).
+ *   - [Accepter + entrer]  = age 18+ ✓ ET analytics granted
+ *   - [Entrer sans stats]  = age 18+ ✓ mais analytics denied
+ *   - [Sortir]             = mineur(e), redirection vers alcool-info-service
+ *
+ * Émet l'événement `lbdp:consent-updated` que Layout.astro écoute pour activer
+ * GA4 via Consent Mode v2. Le lien "Gérer mes préférences" dans le Footer permet
+ * de rouvrir la modal pour changer d'avis.
  */
 import { site } from '../data/site';
 ---
 <div
   id="age-gate"
+  data-age-gate
   class="fixed inset-0 z-[100] hidden items-center justify-center bg-forest-950/95 backdrop-blur-lg"
   aria-modal="true"
   role="dialog"
@@ -32,28 +43,43 @@ import { site } from '../data/site';
         Avez-vous l'âge légal<br />
         <em class="not-italic text-gold-600 font-normal" style="font-family: var(--font-script);">pour consommer ?</em>
       </h2>
-      <p class="text-sm text-ink-700 leading-relaxed mb-8">
+      <p class="text-sm text-ink-700 leading-relaxed mb-6">
         Ce site présente des boissons spiritueuses. L'accès est réservé aux personnes majeures (18 ans en France).
       </p>
 
       <div class="flex flex-col gap-3">
+        <!-- Choix 1 : entrer + accepter les statistiques anonymes (GA4) -->
         <button
           type="button"
-          id="age-gate-yes"
+          id="age-gate-accept-all"
           class="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors"
         >
-          Oui, j'ai 18 ans ou plus
+          Entrer et accepter les statistiques
         </button>
+        <!-- Choix 2 : entrer sans stats (age OK, analytics denied) -->
+        <button
+          type="button"
+          id="age-gate-accept-age"
+          class="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-full border border-forest-300 hover:border-forest-500 hover:bg-cream-50 text-forest-800 text-sm font-medium transition-colors"
+        >
+          Entrer sans statistiques
+        </button>
+        <!-- Choix 3 : sortir (mineur) -->
         <button
           type="button"
           id="age-gate-no"
-          class="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-full border border-forest-200 hover:border-forest-500 text-ink-700 text-sm font-medium transition-colors"
+          class="inline-flex items-center justify-center gap-2 w-full px-6 py-2.5 rounded-full text-ink-500 hover:text-ink-700 text-xs font-medium transition-colors"
         >
           Non, je suis mineur(e)
         </button>
       </div>
 
-      <p class="mt-6 text-[11px] text-ink-500 leading-relaxed">
+      <p class="mt-5 text-[11px] text-ink-500 leading-relaxed">
+        Les statistiques anonymes (Google Analytics) nous aident à améliorer le site.
+        <a href="/politique-cookies" class="underline decoration-forest-300 hover:decoration-forest-700 text-forest-700">En savoir plus</a>.
+      </p>
+
+      <p class="mt-4 text-[11px] text-ink-500 leading-relaxed">
         L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
       </p>
     </div>
@@ -62,34 +88,58 @@ import { site } from '../data/site';
 
 <script>
   (() => {
-    const KEY = 'lbdp_age_gate';
+    const KEY_AGE = 'lbdp_age_gate';
+    const KEY_ANALYTICS = 'lbdp_analytics_consent';
     const VALID_DAYS = 30;
     const gate = document.getElementById('age-gate');
     if (!gate) return;
 
-    const stored = localStorage.getItem(KEY);
-    if (stored) {
+    // Émet le consentement analytics vers Layout.astro (qui gère GA4).
+    const emitConsent = (value: boolean) => {
+      window.dispatchEvent(new CustomEvent('lbdp:consent-updated', { detail: { analytics: value } }));
+    };
+
+    // Réouverture manuelle (bouton "Gérer mes préférences" du Footer).
+    const openGate = () => {
+      gate.classList.remove('hidden');
+      gate.classList.add('flex');
+      document.documentElement.style.overflow = 'hidden';
+    };
+    (window as any).lbdpOpenAgeGate = openGate;
+
+    // Valide le passage : stocke age + analytics choix, émet event, ferme la modal.
+    const validate = (analyticsGranted: boolean) => {
+      const until = Date.now() + VALID_DAYS * 24 * 60 * 60 * 1000;
+      localStorage.setItem(KEY_AGE, JSON.stringify({ confirmed: true, until }));
+      localStorage.setItem(KEY_ANALYTICS, analyticsGranted ? 'true' : 'false');
+      emitConsent(analyticsGranted);
+      gate.classList.add('hidden');
+      gate.classList.remove('flex');
+      document.documentElement.style.overflow = '';
+    };
+
+    // Au chargement : si age-gate déjà validé et pas expiré, skippe la modal
+    // et ré-émet le consentement analytics stocké (pour que Layout.astro active
+    // GA4 dès l'init si le user avait consenti).
+    const storedAge = localStorage.getItem(KEY_AGE);
+    if (storedAge) {
       try {
-        const { confirmed, until } = JSON.parse(stored);
+        const { confirmed, until } = JSON.parse(storedAge);
         if (confirmed && until && Date.now() < until) {
           gate.remove();
+          const priorAnalytics = localStorage.getItem(KEY_ANALYTICS);
+          if (priorAnalytics === 'true') emitConsent(true);
+          else if (priorAnalytics === 'false') emitConsent(false);
           return;
         }
       } catch {}
     }
 
-    // Afficher la modale + bloquer scroll
-    gate.classList.remove('hidden');
-    gate.classList.add('flex');
-    document.documentElement.style.overflow = 'hidden';
+    // Sinon, afficher la modale + bloquer scroll
+    openGate();
 
-    document.getElementById('age-gate-yes')?.addEventListener('click', () => {
-      const until = Date.now() + VALID_DAYS * 24 * 60 * 60 * 1000;
-      localStorage.setItem(KEY, JSON.stringify({ confirmed: true, until }));
-      gate.remove();
-      document.documentElement.style.overflow = '';
-    });
-
+    document.getElementById('age-gate-accept-all')?.addEventListener('click', () => validate(true));
+    document.getElementById('age-gate-accept-age')?.addEventListener('click', () => validate(false));
     document.getElementById('age-gate-no')?.addEventListener('click', () => {
       // Redirection vers un site institutionnel santé publique
       window.location.href = 'https://www.alcool-info-service.fr/';

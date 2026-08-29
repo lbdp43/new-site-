@@ -63,13 +63,24 @@ const orderKey = url.searchParams.get('key') ?? '';
   <!-- Filet de sécurité : si l'utilisateur atterrit ici (paiement réussi ou
        arrivée depuis l'email de confirmation), on purge la session WC locale
        (Cart-Token + Nonce + cache state). Le prochain ajout au panier
-       démarrera proprement avec un nouveau panier. -->
-  <script type="module">
+       démarrera proprement avec un nouveau panier.
+       Émet aussi l'événement GA4 `purchase` avec le n° de commande (no-op
+       silencieux si l'utilisateur n'a pas consenti aux stats). Le montant
+       et les items ne sont pas dispo côté front à ce stade (paiement traité
+       par WordPress), on trackera juste transaction_id — c'est suffisant
+       pour compter les conversions dans GA4. -->
+  <script is:inline define:vars={{ order }}>
     try {
       window.localStorage.removeItem('lbdp_cart_token');
       window.localStorage.removeItem('lbdp_wc_nonce');
-    } catch {
-      /* localStorage indispo (private mode strict) — pas grave */
-    }
+    } catch (e) { /* localStorage indispo (private mode strict) */ }
+    try {
+      if (order) {
+        window.lbdpTrack && window.lbdpTrack('purchase', {
+          transaction_id: String(order),
+          currency: 'EUR',
+        });
+      }
+    } catch (e) {}
   </script>
 </Layout>

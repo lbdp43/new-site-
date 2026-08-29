@@ -191,6 +191,13 @@ const hoursDisplay = lang === 'en'
         <a href={localizedPath('/mentions-legales', lang)} class="hover:text-cream-100">{tr('footer.legal')}</a>
         <a href={localizedPath('/cgv', lang)} class="hover:text-cream-100">{tr('footer.cgv')}</a>
         <a href={localizedPath('/politique-cookies', lang)} class="hover:text-cream-100">{tr('footer.cookies')}</a>
+        <button
+          type="button"
+          onclick="window.lbdpOpenAgeGate && window.lbdpOpenAgeGate()"
+          class="hover:text-cream-100 underline decoration-cream-100/20 hover:decoration-cream-100 underline-offset-4 transition-colors"
+        >
+          {lang === 'en' ? 'Manage my preferences' : 'Gérer mes préférences'}
+        </button>
       </div>
       <div class="text-cream-200/60">
         {tr('footer.abuse')}
