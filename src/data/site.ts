@@ -102,10 +102,12 @@ export const site = {
   // caractères pour rester dans la limite des SERP Google sans troncature.
   defaultDescription:
     "Liqueurs artisanales bio aux plantes oubliées. Liquoristes indépendants en Haute-Loire, atelier à Saint-Didier-en-Velay — L'Alchimie Végétale, Meilleur Digestif du Monde 2025.",
-  // ⚠️ Tant que /og-default.jpg n'a pas été créé en 1200×630 dans public/,
-  // on pointe vers le logo couleur (qui existe). Voir docs/audit-seo-2026-04.md
-  // pour le brief de création de la vraie image OG.
-  defaultOgImage: "/images/brand/logo-complet-fond-blanc.webp",
+  // Image de partage social (Facebook, LinkedIn, WhatsApp, iMessage, Slack…).
+  // Générée le 29 août 2026 avec sharp : bouteille Alchimie Végétale à gauche
+  // + badge "Meilleur Digestif du Monde 2025" + titre + tagline + URL, sur
+  // fond vert forêt. Format 1200×630 (ratio 1.91:1 exigé par Facebook).
+  // Régénérable via un script sharp — cf CLAUDE.md pour la recette.
+  defaultOgImage: "/og-default.jpg",
 } as const;
 
 export const nav = [
