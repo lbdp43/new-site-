@@ -201,8 +201,9 @@ const proArguments = [
           Write to us
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href={`tel:${site.phone}`} class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-cream-100/40 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors">
-          {site.phoneDisplay}
+        <a href={`tel:${site.phone}`} class="inline-flex flex-col items-center gap-0.5 px-7 py-3 rounded-full border border-cream-100/40 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors">
+          <span>{site.phoneDisplay}</span>
+          <span class="text-[10px] font-normal text-cream-200/70">Wed · Fri · Sat 9am–6:30pm</span>
         </a>
       </div>
     </div>

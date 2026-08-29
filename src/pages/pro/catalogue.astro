@@ -135,9 +135,10 @@ const breadcrumb = {
         </a>
         <a
           href={`tel:${site.phone}`}
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream-100/40 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors"
+          class="inline-flex flex-col items-center gap-0.5 px-6 py-2.5 rounded-full border border-cream-100/40 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors"
         >
-          {site.phoneDisplay}
+          <span>{site.phoneDisplay}</span>
+          <span class="text-[10px] font-normal text-cream-200/70">Mer · Ven · Sam 9h–18h30</span>
         </a>
       </div>
     </div>

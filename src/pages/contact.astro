@@ -68,6 +68,7 @@ const sent = Astro.url.searchParams.get('sent') === '1';
             <a href={`tel:${site.phone}`} class="text-ink-700 hover:text-forest-700 transition-colors">
               {site.phoneDisplay}
             </a>
+            <div class="text-xs text-ink-500 mt-1">({site.hoursDisplay})</div>
           </div>
           <div>
             <h3 class="font-display text-lg text-forest-900 mb-2">Email</h3>

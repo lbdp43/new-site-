@@ -46,7 +46,10 @@ const navItems: NavItem[] = [
       { labelKey: 'nav.story', href: localizedPath('/notre-histoire', lang) },
       { labelKey: 'nav.plants', href: localizedPath('/nos-plantes', lang) },
       { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
-      { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
+      // Actualité (blog) temporairement retiré du menu — le contenu existe
+      // toujours sur disque mais est caché du public (voir aussi Footer,
+      // sitemap filter, noindex sur les pages blog).
+      // { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
     ],
   },
   {
