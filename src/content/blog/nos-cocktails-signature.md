@@ -132,15 +132,15 @@ Voici **cinq recettes signatures**, travaillées avec des barmen partenaires à 
 
 **Ingrédients :**
 - 4 cl de [Flèche Ardente](/boutique/fleche-ardente)
-- 3 cl de gin London Dry
-- 1 cl de sirop de vanille bourbon
-- 2 cl de jus de citron frais
-- Eau pétillante
-- Menthe, framboises fraîches
+- 4 cl de jus de fraise
+- 1 cl de jus de citron (vert ou jaune)
+- 2 feuilles de menthe
+- 3 glaçons
+- 3 cl d'eau pétillante
 
-**Montage :** shaker. Flèche Ardente, gin, sirop de vanille, jus de citron, beaucoup de glace. Shaker 12 secondes. Double-filtrer dans un verre highball sur glace neuve. Top eau pétillante, décorer de menthe et deux framboises.
+**Montage :** dans un shaker, ajouter la Flèche Ardente, le jus de fraise, le citron, les feuilles de menthe et les glaçons. Secouer. Verser dans un verre. Allonger avec l'eau pétillante.
 
-**Pourquoi ça marche :** les fruits rouges et la vanille de la Flèche Ardente s'équilibrent au gin sec et à l'acidité du citron. Sexy, à boire à deux.
+**Pourquoi ça marche :** la framboise, la rose et le citron de la Flèche Ardente s'équilibrent au jus de fraise, la menthe apporte la fraîcheur, les bulles allègent. Sexy, à boire à deux.
 
 ## 3. Le Black Mule
 

@@ -209,6 +209,17 @@ export const plants: Plant[] = [
     season: 'Mai à septembre',
     signature: true,
   },
+  {
+    name: 'Pétale de rose',
+    latin: 'Rosa × damascena',
+    family: 'fleur',
+    role: 'Floral · romantique',
+    description:
+      "Pétales de rose de Damas, macérés délicatement. Ils subliment la framboise de La Flèche Ardente sans jamais l'écraser — un floral discret qui ouvre la fin de bouche.",
+    usedIn: "La Flèche Ardente",
+    season: 'Mai à juillet',
+    signature: true,
+  },
 
   // ═══ RACINES & AMERS ═════════════════════════════════════════════════════
   {
@@ -289,6 +300,16 @@ export const plants: Plant[] = [
     season: "Toute l'année",
     signature: true,
   },
+  {
+    name: 'Citron',
+    latin: 'Citrus limon',
+    family: 'agrume',
+    role: 'Acidulé · tension',
+    description:
+      "Jus de citron pressé, ajouté en fin de recette. C'est lui qui ramène la tension à La Flèche Ardente — l'acidité qui empêche la douceur florale de basculer dans le sirupeux.",
+    usedIn: "La Flèche Ardente",
+    signature: true,
+  },
 
   // ═══ ÉPICES ══════════════════════════════════════════════════════════════
   {
@@ -333,60 +354,16 @@ export const plants: Plant[] = [
     season: 'Importée',
     signature: true,
   },
-  {
-    name: 'Vanille',
-    latin: 'Vanilla planifolia',
-    family: 'epice',
-    role: 'Crémeuse · sucrée',
-    description:
-      "Gousse fendue, macérée longuement. Elle enveloppe les fruits rouges de notre Flèche Ardente d'une douceur crémeuse — pour un digestif qui se boit autant sur glace que sur un dessert au chocolat.",
-    usedIn: "La Flèche Ardente",
-    season: 'Importée de Madagascar',
-    signature: true,
-  },
-
   // ═══ FRUITS ══════════════════════════════════════════════════════════════
-  {
-    name: 'Cassis',
-    latin: 'Ribes nigrum',
-    family: 'fruit',
-    role: 'Fruit rouge · puissant',
-    description:
-      "Le fruit rouge le plus intense de notre gamme. Macéré entier, il apporte une profondeur sombre, presque tannique, qui porte tout l'assemblage de la Flèche Ardente.",
-    usedIn: "La Flèche Ardente",
-    season: 'Récolte en juillet',
-    signature: true,
-  },
   {
     name: 'Framboise',
     latin: 'Rubus idaeus',
     family: 'fruit',
     role: 'Fruit rouge · acidulé',
     description:
-      "Petite baie acidulée qui vient équilibrer le cassis. Notes fraîches, légèrement florales — la framboise allège sans affaiblir l'accord fruit rouge.",
+      "Petite baie acidulée et parfumée, macérée entière. Elle porte tout l'assemblage de La Flèche Ardente — notes fraîches, légèrement florales, une gourmandise juste tenue par l'acidité.",
     usedIn: "La Flèche Ardente",
     season: 'Juin à septembre',
-    signature: true,
-  },
-  {
-    name: 'Myrtille',
-    latin: 'Vaccinium myrtillus',
-    family: 'fruit',
-    role: 'Fruit rouge · doux',
-    description:
-      "Cueillie sauvage dans les forêts du Velay. Son profil doux, légèrement boisé, complète le trio de fruits rouges — un clin d'œil au terroir de Haute-Loire.",
-    usedIn: "La Flèche Ardente",
-    season: 'Juillet à août',
-    signature: true,
-  },
-  {
-    name: 'Pitaya',
-    latin: 'Hylocereus undatus',
-    family: 'fruit',
-    role: 'Fruit exotique · rond',
-    description:
-      "Le fruit du dragon — chair rose nacrée, goût doux entre la poire et le kiwi. Touche exotique qui rehausse le trio de fruits rouges de la Flèche Ardente, sans jamais voler la vedette aux baies locales.",
-    usedIn: "La Flèche Ardente",
     signature: true,
   },
   {

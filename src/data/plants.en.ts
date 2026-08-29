@@ -216,38 +216,24 @@ export const plantsEn: Record<string, PlantEn> = {
     usedIn: "Le Cerf'Gent",
     season: 'Imported',
   },
-  'Vanille': {
-    role: 'Creamy · sweet',
-    description:
-      "Split pod, macerated slowly. It wraps the red fruits of our Flèche Ardente in a creamy softness — for a digestif that works both on ice and with a chocolate dessert.",
-    usedIn: "La Flèche Ardente",
-    season: 'Imported from Madagascar',
-  },
-  'Cassis': {
-    role: 'Red fruit · powerful',
-    description:
-      "The most intense red fruit in our range. Macerated whole, it brings a dark, almost tannic depth that carries the whole Flèche Ardente blend.",
-    usedIn: "La Flèche Ardente",
-    season: 'Harvest in July',
-  },
   'Framboise': {
     role: 'Red fruit · tangy',
     description:
-      "A small, tangy berry that balances blackcurrant. Fresh, slightly floral notes — raspberry lightens the blend without weakening the red-fruit accord.",
+      "A small, tangy and fragrant berry, macerated whole. It carries the whole Flèche Ardente blend — fresh, faintly floral notes, an indulgence held together by acidity.",
     usedIn: "La Flèche Ardente",
     season: 'June to September',
   },
-  'Myrtille': {
-    role: 'Red fruit · sweet',
+  'Pétale de rose': {
+    role: 'Floral · romantic',
     description:
-      "Wild-foraged in Velay forests. Its sweet, faintly woody profile rounds off the red-fruit trio — a nod to the Haute-Loire terroir.",
+      "Damask rose petals, gently macerated. They lift the raspberry of La Flèche Ardente without ever overpowering it — a discreet floral note that opens up the finish.",
     usedIn: "La Flèche Ardente",
-    season: 'July to August',
+    season: 'May to July',
   },
-  'Pitaya': {
-    role: 'Exotic fruit · round',
+  'Citron': {
+    role: 'Tangy · tension',
     description:
-      "Dragon fruit — pearly pink flesh, a mellow flavour between pear and kiwi. An exotic touch that lifts the red-fruit trio of La Flèche Ardente without ever stealing the show from the local berries.",
+      "Freshly pressed lemon juice, added at the end. It's what brings tension to La Flèche Ardente — the acidity that keeps the floral sweetness from tipping into syrupy territory.",
     usedIn: "La Flèche Ardente",
   },
   'Amande': {

@@ -1,25 +1,23 @@
 ---
 name: "La Flèche Ardente"
 range: brasserie
-seoCategory: "Liqueur de fruits rouges artisanale"
-priceMin: 16
-priceMax: 34
+seoCategory: "Liqueur de framboise artisanale"
+priceMin: 17
+priceMax: 36
 image: /images/products/fleche-ardente.webp
 image2: /images/products/fleche-ardente-2.webp
-alcohol: 27
+alcohol: 22
 composition:
-  - Cassis
-  - Framboises
-  - Myrtilles
-  - Fruits du dragon
-  - Vanille
-usage: Digestif ou cocktail
-tagline: "Bonbon aux fruits rouges, note vanillée en longueur."
+  - Framboise
+  - Pétale de rose
+  - Jus de citron
+usage: Digestif
+tagline: "Framboise sublimée par la rose, tension du citron."
 tasting:
-  nose: "Fruits rouges mûrs, touche de vanille bourbon."
-  palate: "Bonbon, rond, gourmand."
-  finish: "Longue vanille, légèrement acidulée."
-serving: "Digestif ou long drink avec eau pétillante et menthe."
+  nose: "Couleur rubis. Accroche légère et fruitée — framboise, pétale de rose, jus de citron."
+  palate: "Rond et gourmand, dominante framboise."
+  finish: "La rose sublime la framboise, le citron ramène la tension."
+serving: "En digestif, dégustation optimale à 3 °C."
 sizes: [Empilable 20cl, 50cl, 70cl]
 sizeImages:
   - size: 20
@@ -32,4 +30,6 @@ wcId: 72
 order: 4
 ---
 
-Une liqueur de fruits rouges qui évoque le bonbon d'enfance — cassis, framboise, myrtille et une pointe de fruit du dragon pour la surprise. La vanille tisse le fond et arrondit l'acidité des fruits. À 27°, elle se tient parfaitement en digestif mais fait merveille en cocktail (voir notre Philtre d'Éros).
+La Flèche Ardente est une liqueur de framboise, sublimée par les pétales de rose et le jus de citron pour ramener de la tension. Miroir d'Éros par sa recette originale à la fois complexe et intense, elle exaltera vos sens. Laissez-vous tenter par cet envoûtant philtre d'amour et libérez-vous de vos désirs.
+
+À 22°, elle se déguste en digestif, servie très fraîche (autour de 3 °C). Elle fait aussi merveille en cocktail — voir notre [Philtre d'Éros](/cocktails#philtre-eros).
