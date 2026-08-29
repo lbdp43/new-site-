@@ -243,6 +243,39 @@ depuis un design handoff professionnel (variante "Chute & rebond" choisie).
 - **Teaser homepage** (FR + EN) — après le carousel produits
 - **Photos** : utilise `p.sizeImages[20]` (format empilable 20 cl) quand dispo,
   fallback sur `p.image` sinon
+- **⚠️ Spécificité images `sizes/*-20cl-stack.webp`** — CRITIQUE : ces fichiers
+  DOIVENT avoir un **fond transparent** (`hasAlpha: true, channels: 4`), sinon
+  la bouteille apparaît dans un carré blanc opaque qui casse l'effet Chute &
+  rebond (bouteille toute petite au milieu d'un rectangle blanc au lieu de se
+  fondre dans le layout).
+
+  Format cible : environ 459×551 (ratio ~5:6, les autres varient 456→513 en
+  largeur). La bouteille doit **remplir tout le cadre** (fit: cover) — pas
+  contain qui ajoute des bordures blanches.
+
+  Recette sharp pour convertir un packshot fond blanc en stack transparent :
+  ```js
+  // 1) Convertir tout pixel presque-blanc (>245 RGB) en transparent
+  const raw = await sharp(SRC).ensureAlpha().raw()
+    .toBuffer({ resolveWithObject: true });
+  const buf = Buffer.from(raw.data);
+  for (let i = 0; i < buf.length; i += raw.info.channels) {
+    const [r, g, b] = [buf[i], buf[i+1], buf[i+2]];
+    if (r > 245 && g > 245 && b > 245) buf[i+3] = 0;
+  }
+  // 2) Trim serré + cover 459×551 + WebP avec alpha
+  await sharp(buf, { raw: { width, height, channels: 4 } })
+    .trim()
+    .resize({ width: 459, height: 551, fit: 'cover', position: 'center' })
+    .webp({ quality: 82, alphaQuality: 90 })
+    .toFile('public/images/products/sizes/<slug>-20cl-stack.webp');
+  ```
+
+  Cas typique où on se plante : `.flatten({ background: '#ffffff' })` avant
+  export WebP → détruit la transparence, on se retrouve avec un carré blanc.
+  À NE PAS FAIRE pour les fichiers stack.
+
+  Diagnostiqué le 29 août 2026 sur la Flèche Ardente 20cl.
 - **Trios suggérés** (`src/data/coffret-trios.ts`) — 6 compositions curées
   affichées sous le configurateur, clic → remplit la pile d'un coup
 - **Intégration panier** : à l'ajout, `cartActions.addItem` est appelé N fois
