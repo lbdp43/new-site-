@@ -14,9 +14,9 @@ composition:
   - Charbon végétal
 usage: "Digestif — verveine noire"
 tagline: "Hommage aux mineurs de Saint-Étienne — profond et mystérieux."
-highlight: "Meilleure liqueur de plantes française 2025"
+highlight: "Meilleure liqueur de plantes française 2026"
 awards:
-  - Meilleure liqueur de plantes française 2025 — World Liqueur Awards (Londres)
+  - Meilleure liqueur de plantes française 2026 — World Liqueur Awards (Londres)
 tasting:
   nose: "Note d'Arquebuse en fond, racines, touche boisée."
   palate: "Profonde et mystérieuse, légèrement poivrée, notes boisées de racine de pissenlit."
@@ -38,4 +38,4 @@ order: 3
 
 Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).
 
-Élue **Meilleure liqueur de plantes française 2025** aux World Liqueur Awards de Londres.
+Élue **Meilleure liqueur de plantes française 2026** aux World Liqueur Awards de Londres.
