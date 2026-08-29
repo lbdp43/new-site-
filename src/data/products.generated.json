@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-28T11:46:09.310Z",
+  "generatedAt": "2026-08-29T11:01:47.343Z",
   "productCount": 18,
   "draftCount": 0,
   "products": [
@@ -135,24 +135,22 @@
       "slug": "fleche-ardente",
       "name": "La Flèche Ardente",
       "range": "brasserie",
-      "priceMin": 16,
-      "priceMax": 34,
+      "priceMin": 17,
+      "priceMax": 36,
       "image": "/images/products/fleche-ardente.webp",
-      "alcohol": 27,
-      "usage": "Digestif ou cocktail",
+      "alcohol": 22,
+      "usage": "Digestif",
       "image2": "/images/products/fleche-ardente-2.webp",
-      "tagline": "Bonbon aux fruits rouges, note vanillée en longueur.",
-      "serving": "Digestif ou long drink avec eau pétillante et menthe.",
-      "seoCategory": "Liqueur de fruits rouges artisanale",
+      "tagline": "Framboise sublimée par la rose, tension du citron.",
+      "serving": "En digestif, dégustation optimale à 3 °C.",
+      "seoCategory": "Liqueur de framboise artisanale",
       "wcId": 72,
       "order": 4,
-      "description": "Une liqueur de fruits rouges qui évoque le bonbon d'enfance — cassis, framboise, myrtille et une pointe de fruit du dragon pour la surprise. La vanille tisse le fond et arrondit l'acidité des fruits. À 27°, elle se tient parfaitement en digestif mais fait merveille en cocktail (voir notre Philtre d'Éros).",
+      "description": "La Flèche Ardente est une liqueur de framboise, sublimée par les pétales de rose et le jus de citron pour ramener de la tension. Miroir d'Éros par sa recette originale à la fois complexe et intense, elle exaltera vos sens. Laissez-vous tenter par cet envoûtant philtre d'amour et libérez-vous de vos désirs.\n\nÀ 22°, elle se déguste en digestif, servie très fraîche (autour de 3 °C). Elle fait aussi merveille en cocktail — voir notre [Philtre d'Éros](/cocktails#philtre-eros).",
       "composition": [
-        "Cassis",
-        "Framboises",
-        "Myrtilles",
-        "Fruits du dragon",
-        "Vanille"
+        "Framboise",
+        "Pétale de rose",
+        "Jus de citron"
       ],
       "sizes": [
         "Empilable 20cl",
@@ -160,9 +158,9 @@
         "70cl"
       ],
       "tasting": {
-        "nose": "Fruits rouges mûrs, touche de vanille bourbon.",
-        "palate": "Bonbon, rond, gourmand.",
-        "finish": "Longue vanille, légèrement acidulée."
+        "nose": "Couleur rubis. Accroche légère et fruitée — framboise, pétale de rose, jus de citron.",
+        "palate": "Rond et gourmand, dominante framboise.",
+        "finish": "La rose sublime la framboise, le citron ramène la tension."
       },
       "sizeImages": {
         "20": "/images/products/sizes/fleche-ardente-20cl.webp",

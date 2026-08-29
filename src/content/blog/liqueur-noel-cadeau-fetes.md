@@ -63,11 +63,11 @@ Pour quelqu'un qui fait des cocktails à la maison ou en mobilité (camping, soi
 
 ## 6. Pour un dîner de fêtes : La Flèche Ardente
 
-Notre [Flèche Ardente](/boutique/fleche-ardente) (27°, fruits rouges + vanille bourbon) est une cuvée sensuelle, pensée pour les fins de soirée d'hiver. Notes de framboise, mûre, cassis macérés à froid pendant 6 semaines, finale de vanille longue. Servie pure à 10°C ou en cocktail (notre **Philtre d'Éros** : 4 cl + gin + vanille + citron).
+Notre [Flèche Ardente](/boutique/fleche-ardente) (22°, framboise – rose – citron) est une cuvée sensuelle, pensée pour les fins de soirée d'hiver et les dîners romantiques. Couleur rubis, accroche fruitée de framboise et de pétale de rose, la finale de citron ramène la tension. Servie très fraîche (autour de 3 °C) ou en cocktail (notre **Philtre d'Éros** : 4 cl + jus de fraise + citron + menthe + eau pétillante).
 
-**Pour qui :** un cadeau plus sensuel — Saint-Valentin, anniversaire, dîner romantique. Marche aussi en cadeau de fin d'année si le destinataire aime les notes fruités-vanille.
+**Pour qui :** un cadeau plus sensuel — Saint-Valentin, anniversaire, dîner romantique. Marche aussi en cadeau de fin d'année si le destinataire aime les notes fruitées et florales.
 **Format :** 50 cl ou 70 cl.
-**Budget :** 24 € (50 cl) à 32 € (70 cl).
+**Budget :** 30 € (50 cl) à 36 € (70 cl).
 
 [👉 Voir La Flèche Ardente](/boutique/fleche-ardente)
 
