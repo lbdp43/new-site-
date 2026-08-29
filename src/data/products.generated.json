@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T14:44:40.744Z",
+  "generatedAt": "2026-08-29T14:47:20.492Z",
   "productCount": 18,
   "draftCount": 0,
   "products": [
@@ -102,16 +102,20 @@
       "usage": "Digestif — verveine noire",
       "image2": "/images/products/gorgeon-des-machures-2.webp",
       "tagline": "Hommage aux mineurs de Saint-Étienne — profond et mystérieux.",
+      "highlight": "Meilleure liqueur de plantes française 2025",
       "serving": "Digestif à température ambiante.",
-      "seoCategory": "Liqueur d'absinthe noire (charbon végétal)",
+      "seoCategory": "Liqueur de verveine noire artisanale (charbon végétal)",
       "wcId": 71,
       "order": 3,
-      "description": "Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).",
+      "description": "Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).\n\nÉlue **Meilleure liqueur de plantes française 2025** aux World Liqueur Awards de Londres.",
       "composition": [
         "Verveine",
         "Aurone",
         "Baraban",
         "Charbon végétal"
+      ],
+      "awards": [
+        "Meilleure liqueur de plantes française 2025 — World Liqueur Awards (Londres)"
       ],
       "sizes": [
         "Empilable 20cl",
