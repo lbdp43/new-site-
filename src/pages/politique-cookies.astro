@@ -11,19 +11,39 @@ const schema = {
   inLanguage: 'fr-FR',
 };
 
-// État au 28 avril 2026 : le site n'utilise QUE des cookies strictement
-// nécessaires (essentiels), aucun script tiers de mesure d'audience ni de
-// marketing n'est chargé. La CNIL n'exige pas de bandeau de consentement
-// dans ce cas. Si on ajoute un jour Google Analytics, Meta Pixel ou autre
-// tracking non-essentiel, il faudra :
-//   1. Réintroduire les lignes ci-dessous
-//   2. Implémenter un bandeau de consentement granulaire (Klaro!,
-//      Tarteaucitron, Axeptio, Didomi…)
-//   3. Conditionner le chargement du script tiers à l'opt-in
-const cookies = [
+// Août 2026 : ajout de Google Analytics 4 (mesure d'audience anonyme),
+// activé UNIQUEMENT si le visiteur donne son consentement explicite dans
+// l'AgeGate (bouton "Entrer et accepter les statistiques"). Consent Mode v2
+// garantit que gtag.js est chargé en `denied` par défaut → aucun cookie
+// GA4 posé tant que consentement pas donné. Le visiteur peut changer
+// d'avis via le lien "Gérer mes préférences" du footer.
+const analyticsCookies = [
+  {
+    name: '_ga',
+    purpose: 'Identifie de façon anonyme un visiteur unique (Google Analytics 4).',
+    type: 'Statistiques — consentement requis',
+    duration: '2 ans',
+    consent: true,
+  },
+  {
+    name: '_ga_DK89M6D81H',
+    purpose: "Conserve l'état de session pour Google Analytics 4.",
+    type: 'Statistiques — consentement requis',
+    duration: '2 ans',
+    consent: true,
+  },
+];
+const functionalCookies = [
   {
     name: 'lbdp_age_gate',
     purpose: "Mémorise votre confirmation d'âge (18+) pour ne pas réafficher la modale à chaque visite.",
+    type: 'Fonctionnel — strictement nécessaire',
+    duration: '30 jours',
+    consent: false,
+  },
+  {
+    name: 'lbdp_analytics_consent',
+    purpose: 'Mémorise votre choix quant aux statistiques anonymes (accepté ou refusé).',
     type: 'Fonctionnel — strictement nécessaire',
     duration: '30 jours',
     consent: false,
@@ -50,6 +70,7 @@ const cookies = [
     consent: false,
   },
 ];
+const cookies = [...functionalCookies, ...analyticsCookies];
 ---
 <Layout
   title={`Politique de cookies | ${site.name}`}
@@ -73,10 +94,22 @@ const cookies = [
 
       <h2>Notre principe</h2>
       <p>
-        Nous utilisons le <strong>strict minimum</strong> de cookies nécessaires pour que le site fonctionne bien : panier, confirmation d'âge, configurateur de coffret, dernières fiches consultées. <strong>Aucun cookie de mesure d'audience (Google Analytics, Matomo…) ni de marketing/reciblage (Meta Pixel, Google Ads…) n'est utilisé sur ce site</strong>. Conformément aux recommandations CNIL, aucun bandeau de consentement n'est requis dans ce cas.
+        Nous utilisons deux catégories de cookies :
+      </p>
+      <ul>
+        <li><strong>Cookies fonctionnels</strong> — strictement nécessaires au fonctionnement du site (panier, confirmation d'âge, configurateur de coffret, dernières fiches consultées). Ils sont posés automatiquement, sans consentement requis, conformément aux recommandations CNIL.</li>
+        <li><strong>Cookies de mesure d'audience</strong> — Google Analytics 4, activé <strong>uniquement</strong> si vous cliquez sur "Entrer et accepter les statistiques" dans la fenêtre de vérification d'âge. Ils nous permettent de comprendre comment les visiteurs utilisent le site (pages populaires, sources de trafic, tunnel d'achat) de façon anonyme, pour améliorer l'expérience.</li>
+      </ul>
+      <p>
+        <strong>Aucun cookie marketing/reciblage</strong> (Meta Pixel, Google Ads, TikTok Pixel…) n'est utilisé sur ce site.
+      </p>
+
+      <h2>Google Analytics 4 — précisions</h2>
+      <p>
+        Fournisseur : <strong>Google Ireland Ltd</strong> (siège européen, 70 Sir John Rogerson's Quay, Dublin 2, Irlande). Les données sont anonymisées côté client (IP tronquée automatiquement dans GA4). Nous avons activé le <strong>Consent Mode v2</strong> de Google : tant que vous n'avez pas donné votre accord, aucun cookie GA4 n'est posé et aucune donnée n'est envoyée à Google.
       </p>
       <p>
-        Si nous décidons un jour d'activer un outil de mesure d'audience ou de marketing, nous mettrons en place <strong>un bandeau de consentement granulaire opt-in</strong> respectant les recommandations CNIL (refuser aussi accessible qu'accepter, choix par finalité), et cette page sera mise à jour en conséquence.
+        Pour <strong>refuser</strong> ou <strong>retirer</strong> votre consentement à tout moment : cliquez sur "Gérer mes préférences" en pied de page. Ou installez le <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">module de désactivation officiel Google Analytics</a> (bloque GA sur tous les sites).
       </p>
 
       <h2>Cookies utilisés sur ce site</h2>
@@ -114,11 +147,11 @@ const cookies = [
 
       <h2>Gérer mes préférences</h2>
       <p>
-        Étant donné que tous les cookies utilisés sont strictement nécessaires au fonctionnement du site, il n'y a pas de choix de préférences à effectuer. Vous pouvez en revanche :
+        Vous pouvez à tout moment :
       </p>
       <ul>
+        <li><strong>Modifier votre choix concernant les statistiques anonymes</strong> en cliquant sur "Gérer mes préférences" en pied de page (la fenêtre de choix se rouvre).</li>
         <li>Supprimer les cookies déjà stockés depuis les réglages de votre navigateur (<a href="https://support.google.com/accounts/answer/61416" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies-preferences" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.microsoft.com/fr-fr/windows/supprimer-et-g%C3%A9rer-les-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Edge</a>). Le site continuera à fonctionner mais vous devrez reconfirmer votre âge à votre prochaine visite et votre panier sera vide.</li>
-        <li>Activer l'option « Do Not Track » de votre navigateur : nous la respectons automatiquement (sans impact ici puisque nous ne traçons pas).</li>
       </ul>
 
       <h2>Transfert de données hors UE</h2>
