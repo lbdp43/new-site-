@@ -176,6 +176,159 @@ collections:
     files:
 
       # ═════════════════════════════════════════════════════════════
+      # PAGE D'ACCUEIL (home)
+      # ═════════════════════════════════════════════════════════════
+      - name: index
+        label: "Page d'accueil"
+        file: src/content/static-pages/index.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: ""
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+          - name: heroHome
+            label: "Hero (vidéo plein écran)"
+            widget: object
+            fields:
+              - { name: badge, label: "Badge (haut du hero)", widget: string, required: false }
+              - { name: logo, label: "Logo emblème (image PNG/WebP transparente)", widget: image, required: false }
+              - { name: logoAlt, label: "Alt du logo", widget: string, required: false }
+              - { name: titleScript, label: "Titre calligraphié (Nom de la marque)", widget: string }
+              - { name: titleAccent, label: "Sous-titre (HTML autorisé : <br />)", widget: string, required: false }
+              - { name: intro, label: "Paragraphe d'intro (**gras** autorisé)", widget: text, required: false }
+              - { name: ctaPrimaryLabel, label: "Bouton 1 — texte", widget: string, required: false }
+              - { name: ctaPrimaryHref, label: "Bouton 1 — lien", widget: string, required: false }
+              - { name: ctaSecondaryLabel, label: "Bouton 2 — texte", widget: string, required: false }
+              - { name: ctaSecondaryHref, label: "Bouton 2 — lien", widget: string, required: false }
+              - { name: video, label: "Vidéo de fond (mp4)", widget: file, required: false }
+              - { name: videoPoster, label: "Image poster vidéo (preload)", widget: image, required: false }
+          - name: carouselSection
+            label: "Section « Carousel produits »"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: kicker, label: "Kicker", widget: string, required: false }
+              - { name: heading, label: "Titre", widget: string }
+              - { name: subtitle, label: "Sous-titre", widget: text, required: false }
+          - name: historySection
+            label: "Section « Notre savoir-faire »"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: divider, label: "Divider doré", widget: string, required: false }
+              - { name: title, label: "Titre (HTML autorisé)", widget: string }
+              - name: paragraphs
+                label: "Paragraphes (Markdown gras/italique)"
+                widget: list
+                field: { name: paragraph, label: "Paragraphe", widget: text }
+              - name: links
+                label: "Liens de bas de section"
+                widget: list
+                fields:
+                  - { name: label, label: "Texte du lien", widget: string }
+                  - { name: href, label: "URL", widget: string }
+          - name: introVideoSection
+            label: "Bandeau vidéo « Chaque flacon »"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: video, label: "Vidéo (mp4)", widget: file }
+              - { name: poster, label: "Poster", widget: image, required: false }
+              - { name: script, label: "Script calligraphié en haut", widget: string, required: false }
+              - { name: title, label: "Titre", widget: string }
+              - { name: titleAccent, label: "Titre 2ᵉ ligne (calligraphie)", widget: string, required: false }
+              - { name: tagline, label: "Tagline (sous le titre)", widget: text, required: false }
+          - name: coffretTeaser
+            label: "Teaser « Coffret DIY »"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: kicker, label: "Kicker", widget: string, required: false }
+              - { name: title, label: "Titre", widget: string }
+              - { name: titleAccent, label: "Titre 2ᵉ ligne (calligraphie)", widget: string, required: false }
+              - { name: intro, label: "Paragraphe", widget: text, required: false }
+              - { name: ctaPrimaryLabel, label: "Bouton 1 — texte", widget: string, required: false }
+              - { name: ctaPrimaryHref, label: "Bouton 1 — lien", widget: string, required: false }
+              - { name: ctaSecondaryLabel, label: "Bouton 2 — texte", widget: string, required: false }
+              - { name: ctaSecondaryHref, label: "Bouton 2 — lien", widget: string, required: false }
+              - name: stackImages
+                label: "3 bouteilles empilées (top → bas)"
+                widget: list
+                summary: "{{fields.alt}}"
+                fields:
+                  - { name: src, label: "Image (fond transparent — 20cl stack)", widget: image }
+                  - { name: alt, label: "Alt image", widget: string }
+          - name: cocktailsSection
+            label: "Section « Cocktails »"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: kicker, label: "Kicker", widget: string, required: false }
+              - { name: title, label: "Titre (HTML autorisé)", widget: string }
+              - { name: intro, label: "Paragraphe", widget: text, required: false }
+              - { name: ctaLabel, label: "Bouton — texte", widget: string, required: false }
+              - { name: ctaHref, label: "Bouton — lien", widget: string, required: false }
+              - name: cocktails
+                label: "4 cocktails (grille 2×2)"
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: "Nom du cocktail", widget: string }
+                  - { name: image, label: "Photo cocktail", widget: image }
+                  - { name: href, label: "URL (#ancre cocktails/…)", widget: string }
+                  - { name: offset, label: "Décalage vertical (2ᵉ et 4ᵉ)", widget: boolean, default: false }
+          - name: visitSection
+            label: "Section « Visite boutique »"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: kicker, label: "Kicker", widget: string, required: false }
+              - { name: title, label: "Titre", widget: string }
+              - { name: titleAccent, label: "Titre 2ᵉ ligne (calligraphie)", widget: string, required: false }
+              - { name: intro, label: "Paragraphe (**gras** — placeholders {{address}} / {{city}})", widget: text, required: false }
+              - { name: addressLabel, label: "Label Adresse", widget: string, required: false }
+              - { name: hoursLabel, label: "Label Horaires", widget: string, required: false }
+              - { name: ctaPrimaryLabel, label: "Bouton 1 — texte (auto vers Maps)", widget: string, required: false }
+              - { name: ctaSecondaryLabel, label: "Bouton 2 — texte", widget: string, required: false }
+              - { name: ctaSecondaryHref, label: "Bouton 2 — lien", widget: string, required: false }
+              - { name: video, label: "Vidéo boutique (mp4)", widget: file, required: false }
+              - { name: videoPoster, label: "Poster vidéo", widget: image, required: false }
+              - { name: videoAlt, label: "Alt vidéo", widget: string, required: false }
+          - name: ctaSection
+            label: "Section CTA final"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: script, label: "Script calligraphié en haut", widget: string, required: false }
+              - { name: title, label: "Titre (HTML autorisé)", widget: string }
+              - { name: intro, label: "Paragraphe", widget: text, required: false }
+              - { name: ctaPrimaryLabel, label: "Bouton — texte", widget: string, required: false }
+              - { name: ctaPrimaryHref, label: "Bouton — lien", widget: string, required: false }
+          - name: featuredSection
+            label: "Section « Six flacons à découvrir »"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: kicker, label: "Kicker", widget: string, required: false }
+              - { name: title, label: "Titre", widget: string }
+              - { name: seeAllLabel, label: "Lien « Voir tous » — texte", widget: string, required: false }
+              - { name: seeAllHref, label: "Lien « Voir tous » — URL", widget: string, required: false }
+
+      # ═════════════════════════════════════════════════════════════
       # ATELIERS
       # ═════════════════════════════════════════════════════════════
       - name: ateliers
@@ -720,6 +873,250 @@ collections:
               - { name: ctaPrimaryHref, label: "Bouton 1 — lien", widget: string, required: false }
               - { name: ctaSecondaryLabel, label: "Bouton 2 — texte", widget: string, required: false }
               - { name: ctaSecondaryHref, label: "Bouton 2 — lien", widget: string, required: false }
+
+      # ═════════════════════════════════════════════════════════════
+      # COCKTAILS
+      # ═════════════════════════════════════════════════════════════
+      - name: cocktails
+        label: "Cocktails"
+        file: src/content/static-pages/cocktails.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: "cocktails"
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+          - name: pageHeader
+            label: "Header"
+            widget: object
+            fields:
+              - { name: kicker, label: "Kicker", widget: string, required: false }
+              - { name: title, label: "Titre (HTML autorisé)", widget: string }
+              - { name: subtitle, label: "Sous-titre", widget: text, required: false }
+          - name: ctaSection
+            label: "Section CTA final"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: title, label: "Titre", widget: string }
+              - { name: intro, label: "Paragraphe", widget: text, required: false }
+              - { name: ctaPrimaryLabel, label: "Bouton — texte", widget: string, required: false }
+              - { name: ctaPrimaryHref, label: "Bouton — lien", widget: string, required: false }
+
+      # ═════════════════════════════════════════════════════════════
+      # LUMIÈRE OBSCURE (CBD — YMYL, contenu partiellement extrait)
+      # ═════════════════════════════════════════════════════════════
+      - name: lumiere-obscure
+        label: "Lumière Obscure (CBD)"
+        file: src/content/static-pages/lumiere-obscure.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: "lumiere-obscure"
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: false
+            hint: "⚠️ Page YMYL (CBD). Contenu du site figé côté code — modifier uniquement les balises SEO ici."
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+
+      # ═════════════════════════════════════════════════════════════
+      # LIQUEURS DE PLANTES (landing SEO)
+      # ═════════════════════════════════════════════════════════════
+      - name: liqueurs-de-plantes
+        label: "Liqueurs de plantes (SEO)"
+        file: src/content/static-pages/liqueurs-de-plantes.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: "liqueurs-de-plantes"
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: false
+            hint: "Page SEO optimisée — contenu du corps figé côté code. Modifier les balises SEO ici."
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+
+      # ═════════════════════════════════════════════════════════════
+      # LIQUEUR DIGESTIVE (landing SEO)
+      # ═════════════════════════════════════════════════════════════
+      - name: liqueur-digestive
+        label: "Liqueur digestive (SEO)"
+        file: src/content/static-pages/liqueur-digestive.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: "liqueur-digestive"
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: false
+            hint: "Page SEO optimisée — contenu du corps figé côté code."
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+
+      # ═════════════════════════════════════════════════════════════
+      # LIQUEURS ARTISANALES (landing SEO)
+      # ═════════════════════════════════════════════════════════════
+      - name: liqueurs-artisanales
+        label: "Liqueurs artisanales (SEO)"
+        file: src/content/static-pages/liqueurs-artisanales.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: "liqueurs-artisanales"
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: false
+            hint: "Page SEO optimisée — contenu du corps figé côté code."
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+
+      # ═════════════════════════════════════════════════════════════
+      # PROFESSIONNELS
+      # ═════════════════════════════════════════════════════════════
+      - name: professionnels
+        label: "Professionnels"
+        file: src/content/static-pages/professionnels.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: "professionnels"
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: false
+            hint: "Page pro — contenu du corps figé côté code (formulaire quote, sections)."
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+
+      # ═════════════════════════════════════════════════════════════
+      # MENTIONS LÉGALES (YMYL — Markdown body)
+      # ═════════════════════════════════════════════════════════════
+      - name: mentions-legales
+        label: "Mentions légales"
+        file: src/content/static-pages/mentions-legales.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: "mentions-legales"
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+          - name: pageHeader
+            label: "Header"
+            widget: object
+            fields:
+              - { name: kicker, label: "Kicker", widget: string, required: false }
+              - { name: title, label: "Titre", widget: string }
+              - { name: subtitle, label: "Sous-titre", widget: text, required: false }
+          - name: body
+            label: "Corps de la page (Markdown : ## H2, **gras**, [lien](/url), > citation)"
+            widget: markdown
+            hint: "⚠️ Contenu légal — modifier avec précaution."
+
+      # ═════════════════════════════════════════════════════════════
+      # CGV (YMYL — Markdown body)
+      # ═════════════════════════════════════════════════════════════
+      - name: cgv
+        label: "CGV"
+        file: src/content/static-pages/cgv.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: "cgv"
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+          - name: pageHeader
+            label: "Header"
+            widget: object
+            fields:
+              - { name: kicker, label: "Kicker", widget: string, required: false }
+              - { name: title, label: "Titre", widget: string }
+              - { name: subtitle, label: "Sous-titre", widget: text, required: false }
+          - name: body
+            label: "Corps des CGV (Markdown : ## H2, **gras**, 1. listes)"
+            widget: markdown
+            hint: "⚠️ CGV — modifier avec précaution."
+
+      # ═════════════════════════════════════════════════════════════
+      # POLITIQUE COOKIES (Markdown body + table structurée)
+      # ═════════════════════════════════════════════════════════════
+      - name: politique-cookies
+        label: "Politique de cookies"
+        file: src/content/static-pages/politique-cookies.md
+        media_folder: /public/images
+        public_folder: /images
+        preview_path: "politique-cookies"
+        fields:
+          - name: meta
+            label: "SEO"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: "Titre (balise <title>)", widget: string }
+              - { name: description, label: "Meta description Google", widget: text }
+          - name: pageHeader
+            label: "Header"
+            widget: object
+            fields:
+              - { name: kicker, label: "Kicker", widget: string, required: false }
+              - { name: title, label: "Titre", widget: string }
+              - { name: subtitle, label: "Sous-titre", widget: text, required: false }
+          - name: body
+            label: "Corps de la politique (Markdown)"
+            widget: markdown
+            hint: "⚠️ Politique cookies — modifier avec précaution."
+          - name: cookiesTable
+            label: "Liste des cookies (rendue en tableau)"
+            widget: object
+            collapsed: true
+            fields:
+              - name: functionalCookies
+                label: "Cookies fonctionnels (auto — pas de consentement requis)"
+                widget: list
+                collapsed: true
+                summary: "{{fields.name}}"
+                fields:
+                  - { name: name, label: "Nom du cookie", widget: string }
+                  - { name: purpose, label: "Finalité", widget: text }
+                  - { name: type, label: "Type", widget: string, default: "Fonctionnel — strictement nécessaire" }
+                  - { name: duration, label: "Durée de conservation", widget: string }
+                  - { name: consent, label: "Consentement requis ?", widget: boolean, default: false }
+              - name: analyticsCookies
+                label: "Cookies statistiques (Google Analytics — consentement requis)"
+                widget: list
+                collapsed: true
+                summary: "{{fields.name}}"
+                fields:
+                  - { name: name, label: "Nom du cookie", widget: string }
+                  - { name: purpose, label: "Finalité", widget: text }
+                  - { name: type, label: "Type", widget: string, default: "Statistiques — consentement requis" }
+                  - { name: duration, label: "Durée de conservation", widget: string }
+                  - { name: consent, label: "Consentement requis ?", widget: boolean, default: true }
 
   # ─── ARTICLES DE BLOG EN ──────────────────────────────────────────────
   - name: blog-en

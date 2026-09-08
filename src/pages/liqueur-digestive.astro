@@ -2,9 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 import { products } from '../data/products';
+import { getEntry } from 'astro:content';
 
-const title = "Liqueur digestive — Meilleur Digestif du Monde 2025 | La Brasserie des Plantes";
-const description = "Quel digestif alcool choisir après un repas ? Liqueur digestive aux 27 plantes (Meilleur Digestif du Monde 2025), gentiane, génépi, verveine, menthe — guide complet du digestif artisanal français à base de plantes.";
+const entry = await getEntry('static-pages', 'liqueur-digestive');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/liqueur-digestive.md");
+const title = entry.data.meta.title;
+const description = entry.data.meta.description;
 
 const breadcrumb = {
   '@context': 'https://schema.org',

@@ -479,6 +479,137 @@ const staticPages = defineCollection({
         ctaSecondaryHref: emptyToUndefined(z.string()),
       })
       .nullish(),
+
+    // ═══ Blocs spécifiques à la home (index.md) ══════════════════
+    heroHome: z
+      .object({
+        badge: emptyToUndefined(z.string()),
+        logo: emptyToUndefined(z.string()),
+        logoAlt: emptyToUndefined(z.string()),
+        titleScript: z.string(),
+        titleAccent: emptyToUndefined(z.string()),
+        intro: emptyToUndefined(z.string()),
+        ctaPrimaryLabel: emptyToUndefined(z.string()),
+        ctaPrimaryHref: emptyToUndefined(z.string()),
+        ctaSecondaryLabel: emptyToUndefined(z.string()),
+        ctaSecondaryHref: emptyToUndefined(z.string()),
+        video: emptyToUndefined(z.string()),
+        videoPoster: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+    carouselSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        heading: z.string(),
+        subtitle: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+    historySection: z
+      .object({
+        divider: emptyToUndefined(z.string()),
+        title: z.string(),
+        paragraphs: z.array(z.string()).default([]),
+        links: z
+          .array(z.object({ label: z.string(), href: z.string() }))
+          .default([]),
+      })
+      .nullish(),
+    introVideoSection: z
+      .object({
+        video: z.string(),
+        poster: emptyToUndefined(z.string()),
+        script: emptyToUndefined(z.string()),
+        title: z.string(),
+        titleAccent: emptyToUndefined(z.string()),
+        tagline: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+    coffretTeaser: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        titleAccent: emptyToUndefined(z.string()),
+        intro: emptyToUndefined(z.string()),
+        ctaPrimaryLabel: emptyToUndefined(z.string()),
+        ctaPrimaryHref: emptyToUndefined(z.string()),
+        ctaSecondaryLabel: emptyToUndefined(z.string()),
+        ctaSecondaryHref: emptyToUndefined(z.string()),
+        stackImages: z
+          .array(z.object({ src: z.string(), alt: z.string() }))
+          .default([]),
+      })
+      .nullish(),
+    cocktailsSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        intro: emptyToUndefined(z.string()),
+        ctaLabel: emptyToUndefined(z.string()),
+        ctaHref: emptyToUndefined(z.string()),
+        cocktails: z
+          .array(
+            z.object({
+              title: z.string(),
+              image: z.string(),
+              href: z.string(),
+              offset: z.boolean().default(false),
+            })
+          )
+          .default([]),
+      })
+      .nullish(),
+    visitSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        titleAccent: emptyToUndefined(z.string()),
+        intro: emptyToUndefined(z.string()),
+        addressLabel: emptyToUndefined(z.string()),
+        hoursLabel: emptyToUndefined(z.string()),
+        ctaPrimaryLabel: emptyToUndefined(z.string()),
+        ctaSecondaryLabel: emptyToUndefined(z.string()),
+        ctaSecondaryHref: emptyToUndefined(z.string()),
+        video: emptyToUndefined(z.string()),
+        videoPoster: emptyToUndefined(z.string()),
+        videoAlt: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+    featuredSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        seeAllLabel: emptyToUndefined(z.string()),
+        seeAllHref: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+
+    // ─── Tableau cookies (politique-cookies) ─────────────────────
+    cookiesTable: z
+      .object({
+        functionalCookies: z
+          .array(
+            z.object({
+              name: z.string(),
+              purpose: z.string(),
+              type: z.string(),
+              duration: z.string(),
+              consent: z.boolean(),
+            })
+          )
+          .default([]),
+        analyticsCookies: z
+          .array(
+            z.object({
+              name: z.string(),
+              purpose: z.string(),
+              type: z.string(),
+              duration: z.string(),
+              consent: z.boolean(),
+            })
+          )
+          .default([]),
+      })
+      .nullish(),
   }),
 });
 

@@ -3,6 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 import { products } from '../data/products';
 import { GlowCard } from '../components/ui/spotlight-card';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('static-pages', 'lumiere-obscure');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/lumiere-obscure.md");
+const { meta } = entry.data;
 
 const cbdProducts = products.filter((p) => p.range === 'lumiere-obscure');
 
@@ -82,8 +87,8 @@ const faqSchema = {
 };
 ---
 <Layout
-  title="Liqueur CBD légale France — Boisson au CBD artisanale | Lumière Obscure"
-  description="Liqueurs au CBD (alcool CBD) légales en France : THC < 0,1 % (seuil légal arrêté 30/12/2021). Menthe + ortie, verveine + aurone, absinthe + citron. Boisson CBD artisanale française, infusion alcoolique au chanvre."
+  title={meta.title}
+  description={meta.description}
   schema={[breadcrumb, collectionSchema, faqSchema]}
 >
   <!-- HERO NUIT -->

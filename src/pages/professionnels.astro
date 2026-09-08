@@ -3,6 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 import { Awards } from '@/components/ui/award';
 import { GlowCard } from '../components/ui/spotlight-card';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('static-pages', 'professionnels');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/professionnels.md");
+const { meta } = entry.data;
 
 // Schema breadcrumb + FAQ pour la page pro (actions recommandées par l'audit)
 const breadcrumb = {
@@ -178,8 +183,8 @@ const eventFormats = [
 ];
 ---
 <Layout
-  title="Fournisseur liqueur artisanale — Cavistes, bars, restaurants & CE | La Brasserie des Plantes"
-  description="Fournisseur liqueur artisanale française pour cavistes, CHR, restaurants, bars à cocktails et CE. Distribution directe Auvergne-Rhône-Alpes. Tous formats (20 cl à Jéroboam, BIB 5 L, coffrets). Liqueurs primées Meilleur Digestif du Monde 2025."
+  title={meta.title}
+  description={meta.description}
   schema={[breadcrumb, faqSchema]}
 >
   <!-- HERO VIDÉO plein écran — entrée immersive -->

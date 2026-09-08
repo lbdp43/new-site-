@@ -4,6 +4,11 @@ import PageHeader from '../components/PageHeader.astro';
 import { GlowCard } from '../components/ui/spotlight-card';
 import { cocktails } from '../data/cocktails';
 import { site } from '../data/site';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('static-pages', 'cocktails');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/cocktails.md");
+const { meta, pageHeader, ctaSection } = entry.data;
 
 // Schema Recipe par cocktail — rich snippets Google (noté "FORT impact" dans l'audit)
 const recipeSchemas = cocktails.map((c) => ({
@@ -48,16 +53,18 @@ const toneColors: Record<string, string> = {
 };
 ---
 <Layout
-  title="Recettes cocktails aux plantes — 5 idées cocktails maison | La Brasserie des Plantes"
-  description="5 recettes cocktails faciles aux liqueurs artisanales : Spritz Efflorescent, Verveine Printanière, Philtre d'Éros, Black Mule, Bonbon au Citron. Idées cocktails apéritifs, digestifs et mixologie aux plantes — proportions, montage, accords."
+  title={meta.title}
+  description={meta.description}
   schema={schema}
 >
-  <PageHeader
-    kicker="Mixologie"
-    title="Nos cocktails<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>signatures</em>"
-    subtitle="Cinq recettes cocktails faciles autour de nos liqueurs phares — du spritz ensoleillé au mule sombre. Idées cocktails à reproduire simplement chez soi en 5 minutes."
-    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Cocktails' }]}
-  />
+  {pageHeader && (
+    <PageHeader
+      kicker={pageHeader.kicker}
+      title={pageHeader.title}
+      subtitle={pageHeader.subtitle}
+      breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Cocktails' }]}
+    />
+  )}
 
   <section class="py-12">
     <div class="max-w-5xl mx-auto px-6 space-y-20">
@@ -146,19 +153,23 @@ const toneColors: Record<string, string> = {
     </div>
   </section>
 
-  <section class="py-20 bg-cream-100/60 mt-20">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6">
-        Venez nous voir à l'atelier.
-      </h2>
-      <p class="text-ink-700 text-lg mb-8 leading-relaxed">
-        À Saint-Didier-en-Velay, nous organisons des soirées dégustation et
-        des ateliers où vous composez votre propre liqueur — une après-midi
-        à sentir, goûter, macérer, et vous repartez avec votre bouteille.
-      </p>
-      <a href="/ateliers" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
-        Découvrir nos ateliers
-      </a>
-    </div>
-  </section>
+  {ctaSection && (
+    <section class="py-20 bg-cream-100/60 mt-20">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6">
+          {ctaSection.title}
+        </h2>
+        {ctaSection.intro && (
+          <p class="text-ink-700 text-lg mb-8 leading-relaxed">
+            {ctaSection.intro}
+          </p>
+        )}
+        {ctaSection.ctaPrimaryLabel && ctaSection.ctaPrimaryHref && (
+          <a href={ctaSection.ctaPrimaryHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+            {ctaSection.ctaPrimaryLabel}
+          </a>
+        )}
+      </div>
+    </section>
+  )}
 </Layout>

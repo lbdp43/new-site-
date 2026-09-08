@@ -2,6 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('static-pages', 'politique-cookies');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/politique-cookies.md");
+const { meta, pageHeader, cookiesTable } = entry.data;
+const { Content } = await render(entry);
 
 const schema = {
   '@context': 'https://schema.org',
@@ -11,160 +17,70 @@ const schema = {
   inLanguage: 'fr-FR',
 };
 
-// Août 2026 : ajout de Google Analytics 4 (mesure d'audience anonyme),
-// activé UNIQUEMENT si le visiteur donne son consentement explicite dans
-// l'AgeGate (bouton "Entrer et accepter les statistiques"). Consent Mode v2
-// garantit que gtag.js est chargé en `denied` par défaut → aucun cookie
-// GA4 posé tant que consentement pas donné. Le visiteur peut changer
-// d'avis via le lien "Gérer mes préférences" du footer.
-const analyticsCookies = [
-  {
-    name: '_ga',
-    purpose: 'Identifie de façon anonyme un visiteur unique (Google Analytics 4).',
-    type: 'Statistiques — consentement requis',
-    duration: '2 ans',
-    consent: true,
-  },
-  {
-    name: '_ga_DK89M6D81H',
-    purpose: "Conserve l'état de session pour Google Analytics 4.",
-    type: 'Statistiques — consentement requis',
-    duration: '2 ans',
-    consent: true,
-  },
+const cookies = [
+  ...(cookiesTable?.functionalCookies ?? []),
+  ...(cookiesTable?.analyticsCookies ?? []),
 ];
-const functionalCookies = [
-  {
-    name: 'lbdp_age_gate',
-    purpose: "Mémorise votre confirmation d'âge (18+) pour ne pas réafficher la modale à chaque visite.",
-    type: 'Fonctionnel — strictement nécessaire',
-    duration: '30 jours',
-    consent: false,
-  },
-  {
-    name: 'lbdp_analytics_consent',
-    purpose: 'Mémorise votre choix quant aux statistiques anonymes (accepté ou refusé).',
-    type: 'Fonctionnel — strictement nécessaire',
-    duration: '30 jours',
-    consent: false,
-  },
-  {
-    name: 'lbdp_cart',
-    purpose: "Conserve le contenu de votre panier d'achat entre les pages.",
-    type: 'Fonctionnel — strictement nécessaire',
-    duration: 'Session + 7 jours',
-    consent: false,
-  },
-  {
-    name: 'lbdp-coffret-v2',
-    purpose: 'Mémorise la composition de votre coffret personnalisé en cours.',
-    type: 'Fonctionnel — strictement nécessaire',
-    duration: 'Permanent (effaçable depuis le configurateur)',
-    consent: false,
-  },
-  {
-    name: 'lbdp-recently-viewed-v1',
-    purpose: 'Mémorise les fiches produit que vous avez consultées (max 6) pour la section "Vu récemment".',
-    type: 'Fonctionnel — strictement nécessaire',
-    duration: 'Permanent (effaçable depuis le navigateur)',
-    consent: false,
-  },
-];
-const cookies = [...functionalCookies, ...analyticsCookies];
+
+const updatedDate = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <Layout
-  title={`Politique de cookies | ${site.name}`}
-  description="Quels cookies utilise labrasseriedesplantes.fr, pourquoi, combien de temps, et comment gérer vos préférences."
+  title={meta.title}
+  description={meta.description}
   schema={schema}
 >
-  <PageHeader
-    kicker="Données & vie privée"
-    title="Politique de cookies"
-    subtitle="Comment nous utilisons les cookies, dans le respect du RGPD et des recommandations CNIL."
-    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Cookies' }]}
-  />
+  {pageHeader && (
+    <PageHeader
+      kicker={pageHeader.kicker}
+      title={pageHeader.title}
+      subtitle={pageHeader.subtitle}
+      breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Cookies' }]}
+    />
+  )}
 
   <section class="py-16 bg-white">
     <div class="max-w-3xl mx-auto px-6 prose prose-lg prose-headings:font-display prose-headings:text-forest-900 prose-h2:text-2xl prose-h2:mt-10 prose-a:text-forest-700 prose-strong:text-forest-900">
+      <Content />
 
-      <h2>Qu'est-ce qu'un cookie ?</h2>
-      <p>
-        Un cookie est un petit fichier texte stocké sur votre appareil (ordinateur, téléphone, tablette) par votre navigateur. Il permet à un site de reconnaître votre navigateur et de mémoriser certaines informations (préférences, session de connexion, panier, statistiques de visite).
-      </p>
-
-      <h2>Notre principe</h2>
-      <p>
-        Nous utilisons deux catégories de cookies :
-      </p>
-      <ul>
-        <li><strong>Cookies fonctionnels</strong> — strictement nécessaires au fonctionnement du site (panier, confirmation d'âge, configurateur de coffret, dernières fiches consultées). Ils sont posés automatiquement, sans consentement requis, conformément aux recommandations CNIL.</li>
-        <li><strong>Cookies de mesure d'audience</strong> — Google Analytics 4, activé <strong>uniquement</strong> si vous cliquez sur "Entrer et accepter les statistiques" dans la fenêtre de vérification d'âge. Ils nous permettent de comprendre comment les visiteurs utilisent le site (pages populaires, sources de trafic, tunnel d'achat) de façon anonyme, pour améliorer l'expérience.</li>
-      </ul>
-      <p>
-        <strong>Aucun cookie marketing/reciblage</strong> (Meta Pixel, Google Ads, TikTok Pixel…) n'est utilisé sur ce site.
-      </p>
-
-      <h2>Google Analytics 4 — précisions</h2>
-      <p>
-        Fournisseur : <strong>Google Ireland Ltd</strong> (siège européen, 70 Sir John Rogerson's Quay, Dublin 2, Irlande). Les données sont anonymisées côté client (IP tronquée automatiquement dans GA4). Nous avons activé le <strong>Consent Mode v2</strong> de Google : tant que vous n'avez pas donné votre accord, aucun cookie GA4 n'est posé et aucune donnée n'est envoyée à Google.
-      </p>
-      <p>
-        Pour <strong>refuser</strong> ou <strong>retirer</strong> votre consentement à tout moment : cliquez sur "Gérer mes préférences" en pied de page. Ou installez le <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">module de désactivation officiel Google Analytics</a> (bloque GA sur tous les sites).
-      </p>
-
-      <h2>Cookies utilisés sur ce site</h2>
-      <div class="not-prose overflow-x-auto my-8">
-        <table class="w-full border-collapse bg-cream-50 rounded-xl overflow-hidden text-sm">
-          <thead class="bg-forest-800 text-cream-100">
-            <tr>
-              <th class="px-4 py-3 text-left font-medium">Cookie</th>
-              <th class="px-4 py-3 text-left font-medium">Finalité</th>
-              <th class="px-4 py-3 text-left font-medium">Durée</th>
-              <th class="px-4 py-3 text-left font-medium">Consentement</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-forest-100">
-            {cookies.map((c) => (
+      <!-- Tableau des cookies rendu depuis le frontmatter (structuré). -->
+      {cookies.length > 0 && (
+        <>
+          <h2>Cookies utilisés sur ce site</h2>
+          <div class="not-prose overflow-x-auto my-8">
+            <table class="w-full border-collapse bg-cream-50 rounded-xl overflow-hidden text-sm">
+            <thead class="bg-forest-800 text-cream-100">
               <tr>
-                <td class="px-4 py-3 font-mono text-xs text-forest-900">{c.name}</td>
-                <td class="px-4 py-3 text-ink-700">
-                  <div class="font-medium text-forest-800 mb-0.5">{c.type}</div>
-                  {c.purpose}
-                </td>
-                <td class="px-4 py-3 text-ink-500 whitespace-nowrap">{c.duration}</td>
-                <td class="px-4 py-3">
-                  {c.consent ? (
-                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gold-500/15 text-gold-700 text-xs font-medium">Requis</span>
-                  ) : (
-                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-forest-100 text-forest-700 text-xs font-medium">Auto (nécessaire)</span>
-                  )}
-                </td>
+                <th class="px-4 py-3 text-left font-medium">Cookie</th>
+                <th class="px-4 py-3 text-left font-medium">Finalité</th>
+                <th class="px-4 py-3 text-left font-medium">Durée</th>
+                <th class="px-4 py-3 text-left font-medium">Consentement</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody class="divide-y divide-forest-100">
+              {cookies.map((c) => (
+                <tr>
+                  <td class="px-4 py-3 font-mono text-xs text-forest-900">{c.name}</td>
+                  <td class="px-4 py-3 text-ink-700">
+                    <div class="font-medium text-forest-800 mb-0.5">{c.type}</div>
+                    {c.purpose}
+                  </td>
+                  <td class="px-4 py-3 text-ink-500 whitespace-nowrap">{c.duration}</td>
+                  <td class="px-4 py-3">
+                    {c.consent ? (
+                      <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gold-500/15 text-gold-700 text-xs font-medium">Requis</span>
+                    ) : (
+                      <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-forest-100 text-forest-700 text-xs font-medium">Auto (nécessaire)</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          </div>
+        </>
+      )}
 
-      <h2>Gérer mes préférences</h2>
-      <p>
-        Vous pouvez à tout moment :
-      </p>
-      <ul>
-        <li><strong>Modifier votre choix concernant les statistiques anonymes</strong> en cliquant sur "Gérer mes préférences" en pied de page (la fenêtre de choix se rouvre).</li>
-        <li>Supprimer les cookies déjà stockés depuis les réglages de votre navigateur (<a href="https://support.google.com/accounts/answer/61416" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies-preferences" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.microsoft.com/fr-fr/windows/supprimer-et-g%C3%A9rer-les-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Edge</a>). Le site continuera à fonctionner mais vous devrez reconfirmer votre âge à votre prochaine visite et votre panier sera vide.</li>
-      </ul>
-
-      <h2>Transfert de données hors UE</h2>
-      <p>
-        Le paiement est traité par <strong>Stripe (États-Unis)</strong> via WooPayments. Ce transfert est encadré par les <strong>Clauses contractuelles types (SCC)</strong> adoptées par la Commission européenne. Aucune autre donnée personnelle n'est transférée hors UE par ce site dans son fonctionnement nominal.
-      </p>
-
-      <h2>Vos droits</h2>
-      <p>
-        Consultez nos <a href="/mentions-legales">mentions légales</a> pour les détails sur vos droits RGPD (accès, rectification, suppression, portabilité, opposition). Pour toute question : <a href={`mailto:${site.email}`}>{site.email}</a>.
-      </p>
-
-      <p class="text-xs text-ink-500 mt-12">Dernière mise à jour : {new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
+      <p class="text-xs text-ink-500 mt-12">Dernière mise à jour : {updatedDate}.</p>
     </div>
   </section>
 </Layout>
