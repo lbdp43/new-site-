@@ -161,6 +161,161 @@ collections:
         required: false
         hint: "Texte principal sur la page /boutique/<slug>. Storytelling, histoire, détails."
 
+  # ─── PAGES STATIQUES (contenu éditorial des pages du site) ───────────
+  # Miroir du schema Zod `staticPages` dans src/content.config.ts.
+  # Chaque fichier = une page. Le CMS permet de modifier textes + images
+  # sans toucher aux fichiers .astro (structure HTML/Tailwind).
+  # Pilote : Ateliers. Ajouter d'autres pages en créant leur .md.
+  - name: static-pages
+    label: "Pages"
+    label_singular: "Page"
+    folder: src/content/static-pages
+    media_folder: /public/images
+    public_folder: /images
+    create: false  # gabarits créés par le dev — l'équipe édite, ne crée pas
+    delete: false
+    slug: "{{slug}}"
+    extension: md
+    format: yaml-frontmatter
+    identifier_field: slug
+    thumbnail: hero.videoPoster
+    summary: "{{meta.title}}"
+    sortable_fields: [slug]
+    fields:
+      # ─── Meta SEO ───────────────────────────────────────────────
+      - name: meta
+        label: "SEO"
+        widget: object
+        collapsed: true
+        fields:
+          - { name: title, label: "Titre (balise <title>)", widget: string, hint: "50-70 caractères. Apparaît dans l'onglet du navigateur et Google." }
+          - { name: description, label: "Meta description (Google)", widget: text, hint: "120-160 caractères. Résumé affiché sous le lien dans les résultats de recherche." }
+
+      # ─── Hero ───────────────────────────────────────────────────
+      - name: hero
+        label: "Hero (haut de page)"
+        widget: object
+        collapsed: false
+        fields:
+          - { name: kicker, label: "Petit texte au-dessus du titre", widget: string, required: false }
+          - { name: title, label: "Titre principal", widget: string }
+          - { name: titleAccent, label: "Titre — 2ᵉ ligne stylée (calligraphie)", widget: string, required: false }
+          - { name: intro, label: "Paragraphe d'intro", widget: text, required: false }
+          - { name: ctaPrimaryLabel, label: "Bouton principal — texte", widget: string, required: false }
+          - { name: ctaPrimaryHref, label: "Bouton principal — lien", widget: string, required: false, hint: "Ex: #workshops ou /boutique" }
+          - { name: ctaSecondaryLabel, label: "Bouton secondaire — texte", widget: string, required: false }
+          - { name: ctaSecondaryHref, label: "Bouton secondaire — lien", widget: string, required: false }
+          - { name: video, label: "Vidéo de fond (mp4)", widget: file, required: false, media_library: { config: { max_file_size: 20000000 } } }
+          - { name: videoPoster, label: "Image poster de la vidéo", widget: image, required: false }
+          - { name: videoAlt, label: "Description alt vidéo (accessibilité)", widget: string, required: false }
+
+      # ─── Section intro des ateliers ─────────────────────────────
+      - name: workshopsSection
+        label: "Introduction section « Deux formats »"
+        widget: object
+        collapsed: true
+        fields:
+          - { name: kicker, label: "Petit texte au-dessus", widget: string, required: false }
+          - { name: title, label: "Titre", widget: string }
+          - { name: intro, label: "Paragraphe", widget: text, required: false }
+
+      # ─── Liste des ateliers ─────────────────────────────────────
+      - name: workshops
+        label: "Ateliers (liste)"
+        label_singular: "Atelier"
+        widget: list
+        collapsed: true
+        summary: "{{fields.title}} — {{fields.price}} €"
+        fields:
+          - { name: id, label: "ID (technique — utilisé pour l'ancre #url)", widget: string, hint: "Ex: liqueur, visite. Pas d'espaces." }
+          - { name: kicker, label: "Étiquette (haut de vignette)", widget: string }
+          - { name: title, label: "Titre atelier", widget: string }
+          - { name: subtitle, label: "Sous-titre", widget: text }
+          - { name: price, label: "Prix (€)", widget: number, value_type: int }
+          - { name: duration, label: "Durée (texte)", widget: string, hint: "Ex: 2 h, 1 h 30" }
+          - { name: participants, label: "Nombre de participants", widget: string, hint: "Ex: 2 à 6 personnes" }
+          - { name: ageMin, label: "Âge minimum", widget: number, value_type: int }
+          - { name: language, label: "Langue", widget: string, default: "Français" }
+          - name: includes
+            label: "Ce qui est inclus"
+            widget: list
+            field: { name: item, label: "Ligne", widget: string }
+          - name: steps
+            label: "Déroulé — étapes"
+            widget: list
+            field: { name: step, label: "Étape", widget: text }
+          - { name: image, label: "Photo principale (bouteille/atelier)", widget: image }
+          - name: gallery
+            label: "Galerie photos (4 vignettes)"
+            widget: list
+            field: { name: photo, label: "Photo", widget: image }
+          - { name: flipped, label: "Inverser image ↔ texte (image à droite)", widget: boolean, default: false }
+          - { name: bookingUrl, label: "URL de réservation Wecandoo", widget: string }
+
+      # ─── Section « Où ça se passe » ─────────────────────────────
+      - name: locationSection
+        label: "Section « Où ça se passe »"
+        widget: object
+        collapsed: true
+        fields:
+          - { name: kicker, label: "Petit texte au-dessus", widget: string, required: false }
+          - { name: titleLine1, label: "Titre — ligne 1", widget: string }
+          - { name: titleLine2, label: "Titre — ligne 2 (calligraphie)", widget: string, required: false }
+          - { name: intro, label: "Paragraphe (**gras** avec ** **)", widget: text, required: false }
+          - { name: address, label: "Adresse complète", widget: string }
+          - { name: access, label: "Accès", widget: string, required: false }
+          - { name: parking, label: "Parking", widget: string, required: false }
+          - { name: mapsUrl, label: "URL Google Maps", widget: string, required: false }
+          - { name: video, label: "Vidéo de la boutique (mp4)", widget: file, required: false }
+          - { name: videoPoster, label: "Poster de la vidéo boutique", widget: image, required: false }
+          - { name: videoAlt, label: "Description alt vidéo", widget: string, required: false }
+
+      # ─── Section artisan ────────────────────────────────────────
+      - name: artisanSection
+        label: "Section « Votre hôte »"
+        widget: object
+        collapsed: true
+        fields:
+          - { name: kicker, label: "Petit texte au-dessus", widget: string, required: false }
+          - { name: name, label: "Prénom (grosse calligraphie)", widget: string }
+          - { name: role, label: "Rôle / métier", widget: string }
+          - { name: image, label: "Photo de l'artisan", widget: image }
+          - { name: imageAlt, label: "Description alt photo", widget: string, required: false }
+          - name: bio
+            label: "Biographie (1 paragraphe par ligne)"
+            widget: list
+            field: { name: paragraph, label: "Paragraphe", widget: text }
+
+      # ─── Section groupes / privatisation ────────────────────────
+      - name: groupsSection
+        label: "Section « Groupes — privatisation »"
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { name: kicker, label: "Petit texte au-dessus", widget: string, required: false }
+          - { name: title, label: "Titre", widget: string }
+          - { name: intro, label: "Paragraphe", widget: text, required: false }
+          - { name: ctaPrimaryLabel, label: "Bouton principal — texte", widget: string, required: false }
+          - { name: ctaPrimaryHref, label: "Bouton principal — lien (mailto: ou URL)", widget: string, required: false }
+          - { name: ctaSecondaryLabel, label: "Bouton secondaire — texte", widget: string, required: false }
+          - { name: ctaSecondaryHref, label: "Bouton secondaire — lien", widget: string, required: false }
+
+      # ─── Section CTA final ──────────────────────────────────────
+      - name: ctaSection
+        label: "Section CTA final"
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { name: script, label: "Petit texte calligraphié au-dessus", widget: string, required: false }
+          - { name: title, label: "Titre", widget: string }
+          - { name: intro, label: "Paragraphe", widget: text, required: false }
+          - { name: ctaPrimaryLabel, label: "Bouton principal — texte", widget: string, required: false }
+          - { name: ctaPrimaryHref, label: "Bouton principal — lien", widget: string, required: false }
+          - { name: ctaSecondaryLabel, label: "Bouton secondaire — texte", widget: string, required: false }
+          - { name: ctaSecondaryHref, label: "Bouton secondaire — lien", widget: string, required: false }
+
   # ─── ARTICLES DE BLOG EN ──────────────────────────────────────────────
   - name: blog-en
     label: "Articles — EN"

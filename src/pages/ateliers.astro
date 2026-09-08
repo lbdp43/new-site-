@@ -2,20 +2,31 @@
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 import reviewsData from '../data/wecandoo-reviews.json';
+import { getEntry } from 'astro:content';
 
 /**
- * Page Ateliers — reprend les 2 ateliers Wecandoo :
- *   1. Réalisez votre liqueur artisanale (75 € · 2h · 2-6 pers · 20 avis)
- *   2. Dégustez des liqueurs d'exception (17 € · 1h30 · 2-7 pers · 3 avis)
+ * Page Ateliers — pilote du refactor Option B :
+ * contenu éditorial extrait dans `src/content/static-pages/ateliers.md`
+ * (éditable via Sveltia CMS). Le template ne porte plus que la structure
+ * HTML/Tailwind + la logique de rendu (breadcrumb, schema.org, avis
+ * Wecandoo).
  *
- * Toutes les données (descriptions, déroulés, prix, photos) et les avis
- * clients proviennent des pages Wecandoo officielles — fetchés et
- * intégrés localement pour que l'atelier reste découvrable depuis notre
- * site même sans connaissance préalable de Wecandoo.
+ * Les avis clients Wecandoo restent dans `data/wecandoo-reviews.json` —
+ * ce n'est pas du contenu éditorial LBDP, c'est du scraping tiers.
  */
 
-const WECANDOO_LIQUEUR = 'https://wecandoo.fr/atelier/saint-etienne-etienne-guillaume-liqueurs';
-const WECANDOO_VISITE = 'https://wecandoo.fr/atelier/saint-etienne-etienne-guillaume-liqueurs-visite';
+const entry = await getEntry('static-pages', 'ateliers');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/ateliers.md");
+const {
+  meta,
+  hero,
+  workshopsSection,
+  workshops,
+  locationSection,
+  artisanSection,
+  groupsSection,
+  ctaSection,
+} = entry.data;
 
 const breadcrumb = {
   '@context': 'https://schema.org',
@@ -58,109 +69,39 @@ const workshopLocation = {
   },
 };
 
-const workshopsSchema = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Event',
-    name: 'Réalisez votre liqueur artisanale',
-    description: "Initiez-vous à la production de spiritueux et fabriquez votre propre liqueur artisanale avec Étienne, artisan liquoriste.",
-    image: `${site.url}/images/ateliers/liqueur-1.jpg`,
-    startDate: nextSaturday,
-    endDate: eventEndSaturday,
-    eventStatus: 'https://schema.org/EventScheduled',
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    inLanguage: 'fr-FR',
-    location: workshopLocation,
-    offers: {
-      '@type': 'Offer',
-      price: '75',
-      priceCurrency: 'EUR',
-      url: WECANDOO_LIQUEUR,
-      availability: 'https://schema.org/InStock',
-      validFrom: new Date().toISOString(),
-    },
-    duration: 'PT2H',
-    organizer: { '@id': `${site.url}#localbusiness` },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Event',
-    name: "Dégustez des liqueurs d'exception",
-    description: "Découvrez les secrets de la macération et dégustez six liqueurs exceptionnelles avec Étienne.",
-    image: `${site.url}/images/ateliers/visite-1.jpg`,
-    startDate: nextSaturday,
-    endDate: eventEndSaturday,
-    eventStatus: 'https://schema.org/EventScheduled',
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    inLanguage: 'fr-FR',
-    location: workshopLocation,
-    offers: {
-      '@type': 'Offer',
-      price: '17',
-      priceCurrency: 'EUR',
-      url: WECANDOO_VISITE,
-      availability: 'https://schema.org/InStock',
-      validFrom: new Date().toISOString(),
-    },
-    duration: 'PT1H30M',
-    organizer: { '@id': `${site.url}#localbusiness` },
-  },
-];
+// Génère un schema Event par atelier — dérivé du contenu éditorial pour
+// rester synchro (durée = duration parsée en ISO 8601).
+const parseDurationToIso = (d: string): string => {
+  const m = d.match(/(\d+)\s*h(?:\s*(\d+))?/i);
+  if (!m) return 'PT1H';
+  const h = parseInt(m[1], 10);
+  const min = m[2] ? parseInt(m[2], 10) : 0;
+  return `PT${h}H${min ? `${min}M` : ''}`;
+};
 
-const workshops = [
-  {
-    id: 'liqueur',
-    kicker: 'Atelier pratique',
-    title: 'Réalisez votre liqueur artisanale',
-    subtitle: "Initiez-vous à la production de spiritueux et fabriquez votre liqueur avec Étienne, artisan liquoriste.",
-    price: 75,
-    duration: '2 h',
-    participants: '2 à 6 personnes',
-    ageMin: 18,
-    language: 'Français',
-    includes: [
-      '2 h de découverte avec Étienne',
-      'Des connaissances en fabrication de liqueur',
-      'Votre liqueur artisanale (50 cl) à emporter',
-    ],
-    steps: [
-      "Visite du lieu de macération où vous allez travailler.",
-      "Dégustation des 6 liqueurs de la gamme Brasserie des Plantes.",
-      "Choix de vos arômes et saveurs parmi une belle sélection de plantes — Étienne vous guide pour le dosage.",
-      "Création de votre liqueur dans un bocal type Parfait de 1 L (vous repartez avec 50 cl).",
-      "Transmission de toutes les instructions pour l'améliorer chez vous : temps de repos, dosage en sucre, mise en bouteille.",
-    ],
-    image: '/images/ateliers/liqueur-2.jpg',
-    gallery: ['/images/ateliers/liqueur-1.jpg', '/images/ateliers/liqueur-3.jpg', '/images/ateliers/liqueur-4.jpg', '/images/ateliers/liqueur-5.jpg'],
-    bookingUrl: WECANDOO_LIQUEUR,
+const workshopsSchema = workshops.map((w) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: w.title,
+  description: w.subtitle,
+  image: `${site.url}${w.image}`,
+  startDate: nextSaturday,
+  endDate: eventEndSaturday,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  inLanguage: 'fr-FR',
+  location: workshopLocation,
+  offers: {
+    '@type': 'Offer',
+    price: String(w.price),
+    priceCurrency: 'EUR',
+    url: w.bookingUrl,
+    availability: 'https://schema.org/InStock',
+    validFrom: new Date().toISOString(),
   },
-  {
-    id: 'visite',
-    kicker: 'Visite & dégustation',
-    title: "Dégustez des liqueurs d'exception",
-    subtitle: "Découvrez les secrets de la macération et dégustez six liqueurs exceptionnelles avec Étienne — 1 h 30 dans les coulisses de la maison.",
-    price: 17,
-    duration: '1 h 30',
-    participants: '2 à 7 personnes',
-    ageMin: 18,
-    language: 'Français',
-    includes: [
-      '1 h 30 de découverte avec Étienne',
-      'Des connaissances en fabrication de liqueur',
-      'Une savoureuse dégustation de 6 liqueurs',
-    ],
-    steps: [
-      "Accueil en boutique : présentation par Étienne, introduction aux plantes et à la création des liqueurs.",
-      "Dégustation des 6 liqueurs de la gamme — différents arômes et caractères.",
-      "Passage en laboratoire : les cuves, le procédé de macération expliqué dans le détail.",
-      "Questions-réponses autour de la conservation et de la mise en bouteille.",
-    ],
-    image: '/images/ateliers/visite-1.jpg',
-    gallery: ['/images/ateliers/visite-2.jpg', '/images/ateliers/visite-3.jpg', '/images/ateliers/visite-4.jpg', '/images/ateliers/visite-5.jpg'],
-    flipped: true, // image à droite, texte à gauche (alternance visuelle)
-    bookingUrl: WECANDOO_VISITE,
-  },
-];
+  duration: parseDurationToIso(w.duration),
+  organizer: { '@id': `${site.url}#localbusiness` },
+}));
 
 // Fusion avis des 2 ateliers pour un mur social unique, triés date desc.
 type Review = { name: string; date: string; content: string; workshop: string };
@@ -180,29 +121,28 @@ const fmtDate = (iso: string) => {
 };
 ---
 <Layout
-  title="Ateliers & dégustations liqueurs — La Brasserie des Plantes"
-  description="Deux ateliers en Haute-Loire avec Étienne : fabriquez votre liqueur (2h, 75 €) ou visite-dégustation de six liqueurs (1h30, 17 €). 23 avis clients."
+  title={meta.title}
+  description={meta.description}
   schema={[breadcrumb, ...workshopsSchema]}
 >
-  <!-- HERO — vidéo locale `atelier-brasserie.mp4` en loop muet. Auparavant
-       un iframe YouTube qui dépendait d'un domaine externe (bloqué par
-       certains adblockers, lenteur de chargement, et on ne le maîtrise pas
-       si la vidéo est supprimée). La version locale est fiable, plus rapide
-       à charger, et cache-friendly sur Vercel CDN. -->
+  <!-- HERO — vidéo locale en loop muet. Le path de la vidéo + le poster
+       sont maintenant dans src/content/static-pages/ateliers.md. -->
   <section class="relative min-h-[70vh] md:min-h-[80vh] overflow-hidden bg-forest-950 flex items-end">
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        poster="/videos/atelier-brasserie-poster.webp"
-        aria-label="Atelier La Brasserie des Plantes — production de liqueurs à Saint-Didier-en-Velay"
-        class="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/videos/atelier-brasserie.mp4" type="video/mp4" />
-      </video>
+      {hero.video && (
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster={hero.videoPoster}
+          aria-label={hero.videoAlt}
+          class="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={hero.video} type="video/mp4" />
+        </video>
+      )}
     </div>
     <!-- Ombrage 2 couches : une teinte globale qui unifie + un dégradé plus
          marqué côté texte (en bas-gauche) pour que la typo blanche ressorte
@@ -211,28 +151,38 @@ const fmtDate = (iso: string) => {
     <div class="absolute inset-0 bg-gradient-to-tr from-forest-950/85 via-forest-950/50 to-transparent pointer-events-none"></div>
 
     <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-16 md:py-24 text-cream-50">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/30 border border-gold-500/60 text-gold-300 text-xs font-medium tracking-[0.2em] uppercase mb-6 backdrop-blur-sm">
-        Ateliers & dégustations
-      </div>
+      {hero.kicker && (
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/30 border border-gold-500/60 text-gold-300 text-xs font-medium tracking-[0.2em] uppercase mb-6 backdrop-blur-sm">
+          {hero.kicker}
+        </div>
+      )}
       <h1 class="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 max-w-3xl text-cream-50" style="text-shadow: 0 3px 28px rgba(0,0,0,0.75), 0 1px 2px rgba(0,0,0,0.5);">
-        Venez créer votre liqueur,<br />
-        <em class="not-italic text-gold-300 font-normal" style="font-family: var(--font-script); text-shadow: 0 3px 28px rgba(0,0,0,0.75), 0 1px 2px rgba(0,0,0,0.5);">ou simplement déguster.</em>
+        {hero.title}
+        {hero.titleAccent && (
+          <>
+            <br />
+            <em class="not-italic text-gold-300 font-normal" style="font-family: var(--font-script); text-shadow: 0 3px 28px rgba(0,0,0,0.75), 0 1px 2px rgba(0,0,0,0.5);">{hero.titleAccent}</em>
+          </>
+        )}
       </h1>
-      <p class="text-lg md:text-xl text-cream-50 max-w-2xl leading-relaxed mb-8" style="text-shadow: 0 2px 16px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.5);">
-        Étienne ouvre l'atelier de Saint-Didier-en-Velay aux curieux. Deux
-        formats : un atelier pratique de 2&nbsp;h pour fabriquer votre propre
-        liqueur (75&nbsp;€), et une visite-dégustation de 1&nbsp;h&nbsp;30
-        pour découvrir les coulisses de la maison (17&nbsp;€).
-      </p>
+      {hero.intro && (
+        <p class="text-lg md:text-xl text-cream-50 max-w-2xl leading-relaxed mb-8" style="text-shadow: 0 2px 16px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.5);">
+          {hero.intro}
+        </p>
+      )}
       <div class="flex flex-wrap gap-3">
-        <a href="#workshops" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 text-forest-900 hover:bg-cream-100 font-medium transition-colors">
-          Nos deux ateliers
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </a>
-        <a href={WECANDOO_LIQUEUR} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream-100/50 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors backdrop-blur-sm">
-          Voir dates et réserver
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
+        {hero.ctaPrimaryLabel && hero.ctaPrimaryHref && (
+          <a href={hero.ctaPrimaryHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 text-forest-900 hover:bg-cream-100 font-medium transition-colors">
+            {hero.ctaPrimaryLabel}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+        )}
+        {hero.ctaSecondaryLabel && hero.ctaSecondaryHref && (
+          <a href={hero.ctaSecondaryHref} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream-100/50 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors backdrop-blur-sm">
+            {hero.ctaSecondaryLabel}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        )}
       </div>
     </div>
   </section>
@@ -241,17 +191,19 @@ const fmtDate = (iso: string) => {
   <section id="workshops" class="py-20 md:py-24 bg-cream-50">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-14 max-w-3xl mx-auto">
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
-          Deux formats
-        </div>
+        {workshopsSection.kicker && (
+          <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+            {workshopsSection.kicker}
+          </div>
+        )}
         <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight mb-5">
-          L'atelier, ou la dégustation
+          {workshopsSection.title}
         </h2>
-        <p class="text-lg text-ink-700 leading-relaxed">
-          Selon le temps et l'envie : fabriquez votre propre liqueur (format
-          long, main à la pâte) ou venez plutôt pour une visite commentée
-          suivie d'une dégustation des six liqueurs maison.
-        </p>
+        {workshopsSection.intro && (
+          <p class="text-lg text-ink-700 leading-relaxed">
+            {workshopsSection.intro}
+          </p>
+        )}
       </div>
 
       <div class="space-y-10">
@@ -360,46 +312,59 @@ const fmtDate = (iso: string) => {
   <section class="py-20 bg-white border-y border-forest-100/60">
     <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
       <div>
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
-          Où ça se passe
-        </div>
+        {locationSection.kicker && (
+          <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+            {locationSection.kicker}
+          </div>
+        )}
         <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-5">
-          18 Grand Place,<br /><em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">Saint-Didier-en-Velay</em>
+          {locationSection.titleLine1}
+          {locationSection.titleLine2 && (
+            <>
+              <br /><em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">{locationSection.titleLine2}</em>
+            </>
+          )}
         </h2>
-        <p class="text-ink-700 leading-relaxed mb-6">
-          Notre atelier est installé dans une ancienne boulangerie, au cœur
-          du village. La brasserie est à <strong>30 minutes de Saint-Étienne</strong>
-          en voiture, environ 1 h 15 de Lyon.
-        </p>
+        {locationSection.intro && (
+          <p class="text-ink-700 leading-relaxed mb-6" set:html={locationSection.intro.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')} />
+        )}
         <div class="space-y-2 text-sm text-ink-700 mb-6">
-          <div><strong class="text-forest-800">Adresse</strong> : 18 Grand Place, 43140 Saint-Didier-en-Velay, Haute-Loire</div>
-          <div><strong class="text-forest-800">Accès</strong> : en voiture uniquement (pas de gare sur la commune)</div>
-          <div><strong class="text-forest-800">Parking</strong> : Place du village, gratuit</div>
+          <div><strong class="text-forest-800">Adresse</strong> : {locationSection.address}</div>
+          {locationSection.access && (
+            <div><strong class="text-forest-800">Accès</strong> : {locationSection.access}</div>
+          )}
+          {locationSection.parking && (
+            <div><strong class="text-forest-800">Parking</strong> : {locationSection.parking}</div>
+          )}
         </div>
-        <a
-          href="https://www.google.com/maps/search/?api=1&query=18+Grand+Place+43140+Saint-Didier-en-Velay"
-          target="_blank"
-          rel="noopener"
-          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 text-sm font-medium transition-colors"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Voir sur Google Maps
-        </a>
+        {locationSection.mapsUrl && (
+          <a
+            href={locationSection.mapsUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 text-sm font-medium transition-colors"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Voir sur Google Maps
+          </a>
+        )}
       </div>
-      <div class="aspect-square rounded-2xl overflow-hidden bg-forest-950">
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="/videos/boutique-sortie-poster.jpg"
-          aria-label="Sortie de la boutique de La Brasserie des Plantes à Saint-Didier-en-Velay"
-          class="w-full h-full object-cover"
-        >
-          <source src="/videos/boutique-sortie.mp4" type="video/mp4" />
-        </video>
-      </div>
+      {locationSection.video && (
+        <div class="aspect-square rounded-2xl overflow-hidden bg-forest-950">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster={locationSection.videoPoster}
+            aria-label={locationSection.videoAlt}
+            class="w-full h-full object-cover"
+          >
+            <source src={locationSection.video} type="video/mp4" />
+          </video>
+        </div>
+      )}
     </div>
   </section>
 
@@ -407,29 +372,22 @@ const fmtDate = (iso: string) => {
   <section class="py-20 bg-cream-50">
     <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-[320px_1fr] gap-10 items-center">
       <div class="aspect-square rounded-2xl overflow-hidden max-w-[320px] mx-auto w-full">
-        <img src="/images/ateliers/artisans.webp" alt="Étienne, artisan liquoriste de la Brasserie des Plantes" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+        <img src={artisanSection.image} alt={artisanSection.imageAlt ?? artisanSection.name} loading="lazy" decoding="async" class="w-full h-full object-cover" />
       </div>
       <div>
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
-          Votre hôte
-        </div>
+        {artisanSection.kicker && (
+          <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+            {artisanSection.kicker}
+          </div>
+        )}
         <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-5">
-          <em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">Étienne</em>,<br />
-          artisan liquoriste
+          <em class="not-italic font-normal text-forest-600" style="font-family: var(--font-script);">{artisanSection.name}</em>,<br />
+          {artisanSection.role}
         </h2>
         <div class="text-ink-700 leading-relaxed space-y-4 text-base">
-          <p>
-            Originaire de Saint-Didier-en-Velay, Étienne connaît son coin
-            comme sa poche. Ingénieur en biotechnologie végétale de
-            formation, il a monté La Brasserie des Plantes pour produire
-            des liqueurs macérées à base de plantes oubliées.
-          </p>
-          <p>
-            Son atelier est installé dans une ancienne boulangerie, au cœur
-            du village. Précis, organisé, passionné — il a à cœur de
-            partager son savoir-faire : sélection des plantes, arômes,
-            processus de macération, mise en bouteille.
-          </p>
+          {artisanSection.bio.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
         </div>
       </div>
     </div>
@@ -477,53 +435,69 @@ const fmtDate = (iso: string) => {
   </section>
 
   <!-- PRIVATISATION / EVJF-EVG / ENTREPRISE -->
-  <section class="py-20 bg-cream-50">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
-        Groupes, EVJF / EVG, entreprises
+  {groupsSection && (
+    <section class="py-20 bg-cream-50">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        {groupsSection.kicker && (
+          <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">
+            {groupsSection.kicker}
+          </div>
+        )}
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-5">
+          {groupsSection.title}
+        </h2>
+        {groupsSection.intro && (
+          <p class="text-lg text-ink-700 leading-relaxed mb-8 max-w-2xl mx-auto">
+            {groupsSection.intro}
+          </p>
+        )}
+        <div class="flex flex-wrap justify-center gap-3">
+          {groupsSection.ctaPrimaryLabel && groupsSection.ctaPrimaryHref && (
+            <a href={groupsSection.ctaPrimaryHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+              {groupsSection.ctaPrimaryLabel}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          )}
+          {groupsSection.ctaSecondaryLabel && groupsSection.ctaSecondaryHref && (
+            <a href={groupsSection.ctaSecondaryHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 font-medium transition-colors">
+              {groupsSection.ctaSecondaryLabel}
+            </a>
+          )}
+        </div>
       </div>
-      <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-5">
-        Privatiser l'atelier pour votre groupe
-      </h2>
-      <p class="text-lg text-ink-700 leading-relaxed mb-8 max-w-2xl mx-auto">
-        Enterrement de vie de jeune fille, de jeune garçon, séminaire
-        d'équipe, team-building, afterwork — nous privatisons l'atelier
-        pour votre groupe, sur devis. Formats et durées adaptés à vos
-        envies.
-      </p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <a href="mailto:labrasseriedesplantes@gmail.com?subject=Privatisation%20atelier%20groupe" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
-          Demander un devis groupe
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="/professionnels#evenements" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 font-medium transition-colors">
-          Espace Professionnels
-        </a>
-      </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- CTA FINAL -->
-  <section class="py-20 md:py-24 bg-forest-900 text-cream-100">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <span style="font-family: var(--font-script);" class="text-gold-400 text-2xl">— On vous attend —</span>
-      <h2 class="font-display text-4xl md:text-5xl mt-4 mb-6 leading-tight">
-        Prêt à pousser<br />les portes de l'atelier ?
-      </h2>
-      <p class="text-cream-200/80 mb-10 text-lg leading-relaxed max-w-2xl mx-auto">
-        Réservez en ligne sur Wecandoo — vous trouverez les prochaines
-        dates disponibles et paierez directement votre place.
-      </p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <a href={WECANDOO_LIQUEUR} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
-          Atelier liqueur (75 €)
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
-        <a href={WECANDOO_VISITE} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-cream-100/50 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors">
-          Visite-dégustation (17 €)
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
+  {ctaSection && (
+    <section class="py-20 md:py-24 bg-forest-900 text-cream-100">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        {ctaSection.script && (
+          <span style="font-family: var(--font-script);" class="text-gold-400 text-2xl">{ctaSection.script}</span>
+        )}
+        <h2 class="font-display text-4xl md:text-5xl mt-4 mb-6 leading-tight">
+          {ctaSection.title}
+        </h2>
+        {ctaSection.intro && (
+          <p class="text-cream-200/80 mb-10 text-lg leading-relaxed max-w-2xl mx-auto">
+            {ctaSection.intro}
+          </p>
+        )}
+        <div class="flex flex-wrap justify-center gap-3">
+          {ctaSection.ctaPrimaryLabel && ctaSection.ctaPrimaryHref && (
+            <a href={ctaSection.ctaPrimaryHref} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
+              {ctaSection.ctaPrimaryLabel}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </a>
+          )}
+          {ctaSection.ctaSecondaryLabel && ctaSection.ctaSecondaryHref && (
+            <a href={ctaSection.ctaSecondaryHref} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-cream-100/50 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors">
+              {ctaSection.ctaSecondaryLabel}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </a>
+          )}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 </Layout>

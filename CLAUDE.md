@@ -340,6 +340,39 @@ remplacer le contenu de la colonne gauche.
 | `seo-schema-report.md` | Audit Schema.org (2026-04-27) — couverture, validations, code Recipe prêt à coller |
 | `seo-geo-report.md` | Audit GEO/AI (2026-04-27) — score 62/100, llms.txt template |
 
+## Pages statiques éditables via CMS (Option B — Phase 3)
+
+Depuis septembre 2026, le contenu éditorial des pages statiques est extrait
+dans `src/content/static-pages/<slug>.md` (Content Collection Zod), éditable
+via Sveltia CMS. La structure HTML/Tailwind reste dans le fichier `.astro`,
+seuls les **textes + images** sont exposés au CMS.
+
+**Pattern à suivre pour ajouter une page au CMS** :
+
+1. Décider quels champs sont éditables (kickers, titres, paragraphes, images,
+   listes) et lesquels restent en dur (structure, animations, logique).
+2. Écrire le schema Zod dans `src/content.config.ts` sous la clé
+   `staticPages`. Étendre la définition ou créer un schema discriminé si les
+   pages ont des structures très différentes.
+3. Créer `src/content/static-pages/<slug>.md` avec le frontmatter YAML +
+   les valeurs actuelles (extraites du .astro).
+4. Refactor le `.astro` :
+   - `const entry = await getEntry('static-pages', '<slug>')` + guard
+   - Remplacer chaque texte/image hardcodé par `entry.data.xxx`
+   - Wrapper les blocs optionnels dans `{condition && (...)}`
+5. Ajouter les champs dans `public/admin/config.yml` (miroir du Zod), avec
+   `widget: image` pour les visuels et `widget: file` pour les vidéos mp4.
+
+**Pilote livré (sept. 2026)** : `/ateliers` — 6 sections éditables (hero,
+workshops-list, location, artisan, groups, cta-final), avec images
+uploadables par section. Les avis Wecandoo restent dans
+`data/wecandoo-reviews.json` (scraping tiers, hors CMS).
+
+**Pages à basculer ensuite** (par ordre de priorité selon fréquence de
+retouche par Guillaume/Étienne) : `notre-histoire`, `nos-plantes`,
+`contact`, `faq`, `professionnels`, `presse`. Home (`index.astro`) plus
+complexe car mixe FR i18n + composants React ; à laisser pour la fin.
+
 ## Règle d'or CMS (Sveltia)
 
 **NE JAMAIS** utiliser un widget `object` avec clés numériques dans

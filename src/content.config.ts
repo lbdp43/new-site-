@@ -146,4 +146,120 @@ const products = defineCollection({
   }),
 });
 
-export const collections = { blog, 'blog-en': blogEn, products };
+// ─── Pages statiques (contenu éditorial des pages du site) ──────────────
+// Chaque page = un .md dans `src/content/static-pages/<slug>.md`.
+// Le frontmatter porte les blocs (hero, sections, images, listes) éditables
+// via Sveltia CMS. Le body markdown est facultatif (utile pour de la prose).
+//
+// Objectif : que Guillaume/Étienne puissent modifier textes ET images des
+// pages statiques (Ateliers, etc.) sans toucher aux fichiers .astro.
+// La structure HTML/Tailwind reste dans le template ; seul le contenu
+// éditorial est extrait ici.
+const staticPages = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/static-pages' }),
+  schema: z.object({
+    // ─── Meta SEO ────────────────────────────────────────────────
+    meta: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+
+    // ─── Hero (haut de page, vidéo/image + accroche) ─────────────
+    hero: z.object({
+      kicker: emptyToUndefined(z.string()),
+      title: z.string(),
+      titleAccent: emptyToUndefined(z.string()),
+      intro: emptyToUndefined(z.string()),
+      ctaPrimaryLabel: emptyToUndefined(z.string()),
+      ctaPrimaryHref: emptyToUndefined(z.string()),
+      ctaSecondaryLabel: emptyToUndefined(z.string()),
+      ctaSecondaryHref: emptyToUndefined(z.string()),
+      video: emptyToUndefined(z.string()),
+      videoPoster: emptyToUndefined(z.string()),
+      videoAlt: emptyToUndefined(z.string()),
+    }),
+
+    // ─── Section "Les deux ateliers" ─────────────────────────────
+    workshopsSection: z.object({
+      kicker: emptyToUndefined(z.string()),
+      title: z.string(),
+      intro: emptyToUndefined(z.string()),
+    }),
+
+    // ─── Liste des ateliers (2 items) ────────────────────────────
+    workshops: z
+      .array(
+        z.object({
+          id: z.string(),
+          kicker: z.string(),
+          title: z.string(),
+          subtitle: z.string(),
+          price: z.number(),
+          duration: z.string(),
+          participants: z.string(),
+          ageMin: z.number(),
+          language: z.string(),
+          includes: z.array(z.string()).default([]),
+          steps: z.array(z.string()).default([]),
+          image: z.string(),
+          gallery: z.array(z.string()).default([]),
+          flipped: z.boolean().default(false),
+          bookingUrl: z.string(),
+        })
+      )
+      .default([]),
+
+    // ─── Section "Où ça se passe" (lieu + adresse) ───────────────
+    locationSection: z.object({
+      kicker: emptyToUndefined(z.string()),
+      titleLine1: z.string(),
+      titleLine2: emptyToUndefined(z.string()),
+      intro: emptyToUndefined(z.string()),
+      address: z.string(),
+      access: emptyToUndefined(z.string()),
+      parking: emptyToUndefined(z.string()),
+      mapsUrl: emptyToUndefined(z.string()),
+      video: emptyToUndefined(z.string()),
+      videoPoster: emptyToUndefined(z.string()),
+      videoAlt: emptyToUndefined(z.string()),
+    }),
+
+    // ─── Section "Votre hôte" (artisan) ──────────────────────────
+    artisanSection: z.object({
+      kicker: emptyToUndefined(z.string()),
+      name: z.string(),
+      role: z.string(),
+      image: z.string(),
+      imageAlt: emptyToUndefined(z.string()),
+      bio: z.array(z.string()).default([]),
+    }),
+
+    // ─── Section "Privatisation groupes" ─────────────────────────
+    groupsSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        intro: emptyToUndefined(z.string()),
+        ctaPrimaryLabel: emptyToUndefined(z.string()),
+        ctaPrimaryHref: emptyToUndefined(z.string()),
+        ctaSecondaryLabel: emptyToUndefined(z.string()),
+        ctaSecondaryHref: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+
+    // ─── CTA final ───────────────────────────────────────────────
+    ctaSection: z
+      .object({
+        script: emptyToUndefined(z.string()),
+        title: z.string(),
+        intro: emptyToUndefined(z.string()),
+        ctaPrimaryLabel: emptyToUndefined(z.string()),
+        ctaPrimaryHref: emptyToUndefined(z.string()),
+        ctaSecondaryLabel: emptyToUndefined(z.string()),
+        ctaSecondaryHref: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+  }),
+});
+
+export const collections = { blog, 'blog-en': blogEn, products, 'static-pages': staticPages };
