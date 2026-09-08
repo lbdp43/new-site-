@@ -2,9 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 import { products } from '../data/products';
+import { getEntry } from 'astro:content';
 
-const title = "Liqueurs artisanales françaises — Brasserie des Plantes (Haute-Loire)";
-const description = "Qu'est-ce qu'une liqueur artisanale ? Définition, fabrication, différences avec une liqueur industrielle. Notre gamme de liqueurs naturelles aux plantes oubliées, sans arôme ni colorant — Meilleur Digestif du Monde 2025.";
+const entry = await getEntry('static-pages', 'liqueurs-artisanales');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/liqueurs-artisanales.md");
+const title = entry.data.meta.title;
+const description = entry.data.meta.description;
 
 const breadcrumb = {
   '@context': 'https://schema.org',

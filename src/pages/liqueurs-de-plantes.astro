@@ -2,9 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 import { products } from '../data/products';
+import { getEntry } from 'astro:content';
 
-const title = "Liqueurs de plantes — Alcool de plantes artisanal français | La Brasserie des Plantes";
-const description = "Verveine, gentiane, menthe, sureau, génépi, absinthe… Découvrez nos liqueurs et alcools de plantes artisanaux fabriqués en Haute-Loire. Quarantaine de plantes, racines, fleurs et écorces sourcées chez nos cueilleurs et maraîchers partenaires (la plupart en bio), sans arôme ni colorant ajouté.";
+const entry = await getEntry('static-pages', 'liqueurs-de-plantes');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/liqueurs-de-plantes.md");
+const title = entry.data.meta.title;
+const description = entry.data.meta.description;
 
 const breadcrumb = {
   '@context': 'https://schema.org',

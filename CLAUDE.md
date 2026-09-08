@@ -394,12 +394,46 @@ petit helper `renderInline(s)` qui convertit `**gras**` et `*italique*`
 en HTML sans dépendre de `marked` (import lourd pour 3 balises).
 Pattern à réutiliser dans les futures pages.
 
-**Restent à basculer** (session future) : `professionnels` (multi-sections
-+ formulaire), `lumiere-obscure` (CBD/YMYL), `cocktails` (liste avec
-données), pages catégorie SEO (`liqueurs-de-plantes`, `liqueur-digestive`,
-`liqueurs-artisanales`), pages légales (`mentions-legales`, `cgv`,
-`politique-cookies`), et enfin la home `index.astro` (i18n + React,
-plus complexe).
+**Pages livrées supplémentaires (sept. 2026, batch 2)** — la totalité
+des pages statiques FR sont désormais éditables via Sveltia CMS :
+
+- `index` (page d'accueil) — heroHome (badge, logo, vidéo, CTAs),
+  carouselSection (kicker/heading), historySection (paragraphes +
+  liens), introVideoSection (bandeau vidéo), coffretTeaser (3
+  stackImages), cocktailsSection (4 cocktails éditables), visitSection
+  (visite boutique avec placeholders `{{address}}`/`{{city}}`),
+  ctaSection, featuredSection
+- `mentions-legales` — meta + pageHeader + **body markdown complet**
+  (widget `markdown` dans Sveltia, éditeur riche)
+- `cgv` — meta + pageHeader + body markdown complet
+- `politique-cookies` — meta + pageHeader + body markdown +
+  cookiesTable structurée (functionalCookies + analyticsCookies)
+- `cocktails` — meta + pageHeader + ctaSection (les 5 recettes
+  restent dans `data/cocktails.ts` — logique catalogue)
+- `lumiere-obscure` **⚠️ YMYL** — meta uniquement (le corps + la FAQ
+  YMYL sur CBD/THC restent en dur pour ne pas casser accidentellement
+  le cadre légal THC < 0,1 % arrêté 30 déc 2021)
+- `liqueurs-de-plantes`, `liqueur-digestive`, `liqueurs-artisanales`
+  — meta uniquement (landing SEO au contenu figé)
+- `professionnels` — meta uniquement (multi-sections + formulaire
+  quote, à ouvrir en Phase 4 si besoin)
+
+**Sveltia** : 12 pages listées dans la collection « Pages du site » —
+Page d'accueil, Ateliers, Notre histoire, Nos plantes, Contact, FAQ,
+Presse, Cocktails, Lumière Obscure (CBD), Liqueurs de plantes (SEO),
+Liqueur digestive (SEO), Liqueurs artisanales (SEO), Professionnels,
+Mentions légales, CGV, Politique de cookies.
+
+**Pattern body markdown (pages légales)** : import `render` depuis
+`astro:content`, `const { Content } = await render(entry);`, puis
+`<Content />` dans le template avec la classe `.prose` de Tailwind
+Typography. Sveltia expose un widget `markdown` riche (H2, gras,
+italique, listes, liens, citations `>`) → l'équipe édite comme un
+Google Doc.
+
+**Phase 4 possible** : ouvrir `lumiere-obscure` FAQ (avec **grand
+warning YMYL**), professionnels sections marketing, catégories SEO
+prose profonde. À faire seulement à la demande de Guillaume.
 
 ## Règle d'or CMS (Sveltia)
 
