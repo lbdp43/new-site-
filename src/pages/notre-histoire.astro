@@ -2,10 +2,24 @@
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('static-pages', 'notre-histoire');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/notre-histoire.md");
+const {
+  meta,
+  pageHeader,
+  videoHero,
+  stats,
+  storySections,
+  distinctionsSection,
+  teamSection,
+  gallerySection,
+  ctaSection,
+} = entry.data;
 
 // ─── Schema.org ───────────────────────────────────────────────────────
-// AboutPage + BreadcrumbList + Person pour les 2 fondateurs (cf. audit Schema.org
-// patch 5 : renforce le Knowledge Graph — "qui sont les fondateurs de LBDP ?").
+// AboutPage + BreadcrumbList + Person pour les 2 fondateurs.
 const schema = [
   {
     '@context': 'https://schema.org',
@@ -64,573 +78,451 @@ const schema = [
   },
 ];
 
-// ─── Distinctions regroupées par produit (lisibilité) ──────────────────
-// Source : fiches produit `src/content/products/*.md` + public/llms.txt.
-const productsWithMedals = [
-  {
-    product: "L'Herbe des Druides",
-    slug: 'herbe-des-druides',
-    tagline: 'Verveine · serpolet · carvi',
-    note: 'Notre liqueur la plus médaillée — 3× Or à Lyon, Argent à Paris et Argent à Londres.',
-    medals: [
-      { year: '2023', tier: 'gold', label: "Médaille d'Or", competition: 'Concours International de Lyon' },
-      { year: '2024', tier: 'gold', label: "Médaille d'Or", competition: 'Concours International de Lyon' },
-      { year: '2024', tier: 'silver', label: "Médaille d'Argent", competition: 'Concours Général Agricole — Paris' },
-      { year: '2025', tier: 'silver', label: "Médaille d'Argent", competition: 'World Drinks Awards — Londres' },
-      { year: '2026', tier: 'gold', label: "Médaille d'Or", competition: 'Concours International de Lyon' },
-    ],
-  },
-  {
-    product: "Le Cerf'Gent",
-    slug: 'cerf-gent',
-    tagline: 'Apéritif amer · gentiane · quinquina',
-    note: "Notre apéritif amer, à base de gentiane jaune et de quinquina — couronné d'Or au Concours Général Agricole de Paris dès sa première présentation.",
-    medals: [
-      { year: '2025', tier: 'gold', label: "Médaille d'Or", competition: 'Concours Général Agricole — Paris' },
-    ],
-  },
-  {
-    product: "L'Essence des Alpes",
-    slug: 'essence-des-alpes',
-    tagline: 'Génépi · épine de sapin · hysope',
-    note: "Un hommage alpin au génépi, à l'épine de sapin et à l'hysope — médaillée d'Argent au Concours International de Lyon.",
-    medals: [
-      { year: '2026', tier: 'silver', label: "Médaille d'Argent", competition: 'Concours International de Lyon' },
-    ],
-  },
-];
-
-const innovationAward = {
-  year: '2023',
-  title: 'Lauréat Artinov Haute-Loire',
-  subtitle: 'Chambre de Métiers et de l\'Artisanat — Innovation de savoir-faire',
-  what: 'Pour notre tireuse pression (invention interne pour le service bar des pros).',
-};
-
 const tierStyles: Record<string, { bg: string; text: string; border: string; ring: string }> = {
   gold: { bg: 'bg-gold-500/15', text: 'text-gold-700', border: 'border-gold-500/40', ring: 'ring-gold-500/20' },
   silver: { bg: 'bg-ink-200/40', text: 'text-ink-600', border: 'border-ink-300/60', ring: 'ring-ink-300/30' },
 };
 
-// Galerie finale — mix d'images humaines, atelier, produit, événements, paysage, salon.
-// Pas de doublon : 10 visuels distincts.
-const galleryPhotos = [
-  { src: '/images/stories/service-verre.webp', alt: "Service à la dégustation — L'Alchimie Végétale dans un verre tulipe", aspect: 'aspect-[3/2]', objectPos: '' },
-  { src: '/images/stories/salon-origine-auvergne.webp', alt: 'Guillaume en salon Origine Auvergne — stand La Brasserie des Plantes, dégustation avec un visiteur', aspect: 'aspect-[3/2]', objectPos: '' },
-  { src: '/images/gallery/saint-etienne.webp', alt: "Li'Cœur avec Étienne et Guillaume — rendez-vous dégustation", aspect: 'aspect-square', objectPos: '' },
-  { src: '/images/stories/atelier-1.webp', alt: "Étienne en train d'embouteiller une cuvée à l'atelier", aspect: 'aspect-[3/2]', objectPos: '' },
-  { src: '/images/gallery/atelier-04.webp', alt: "L'Alchimie Végétale — story Meilleur Digestif du Monde 2025", aspect: 'aspect-[3/4]', objectPos: 'object-[center_70%]' },
-  { src: '/images/stories/atelier-2.webp', alt: 'Embouteillage à la main — zoom sur une bouteille verte', aspect: 'aspect-[3/2]', objectPos: '' },
-  { src: '/images/gallery/evenement-02.webp', alt: "Étienne dans un champ de fleurs — au milieu des plantes qui composent nos liqueurs", aspect: 'aspect-[3/4]', objectPos: '' },
-  { src: '/images/gallery/production-01.webp', alt: 'Notre stand au marché de Noël — toutes les bouteilles sous les guirlandes', aspect: 'aspect-square', objectPos: '' },
-  { src: '/images/gallery/evenement-01.webp', alt: 'Guillaume en dégustation avec un client — stand du Concours International de Lyon', aspect: 'aspect-[3/4]', objectPos: '' },
-  { src: '/images/gallery/atelier-05.webp', alt: "À l'atelier — scène de travail quotidien à Saint-Didier-en-Velay", aspect: 'aspect-square', objectPos: '' },
-];
+// Rendu markdown inline minimal (bold + italic) pour les paragraphes du CMS.
+const renderInline = (s: string) =>
+  s
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-medium text-forest-800">$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+// Insère un <br class="hidden sm:inline" /> après le mot indiqué dans la
+// phrase calligraphiée du hero vidéo (« Ça fait plus de vingt ans<br />qu'on
+// se connaît. »). Purement visuel — si absent, la phrase reste sur une ligne.
+const scriptWithBreak = (script: string | undefined, after: string | undefined) => {
+  if (!script) return '';
+  if (!after) return script;
+  const idx = script.indexOf(after);
+  if (idx < 0) return script;
+  const cut = idx + after.length;
+  return script.slice(0, cut) + '<br class="hidden sm:inline" /> ' + script.slice(cut).trimStart();
+};
 ---
 <Layout
-  title="Notre histoire — La Brasserie des Plantes, Haute-Loire"
-  description="Deux amis d'enfance, une passion pour les plantes oubliées. L'aventure de La Brasserie des Plantes depuis Saint-Didier-en-Velay — fondée en 2021, dix distinctions internationales, Meilleur Digestif du Monde 2025."
+  title={meta.title}
+  description={meta.description}
   schema={schema}
 >
-  <PageHeader
-    kicker="Notre histoire"
-    title="Deux amis,<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>un terroir</em>"
-    subtitle="Depuis Saint-Didier-en-Velay, nous faisons revivre des plantes oubliées en liqueurs et en infusions, sourcées chez nos cueilleurs et maraîchers partenaires. Une aventure de village, qui a fini par décrocher le titre de Meilleur Digestif du Monde."
-    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Notre histoire' }]}
-  />
+  {pageHeader && (
+    <PageHeader
+      kicker={pageHeader.kicker}
+      title={pageHeader.title}
+      subtitle={pageHeader.subtitle}
+      breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Notre histoire' }]}
+    />
+  )}
 
-  <!-- Vidéo hero bandeau : Étienne et Guillaume, making of -->
-  <section class="relative w-full bg-forest-950 overflow-hidden">
-    <div class="relative aspect-[21/9] md:aspect-[21/8] w-full">
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        poster="/videos/duo-making-of-poster.jpg"
-        aria-label="Étienne et Guillaume, cofondateurs, dans l'atelier de la Brasserie des Plantes"
-        class="absolute inset-0 w-full h-full object-cover object-top"
-      >
-        <source src="/videos/duo-making-of.mp4" type="video/mp4" />
-      </video>
-      <!-- Overlay sombre pour lisibilité texte -->
-      <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/30 to-forest-950/80"></div>
-      <!-- Texte humain centré, multi-lignes -->
-      <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6 gap-3 md:gap-5">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cream-50/15 border border-cream-100/30 text-cream-100 text-[10px] md:text-xs font-medium tracking-[0.25em] uppercase backdrop-blur-sm">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>
-          En Haute-Loire · Depuis 2021
+  <!-- Vidéo hero bandeau -->
+  {videoHero && (
+    <section class="relative w-full bg-forest-950 overflow-hidden">
+      <div class="relative aspect-[21/9] md:aspect-[21/8] w-full">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster={videoHero.poster}
+          aria-label={videoHero.alt}
+          class="absolute inset-0 w-full h-full object-cover object-top"
+        >
+          <source src={videoHero.src} type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/30 to-forest-950/80"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6 gap-3 md:gap-5">
+          {videoHero.badge && (
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cream-50/15 border border-cream-100/30 text-cream-100 text-[10px] md:text-xs font-medium tracking-[0.25em] uppercase backdrop-blur-sm">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>
+              {videoHero.badge}
+            </div>
+          )}
+          {videoHero.script && (
+            <p class="text-cream-50 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.05] drop-shadow-lg max-w-3xl">
+              <em class="not-italic font-normal" style="font-family: var(--font-script);" set:html={scriptWithBreak(videoHero.script, videoHero.scriptLineBreakAfter)}></em>
+            </p>
+          )}
+          {videoHero.tagline && (
+            <p class="text-cream-100/85 text-sm md:text-lg leading-relaxed max-w-xl">
+              {videoHero.tagline}
+            </p>
+          )}
         </div>
-        <p class="text-cream-50 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.05] drop-shadow-lg max-w-3xl">
-          <em class="not-italic font-normal" style="font-family: var(--font-script);">
-            Ça fait plus de vingt ans<br class="hidden sm:inline" /> qu'on se connaît.
-          </em>
-        </p>
-        <p class="text-cream-100/85 text-sm md:text-lg leading-relaxed max-w-xl">
-          Deux amis d'enfance. Un terroir. Dix distinctions internationales, et des liqueurs faites à quatre mains.
-        </p>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- Chiffres clés -->
-  <section class="py-14 border-y border-forest-100/60 bg-cream-100/40">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div>
-        <div class="font-display text-4xl md:text-5xl text-forest-800">2021</div>
-        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">Année de fondation</div>
+  {stats && stats.length > 0 && (
+    <section class="py-14 border-y border-forest-100/60 bg-cream-100/40">
+      <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        {stats.map((s) => (
+          <div>
+            {s.isIcon ? (
+              <div class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gold-500/15 text-gold-600">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="7"/>
+                  <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                </svg>
+              </div>
+            ) : (
+              <div class="font-display text-4xl md:text-5xl text-forest-800">{s.value}</div>
+            )}
+            <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">{s.label}</div>
+          </div>
+        ))}
       </div>
-      <div>
-        <div class="font-display text-4xl md:text-5xl text-forest-800">18</div>
-        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">Références au catalogue</div>
-      </div>
-      <div>
-        <div class="font-display text-4xl md:text-5xl text-forest-800">10</div>
-        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">Distinctions internationales</div>
-      </div>
-      <div>
-        <div class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gold-500/15 text-gold-600">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="8" r="7"/>
-            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-          </svg>
-        </div>
-        <div class="text-xs uppercase tracking-wider text-ink-500 mt-2">Meilleur digestif du monde 2025</div>
-      </div>
-    </div>
-  </section>
+    </section>
+  )}
 
-  <!-- Récit — Les débuts -->
-  <section class="py-20 bg-cream-50">
-    <div class="max-w-3xl mx-auto px-6">
-      {/* Ancres pour Person.url des auteurs blog (Étienne / Guillaume) */}
-      <span id="etienne" class="sr-only" aria-hidden="true"></span>
-      <span id="guillaume" class="sr-only" aria-hidden="true"></span>
-      <div class="prose prose-lg max-w-none text-ink-700 space-y-6 leading-relaxed">
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Les débuts</div>
-        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
-          Une amitié d'enfance<br />
-          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">devenue projet</em>
-        </h2>
-        <p>
-          Tout commence dans la cour de l'école, à Saint-Didier-en-Velay. Étienne et
-          Guillaume grandissent ensemble, dans ce village du Velay posé sur les
-          contreforts du Massif central, à la lisière de la Haute-Loire et de la
-          Loire. Chacun prend sa route — Étienne étudie la biotechnologie des
-          plantes à Toulouse, Guillaume fait ses armes dans la restauration et
-          ouvre un bar-restaurant à Saint-Étienne.
-        </p>
-        <p>
-          Mais la Haute-Loire les rappelle. Ses forêts, ses estives, ses
-          plantes. Un savoir qui ne demande qu'à être remis au jour — celui
-          des grand-mères qui préparaient la mélisse pour le rhume, la
-          gentiane pour l'estomac, parfumaient leurs liqueurs d'hysope ou
-          d'aurone. En 2021, ils décident d'assembler leurs expertises :
-          la rigueur scientifique d'un côté, la sensibilité du service et
-          du goût de l'autre. La Brasserie des Plantes naît — artisanale,
-          auvergnate, sans compromis.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- NEW : Financement participatif Ulule -->
-  <section class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
-          <img
-            src="/images/stories/duo-bouteille-nature.webp"
-            alt="Étienne et Guillaume célébrant une bouteille de la Brasserie des Plantes, dans les prés de Haute-Loire"
-            class="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </div>
-      <div>
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Le lancement</div>
-        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
-          Lancés par ceux qui<br />
-          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">y ont cru en premier</em>
-        </h2>
-        <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
-          <p>
-            Étienne rentre tout juste en Haute-Loire ; Guillaume, lui, vient
-            de <strong class="font-medium text-forest-800">vendre ses parts
-            du bar-restaurant à son associé</strong> à Saint-Étienne. Et
-            <strong class="font-medium text-forest-800">on se lance à deux, dans
-            notre atelier</strong> — sans équipe, sans gros carnet d'adresses,
-            juste deux amis d'enfance et l'envie de faire revivre des plantes
-            oubliées.
-          </p>
-          <p>
-            Pour que le projet parte vraiment, on a lancé
-            <strong class="font-medium text-forest-800">une campagne de financement
-            participatif sur Ulule</strong>. Des amis de Saint-Étienne et de
-            Saint-Didier, des curieux croisés sur les marchés du Velay, des
-            inconnus qui ont simplement aimé le pitch — chacun a pré-commandé
-            ses premières bouteilles ou mis quelques euros pour qu'on démarre.
-            <strong class="font-medium text-forest-800">C'est aussi grâce à ces
-            gens-là</strong> qu'on a réussi à créer la société.
-          </p>
-          <p>
-            Ce qu'on crée, c'est du
-            <strong class="font-medium text-forest-800">patrimoine vivant</strong>
-            — ça se partage. Et on se complète dans ce qu'on fait.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Duo image + texte : plantes -->
-  <section class="py-20 bg-cream-50">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div class="order-2 md:order-1">
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Le terroir</div>
-        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
-          Un hommage aux<br />
-          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">plantes oubliées</em>
-        </h2>
-        <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
-          <p>
-            Notre démarche tient en une idée : redonner leur place à des
-            plantes que nos grand-mères connaissaient bien. Verveine
-            citronnée, serpolet (thym sauvage), carvi, mélisse, hysope,
-            aurone, gentiane jaune, génépi, sureau, baraban, ortie — chaque
-            liqueur raconte son petit bouquet.
-          </p>
-          <p>
-            Certaines liqueurs sont simples, signatures d'un terroir :
-            <em>L'Herbe des Druides</em> ne marie que trois plantes (verveine,
-            serpolet, carvi). D'autres sont des assemblages complexes : <em>L'Alchimie
-            Végétale</em> compose à elle seule <strong class="font-medium text-forest-800">27 plantes,
-            racines, écorces et épices</strong>. Au total, à travers toute la
-            gamme, <strong class="font-medium text-forest-800">une quarantaine de plantes</strong> —
-            aromatiques, médicinales, parfois amères, toujours chargées
-            d'histoire — passent par nos macérats.
-          </p>
-          <p>
-            <a href="/nos-plantes" class="text-forest-700 font-medium hover:text-forest-900 underline decoration-forest-300 underline-offset-4">
-              Voir toutes nos plantes et dans quelles liqueurs on les retrouve →
-            </a>
-          </p>
-        </div>
-      </div>
-      <div class="order-1 md:order-2">
-        <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
-          <img
-            src="/images/stories/plantes.webp"
-            alt="Plantes aromatiques et médicinales utilisées dans nos liqueurs artisanales"
-            class="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Duo image + texte : savoir-faire -->
-  <section class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
-          <img
-            src="/images/stories/etienne-degustation.webp"
-            alt="Étienne contrôle une cuvée à travers un tube de dégustation dans l'atelier de Saint-Didier-en-Velay"
-            class="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </div>
-      <div>
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Le savoir-faire</div>
-        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
-          Assembler, composer,<br />
-          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">laisser le temps faire</em>
-        </h2>
-        <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
-          <p>
-            Nos plantes viennent de <strong class="font-medium text-forest-800">cueilleurs
-            et de maraîchers partenaires</strong> que nous sélectionnons un
-            par un — rencontrés, questionnés, visités. La plupart sont en
-            agriculture biologique, pas tous : pour certaines plantes ou
-            ingrédients (génépi, agrumes, réglisse, quinquina, épices),
-            on s'appuie sur des filières spécialisées quand la plante
-            l'exige.
-          </p>
-          <p>
-            Pas d'arôme ajouté, pas de conservateur : le savoir-faire, la
-            patience et le temps font le reste. Chaque bouteille est
-            remplie, bouchée, étiquetée à la main — à quatre mains, pour
-            être précis.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Distinctions — toutes les médailles -->
-  <section class="py-20 bg-gradient-to-b from-cream-50 to-gold-500/10 border-y border-gold-500/30">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-14 max-w-3xl mx-auto">
-        <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">La consécration</div>
-        <h2 class="font-display text-3xl md:text-5xl text-forest-900 mb-6 leading-tight">
-          Dix distinctions<br />
-          <em class="not-italic text-gold-600 font-normal" style="font-family: var(--font-script);">en quatre ans</em>
-        </h2>
-        <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
-          <p>
-            Une reconnaissance qui dépasse largement les frontières du Velay. Chacune de
-            ces médailles a récompensé un travail de formulation long, patient,
-            souvent invisible — trois à quatre ans pour une recette aboutie.
-          </p>
-          <p>
-            Trois produits de la gamme ont été distingués à ce jour :
-            <strong class="font-medium text-forest-800">L'Herbe des Druides</strong>, notre
-            liqueur la plus médaillée avec <strong class="font-medium text-forest-800">trois
-            Or au Concours International de Lyon</strong>, un Argent au Concours Général
-            Agricole de Paris et un Argent aux World Drinks Awards de Londres ;
-            <strong class="font-medium text-forest-800">Le Cerf'Gent</strong>, notre
-            apéritif amer, <strong class="font-medium text-forest-800">Or à Paris en 2025</strong> ;
-            et <strong class="font-medium text-forest-800">L'Essence des Alpes</strong>,
-            <strong class="font-medium text-forest-800">Argent au Concours International
-            de Lyon en 2026</strong>. Sans oublier <em>L'Alchimie Végétale</em>, sacrée
-            Meilleur Digestif du Monde.
-          </p>
-        </div>
-      </div>
-
-      <!-- Flagship WDA -->
-      <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
-        <div>
-          <div class="aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl">
-            <img
-              src="/images/stories/world-drinks-awards-2025.webp"
-              alt="L'Alchimie Végétale — Meilleur Digestif du Monde 2025 aux World Drinks Awards"
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
+  <!-- Sections narratives alternées -->
+  {(storySections ?? []).map((sec) => {
+    const bgClass = sec.background === 'white' ? 'bg-white' : 'bg-cream-50';
+    if (sec.layout === 'prose') {
+      // Ancres pour Person.url des auteurs blog (uniquement première section prose).
+      return (
+        <section class={`py-20 ${bgClass}`}>
+          <div class="max-w-3xl mx-auto px-6">
+            <span id="etienne" class="sr-only" aria-hidden="true"></span>
+            <span id="guillaume" class="sr-only" aria-hidden="true"></span>
+            <div class="prose prose-lg max-w-none text-ink-700 space-y-6 leading-relaxed">
+              {sec.kicker && (
+                <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">{sec.kicker}</div>
+              )}
+              <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+                {sec.title}
+                {sec.titleAccent && (
+                  <><br /><em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">{sec.titleAccent}</em></>
+                )}
+              </h2>
+              {sec.paragraphs.map((p) => (<p set:html={renderInline(p)} />))}
+              {sec.linkLabel && sec.linkHref && (
+                <p>
+                  <a href={sec.linkHref} class="text-forest-700 font-medium hover:text-forest-900 underline decoration-forest-300 underline-offset-4">
+                    {sec.linkLabel}
+                  </a>
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    const imageLeft = sec.layout === 'image-left';
+    return (
+      <section class={`py-20 ${bgClass}`}>
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+          <div class={imageLeft ? '' : 'order-2 md:order-1'}>
+            {imageLeft ? (
+              sec.image && (
+                <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+                  <img src={sec.image} alt={sec.imageAlt ?? sec.title} class="w-full h-full object-cover" loading="lazy" />
+                </div>
+              )
+            ) : (
+              <>
+                {sec.kicker && (
+                  <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">{sec.kicker}</div>
+                )}
+                <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+                  {sec.title}
+                  {sec.titleAccent && (
+                    <><br /><em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">{sec.titleAccent}</em></>
+                  )}
+                </h2>
+                <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
+                  {sec.paragraphs.map((p) => (<p set:html={renderInline(p)} />))}
+                  {sec.linkLabel && sec.linkHref && (
+                    <p>
+                      <a href={sec.linkHref} class="text-forest-700 font-medium hover:text-forest-900 underline decoration-forest-300 underline-offset-4">
+                        {sec.linkLabel}
+                      </a>
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+          <div class={imageLeft ? '' : 'order-1 md:order-2'}>
+            {imageLeft ? (
+              <>
+                {sec.kicker && (
+                  <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">{sec.kicker}</div>
+                )}
+                <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+                  {sec.title}
+                  {sec.titleAccent && (
+                    <><br /><em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">{sec.titleAccent}</em></>
+                  )}
+                </h2>
+                <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
+                  {sec.paragraphs.map((p) => (<p set:html={renderInline(p)} />))}
+                  {sec.linkLabel && sec.linkHref && (
+                    <p>
+                      <a href={sec.linkHref} class="text-forest-700 font-medium hover:text-forest-900 underline decoration-forest-300 underline-offset-4">
+                        {sec.linkLabel}
+                      </a>
+                    </p>
+                  )}
+                </div>
+              </>
+            ) : (
+              sec.image && (
+                <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+                  <img src={sec.image} alt={sec.imageAlt ?? sec.title} class="w-full h-full object-cover" loading="lazy" />
+                </div>
+              )
+            )}
           </div>
         </div>
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/50 text-gold-700 text-xs font-medium tracking-[0.15em] uppercase mb-4">
-            ★ Titre mondial
-          </div>
-          <h3 class="font-display text-2xl md:text-3xl text-forest-900 mb-4 leading-tight">
-            Meilleur Digestif du Monde 2025
-          </h3>
-          <div class="space-y-4 text-ink-700 leading-relaxed">
-            <p>
-              En avril 2025, notre liqueur phare — <em>L'Alchimie Végétale</em>,
-              50 % vol., 27 plantes — est couronnée <strong class="text-gold-700">Meilleur
-              Digestif du Monde</strong> aux World Drinks Awards à Londres,
-              toutes catégories digestives confondues.
-            </p>
-            <p>
-              Derrière ce prix, trois ans de formulations, d'échecs, de
-              recommencements. Et surtout la conviction que l'artisanat a sa
-              place dans un monde qui va trop vite.
-            </p>
-          </div>
-          <div class="mt-6">
-            <a href="/boutique/alchimie-vegetale" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
-              Découvrir L'Alchimie Végétale
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
+      </section>
+    );
+  })}
+
+  <!-- Distinctions -->
+  {distinctionsSection && (
+    <section class="py-20 bg-gradient-to-b from-cream-50 to-gold-500/10 border-y border-gold-500/30">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-14 max-w-3xl mx-auto">
+          {distinctionsSection.kicker && (
+            <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">{distinctionsSection.kicker}</div>
+          )}
+          <h2 class="font-display text-3xl md:text-5xl text-forest-900 mb-6 leading-tight">
+            {distinctionsSection.title}
+            {distinctionsSection.titleAccent && (
+              <><br /><em class="not-italic text-gold-600 font-normal" style="font-family: var(--font-script);">{distinctionsSection.titleAccent}</em></>
+            )}
+          </h2>
+          <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+            {distinctionsSection.paragraphs.map((p) => (
+              <p set:html={renderInline(p)} />
+            ))}
           </div>
         </div>
-      </div>
 
-      <!-- Grille par produit médaillé -->
-      <div class="grid md:grid-cols-3 gap-6">
-        {productsWithMedals.map((p) => (
-          <article class="p-6 rounded-2xl bg-white border border-forest-100/60 hover:shadow-md transition-shadow flex flex-col">
-            <div class="mb-4">
-              <h3 class="font-display text-2xl text-forest-900 leading-tight mb-1">
-                <a href={`/boutique/${p.slug}`} class="hover:text-forest-700 transition-colors">
-                  {p.product}
-                </a>
-              </h3>
-              <div class="text-xs uppercase tracking-[0.2em] text-gold-600 font-medium">
-                {p.tagline}
+        {distinctionsSection.flagship && (
+          <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+              <div class="aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl">
+                <img src={distinctionsSection.flagship.image} alt={distinctionsSection.flagship.imageAlt ?? distinctionsSection.flagship.title} class="w-full h-full object-cover" loading="lazy" />
               </div>
             </div>
-            {p.note && (
-              <p class="text-sm text-ink-600 italic leading-relaxed mb-4">{p.note}</p>
+            <div>
+              {distinctionsSection.flagship.badge && (
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/50 text-gold-700 text-xs font-medium tracking-[0.15em] uppercase mb-4">
+                  {distinctionsSection.flagship.badge}
+                </div>
+              )}
+              <h3 class="font-display text-2xl md:text-3xl text-forest-900 mb-4 leading-tight">
+                {distinctionsSection.flagship.title}
+              </h3>
+              <div class="space-y-4 text-ink-700 leading-relaxed">
+                {distinctionsSection.flagship.paragraphs.map((p) => (
+                  <p set:html={renderInline(p)} />
+                ))}
+              </div>
+              {distinctionsSection.flagship.ctaLabel && distinctionsSection.flagship.ctaHref && (
+                <div class="mt-6">
+                  <a href={distinctionsSection.flagship.ctaHref} class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+                    {distinctionsSection.flagship.ctaLabel}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {distinctionsSection.productsWithMedals.length > 0 && (
+          <div class="grid md:grid-cols-3 gap-6">
+            {distinctionsSection.productsWithMedals.map((p) => (
+              <article class="p-6 rounded-2xl bg-white border border-forest-100/60 hover:shadow-md transition-shadow flex flex-col">
+                <div class="mb-4">
+                  <h3 class="font-display text-2xl text-forest-900 leading-tight mb-1">
+                    <a href={`/boutique/${p.slug}`} class="hover:text-forest-700 transition-colors">
+                      {p.product}
+                    </a>
+                  </h3>
+                  {p.tagline && (
+                    <div class="text-xs uppercase tracking-[0.2em] text-gold-600 font-medium">
+                      {p.tagline}
+                    </div>
+                  )}
+                </div>
+                {p.note && (
+                  <p class="text-sm text-ink-600 italic leading-relaxed mb-4">{p.note}</p>
+                )}
+                <ul class="space-y-2.5 flex-1">
+                  {p.medals.map((m) => {
+                    const t = tierStyles[m.tier];
+                    return (
+                      <li class="flex items-start gap-3">
+                        <span class={`flex-none mt-0.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-full ${t.bg} ${t.text} text-[10px] font-medium tracking-wide uppercase`}>
+                          {m.tier === 'gold' ? 'Or' : 'Argent'} {m.year}
+                        </span>
+                        <span class="text-sm text-ink-700 leading-snug">{m.competition}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <a href={`/boutique/${p.slug}`} class="mt-5 pt-4 border-t border-forest-100/60 text-sm text-forest-700 font-medium hover:text-forest-900 inline-flex items-center gap-1.5">
+                  Voir le produit
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </article>
+            ))}
+          </div>
+        )}
+
+        {distinctionsSection.innovationAward && (
+          <div class="mt-8 p-6 rounded-2xl bg-forest-50/60 border border-forest-200/60 flex flex-col sm:flex-row gap-5 items-start">
+            <div class="flex-none inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-forest-500/15 text-forest-700">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5 2 7-6.5-4.5-6.5 4.5 2-7L2 9h7z"/></svg>
+            </div>
+            <div class="flex-1">
+              <div class="text-xs uppercase tracking-[0.2em] text-forest-700 font-medium mb-1">Prix innovation · {distinctionsSection.innovationAward.year}</div>
+              <h3 class="font-display text-xl text-forest-900 leading-tight mb-1">{distinctionsSection.innovationAward.title}</h3>
+              {distinctionsSection.innovationAward.subtitle && (
+                <div class="text-sm text-ink-500 mb-2">{distinctionsSection.innovationAward.subtitle}</div>
+              )}
+              {distinctionsSection.innovationAward.description && (
+                <p class="text-sm text-ink-700 leading-relaxed">{distinctionsSection.innovationAward.description}</p>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- Équipe -->
+  {teamSection && (
+    <section class="py-24 bg-forest-50/40">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16 max-w-2xl mx-auto">
+          {teamSection.kicker && (
+            <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">{teamSection.kicker}</div>
+          )}
+          <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight">{teamSection.title}</h2>
+          {teamSection.intro && (
+            <p class="text-ink-600 mt-4 leading-relaxed">{teamSection.intro}</p>
+          )}
+        </div>
+
+        {teamSection.members.map((m, i) => {
+          const imageLeft = m.layout === 'image-left';
+          const isLast = i === teamSection.members.length - 1;
+          return (
+            <div class={`grid md:grid-cols-2 gap-12 items-center ${isLast ? '' : 'mb-20'}`}>
+              <div class={imageLeft ? '' : 'order-2 md:order-1'}>
+                {imageLeft ? (
+                  <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+                    <img src={m.image} alt={m.imageAlt ?? m.name} class="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                ) : (
+                  <>
+                    {m.kicker && (
+                      <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">{m.kicker}</div>
+                    )}
+                    <h3 class="font-display text-4xl md:text-5xl text-forest-900 mb-4 leading-tight">{m.name}</h3>
+                    {m.role && (
+                      <div class="text-sm text-forest-700 font-medium mb-5 tracking-wide">{m.role}</div>
+                    )}
+                    <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+                      {m.paragraphs.map((p) => (<p set:html={renderInline(p)} />))}
+                    </div>
+                  </>
+                )}
+              </div>
+              <div class={imageLeft ? '' : 'order-1 md:order-2'}>
+                {imageLeft ? (
+                  <>
+                    {m.kicker && (
+                      <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">{m.kicker}</div>
+                    )}
+                    <h3 class="font-display text-4xl md:text-5xl text-forest-900 mb-4 leading-tight">{m.name}</h3>
+                    {m.role && (
+                      <div class="text-sm text-forest-700 font-medium mb-5 tracking-wide">{m.role}</div>
+                    )}
+                    <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
+                      {m.paragraphs.map((p) => (<p set:html={renderInline(p)} />))}
+                    </div>
+                  </>
+                ) : (
+                  <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+                    <img src={m.image} alt={m.imageAlt ?? m.name} class="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  <!-- Galerie -->
+  {gallerySection && (
+    <section class="py-20 bg-cream-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12 max-w-2xl mx-auto">
+          {gallerySection.kicker && (
+            <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">{gallerySection.kicker}</div>
+          )}
+          <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-4">
+            {gallerySection.title}
+            {gallerySection.titleAccent && (
+              <><br class="sm:hidden" /><em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);"> {gallerySection.titleAccent}</em></>
             )}
-            <ul class="space-y-2.5 flex-1">
-              {p.medals.map((m) => {
-                const t = tierStyles[m.tier];
-                return (
-                  <li class="flex items-start gap-3">
-                    <span class={`flex-none mt-0.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-full ${t.bg} ${t.text} text-[10px] font-medium tracking-wide uppercase`}>
-                      {m.tier === 'gold' ? 'Or' : 'Argent'} {m.year}
-                    </span>
-                    <span class="text-sm text-ink-700 leading-snug">{m.competition}</span>
-                  </li>
-                );
-              })}
-            </ul>
-            <a href={`/boutique/${p.slug}`} class="mt-5 pt-4 border-t border-forest-100/60 text-sm text-forest-700 font-medium hover:text-forest-900 inline-flex items-center gap-1.5">
-              Voir le produit
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </article>
-        ))}
-      </div>
-
-      <!-- Prix innovation (distinct) -->
-      <div class="mt-8 p-6 rounded-2xl bg-forest-50/60 border border-forest-200/60 flex flex-col sm:flex-row gap-5 items-start">
-        <div class="flex-none inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-forest-500/15 text-forest-700">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5 2 7-6.5-4.5-6.5 4.5 2-7L2 9h7z"/></svg>
+          </h2>
+          {gallerySection.intro && (
+            <p class="text-ink-600 leading-relaxed">{gallerySection.intro}</p>
+          )}
         </div>
-        <div class="flex-1">
-          <div class="text-xs uppercase tracking-[0.2em] text-forest-700 font-medium mb-1">Prix innovation · {innovationAward.year}</div>
-          <h3 class="font-display text-xl text-forest-900 leading-tight mb-1">{innovationAward.title}</h3>
-          <div class="text-sm text-ink-500 mb-2">{innovationAward.subtitle}</div>
-          <p class="text-sm text-ink-700 leading-relaxed">{innovationAward.what}</p>
+        <div class="columns-2 md:columns-3 gap-4 [column-fill:_balance]">
+          {gallerySection.photos.map((photo) => (
+            <div class="mb-4 break-inside-avoid overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow">
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                class:list={[photo.aspect ?? '', 'w-full object-cover', photo.objectPos ?? '']}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Équipe — layout alterné (photo-gauche / texte-droite puis photo-droite / texte-gauche) -->
-  <section class="py-24 bg-forest-50/40">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16 max-w-2xl mx-auto">
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">L'équipe</div>
-        <h2 class="font-display text-4xl md:text-5xl text-forest-900 leading-tight">Les mains derrière les flacons</h2>
-        <p class="text-ink-600 mt-4 leading-relaxed">
-          Deux fondateurs, deux regards complémentaires. Tout ce que vous goûtez
-          dans la bouteille est passé par l'un et par l'autre.
-        </p>
-      </div>
-
-      <!-- Étienne : photo gauche, texte droite -->
-      <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
-        <div>
-          <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
-            <img
-              src="/images/team/portrait-etienne.webp"
-              alt="Portrait d'Étienne, cofondateur de La Brasserie des Plantes, biotechnologue des plantes"
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <div>
-          <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">Cofondateur</div>
-          <h3 class="font-display text-4xl md:text-5xl text-forest-900 mb-4 leading-tight">Étienne</h3>
-          <div class="text-sm text-forest-700 font-medium mb-5 tracking-wide">
-            Biotechnologue des plantes · Production
-          </div>
-          <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
-            <p>
-              Formé à la biotechnologie végétale à Toulouse, Étienne est le
-              nez de la Brasserie — celui qui traduit la botanique en saveur.
-              Il compose les recettes, choisit les plantes, règle les temps
-              de macération.
-            </p>
-            <p>
-              Sa signature : l'assemblage à l'ancienne, lente, par paliers.
-              C'est lui qui a mis quatre ans à stabiliser <em>L'Alchimie
-              Végétale</em>, la recette des 27 plantes qui a fini par décrocher
-              le titre mondial en 2025.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Guillaume : texte gauche, photo droite -->
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="order-2 md:order-1">
-          <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">Cofondateur</div>
-          <h3 class="font-display text-4xl md:text-5xl text-forest-900 mb-4 leading-tight">Guillaume</h3>
-          <div class="text-sm text-forest-700 font-medium mb-5 tracking-wide">
-            Accords et usages · Développement commercial
-          </div>
-          <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
-            <p>
-              Ancien restaurateur à Saint-Étienne — bar, carte, service du
-              soir — Guillaume pense les moments, les accords, les usages.
-              Il conçoit les recettes de cocktails, les bonnes associations
-              mets-liqueur, le ton du site.
-            </p>
-            <p>
-              C'est aussi lui qui sillonne l'Auvergne-Rhône-Alpes pour
-              rencontrer les cavistes, les restaurants, les comités
-              d'entreprise. S'il y a un client qui nous écrit un mercredi
-              soir, il y a de fortes chances que ce soit Guillaume qui
-              réponde.
-            </p>
-          </div>
-        </div>
-        <div class="order-1 md:order-2">
-          <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
-            <img
-              src="/images/team/portrait-guillaume.webp"
-              alt="Portrait de Guillaume, cofondateur de La Brasserie des Plantes, ancien restaurateur"
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Galerie — photos variées (atelier, salon, nature, événements, produit) -->
-  <section class="py-20 bg-cream-50">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-12 max-w-2xl mx-auto">
-        <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">En images</div>
-        <h2 class="font-display text-3xl md:text-4xl text-forest-900 leading-tight mb-4">
-          Le quotidien<br class="sm:hidden" />
-          <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">de la Brasserie</em>
-        </h2>
-        <p class="text-ink-600 leading-relaxed">
-          Atelier, marchés, salons, rencontres et dégustations — quelques
-          moments attrapés de notre aventure de village.
-        </p>
-      </div>
-      <div class="columns-2 md:columns-3 gap-4 [column-fill:_balance]">
-        {galleryPhotos.map((photo) => (
-          <div class="mb-4 break-inside-avoid overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow">
-            <img
-              src={photo.src}
-              alt={photo.alt}
-              class:list={[photo.aspect, 'w-full object-cover', photo.objectPos]}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- CTA -->
-  <section class="py-20 bg-white">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6">
-        Venez nous rencontrer.
-      </h2>
-      <p class="text-lg text-ink-700 mb-8 leading-relaxed">
-        Notre atelier est ouvert à Saint-Didier-en-Velay, du mercredi au
-        samedi. Nous proposons aussi des ateliers de mixologie pour découvrir
-        nos liqueurs autrement.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="/ateliers" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
-          Nos ateliers
-        </a>
-        <a href="/contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 font-medium transition-colors">
-          Nous écrire
-        </a>
+  {ctaSection && (
+    <section class="py-20 bg-white">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6">
+          {ctaSection.title}
+        </h2>
+        {ctaSection.intro && (
+          <p class="text-lg text-ink-700 mb-8 leading-relaxed">
+            {ctaSection.intro}
+          </p>
+        )}
+        <div class="flex flex-wrap justify-center gap-4">
+          {ctaSection.ctaPrimaryLabel && ctaSection.ctaPrimaryHref && (
+            <a href={ctaSection.ctaPrimaryHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
+              {ctaSection.ctaPrimaryLabel}
+            </a>
+          )}
+          {ctaSection.ctaSecondaryLabel && ctaSection.ctaSecondaryHref && (
+            <a href={ctaSection.ctaSecondaryHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-forest-700/40 hover:border-forest-700 text-forest-900 font-medium transition-colors">
+              {ctaSection.ctaSecondaryLabel}
+            </a>
+          )}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 </Layout>

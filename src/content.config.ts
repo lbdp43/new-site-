@@ -155,38 +155,251 @@ const products = defineCollection({
 // pages statiques (Ateliers, etc.) sans toucher aux fichiers .astro.
 // La structure HTML/Tailwind reste dans le template ; seul le contenu
 // éditorial est extrait ici.
+// Chaque page a un sous-ensemble de blocs différents. Tous les blocs sont
+// optionnels sauf `meta` — le template `.astro` valide implicitement en
+// lisant les propriétés dont il a besoin.
 const staticPages = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/static-pages' }),
   schema: z.object({
-    // ─── Meta SEO ────────────────────────────────────────────────
+    // ─── Meta SEO (obligatoire) ──────────────────────────────────
     meta: z.object({
       title: z.string(),
       description: z.string(),
     }),
 
-    // ─── Hero (haut de page, vidéo/image + accroche) ─────────────
-    hero: z.object({
-      kicker: emptyToUndefined(z.string()),
-      title: z.string(),
-      titleAccent: emptyToUndefined(z.string()),
-      intro: emptyToUndefined(z.string()),
-      ctaPrimaryLabel: emptyToUndefined(z.string()),
-      ctaPrimaryHref: emptyToUndefined(z.string()),
-      ctaSecondaryLabel: emptyToUndefined(z.string()),
-      ctaSecondaryHref: emptyToUndefined(z.string()),
-      video: emptyToUndefined(z.string()),
-      videoPoster: emptyToUndefined(z.string()),
-      videoAlt: emptyToUndefined(z.string()),
-    }),
+    // ─── PageHeader (composant partagé : kicker/title/subtitle) ──
+    pageHeader: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        subtitle: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+
+    // ─── Hero (haut de page, vidéo/image + accroche — ateliers) ──
+    hero: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        titleAccent: emptyToUndefined(z.string()),
+        intro: emptyToUndefined(z.string()),
+        ctaPrimaryLabel: emptyToUndefined(z.string()),
+        ctaPrimaryHref: emptyToUndefined(z.string()),
+        ctaSecondaryLabel: emptyToUndefined(z.string()),
+        ctaSecondaryHref: emptyToUndefined(z.string()),
+        video: emptyToUndefined(z.string()),
+        videoPoster: emptyToUndefined(z.string()),
+        videoAlt: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+
+    // ─── Vidéo hero (notre-histoire) ─────────────────────────────
+    videoHero: z
+      .object({
+        src: z.string(),
+        poster: emptyToUndefined(z.string()),
+        alt: emptyToUndefined(z.string()),
+        badge: emptyToUndefined(z.string()),
+        script: emptyToUndefined(z.string()),
+        scriptLineBreakAfter: emptyToUndefined(z.string()),
+        tagline: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+
+    // ─── Bandeau vidéo simple (nos-plantes) ──────────────────────
+    videoBanner: z
+      .object({
+        src: z.string(),
+        poster: emptyToUndefined(z.string()),
+        alt: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+
+    // ─── Paragraphes d'intro (nos-plantes) ───────────────────────
+    introParagraphs: z.array(z.string()).nullish().transform((v) => v ?? undefined),
+    listClosing: emptyToUndefined(z.string()),
+    demarcheSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        titleAccent: emptyToUndefined(z.string()),
+        paragraphs: z.array(z.string()).default([]),
+      })
+      .nullish(),
+
+    // ─── Chiffres clés (notre-histoire) ──────────────────────────
+    stats: z
+      .array(
+        z.object({
+          value: z.string(),
+          label: z.string(),
+          isIcon: z.boolean().default(false),
+        })
+      )
+      .nullish()
+      .transform((v) => v ?? undefined),
+
+    // ─── Sections narratives alternées (notre-histoire) ──────────
+    storySections: z
+      .array(
+        z.object({
+          kicker: emptyToUndefined(z.string()),
+          title: z.string(),
+          titleAccent: emptyToUndefined(z.string()),
+          image: emptyToUndefined(z.string()),
+          imageAlt: emptyToUndefined(z.string()),
+          layout: z.enum(['prose', 'image-left', 'image-right']).default('image-right'),
+          background: z.enum(['white', 'cream']).default('cream'),
+          paragraphs: z.array(z.string()).default([]),
+          linkLabel: emptyToUndefined(z.string()),
+          linkHref: emptyToUndefined(z.string()),
+        })
+      )
+      .nullish()
+      .transform((v) => v ?? undefined),
+
+    // ─── Distinctions (notre-histoire) ───────────────────────────
+    distinctionsSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        titleAccent: emptyToUndefined(z.string()),
+        paragraphs: z.array(z.string()).default([]),
+        flagship: z
+          .object({
+            badge: emptyToUndefined(z.string()),
+            title: z.string(),
+            image: z.string(),
+            imageAlt: emptyToUndefined(z.string()),
+            paragraphs: z.array(z.string()).default([]),
+            ctaLabel: emptyToUndefined(z.string()),
+            ctaHref: emptyToUndefined(z.string()),
+          })
+          .nullish(),
+        productsWithMedals: z
+          .array(
+            z.object({
+              product: z.string(),
+              slug: z.string(),
+              tagline: emptyToUndefined(z.string()),
+              note: emptyToUndefined(z.string()),
+              medals: z
+                .array(
+                  z.object({
+                    year: z.string(),
+                    tier: z.enum(['gold', 'silver']),
+                    competition: z.string(),
+                  })
+                )
+                .default([]),
+            })
+          )
+          .default([]),
+        innovationAward: z
+          .object({
+            year: z.string(),
+            title: z.string(),
+            subtitle: emptyToUndefined(z.string()),
+            description: emptyToUndefined(z.string()),
+          })
+          .nullish(),
+      })
+      .nullish(),
+
+    // ─── Équipe (notre-histoire) ─────────────────────────────────
+    teamSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        intro: emptyToUndefined(z.string()),
+        members: z
+          .array(
+            z.object({
+              kicker: emptyToUndefined(z.string()),
+              name: z.string(),
+              role: emptyToUndefined(z.string()),
+              image: z.string(),
+              imageAlt: emptyToUndefined(z.string()),
+              anchorId: emptyToUndefined(z.string()),
+              layout: z.enum(['image-left', 'image-right']).default('image-left'),
+              paragraphs: z.array(z.string()).default([]),
+            })
+          )
+          .default([]),
+      })
+      .nullish(),
+
+    // ─── Galerie photos (notre-histoire) ─────────────────────────
+    gallerySection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        titleAccent: emptyToUndefined(z.string()),
+        intro: emptyToUndefined(z.string()),
+        photos: z
+          .array(
+            z.object({
+              src: z.string(),
+              alt: z.string(),
+              aspect: emptyToUndefined(z.string()),
+              objectPos: emptyToUndefined(z.string()),
+            })
+          )
+          .default([]),
+      })
+      .nullish(),
+
+    // ─── FAQ (faq) ───────────────────────────────────────────────
+    faqCategories: z
+      .array(
+        z.object({
+          name: z.string(),
+          questions: z
+            .array(z.object({ q: z.string(), a: z.string() }))
+            .default([]),
+        })
+      )
+      .nullish()
+      .transform((v) => v ?? undefined),
+
+    // ─── Blocs contact ───────────────────────────────────────────
+    contactBlocks: z
+      .object({
+        atelierTitle: emptyToUndefined(z.string()),
+        mapsLinkLabel: emptyToUndefined(z.string()),
+        phoneLabel: emptyToUndefined(z.string()),
+        emailLabel: emptyToUndefined(z.string()),
+        hoursLabel: emptyToUndefined(z.string()),
+        proTitle: emptyToUndefined(z.string()),
+        proText: emptyToUndefined(z.string()),
+        proCtaLabel: emptyToUndefined(z.string()),
+      })
+      .nullish(),
+    form: z
+      .object({
+        title: emptyToUndefined(z.string()),
+        confirmationTitle: emptyToUndefined(z.string()),
+        confirmationText: emptyToUndefined(z.string()),
+        namePlaceholder: emptyToUndefined(z.string()),
+        emailPlaceholder: emptyToUndefined(z.string()),
+        subjectPlaceholder: emptyToUndefined(z.string()),
+        subjectOptions: z.array(z.string()).default([]),
+        messagePlaceholder: emptyToUndefined(z.string()),
+        submitLabel: emptyToUndefined(z.string()),
+        privacyText: emptyToUndefined(z.string()),
+      })
+      .nullish(),
 
     // ─── Section "Les deux ateliers" ─────────────────────────────
-    workshopsSection: z.object({
-      kicker: emptyToUndefined(z.string()),
-      title: z.string(),
-      intro: emptyToUndefined(z.string()),
-    }),
+    workshopsSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        title: z.string(),
+        intro: emptyToUndefined(z.string()),
+      })
+      .nullish(),
 
-    // ─── Liste des ateliers (2 items) ────────────────────────────
+    // ─── Liste des ateliers ──────────────────────────────────────
     workshops: z
       .array(
         z.object({
@@ -207,34 +420,39 @@ const staticPages = defineCollection({
           bookingUrl: z.string(),
         })
       )
-      .default([]),
+      .nullish()
+      .transform((v) => v ?? []),
 
-    // ─── Section "Où ça se passe" (lieu + adresse) ───────────────
-    locationSection: z.object({
-      kicker: emptyToUndefined(z.string()),
-      titleLine1: z.string(),
-      titleLine2: emptyToUndefined(z.string()),
-      intro: emptyToUndefined(z.string()),
-      address: z.string(),
-      access: emptyToUndefined(z.string()),
-      parking: emptyToUndefined(z.string()),
-      mapsUrl: emptyToUndefined(z.string()),
-      video: emptyToUndefined(z.string()),
-      videoPoster: emptyToUndefined(z.string()),
-      videoAlt: emptyToUndefined(z.string()),
-    }),
+    // ─── Section lieu (ateliers) ─────────────────────────────────
+    locationSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        titleLine1: z.string(),
+        titleLine2: emptyToUndefined(z.string()),
+        intro: emptyToUndefined(z.string()),
+        address: z.string(),
+        access: emptyToUndefined(z.string()),
+        parking: emptyToUndefined(z.string()),
+        mapsUrl: emptyToUndefined(z.string()),
+        video: emptyToUndefined(z.string()),
+        videoPoster: emptyToUndefined(z.string()),
+        videoAlt: emptyToUndefined(z.string()),
+      })
+      .nullish(),
 
-    // ─── Section "Votre hôte" (artisan) ──────────────────────────
-    artisanSection: z.object({
-      kicker: emptyToUndefined(z.string()),
-      name: z.string(),
-      role: z.string(),
-      image: z.string(),
-      imageAlt: emptyToUndefined(z.string()),
-      bio: z.array(z.string()).default([]),
-    }),
+    // ─── Section artisan (ateliers) ──────────────────────────────
+    artisanSection: z
+      .object({
+        kicker: emptyToUndefined(z.string()),
+        name: z.string(),
+        role: z.string(),
+        image: z.string(),
+        imageAlt: emptyToUndefined(z.string()),
+        bio: z.array(z.string()).default([]),
+      })
+      .nullish(),
 
-    // ─── Section "Privatisation groupes" ─────────────────────────
+    // ─── Section groupes / privatisation (ateliers) ──────────────
     groupsSection: z
       .object({
         kicker: emptyToUndefined(z.string()),
@@ -247,11 +465,13 @@ const staticPages = defineCollection({
       })
       .nullish(),
 
-    // ─── CTA final ───────────────────────────────────────────────
+    // ─── CTA final (partagé) ─────────────────────────────────────
     ctaSection: z
       .object({
+        kicker: emptyToUndefined(z.string()),
         script: emptyToUndefined(z.string()),
         title: z.string(),
+        titleAccent: emptyToUndefined(z.string()),
         intro: emptyToUndefined(z.string()),
         ctaPrimaryLabel: emptyToUndefined(z.string()),
         ctaPrimaryHref: emptyToUndefined(z.string()),

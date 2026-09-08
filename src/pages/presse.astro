@@ -3,6 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
 import { pressByYear, pressYearsDesc, typeLabels, typeIcons } from '../data/press';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('static-pages', 'presse');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/presse.md");
+const { meta, pageHeader, ctaSection } = entry.data;
 
 const breadcrumb = {
   '@context': 'https://schema.org',
@@ -23,18 +28,24 @@ const collectionSchema = {
 };
 
 const totalMentions = Object.values(pressByYear).reduce((s, arr) => s + arr.length, 0);
+
+// Interpolation {{count}} → nombre total de mentions.
+const interpolate = (s: string | undefined) =>
+  s ? s.replace(/\{\{count\}\}/g, String(totalMentions)) : s;
 ---
 <Layout
-  title={`Revue de presse — ${totalMentions} articles — ${site.name}`}
-  description={`${totalMentions} articles et reportages sur La Brasserie des Plantes : presse nationale, régionale, spécialisée et institutionnelle, de 2021 à aujourd'hui.`}
+  title={interpolate(meta.title)!}
+  description={interpolate(meta.description)!}
   schema={[breadcrumb, collectionSchema]}
 >
-  <PageHeader
-    kicker="Revue de presse"
-    title={`${totalMentions} articles<br /><em class='not-italic font-normal text-gold-600' style='font-family: var(--font-script);'>qui parlent de nous</em>`}
-    subtitle="Presse nationale, régionale, spécialisée, institutionnelle — toutes les couvertures vérifiées de La Brasserie des Plantes, par ordre chronologique inverse."
-    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Presse' }]}
-  />
+  {pageHeader && (
+    <PageHeader
+      kicker={pageHeader.kicker}
+      title={interpolate(pageHeader.title)!}
+      subtitle={pageHeader.subtitle}
+      breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Presse' }]}
+    />
+  )}
 
   <section class="py-16 bg-cream-50">
     <div class="max-w-5xl mx-auto px-6 space-y-16">
@@ -104,27 +115,37 @@ const totalMentions = Object.values(pressByYear).reduce((s, arr) => s + arr.leng
   </section>
 
   <!-- CTA presse — invite à nous contacter -->
-  <section class="py-20 bg-forest-900 text-cream-100">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <div class="text-[10px] md:text-xs uppercase tracking-[0.35em] text-gold-400 font-medium mb-3">Journalistes, bloggeurs</div>
-      <h2 class="font-display text-3xl md:text-4xl leading-tight mb-6">
-        Un projet d'article ?<br />
-        <em class="not-italic font-normal text-gold-400" style="font-family: var(--font-script);">Nous recevons volontiers</em>
-      </h2>
-      <p class="text-cream-200/80 leading-relaxed mb-8">
-        Nous répondons aux sollicitations presse sous 48 heures ouvrées, fournissons volontiers visuels HD,
-        échantillons de dégustation et interviews (plateau, téléphone, mail). Saint-Didier-en-Velay est à 1h de Lyon,
-        1h30 de Clermont-Ferrand, 4h de Paris en TGV + voiture.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href={`mailto:${site.email}?subject=Demande%20presse`} class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
-          Contact presse
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="/blog/dans-la-presse-2025" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-cream-100/40 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors">
-          Lire notre revue de presse 2025
-        </a>
+  {ctaSection && (
+    <section class="py-20 bg-forest-900 text-cream-100">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        {ctaSection.kicker && (
+          <div class="text-[10px] md:text-xs uppercase tracking-[0.35em] text-gold-400 font-medium mb-3">{ctaSection.kicker}</div>
+        )}
+        <h2 class="font-display text-3xl md:text-4xl leading-tight mb-6">
+          {ctaSection.title}
+          {ctaSection.titleAccent && (
+            <><br /><em class="not-italic font-normal text-gold-400" style="font-family: var(--font-script);">{ctaSection.titleAccent}</em></>
+          )}
+        </h2>
+        {ctaSection.intro && (
+          <p class="text-cream-200/80 leading-relaxed mb-8">
+            {ctaSection.intro}
+          </p>
+        )}
+        <div class="flex flex-wrap justify-center gap-4">
+          {ctaSection.ctaPrimaryLabel && ctaSection.ctaPrimaryHref && (
+            <a href={ctaSection.ctaPrimaryHref} class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
+              {ctaSection.ctaPrimaryLabel}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          )}
+          {ctaSection.ctaSecondaryLabel && ctaSection.ctaSecondaryHref && (
+            <a href={ctaSection.ctaSecondaryHref} class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-cream-100/40 hover:bg-cream-100/10 text-cream-100 font-medium transition-colors">
+              {ctaSection.ctaSecondaryLabel}
+            </a>
+          )}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 </Layout>

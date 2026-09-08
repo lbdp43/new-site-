@@ -3,6 +3,19 @@ import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { plants } from '../data/plants';
 import { site } from '../data/site';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('static-pages', 'nos-plantes');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/nos-plantes.md");
+const {
+  meta,
+  pageHeader,
+  videoBanner,
+  introParagraphs,
+  listClosing,
+  demarcheSection,
+  ctaSection,
+} = entry.data;
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -13,7 +26,6 @@ const breadcrumbSchema = {
   ],
 };
 
-// ItemList schema — chaque plante est un DefinedTerm pour AI search + SEO sémantique.
 const plantsListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
@@ -47,7 +59,6 @@ const familyLabels: Record<string, string> = {
   autre: 'Spécialité',
 };
 
-// Ordre d'affichage des familles (ordre de dégustation logique)
 const familyOrder = ['aromatique', 'fleur', 'racine', 'ecorce', 'agrume', 'epice', 'fruit', 'autre'] as const;
 const sortedPlants = [...plants].sort((a, b) => {
   const fa = familyOrder.indexOf(a.family as typeof familyOrder[number]);
@@ -56,61 +67,56 @@ const sortedPlants = [...plants].sort((a, b) => {
   return a.name.localeCompare(b.name, 'fr');
 });
 
+// Rendu markdown inline minimal (bold + italic) pour les paragraphes du CMS,
+// évite un import lourd de `marked` pour 3 balises.
+const renderInline = (s: string) =>
+  s
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-medium text-forest-800">$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>');
 ---
 <Layout
-  title="Nos plantes — une quarantaine d'ingrédients botaniques | La Brasserie des Plantes"
-  description="Verveine, mélisse, serpolet, carvi, hysope, gentiane, génépi, sureau, pitaya, amande… une quarantaine de plantes, racines, écorces, fleurs, agrumes, épices et fruits qui composent nos liqueurs artisanales de Haute-Loire."
+  title={meta.title}
+  description={meta.description}
   schema={schema}
 >
-  <PageHeader
-    kicker="Botanique"
-    title="Les plantes qui composent<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>nos liqueurs</em>"
-    subtitle="Verveine, serpolet, carvi, mélisse, hysope, gentiane, génépi, sureau, ortie, chanvre, amande, pitaya… Une quarantaine d'ingrédients botaniques, sourcés chez des cueilleurs et maraîchers que nous choisissons un par un."
-    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Nos plantes' }]}
-  />
+  {pageHeader && (
+    <PageHeader
+      kicker={pageHeader.kicker}
+      title={pageHeader.title}
+      subtitle={pageHeader.subtitle}
+      breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Nos plantes' }]}
+    />
+  )}
 
   <section class="pb-24">
     <div class="max-w-6xl mx-auto px-6">
 
       <!-- Vidéo verveine -->
-      <div class="aspect-[5/2] rounded-3xl overflow-hidden shadow-xl mb-16 bg-forest-50">
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="/videos/plante-verveine-poster.jpg"
-          aria-label="Étienne, cofondateur, prépare la verveine fraîche — plante signature de La Brasserie des Plantes"
-          class="w-full h-full object-cover"
-        >
-          <source src="/videos/plante-verveine.mp4" type="video/mp4" />
-        </video>
-      </div>
+      {videoBanner && (
+        <div class="aspect-[5/2] rounded-3xl overflow-hidden shadow-xl mb-16 bg-forest-50">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster={videoBanner.poster}
+            aria-label={videoBanner.alt}
+            class="w-full h-full object-cover"
+          >
+            <source src={videoBanner.src} type="video/mp4" />
+          </video>
+        </div>
+      )}
 
       <!-- Intro -->
-      <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-16">
-        <p>
-          Une liqueur, c'est un paysage en bouteille. Certaines de nos
-          recettes tiennent sur trois plantes — <em>L'Herbe des Druides</em>,
-          c'est verveine, serpolet, carvi, point. D'autres sont des trios
-          d'accord : <em>Le Zéleste</em>, c'est un trio de zestes (citron
-          jaune, citron vert, orange) ; <em>Le Menthor</em>, un trio de menthes
-          (poivrée, verte, agastache). Et puis il y a les grands assemblages —
-          <em>L'Alchimie Végétale</em>, <strong class="font-medium text-forest-800">27 plantes, racines,
-          écorces et épices</strong>, couronnée Meilleur Digestif du Monde en 2025.
-        </p>
-        <p>
-          À travers toute la gamme, nous travaillons avec
-          <strong class="font-medium text-forest-800">une quarantaine d'ingrédients
-          botaniques</strong> — aromatiques, racines, écorces, fleurs, agrumes,
-          épices, fruits. Nous ne cultivons pas nos plantes nous-mêmes : nous
-          les sourçons chez des cueilleurs et des maraîchers que nous
-          choisissons un par un. La plupart sont en agriculture
-          biologique — pas tous. Origine connue à chaque fois, producteur
-          rencontré.
-        </p>
-      </div>
+      {introParagraphs && introParagraphs.length > 0 && (
+        <div class="max-w-3xl mx-auto text-lg text-ink-700 leading-relaxed space-y-6 mb-16">
+          {introParagraphs.map((p) => (
+            <p set:html={renderInline(p)} />
+          ))}
+        </div>
+      )}
 
       <!-- Grille plantes -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -155,62 +161,63 @@ const sortedPlants = [...plants].sort((a, b) => {
         ))}
       </div>
 
-      <!-- Clôture de la liste : on ne dit pas tout -->
-      <div class="mt-12 max-w-3xl mx-auto text-center">
-        <p class="text-base md:text-lg text-ink-600 italic leading-relaxed">
-          … et bien d'autres, que nous gardons pour nous. Les secrets d'assemblage
-          font aussi partie du métier.
-        </p>
-      </div>
+      {listClosing && (
+        <div class="mt-12 max-w-3xl mx-auto text-center">
+          <p class="text-base md:text-lg text-ink-600 italic leading-relaxed">
+            {listClosing}
+          </p>
+        </div>
+      )}
     </div>
   </section>
 
-  <!-- Pourquoi ce choix -->
-  <section class="py-20 bg-cream-50">
-    <div class="max-w-3xl mx-auto px-6">
-      <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">Notre démarche</div>
-      <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
-        La plante,<br />
-        <em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">avant tout</em>
-      </h2>
-      <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
-        <p>
-          Nous n'écrivons jamais une recette sans savoir d'où viennent les
-          plantes. Nous travaillons avec des cueilleurs et des maraîchers
-          que nous sélectionnons un par un : chaque plante a son récoltant,
-          chaque récoltant est rencontré.
-        </p>
-        <p>
-          La plupart de nos plantes sont issues de
-          <strong class="font-medium text-forest-800">l'agriculture
-          biologique</strong> — pas toutes, mais c'est ce vers quoi on tend
-          à chaque cuvée. Pour certaines plantes ou ingrédients (génépi,
-          agrumes, réglisse, quinquina, épices), on s'appuie sur des filières
-          spécialisées quand la plante l'exige.
-        </p>
+  <!-- Pourquoi ce choix / démarche -->
+  {demarcheSection && (
+    <section class="py-20 bg-cream-50">
+      <div class="max-w-3xl mx-auto px-6">
+        {demarcheSection.kicker && (
+          <div class="text-xs uppercase tracking-[0.25em] text-forest-600 font-medium mb-3">{demarcheSection.kicker}</div>
+        )}
+        <h2 class="font-display text-3xl md:text-4xl text-forest-900 mb-6 leading-tight">
+          {demarcheSection.title}
+          {demarcheSection.titleAccent && (
+            <><br /><em class="not-italic text-forest-600 font-normal" style="font-family: var(--font-script);">{demarcheSection.titleAccent}</em></>
+          )}
+        </h2>
+        <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
+          {demarcheSection.paragraphs.map((p) => (
+            <p set:html={renderInline(p)} />
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- CTA -->
-  <section class="py-20 bg-forest-900 text-cream-100">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="font-display text-3xl md:text-4xl mb-6">
-        Et la suite ?
-      </h2>
-      <p class="text-cream-200/80 leading-relaxed text-lg mb-8 max-w-xl mx-auto">
-        Notre liste s'enrichit chaque saison — édition limitée, cuvée
-        spéciale, collaboration avec un nouveau producteur. La meilleure
-        façon de découvrir ce qui se passe dans nos cuves : goûter.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="/boutique" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
-          Explorer la boutique
-        </a>
-        <a href="/ateliers" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream-100/40 hover:border-cream-100/70 text-cream-100 font-medium transition-colors">
-          Visite-dégustation à l'atelier
-        </a>
+  {ctaSection && (
+    <section class="py-20 bg-forest-900 text-cream-100">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <h2 class="font-display text-3xl md:text-4xl mb-6">
+          {ctaSection.title}
+        </h2>
+        {ctaSection.intro && (
+          <p class="text-cream-200/80 leading-relaxed text-lg mb-8 max-w-xl mx-auto">
+            {ctaSection.intro}
+          </p>
+        )}
+        <div class="flex flex-wrap justify-center gap-4">
+          {ctaSection.ctaPrimaryLabel && ctaSection.ctaPrimaryHref && (
+            <a href={ctaSection.ctaPrimaryHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 hover:bg-cream-100 text-forest-900 font-medium transition-colors">
+              {ctaSection.ctaPrimaryLabel}
+            </a>
+          )}
+          {ctaSection.ctaSecondaryLabel && ctaSection.ctaSecondaryHref && (
+            <a href={ctaSection.ctaSecondaryHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream-100/40 hover:border-cream-100/70 text-cream-100 font-medium transition-colors">
+              {ctaSection.ctaSecondaryLabel}
+            </a>
+          )}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 </Layout>

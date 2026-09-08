@@ -2,6 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('static-pages', 'contact');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/contact.md");
+const { meta, pageHeader, contactBlocks, form } = entry.data;
 
 const contactSchema = {
   '@context': 'https://schema.org',
@@ -24,23 +29,25 @@ const breadcrumb = {
 const sent = Astro.url.searchParams.get('sent') === '1';
 ---
 <Layout
-  title="Contact | Nous écrire — La Brasserie des Plantes, Haute-Loire"
-  description="Contactez La Brasserie des Plantes à Saint-Didier-en-Velay. Téléphone, email, adresse, horaires d'ouverture. Partenariats professionnels bienvenus."
+  title={meta.title}
+  description={meta.description}
   schema={[contactSchema, breadcrumb]}
 >
-  <PageHeader
-    kicker="Contact"
-    title="Contactez<br />la Brasserie"
-    subtitle="Pour une commande, un partenariat, une question sur nos plantes ou nos ateliers — écrivez-nous, on répond vite."
-    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Contact' }]}
-  />
+  {pageHeader && (
+    <PageHeader
+      kicker={pageHeader.kicker}
+      title={pageHeader.title}
+      subtitle={pageHeader.subtitle}
+      breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'Contact' }]}
+    />
+  )}
 
   <section class="py-16">
     <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
-      <!-- Coordonnées -->
+      <!-- Coordonnées (adresse, téléphone, email : sourcés depuis src/data/site.ts) -->
       <div class="space-y-10">
         <div>
-          <h2 class="font-display text-2xl text-forest-900 mb-4">Notre atelier</h2>
+          <h2 class="font-display text-2xl text-forest-900 mb-4">{contactBlocks?.atelierTitle ?? 'Notre atelier'}</h2>
           <address class="not-italic text-ink-700 leading-relaxed">
             {site.address.street}<br />
             {site.address.postalCode} {site.address.city}<br />
@@ -57,21 +64,21 @@ const sent = Astro.url.searchParams.get('sent') === '1';
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                 <circle cx="12" cy="10" r="3"/>
               </svg>
-              Voir sur Google Maps
+              {contactBlocks?.mapsLinkLabel ?? 'Voir sur Google Maps'}
             </a>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-6">
           <div>
-            <h3 class="font-display text-lg text-forest-900 mb-2">Téléphone</h3>
+            <h3 class="font-display text-lg text-forest-900 mb-2">{contactBlocks?.phoneLabel ?? 'Téléphone'}</h3>
             <a href={`tel:${site.phone}`} class="text-ink-700 hover:text-forest-700 transition-colors">
               {site.phoneDisplay}
             </a>
             <div class="text-xs text-ink-500 mt-1">({site.hoursDisplay})</div>
           </div>
           <div>
-            <h3 class="font-display text-lg text-forest-900 mb-2">Email</h3>
+            <h3 class="font-display text-lg text-forest-900 mb-2">{contactBlocks?.emailLabel ?? 'Email'}</h3>
             <a href={`mailto:${site.email}`} class="text-ink-700 hover:text-forest-700 transition-colors break-all">
               {site.email}
             </a>
@@ -79,34 +86,38 @@ const sent = Astro.url.searchParams.get('sent') === '1';
         </div>
 
         <div>
-          <h3 class="font-display text-lg text-forest-900 mb-2">Horaires</h3>
+          <h3 class="font-display text-lg text-forest-900 mb-2">{contactBlocks?.hoursLabel ?? 'Horaires'}</h3>
           <div class="text-ink-700">{site.hoursDisplay}</div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-forest-50 border border-forest-200/60">
-          <h3 class="font-display text-xl text-forest-900 mb-2">Professionnels</h3>
-          <p class="text-sm text-ink-700 leading-relaxed mb-4">
-            Restaurateurs, cavistes, épiceries fines — nous distribuons en
-            direct. Écrivez-nous avec quelques mots sur votre établissement et
-            nous vous rappellerons.
-          </p>
-          <a href={`mailto:${site.email}?subject=Partenariat%20professionnel`} class="text-forest-700 hover:text-forest-900 font-medium text-sm inline-flex items-center gap-1">
-            Nous contacter
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
+        {contactBlocks?.proTitle && (
+          <div class="p-6 rounded-2xl bg-forest-50 border border-forest-200/60">
+            <h3 class="font-display text-xl text-forest-900 mb-2">{contactBlocks.proTitle}</h3>
+            {contactBlocks.proText && (
+              <p class="text-sm text-ink-700 leading-relaxed mb-4">
+                {contactBlocks.proText}
+              </p>
+            )}
+            {contactBlocks.proCtaLabel && (
+              <a href={`mailto:${site.email}?subject=Partenariat%20professionnel`} class="text-forest-700 hover:text-forest-900 font-medium text-sm inline-flex items-center gap-1">
+                {contactBlocks.proCtaLabel}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            )}
+          </div>
+        )}
       </div>
 
-      <!-- Formulaire -->
+      <!-- Formulaire (labels via form.*, la config Netlify reste intacte) -->
       <div>
-        <h2 class="font-display text-2xl text-forest-900 mb-6">Envoyez-nous un message</h2>
+        <h2 class="font-display text-2xl text-forest-900 mb-6">{form?.title ?? 'Envoyez-nous un message'}</h2>
         {sent && (
           <div class="mb-6 p-5 rounded-xl bg-forest-50 border border-forest-200 text-forest-800">
             <div class="flex items-start gap-3">
               <svg class="w-5 h-5 flex-none mt-0.5 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
               <div>
-                <div class="font-medium mb-1">Message envoyé, merci !</div>
-                <div class="text-sm text-ink-700">Nous revenons vers vous sous 48 heures ouvrées.</div>
+                <div class="font-medium mb-1">{form?.confirmationTitle ?? 'Message envoyé, merci !'}</div>
+                <div class="text-sm text-ink-700">{form?.confirmationText ?? 'Nous revenons vers vous sous 48 heures ouvrées.'}</div>
               </div>
             </div>
           </div>
@@ -126,7 +137,7 @@ const sent = Astro.url.searchParams.get('sent') === '1';
           </p>
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
-              <label for="nom" class="block text-sm font-medium text-ink-700 mb-2">Prénom & nom</label>
+              <label for="nom" class="block text-sm font-medium text-ink-700 mb-2">{form?.namePlaceholder ?? 'Prénom & nom'}</label>
               <input
                 id="nom"
                 name="nom"
@@ -136,7 +147,7 @@ const sent = Astro.url.searchParams.get('sent') === '1';
               />
             </div>
             <div>
-              <label for="email" class="block text-sm font-medium text-ink-700 mb-2">Email</label>
+              <label for="email" class="block text-sm font-medium text-ink-700 mb-2">{form?.emailPlaceholder ?? 'Email'}</label>
               <input
                 id="email"
                 name="email"
@@ -147,21 +158,19 @@ const sent = Astro.url.searchParams.get('sent') === '1';
             </div>
           </div>
           <div>
-            <label for="sujet" class="block text-sm font-medium text-ink-700 mb-2">Sujet</label>
+            <label for="sujet" class="block text-sm font-medium text-ink-700 mb-2">{form?.subjectPlaceholder ?? 'Sujet'}</label>
             <select
               id="sujet"
               name="sujet"
               class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-cream-50 focus:border-forest-600 focus:ring-2 focus:ring-forest-200 outline-none transition"
             >
-              <option>Question sur un produit</option>
-              <option>Commande / livraison</option>
-              <option>Partenariat professionnel</option>
-              <option>Ateliers & dégustation</option>
-              <option>Autre</option>
+              {(form?.subjectOptions ?? ['Question sur un produit', 'Commande / livraison', 'Partenariat professionnel', 'Ateliers & dégustation', 'Autre']).map((opt) => (
+                <option>{opt}</option>
+              ))}
             </select>
           </div>
           <div>
-            <label for="message" class="block text-sm font-medium text-ink-700 mb-2">Message</label>
+            <label for="message" class="block text-sm font-medium text-ink-700 mb-2">{form?.messagePlaceholder ?? 'Message'}</label>
             <textarea
               id="message"
               name="message"
@@ -171,12 +180,13 @@ const sent = Astro.url.searchParams.get('sent') === '1';
             ></textarea>
           </div>
           <button type="submit" class="w-full px-6 py-4 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium transition-colors">
-            Envoyer
+            {form?.submitLabel ?? 'Envoyer'}
           </button>
-          <p class="text-xs text-ink-500 text-center">
-            En soumettant ce formulaire, vous acceptez que vos données soient
-            traitées pour répondre à votre demande.
-          </p>
+          {form?.privacyText && (
+            <p class="text-xs text-ink-500 text-center">
+              {form.privacyText}
+            </p>
+          )}
         </form>
       </div>
     </div>

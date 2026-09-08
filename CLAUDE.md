@@ -363,15 +363,43 @@ seuls les **textes + images** sont exposés au CMS.
 5. Ajouter les champs dans `public/admin/config.yml` (miroir du Zod), avec
    `widget: image` pour les visuels et `widget: file` pour les vidéos mp4.
 
-**Pilote livré (sept. 2026)** : `/ateliers` — 6 sections éditables (hero,
-workshops-list, location, artisan, groups, cta-final), avec images
-uploadables par section. Les avis Wecandoo restent dans
-`data/wecandoo-reviews.json` (scraping tiers, hors CMS).
+**Pages livrées (sept. 2026)** — 6 pages statiques éditables via
+Sveltia `/admin/` → collection **Pages du site** :
+- `ateliers` — hero, workshopsSection, workshops[], locationSection,
+  artisanSection, groupsSection, ctaSection
+- `notre-histoire` — pageHeader, videoHero, stats[], storySections[]
+  (image + texte alterné avec `layout: image-left|image-right|prose`),
+  distinctionsSection (flagship + productsWithMedals[] + innovationAward),
+  teamSection (members[]), gallerySection (photos[]), ctaSection
+- `nos-plantes` — pageHeader, videoBanner, introParagraphs[]
+  (Markdown **gras** + *italique*), listClosing, demarcheSection,
+  ctaSection. La grille des 40 plantes reste dans `src/data/plants.ts`
+- `contact` — pageHeader, contactBlocks (labels), form (labels + options
+  du sujet). Le formulaire Netlify Forms reste intact ; adresse/tel/email
+  viennent toujours de `src/data/site.ts`
+- `faq` — pageHeader, faqCategories[] (nom + questions[]), ctaSection.
+  Schema FAQPage @ Schema.org généré automatiquement depuis les Q/A
+- `presse` — pageHeader (avec placeholder `{{count}}` = compteur total),
+  ctaSection. La revue de presse (mentions) reste dans `src/data/press.ts`
 
-**Pages à basculer ensuite** (par ordre de priorité selon fréquence de
-retouche par Guillaume/Étienne) : `notre-histoire`, `nos-plantes`,
-`contact`, `faq`, `professionnels`, `presse`. Home (`index.astro`) plus
-complexe car mixe FR i18n + composants React ; à laisser pour la fin.
+**Architecture** : Sveltia utilise `files:` collection (chaque page = un
+fichier fixe avec son propre schéma) → UX propre côté CMS (chaque page
+apparaît comme sa propre entrée avec les seuls champs pertinents).
+Côté Zod, un schéma unifié avec presque tous les blocs `.nullish()` —
+chaque template `.astro` consomme uniquement les champs dont il a
+besoin, en optional chaining.
+
+**Rendu inline Markdown** : les paragraphes CMS sont rendus via un
+petit helper `renderInline(s)` qui convertit `**gras**` et `*italique*`
+en HTML sans dépendre de `marked` (import lourd pour 3 balises).
+Pattern à réutiliser dans les futures pages.
+
+**Restent à basculer** (session future) : `professionnels` (multi-sections
++ formulaire), `lumiere-obscure` (CBD/YMYL), `cocktails` (liste avec
+données), pages catégorie SEO (`liqueurs-de-plantes`, `liqueur-digestive`,
+`liqueurs-artisanales`), pages légales (`mentions-legales`, `cgv`,
+`politique-cookies`), et enfin la home `index.astro` (i18n + React,
+plus complexe).
 
 ## Règle d'or CMS (Sveltia)
 

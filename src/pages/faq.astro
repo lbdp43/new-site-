@@ -2,80 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
+import { getEntry } from 'astro:content';
 
-interface FaqItem {
-  q: string;
-  a: string;
-  category: 'Commande' | 'Dégustation' | 'Produits' | 'CBD' | 'Pro';
-}
+const entry = await getEntry('static-pages', 'faq');
+if (!entry) throw new Error("Contenu manquant : src/content/static-pages/faq.md");
+const { meta, pageHeader, faqCategories, ctaSection } = entry.data;
 
-const faqs: FaqItem[] = [
-  {
-    category: 'Commande',
-    q: "Combien de temps pour recevoir une commande de La Brasserie des Plantes ?",
-    a: "Nos commandes sont expédiées sous 2 à 3 jours ouvrés depuis notre atelier en Haute-Loire. La livraison en France métropolitaine se fait via Colissimo suivi, sous 48h à 72h après expédition.",
-  },
-  {
-    category: 'Commande',
-    q: "À partir de quel montant la livraison est-elle offerte chez La Brasserie des Plantes ?",
-    a: "Oui, la livraison est offerte dès 65 € d'achats en France métropolitaine. En dessous de ce montant, les frais sont calculés selon le poids du colis.",
-  },
-  {
-    category: 'Commande',
-    q: "La Brasserie des Plantes livre-t-elle à l'étranger ?",
-    a: "Nous livrons actuellement en France métropolitaine et en Belgique. Pour toute demande d'expédition à l'étranger, contactez-nous directement.",
-  },
-  {
-    category: 'Dégustation',
-    q: "Comment déguster L'Alchimie Végétale, Meilleur Digestif du Monde 2025 ?",
-    a: "L'Alchimie Végétale se déguste en digestif, idéalement à 3°C (sortie de congélateur). Un trait dans un café, un long drink avec un tonic artisanal, ou nature — à vous de choisir. Son degré (50% vol.) et sa complexité en font un produit à apprécier lentement, par petites gorgées.",
-  },
-  {
-    category: 'Dégustation',
-    q: "Peut-on cuisiner avec les liqueurs de La Brasserie des Plantes ?",
-    a: "Absolument. Nos apéritifs s'accordent très bien avec les desserts aux fruits (fraises, framboises, agrumes) et peuvent parfumer des sorbets, ganaches ou mousses. L'Herbe des Druides sublime un sabayon ; La Flèche Ardente relève une salade de fraises.",
-  },
-  {
-    category: 'Dégustation',
-    q: "Combien de temps se conservent les liqueurs de La Brasserie des Plantes ?",
-    a: "Nos liqueurs se conservent plusieurs années non ouvertes, à l'abri de la lumière et de la chaleur. Une fois ouvertes, elles gardent toutes leurs qualités pendant 12 à 18 mois — au-delà, les arômes s'assouplissent mais restent très agréables.",
-  },
-  {
-    category: 'Produits',
-    q: "Les liqueurs de La Brasserie des Plantes sont-elles biologiques ?",
-    a: "La plupart de nos plantes sont issues de l'agriculture biologique, sourcées chez nos cueilleurs et maraîchers partenaires. Toutes ne le sont pas : pour certains ingrédients (agrumes, épices, fruits exotiques), l'approvisionnement dépend des saisons et de la disponibilité — quand le bio est possible, on le privilégie ; quand il ne l'est pas, on reste exigeants sur la qualité et l'origine.",
-  },
-  {
-    category: 'Produits',
-    q: "La Brasserie des Plantes utilise-t-elle des arômes, colorants ou conservateurs ajoutés ?",
-    a: "Pas d'arôme ajouté, pas de colorant, pas de conservateur. Nos liqueurs sont faites de plantes, d'alcool et de sucre. Ce qu'il y a dans la bouteille, c'est ce qui a poussé dans la cuve.",
-  },
-  {
-    category: 'Produits',
-    q: "Quel est le degré d'alcool des liqueurs de La Brasserie des Plantes ?",
-    a: "L'Alchimie Végétale titre 50% vol. Les autres liqueurs de la gamme signature se situent entre 30 et 45% vol. Les apéritifs de la gamme Nectar/Lime/Flèche sont plus légers (18 à 22% vol.), ainsi que les infusions Lumière Obscure au CBD.",
-  },
-  {
-    category: 'CBD',
-    q: "Les infusions CBD Lumière Obscure contiennent-elles du THC ?",
-    a: "Nos infusions de la gamme Lumière Obscure contiennent du CBD (cannabidiol), molécule non psychotrope et légale en France. La teneur en THC reste sous le seuil légal de 0,1 % (arrêté du 30 décembre 2021). Vous ne ressentirez aucun effet psychoactif.",
-  },
-  {
-    category: 'CBD',
-    q: "Quels sont les effets du CBD dans les infusions Lumière Obscure ?",
-    a: "Le CBD est reconnu pour ses propriétés apaisantes et relaxantes. Associé à des plantes comme l'ortie, la verveine ou l'absinthe, il s'inscrit dans une logique de détente botanique — pas de médication. Nos infusions ne remplacent pas un avis médical.",
-  },
-  {
-    category: 'Pro',
-    q: "Comment devenir revendeur de La Brasserie des Plantes (caviste, restaurant, épicerie fine) ?",
-    a: "Nous distribuons directement aux cavistes, restaurateurs, épiceries fines et hôteliers. Écrivez-nous à " + site.email + " avec quelques mots sur votre établissement et nous reviendrons vers vous rapidement avec nos tarifs professionnels.",
-  },
-];
+// Aplatit les Q/A pour Schema.org FAQPage (Google rich result).
+const allQuestions = (faqCategories ?? []).flatMap((c) => c.questions);
 
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
+  mainEntity: allQuestions.map((f) => ({
     '@type': 'Question',
     name: f.q,
     acceptedAnswer: {
@@ -93,34 +32,30 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${site.url}/faq` },
   ],
 };
-
-// Regroupement par catégorie pour l'affichage
-const categories = ['Commande', 'Dégustation', 'Produits', 'CBD', 'Pro'] as const;
-const faqsByCategory = Object.fromEntries(
-  categories.map((cat) => [cat, faqs.filter((f) => f.category === cat)])
-);
 ---
 <Layout
-  title="Foire aux questions | Livraison, dégustation, CBD — La Brasserie des Plantes"
-  description="Livraison, conservation, dégustation, CBD, partenariats professionnels : toutes les réponses à vos questions sur nos liqueurs artisanales."
+  title={meta.title}
+  description={meta.description}
   schema={[faqSchema, breadcrumb]}
 >
-  <PageHeader
-    kicker="Foire aux questions"
-    title="Toutes<br />nos réponses"
-    subtitle="Commande, dégustation, conservation, CBD, partenariats — tout est ici. Si vous ne trouvez pas, écrivez-nous."
-    breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'FAQ' }]}
-  />
+  {pageHeader && (
+    <PageHeader
+      kicker={pageHeader.kicker}
+      title={pageHeader.title}
+      subtitle={pageHeader.subtitle}
+      breadcrumb={[{ label: 'Accueil', href: '/' }, { label: 'FAQ' }]}
+    />
+  )}
 
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-6 space-y-14">
-      {categories.map((cat) => (
+      {(faqCategories ?? []).map((cat) => (
         <div>
           <h2 class="font-display text-2xl md:text-3xl text-forest-900 mb-6 pb-2 border-b border-forest-200">
-            {cat}
+            {cat.name}
           </h2>
           <div class="space-y-3">
-            {faqsByCategory[cat].map((f) => (
+            {cat.questions.map((f) => (
               <details class="group rounded-2xl bg-cream-50 border border-forest-100/60 overflow-hidden open:border-forest-300">
                 <summary class="cursor-pointer px-6 py-4 font-medium text-forest-900 flex items-center justify-between gap-4 hover:bg-forest-50/50 transition-colors list-none">
                   <span>{f.q}</span>
@@ -139,13 +74,19 @@ const faqsByCategory = Object.fromEntries(
     </div>
   </section>
 
-  <section class="py-16 bg-forest-900 text-cream-100 mt-16">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="font-display text-3xl text-cream-100 mb-4">Une autre question ?</h2>
-      <p class="text-cream-200/80 mb-8">Nous répondons rapidement, sans langue de bois.</p>
-      <a href="/contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 text-forest-900 font-medium hover:bg-cream-100 transition-colors">
-        Nous écrire
-      </a>
-    </div>
-  </section>
+  {ctaSection && (
+    <section class="py-16 bg-forest-900 text-cream-100 mt-16">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <h2 class="font-display text-3xl text-cream-100 mb-4">{ctaSection.title}</h2>
+        {ctaSection.intro && (
+          <p class="text-cream-200/80 mb-8">{ctaSection.intro}</p>
+        )}
+        {ctaSection.ctaPrimaryLabel && ctaSection.ctaPrimaryHref && (
+          <a href={ctaSection.ctaPrimaryHref} class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream-50 text-forest-900 font-medium hover:bg-cream-100 transition-colors">
+            {ctaSection.ctaPrimaryLabel}
+          </a>
+        )}
+      </div>
+    </section>
+  )}
 </Layout>
