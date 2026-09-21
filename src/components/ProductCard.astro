@@ -31,14 +31,14 @@ const priceLabel =
       </span>
     )}
 
-    <div class="aspect-[4/5] bg-white flex items-center justify-center relative overflow-hidden">
+    <div class="aspect-[3/4] sm:aspect-[4/5] bg-white flex items-center justify-center relative overflow-hidden">
       <img
         src={product.image}
         alt={`Liqueur artisanale ${product.name} — La Brasserie des Plantes`}
         loading="lazy"
         decoding="async"
         class:list={[
-          'absolute inset-0 w-full h-full object-contain p-6 transition-opacity duration-500 ease-in-out',
+          'absolute inset-0 w-full h-full object-contain p-2 sm:p-4 md:p-6 transition-opacity duration-500 ease-in-out',
           product.image2 ? 'opacity-100 group-hover:opacity-0' : 'group-hover:scale-105 transition-transform',
         ]}
       />
@@ -61,7 +61,7 @@ const priceLabel =
       )}
     </div>
 
-    <div class="p-6 flex-1 flex flex-col">
+    <div class="p-4 sm:p-6 flex-1 flex flex-col">
       <h3 class="font-display text-xl text-forest-900 mb-2 leading-tight">
         {product.name}
       </h3>

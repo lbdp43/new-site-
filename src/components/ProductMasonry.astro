@@ -43,7 +43,7 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
   </div>
 )}
 
-<div class="product-masonry grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+<div class="product-masonry grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
   {promoCard && (
     <a
       href={promoCard.href}
@@ -67,7 +67,7 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
         {/* Bouteilles empilables — visuel 3-stack centré. Largeur bouteille
             ~32% de la carte : assez généreux pour que le stack soit lisible,
             assez compact pour tenir dans aspect [5/6] avec padding. */}
-        <div class="aspect-[5/6] relative overflow-hidden flex items-center justify-center p-5">
+        <div class="aspect-[3/4] sm:aspect-[5/6] relative overflow-hidden flex items-center justify-center p-2 sm:p-4 md:p-5">
           <div class="relative flex flex-col items-center transition-transform duration-500 group-hover:-translate-y-1" style="width: 32%;">
             {promoCard.stackImages.slice(0, 3).map((src, idx) => (
               <img
@@ -86,7 +86,7 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
           </div>
         </div>
 
-        <div class="p-5 flex-1 flex flex-col">
+        <div class="p-3.5 sm:p-5 flex-1 flex flex-col">
           <h3 class="font-display text-lg text-forest-900 leading-tight mb-1">{promoCard.title}</h3>
           {promoCard.tagline && (
             <p class="text-xs italic text-ink-500 leading-relaxed line-clamp-2">{promoCard.tagline}</p>
@@ -107,7 +107,7 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
   {items.map((p, i) => {
     // On alterne les aspects pour créer l'effet masonry sans casser la lisibilité
     // des flacons (toujours centrés, jamais tronqués).
-    const aspect = i % 5 === 0 ? 'aspect-[3/4]' : i % 4 === 0 ? 'aspect-[4/5]' : 'aspect-[5/6]';
+    const aspect = i % 5 === 0 ? 'sm:aspect-[3/4]' : i % 4 === 0 ? 'sm:aspect-[4/5]' : 'sm:aspect-[5/6]';
     return (
       <a
         href={`/boutique/${p.slug}`}
@@ -121,26 +121,34 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
           padding="none"
           className="bg-white !aspect-auto w-full overflow-hidden"
         >
+          {/* Sur une carte étroite (2 colonnes mobile), un libellé de médaille
+              ne tient pas sur une ligne à côté de la pastille du degré. On le
+              laisse donc passer sur deux lignes et on masque le degré, qui
+              reste lisible sur la fiche produit. À partir de sm, largeur
+              suffisante : une ligne, pastille visible. */}
           {p.highlight && (
-            <span class="absolute top-3 left-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gold-500 text-cream-50 text-[10px] font-medium uppercase tracking-wide shadow-sm">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
-              {p.highlight}
+            <span class="absolute top-3 left-3 z-10 inline-flex items-start sm:items-center gap-1 w-fit max-w-[calc(100%-1.5rem)] sm:max-w-[calc(100%-4.5rem)] px-2.5 py-1 rounded-xl sm:rounded-full bg-gold-500 text-cream-50 text-[10px] leading-tight font-medium uppercase tracking-wide shadow-sm">
+              <svg class="flex-none mt-px sm:mt-0" width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+              <span class="line-clamp-2 sm:line-clamp-1">{p.highlight}</span>
             </span>
           )}
           {p.alcohol > 0 && (
-            <span class="absolute top-3 right-3 z-10 text-[11px] font-medium text-cream-50 bg-forest-800/90 px-2.5 py-1 rounded-full backdrop-blur-sm">
+            <span class:list={[
+              'absolute top-3 right-3 z-10 text-[11px] font-medium text-cream-50 bg-forest-800/90 px-2.5 py-1 rounded-full backdrop-blur-sm',
+              p.highlight ? 'hidden sm:inline-block' : '',
+            ]}>
               {formatAlcoholFr(p.alcohol)}°
             </span>
           )}
 
-          <div class={`${aspect} bg-white relative overflow-hidden`}>
+          <div class={`aspect-[3/4] ${aspect} bg-white relative overflow-hidden`}>
             <img
               src={p.sizeImages?.[70] || p.image}
               alt={`${p.name} — liqueur artisanale aux plantes oubliées`}
               loading="lazy"
               decoding="async"
               class:list={[
-                'absolute inset-0 w-full h-full object-contain p-6 transition-opacity duration-500 ease-in-out',
+                'absolute inset-0 w-full h-full object-contain p-2 sm:p-4 md:p-6 transition-opacity duration-500 ease-in-out',
                 p.image2 ? 'group-hover:opacity-0' : 'group-hover:scale-105 transition-transform',
               ]}
             />
@@ -154,7 +162,7 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
             )}
           </div>
 
-          <div class="p-5 flex-1 flex flex-col">
+          <div class="p-3.5 sm:p-5 flex-1 flex flex-col">
             <h3 class="font-display text-lg text-forest-900 leading-tight mb-1">{p.name}</h3>
             {p.tagline && (
               <p class="text-xs italic text-ink-500 leading-relaxed line-clamp-2">{p.tagline}</p>

@@ -93,7 +93,7 @@ const track = [...items, ...items];
       data-slider-track
       data-speed={speed}
       data-reverse={reverse ? 'true' : 'false'}
-      class="product-slider flex overflow-x-auto gap-5 md:gap-6 py-4 px-6 md:px-10"
+      class="product-slider flex overflow-x-auto gap-3 sm:gap-5 md:gap-6 py-4 px-4 sm:px-6 md:px-10"
       style="scroll-behavior:auto;scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;"
     >
       {track.map((p, i) => {
@@ -103,7 +103,7 @@ const track = [...items, ...items];
             href={`/boutique/${p.slug}`}
             aria-hidden={isClone ? 'true' : undefined}
             tabindex={isClone ? -1 : undefined}
-            class="product-slider-card flex-none w-[62vw] sm:w-[300px] md:w-[280px] lg:w-[260px] block transition-transform duration-300 hover:-translate-y-1 snap-start"
+            class="product-slider-card flex-none w-[43vw] sm:w-[300px] md:w-[280px] lg:w-[260px] block transition-transform duration-300 hover:-translate-y-1 snap-start"
           >
             <GlowCard
               client:visible
@@ -116,12 +116,12 @@ const track = [...items, ...items];
                   : 'bg-white border border-forest-100/60'
               }`}
             >
-              <div class="aspect-[4/5] bg-white relative overflow-hidden">
+              <div class="aspect-[3/4] sm:aspect-[4/5] bg-white relative overflow-hidden">
                 <img
                   src={p.image}
                   alt={`${p.name} — liqueur artisanale aux plantes oubliées`}
                   class:list={[
-                    'absolute inset-0 w-full h-full object-contain p-6 transition-all duration-500 ease-out',
+                    'absolute inset-0 w-full h-full object-contain p-2 sm:p-4 md:p-6 transition-all duration-500 ease-out',
                     p.image2 ? 'opacity-100 group-hover/card:opacity-0' : 'group-hover/card:scale-105',
                   ]}
                   loading="lazy"
@@ -137,22 +137,23 @@ const track = [...items, ...items];
                   />
                 )}
                 {p.highlight && (
-                  <span class="absolute top-3 left-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gold-500 text-cream-50 text-[10px] font-medium uppercase tracking-wide shadow-sm">
-                    <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
-                    {p.highlight}
+                  <span class="absolute top-3 left-3 z-10 inline-flex items-start sm:items-center gap-1 w-fit max-w-[calc(100%-1.5rem)] sm:max-w-[calc(100%-4.5rem)] px-2.5 py-1 rounded-xl sm:rounded-full bg-gold-500 text-cream-50 text-[10px] leading-tight font-medium uppercase tracking-wide shadow-sm">
+                    <svg class="flex-none mt-px sm:mt-0" width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+                    <span class="line-clamp-2 sm:line-clamp-1">{p.highlight}</span>
                   </span>
                 )}
                 {p.alcohol > 0 && (
                   <span class:list={[
                     'absolute top-3 right-3 z-10 text-[11px] font-medium px-2.5 py-1 rounded-full',
                     theme === 'dark' ? 'bg-cream-50/10 text-cream-50 border border-cream-100/20' : 'bg-forest-800/90 text-cream-50',
+                    p.highlight ? 'hidden sm:inline-block' : '',
                   ]}>
                     {formatAlcoholFr(p.alcohol)}°
                   </span>
                 )}
               </div>
-              <div class="p-5">
-                <h3 class="font-display text-xl leading-tight mb-1.5">{p.name}</h3>
+              <div class="p-3 sm:p-5">
+                <h3 class="font-display text-base sm:text-xl leading-tight mb-1.5">{p.name}</h3>
                 <p class:list={['text-xs italic leading-relaxed line-clamp-2', muted]}>{p.tagline}</p>
                 <div class:list={['mt-3 pt-3 border-t flex items-center justify-between text-xs',
                   theme === 'dark' ? 'border-cream-100/10' : 'border-forest-100'
