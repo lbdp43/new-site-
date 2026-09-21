@@ -37,7 +37,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Servir** : pur, sans glaçon. Le charbon végétal et les racines s'expriment mieux tempérés.  
 **Accord** : fromage bleu, chocolat noir fort, café de spécialité.
 
-### La Flèche Ardente (27°) — Fruits rouges
+### La Flèche Ardente (22°) — Fruits rouges
 **Température** : 10–12°C (légèrement fraîche).  
 **Verre** : tumbler ou à digestif.  
 **Servir** : glaçon possible, ou en long drink (voir [Le Philtre d'Éros](/blog/nos-cocktails-signature)).  

@@ -56,4 +56,4 @@ C'est exactement ce que nous essayons de faire, un flacon à la fois.
 
 ---
 
-**À lire aussi :** [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) · [Plantes oubliées](/blog/plantes-oubliees-du-velay) · [Trois amis, une brasserie](/blog/trois-amis-une-brasserie).
+**À lire aussi :** [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) · [Plantes oubliées](/blog/plantes-oubliees-du-velay) · [Deux amis, une brasserie](/blog/trois-amis-une-brasserie).

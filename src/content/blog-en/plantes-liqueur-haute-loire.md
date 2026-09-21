@@ -173,4 +173,4 @@ That's why we don't aim for tonnage. We make **less but better** — and you can
 - [Forgotten plants — 7 species coming back to our glasses](/en/journal/plantes-oubliees-du-velay)
 - [Discover the 12 plants in our range](/en/our-plants) — detailed profiles
 
-Or browse [the full shop](/en/shop) — 18 liqueurs.
+Or browse [the full shop](/en/shop) — 13 liqueurs.

@@ -36,7 +36,7 @@ La journaliste de *Réussir* avait passé la matinée avec Étienne dans le gara
 Quatre ans plus tard, nous relisons cet article avec l'affection qu'on porte aux vieux cahiers d'école. Les erreurs mineures nous font sourire — un nom mal orthographié, un volume de production surestimé — mais l'esprit est juste.
 
 **Ce qui a changé :**
-- De 3 références → **18 références** aujourd'hui
+- De 3 références → **15 références** aujourd'hui
 - De 11 cavistes → **plus de 100 points de vente** en France
 - Toujours une équipe resserrée : **Étienne et Guillaume**
 - De "jeunes entrepreneurs à suivre" → **Meilleur Digestif du Monde 2025**
@@ -55,4 +55,4 @@ Il rappelle aussi que la presse agricole comprend parfois mieux les produits art
 
 ---
 
-**À lire aussi :** [Trois amis, une brasserie](/blog/trois-amis-une-brasserie) · [La Brasserie des Plantes dans la presse — 2025](/blog/dans-la-presse-2025) · [Verveine, serpolet, carvi — les plantes oubliées](/blog/plantes-oubliees-du-velay).
+**À lire aussi :** [Deux amis, une brasserie](/blog/trois-amis-une-brasserie) · [La Brasserie des Plantes dans la presse — 2025](/blog/dans-la-presse-2025) · [Verveine, serpolet, carvi — les plantes oubliées](/blog/plantes-oubliees-du-velay).

@@ -92,7 +92,7 @@ Pour donner des ordres de grandeur publics :
 
 - [**Chartreuse**](https://www.chartreuse.fr/) (grande maison artisanale française) : ~1,5 million/an toutes cuvées confondues.
 - [**Bénédictine**](https://www.benedictine.com/) : quelques centaines de milliers/an.
-- **Nous**, La Brasserie des Plantes : **entre 30 000 et 40 000 bouteilles/an** réparties sur 18 références. Certaines éditions limitées comme [L'Alchimie Cuvée Michel](/boutique/alchimie-cuvee-michel) ne dépassent pas **500 bouteilles/an**.
+- **Nous**, La Brasserie des Plantes : **entre 30 000 et 40 000 bouteilles/an** réparties sur 15 références. Certaines éditions limitées comme [L'Alchimie Cuvée Michel](/boutique/alchimie-cuvee-michel) ne dépassent pas **500 bouteilles/an**.
 
 Pourquoi c'est important pour vous ? Parce que :
 
@@ -195,6 +195,6 @@ Si les 4 sont cochés, vous êtes probablement face à une maison artisanale hon
 - [L'embouteillage à la main — pourquoi nous refusons d'automatiser](/blog/embouteillage-a-la-main)
 - [Les plantes de nos liqueurs — voyage botanique](/blog/plantes-liqueur-haute-loire)
 - [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay)
-- [Trois amis, une liqueur house — comment tout a commencé en 2021](/blog/trois-amis-une-brasserie)
+- [Deux amis, une brasserie — comment tout a commencé en 2021](/blog/trois-amis-une-brasserie)
 
 Ou **testez directement** : [composez votre coffret de 3 bouteilles](/composer-mon-coffret) parmi notre gamme, pour comparer par vous-même.

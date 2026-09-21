@@ -23,7 +23,7 @@ Notre [L'Alchimie Végétale](/boutique/alchimie-vegetale) (50°, 27 plantes) a 
 
 ## 2. Pour un découvreur : le coffret cadeau personnalisé
 
-Pour quelqu'un qui ne connaît pas notre gamme, notre [coffret cadeau alcool personnalisé](/composer-mon-coffret) est probablement l'option la plus pertinente. Le destinataire reçoit **trois bouteilles 20 cl au choix** parmi nos 18 références, dans un emballage empilable original ("Chute & rebond") — un cadeau plus visuel et plus expérientiel qu'une bouteille seule.
+Pour quelqu'un qui ne connaît pas notre gamme, notre [coffret cadeau alcool personnalisé](/composer-mon-coffret) est probablement l'option la plus pertinente. Le destinataire reçoit **trois bouteilles 20 cl au choix** parmi nos 11 liqueurs empilables, dans un emballage empilable original ("Chute & rebond") — un cadeau plus visuel et plus expérientiel qu'une bouteille seule.
 
 **Pour qui :** quelqu'un qui aime découvrir, ou un cadeau à offrir sans connaître précisément les goûts du destinataire.
 **Format :** 3 bouteilles 20 cl, configurables.
@@ -90,6 +90,6 @@ Notre [Coffret Initiation](/boutique/coffret-initiation) regroupe **3 cuvées 20
 
 **À lire aussi :** [Comment servir une liqueur — 7 règles d'or](/blog/comment-servir-liqueur-7-regles) · [Comment choisir une liqueur artisanale — guide complet](/blog/choisir-liqueur-artisanale-guide) · [Apéritif artisanal — le guide](/aperitif-artisanal) · [Le digestif naturel — guide](/digestif-naturel).
 
-**Voir aussi notre [boutique complète (18 références)](/boutique).**
+**Voir aussi notre [boutique complète (15 références)](/boutique).**
 
 **L'abus d'alcool est dangereux pour la santé. À consommer avec modération. Vente d'alcool interdite aux mineurs.**

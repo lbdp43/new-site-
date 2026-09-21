@@ -66,4 +66,4 @@ Concrètement, cinq choses :
 
 ---
 
-**À lire aussi :** [Trois amis, une brasserie](/blog/trois-amis-une-brasserie) · [Les plantes oubliées](/blog/plantes-oubliees-du-velay) · [L'Alchimie Végétale, 27 plantes](/blog/alchimie-vegetale-27-plantes-composition) · [Portrait institutionnel](/blog/velay-attractivite-portrait-institutionnel) · [Visite vidéo de l'atelier](/blog/haute-loire-tourisme-video-atelier) · [Premiers pas racontés par Réussir](/blog/reussir-pamac-2021-les-debuts).
+**À lire aussi :** [Deux amis, une brasserie](/blog/trois-amis-une-brasserie) · [Les plantes oubliées](/blog/plantes-oubliees-du-velay) · [L'Alchimie Végétale, 27 plantes](/blog/alchimie-vegetale-27-plantes-composition) · [Portrait institutionnel](/blog/velay-attractivite-portrait-institutionnel) · [Visite vidéo de l'atelier](/blog/haute-loire-tourisme-video-atelier) · [Premiers pas racontés par Réussir](/blog/reussir-pamac-2021-les-debuts).

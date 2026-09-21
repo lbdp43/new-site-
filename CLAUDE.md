@@ -640,6 +640,62 @@ Avril 2026 : la section blog/chroniques s'appelle **"Actualité"** côté UI FR
 on n'a pas renommé les routes pour éviter de casser des liens externes et des
 vieux partages. Côté EN, l'URL est `/en/journal/*` et le label reste "Journal".
 
+## 📊 Compteurs de gamme — chiffres de référence
+
+Le retrait de la gamme CBD (21/09/2026) a fait passer le catalogue de 18 à
+15 références, mais **le chiffre 18 était resté partout** : 6 articles FR/EN,
+les deux pages 404, `llms.txt`, le configurateur de coffret et
+`/composer-mon-coffret` — qui promettait 18 bouteilles au choix alors que la
+grille n'en affiche que 11. Corrigé le 21/09/2026.
+
+| Ce qu'on compte | Nombre | Comment le recalculer |
+|---|---|---|
+| Références au catalogue | **15** | tous les produits |
+| Liqueurs | **13** | hors `range: accessoire` (coffret + flasque) |
+| Dans le configurateur de coffret | **11** | hors `accessoire`, `edition-limitee`, et sans `wcId` |
+
+⚠️ Ces chiffres sont **écrits en dur** dans le contenu — aucun n'est dérivé de
+`products.generated.json`. Toute création ou suppression de produit oblige à
+repasser dessus. Commande de contrôle :
+
+```bash
+grep -rn -iE "\b(1[0-9]|2[0-9])\s*(liqueurs?|références?)" src/ public/*.txt | grep -v generated.json
+```
+
+## ✏️ Faits vérifiés sur les articles (21/09/2026)
+
+- **« Deux amis, une brasserie »** — l'article ne raconte que deux fondateurs,
+  Étienne et Guillaume. 14 fichiers annonçaient « Trois amis » / « Three
+  friends ». Corrigé. ⚠️ Le **slug reste `trois-amis-une-brasserie`** : à
+  renommer tant que l'Actualité est masquée (aucun lien externe).
+- **« liqueur house »** était employé dans deux articles **français** — reste
+  de la version anglaise. Corrigé. L'expression est légitime dans les textes
+  EN, ne pas la traquer là-bas.
+- Les degrés cités dans les articles sont désormais alignés sur les fiches
+  produit. Deux étaient des **contradictions internes** (le même article
+  donnait deux chiffres différents pour le même produit).
+
+  ⚠️ Piège pour un futur contrôle automatique : `L'Alchimie Végétale` (50 %) et
+  `L'Alchimie Végétale — Cuvée Michel` (48,3 %) — de même pour `L'Herbe des
+  Druides` (28 %) et sa finition fût de chêne (27,1 %). Un matching par nom
+  court produit de faux écarts. Et « à 4°C » ou « +40 % de ventes » ne sont pas
+  des degrés d'alcool.
+
+## 🔌 MCP Vercel — portée limitée
+
+Connecté le 21/09/2026. **Portée projet uniquement** : `list_projects`,
+`list_project_domains` et `list_deployments` répondent, mais `get_team` et
+`filter_project_envs` renvoient un **403** (« scope lbdp43s-projects »).
+
+Conséquence : on **ne peut pas vérifier depuis ici** le plan de l'abonnement
+(Hobby / Pro) ni la présence des variables d'environnement. Ces deux points
+restent des vérifications manuelles côté tableau de bord — et le passage en
+Pro reste le premier pré-requis de `docs/bascule-www.md`.
+
+Projet : `prj_l85xURdLb1X1S0RzCyZB96OgfdzJ` (`new-site`), équipe
+`team_4z7NhXXiwGttRzsD5ifwUPEU`. Domaines à ce jour : `test.` uniquement
+(+ l'URL `.vercel.app` qui redirige dessus). `www.` n'est pas encore ajouté.
+
 ## 🚧 Actualité temporairement retirée — décision du 21/09/2026
 
 **Guillaume : « on les passe tous en revue mais on laisse en Actualité

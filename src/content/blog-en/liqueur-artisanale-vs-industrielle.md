@@ -192,6 +192,6 @@ If all 4 are ticked, you're probably facing an honest craft house. If fewer than
 - [How to choose a craft liqueur — complete guide](/en/journal/choisir-liqueur-artisanale-guide) — the 5 objective criteria
 - [The plants in our liqueurs — a botanical journey](/en/journal/plantes-liqueur-haute-loire)
 - [Partner foragers and growers — how we source our plants](/en/journal/producteurs-partenaires-bio-velay)
-- [Three friends, one liqueur house — how it all started in 2021](/en/journal/trois-amis-une-brasserie)
+- [Two friends, one liqueur house — how it all started in 2021](/en/journal/trois-amis-une-brasserie)
 
 Or **test it directly**: [build your own 3-bottle gift box](/en/build-your-gift-box) and compare for yourself.

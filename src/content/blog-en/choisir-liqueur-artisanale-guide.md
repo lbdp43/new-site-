@@ -50,9 +50,9 @@ It determines **use** and **serving context**.
 | **35-45%** | Strong digestif | For contemplation, small pour |
 | **+45%** | Elixir / rare | Neat tasting, micro-pour |
 
-Our [Cerf'Gent](/en/shop/cerf-gent) is **16%** — designed for aperitif, served frozen as a French alternative to industrial gentian bitters.
+Our [Cerf'Gent](/en/shop/cerf-gent) is **15.5%** — designed for aperitif, served frozen as a French alternative to industrial gentian bitters.
 
-Our [L'Alchimie Végétale](/en/shop/alchimie-vegetale) is **42%** — a powerful digestif, crowned **World's Best Digestif 2025** at the World Drinks Awards. Small pour, room temperature.
+Our [L'Alchimie Végétale](/en/shop/alchimie-vegetale) is **50%** — a powerful digestif, crowned **World's Best Digestif 2025** at the World Drinks Awards. Small pour, room temperature.
 
 **Common trap**: a 40° liqueur isn't "better" than a 20° one. The right ABV depends on your use.
 
@@ -116,7 +116,7 @@ The smaller the batch, the more:
 
 ## 3. Picking by use: our classification
 
-Here's how we recommend our 18 liqueurs by moment:
+Here's how we recommend our 13 liqueurs by moment:
 
 ### For aperitif
 
@@ -216,6 +216,6 @@ For L'Alchimie Végétale (€45 / 70 cl), the production cost alone exceeds €
 **Read next**:
 - [Craft vs industrial liqueur: the 7 real differences](/en/journal/liqueur-artisanale-vs-industrielle)
 - [The plants in our liqueurs — a botanical journey](/en/journal/plantes-liqueur-haute-loire)
-- [Three friends, one liqueur house — our story](/en/journal/trois-amis-une-brasserie)
+- [Two friends, one liqueur house — our story](/en/journal/trois-amis-une-brasserie)
 
-**Or start right here**: [browse the shop](/en/shop) — 18 liqueurs, 4 ranges.
+**Or start right here**: [browse the shop](/en/shop) — 13 liqueurs, 4 ranges.

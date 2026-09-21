@@ -51,9 +51,9 @@ Il détermine **l'usage** et **le moment de consommation**.
 | **35-45 %** | Digestif puissant | En méditation, petite dose |
 | **+45 %** | Élixir / Rare | Tasting pur, micro-dose |
 
-Notre [Cerf'Gent](/boutique/cerf-gent) est à **16 %** — conçu pour l'apéritif, à servir givré en remplacement d'une Suze industrielle.
+Notre [Cerf'Gent](/boutique/cerf-gent) est à **15,5 %** — conçu pour l'apéritif, à servir givré en remplacement d'une Suze industrielle.
 
-Notre [L'Alchimie Végétale](/boutique/alchimie-vegetale) titre **42 %** — un digestif puissant, primé **Meilleur Digestif du Monde 2025** aux World Drinks Awards. On le sert en petite verre, à température ambiante.
+Notre [L'Alchimie Végétale](/boutique/alchimie-vegetale) titre **50 %** — un digestif puissant, primé **Meilleur Digestif du Monde 2025** aux World Drinks Awards. On le sert en petite verre, à température ambiante.
 
 **Piège courant** : une liqueur à 40° n'est pas "meilleure" qu'une à 20°. Le bon taux dépend de votre usage.
 
@@ -117,7 +117,7 @@ Plus le lot est petit, plus :
 
 ## 3. Choisir selon l'usage : notre classification
 
-Voici comment on recommande nos 18 liqueurs selon le moment :
+Voici comment on recommande nos 13 liqueurs selon le moment :
 
 ### Pour l'apéritif
 
@@ -221,6 +221,6 @@ Pour L'Alchimie Végétale (45 € / 70 cl), le coût de production est supérie
 - [Liqueur de gentiane : Suze, Salers, Avèze, Cerf'Gent — les différences](/blog/liqueur-gentiane-suze-salers-difference)
 - [L'embouteillage à la main — pourquoi nous refusons d'automatiser](/blog/embouteillage-a-la-main)
 - [Les plantes de nos liqueurs — voyage botanique](/blog/plantes-liqueur-haute-loire) — notre approche botanique
-- [Trois amis, une liqueur house — notre histoire](/blog/trois-amis-une-brasserie) — comment la Brasserie des Plantes est née
+- [Deux amis, une brasserie — notre histoire](/blog/trois-amis-une-brasserie) — comment la Brasserie des Plantes est née
 
-**Ou commencez directement** : [parcourez la boutique](/boutique) — 18 liqueurs, 4 gammes.
+**Ou commencez directement** : [parcourez la boutique](/boutique) — 13 liqueurs, 4 gammes.

@@ -65,4 +65,4 @@ Merci à tous ceux qui nous ont accompagnés. On continue.
 
 ---
 
-**À lire aussi :** [Revue de presse printemps 2025](/blog/dans-la-presse-2025) · [Comment se passe un concours international](/blog/world-drinks-awards-comment-ca-marche) · [L'Alchimie Végétale, entre science et poésie](/blog/alchimie-vegetale-27-plantes-composition) · [Trois amis, une brasserie](/blog/trois-amis-une-brasserie).
+**À lire aussi :** [Revue de presse printemps 2025](/blog/dans-la-presse-2025) · [Comment se passe un concours international](/blog/world-drinks-awards-comment-ca-marche) · [L'Alchimie Végétale, entre science et poésie](/blog/alchimie-vegetale-27-plantes-composition) · [Deux amis, une brasserie](/blog/trois-amis-une-brasserie).

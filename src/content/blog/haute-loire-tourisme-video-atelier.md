@@ -62,4 +62,4 @@ L'atelier est situé au **18 Grand Place, 43140 Saint-Didier-en-Velay**. Nous re
 
 ---
 
-**À lire aussi :** [L'embouteillage à la main — pourquoi nous refusons d'automatiser](/blog/embouteillage-a-la-main) · [Trois amis, une brasserie — comment tout a commencé](/blog/trois-amis-une-brasserie) · [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).
+**À lire aussi :** [L'embouteillage à la main — pourquoi nous refusons d'automatiser](/blog/embouteillage-a-la-main) · [Deux amis, une brasserie — comment tout a commencé](/blog/trois-amis-une-brasserie) · [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).

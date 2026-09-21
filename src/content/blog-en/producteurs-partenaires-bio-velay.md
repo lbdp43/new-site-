@@ -65,4 +65,4 @@ Concretely, five things:
 
 ---
 
-**Also read:** [Three friends, one liqueur house](/en/journal/trois-amis-une-brasserie) · [Forgotten plants](/en/journal/plantes-oubliees-du-velay) · [L'Alchimie Végétale, 27 plants](/en/journal/alchimie-vegetale-27-plantes-composition).
+**Also read:** [Two friends, one liqueur house](/en/journal/trois-amis-une-brasserie) · [Forgotten plants](/en/journal/plantes-oubliees-du-velay) · [L'Alchimie Végétale, 27 plants](/en/journal/alchimie-vegetale-27-plantes-composition).

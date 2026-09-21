@@ -9,7 +9,7 @@ import { coffretTrios, type CoffretTrio } from '../../data/coffret-trios';
  * UX issue du design handoff "Bouteille empilable" variante 1 (Chute & rebond) :
  * - Colonne gauche : zone d'empilement avec animation de chute (Framer Motion
  *   spring) + récap sticky en bas (total + CTA)
- * - Colonne droite : grille des 18 liqueurs cliquables
+ * - Colonne droite : grille des 11 liqueurs éligibles, cliquables
  * - Persistance du stack dans localStorage (reprise si l'utilisateur revient)
  * - Pas de limite stricte — la "taille cible" reste 3 (pour le branding coffret
  *   + la metadata `_coffret_diy` WC), mais on peut empiler plus pour offrir
