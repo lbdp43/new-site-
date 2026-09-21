@@ -46,7 +46,6 @@ Le reportage vidéo tourné par la CMA dans notre atelier montre le système en 
 Concrètement, pour les **bars, restaurants et caves** qui travaillent avec nous :
 
 - **BIB 5 L** livré avec poche changeable, plus économique au litre qu'une bouteille 70 cl
-- **Tireuse inox** prêtée contre caution, adaptable à la plupart des comptoirs
 - **Formation** sur site pour prise en main, entretien, hygiène
 - **Suivi** de consommation et réassort automatique
 
