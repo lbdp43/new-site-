@@ -36,6 +36,24 @@ wcId: 71
 order: 3
 ---
 
-Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Créée pour la Sainte-Barbe, d'après trois recettes traditionnelles du Forez : un assemblage de liqueur de verveine, d'arquebuse forézienne et de barabans (un des noms vernaculaires du pissenlit), avec une pointe de charbon ajoutée à la macération.
+Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Créée pour la Sainte-Barbe, patronne des mineurs, d'après trois recettes traditionnelles du Forez.
 
-Élue **Meilleure liqueur de plantes française 2026** aux World Liqueur Awards de Londres.
+## Un assemblage, pas une macération simple
+
+Là où nos autres liqueurs partent d'une macération unique, Le Gorgeon est un **assemblage** : une liqueur de verveine, une **arquebuse forézienne** et des barabans, réunis après coup. C'est ce qui lui donne sa profondeur — trois profils construits séparément, puis accordés.
+
+L'**arquebuse** est une vieille tradition liquoriste française, un assemblage de plantes amères dont l'**aurone** (*Artemisia abrotanum*) est la signature — cousine de l'absinthe, moins amère qu'elle, sur des notes de fruit-bonbon et de citron. Le **baraban** (*Taraxacum officinale*), un des noms vernaculaires du pissenlit, apporte ses feuilles amères et terreuses : une amertume de sous-bois, de terre humide de printemps. La **verveine odorante** (*Aloysia citrodora*) tient le haut du nez, citronnée, sans acidité.
+
+Le **charbon végétal** est ajouté à la macération. Il ne parfume pas — il assombrit. C'est de là que vient ce noir d'encre, et rien d'autre : pas de colorant de synthèse.
+
+## Meilleure liqueur de plantes française 2026
+
+Aux **World Liqueur Awards** de Londres, Le Gorgeon des Machurés a été élu **meilleure liqueur de plantes française de l'année 2026**, toutes maisons confondues. Pour comprendre comment se juge un concours de ce type, lire [notre article sur le fonctionnement des World Drinks Awards](/blog/world-drinks-awards-comment-ca-marche).
+
+## Comment le servir
+
+**En digestif pur** : à température ambiante, dans un petit verre. C'est là qu'on perçoit le mieux le fond boisé de racine et la finale un rien fumée.
+
+**En cocktail** : base de notre [Black Mule](/cocktails#black-mule) — 2 cl avec du gin, du citron vert et de la ginger beer, dans une tasse en cuivre. L'amertume sombre du baraban et le gingembre se répondent particulièrement bien.
+
+**À offrir** : c'est notre seule référence disponible en magnum 150 cl.

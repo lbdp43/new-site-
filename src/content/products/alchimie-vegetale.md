@@ -51,9 +51,3 @@ Les plantes viennent de [cueilleurs et maraîchers partenaires](/blog/producteur
 **En long drink** : 4 cl d'Alchimie, glaçons, tonic sec (Fever-Tree Indian), zeste d'orange amère. Une variation spritz-amer qui met en avant le cardamome-combava.
 
 **En cuisine** : un trait dans un **café long** juste après le repas (recette signature de la maison) ; une réduction pour glacer un gibier ; un splash dans une **crème dessert** au chocolat amer.
-
-## Pourquoi ce prix
-
-*L'Alchimie Végétale* a été élue **[Meilleur Digestif du Monde 2025](/blog/meilleur-digestif-du-monde-2025)** aux World Drinks Awards à Londres, le 17 avril. Le jury a salué une "signature aromatique claire sans être dominante, une longueur en bouche inhabituelle pour un digestif sucré, une intégration racinaire rare". Quatre ans de recherche et développement pour arriver à la cuvée actuelle — que nous n'avons volontairement pas modifiée depuis.
-
-La cuvée en vente aujourd'hui est celle que le jury a dégustée. Pour l'anecdote de composition et les arbitrages de recette, voir [l'histoire des 27 plantes](/blog/alchimie-vegetale-27-plantes-composition).

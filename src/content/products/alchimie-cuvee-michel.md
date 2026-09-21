@@ -22,4 +22,22 @@ wcId: 2547
 order: 2
 ---
 
-Notre cuvée hommage à Michel — vieil ami d'enfance disparu, qui aurait aimé ce prix du monde. Légère variation autour de la base de L'Alchimie Végétale, avec un surcroît de réglisse et de gentiane. Tirage confidentiel, quelques dizaines de bouteilles par an.
+Notre cuvée hommage à Michel — un ami d'enfance disparu, qui aurait aimé voir ce titre mondial arriver. Une variation autour de la base de [L'Alchimie Végétale](/boutique/alchimie-vegetale), poussée vers la réglisse et la gentiane, puis élevée sous bois.
+
+## Une variation, pas une réédition
+
+L'assemblage de départ est celui de l'Alchimie : **27 plantes, racines, écorces, fleurs et épices** — [le détail de la composition est ici](/blog/alchimie-vegetale-27-plantes-composition). Mais deux plantes y prennent plus de place.
+
+La **réglisse** (*Glycyrrhiza glabra*), utilisée en quantité mesurée, enveloppe les amers et arrondit les agrumes. La **gentiane jaune** (*Gentiana lutea*) tire l'ensemble vers le bas, sur une amertume franche et longue. Le résultat est plus sombre que l'Alchimie classique.
+
+L'élevage se fait en **fût de chêne sélectionné ayant porté du Chardonnay**. Il donne un nez boisé et vanillé sur les herbes fraîches et la menthe, une bouche citronnée et ronde marquée par le vin, et un final épicé sur le chêne toasté.
+
+## Un tirage confidentiel
+
+Moins de **300 bouteilles par an**, numérotées. C'est la référence la plus rare du catalogue.
+
+## Comment la servir
+
+**En digestif, entre 4 et 6 °C**, lentement. Ce n'est pas une liqueur qu'on sert à la volée.
+
+**Dans un verre large**, pour laisser le fût s'ouvrir. Comptez quelques minutes après le service avant la première gorgée.

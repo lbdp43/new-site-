@@ -31,4 +31,18 @@ wcId: 65
 order: 6
 ---
 
-Notre liqueur la plus florale. Trois fleurs d'avril : sureau pour le pollen, bleuet pour la rondeur, camomille pour la tenue. Un Nectar d'Ostara très mielleux, très rond, à 24° — idéal en spritz ou en apéritif sans ajout.
+Notre liqueur la plus florale. Trois fleurs de printemps — sureau, bleuet, camomille — pour un résultat très miellé, très rond, à 24°. Le nom vient d'**Ostara**, la fête de l'équinoxe de printemps : c'est la saison de la cueillette, et c'est le goût qu'on a cherché à mettre en bouteille.
+
+## Trois fleurs, une fenêtre courte
+
+La **fleur de sureau** (*Sambucus nigra*) donne le pollen et le miel. Ce sont ces petites ombelles blanches qui fleurissent début juin, sur un arôme presque muscaté — et dont la fenêtre de cueillette tient en quinze jours à peine. Le **bleuet** (*Centaurea cyanus*), la fleur bleue des moissons presque disparue des blés conventionnels, apporte un floral discret, légèrement herbacé. La **camomille matricaire** (*Matricaria chamomilla*), dont l'arôme rappelle la pomme mûre, vient arrondir l'accord et lui donner de la tenue.
+
+Les plantes sont **issues de l'agriculture biologique**, sélectionnées avec soin, notamment auprès de producteurs et cueilleurs partenaires.
+
+## Comment le servir
+
+**En spritz** : c'est son terrain de jeu. Base de notre [Spritz Efflorescent](/cocktails#spritz-efflorescent), avec du Prosecco et une pointe de Mandarine Napoléon.
+
+**Pur, bien frais** : à 3 °C en apéritif d'été, sans rien ajouter. La rondeur miellée suffit.
+
+**À table** : il supporte très bien la cuisine. En déglaçage sur des travers de porc caramélisés, dans une pâte à beignets de courgettes, ou versé sur une salade de fruits.
