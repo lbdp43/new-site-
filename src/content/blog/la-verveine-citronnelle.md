@@ -51,4 +51,4 @@ Deux façons de la goûter chez soi :
 
 ---
 
-**À lire aussi :** [Quelle liqueur de verveine choisir en 2026 ? Comparatif](/blog/quelle-liqueur-verveine-choisir-2026) · [Artinov 2023 — notre verveine à la tirette](/blog/artinov-2023-verveine-a-la-tirette) · [Les plantes oubliées qu'on remet en bouteille](/blog/plantes-oubliees-du-velay) · [Élixir végétal — les 7 plantes d'une liqueur d'herboristerie](/blog/elixir-vegetal-7-plantes-liqueur).
+**À lire aussi :** [Quelle liqueur de verveine choisir en 2026 ? Comparatif](/blog/quelle-liqueur-verveine-choisir-2026) · [Artinov 2023 — notre machine réfrigérée](/blog/artinov-2023-machine-refrigeree) · [Les plantes oubliées qu'on remet en bouteille](/blog/plantes-oubliees-du-velay) · [Élixir végétal — les 7 plantes d'une liqueur d'herboristerie](/blog/elixir-vegetal-7-plantes-liqueur).

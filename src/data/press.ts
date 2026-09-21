@@ -91,7 +91,7 @@ export const pressMentions: PressMention[] = [
     url: 'https://www.youtube.com/watch?v=-BUIyIrTeCY',
     date: '2023-11-28',
     type: 'tv',
-    excerpt: "Vidéo officielle de la Chambre de Métiers et de l'Artisanat sur notre système de tirage pression pour liqueur végétale, lauréat Artinov 2023.",
+    excerpt: "Vidéo officielle de la Chambre de Métiers et de l'Artisanat sur notre machine réfrigérée de service pour liqueur végétale, lauréate Artinov 2023.",
   },
   {
     title: "Cinq artisans de Haute-Loire primés au concours Artinov",

@@ -1,6 +1,6 @@
 ---
-title: "Artinov 2023 — notre verveine à la tirette, lauréate Innovation de savoir-faire"
-description: "En 2023, la Chambre de Métiers et de l'Artisanat de Haute-Loire a récompensé notre système de tirage pression pour liqueur végétale. Retour sur une idée simple : servir la liqueur comme on sert la bière."
+title: "Artinov 2023 — notre machine réfrigérée, lauréate Innovation de savoir-faire"
+description: "En 2023, la Chambre de Métiers et de l'Artisanat de Haute-Loire a récompensé notre distributeur réfrigéré de liqueur végétale. Retour sur une idée simple : servir la liqueur au verre, au comptoir, à la bonne température."
 date: 2023-11-28
 updated: 2026-04-27
 author: "La Brasserie des Plantes"
@@ -9,7 +9,7 @@ cover: /images/gallery/production-01.jpg
 readingTime: "5 min"
 ---
 
-En novembre 2023, nous avons reçu le prix **Artinov Haute-Loire** — catégorie *Innovation de savoir-faire* — pour un projet qu'on trimballait depuis plusieurs mois : un **système de tirage pression** conçu pour servir nos liqueurs végétales comme on sert une bière artisanale, au verre, au comptoir.
+En novembre 2023, nous avons reçu le prix **Artinov Haute-Loire** — catégorie *Innovation de savoir-faire* — pour un projet qu'on trimballait depuis plusieurs mois : une **machine réfrigérée** conçue pour servir nos liqueurs végétales au verre, au comptoir, à la bonne température.
 
 Personne, à notre connaissance, n'avait fait cela pour une liqueur en France. D'où la récompense.
 
@@ -19,7 +19,7 @@ L'idée est née d'une contrainte de bar : quand on travaille avec de la liqueur
 
 Guillaume, venu de la restauration à Saint-Étienne, avait vu le problème des centaines de fois. Un jour, il a posé la question à Étienne : *"Et si on tirait la liqueur comme de la bière pression ?"*
 
-Objection immédiate : la liqueur est à 28° ou 30° — très loin des 5° d'une pression. Il fallait un **système fermé**, qui ne laisse pas l'air entrer, qui supporte les teneurs alcooliques hautes, qui se nettoie facilement. Bref, une tireuse sur mesure.
+Objection immédiate : une liqueur à 28° ou 30° ne se sert pas comme une bière. Il fallait une machine qui tienne la liqueur au froid, supporte les teneurs alcooliques hautes et se nettoie facilement. Bref, un distributeur sur mesure.
 
 ## Le prototype
 
@@ -32,7 +32,7 @@ Résultat côté bar :
 
 ## L'angle Artinov
 
-Le jury d'Artinov, présidé par la [**Chambre de Métiers et de l'Artisanat**](https://www.artisanat.fr/) Haute-Loire, a retenu notre candidature pour une raison simple : l'innovation est **techniquement originale** — appliquer la tireuse à un spiritueux — mais reste au service de **l'artisanat**. Ce n'est pas une innovation de rupture pour elle-même ; c'est un outil qui permet à un barman de mieux travailler avec nos liqueurs.
+Le jury d'Artinov, présidé par la [**Chambre de Métiers et de l'Artisanat**](https://www.artisanat.fr/) Haute-Loire, a retenu notre candidature pour une raison simple : l'innovation est **techniquement originale** — appliquer le distributeur réfrigéré à un spiritueux — mais reste au service de **l'artisanat**. Ce n'est pas une innovation de rupture pour elle-même ; c'est un outil qui permet à un barman de mieux travailler avec nos liqueurs.
 
 Le reportage vidéo tourné par la CMA dans notre atelier montre le système en action, et insiste sur l'aspect mise à l'échelle maîtrisée : petit producteur, gros débit au verre.
 
