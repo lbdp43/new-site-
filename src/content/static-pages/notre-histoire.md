@@ -1,7 +1,7 @@
 ---
 meta:
   title: "Notre histoire — La Brasserie des Plantes, Haute-Loire"
-  description: "Deux amis d'enfance, une passion pour les plantes oubliées. L'aventure de La Brasserie des Plantes depuis Saint-Didier-en-Velay — fondée en 2021, douze distinctions internationales, Meilleur Digestif du Monde 2025."
+  description: "Deux amis d'enfance, une passion pour les plantes oubliées. La Brasserie des Plantes depuis 2021 : douze distinctions, dont Meilleur Digestif du Monde."
 
 pageHeader:
   kicker: "Notre histoire"

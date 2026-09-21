@@ -42,7 +42,7 @@ Notre **digestif** de prestige. Assemblage complexe inspiré des grandes liqueur
 
 Cinq familles structurent la recette : les **racines** (gentiane jaune de moyenne montagne, angélique, réglisse) posent la colonne vertébrale et donnent la longueur en bouche. Le **cœur herbacé** (verveine odorante, mélisse, serpolet sauvage) fait respirer la liqueur. Les **fleurs** (sureau, camomille) arrondissent et signent les notes qu'on identifie d'abord au nez. Les **épices et écorces** (cannelle de Ceylan, cardamome verte, combava, badiane, quinquina) jouent le rôle de sel — elles apportent la tension sans laquelle une liqueur devient bavarde. Enfin quelques **fruits rouges sauvages** (myrtille, en micro-dose) posent des touches presque invisibles de fruité sombre.
 
-Les plantes viennent de [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) sélectionnés un par un, la plupart en bio. Six ingrédients tropicaux (cardamome, combava, cannelle, badiane, réglisse, quinquina) sont sourcés chez des grossistes européens spécialisés avec traçabilité complète — pas d'arôme de synthèse, jamais.
+Les plantes viennent de [cueilleurs, maraîchers, coopératives et filières spécialisées](/blog/producteurs-partenaires-bio-velay), la plupart en bio. Six ingrédients tropicaux (cardamome, combava, cannelle, badiane, réglisse, quinquina) sont sourcés chez des grossistes européens spécialisés avec traçabilité complète — pas d'arôme de synthèse, jamais.
 
 ## Comment la servir
 

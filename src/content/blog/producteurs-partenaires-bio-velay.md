@@ -1,6 +1,6 @@
 ---
-title: "Cueilleurs et maraîchers partenaires — comment nous sourçons nos plantes"
-description: "Les plantes qui entrent dans nos liqueurs viennent de cueilleurs et de maraîchers partenaires, sélectionnés un par un, la plupart en agriculture biologique. Tour d'horizon de notre filière."
+title: "Comment nous sourçons nos plantes — cueilleurs, maraîchers et filières"
+description: "Cueilleurs, maraîchers, coopératives, filières spécialisées : d'où viennent les plantes de nos liqueurs, comment nous les choisissons, et pourquoi la plupart sont en agriculture biologique."
 date: 2024-09-05
 updated: 2026-04-27
 author: "Guillaume"
@@ -9,19 +9,19 @@ cover: /images/gallery/evenement-03.webp
 readingTime: "6 min"
 ---
 
-Nous ne cultivons pas nos plantes nous-mêmes. Chaque feuille, chaque racine, chaque zeste qui entre dans nos cuves vient d'un **cueilleur** ou d'un **maraîcher partenaire** — des gens qui ont fait de la plante leur métier, et que nous avons choisis un par un. **La plupart sont en [agriculture biologique](https://www.agencebio.org/) — pas tous.** Tous nous connaissent par leur prénom. C'est un **écosystème** que nous avons construit lentement, par visites, par dégustations, par confiance.
+Nous ne cultivons pas nos plantes — à de rares exceptions près, que nous cueillons nous-mêmes. Elles viennent de **cueilleurs**, de **maraîchers**, de **coopératives** et de **filières spécialisées**, selon ce que chaque plante exige : certaines ne poussent qu'en altitude, d'autres à l'autre bout du monde. **La plupart sont en [agriculture biologique](https://www.agencebio.org/) — pas toutes.** Ce qui ne change jamais, c'est l'exigence : on goûte, on compare, on refuse ce qui ne tient pas.
 
-## Pourquoi des partenaires sélectionnés un par un
+## Ce que nous regardons avant de dire oui
 
 Trois raisons, toujours les mêmes :
 
 1. **Traçabilité** — nous savons de quel champ vient chaque plante. Si un lot a un souci, on remonte la chaîne en 24 heures.
-2. **Qualité** — les producteurs partenaires récoltent à la bonne saison, à la bonne heure, et nous livrent rapidement. Une verveine cueillie le mardi matin peut être en cuve le mercredi après-midi.
-3. **Relation directe** — un producteur rencontré, qu'on a vu travailler, c'est une qualité qu'on peut faire évoluer ensemble. Pas une ligne anonyme sur une facture.
+2. **Qualité** — récolte à la bonne saison, à la bonne heure, et livraison rapide. Une verveine cueillie le mardi matin peut être en cuve le mercredi après-midi.
+3. **Constance** — une plante qui tient d'un lot à l'autre, c'est une recette qui ne bouge pas. Quand la qualité varie, on change de source.
 
 ## Les grandes familles de partenaires
 
-Par respect pour nos producteurs, nous n'affichons pas tous les noms — certains préfèrent l'anonymat et nous respectons ce choix. Nous pouvons présenter les grandes familles :
+Par respect pour nos fournisseurs, nous n'affichons pas tous les noms — certains préfèrent l'anonymat et nous respectons ce choix. Nous pouvons présenter les grandes familles :
 
 ### Les gentianaïres
 La **gentiane jaune** (clé du Cerf'Gent) vient de gentianaïres professionnels qui récoltent à la main les racines, entre 1 000 et 1 600 m d'altitude. C'est un métier rare — moins d'une centaine de personnes en France.

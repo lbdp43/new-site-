@@ -58,7 +58,7 @@ Pour aller plus loin, voir [notre voyage botanique](/blog/plantes-liqueur-haute-
 - ❌ "Sourcing local" sans aucun détail
 - ❌ Site silencieux sur l'amont agricole
 
-Chez nous, on a [un article entier sur nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — gentianaïres professionnels, maraîchers, apiculteurs, arboriculteur. Tous sont rencontrés un par un.
+Chez nous, on a [un article entier sur nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — gentianaïres professionnels, maraîchers, coopératives, apiculteurs, arboriculteur.
 
 ## 5. Le prix au litre cohérent
 

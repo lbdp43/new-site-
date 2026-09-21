@@ -37,7 +37,7 @@ export const productsEn: Record<string, ProductEn> = {
     highlight: 'World\'s Best Digestif 2025',
     awards: ['World\'s Best Digestif 2025 — World Drinks Awards'],
     description:
-      "Our prestige liqueur. A complex blend inspired by the great monastic liqueurs, L'Alchimie Végétale assembles 27 plants, roots, barks and spices chosen one by one for their balance. Three years of formulation, a tribute to the know-how of Haute-Loire — and international recognition in 2025.",
+      "Our prestige liqueur. A complex blend inspired by the great monastic liqueurs, L'Alchimie Végétale assembles 27 plants, roots, barks and spices chosen for their balance. Three years of formulation, a tribute to the know-how of Haute-Loire — and international recognition in 2025.",
     tasting: {
       nose: 'Fresh, herbaceous, mentholated.',
       palate: 'Citrus on the attack, spice on the structure, with a peppery roundness.',

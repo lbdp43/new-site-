@@ -1,5 +1,5 @@
 ---
 meta:
-  title: "Liqueurs artisanales françaises — Brasserie des Plantes (Haute-Loire)"
-  description: "Qu'est-ce qu'une liqueur artisanale ? Définition, fabrication, différences avec une liqueur industrielle. Notre gamme de liqueurs aux plantes oubliées, fabriquées à la main — Meilleur Digestif du Monde 2025."
+  title: "Liqueur artisanale française — définition et gamme"
+  description: "Qu'est-ce qu'une liqueur artisanale ? Définition, fabrication, différence avec l'industriel — et notre gamme aux plantes oubliées, faite à la main."
 ---

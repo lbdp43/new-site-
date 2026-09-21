@@ -1,6 +1,6 @@
 ---
 title: "Partner foragers and growers — how we source our plants"
-description: "The plants in our liqueurs come from partner foragers and market gardeners, hand-picked one by one, most of them organic. A tour of our supply chain."
+description: "Foragers, market gardeners, cooperatives, specialist suppliers: where the plants in our liqueurs come from, how we choose them, and why most are organically farmed."
 date: 2024-09-05
 author: "Guillaume"
 category: Terroir
@@ -8,9 +8,9 @@ cover: /images/gallery/evenement-03.webp
 readingTime: "6 min"
 ---
 
-We don't grow our plants ourselves. Every leaf, every root, every zest that goes into our tanks comes from a partner **forager** or **market gardener** — people who've made the plant their craft, and whom we've picked one by one. **Most are in organic farming — not all.** They all know us by our first names. It's an **ecosystem** we've built slowly, through visits, tastings and trust.
+We don't grow our plants — bar a rare few we forage ourselves. They come from **foragers**, **market gardeners**, **cooperatives** and **specialist suppliers**, depending on what each plant calls for: some only grow at altitude, others on the other side of the world. **Most are organically farmed — not all.** What never changes is the standard: we taste, we compare, we turn down what doesn't hold up.
 
-## Why hand-picked partners
+## What we look at before saying yes
 
 Three reasons, always the same:
 

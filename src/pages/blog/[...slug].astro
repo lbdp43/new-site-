@@ -111,7 +111,7 @@ const recipeSchemas = (post.data.schemaRecipes ?? []).map((r) => ({
 }));
 ---
 <Layout
-  title={`${post.data.title} | Actualité — ${site.name}`}
+  title={post.data.title}
   description={post.data.description}
   ogImage={post.data.cover}
   ogType="article"

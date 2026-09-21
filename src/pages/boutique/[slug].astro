@@ -203,11 +203,17 @@ const parseAward = (raw: string): ParsedAward => {
   return { level, title, issuer, logo: findAwardLogo(raw) };
 };
 const parsedAwards = (product.awards || []).map(parseAward);
+
+// Title : « catégorie SEO — nom » tant que ça tient dans la limite de Google,
+// sinon le nom seul. Le degré n'est pas un terme de recherche, il sort du
+// title (il reste dans la meta description et sur la page).
+const seoTitleFull = product.seoCategory
+  ? `${product.seoCategory} — ${product.name}`
+  : product.name;
+const pageTitle = seoTitleFull.length <= 60 ? seoTitleFull : product.name;
 ---
 <Layout
-  title={product.seoCategory
-    ? `${product.seoCategory} — ${product.name}${product.alcohol ? ' ' + formatAlcoholFr(product.alcohol) + '°' : ''} | La Brasserie des Plantes`
-    : `${product.name}${product.alcohol ? ' ' + formatAlcoholFr(product.alcohol) + '°' : ''} | La Brasserie des Plantes`}
+  title={pageTitle}
   description={metaDescription}
   ogImage={product.image}
   ogType="product"
