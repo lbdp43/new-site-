@@ -48,7 +48,7 @@ Concrètement, pour les **bars, restaurants et caves** qui travaillent avec nous
 - **Formation** sur site pour prise en main, entretien, hygiène
 - **Suivi** de consommation et réassort automatique
 
-Aujourd'hui, la tireuse est installée chez **une dizaine de partenaires** en Auvergne-Rhône-Alpes. Pour la plupart, c'est *L'Herbe des Druides* qui y coule (verveine adoucie, servie givrée) ; pour d'autres, *Le Cerf'Gent* en alternative apéritive à la Suze.
+Aujourd'hui, **une quinzaine de machines réfrigérées** sont installées chez des partenaires. Pour la plupart, c'est *L'Herbe des Druides* qui y coule (verveine adoucie, servie givrée) ; pour d'autres, *Le Cerf'Gent* en alternative apéritive à la Suze.
 
 ## Ce qu'on en retient
 
@@ -56,7 +56,7 @@ L'innovation, chez nous, c'est rarement spectaculaire. C'est plus souvent **un p
 
 ---
 
-**Pour les pros :** notre [espace dédié](/professionnels) détaille les formats BIB et la formation sur site. Pour une démo de la tireuse, [contactez-nous](/contact).
+**Pour les pros :** notre [espace dédié](/professionnels) détaille les formats BIB et la formation sur site. Pour une démo de la machine, [contactez-nous](/contact).
 
 ---
 
