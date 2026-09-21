@@ -27,7 +27,7 @@ Avant *Réussir*, personne n'avait écrit sur nous. C'était le **premier miroir
 La journaliste de *Réussir* avait passé la matinée avec Étienne dans le garage qui nous servait d'atelier. Elle avait noté, entre autres :
 
 - Étienne et Guillaume étaient **des amis d'enfance**, l'un formé à la **biotechnologie végétale à Toulouse**, l'autre ayant fait sa carrière dans la **restauration à Saint-Étienne**.
-- La gamme initiale comptait **trois liqueurs** : *L'Herbe des Druides*, *Le Gorgeon des Mâchurés* et *L'Alchimie Végétale* (qui n'avait alors que trois ans de maturation derrière elle, loin des quatre qu'elle aurait avant Londres).
+- La gamme initiale comptait **trois liqueurs** : *L'Herbe des Druides*, *Le Gorgeon des Machurés* et *L'Alchimie Végétale* (qui n'avait alors que trois ans de maturation derrière elle, loin des quatre qu'elle aurait avant Londres).
 - Nous travaillions déjà avec **six producteurs partenaires** pour la matière première — figure qui est passée à onze aujourd'hui.
 - L'ambition affichée était *"pas une marque, une ferme transformée"* — formule que nous n'avons jamais démentie.
 

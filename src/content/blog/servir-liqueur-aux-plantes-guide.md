@@ -31,7 +31,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Servir** : glaçons facultatifs, ou une pierre à whisky pour ne pas diluer.  
 **Accord** : poisson fumé, fromages frais, carpaccio d'agrumes en dessert.
 
-### Le Gorgeon des Mâchurés (30°) — Verveine noire
+### Le Gorgeon des Machurés (30°) — Verveine noire
 **Température** : 18–20°C (ambiante).  
 **Verre** : verre ballon ou petit tumbler.  
 **Servir** : pur, sans glaçon. Le charbon végétal et les racines s'expriment mieux tempérés.  
