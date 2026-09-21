@@ -11,6 +11,7 @@ composition:
   - Framboise
   - Pétale de rose
   - Jus de citron
+ingredients: "eau, sucre, alcool, framboise, pétale de rose et jus de citron"
 usage: Digestif
 tagline: "La framboise, sublimée par la rose, relevée par la tension du citron."
 tasting:

@@ -43,7 +43,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Servir** : glaçon possible, ou en long drink (voir [Le Philtre d'Éros](/blog/nos-cocktails-signature)).  
 **Accord** : tarte aux fruits rouges, panna cotta, fromage de chèvre frais.
 
-### L'Essence des Alpes (32°) — Digestif de montagne
+### L'Essence des Cimes (32°) — Digestif de montagne
 **Température** : 8–10°C (pierre à whisky ou très légèrement glacé).  
 **Verre** : verre à digestif, ou petit tumbler.  
 **Servir** : pur, en fin de repas copieux ou en après-ski.  

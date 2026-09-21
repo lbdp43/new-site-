@@ -23,7 +23,7 @@
 
 ## Gammes produits
 
-- **Brasserie des Plantes** : liqueurs signature (L'Alchimie Végétale 50°, L'Herbe des Druides 28°, Le Gorgeon des Machurés 30°, La Flèche Ardente 27°, L'Essence des Alpes 32°, Le Nectar d'Ostara 24°, La Lime des Prés 18°)
+- **Brasserie des Plantes** : liqueurs signature (L'Alchimie Végétale 50°, L'Herbe des Druides 28°, Le Gorgeon des Machurés 30°, La Flèche Ardente 27°, L'Essence des Cimes 32°, Le Nectar d'Ostara 24°, La Lime des Prés 18°)
 - **Gamme Apéritif** : Le Cerf'Gent 15° (gentiane), La Pralicoquine 15° (praline-amande), Le Menthor 17,5° (triple menthe), Le Zéleste 17,5° (trio d'agrumes)
 - **Lumière Obscure** : liqueurs au CBD (Menthe CBD Ortie, Verveine CBD Aurone, CBD Absinthe Citron), THC < 0,1 %
 - **Éditions limitées** : Herbe des Druides finition fût de chêne, Alchimie Végétale Cuvée Michel

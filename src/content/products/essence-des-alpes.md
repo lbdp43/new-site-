@@ -1,5 +1,5 @@
 ---
-name: "L'Essence des Alpes"
+name: "L'Essence des Cimes"
 range: brasserie
 seoCategory: "Liqueur de génépi artisanale"
 priceMin: 17

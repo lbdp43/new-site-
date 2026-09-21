@@ -30,7 +30,7 @@ export const plantsEn: Record<string, PlantEn> = {
   'Serpolet': {
     role: 'Wild thyme · spiced depth',
     description:
-      "The wild thyme of our Velay highlands. Finer and more floral than common thyme, it grows flat on alpine pasture. Present in our signature trio with verbena and caraway.",
+      "The wild cousin of common thyme, finer and more floral. It grows flat on dry upland pasture. Present in our signature trio with verbena and caraway.",
     usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Machurés",
     season: 'July to August',
   },
@@ -52,13 +52,13 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Camphorated · alpine',
     description:
       "A medieval plant from monastic gardens, lightly camphorated, a touch bitter. It brings depth and an \"alpine\" character to our mountain blends.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'June to August',
   },
   'Aurone': {
     role: 'Fine bitter · fruit-candy',
     description:
-      "A cousin to absinthe and wormwood. Less bitter, more subtle — fruit-candy and citrus at the same time. Long used as a tonic infusion in Auvergne countryside.",
+      "A cousin to absinthe and wormwood. Less bitter, more subtle — fruit-candy and citrus at the same time. Long used as a tonic infusion in the French countryside.",
     usedIn: "Le Gorgeon des Machurés, Verveine CBD Aurone",
     season: 'July to September',
   },
@@ -100,7 +100,7 @@ export const plantsEn: Record<string, PlantEn> = {
   'Baraban': {
     role: 'Bitter · earthy',
     description:
-      "The Auvergnat name for dandelion. We work mainly its leaves — bitter and earthy, an undergrowth bitterness, like damp spring soil. Locally foraged.",
+      "One of the vernacular names for dandelion. We work mainly its leaves — bitter and earthy, an undergrowth bitterness, like damp spring soil.",
     usedIn: "Le Gorgeon des Machurés",
     season: 'March to May',
   },
@@ -108,20 +108,20 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Mountain · fine bitter',
     description:
       "The queen plant of the Alps. We work it in partnership with a forager from Barcelonnette. Noble bitterness, mineral character, highly sought-after profile for mountain digestifs.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'July to August',
   },
   'Bourgeon de sapin': {
     role: 'Resinous · woody',
     description:
       "Young fir shoots, picked in spring while still tender. They add a resinous, almost balsamic woodiness that anchors our alpine blends.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'April to June',
   },
   'Fleur de sureau': {
     role: 'Floral · honeyed',
     description:
-      "Small white umbels that bloom in early June. Floral, honeyed aroma, almost muscat. Picked close to the workshop, they define our Nectar d'Ostara.",
+      "Small white umbels that bloom in early June. Floral, honeyed aroma, almost muscat. A short picking window — barely a fortnight — that defines our Nectar d'Ostara.",
     usedIn: "Le Nectar d'Ostara",
     season: 'Late May to June',
   },

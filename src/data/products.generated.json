@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T14:56:29.255Z",
+  "generatedAt": "2026-09-21T15:31:12.299Z",
   "productCount": 18,
   "draftCount": 0,
   "products": [
@@ -24,7 +24,9 @@
         "27 plantes, racines, écorces, fleurs et épices sélectionnées"
       ],
       "awards": [
-        "Meilleur Digestif du Monde 2025 — World Drinks Awards"
+        "Meilleur Digestif du Monde 2025 — World Drinks Awards",
+        "Médaille d'Or 2025 — World Liqueur Awards",
+        "Meilleur digestif français 2026 — World Liqueur Awards"
       ],
       "sizes": [
         "Empilable 20cl",
@@ -58,6 +60,7 @@
       "highlight": "Multi-médaillée Lyon, Paris, Londres",
       "serving": "En apéritif givré, ou en digestif à température ambiante.",
       "seoCategory": "Liqueur de verveine artisanale",
+      "ingredients": "eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique",
       "wcId": 70,
       "order": 2,
       "description": "Notre best-seller. L'Herbe des Druides est une **liqueur de verveine artisanale** à 28° d'alcool, adoucie par le **serpolet** (thym sauvage de moyenne montagne) et épicée par le **carvi** (cumin des prés). Une **liqueur naturelle** — sans arôme ni colorant ajouté — où la verveine et l'alcool dialoguent dans un équilibre floral, sauvage, tempéré par les notes épicées.\n\n## Trois plantes, aucun arôme ajouté\n\nLa recette tient sur trois plantes, récoltées chez nos [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) (la plupart en bio). La **verveine odorante** (*Aloysia citrodora*) est notre plante totem — elle donne le haut du nez, ce parfum citronné sans acidité, enrichi de nérol et de linalol. Le **serpolet** sauvage (*Thymus serpyllum*), cueilli sur des pentes rocailleuses au moment de la floraison, apporte la concentration thymée et une note résineuse. Le **carvi** (*Carum carvi*) pose la structure épicée en bouche et ancre la finale.\n\nPas d'arôme ajouté, pas de colorant : la couleur vert pâle vient de la chlorophylle des plantes macérées. Macération froide longue, filtration lente, repos minimum deux mois.\n\n## Cinq distinctions internationales\n\n- **Or 2023, 2024, 2026** — Concours International de Lyon\n- **Argent 2024** — Concours Général Agricole, Salon de l'Agriculture Paris\n- **Argent 2025** — World Drinks Awards, Londres\n\nLe [Concours International de Lyon](https://concours-vinslyon.com/) nous a décerné trois médailles d'or sur les trois cuvées présentées, ce qui place la verveine-serpolet-carvi parmi les rares recettes à avoir un palmarès aussi stable. Lire [le récit de la première médaille 2023](/blog/premiere-medaille-or-concours-lyon-2023).\n\n## Comment la servir\n\n**En apéritif givré** : au congélateur quelques heures, servi à 0°C dans un verre tulipé. Les huiles essentielles prennent de l'épaisseur. Avec un zeste de citron jaune pour accentuer la verveine.\n\n**En digestif pur** : à température ambiante, un fond de verre après un repas riche. Le carvi aide.\n\n**En cocktail** : base de notre [Verveine Printanière](/cocktails#verveine-printaniere) — 4 cl, citron vert, sirop de sucre de canne, eau pétillante, feuilles fraîches.",
@@ -105,9 +108,10 @@
       "highlight": "Meilleure liqueur de plantes française 2026",
       "serving": "Digestif à température ambiante.",
       "seoCategory": "Liqueur de verveine noire artisanale (charbon végétal)",
+      "ingredients": "assemblage de liqueur de verveine, d'arquebuse forézienne et de barabans, avec une pointe de charbon ajoutée à la macération",
       "wcId": 71,
       "order": 3,
-      "description": "Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).\n\nÉlue **Meilleure liqueur de plantes française 2026** aux World Liqueur Awards de Londres.",
+      "description": "Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Créée pour la Sainte-Barbe, d'après trois recettes traditionnelles du Forez : un assemblage de liqueur de verveine, d'arquebuse forézienne et de barabans (un des noms vernaculaires du pissenlit), avec une pointe de charbon ajoutée à la macération.\n\nÉlue **Meilleure liqueur de plantes française 2026** aux World Liqueur Awards de Londres.",
       "composition": [
         "Verveine",
         "Aurone",
@@ -148,6 +152,7 @@
       "tagline": "La framboise, sublimée par la rose, relevée par la tension du citron.",
       "serving": "En digestif, dégustation optimale à 3 °C.",
       "seoCategory": "Liqueur de framboise artisanale",
+      "ingredients": "eau, sucre, alcool, framboise, pétale de rose et jus de citron",
       "wcId": 72,
       "order": 4,
       "description": "La Flèche Ardente est une liqueur de framboise, sublimée par les pétales de rose et le jus de citron pour ramener de la tension. Miroir d'Éros par sa recette originale à la fois complexe et intense, elle exaltera vos sens. Laissez-vous tenter par cet envoûtant philtre d'amour et libérez-vous de vos désirs.\n\nÀ 22°, elle se déguste en digestif, servie très fraîche (autour de 3 °C). Elle fait aussi merveille en cocktail — voir notre [Philtre d'Éros](/cocktails#philtre-eros).",
@@ -174,7 +179,7 @@
     },
     {
       "slug": "essence-des-alpes",
-      "name": "L'Essence des Alpes",
+      "name": "L'Essence des Cimes",
       "range": "brasserie",
       "priceMin": 17,
       "priceMax": 36,
@@ -187,14 +192,15 @@
       "seoCategory": "Liqueur de génépi artisanale",
       "wcId": 4042,
       "order": 5,
-      "description": "Un digestif de montagne. Génépi biologique en provenance d'un partenaire de Barcelonnette, marié à notre liqueur d'épine de sapin et à l'hysope — cette cousine de la lavande aux notes mentholées et camphrées. Douceur, fraîcheur, petite note résineuse de fond.",
+      "description": "Un digestif de montagne. Génépi biologique en provenance d'un partenaire de Barcelonnette, marié au bourgeon de sapin et à l'hysope — cette cousine de la lavande aux notes mentholées et camphrées. Douceur, fraîcheur, petite note résineuse de fond.",
       "composition": [
         "Génépi bio (partenariat Barcelonnette)",
-        "Liqueur d'épine de sapin",
+        "Bourgeon de sapin",
         "Hysope"
       ],
       "awards": [
-        "Médaille d'Argent 2026 — Concours International de Lyon"
+        "Médaille d'Argent 2026 — Concours International de Lyon",
+        "Médaille d'Argent 2026 — World Liqueur Awards"
       ],
       "sizes": [
         "Empilable 20cl",
@@ -225,6 +231,7 @@
       "tagline": "Une liqueur florale, douce, miellée et ronde.",
       "serving": "En spritz avec Prosecco et Mandarine Napoléon (cf. Spritz Efflorescent), ou pur à température ambiante.",
       "seoCategory": "Liqueur de fleurs de sureau",
+      "ingredients": "eau, sucre, alcool, fleurs de sureau, de bleuet et de camomille — plantes issues de l'agriculture biologique",
       "wcId": 65,
       "order": 6,
       "description": "Notre liqueur la plus florale. Trois fleurs d'avril : sureau pour le pollen, bleuet pour la rondeur, camomille pour la tenue. Un Nectar d'Ostara très mielleux, très rond, à 24° — idéal en spritz ou en apéritif sans ajout.",
@@ -262,6 +269,7 @@
       "tagline": "Une liqueur végétale fraîche aux notes citronnées.",
       "serving": "À température ambiante avec glaçons, ou avec un trait de Porto blanc en apéritif.",
       "seoCategory": "Liqueur de tilleul (élixir floral)",
+      "ingredients": "eau, sucre, alcool, thym citron, mélisse et houblon — plantes issues de l'agriculture biologique",
       "wcId": 69,
       "order": 7,
       "description": "Un tour de passe-passe botanique : une liqueur citronnée sans un gramme de citron réel. Le thym citron apporte l'attaque zestée, la mélisse la fraîcheur florale, le houblon l'amertume noble. Aucune acidité — juste une vague de prairie citronnée.",

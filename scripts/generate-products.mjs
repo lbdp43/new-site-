@@ -161,6 +161,8 @@ function main() {
         product.wcSizeAttribute = String(frontmatter.wcSizeAttribute).trim();
       if (!isEmpty(frontmatter.seoCategory))
         product.seoCategory = String(frontmatter.seoCategory).trim();
+      if (!isEmpty(frontmatter.ingredients))
+        product.ingredients = String(frontmatter.ingredients).trim();
 
       // Numbers optionnels
       if (!isEmpty(frontmatter.wcId)) product.wcId = Number(frontmatter.wcId);

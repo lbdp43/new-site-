@@ -319,7 +319,7 @@ remplacer le contenu de la colonne gauche.
 | `src/pages/commande/confirmation.astro` | Route `/commande/confirmation` |
 | `src/pages/blog/index.astro` | Route `/blog` (label UI "Actualité" côté FR). Hero staggered (BlogHeroIntro) + filtre catégories client-side (Fabrication / Terroir / Actualité / Plantes / Recettes). |
 | `src/components/BlogHeroIntro.tsx` | Hero éditorial staggered (flou → net) pour /blog — kicker + titre + script + paragraphe d'intro. |
-| `src/content/products/*.md` | **Source de vérité éditoriale** des fiches produit (1 fichier par SKU). Éditable via Sveltia CMS. |
+| `src/content/products/*.md` | **Source de vérité éditoriale** des fiches produit (1 fichier par SKU). Éditable via Sveltia CMS. Deux champs distincts à ne pas confondre : `composition` = liste éditoriale des plantes (puces) ; `ingredients` = mention réglementaire recopiée de l'étiquette (eau, sucre, alcool…), affichée en petit sous la liste. Pendant EN : `productsEn[slug].ingredients` dans `src/data/products.en.ts`. |
 | `src/data/products.ts` | Thin wrapper — importe `products.generated.json` + définit types + ranges + helpers |
 | `src/data/products.generated.json` | Généré au prebuild par `generate-products.mjs`. Ne pas éditer à la main. |
 | `scripts/generate-products.mjs` | Script prebuild : compile les .md → JSON consommable sync |
@@ -445,6 +445,7 @@ l'étiquette à l'appui.
 |---|---|---|
 | **Le Gorgeon des Machurés** | ~~Mâchurés~~ | Vérifié sur photo d'étiquette le 2026-09-21. Le mot commun *mâchurer* prend bien un circonflexe, mais l'étiquette imprime MACHURÉS sans accent — le site doit correspondre à ce que le client a en main. Corrigé à tort en septembre 2026 (PR #25), reversé aussitôt (PR #28). |
 | **La Pralicoquine** | ~~PraliCoquine~~ | Minuscule au c, confirmé par Guillaume. |
+| **L'Essence des Cimes** | ~~L'Essence des Alpes~~ | Renommé le 2026-09-21 (arbitrage Guillaume). Le slug reste `essence-des-alpes` — fichier `.md`, images `sizes/essence-des-alpes-*.webp`, clé `products.en.ts` et URL inchangés. |
 
 S'applique aussi au mot commun quand il désigne les mineurs (« en mémoire
 des Machurés »), pour rester cohérent avec le nom du produit.

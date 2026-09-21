@@ -11,6 +11,7 @@ composition:
   - Thym citron
   - Mélisse
   - Houblon
+ingredients: "eau, sucre, alcool, thym citron, mélisse et houblon — plantes issues de l'agriculture biologique"
 usage: Liqueur citronnée sans citron
 tagline: "Une liqueur végétale fraîche aux notes citronnées."
 tasting:

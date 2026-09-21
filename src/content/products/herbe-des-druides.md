@@ -11,6 +11,7 @@ composition:
   - Verveine
   - Serpolet (thym sauvage)
   - Carvi (cumin des prés)
+ingredients: "eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique"
 usage: Apéritif ou digestif
 tagline: "La verveine dans sa version la plus noble — florale, sauvage, épicée."
 highlight: "Multi-médaillée Lyon, Paris, Londres"

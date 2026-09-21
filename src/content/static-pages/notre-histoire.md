@@ -80,7 +80,7 @@ distinctionsSection:
   titleAccent: "en quatre ans"
   paragraphs:
     - "Une reconnaissance qui dépasse largement les frontières du Velay. Chacune de ces médailles a récompensé un travail de formulation long, patient, souvent invisible — trois à quatre ans pour une recette aboutie."
-    - "Trois produits de la gamme ont été distingués à ce jour : **L'Herbe des Druides**, notre liqueur la plus médaillée avec **trois Or au Concours International de Lyon**, un Argent au Concours Général Agricole de Paris et un Argent aux World Drinks Awards de Londres ; **Le Cerf'Gent**, notre apéritif amer, **Or à Paris en 2025** ; et **L'Essence des Alpes**, **Argent au Concours International de Lyon en 2026**. Sans oublier *L'Alchimie Végétale*, sacrée Meilleur Digestif du Monde."
+    - "Trois produits de la gamme ont été distingués à ce jour : **L'Herbe des Druides**, notre liqueur la plus médaillée avec **trois Or au Concours International de Lyon**, un Argent au Concours Général Agricole de Paris et un Argent aux World Drinks Awards de Londres ; **Le Cerf'Gent**, notre apéritif amer, **Or à Paris en 2025** ; et **L'Essence des Cimes**, **Argent au Concours International de Lyon en 2026**. Sans oublier *L'Alchimie Végétale*, sacrée Meilleur Digestif du Monde."
   flagship:
     badge: "★ Titre mondial"
     title: "Meilleur Digestif du Monde 2025"
@@ -120,7 +120,7 @@ distinctionsSection:
         - year: "2025"
           tier: "gold"
           competition: "Concours Général Agricole — Paris"
-    - product: "L'Essence des Alpes"
+    - product: "L'Essence des Cimes"
       slug: "essence-des-alpes"
       tagline: "Génépi · bourgeon de sapin · hysope"
       note: "Un hommage alpin au génépi, au bourgeon de sapin et à l'hysope — médaillée d'Argent au Concours International de Lyon."

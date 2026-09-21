@@ -494,7 +494,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
   <!-- Bandeau horizontal Notes de dégustation / Composition / Conseil — placé
        juste après le hero pour combler le vide à gauche sous la photo tout en
        gardant l'info à portée de scroll. 3 colonnes sur desktop, stack sur mobile. -->
-  {(product.tasting || (product.composition && product.composition.length > 0) || product.serving) && (
+  {(product.tasting || (product.composition && product.composition.length > 0) || product.ingredients || product.serving) && (
     <section class="py-10 bg-cream-50 border-y border-forest-100/60">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-3 gap-6 md:gap-10">
@@ -525,19 +525,29 @@ const parsedAwards = (product.awards || []).map(parseAward);
               </dl>
             </div>
           )}
-          {product.composition && product.composition.length > 0 && (
+          {((product.composition && product.composition.length > 0) || product.ingredients) && (
             <div class="md:px-6 md:border-r md:border-forest-100/70">
               <div class="text-xs uppercase tracking-[0.2em] text-forest-700 font-medium mb-3">
                 Composition
               </div>
-              <ul class="text-sm text-ink-700 leading-relaxed space-y-1.5">
-                {product.composition.map((c) => (
-                  <li class="flex items-start gap-3">
-                    <span class="flex-none w-1.5 h-1.5 rounded-full bg-gold-500 mt-2" aria-hidden="true"></span>
-                    <span>{c}</span>
-                  </li>
-                ))}
-              </ul>
+              {product.composition && product.composition.length > 0 && (
+                <ul class="text-sm text-ink-700 leading-relaxed space-y-1.5">
+                  {product.composition.map((c) => (
+                    <li class="flex items-start gap-3">
+                      <span class="flex-none w-1.5 h-1.5 rounded-full bg-gold-500 mt-2" aria-hidden="true"></span>
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {/* Mention réglementaire reprise de l'étiquette — volontairement
+                  discrète, sous la liste éditoriale des plantes. */}
+              {product.ingredients && (
+                <p class="mt-4 pt-3 border-t border-forest-100/70 text-xs text-ink-600 leading-relaxed">
+                  <span class="uppercase tracking-wide text-forest-600 font-medium">Ingrédients</span>
+                  {' — '}{product.ingredients}
+                </p>
+              )}
             </div>
           )}
           {product.serving && (

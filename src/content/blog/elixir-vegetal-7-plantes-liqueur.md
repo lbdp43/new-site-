@@ -105,7 +105,7 @@ Si vous voulez découvrir la catégorie, voici une petite bibliothèque de réf�
 2. **Bénédictine** (Normandie, 27 plantes, 40°) — créée à Fécamp au XIX<sup>e</sup>
 3. **L'Alchimie Végétale** ([nous](/boutique/alchimie-vegetale), Haute-Loire, 27 plantes, 50°) — Meilleur Digestif du Monde 2025
 4. **Élixir du Suédois** (Allemagne/France, formule du Dr Samst, 1450) — strictement médicinal
-5. **Génépi des Alpes** ([L'Essence des Alpes](/boutique/essence-des-alpes), formules variées, 30-40°) — la version alpine
+5. **Génépi des Alpes** ([L'Essence des Cimes](/boutique/essence-des-alpes), formules variées, 30-40°) — la version alpine
 
 ## Comment déguster un élixir végétal
 

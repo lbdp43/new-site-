@@ -73,7 +73,7 @@ export const plants: Plant[] = [
     role: 'Camphrée · alpine',
     description:
       "Plante médiévale des jardins monastiques, légèrement camphrée, un peu amère. Elle apporte de la profondeur et un caractère « alpin » aux assemblages de montagne.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'Juin à août',
     signature: true,
   },
@@ -83,7 +83,7 @@ export const plants: Plant[] = [
     family: 'aromatique',
     role: 'Amer fin · fruit-bonbon',
     description:
-      "Cousine de l'absinthe et de l'armoise. Moins amère, plus subtile — fruit-bonbon et citron à la fois. Longtemps utilisée en tisane fortifiante dans les campagnes auvergnates.",
+      "Cousine de l'absinthe et de l'armoise. Moins amère, plus subtile — fruit-bonbon et citron à la fois. Longtemps utilisée en tisane fortifiante dans les campagnes françaises.",
     usedIn: "Le Gorgeon des Machurés, Verveine CBD Aurone",
     season: 'Juillet à septembre',
   },
@@ -159,7 +159,7 @@ export const plants: Plant[] = [
     role: 'Montagnard · amer fin',
     description:
       "Plante reine des Alpes. Nous le travaillons en partenariat avec un cueilleur de Barcelonnette. Amertume noble, caractère minéral, profil très recherché en digestif de montagne.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'Juillet à août',
     signature: true,
   },
@@ -170,7 +170,7 @@ export const plants: Plant[] = [
     role: 'Résineux · boisé',
     description:
       "Les jeunes pousses de sapin, cueillies au printemps quand elles sont encore tendres. Elles apportent un boisé résineux, presque balsamique, qui ancre les accords alpins.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'Avril à juin',
     signature: true,
   },
@@ -182,7 +182,7 @@ export const plants: Plant[] = [
     family: 'fleur',
     role: 'Floral · miellé',
     description:
-      "Petits ombelles blanches qui fleurissent début juin. Arôme floral, miellé, presque muscaté. Cueillies au plus près de l'atelier, elles signent notre liqueur d'Ostara.",
+      "Petits ombelles blanches qui fleurissent début juin. Arôme floral, miellé, presque muscaté. Une cueillette courte — quinze jours à peine — qui signe notre liqueur d'Ostara.",
     usedIn: "Le Nectar d'Ostara",
     season: 'Fin mai à juin',
     signature: true,

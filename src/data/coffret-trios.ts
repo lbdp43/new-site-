@@ -73,8 +73,8 @@ export const coffretTrios: CoffretTrio[] = [
       en: 'Mountain Spirit',
     },
     description: {
-      fr: "Le Velay dans un coffret. Génépi des Alpes, verveine des bois et liqueur noire des mineurs stéphanois — les racines du territoire.",
-      en: "Velay in a gift box. Alpine genepi, wild verbena and the black liqueur of the Saint-Étienne miners — the roots of the terroir.",
+      fr: "Trois liqueurs de caractère. Génépi alpin, verveine et liqueur noire des mineurs stéphanois — un coffret qui monte en puissance.",
+      en: "Three characterful liqueurs. Alpine genepi, verbena and the black liqueur of the Saint-Étienne miners — a box that builds in intensity.",
     },
     slugs: ['essence-des-alpes', 'herbe-des-druides', 'gorgeon-des-machures'],
   },

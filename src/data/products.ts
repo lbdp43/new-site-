@@ -26,6 +26,9 @@ export interface Product {
   image2?: string;
   alcohol: number;
   composition: string[];
+  /** Liste d'ingrédients réglementaire (eau, sucre, alcool, plantes…),
+   *  telle qu'elle figure sur l'étiquette. Affichée sous la composition. */
+  ingredients?: string;
   usage: string;
   tagline?: string;
   highlight?: string;

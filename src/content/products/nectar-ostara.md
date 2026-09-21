@@ -11,6 +11,7 @@ composition:
   - Fleur de sureau
   - Bleuet
   - Camomille
+ingredients: "eau, sucre, alcool, fleurs de sureau, de bleuet et de camomille — plantes issues de l'agriculture biologique"
 usage: "Liqueur de fleurs — spritz, apéritif floral"
 tagline: "Une liqueur florale, douce, miellée et ronde."
 tasting:

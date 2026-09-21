@@ -12,6 +12,7 @@ composition:
   - Aurone
   - Baraban
   - Charbon végétal
+ingredients: "assemblage de liqueur de verveine, d'arquebuse forézienne et de barabans, avec une pointe de charbon ajoutée à la macération"
 usage: "Digestif — verveine noire"
 tagline: "La verveine noire en hommage aux mineurs stéphanois — profonde et mystérieuse."
 highlight: "Meilleure liqueur de plantes française 2026"
@@ -36,6 +37,6 @@ wcId: 71
 order: 3
 ---
 
-Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).
+Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Créée pour la Sainte-Barbe, d'après trois recettes traditionnelles du Forez : un assemblage de liqueur de verveine, d'arquebuse forézienne et de barabans (un des noms vernaculaires du pissenlit), avec une pointe de charbon ajoutée à la macération.
 
 Élue **Meilleure liqueur de plantes française 2026** aux World Liqueur Awards de Londres.

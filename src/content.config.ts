@@ -103,6 +103,10 @@ const products = defineCollection({
     highlight: emptyToUndefined(z.string()),
     serving: emptyToUndefined(z.string()),
     wcSizeAttribute: emptyToUndefined(z.string()),
+    /** Liste d'ingrédients réglementaire, telle qu'elle figure sur
+     *  l'étiquette : eau, sucre, alcool, puis les plantes. Distincte de
+     *  `composition`, qui ne liste que les plantes à visée éditoriale. */
+    ingredients: emptyToUndefined(z.string()),
     /** Catégorie SEO descriptive (mot-clé cible). Ex : "Liqueur de
      *  verveine artisanale", "Liqueur de gentiane" — apparaît en kicker
      *  au-dessus du H1 + dans le <title>, la meta description, le schema
