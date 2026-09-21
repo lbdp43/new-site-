@@ -24,14 +24,14 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Lemony freshness · digestive',
     description:
       "Native to South America, cultivated in France since the 18th century. Its fresh, lemony, soothing aroma makes it the queen of digestifs. It's our most-used plant — it goes into four of our liqueurs.",
-    usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Machurés, Verveine CBD Aurone",
+    usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Mâchurés, Verveine CBD Aurone",
     season: 'June to September',
   },
   'Serpolet': {
     role: 'Wild thyme · spiced depth',
     description:
       "The wild thyme of our Velay highlands. Finer and more floral than common thyme, it grows flat on alpine pasture. Present in our signature trio with verbena and caraway.",
-    usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Machurés",
+    usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Mâchurés",
     season: 'July to August',
   },
   'Thym-citron': {
@@ -59,7 +59,7 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Fine bitter · fruit-candy',
     description:
       "A cousin to absinthe and wormwood. Less bitter, more subtle — fruit-candy and citrus at the same time. Long used as a tonic infusion in Auvergne countryside.",
-    usedIn: "Le Gorgeon des Machurés, Verveine CBD Aurone",
+    usedIn: "Le Gorgeon des Mâchurés, Verveine CBD Aurone",
     season: 'July to September',
   },
   'Absinthe': {
@@ -101,7 +101,7 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Bitter · earthy',
     description:
       "The Auvergnat name for dandelion. We work mainly its leaves — bitter and earthy, an undergrowth bitterness, like damp spring soil. Locally foraged.",
-    usedIn: "Le Gorgeon des Machurés",
+    usedIn: "Le Gorgeon des Mâchurés",
     season: 'March to May',
   },
   'Génépi': {
@@ -192,7 +192,7 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Aniseed · warmth',
     description:
       "Also called meadow caraway, or meadow anise. Its seeds, after long maceration, offer an aniseed warmth with a light mentholated edge. A staple of traditional Auvergnat liqueurs.",
-    usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Machurés",
+    usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Mâchurés",
     season: 'Harvested in July',
   },
   'Coriandre': {

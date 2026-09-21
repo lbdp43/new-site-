@@ -6,7 +6,7 @@ meta:
 pageHeader:
   kicker: "Notre histoire"
   title: "Deux amis,<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>un terroir</em>"
-  subtitle: "Depuis Saint-Didier-en-Velay, nous faisons revivre des plantes oubliées en liqueurs et en infusions, sourcées chez nos cueilleurs et maraîchers partenaires. Une aventure de village, qui a fini par décrocher le titre de Meilleur Digestif du Monde."
+  subtitle: "Depuis Saint-Didier-en-Velay, nous composons des liqueurs et infusions à partir de plantes soigneusement sélectionnées, notamment auprès de producteurs et cueilleurs partenaires. Une aventure de village, qui a fini par décrocher le titre de Meilleur Digestif du Monde."
 
 videoHero:
   src: "/videos/duo-making-of.mp4"

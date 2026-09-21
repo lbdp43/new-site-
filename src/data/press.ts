@@ -160,7 +160,7 @@ export const pressMentions: PressMention[] = [
     url: 'https://www.lacommere43.fr/loire-semene/item/41201-saint-didier-en-velay-la-brasserie-des-plantes-debouche-sur-trois-liqueurs-artisanales.html',
     date: '2021-07-22',
     type: 'press',
-    excerpt: "Article de lancement : les trois premières références (L'Herbe des Druides, Le Gorgeon des Machurés, L'Alchimie Végétale).",
+    excerpt: "Article de lancement : les trois premières références (L'Herbe des Druides, Le Gorgeon des Mâchurés, L'Alchimie Végétale).",
   },
 ];
 
