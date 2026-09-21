@@ -111,10 +111,10 @@ export const plantsEn: Record<string, PlantEn> = {
     usedIn: "L'Essence des Alpes",
     season: 'July to August',
   },
-  'Épine de sapin': {
+  'Bourgeon de sapin': {
     role: 'Resinous · woody',
     description:
-      "Young spruce shoots, picked in spring while still tender. They add a resinous, almost balsamic woodiness that anchors our alpine blends.",
+      "Young fir shoots, picked in spring while still tender. They add a resinous, almost balsamic woodiness that anchors our alpine blends.",
     usedIn: "L'Essence des Alpes",
     season: 'April to June',
   },

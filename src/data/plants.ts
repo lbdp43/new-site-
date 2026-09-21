@@ -164,12 +164,12 @@ export const plants: Plant[] = [
     signature: true,
   },
   {
-    name: 'Épine de sapin',
+    name: 'Bourgeon de sapin',
     latin: 'Abies alba',
     family: 'aromatique',
     role: 'Résineux · boisé',
     description:
-      "Les jeunes pousses d'épicéa, cueillies au printemps quand elles sont encore tendres. Elles apportent un boisé résineux, presque balsamique, qui ancre les accords alpins.",
+      "Les jeunes pousses de sapin, cueillies au printemps quand elles sont encore tendres. Elles apportent un boisé résineux, presque balsamique, qui ancre les accords alpins.",
     usedIn: "L'Essence des Alpes",
     season: 'Avril à juin',
     signature: true,
