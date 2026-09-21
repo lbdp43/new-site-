@@ -293,11 +293,6 @@
       "source": "/en/journal/cbd-et-plantes-lumiere-obscure",
       "destination": "/en/journal",
       "permanent": true
-    },
-    {
-      "source": "/blog/artinov-2023-verveine-a-la-tirette",
-      "destination": "/blog/artinov-2023-machine-refrigeree",
-      "permanent": true
     }
   ]
 }

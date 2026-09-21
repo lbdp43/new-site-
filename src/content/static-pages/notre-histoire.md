@@ -143,7 +143,7 @@ distinctionsSection:
     year: "2023"
     title: "Lauréat Artinov Haute-Loire"
     subtitle: "Chambre de Métiers et de l'Artisanat — Innovation de savoir-faire"
-    description: "Pour notre machine réfrigérée (invention interne pour le service bar des pros)."
+    description: "Pour notre tireuse pression (invention interne pour le service bar des pros)."
 
 teamSection:
   kicker: "L'équipe"

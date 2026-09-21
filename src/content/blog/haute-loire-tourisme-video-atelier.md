@@ -48,7 +48,7 @@ Pour nous, cela a des effets concrets :
 
 ## L'atelier aujourd'hui
 
-L'atelier filmé en 2023 n'a presque pas changé. Nous avons ajouté **deux cuves supplémentaires** (pour absorber le pic de production post-World Drinks Awards 2025) et installé **la machine réfrigérée** qui nous a valu le prix Artinov — mais la configuration générale est la même.
+L'atelier filmé en 2023 n'a presque pas changé. Nous avons ajouté **deux cuves supplémentaires** (pour absorber le pic de production post-World Drinks Awards 2025) et installé **la tireuse pression** qui nous a valu le prix Artinov — mais la configuration générale est la même.
 
 C'est volontaire. Nous pourrions agrandir, mécaniser, accélérer. Nous préférons rester à une échelle où **tout est fait à la main** et où **chaque bouteille passe entre nos quatre mains** avant de partir.
 

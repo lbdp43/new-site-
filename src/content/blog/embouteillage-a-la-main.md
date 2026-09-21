@@ -79,6 +79,6 @@ Quand ce ne sera plus possible, il faudra choisir. Pour l'instant, les quatre ma
 
 ---
 
-**Voir le processus de plus près :** [Artinov 2023 — notre machine réfrigérée](/blog/artinov-2023-machine-refrigeree) · [Visite de l'atelier en vidéo](/blog/haute-loire-tourisme-video-atelier) · [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).
+**Voir le processus de plus près :** [Artinov 2023 — notre tireuse à verveine](/blog/artinov-2023-verveine-a-la-tirette) · [Visite de l'atelier en vidéo](/blog/haute-loire-tourisme-video-atelier) · [Cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay).
 
 **À lire aussi :** [Reconnaître une vraie liqueur artisanale — checklist en 5 points](/blog/reconnaitre-vraie-liqueur-artisanale-checklist) · [Liqueur artisanale vs industrielle — 7 différences clés](/blog/liqueur-artisanale-vs-industrielle) · [Comment choisir une liqueur artisanale — le guide complet](/blog/choisir-liqueur-artisanale-guide).
