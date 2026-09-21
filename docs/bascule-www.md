@@ -32,6 +32,24 @@ aucune retouche.
 
 ---
 
+## 🚧 L'Actualité reste masquée à la bascule
+
+Décision Guillaume, 21/09/2026 : **la section Actualité ne s'ouvre PAS le jour
+de la bascule.** Les 33 articles doivent d'abord être relus un par un.
+
+Concrètement : `noindex` conservé, section absente du menu, articles hors
+sitemap — exactement l'état actuel. Rien à faire le jour J, c'est un
+non-changement volontaire.
+
+Ne pas confondre avec un oubli : si une future session voit le blog en
+`noindex` et veut « corriger », la réponse est non tant que la revue n'est
+pas terminée. État d'avancement : `blog-revue-2026-09-21.md`.
+
+Les trois leviers à lever ensemble le jour de la réouverture sont listés
+dans la section « Actualité temporairement retirée » de `CLAUDE.md`.
+
+---
+
 ## ☝️ Avant de commencer — pré-requis à valider
 
 - [ ] **Testé un vrai paiement en conditions réelles** (commande de 1-2 €

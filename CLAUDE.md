@@ -541,10 +541,10 @@ Balayage fait le 2026-09-21 : 162 occurrences → **1 restante**, dans un
 (`src/data/wecandoo-reviews.json`). On ne réécrit pas les mots d'un client :
 à remplacer par un autre avis si Guillaume le souhaite.
 
-L'article `src/content/blog/maceration-froide-pourquoi-pas-distillation.md`
-est passé en **`draft: true`** : son titre, son URL et sa thèse entière
-reposaient sur le procédé. À réécrire sous un autre angle et une autre URL,
-ou à supprimer.
+L'article `maceration-froide-pourquoi-pas-distillation.md` a été **supprimé**
+(son titre, son URL et sa thèse entière reposaient sur le procédé). Vérifié le
+21/09/2026 : le fichier n'existe plus et la collection blog ne contient aucun
+brouillon.
 
 **Commande de vérification :**
 ```bash
@@ -581,12 +581,12 @@ jamais de colorant de synthèse. La mention « cochenille pour le rose de
 la Pralicoquine », qui n'existait que côté EN, a été retirée faute de
 confirmation.
 
-**⚠️ Tension non résolue** : `/liqueurs-artisanales`,
-`/liqueurs-de-plantes`, `/aperitif-artisanal` et deux articles de blog
-conseillent au lecteur de chercher la mention « sans arôme ajouté » pour
-reconnaître une vraie liqueur artisanale. Ce ne sont pas des claims sur
-nos produits, mais un lecteur qui applique cette grille au Menthor en
-tirerait une mauvaise conclusion. À arbitrer avec Guillaume.
+✅ **Tension résolue** — les landings `/liqueurs-artisanales`,
+`/liqueurs-de-plantes` et `/aperitif-artisanal` conseillaient au lecteur de
+chercher la mention « sans arôme ajouté » comme critère de reconnaissance
+d'une vraie liqueur artisanale, ce qui lui aurait fait tirer une mauvaise
+conclusion sur Le Menthor. Vérifié le 21/09/2026 : **plus aucune occurrence
+du mot « arôme »** dans les articles de blog ni dans ces trois pages.
 
 ## Brouillons d'articles
 
@@ -620,6 +620,28 @@ Avril 2026 : la section blog/chroniques s'appelle **"Actualité"** côté UI FR
 (`nav.journal` → `"Actualité"` dans `src/i18n/ui.ts`). **L'URL reste `/blog`** —
 on n'a pas renommé les routes pour éviter de casser des liens externes et des
 vieux partages. Côté EN, l'URL est `/en/journal/*` et le label reste "Journal".
+
+## 🚧 Actualité temporairement retirée — décision du 21/09/2026
+
+**Guillaume : « on les passe tous en revue mais on laisse en Actualité
+temporairement retirée ».** La section reste masquée **y compris après la
+bascule www.**, jusqu'à ce que les 33 articles aient été relus.
+
+Trois leviers la masquent, à lever **ensemble** le jour où on rouvre :
+1. `noindex={true}` dans `src/pages/blog/index.astro`,
+   `src/pages/blog/[...slug].astro`, `src/pages/en/journal/index.astro`,
+   `src/pages/en/journal/[...slug].astro`
+2. Entrées retirées du `Header.astro` et du `Footer.astro`
+3. Filtre sitemap dans `astro.config.mjs`
+
+État de la revue : `blog-revue-2026-09-21.md`. La passe systématique
+(conformité, liens, métadonnées, maillage) est faite — **la relecture
+éditoriale article par article reste à faire**.
+
+⚠️ À traiter **avant** de rouvrir : 24 titres sur 33 dépassent 60 caractères,
+29 descriptions sur 33 sont hors des 70–160 caractères, 4 articles ne sont
+liés depuis aucun autre, et le slug `producteurs-partenaires-bio-velay`
+devrait être renommé tant qu'aucun lien externe n'existe.
 
 Le hero `/blog` utilise `BlogHeroIntro` (stagger flou → net) suivi d'un filtre
 client-side par catégorie (Fabrication / Terroir / Actualité / Plantes /
@@ -695,15 +717,25 @@ Bannir aussi ce qui va avec : « chaque récoltant est rencontré »,
 EN « we pick one by one », « hand-picked », « every grower is met ».
 
 Appliqué au 21/09/2026 sur la **home** et **/nos-plantes** (+ `/en/our-plants`).
-**Reste à balayer** (~18 occurrences) : `src/content/static-pages/index.md`,
-`liqueurs-de-plantes.astro`, `en/index.astro`, `en/our-story.astro`,
-`products/alchimie-vegetale.md`, `products.en.ts`, et 8 articles de blog
-FR/EN dont `producteurs-partenaires-bio-velay` (titre + description +
-corps), `plantes-liqueur-haute-loire`, `quelle-liqueur-verveine-choisir-2026`,
-`reconnaitre-vraie-liqueur-artisanale-checklist`, `trois-amis-une-brasserie`,
-`velay-attractivite-portrait-institutionnel`, `la-verveine-citronnelle`.
-À faire sur accord de Guillaume — l'article `producteurs-partenaires-bio-velay`
-est construit entièrement sur cette promesse.
+
+✅ **Blog balayé et vérifié le 21/09/2026** (voir `blog-revue-2026-09-21.md`) :
+les 41 fichiers FR + EN ne contiennent plus aucune occurrence de l'ancienne
+formule (« un par un », « chaque récoltant est rencontré », « hand-picked »)
+ni de claim géographique sur les plantes. Les 6 matches restants du grep de
+vérification sont légitimes : concurrents nommés avec leur ancrage
+(« Verveine du Velay (Pagès) ») et greffe de Haute-Loire (la maison, pas la
+matière première).
+
+`producteurs-partenaires-bio-velay` **a déjà été réécrit** (màj 2026-04-27) :
+il parle aujourd'hui de « cueilleurs, maraîchers, coopératives et filières
+spécialisées », dit que certaines plantes viennent d'altitude et d'autres de
+l'autre bout du monde, et que la plupart sont en bio — pas toutes.
+
+⚠️ **Seul reste** : le **slug** contient encore `bio-velay`. Le corps est
+conforme, l'URL non. L'Actualité n'ayant jamais été publique sur Astro,
+le slug peut être changé sans redirection — mais seulement tant que la
+section reste masquée. Slug proposé : `comment-nous-sourcons-nos-plantes`
+(6 articles pointent vers lui, à mettre à jour en même temps).
 
 **Commande de vérification (à lancer avant tout commit contenu) :**
 ```bash
