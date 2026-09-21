@@ -208,10 +208,14 @@ L'origine est celle du site qui **affiche** les pages (Astro), pas celle qui
 sert l'API — donc le passage du WordPress sur `wp.labrasseriedesplantes.fr`
 ne demandera aucune retouche de cette liste.
 
-## 🚨 Deux plugins de cache sur le WordPress — risque panier
+## 🚨 Cache WordPress — risque de panier partagé
 
-Vu le 21/09/2026 dans l'admin WP : **IONOS Performance** et **WP Fastest
-Cache** tournent en parallèle.
+Deux plugins de cache tournaient en parallèle (vu le 21/09/2026) :
+**IONOS Performance** et **WP Fastest Cache**. Guillaume a **désactivé IONOS
+Performance** le jour même. **WP Fastest Cache reste actif.**
+
+⚠️ « IONOS Performance » est aussi un service **côté serveur** : désactiver
+le plugin ne coupe pas forcément le cache appliqué par l'hébergeur en amont.
 
 **Le danger** : si l'un des deux met en cache les réponses de
 `/wp-json/wc/store/v1/*`, deux clients différents peuvent recevoir le même

@@ -93,24 +93,39 @@ permettraient de basculer en quelques heures.
       toutes couvertes (1 trou trouvé et corrigé : `/shop/lessence-des-cimes/`).
       Le WordPress n'a **aucun article de blog**, aucune catégorie, aucune
       étiquette. Contrôlé à chaque build.
-- [ ] 🔴 **Vérifier qu'AUCUN cache ne met en cache `/wp-json/`** — deux
-      plugins de cache tournent en parallèle sur le WordPress (**IONOS
-      Performance** et **WP Fastest Cache**, vus le 21/09/2026). Si l'un des
-      deux met en cache les réponses de la Store API, **deux clients
-      différents peuvent recevoir le même panier** : le second voit les
+- [ ] 🔴 **Vérifier que WP Fastest Cache ne met pas en cache `/wp-json/`**
+
+      Deux plugins de cache tournaient en parallèle (IONOS Performance et WP
+      Fastest Cache). **Guillaume a désactivé IONOS Performance le
+      21/09/2026** — il en reste un.
+
+      Le danger, s'il met en cache les réponses de la Store API : **deux
+      clients différents reçoivent le même panier**. Le second voit les
       articles du premier, et une commande peut partir avec le mauvais
-      contenu. C'est le risque le plus grave de toute la bascule, et il est
-      silencieux — rien ne le signale, tout a l'air de fonctionner.
+      contenu. Rien ne le signale — tout a l'air de fonctionner.
 
-      Comment vérifier : ouvrir `/wp-json/wc/store/v1/cart` en navigation
-      privée, regarder les en-têtes de réponse. Aucun `x-cache: HIT`,
-      `x-fastest-cache`, `age:` ou équivalent ne doit apparaître. Dans les
-      réglages des deux plugins, exclure explicitement `/wp-json/*`.
+      **Le contrôle** (2 minutes) : ouvrir
+      `https://www.labrasseriedesplantes.fr/wp-json/wc/store/v1/cart` en
+      navigation privée, puis l'inspecteur → onglet Réseau → en-têtes de
+      réponse. Aucun `x-cache: HIT`, `age:`, `x-wp-fastest-cache` ni
+      équivalent ne doit apparaître. Recharger deux fois : le contenu doit
+      pouvoir différer.
 
-      À faire aussi : décider s'il faut **garder les deux plugins de cache**.
-      Deux caches HTML superposés se marchent dessus et rendent tout
-      diagnostic difficile. Après la bascule, le WordPress ne sert plus de
-      pages publiques — un cache HTML n'a quasiment plus d'objet.
+      **Le réglage** : WP Fastest Cache → onglet *Exclure* → ajouter une
+      règle sur l'URL commençant par `/wp-json/`. Par défaut le plugin ne
+      met en cache que les pages HTML pour les visiteurs déconnectés, donc
+      il y a de bonnes chances que ce soit déjà propre — mais c'est à
+      vérifier, pas à supposer.
+
+      ⚠️ **Attention au cache de l'hébergeur** : « IONOS Performance » est
+      aussi un service côté serveur. Désactiver le plugin ne coupe pas
+      forcément le cache appliqué par IONOS en amont. Si le contrôle
+      ci-dessus montre encore un `age:` ou un `x-cache`, regarder du côté du
+      panneau IONOS, pas seulement des plugins WordPress.
+
+      À décider après la bascule : le WordPress ne servira plus aucune page
+      publique. Un cache HTML n'aura quasiment plus d'objet — autant s'en
+      débarrasser pour simplifier.
 - [ ] **Backups WordPress** à jour (complet BDD + fichiers). **WPvivid
       Backup est déjà installé** sur le WP (vu le 21/09/2026) — il suffit de
       lancer une sauvegarde complète et de vérifier qu'elle part bien vers un
