@@ -38,13 +38,13 @@ order: 3
 
 Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Créée pour la Sainte-Barbe, patronne des mineurs, d'après trois recettes traditionnelles du Forez.
 
-## Un assemblage, pas une macération simple
+## Un assemblage, pas une recette unique
 
-Là où nos autres liqueurs partent d'une macération unique, Le Gorgeon est un **assemblage** : une liqueur de verveine, une **arquebuse forézienne** et des barabans, réunis après coup. C'est ce qui lui donne sa profondeur — trois profils construits séparément, puis accordés.
+Là où nos autres liqueurs partent d'une recette unique, Le Gorgeon est un **assemblage** : une liqueur de verveine, une **arquebuse forézienne** et des barabans, réunis après coup. C'est ce qui lui donne sa profondeur — trois profils construits séparément, puis accordés.
 
 L'**arquebuse** est une vieille tradition liquoriste française, un assemblage de plantes amères dont l'**aurone** (*Artemisia abrotanum*) est la signature — cousine de l'absinthe, moins amère qu'elle, sur des notes de fruit-bonbon et de citron. Le **baraban** (*Taraxacum officinale*), un des noms vernaculaires du pissenlit, apporte ses feuilles amères et terreuses : une amertume de sous-bois, de terre humide de printemps. La **verveine odorante** (*Aloysia citrodora*) tient le haut du nez, citronnée, sans acidité.
 
-Le **charbon végétal** est ajouté à la macération. Il ne parfume pas — il assombrit. C'est de là que vient ce noir d'encre, et rien d'autre : pas de colorant de synthèse.
+Le **charbon végétal** est ajouté en cours d'élaboration. Il ne parfume pas — il assombrit. C'est de là que vient ce noir d'encre, et rien d'autre : pas de colorant de synthèse.
 
 ## Meilleure liqueur de plantes française 2026
 

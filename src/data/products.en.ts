@@ -37,7 +37,7 @@ export const productsEn: Record<string, ProductEn> = {
     highlight: 'World\'s Best Digestif 2025',
     awards: ['World\'s Best Digestif 2025 — World Drinks Awards'],
     description:
-      "Our prestige liqueur. A complex maceration inspired by the great monastic liqueurs, L'Alchimie Végétale assembles 27 plants, roots, barks and spices chosen one by one for their balance. Three years of formulation, a tribute to the know-how of Haute-Loire — and international recognition in 2025.",
+      "Our prestige liqueur. A complex blend inspired by the great monastic liqueurs, L'Alchimie Végétale assembles 27 plants, roots, barks and spices chosen one by one for their balance. Three years of formulation, a tribute to the know-how of Haute-Loire — and international recognition in 2025.",
     tasting: {
       nose: 'Fresh, herbaceous, mentholated.',
       palate: 'Citrus on the attack, spice on the structure, with a peppery roundness.',
@@ -76,7 +76,7 @@ export const productsEn: Record<string, ProductEn> = {
     usage: 'Digestif — black verbena',
     tagline: 'Black verbena, a tribute to the Saint-Étienne miners — deep and mysterious.',
     description:
-      "A black verbena, coloured with activated charcoal, to drink in memory of the Machurés — the Saint-Étienne miners whose faces were black with coal dust at the end of the day. Created for Sainte-Barbe, after three traditional recipes from the Forez: a blend of verbena liqueur, arquebuse forézienne and barabans (one of the vernacular names for dandelion), with a touch of charcoal added during maceration.",
+      "A black verbena, coloured with activated charcoal, to drink in memory of the Machurés — the Saint-Étienne miners whose faces were black with coal dust at the end of the day. Created for Sainte-Barbe, after three traditional recipes from the Forez: a blend of verbena liqueur, arquebuse forézienne and barabans (one of the vernacular names for dandelion), with a touch of charcoal added along the way.",
     tasting: {
       nose: 'Hint of Arquebuse in the background, roots, a touch of wood.',
       palate: 'Deep and mysterious, slightly peppery, woody dandelion root notes.',
@@ -92,7 +92,7 @@ export const productsEn: Record<string, ProductEn> = {
     usage: 'Digestif or cocktail',
     tagline: 'Raspberry, elevated by rose, sharpened by a tension of lemon.',
     description:
-      "A ruby-red liqueur built on whole macerated raspberries. Damask rose lifts the fruit without ever covering it, and a dash of fresh lemon juice keeps the sweetness from tipping into syrup. At 22%, it holds its own as a digestif and shines in cocktails (see our Philtre d'Éros).",
+      "A ruby-red liqueur built on whole raspberries. Damask rose lifts the fruit without ever covering it, and a dash of fresh lemon juice keeps the sweetness from tipping into syrup. At 22%, it holds its own as a digestif and shines in cocktails (see our Philtre d'Éros).",
     tasting: {
       nose: 'Ripe raspberry, a discreet floral note.',
       palate: 'Round and indulgent, carried by the fruit.',
@@ -181,11 +181,11 @@ export const productsEn: Record<string, ProductEn> = {
 
   'pralicoquine': {
     subtitle: 'Praline & almond liqueur',
-    composition: ['Pink pralines', 'Macerated roasted almonds'],
+    composition: ['Pink pralines', 'Roasted almonds'],
     usage: 'Indulgent aperitif or light digestif',
     tagline: 'A soft, praline-rich liqueur — unashamedly indulgent.',
     description:
-      "The pleasure liqueur. Pralines and roasted almonds macerated in alcohol — silky, indulgent, very easy-drinking as an aperitif. Also excellent in creative cocktails: sparkling kir, gin-based drinks, even a twisted margarita.",
+      "The pleasure liqueur. Pralines and roasted almonds — silky, indulgent, very easy-drinking as an aperitif. Also excellent in creative cocktails: sparkling kir, gin-based drinks, even a twisted margarita.",
     tasting: {
       nose: 'Pink praline, toasted almond.',
       palate: 'Creamy, sweet, round.',

@@ -158,7 +158,7 @@ teamSection:
       anchorId: "etienne"
       layout: "image-left"
       paragraphs:
-        - "Formé à la biotechnologie végétale à Toulouse, Étienne est le nez de la Brasserie — celui qui traduit la botanique en saveur. Il compose les recettes, choisit les plantes, règle les temps de macération."
+        - "Formé à la biotechnologie végétale à Toulouse, Étienne est le nez de la Brasserie — celui qui traduit la botanique en saveur. Il compose les recettes, choisit les plantes, règle les temps de repos."
         - "Sa signature : l'assemblage à l'ancienne, lente, par paliers. C'est lui qui a mis quatre ans à stabiliser *L'Alchimie Végétale*, la recette des 27 plantes qui a fini par décrocher le titre mondial en 2025."
     - kicker: "Cofondateur"
       name: "Guillaume"

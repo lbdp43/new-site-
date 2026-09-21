@@ -50,7 +50,7 @@ Il ne change pas non plus notre **rythme de production**. Nous ne sortons pas de
 
 - **27 plantes** — racines (gentiane, angélique, réglisse), fleurs (sureau, camomille), écorces (cannelle, quinquina), épices (cardamome, combava, badiane), aromatiques (verveine, mélisse, serpolet) et fruits (myrtille sauvage en micro-touches).
 - **50 % vol.** — construction autour d'un équilibre amer-racinaire. Les racines structurent, les fleurs arrondissent, les épices tendent.
-- **Macération froide** pendant plusieurs semaines, assemblage, repos long minimum trois mois.
+- **Travail à froid** pendant plusieurs semaines, assemblage, repos long minimum trois mois.
 - **4 ans de R&D** et 32 essais documentés avant la version commerciale.
 
 Pour comprendre la démarche complète de composition, voir [L'Alchimie Végétale, entre science et poésie](/blog/alchimie-vegetale-27-plantes-composition).

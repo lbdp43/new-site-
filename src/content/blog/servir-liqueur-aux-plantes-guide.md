@@ -13,7 +13,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 
 ## La règle générale : trois températures, trois rôles
 
-- **Ambiante (18–22°C)** — pour les digestifs riches, où l'on veut toute la palette aromatique. Les macérations complexes s'étalent mieux à cette température.
+- **Ambiante (18–22°C)** — pour les digestifs riches, où l'on veut toute la palette aromatique. Les assemblages complexes s'étalent mieux à cette température.
 - **Fraîche (8–12°C)** — pour la plupart des apéritifs. Le froid arrondit le sucre, raccourcit la finale, ouvre les notes hautes.
 - **Très froide / givrée (0–3°C)** — pour les apéritifs légers (17,5°) et pour la gamme Lumière Obscure (CBD). Le froid neutralise certaines notes lourdes et laisse les florales parler.
 

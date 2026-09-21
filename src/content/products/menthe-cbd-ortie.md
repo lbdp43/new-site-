@@ -29,7 +29,7 @@ Le versant herbacé de notre gamme [Lumière Obscure](/lumiere-obscure). La ment
 
 La **menthe verte** (*Mentha spicata*) est la plus douce des menthes : chlorophyllienne, désaltérante, fraîche sans piquer. Elle tient le haut de la bouche sans jamais agresser.
 
-L'**ortie** (*Urtica dioica*) est la surprise de la recette. Mauvaise herbe mal-aimée, chargée de minéraux, elle perd tout son piquant à la macération et révèle un goût vert subtil, proche du thé vert, presque iodé. C'est elle qui donne à cette liqueur son épaisseur végétale.
+L'**ortie** (*Urtica dioica*) est la surprise de la recette. Mauvaise herbe mal-aimée, chargée de minéraux, elle perd tout son piquant à l'élaboration et révèle un goût vert subtil, proche du thé vert, presque iodé. C'est elle qui donne à cette liqueur son épaisseur végétale.
 
 Le **chanvre** ferme l'accord sur un fond herbacé.
 

@@ -172,7 +172,7 @@ Les éditions limitées et cuvées : [Herbe des Druides Fût de Chêne](/boutiqu
 
 ## 5. Les 6 pièges à éviter
 
-1. **"Aux extraits naturels de plantes"** ≠ "aux plantes". Les extraits peuvent être reconstitués à partir de molécules isolées — c'est légal, c'est "naturel", mais ce n'est pas de la macération de plante entière.
+1. **"Aux extraits naturels de plantes"** ≠ "aux plantes". Les extraits peuvent être reconstitués à partir de molécules isolées — c'est légal, c'est "naturel", mais ce n'est pas de la plante entière.
 
 2. **Couleur trop vive** (vert fluo, rouge cerise) : presque toujours un colorant ajouté. Les plantes donnent des teintes plus nuancées (vert olive, jaune miel, ambre).
 

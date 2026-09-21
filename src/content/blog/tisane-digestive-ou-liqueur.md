@@ -16,9 +16,9 @@ Tisane et liqueur sont les deux formes les plus anciennes de **digestif naturel*
 C'est la différence fondamentale.
 
 - **Tisane** : extraction par eau chaude (60-90°C, 3-15 minutes). Solubilise les principes **hydrosolubles** : tanins, certaines huiles essentielles, polyphénols, mucilages.
-- **Liqueur** : macération par alcool (40-70° vol., 1 à 12 semaines). Solubilise davantage de principes **lipophiles** (= solubles dans l'alcool, pas dans l'eau) : huiles essentielles, alcaloïdes amers, résines, terpènes complexes.
+- **Liqueur** : extraction par alcool (40-70° vol., 1 à 12 semaines). Solubilise davantage de principes **lipophiles** (= solubles dans l'alcool, pas dans l'eau) : huiles essentielles, alcaloïdes amers, résines, terpènes complexes.
 
-**Conséquence pratique :** pour une plante très amère (gentiane, quinquina, angélique), la macération alcoolique extrait beaucoup plus de principes actifs amers qu'une infusion. C'est pour ça que la [liqueur de gentiane](/blog/liqueur-gentiane-suze-salers-difference) Cerf'Gent ou la Suze sont structurellement plus amères qu'une tisane de gentiane.
+**Conséquence pratique :** pour une plante très amère (gentiane, quinquina, angélique), l'extraction alcoolique donne beaucoup plus de principes actifs amers qu'une infusion. C'est pour ça que la [liqueur de gentiane](/blog/liqueur-gentiane-suze-salers-difference) Cerf'Gent ou la Suze sont structurellement plus amères qu'une tisane de gentiane.
 
 ## Différence #2 : Le dosage et le timing
 

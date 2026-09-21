@@ -11,7 +11,7 @@ readingTime: "10 min"
 
 Quand on nous demande **ce qui fait la différence** entre nos liqueurs et celles des grandes maisons, la réponse tient en un mot : les **plantes**.
 
-Nous ne les cultivons pas nous-mêmes. Nous travaillons avec des **cueilleurs** et des **maraîchers partenaires** — [des gens qu'on a choisis un par un](/blog/producteurs-partenaires-bio-velay) — la plupart en bio, pas tous. Notre atelier, lui, est à **Saint-Didier-en-Velay** (Haute-Loire) : c'est là que la macération et l'embouteillage se font à la main.
+Nous ne les cultivons pas nous-mêmes. Nous travaillons avec des **cueilleurs** et des **maraîchers partenaires** — [des gens qu'on a choisis un par un](/blog/producteurs-partenaires-bio-velay) — la plupart en bio, pas tous. Notre atelier, lui, est à **Saint-Didier-en-Velay** (Haute-Loire) : c'est là que la fabrication et l'embouteillage se font à la main.
 
 Ce guide est le voyage botanique d'une bouteille. **12 plantes signatures**, leur identité, leur usage, et dans quelles liqueurs on les retrouve.
 

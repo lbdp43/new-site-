@@ -50,7 +50,7 @@ Création auvergnate (Riom-ès-Montagnes), souvent considérée comme la "vraie"
 
 ### 4. Le Bonal Gentiane-Quina (1865)
 
-Cousine alpine née à Voiron en 1865, à base de **gentiane + quinquina + macération de plantes**. Plus complexe, robe rougeâtre.
+Cousine alpine née à Voiron en 1865, à base de **gentiane + quinquina + plantes**. Plus complexe, robe rougeâtre.
 
 - **Profil** : amer + boisé du quinquina + notes d'écorces, **plus médicinal**
 - **Usage** : apéritif sec à l'ancienne, parfois en cocktail (Negroni "à la gentiane")

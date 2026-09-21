@@ -36,7 +36,7 @@ wcId: 348
 order: 1
 ---
 
-Notre **digestif** de prestige. Macérat complexe inspiré des grandes liqueurs monastiques, L'Alchimie Végétale assemble 27 plantes, racines, écorces et épices choisies une à une pour leur équilibre. À 50° d'alcool, c'est une **liqueur naturelle** — pas d'arôme, pas de colorant, juste l'alcool et les plantes. Trois ans de formulation, un hommage à la tradition liquoriste artisanale française — et une reconnaissance mondiale en 2025.
+Notre **digestif** de prestige. Assemblage complexe inspiré des grandes liqueurs monastiques, L'Alchimie Végétale assemble 27 plantes, racines, écorces et épices choisies une à une pour leur équilibre. À 50° d'alcool, c'est une **liqueur naturelle** — pas d'arôme, pas de colorant, juste l'alcool et les plantes. Trois ans de formulation, un hommage à la tradition liquoriste artisanale française — et une reconnaissance mondiale en 2025.
 
 ## Le grand assemblage
 

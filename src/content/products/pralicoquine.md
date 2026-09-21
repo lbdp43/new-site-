@@ -8,7 +8,7 @@ image: /images/products/pralicoquine.webp
 alcohol: 15.5
 composition:
   - Pralines
-  - Amandes torréfiées macérées
+  - Amandes torréfiées
 usage: Apéritif gourmand ou digestif léger
 tagline: "Une liqueur douce, pralinée et résolument gourmande."
 tasting:
@@ -26,7 +26,7 @@ wcId: 2947
 order: 2
 ---
 
-La liqueur plaisir de la maison. Pralines et amandes torréfiées macérées dans l'alcool — onctueuse, sucrée, ronde, avec cette finale d'amande grillée qui persiste longtemps.
+La liqueur plaisir de la maison. Pralines et amandes torréfiées — onctueuse, sucrée, ronde, avec cette finale d'amande grillée qui persiste longtemps.
 
 ## L'amande travaillée en praline
 

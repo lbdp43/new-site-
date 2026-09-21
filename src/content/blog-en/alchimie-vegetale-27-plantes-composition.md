@@ -29,15 +29,15 @@ The 27 plants fall into **five functional families** — roots, herbs, flowers, 
 
 **The citrus** avoids the "medicinal syrup" effect a complex liqueur can take on — they open, refresh, lighten.
 
-## The four maceration stages
+## The four production stages
 
-**Stage 1 — Long maceration (12 weeks)** of roots in neutral alcohol at 70% vol., at room temperature, in closed stainless-steel tanks. Roots need time; flowers wouldn't survive.
+**Stage 1 — Long cycle (12 weeks)** of roots in neutral alcohol at 70% vol., at room temperature, in closed stainless-steel tanks. Roots need time; flowers wouldn't survive.
 
-**Stage 2 — Short maceration (72 hours)** of herbs and flowers, in a second, less concentrated alcohol (45%), at cool temperature. Volatile aromas are better preserved cold and at lower strength.
+**Stage 2 — Short cycle (72 hours)** of herbs and flowers, in a second, less concentrated alcohol (45%), at cool temperature. Volatile aromas are better preserved cold and at lower strength.
 
 **Stage 3 — Spice infusion (48 hours)** in warm alcohol (60°, tepid — not boiling). Heat better releases the essential oils from seeds and barks.
 
-**Stage 4 — Assembly and rest (8 weeks)** — we bring the three macerations together in a single tank, adjust with sugar (just enough to balance, not to mask), and let it rest. It's during these eight weeks that the blend "welds" together.
+**Stage 4 — Assembly and rest (8 weeks)** — we bring the three preparations together in a single tank, adjust with sugar (just enough to balance, not to mask), and let it rest. It's during these eight weeks that the blend "welds" together.
 
 Total: **about six months** between the first plant and the bottle.
 

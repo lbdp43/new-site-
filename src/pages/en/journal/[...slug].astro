@@ -4,7 +4,7 @@ import Layout from '../../../layouts/Layout.astro';
 import { site } from '../../../data/site';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog-en');
+  const posts = await getCollection('blog-en', ({ data }) => !data.draft);
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -17,7 +17,7 @@ const { Content } = await render(post);
 const authorBios: Record<string, { role: string; description: string }> = {
   'Étienne': {
     role: 'Plant biotechnologist',
-    description: "Co-founder of La Brasserie des Plantes. Trained in plant biotechnology in Toulouse, he composes the recipes and oversees the macerations.",
+    description: "Co-founder of La Brasserie des Plantes. Trained in plant biotechnology in Toulouse, he composes the recipes and oversees production.",
   },
   'Guillaume': {
     role: 'Pairings and uses',

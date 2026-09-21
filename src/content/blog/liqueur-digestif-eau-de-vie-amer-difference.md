@@ -17,18 +17,18 @@ Tout le vocabulaire des spiritueux se range en trois grandes familles, selon ce 
 
 ### 1. L'eau-de-vie (distillation)
 
-L'eau-de-vie est obtenue par **distillation d'un fruit, d'un grain ou d'une plante préalablement fermentés**. Pas de sucre ajouté, pas de macération supplémentaire. C'est le spiritueux à l'état pur.
+L'eau-de-vie est obtenue par **distillation d'un fruit, d'un grain ou d'une plante préalablement fermentés**. Pas de sucre ajouté, pas d'étape d'extraction supplémentaire. C'est le spiritueux à l'état pur.
 
 - Cognac, armagnac, marc, calvados → distillation de fruits ou de marc de raisin fermenté
 - Whisky, gin, vodka → distillation de céréales fermentées
-- Génépi traditionnel (eau-de-vie blanche) → distillation de macérat de génépi
+- Génépi traditionnel (eau-de-vie blanche) → distillation d'un extrait de génépi
 - Rhum agricole → distillation de jus de canne fermenté
 
 **Repères** : 35° à 70° en général, **pas de sucre ajouté**, robe claire ou ambrée selon le vieillissement en fût.
 
-### 2. La liqueur (macération + sucre)
+### 2. La liqueur (extraction + sucre)
 
-La liqueur part d'un alcool neutre (souvent issu de céréales) dans lequel on **fait macérer des plantes, des fruits ou des écorces**, puis on sucre. Pas de distillation finale — la macération est le procédé central.
+La liqueur part d'un alcool neutre (souvent issu de céréales) dans lequel on **laisse des plantes, des fruits ou des écorces**, puis on sucre. Pas de distillation finale — l'extraction à froid est le procédé central.
 
 - Liqueur de verveine (notre [Herbe des Druides](/boutique/herbe-des-druides))
 - Liqueur de fruits rouges ([Flèche Ardente](/boutique/fleche-ardente))
@@ -39,7 +39,7 @@ La liqueur part d'un alcool neutre (souvent issu de céréales) dans lequel on *
 
 ### 3. L'amer / le bitter (sous-catégorie de la liqueur)
 
-L'**amer** est une liqueur dans laquelle l'amertume domine clairement, généralement par macération de **racines amères** (gentiane, quinquina, angélique) ou d'écorces. Le sucre y est moindre que dans une liqueur classique.
+L'**amer** est une liqueur dans laquelle l'amertume domine clairement, généralement par extraction de **racines amères** (gentiane, quinquina, angélique) ou d'écorces. Le sucre y est moindre que dans une liqueur classique.
 
 - Amers italiens : Fernet-Branca, Averna, Amaro Montenegro
 - Amers français : [Suze](https://www.suze.com/), Salers, Avèze, [Cerf'Gent](/boutique/cerf-gent)
@@ -75,11 +75,11 @@ Comme "digestif", c'est un usage. Un apéritif (= avant le repas, pour ouvrir l'
 
 ### "Ratafia" — la liqueur paysanne
 
-Le ratafia est une **liqueur faite à la maison par macération de fruits, plantes ou noix** dans de l'eau-de-vie, puis sucrée. C'est le terme historique en France pour "ce que mamie faisait avec les noix au mois d'août". Aujourd'hui les ratafias commercialisés sont surtout de Champagne (à base de moût de raisin).
+Le ratafia est une **liqueur faite à la maison en laissant fruits, plantes ou noix** dans de l'eau-de-vie, puis sucrée. C'est le terme historique en France pour "ce que mamie faisait avec les noix au mois d'août". Aujourd'hui les ratafias commercialisés sont surtout de Champagne (à base de moût de raisin).
 
 ### "Alcoolat" — le terme technique pharmaceutique
 
-L'alcoolat désigne la **macération de plantes médicinales dans de l'alcool**, dans le sens pharmaceutique strict. Souvent non sucré. C'est le mot des herboristes. La frontière avec la liqueur tient à l'ajout de sucre (qui rend une formule "comestible" et plus "agréable").
+L'alcoolat désigne l'**extrait de plantes médicinales dans de l'alcool**, dans le sens pharmaceutique strict. Souvent non sucré. C'est le mot des herboristes. La frontière avec la liqueur tient à l'ajout de sucre (qui rend une formule "comestible" et plus "agréable").
 
 ### "Crème de…"
 
@@ -90,11 +90,11 @@ Une crème de fruits (cassis, pêche, abricot, framboise) est une liqueur **trè
 | Catégorie | Procédé | Sucre | Degré | Exemple |
 |---|---|---|---|---|
 | Eau-de-vie | Distillation | Aucun | 35-70° | Cognac, génépi blanc |
-| Liqueur | Macération + sucre | 100-300 g/L | 15-55° | Verveine, Chartreuse |
-| Amer | Macération racines | 80-150 g/L | 14-40° | Suze, Fernet, [Cerf'Gent](/boutique/cerf-gent) |
-| Crème de | Macération + très sucré | 250+ g/L | 15-25° | Crème de cassis |
-| Ratafia | Macération maison | Variable | 16-25° | Ratafia de Champagne |
-| Alcoolat | Macération pharmaceutique | Souvent aucun | 60-90° | Élixir du Suédois |
+| Liqueur | Extraction + sucre | 100-300 g/L | 15-55° | Verveine, Chartreuse |
+| Amer | Extraction de racines | 80-150 g/L | 14-40° | Suze, Fernet, [Cerf'Gent](/boutique/cerf-gent) |
+| Crème de | Extraction + très sucré | 250+ g/L | 15-25° | Crème de cassis |
+| Ratafia | Préparation maison | Variable | 16-25° | Ratafia de Champagne |
+| Alcoolat | Extrait pharmaceutique | Souvent aucun | 60-90° | Élixir du Suédois |
 | Vermouth | Vin + plantes | Variable | 14-22° | Noilly Prat, Carpano |
 | Élixir | Assemblage complexe (20+ plantes) | Variable | 35-55° | Chartreuse Verte, [Alchimie Végétale](/boutique/alchimie-vegetale) |
 
@@ -113,7 +113,7 @@ Méfiez-vous des étiquettes vagues type **"liqueur traditionnelle"** ou **"rece
 
 - Les **plantes nommées** sur l'étiquette (avec proportions ou ordre d'importance)
 - L'**origine géographique** des ingrédients clés
-- Les **mentions techniques** (macération à froid, embouteillage à la main, sans arôme ajouté)
+- Les **mentions techniques** (travail à froid, embouteillage à la main, sans arôme ajouté)
 - Les **distinctions** (concours indépendants type [World Drinks Awards](https://www.worldliqueurawards.com/), [Concours Général Agricole](https://www.concours-general-agricole.fr/))
 
 C'est précisément pour ces raisons que nous documentons sur chaque page produit nos plantes, nos partenaires et nos méthodes — voir par exemple [la fiche complète de L'Alchimie Végétale](/boutique/alchimie-vegetale) ou [le récit des 27 plantes](/blog/alchimie-vegetale-27-plantes-composition).

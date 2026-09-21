@@ -17,7 +17,7 @@ Le **9 octobre 2023**, une équipe de **Haute-Loire Tourisme** (office de touris
 
 La vidéo commence par une vue extérieure de l'atelier — une petite bâtisse en pierre, à l'écart du centre du village — puis passe progressivement à l'intérieur. On y voit :
 
-- **Les cuves de macération** (6 cuves inox, 100 à 500 litres chacune)
+- **Les cuves** (6 cuves inox, 100 à 500 litres chacune)
 - **Les plantes en séchage** suspendues dans une salle ventilée
 - **L'embouteilleuse semi-automatique** qui nous sert pour les grosses séries
 - **La table de remplissage manuel** pour les éditions limitées
@@ -31,7 +31,7 @@ Pour une question de durée, l'équipe de tournage a dû couper plusieurs choses
 Une étape **cruciale et invisible** : avant chaque remplissage, chaque bouteille passe dans notre laveuse, est stérilisée à la vapeur, puis séchée à air chaud. Un bouchon mal rincé, une bouteille mal stérilisée, et tout un lot devient impropre. C'est probablement l'étape où on met **le plus de temps** — et qu'aucun client ne voit jamais.
 
 ### Le bureau des recettes
-À l'étage, une petite pièce avec un bureau, des cahiers. C'est là que les recettes sont testées, documentées, ajustées. Chaque macération a sa fiche — numéro de lot, date de plante, durée, degré d'alcool, notes de dégustation semaine par semaine. Un carnet qu'Étienne noircit depuis 2021.
+À l'étage, une petite pièce avec un bureau, des cahiers. C'est là que les recettes sont testées, documentées, ajustées. Chaque cuvée a sa fiche — numéro de lot, date de plante, durée, degré d'alcool, notes de dégustation semaine par semaine. Un carnet qu'Étienne noircit depuis 2021.
 
 ### Le stock de plantes
 La cave, fraîche et sombre, où sont rangées les plantes séchées par famille et par millésime. Un visiteur serait déçu — c'est **juste des étagères** — mais c'est notre garde-manger.

@@ -499,6 +499,54 @@ la **cochenille** de la Pralicoquine — et que `composition` du Gorgeon liste
 bien « Charbon végétal ». Aucun colorant n'a donc été inscrit dans les
 `ingredients`. À trancher avec Guillaume, puis aligner les deux FAQ.
 
+## 🚨 Vocabulaire interdit — procédé de fabrication
+
+**Consigne de Guillaume (2026-09-21)** : ne jamais écrire **macération**,
+**macérat**, **macérer**, **macéré(e)(s)** — ni leurs équivalents anglais
+*maceration*, *macerated*, *macerating* — nulle part sur le site.
+
+Vocabulaire de remplacement, **qui ne doit pas nommer un autre procédé** :
+« élaboration », « fabrication », « préparation », « travail des plantes »,
+« extrait », « travaillé à froid », « temps longs ». Ne pas substituer
+« infusion » ou « distillation », qui affirmeraient une autre technique.
+
+Balayage fait le 2026-09-21 : 162 occurrences → **1 restante**, dans un
+**avis client recopié mot pour mot** sur `/ateliers`
+(`src/data/wecandoo-reviews.json`). On ne réécrit pas les mots d'un client :
+à remplacer par un autre avis si Guillaume le souhaite.
+
+L'article `src/content/blog/maceration-froide-pourquoi-pas-distillation.md`
+est passé en **`draft: true`** : son titre, son URL et sa thèse entière
+reposaient sur le procédé. À réécrire sous un autre angle et une autre URL,
+ou à supprimer.
+
+**Commande de vérification :**
+```bash
+grep -rniE "mac[ée]r" src/ public/*.txt | grep -v generated.json | grep -v wecandoo-reviews
+```
+
+## ⚠️ « Sans arôme ajouté » — claim à ne pas généraliser
+
+Guillaume a demandé le 2026-09-21 de **retirer ce claim du Menthor**. La
+mention a donc disparu de `src/content/products/menthor.md`.
+
+**Point non tranché** : le claim reste affirmé **pour toute la gamme** dans
+une vingtaine d'endroits (FAQ FR et EN, `boutique/index.astro`,
+`liqueurs-artisanales.astro`, `liqueurs-de-plantes.astro`,
+`digestif-naturel.astro`, `aperitif-artisanal.astro`, metas des pages SEO,
+fiches Herbe des Druides et Alchimie, plusieurs articles). Si le Menthor
+contient un arôme, ces formulations générales sont fausses. **À arbitrer
+avec Guillaume avant d'y toucher** — ne pas les supprimer d'office, c'est
+un argument de vente réel pour le reste de la gamme.
+
+## Brouillons d'articles
+
+`draft: true` masque un article de `/blog` et `/en/journal` (index + page
+d'article). Le champ n'existait que pour les produits jusqu'au 2026-09-21 :
+posé sur un article, **Zod le supprimait silencieusement et l'article
+partait quand même en ligne**. Il est désormais déclaré dans `blogSchema` et
+`blogEn`, filtré dans les quatre templates, et exposé dans Sveltia.
+
 ## Règle d'or CMS (Sveltia)
 
 **NE JAMAIS** utiliser un widget `object` avec clés numériques dans

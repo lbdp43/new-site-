@@ -10,7 +10,7 @@ pageHeader:
 
 ctaSection:
   title: "Venez nous voir à l'atelier."
-  intro: "À Saint-Didier-en-Velay, nous organisons des soirées dégustation et des ateliers où vous composez votre propre liqueur — une après-midi à sentir, goûter, macérer, et vous repartez avec votre bouteille."
+  intro: "À Saint-Didier-en-Velay, nous organisons des soirées dégustation et des ateliers où vous composez votre propre liqueur — une après-midi à sentir, goûter, assembler, et vous repartez avec votre bouteille."
   ctaPrimaryLabel: "Découvrir nos ateliers"
   ctaPrimaryHref: "/ateliers"
 ---

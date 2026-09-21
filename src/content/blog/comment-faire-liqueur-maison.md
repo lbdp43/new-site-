@@ -1,6 +1,6 @@
 ---
 title: "Comment faire sa liqueur maison : la vraie méthode (et pourquoi c'est plus dur qu'on croit)"
-description: "Recette de liqueur maison, méthode de macération, choix des plantes, dosage du sucre, durée. Le guide honnête d'un liquoriste artisan — avec les erreurs à éviter."
+description: "Recette de liqueur maison, méthode pas à pas, choix des plantes, dosage du sucre, durée. Le guide honnête d'un liquoriste artisan — avec les erreurs à éviter."
 date: 2026-04-28
 updated: 2026-04-28
 author: "Étienne"
@@ -9,9 +9,9 @@ cover: /images/gallery/atelier-04.webp
 readingTime: "8 min"
 ---
 
-Faire sa liqueur maison fait partie des projets DIY romantiques — au même titre que faire son pain, son kombucha ou son hydromel. **Et c'est tout à fait possible.** En revanche, il faut savoir d'avance que ce qui sort d'un macérat amateur est rarement comparable à ce qui sort d'un atelier professionnel — pour des raisons qu'on n'imagine pas toujours. Voici la méthode honnête, sans cacher les difficultés.
+Faire sa liqueur maison fait partie des projets DIY romantiques — au même titre que faire son pain, son kombucha ou son hydromel. **Et c'est tout à fait possible.** En revanche, il faut savoir d'avance que ce qui sort d'un bocal amateur est rarement comparable à ce qui sort d'un atelier professionnel — pour des raisons qu'on n'imagine pas toujours. Voici la méthode honnête, sans cacher les difficultés.
 
-## La méthode de base — macération à froid
+## La méthode de base — extraction à froid
 
 C'est notre méthode chez La Brasserie des Plantes. C'est aussi la plus accessible en cuisine.
 
@@ -31,14 +31,14 @@ C'est notre méthode chez La Brasserie des Plantes. C'est aussi la plus accessib
 **Étapes :**
 
 1. **Préparation des plantes.** Si fraîches : laver, sécher, froisser légèrement les feuilles à la main pour libérer les huiles essentielles (sans écraser). Si séchées : telles quelles.
-2. **Macération.** Mettre les plantes dans le bocal. Verser l'alcool 90°. Fermer hermétiquement. Laisser à température ambiante (18-22°C), à l'abri de la lumière directe, **2 à 6 semaines** selon la plante.
+2. **Repos.** Mettre les plantes dans le bocal. Verser l'alcool 90°. Fermer hermétiquement. Laisser à température ambiante (18-22°C), à l'abri de la lumière directe, **2 à 6 semaines** selon la plante.
 3. **Agitation.** Une fois par jour pendant la première semaine, secouer le bocal (sans l'ouvrir). Puis 2-3 fois par semaine ensuite.
 4. **Filtration.** À la fin, filtrer une première fois à la passoire (récupérer les feuilles), puis une seconde fois au filtre à café papier (clarifier).
 5. **Sirop.** Faire chauffer 20 cl d'eau avec le sucre, jusqu'à dissolution complète. Laisser refroidir.
-6. **Assemblage.** Mélanger le macérat filtré et le sirop refroidi. Goûter. Ajuster (eau pour adoucir, alcool pour relever).
+6. **Assemblage.** Mélanger l'extrait filtré et le sirop refroidi. Goûter. Ajuster (eau pour adoucir, alcool pour relever).
 7. **Repos.** Mettre en bouteille. **Repos minimum 1 mois** avant dégustation — les saveurs ont besoin de "se souder". Plus c'est long, mieux c'est.
 
-## Durées de macération par type de plante
+## Durées de repos par type de plante
 
 | Plante | Durée recommandée |
 |---|---|
@@ -66,19 +66,19 @@ C'est l'erreur #1 des amateurs : trop sucrer.
 ## Les 5 erreurs classiques à éviter
 
 ### 1. Plantes pas assez fraîches
-Une feuille de verveine cueillie le matin et utilisée le jour même donne un résultat radicalement différent d'une feuille séchée 6 mois en sachet du supermarché. **Cueillir et macérer le même jour** quand c'est possible.
+Une feuille de verveine cueillie le matin et utilisée le jour même donne un résultat radicalement différent d'une feuille séchée 6 mois en sachet du supermarché. **Cueillir et mettre en bocal le même jour** quand c'est possible.
 
 ### 2. Alcool de mauvaise qualité
 L'alcool 90° de pharmacie a parfois un nez "industriel". Préférer un **alcool de fruits 90°** ou un **alcool pour fruits 96°** vendu en cave coopérative — beaucoup plus neutre. À défaut, une vodka premium 40° (Belvedere, Grey Goose) marche, mais il faut compenser par un peu plus de plantes.
 
-### 3. Macération trop longue (ou trop courte)
+### 3. Un repos trop long (ou trop court)
 Trop court : la liqueur a un nez d'alcool brut, pas d'arômes. Trop long : amertume excessive (notamment sur les zestes d'agrumes — bannir au-delà de 3 semaines), notes "végétales" lourdes (notamment sur les feuilles fraîches au-delà de 4 semaines). **Goûter régulièrement** à partir de la 2e semaine, et arrêter quand le profil est bon.
 
 ### 4. Pas de repos après assemblage
 **Une liqueur fraîchement assemblée est désagréable.** Les arômes "tirent dans tous les sens", l'alcool agresse, le sucre semble plaqué. Le repos d'1 mois minimum (idéalement 3 mois) permet aux molécules aromatiques de se "souder" — terme imprécis mais qui décrit bien la transformation.
 
 ### 5. Hygiène approximative
-Une liqueur à 30° est suffisamment alcoolisée pour bloquer la plupart des micro-organismes. Mais **les bocaux doivent être stérilisés** avant macération, et **les bouteilles aussi** avant mise en bouteille. Un eau bouillante 10 minutes, séchage retournés sur torchon propre — pas négociable.
+Une liqueur à 30° est suffisamment alcoolisée pour bloquer la plupart des micro-organismes. Mais **les bocaux doivent être stérilisés** avant remplissage, et **les bouteilles aussi** avant mise en bouteille. Un eau bouillante 10 minutes, séchage retournés sur torchon propre — pas négociable.
 
 ## Pourquoi le résultat amateur est rarement au niveau professionnel
 
@@ -86,7 +86,7 @@ Voici la partie qu'on ne lit jamais dans les recettes Pinterest.
 
 1. **Les plantes professionnelles sont triées.** Quand un cueilleur professionnel récolte 5 kg de verveine pour un liquoriste, il prend les feuilles à un stade de maturité précis (juste avant floraison), il sépare les feuilles des tiges, il sèche en condition contrôlée. Le résultat est 3-5x plus aromatique qu'une botte de verveine de marché.
 
-2. **Les ratios sont mesurés.** Un macérat amateur dose "à l'œil". Un macérat pro dose au gramme près. Sur 1 litre, 5 g de différence sur l'ortie est invisible. Sur 1000 litres, c'est catastrophique. Les pros calibrent sur des batchs de 50-100 litres pour ajuster leurs ratios — ce qu'aucun amateur ne peut faire.
+2. **Les ratios sont mesurés.** Un amateur dose "à l'œil". Un professionnel dose au gramme près. Sur 1 litre, 5 g de différence sur l'ortie est invisible. Sur 1000 litres, c'est catastrophique. Les pros calibrent sur des batchs de 50-100 litres pour ajuster leurs ratios — ce qu'aucun amateur ne peut faire.
 
 3. **L'alcool a une qualité variable.** L'alcool 90° en pharmacie n'est pas le même alcool que celui qu'utilise un distillateur professionnel — qui achète directement à des distilleries spécialisées avec cahier des charges précis (alcool de blé, de betterave ou de raisin selon le profil aromatique cherché).
 
@@ -99,7 +99,7 @@ Voici la partie qu'on ne lit jamais dans les recettes Pinterest.
 Malgré tout, il y a 3 cas où le DIY est totalement justifié :
 
 - **Le plaisir du processus** — la patience, l'attente, le geste. C'est une expérience, pas une compétition de qualité.
-- **Une plante du jardin spécifique** — votre verveine du jardin a un parfum unique impossible à reproduire commercialement. Le macérat capture cet arôme spécifique.
+- **Une plante du jardin spécifique** — votre verveine du jardin a un parfum unique impossible à reproduire commercialement. L'extrait capture cet arôme spécifique.
 - **Cadeau personnel** — une liqueur avec étiquette manuscrite, c'est un objet émotionnel. Ce qui compte n'est plus le goût absolu mais l'attention.
 
 **Ce qui n'est pas justifié :** vouloir reproduire à la maison une liqueur primée. La Chartreuse Verte, la Suze, l'Alchimie Végétale — ce sont des recettes industrialisées sur des décennies, avec accès à des matières premières, équipements et savoir-faire qu'aucune cuisine ne peut égaler. Pour ces produits, **achetez le pro**.

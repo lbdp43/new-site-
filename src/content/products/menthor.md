@@ -34,8 +34,6 @@ Une liqueur de menthe construite sur trois menthes, là où l'usage veut qu'on e
 
 La **menthe poivrée** (*Mentha × piperita*) mène la danse : c'est la plus puissante et la plus éclatante, elle donne la fraîcheur dominante. La **menthe coréenne** (*Agastache rugosa*), plus rare et plus épicée, la complète d'un léger goût anisé, presque réglissé — c'est elle qui fait toute la richesse de l'accord. La **menthe verte** (*Mentha spicata*), la plus douce des trois, chlorophyllienne et désaltérante, pose l'assise sans jamais piquer.
 
-Sans arôme de menthe ajouté : la couleur et le parfum viennent des feuilles macérées.
-
 À 17,5°, il reste léger — c'est voulu, une liqueur de menthe trop alcoolisée devient vite agressive.
 
 ## Comment le servir

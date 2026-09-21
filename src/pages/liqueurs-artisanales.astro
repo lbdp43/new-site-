@@ -21,11 +21,11 @@ const breadcrumb = {
 const faq = [
   {
     q: "Qu'est-ce qu'une liqueur artisanale ?",
-    a: "Une liqueur artisanale est un spiritueux sucré (15° à 50° en moyenne) obtenu par macération d'ingrédients naturels — plantes, fruits, écorces, racines, épices — dans de l'alcool neutre, suivie d'un assemblage et d'un repos. À la différence des liqueurs industrielles qui partent souvent d'arômes standardisés, l'artisan travaille la matière brute et accepte les variations de millésime, de récolte et de terroir.",
+    a: "Une liqueur artisanale est un spiritueux sucré (15° à 50° en moyenne) obtenu à partir d'ingrédients naturels — plantes, fruits, écorces, racines, épices — travaillés dans de l'alcool neutre, puis assemblés et laissés reposer. À la différence des liqueurs industrielles qui partent souvent d'arômes standardisés, l'artisan travaille la matière brute et accepte les variations de millésime, de récolte et de terroir.",
   },
   {
     q: "Quelle différence entre une liqueur artisanale et une liqueur industrielle ?",
-    a: "L'industriel fabrique à partir d'extraits aromatiques standardisés livrés en fûts métalliques, dosés au gramme près pour garantir une identité gustative constante. L'artisan macère des plantes fraîches ou séchées (verveine, gentiane, menthe…), avec des variations naturelles d'une cuvée à l'autre. Côté procédé, l'artisan utilise des macérations longues (semaines à mois), un embouteillage souvent manuel, et des lots beaucoup plus petits.",
+    a: "L'industriel fabrique à partir d'extraits aromatiques standardisés livrés en fûts métalliques, dosés au gramme près pour garantir une identité gustative constante. L'artisan travaille des plantes fraîches ou séchées (verveine, gentiane, menthe…), avec des variations naturelles d'une cuvée à l'autre. Côté procédé, l'artisan travaille sur des durées longues (semaines à mois), avec un embouteillage souvent manuel et des lots beaucoup plus petits.",
   },
   {
     q: "Comment reconnaître une vraie liqueur artisanale ?",
@@ -112,8 +112,8 @@ const featured = products.filter((p) => p.seoCategory && p.range !== 'accessoire
                 prose-strong:text-forest-900 prose-strong:font-medium">
       <h2>Définition : qu'est-ce qu'une liqueur artisanale ?</h2>
       <p>
-        Une <strong>liqueur</strong> est un spiritueux sucré obtenu par macération
-        d'ingrédients végétaux ou de fruits dans de l'alcool, à un degré
+        Une <strong>liqueur</strong> est un spiritueux sucré obtenu à partir
+        d'ingrédients végétaux ou de fruits travaillés dans de l'alcool, à un degré
         compris entre 15° et 55° en général. Le terme <strong>« artisanale »</strong>
         n'est pas une mention légale protégée en France — il décrit plutôt une
         approche de fabrication : <em>petits lots, ingrédients bruts, gestes manuels,
@@ -123,8 +123,8 @@ const featured = products.filter((p) => p.seoCategory && p.range !== 'accessoire
         Concrètement, une liqueur artisanale française se reconnaît à quatre
         signes : la <strong>matière première</strong> (plantes ou fruits frais ou
         séchés, identifiés par variété et par origine), le <strong>procédé</strong>
-        (macération longue à froid, parfois suivie d'une infusion à chaud, jamais
-        d'extraction industrielle au CO₂ supercritique), la <strong>taille des
+        (un travail long et à basse température, jamais d'extraction
+        industrielle au CO₂ supercritique), la <strong>taille des
         lots</strong> (de quelques centaines à quelques milliers de bouteilles
         par cuvée, contre des millions en industriel), et la <strong>main</strong>
         qui pose les bouchons — souvent celle du producteur lui-même.
@@ -146,19 +146,19 @@ const featured = products.filter((p) => p.seoCategory && p.range !== 'accessoire
           partenaires</a>.
         </li>
         <li>
-          <strong>Macération à froid.</strong> Les plantes sont plongées dans un
-          alcool neutre à fort degré (60° à 70° selon la recette), pendant
-          plusieurs semaines. Le froid extrait lentement les huiles essentielles
-          et les principes aromatiques sans les dénaturer, à la différence d'une
-          extraction à chaud qui « brûle » les notes les plus volatiles.
+          <strong>Travail à froid.</strong> Les plantes restent plusieurs
+          semaines au contact d'un alcool neutre à fort degré (60° à 70° selon
+          la recette). Le froid libère lentement les huiles essentielles et les
+          principes aromatiques sans les dénaturer, à la différence d'un
+          procédé à chaud qui « brûle » les notes les plus volatiles.
         </li>
         <li>
-          <strong>Filtration et assemblage.</strong> On sépare les plantes du
-          macérat, puis on assemble les différents extraits — chaque plante
-          est macérée séparément pour pouvoir doser précisément. C'est ici
+          <strong>Filtration et assemblage.</strong> On sépare les plantes de
+          la préparation, puis on assemble les différents extraits — chaque
+          plante est travaillée séparément pour pouvoir doser précisément. C'est ici
           que la maîtrise de l'artisan se joue : la
           <a href="/boutique/alchimie-vegetale">Liqueur digestive aux 27 plantes</a>
-          repose sur 27 macérations distinctes assemblées au gramme près.
+          repose sur 27 préparations distinctes assemblées au gramme près.
         </li>
         <li>
           <strong>Dilution et sucrage.</strong> Le concentré est ramené au degré
@@ -195,7 +195,7 @@ const featured = products.filter((p) => p.seoCategory && p.range !== 'accessoire
         </li>
         <li>
           <strong>Couleur.</strong> L'artisan préfère un colorant naturel qui se
-          boit (charbon végétal, fruits rouges macérés) ou la couleur intrinsèque
+          boit (charbon végétal, fruits rouges) ou la couleur intrinsèque
           des plantes ; l'industriel utilise du caramel E150 ou du E133.
         </li>
         <li>
@@ -211,7 +211,7 @@ const featured = products.filter((p) => p.seoCategory && p.range !== 'accessoire
         digestif de prestige selon le format (du 20 cl au magnum 1,5 L). Ce prix
         couvre : la matière première payée au juste prix aux producteurs (souvent
         2 à 4 fois plus cher que pour de l'extrait industriel), le temps de
-        macération (capital immobilisé pendant des mois), le travail manuel
+        l'immobilisation des cuves pendant des mois, le travail manuel
         d'embouteillage (vs ligne automatisée à 6 000 bouteilles/heure), et les
         petits volumes qui ne permettent pas d'amortir les frais fixes comme
         l'industriel.
@@ -224,7 +224,7 @@ const featured = products.filter((p) => p.seoCategory && p.range !== 'accessoire
 
       <h2>Notre gamme de liqueurs artisanales</h2>
       <p>
-        Toutes nos liqueurs sont conçues, macérées et embouteillées à la main
+        Toutes nos liqueurs sont conçues, élaborées et embouteillées à la main
         dans notre atelier de Saint-Didier-en-Velay (Haute-Loire). Voici les
         principales :
       </p>

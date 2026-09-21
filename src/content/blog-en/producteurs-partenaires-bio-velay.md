@@ -51,7 +51,7 @@ Across the seasons, our calendar looks like this:
 - **June–July**: peak aromatic season (lemon balm, thyme, coriander, chamomile)
 - **August–September**: late harvest (caraway, lavender, hyssop), beginning of roots
 - **October–November**: root harvest (gentian, angelica, liquorice) before the first frosts
-- **Winter**: long macerations, testing new recipes, visits to producers, planning next season's harvest calendar
+- **Winter**: long preparations, testing new recipes, visits to producers, planning next season's harvest calendar
 
 ## What changes when you know your producers
 

@@ -25,7 +25,7 @@ Cette combinaison fait de la verveine une plante à la fois **fraîche en attaqu
 
 ### 1. La Verveine du Velay ([Pagès](https://www.distilleriepages.com/))
 
-La plus connue, fondée en 1859 à Saint-Germain-Laprade (Haute-Loire). Décliné en deux versions : **verte** (55°, recette historique macérée et distillée) et **jaune** (40°, plus douce). Le profil est très **herbacé-mentholé**, avec une amertume notable issue d'autres plantes aromatiques.
+La plus connue, fondée en 1859 à Saint-Germain-Laprade (Haute-Loire). Décliné en deux versions : **verte** (55°, recette historique) et **jaune** (40°, plus douce). Le profil est très **herbacé-mentholé**, avec une amertume notable issue d'autres plantes aromatiques.
 
 - **Pour qui ?** Les amateurs de classiques puissants type Chartreuse Verte
 - **Prix** : 25-35 € le 70 cl

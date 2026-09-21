@@ -10,7 +10,7 @@ readingTime: "10 min"
 
 When people ask us **what makes our liqueurs different** from those of larger houses, the answer is one word: the **plants**.
 
-We don't grow them ourselves. We work with partner **foragers** and **market gardeners** — [people we picked one by one](/en/journal/producteurs-partenaires-bio-velay) — most of them organic, not all. Our workshop is in **Saint-Didier-en-Velay** (Haute-Loire, France): that's where maceration and bottling happen, by hand.
+We don't grow them ourselves. We work with partner **foragers** and **market gardeners** — [people we picked one by one](/en/journal/producteurs-partenaires-bio-velay) — most of them organic, not all. Our workshop is in **Saint-Didier-en-Velay** (Haute-Loire, France): that's where production and bottling happen, by hand.
 
 This guide is the botanical journey of a bottle. **12 signature plants**, their identity, their use, and which of our liqueurs they end up in.
 

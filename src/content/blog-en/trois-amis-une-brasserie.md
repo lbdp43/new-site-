@@ -17,13 +17,13 @@ It's also the precise moment an idea becomes a project.
 
 **Étienne** and **Guillaume** have known each other since the playground in Saint-Didier-en-Velay. This Velay village, on the border of Haute-Loire and Loire, sits between the foothills of the Massif Central and the Gier valley. Little industry, many slopes, wild plants everywhere.
 
-Each takes their own road. Étienne studies **plant biotechnology** in Toulouse — understanding molecules, macerations, aromatic balance. Guillaume opens a **bar-restaurant in Saint-Étienne**, working service, customers, the menu. They see each other every year, in summer, in Saint-Didier.
+Each takes their own road. Étienne studies **plant biotechnology** in Toulouse — understanding molecules, extracts, aromatic balance. Guillaume opens a **bar-restaurant in Saint-Étienne**, working service, customers, the menu. They see each other every year, in summer, in Saint-Didier.
 
 In 2019, the conversation takes a different turn. *"What if we did something?"* We know what we don't want: neither an American-style production line, nor a marketing-first brand. We know what we want: plants we recognise, a territory we claim, a craft we master.
 
 ## The garage, the early trials
 
-For eighteen months, Étienne formulates in a garage. Macerations sit on plastic shelves, experimental bottles labelled by hand, labels all reading *"test-37"*, *"test-48"*. Some end up in the sink. Others go to tasting — first with Guillaume, then with fellow wine merchants in Saint-Étienne who become the first jury.
+For eighteen months, Étienne formulates in a garage. Preparations sit on plastic shelves, experimental bottles labelled by hand, labels all reading *"test-37"*, *"test-48"*. Some end up in the sink. Others go to tasting — first with Guillaume, then with fellow wine merchants in Saint-Étienne who become the first jury.
 
 The verbena / wild thyme / caraway ratio for *L'Herbe des Druides* stabilises at test 54. The idea of *Alchimie Végétale* — more complex, 27 plants — starts in parallel. It will be long: **four years of R&D** before this liqueur is entered in an international competition.
 

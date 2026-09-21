@@ -52,7 +52,7 @@ Au fil des saisons, notre calendrier ressemble à ceci :
 - **Juin-juillet** : pleine saison aromatique (mélisse, thym, coriandre, camomille)
 - **Août-septembre** : récolte tardive (carvi, lavande, hysope), début des racines
 - **Octobre-novembre** : récolte des racines (gentiane, angélique, réglisse) avant les premières gelées
-- **Hiver** : macérations longues, tests de nouvelles recettes, visites chez les producteurs, préparation du calendrier de récoltes suivant
+- **Hiver** : préparations longues, tests de nouvelles recettes, visites chez les producteurs, préparation du calendrier de récoltes suivant
 
 ## Ce qui change quand on connaît ses producteurs
 

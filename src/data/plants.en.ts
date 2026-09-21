@@ -93,7 +93,7 @@ export const plantsEn: Record<string, PlantEn> = {
   'Ortie': {
     role: 'Green · mineral',
     description:
-      "An unloved weed, yet mineral-rich and with an unmistakable green flavour. Cooked or macerated, it loses its sting and reveals a subtle green-tea taste, almost iodic.",
+      "An unloved weed, yet mineral-rich and with an unmistakable green flavour. Once worked, it loses its sting and reveals a subtle green-tea taste, almost iodic.",
     usedIn: "Menthe CBD Ortie",
     season: 'April to July',
   },
@@ -191,7 +191,7 @@ export const plantsEn: Record<string, PlantEn> = {
   'Carvi': {
     role: 'Aniseed · warmth',
     description:
-      "Also called meadow caraway, or meadow anise. Its seeds, after long maceration, offer an aniseed warmth with a light mentholated edge. A staple of traditional Auvergnat liqueurs.",
+      "Also called meadow caraway, or meadow anise. Its seeds, slowly worked, offer an aniseed warmth with a light mentholated edge. A staple of traditional Auvergnat liqueurs.",
     usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Machurés",
     season: 'Harvested in July',
   },
@@ -212,21 +212,21 @@ export const plantsEn: Record<string, PlantEn> = {
   'Muscade': {
     role: 'Spiced · balsamic',
     description:
-      "Nutmeg, freshly grated before maceration. Its balsamic warmth complements cinnamon in the Cerf'Gent blend.",
+      "Nutmeg, freshly grated. Its balsamic warmth complements cinnamon in the Cerf'Gent blend.",
     usedIn: "Le Cerf'Gent",
     season: 'Imported',
   },
   'Framboise': {
     role: 'Red fruit · tangy',
     description:
-      "A small, tangy and fragrant berry, macerated whole. It carries the whole Flèche Ardente blend — fresh, faintly floral notes, an indulgence held together by acidity.",
+      "A small, tangy and fragrant berry, worked whole. It carries the whole Flèche Ardente blend — fresh, faintly floral notes, an indulgence held together by acidity.",
     usedIn: "La Flèche Ardente",
     season: 'June to September',
   },
   'Pétale de rose': {
     role: 'Floral · romantic',
     description:
-      "Damask rose petals, gently macerated. They lift the raspberry of La Flèche Ardente without ever overpowering it — a discreet floral note that opens up the finish.",
+      "Damask rose petals, used with restraint. They lift the raspberry of La Flèche Ardente without ever overpowering it — a discreet floral note that opens up the finish.",
     usedIn: "La Flèche Ardente",
     season: 'May to July',
   },

@@ -7,6 +7,10 @@ author: "Étienne"
 category: Fabrication
 cover: /images/gallery/atelier-04.webp
 readingTime: "6 min"
+# Retiré du site le 21/09/2026 : tout l'article (titre, URL, thèse) repose
+# sur le procédé de macération, dont Guillaume ne veut plus parler nulle part.
+# À réécrire sous un autre angle et une autre URL, ou à supprimer.
+draft: true
 ---
 
 Quand un visiteur de l'atelier nous demande "Vous distillez ?", on répond toujours **non**. Nous ne sommes pas distillateurs — nous sommes **liquoristes par macération à froid**. Cette distinction n'est pas anecdotique : c'est ce qui définit techniquement notre travail, et ce qui explique pourquoi notre [Alchimie Végétale](/boutique/alchimie-vegetale) ou notre [Herbe des Druides](/boutique/herbe-des-druides) ont un profil aromatique très différent d'une Chartreuse ou d'un Génépi des Alpes. Voici pourquoi nous avons choisi cette méthode, et ce qu'elle change concrètement.
