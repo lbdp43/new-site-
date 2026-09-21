@@ -134,7 +134,6 @@ export function getHreflangLinks(currentPath: string, currentLang: Lang, siteUrl
 // n'émettent PAS de hreflang en attendant leur traduction.
 const enBlogSlugs = [
   'alchimie-vegetale-27-plantes-composition',
-  'cbd-et-plantes-lumiere-obscure',
   'choisir-liqueur-artisanale-guide',
   'liqueur-artisanale-vs-industrielle',
   'meilleur-digestif-du-monde-2025',
@@ -147,7 +146,6 @@ const enBlogSlugs = [
 // Fiches produit traduites EN — miroir exact de `src/content/products/*.md`
 // (tous les produits sont traduits, mêmes slugs FR/EN à date).
 const enShopSlugs = [
-  'absinthe-cbd-citron',
   'alchimie-cuvee-michel',
   'alchimie-vegetale',
   'cerf-gent',
@@ -159,11 +157,9 @@ const enShopSlugs = [
   'herbe-des-druides',
   'herbe-druides-fut-chene',
   'lime-des-pres',
-  'menthe-cbd-ortie',
   'menthor',
   'nectar-ostara',
   'pralicoquine',
-  'verveine-cbd-aurone',
   'zeleste',
 ] as const;
 
@@ -173,7 +169,6 @@ export const translatedPages: Record<Lang, string[]> = {
     '/en/',
     '/en/our-story/',
     '/en/shop/',
-    '/en/dark-light/',
     '/en/our-plants/',
     '/en/cocktails/',
     '/en/workshops/',

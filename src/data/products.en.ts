@@ -230,64 +230,6 @@ export const productsEn: Record<string, ProductEn> = {
     serving: 'Very cold as an aperitif, or as a long drink with tonic.',
   },
 
-  // ===== LUMIÈRE OBSCURE (CBD) =====
-
-  'menthe-cbd-ortie': {
-    ingredients:
-      "water, sugar, alcohol, spearmint, nettle and hemp (CBD)",
-    subtitle: 'Spearmint & hemp aperitif',
-    composition: ['Spearmint', 'Hemp (CBD, no THC)', 'Nettle'],
-    usage: 'Botanical aperitif with CBD',
-    tagline: 'The spirit of a mint tea — spearmint, hemp, nettle.',
-    description:
-      "The herbaceous side of our CBD range. Spearmint dominates — you find the chlorophyll of a mint tea, softened by nettle and hemp. Exactly the opposite of Menthor, which plays on mentholated freshness.",
-    tasting: {
-      nose: 'Spearmint, fresh grass.',
-      palate: 'Herbaceous, mint tea, quite soft.',
-      finish: 'Long spearmint.',
-    },
-    serving: 'Aperitif, chilled, as a long drink or neat.',
-  },
-
-  'verveine-cbd-aurone': {
-    ingredients:
-      "water, sugar, alcohol, lemon verbena, southernwood and hemp (CBD)",
-    subtitle: 'Verbena & hemp digestif',
-    composition: ['Verbena', 'Southernwood', 'Hemp (CBD, no THC)'],
-    usage: 'Botanical digestif with CBD',
-    tagline: 'Verbena, southernwood and hemp — herbaceous and round.',
-    description:
-      "A CBD digestif. Lemon verbena, southernwood (a cousin of wormwood, less bitter) and hemp come together for a smooth experience. At 30%, it is a true digestif, but with that touch of relaxation that CBD brings.",
-    tasting: {
-      nose: 'Lemon verbena, a resinous hint.',
-      palate: 'Dominant verbena, hemp in the background.',
-      finish: 'Persistent, lightly camphorated.',
-    },
-    serving: 'Digestif, at room temperature.',
-  },
-
-  'absinthe-cbd-citron': {
-    ingredients:
-      "water, sugar, alcohol, hemp (CBD), wormwood, lemon peel and coriander seeds",
-    subtitle: 'Hemp-forward botanical digestif',
-    composition: [
-      'Hemp (CBD, dominant, no THC)',
-      'Wormwood (absinthe)',
-      'Lemon peel',
-      'Coriander seeds',
-    ],
-    usage: 'Botanical digestif — for hemp enthusiasts',
-    tagline: 'Hemp-forward, wormwood in the background, lemon zest.',
-    description:
-      "The most assertive of the Lumière Obscure range. Hemp takes the lead — you clearly feel the distinctive green-hay note, not for everyone. Wormwood brings a mentholated, liquorice structure; lemon peel and coriander the freshness needed for balance.",
-    tasting: {
-      nose: 'Hemp, green hay, lemon.',
-      palate: 'Very green, herbaceous, with wormwood as a mentholated backbone.',
-      finish: 'Persistent hemp.',
-    },
-    serving: 'Digestif, at room temperature. For informed enthusiasts.',
-  },
-
   // ===== LIMITED EDITIONS =====
 
   'herbe-druides-fut-chene': {

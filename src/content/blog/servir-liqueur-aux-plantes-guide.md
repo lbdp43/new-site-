@@ -15,7 +15,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 
 - **Ambiante (18–22°C)** — pour les digestifs riches, où l'on veut toute la palette aromatique. Les assemblages complexes s'étalent mieux à cette température.
 - **Fraîche (8–12°C)** — pour la plupart des apéritifs. Le froid arrondit le sucre, raccourcit la finale, ouvre les notes hautes.
-- **Très froide / givrée (0–3°C)** — pour les apéritifs légers (17,5°) et pour la gamme Lumière Obscure (CBD). Le froid neutralise certaines notes lourdes et laisse les florales parler.
+- **Très froide / givrée (0–3°C)** — pour les apéritifs légers (17,5°). Le froid neutralise certaines notes lourdes et laisse les florales parler.
 
 ## Guide par référence
 
@@ -84,14 +84,6 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Verre** : verre à vin blanc ou Collins.  
 **Servir** : pur avec glaçon, ou tonic, ou en substitut au Limoncello.  
 **Accord** : poisson cru, sushi, ceviche, salade verte.
-
-### Gamme Lumière Obscure (21 à 37°) — CBD
-**Température** : **3°C strict** (glaçon ou givré).  
-**Verre** : verre à vin ou tumbler.  
-**Servir** : pur. À 3°C, le chanvre se tient ; plus chaud, il domine.  
-**Accord** : moments calmes, fin de soirée, lecture.
-
-Pour comprendre les accords aromatiques de la gamme CBD, lire [pourquoi marier le CBD à la menthe, la verveine et l'absinthe](/blog/cbd-et-plantes-lumiere-obscure).
 
 ## Les erreurs classiques
 

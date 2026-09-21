@@ -210,4 +210,4 @@ Si vous voulez aller plus loin avec la verveine en cocktail :
 
 **À lire aussi :** [Quelle liqueur de verveine choisir en 2026 ? Comparatif](/blog/quelle-liqueur-verveine-choisir-2026) · [La verveine citronnelle, reine des digestifs](/blog/la-verveine-citronnelle) · [Nos 5 cocktails signatures (toutes liqueurs)](/blog/nos-cocktails-signature) · [Le digestif naturel — guide complet](/digestif-naturel).
 
-**Découvrir nos liqueurs de verveine :** [L'Herbe des Druides 28°](/boutique/herbe-des-druides) (best-seller) · [L'Herbe des Druides Fût de Chêne](/boutique/herbe-druides-fut-chene) (édition limitée vieillie) · [Verveine CBD Aurone](/boutique/verveine-cbd-aurone) (gamme Lumière Obscure).
+**Découvrir nos liqueurs de verveine :** [L'Herbe des Druides 28°](/boutique/herbe-des-druides) (best-seller) · [L'Herbe des Druides Fût de Chêne](/boutique/herbe-druides-fut-chene) (édition limitée vieillie).

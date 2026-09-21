@@ -35,8 +35,7 @@ Trois mots-clés à retenir :
 - **Eau-de-vie / Spiritueux aux plantes** : ne respecte pas le seuil de sucre. Absinthe, pastis, gin appartiennent à cette catégorie.
 
 Dans notre gamme, nous avons :
-- **17 liqueurs** au sens strict (L'Alchimie Végétale, L'Herbe des Druides, la gamme Lumière Obscure, les apéritifs aux plantes…)
-- **1 spiritueux aux plantes** : [L'Absinthe CBD Citron](/boutique/absinthe-cbd-citron), qui descend sous les 100 g/L de sucre.
+- **Des liqueurs** au sens strict (L'Alchimie Végétale, L'Herbe des Druides, les apéritifs aux plantes…), toutes au-dessus de 100 g/L de sucre.
 
 ## 2. Les 5 critères qui comptent vraiment
 
@@ -146,8 +145,6 @@ Retrouvez nos recettes détaillées sur [la page cocktails](/cocktails).
 Composez [votre propre coffret de 3 bouteilles](/composer-mon-coffret) parmi toute la gamme — nos 20 cl s'empilent naturellement grâce à leur format breveté.
 
 ### Pour la relaxation (profil spécifique)
-
-La gamme [Lumière Obscure](/lumiere-obscure) associe le **CBD** (chanvre sans THC) à nos plantes signatures. Pas d'effet psychoactif, pas d'euphorie — simplement une composition pensée pour le moment de détente. [Verveine CBD Aurone](/boutique/verveine-cbd-aurone), [Menthe CBD Ortie](/boutique/menthe-cbd-ortie), [Absinthe CBD Citron](/boutique/absinthe-cbd-citron).
 
 ## 4. Conseils par profil d'amateur
 

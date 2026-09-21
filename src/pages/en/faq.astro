@@ -6,7 +6,7 @@ import { site } from '../../data/site';
 interface FaqItem {
   q: string;
   a: string;
-  category: 'Orders' | 'Tasting' | 'Products' | 'CBD' | 'Trade';
+  category: 'Orders' | 'Tasting' | 'Products' | 'Trade';
 }
 
 const faqs: FaqItem[] = [
@@ -53,17 +53,7 @@ const faqs: FaqItem[] = [
   {
     category: 'Products',
     q: 'What is the alcohol content of your liqueurs?',
-    a: "L'Alchimie Végétale is 50% vol. The other signature range liqueurs fall between 30 and 45% vol. Aperitifs from the Nectar/Lime/Flèche range are lighter (18 to 22% vol.), as are the CBD-infused Lumière Obscure liqueurs.",
-  },
-  {
-    category: 'CBD',
-    q: 'Do your CBD infusions contain THC?',
-    a: 'No. Our Lumière Obscure CBD range uses certified industrial hemp (Cannabis sativa L.), dosed at less than 0.1% THC, in line with French legislation. CBD is not psychotropic — you will feel the alcohol, not the THC.',
-  },
-  {
-    category: 'CBD',
-    q: 'Does CBD have effects?',
-    a: 'Some studies suggest relaxing and anti-inflammatory effects, but the doses in a liqueur (a few mg per glass) are far below the therapeutic doses studied. We claim no medical effect — our CBD range is above all an aromatic proposition around hemp.',
+    a: "L'Alchimie Végétale is 50% vol. The other signature range liqueurs fall between 30 and 45% vol. Aperitifs from the Nectar/Lime/Flèche range are lighter (18 to 22% vol.).",
   },
   {
     category: 'Trade',
@@ -100,21 +90,21 @@ const breadcrumb = {
   ],
 };
 
-const categories = ['Orders', 'Tasting', 'Products', 'CBD', 'Trade'] as const;
+const categories = ['Orders', 'Tasting', 'Products', 'Trade'] as const;
 const faqsByCategory = Object.fromEntries(
   categories.map((cat) => [cat, faqs.filter((f) => f.category === cat)])
 );
 ---
 <Layout
   lang="en"
-  title="FAQ | Shipping, tasting, CBD — La Brasserie des Plantes"
-  description="Delivery, storage, tasting, CBD, trade partnerships: all answers to your questions about our craft liqueurs."
+  title="FAQ — La Brasserie des Plantes"
+  description="Delivery, storage, tasting, trade partnerships: all answers to your questions about our craft liqueurs."
   schema={[faqSchema, breadcrumb]}
 >
   <PageHeader
     kicker="Frequently Asked Questions"
     title="All<br />our answers"
-    subtitle="Orders, tasting, storage, CBD, partnerships — it's all here. If you can't find what you need, write to us."
+    subtitle="Orders, tasting, storage, partnerships — it's all here. If you can't find what you need, write to us."
     breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'FAQ' }]}
   />
 

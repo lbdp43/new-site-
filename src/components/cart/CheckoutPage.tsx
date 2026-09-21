@@ -552,11 +552,6 @@ function CheckoutInner() {
               </>
             )}
           </button>
-
-          <p className="mt-3 text-xs text-ink-500 text-center">
-            En validant, vous acceptez nos{" "}
-            <a href="/cgv" className="underline">conditions générales de vente</a>.
-          </p>
         </div>
       </aside>
     </form>

@@ -1,6 +1,6 @@
 ---
 title: "Liqueur de Noël : 7 idées originales pour les fêtes 2026"
-description: "Quelle liqueur offrir à Noël ? Idées de cadeau alcool original pour amateur de spiritueux : coffret personnalisé, digestif primé, apéritif amer artisanal, liqueurs au CBD. Notre sélection cadeaux 2026."
+description: "Quelle liqueur offrir à Noël ? Idées de cadeau alcool original pour amateur de spiritueux : coffret personnalisé, digestif primé, apéritif amer artisanal, éditions limitées. Notre sélection cadeaux 2026."
 date: 2026-04-28
 updated: 2026-04-28
 author: "Guillaume"
@@ -31,17 +31,7 @@ Pour quelqu'un qui ne connaît pas notre gamme, notre [coffret cadeau alcool per
 
 [👉 Composer un coffret](/composer-mon-coffret)
 
-## 3. Pour un curieux : la gamme Lumière Obscure (CBD légal)
-
-Notre gamme [Lumière Obscure](/lumiere-obscure) — trois liqueurs au CBD (cannabidiol) légales en France (THC < 0,1 %, seuil légal arrêté du 30 décembre 2021) — est probablement la plus singulière du marché français. Trois cuvées : menthe-ortie, verveine-aurone, absinthe-citron.
-
-**Pour qui :** quelqu'un qui s'intéresse au bien-être, à la nouveauté, aux produits "à raconter".
-**Format :** 50 cl ou 70 cl par cuvée. Coffret 3 × 20 cl disponible.
-**Budget :** 28 à 55 € la cuvée.
-
-[👉 Voir Lumière Obscure](/lumiere-obscure)
-
-## 4. Pour un amateur de gentiane : le Cerf'Gent
+## 3. Pour un amateur de gentiane : le Cerf'Gent
 
 Médaille d'Or au Concours Général Agricole de Paris 2025 (Salon de l'Agriculture). Notre [Cerf'Gent](/boutique/cerf-gent) est une **liqueur de gentiane moderne** — moins sucrée que les Suze ou Salers industrielles (130 g/L vs 200-280 g/L), à dosage contemporain, avec un assemblage quinquina-zestes-épices qui dialogue avec la gentiane sans la masquer.
 
@@ -51,7 +41,7 @@ Médaille d'Or au Concours Général Agricole de Paris 2025 (Salon de l'Agricult
 
 [👉 Voir Cerf'Gent](/boutique/cerf-gent)
 
-## 5. Pour un cocktail-maker : la flasque Verveine + entonnoir
+## 4. Pour un cocktail-maker : la flasque Verveine + entonnoir
 
 Pour quelqu'un qui fait des cocktails à la maison ou en mobilité (camping, soirée), notre **flasque inox 20 cl + entonnoir** remplie de [L'Herbe des Druides](/boutique/herbe-des-druides) — Médaille d'Or 3× au Concours International de Lyon — est un cadeau objet + produit. La flasque est gravable sur demande (initiales, message court).
 
@@ -61,7 +51,7 @@ Pour quelqu'un qui fait des cocktails à la maison ou en mobilité (camping, soi
 
 [👉 Voir la flasque](/boutique/flasque-entonnoir)
 
-## 6. Pour un dîner de fêtes : La Flèche Ardente
+## 5. Pour un dîner de fêtes : La Flèche Ardente
 
 Notre [Flèche Ardente](/boutique/fleche-ardente) (22°, framboise – rose – citron) est une cuvée sensuelle, pensée pour les fins de soirée d'hiver et les dîners romantiques. Couleur rubis, accroche fruitée de framboise et de pétale de rose, la finale de citron ramène la tension. Servie très fraîche (autour de 3 °C) ou en cocktail (notre **Philtre d'Éros** : 4 cl + jus de fraise + citron + menthe + eau pétillante).
 
@@ -71,7 +61,7 @@ Notre [Flèche Ardente](/boutique/fleche-ardente) (22°, framboise – rose – 
 
 [👉 Voir La Flèche Ardente](/boutique/fleche-ardente)
 
-## 7. Pour un curieux à petit budget : le Coffret Initiation
+## 6. Pour un curieux à petit budget : le Coffret Initiation
 
 Notre [Coffret Initiation](/boutique/coffret-initiation) regroupe **3 cuvées 20 cl** sélectionnées par nous pour donner un panorama équilibré : un digestif, un apéritif, une liqueur fraîche. Idéal pour quelqu'un qui veut découvrir la maison sans trop investir.
 

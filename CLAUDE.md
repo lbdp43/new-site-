@@ -889,44 +889,34 @@ propriété est simplement omise du schema (pas d'invention de valeurs).
   admin. Corriger côté WP avec un plugin type "Stop User Enumeration"
   (indépendant de notre code)
 
-## ⚠️ Visuels 20 cl de la gamme Lumière Obscure — abîmés
+## 🚨 La gamme Lumière Obscure (CBD) a été supprimée
 
-Les trois fichiers `sizes/{menthe-cbd-ortie,verveine-cbd-aurone,absinthe-cbd-citron}-20cl.webp`
-et leurs variantes `-20cl-stack.webp` ont subi un détourage trop agressif :
-la transparence a été **découpée à travers la bouteille**. L'étiquette est
-rongée — le vert est mangé par des trous semi-transparents, les mentions
-« 21 % VOL » et « 20 CL » sont blanchies. À l'écran, le fond de page
-traverse le flacon.
+**Décision de Guillaume, 21/09/2026 : plus de produits en stock, la gamme
+sort du site.** Ne plus jamais parler de CBD, de chanvre, de THC ni de
+Lumière Obscure — dans aucun support, aucune langue.
 
-Mesure : 18 % de pixels semi-transparents pour la menthe, 12,5 % pour
-l'absinthe, 9,3 % pour la verveine — contre **7,5 %** de simple
-anti-aliasing de bord sur tous les autres produits, qui sont sains.
+Supprimés : les 3 fiches produit, `/lumiere-obscure`, `/en/dark-light`,
+l'article `cbd-et-plantes-lumiere-obscure` (FR + EN), la page CMS, les
+visuels, la valeur `lumiere-obscure` du type `ProductRange` et de l'enum
+Zod, les entrées de navigation, les catégories de FAQ, et la plante
+« Chanvre (CBD) ».
 
-**Les trois fiches n'utilisent donc plus ces visuels** : `sizeImages` a été
-retiré de leur frontmatter le 21/09/2026, elles retombent sur la photo
-principale 70 cl, qui est propre.
+**Trois plantes ont disparu avec la gamme** — elles n'entraient que dans
+ces recettes : **Absinthe**, **Ortie**, **Chanvre**. `plants.ts` passe de
+33 à 30 entrées.
 
-Pour rétablir un visuel 20 cl, il faut **repartir du packshot d'origine**
-(fond blanc, non détouré) — ceux du WordPress, `wp-content/uploads/2022/01/
-liqueurs-artisanales-verveine-cadeau-*.png`. Ne pas tenter de réparer les
-fichiers actuels, l'information est perdue.
+**12 redirections 301** ajoutées dans `vercel.json` vers `/boutique`,
+`/blog`, `/en/shop` et `/en/journal`. Les 3 redirections WordPress qui
+visaient les fiches supprimées ont été recâblées sur `/boutique`.
 
-Voir la recette sharp de la section « Coffret DIY » pour le détourage,
-et **vérifier le résultat à l'œil sur fond blanc** avant de commettre :
-un seuil de blanc trop permissif mange les zones claires du produit
-lui-même (reflets du verre, blancs de l'étiquette).
+**Commande de vérification :**
+```bash
+grep -rniE "\bcbd\b|chanvre|\bhemp\b|lumi(è|e)re.?obscure|dark-light|cannabis|\bthc\b" src/ public/*.txt public/admin/ | grep -v "#cbd5e1"
+```
+(`#cbd5e1` est une couleur hexadécimale dans `ui/award.tsx`, faux positif.)
 
-## Contenances de la gamme Lumière Obscure
-
-**Il n'y a pas de 50 cl en Lumière Obscure** (Guillaume, 21/09/2026). Le
-document de reprise du WordPress en mentionnait un pour la Menthe CBD
-Ortie : c'est une erreur du document, pas du catalogue.
-
-| Référence | Formats | Prix |
-|---|---|---|
-| Menthe CBD Ortie | 20 cl, 70 cl | 16 – 34 € |
-| Verveine CBD Aurone | 20 cl, 70 cl | 17 – 34 € |
-| Absinthe CBD Citron | 20 cl, 70 cl | 18 – 39 € |
+Si la gamme revient un jour, tout est dans l'historique git au commit
+qui précède cette suppression.
 
 ## Images manquantes — TODO
 

@@ -4,7 +4,7 @@ import ProductMasonry from '../../components/ProductMasonry.astro';
 import { products, ranges, type ProductRange } from '../../data/products';
 import { site } from '../../data/site';
 
-const order: ProductRange[] = ['brasserie', 'aperitif', 'lumiere-obscure', 'edition-limitee', 'accessoire'];
+const order: ProductRange[] = ['brasserie', 'aperitif', 'edition-limitee', 'accessoire'];
 const productsByRange = Object.fromEntries(
   order.map((r) => [r, products.filter((p) => p.range === r)])
 ) as Record<ProductRange, typeof products>;
@@ -23,7 +23,7 @@ const itemListSchema = {
   '@type': 'ItemList',
   name: 'Liqueurs artisanales aux plantes — La Brasserie des Plantes',
   description:
-    "Catalogue complet de liqueurs artisanales françaises produites à la main en Haute-Loire : liqueur de verveine, liqueur de gentiane, liqueur de menthe, liqueurs digestives, infusions CBD. Meilleur Digestif du Monde 2025 (World Drinks Awards).",
+    "Catalogue complet de liqueurs artisanales françaises produites à la main en Haute-Loire : liqueur de verveine, liqueur de gentiane, liqueur de menthe, liqueurs digestives. Meilleur Digestif du Monde 2025 (World Drinks Awards).",
   numberOfItems: products.length,
   itemListElement: products.map((p, i) => ({
     '@type': 'ListItem',
@@ -208,10 +208,9 @@ const collectionSchema = {
       <p class="text-ink-700 leading-relaxed mb-4">
         Notre apéritif phare, <a href="/boutique/alchimie-vegetale" class="text-gold-700 underline decoration-gold-400 hover:decoration-gold-700">L'Alchimie Végétale</a>,
         a été élu <strong>Meilleur Digestif du Monde 2025</strong> aux World
-        Drinks Awards de Londres. La gamme <a href="/lumiere-obscure" class="text-gold-700 underline decoration-gold-400 hover:decoration-gold-700">Lumière Obscure</a>
-        explore la voie des infusions au CBD, et la collection
+        Drinks Awards de Londres. Et la collection
         <a href="/composer-mon-coffret" class="text-gold-700 underline decoration-gold-400 hover:decoration-gold-700">Coffret DIY</a>
-        permet de composer son propre coffret cadeau parmi nos 18 liqueurs
+        permet de composer son propre coffret cadeau parmi nos liqueurs
         artisanales.
       </p>
       <p class="text-ink-700 leading-relaxed">

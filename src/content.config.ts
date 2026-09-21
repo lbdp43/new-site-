@@ -91,7 +91,7 @@ const products = defineCollection({
   schema: z.object({
     // ─── Champs obligatoires ─────────────────────────────────────
     name: z.string().min(1),
-    range: z.enum(['brasserie', 'aperitif', 'lumiere-obscure', 'edition-limitee', 'accessoire']),
+    range: z.enum(['brasserie', 'aperitif', 'edition-limitee', 'accessoire']),
     priceMin: z.number(),
     priceMax: z.number(),
     image: z.string().min(1),

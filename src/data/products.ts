@@ -14,7 +14,7 @@
 
 import generated from './products.generated.json' with { type: 'json' };
 
-export type ProductRange = 'brasserie' | 'aperitif' | 'lumiere-obscure' | 'edition-limitee' | 'accessoire';
+export type ProductRange = 'brasserie' | 'aperitif' | 'edition-limitee' | 'accessoire';
 
 export interface Product {
   slug: string;
@@ -66,12 +66,6 @@ export const ranges: Record<ProductRange, { name: string; baseline: string; desc
     baseline: 'Des apéritifs amers ou gourmands, 15,5 à 17,5°, à servir givrés.',
     description:
       "Plus légers en alcool, plus vifs, conçus pour ouvrir les rassemblements. De la gentiane amère (Cerf'Gent) à la menthe en triple alliance (Menthor), en passant par la praline (Pralicoquine) et les agrumes (Zéleste).",
-  },
-  'lumiere-obscure': {
-    name: 'Lumière Obscure',
-    baseline: 'Liqueurs au CBD — chanvre sans THC, associé aux plantes.',
-    description:
-      "Une gamme à part, où le chanvre rencontre nos plantes signatures — menthe verte, verveine, absinthe. Sans effet psychoactif, une autre approche de la détente botanique.",
   },
   'edition-limitee': {
     name: 'Éditions limitées & cuvées',

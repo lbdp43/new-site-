@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-21T17:35:27.295Z",
-  "productCount": 18,
+  "generatedAt": "2026-09-21T17:43:44.820Z",
+  "productCount": 15,
   "draftCount": 0,
   "products": [
     {
@@ -437,100 +437,6 @@
       "sizeImages": {
         "20": "/images/products/sizes/zeleste-20cl.webp",
         "70": "/images/products/sizes/zeleste-70cl.webp"
-      }
-    },
-    {
-      "slug": "menthe-cbd-ortie",
-      "name": "Menthe CBD Ortie",
-      "range": "lumiere-obscure",
-      "priceMin": 16,
-      "priceMax": 34,
-      "image": "/images/products/menthe-cbd-ortie.webp",
-      "alcohol": 21,
-      "usage": "Apéritif botanique au CBD",
-      "tagline": "L'esprit d'un thé à la menthe — menthe verte, chanvre, ortie.",
-      "serving": "Apéritif, frais, en long drink ou pur.",
-      "seoCategory": "Infusion CBD menthe et ortie (sans THC)",
-      "ingredients": "eau, sucre, alcool, menthe verte, ortie et chanvre (CBD)",
-      "wcId": 626,
-      "order": 1,
-      "description": "Le versant herbacé de notre gamme [Lumière Obscure](/lumiere-obscure). La menthe verte domine — on y retrouve la chlorophylle d'un thé à la menthe — adoucie par l'ortie et le chanvre. Exactement l'opposé du [Menthor](/boutique/menthor), qui mise lui sur la fraîcheur mentholée.\n\n## Menthe, ortie, chanvre\n\nLa **menthe verte** (*Mentha spicata*) est la plus douce des menthes : chlorophyllienne, désaltérante, fraîche sans piquer. Elle tient le haut de la bouche sans jamais agresser.\n\nL'**ortie** (*Urtica dioica*) est la surprise de la recette. Mauvaise herbe mal-aimée, chargée de minéraux, elle perd tout son piquant à l'élaboration et révèle un goût vert subtil, proche du thé vert, presque iodé. C'est elle qui donne à cette liqueur son épaisseur végétale.\n\nLe **chanvre** ferme l'accord sur un fond herbacé.\n\n## Le cadre, sans ambiguïté\n\nNous travaillons des variétés de **chanvre** (*Cannabis sativa L.*) dont la teneur en THC reste **strictement inférieure à 0,1 %**, le seuil légal français fixé par l'arrêté du 30 décembre 2021. Le CBD est dosé de façon **aromatique** — quelques milligrammes par verre, très en-deçà des doses étudiées en laboratoire.\n\nNous le travaillons pour ses **terpènes végétaux**, parce qu'ils s'accordent avec nos plantes. Pas pour un effet : **nous ne revendiquons aucun effet médical**, et ce que vous ressentirez dans un verre, c'est l'alcool. Plus de détail dans [notre article sur le CBD et les plantes](/blog/cbd-et-plantes-lumiere-obscure).\n\n## Comment le servir\n\n**En apéritif, très frais** : à 3 °C, pur, dans un petit verre.\n\n**En long drink** : allongé à l'eau pétillante avec beaucoup de glace et une feuille de menthe. À 21°, il supporte très bien l'allongement.\n\n**En digestif** aussi, à température ambiante, pour qui préfère les fins de repas végétales.",
-      "composition": [
-        "Menthe verte",
-        "Chanvre (CBD, sans THC)",
-        "Ortie"
-      ],
-      "sizes": [
-        "Empilable 20cl",
-        "70cl"
-      ],
-      "tasting": {
-        "nose": "Menthe verte, herbe fraîche.",
-        "palate": "Herbacé, thé à la menthe, assez doux.",
-        "finish": "Longue menthe verte."
-      }
-    },
-    {
-      "slug": "verveine-cbd-aurone",
-      "name": "Verveine CBD Aurone",
-      "range": "lumiere-obscure",
-      "priceMin": 17,
-      "priceMax": 34,
-      "image": "/images/products/verveine-cbd-aurone.webp",
-      "alcohol": 30,
-      "usage": "Digestif botanique au CBD",
-      "tagline": "Verveine, aurone et chanvre — herbacée et ronde en bouche.",
-      "serving": "Digestif, à température ambiante.",
-      "seoCategory": "Infusion CBD verveine et aurone (sans THC)",
-      "ingredients": "eau, sucre, alcool, verveine odorante, aurone et chanvre (CBD)",
-      "wcId": 616,
-      "order": 2,
-      "description": "Le versant digestif de la gamme [Lumière Obscure](/lumiere-obscure). À 30°, c'est une vraie liqueur de fin de repas — la verveine citronnée mène, l'aurone épice, le chanvre pose le fond.\n\n## Verveine, aurone, chanvre\n\nLa **verveine odorante** (*Aloysia citrodora*) est notre plante la plus utilisée : un parfum frais, citronné, sans acidité, qui tient le haut du nez. C'est la même plante que dans [L'Herbe des Druides](/boutique/herbe-des-druides), mais dans un tout autre contexte.\n\nL'**aurone** (*Artemisia abrotanum*), cousine de l'absinthe et de l'armoise, est moins amère et plus subtile qu'elles — sur des notes de fruit-bonbon et de citron. Elle prolonge la verveine au lieu de la contredire, et signe la finale légèrement camphrée.\n\nLe **chanvre** apporte un fond herbacé et beurré, qui épaissit la bouche.\n\n## Le cadre, sans ambiguïté\n\nNous travaillons des variétés de **chanvre** (*Cannabis sativa L.*) dont la teneur en THC reste **strictement inférieure à 0,1 %**, le seuil légal français fixé par l'arrêté du 30 décembre 2021. Le CBD est dosé de façon **aromatique** — quelques milligrammes par verre, très en-deçà des doses étudiées en laboratoire.\n\nNous le travaillons pour ses **terpènes végétaux**, parce qu'ils s'accordent avec nos plantes. Pas pour un effet : **nous ne revendiquons aucun effet médical**, et ce que vous ressentirez dans un verre, c'est l'alcool. Plus de détail dans [notre article sur le CBD et les plantes](/blog/cbd-et-plantes-lumiere-obscure).\n\n## Comment le servir\n\n**En digestif pur**, à température ambiante. À 30°, c'est le service pour lequel la recette a été pensée.\n\n**Très frais** en fin de repas d'été, si vous préférez resserrer la verveine.\n\n**En petit verre** plutôt qu'en long drink : cette recette-là ne gagne rien à être allongée.",
-      "composition": [
-        "Verveine",
-        "Aurone",
-        "Chanvre (CBD, sans THC)"
-      ],
-      "sizes": [
-        "Empilable 20cl",
-        "70cl"
-      ],
-      "tasting": {
-        "nose": "Verveine citronnée, touche résineuse.",
-        "palate": "Verveine dominante, chanvre en fond.",
-        "finish": "Persistante, légèrement camphrée."
-      }
-    },
-    {
-      "slug": "absinthe-cbd-citron",
-      "name": "CBD Absinthe Citron",
-      "range": "lumiere-obscure",
-      "priceMin": 18,
-      "priceMax": 39,
-      "image": "/images/products/absinthe-cbd-citron.webp",
-      "alcohol": 37,
-      "usage": "Digestif botanique — pour amateurs de chanvre",
-      "tagline": "Chanvre dominant, absinthe en fond, zeste de citron.",
-      "serving": "Digestif, à température ambiante. Pour amateurs avertis.",
-      "seoCategory": "Infusion CBD absinthe-citron (sans THC)",
-      "ingredients": "eau, sucre, alcool, chanvre (CBD), absinthe, écorces de citron et graines de coriandre",
-      "wcId": 629,
-      "order": 3,
-      "description": "Le plus marqué de la gamme [Lumière Obscure](/lumiere-obscure), et le plus clivant. Le chanvre prend le dessus — on perçoit nettement la note de foin vert, très particulière. Ce n'est pas une liqueur d'initiation.\n\n## Le chanvre en tête, l'absinthe en fond\n\nIci le **chanvre** est dominant, pas d'appoint. Il donne cette attaque herbacée et cette note de foin vert qui font toute l'identité de la recette — et qui ne plaisent pas à tout le monde, on le dit franchement.\n\nL'**absinthe** (*Artemisia absinthium*), la grande amère, est travaillée avec mesure : elle apporte une structure mentholée et réglissée, une fraîcheur longue qui n'étouffe rien. Les **écorces de citron** (*Citrus limon*) et les **graines de coriandre** (*Coriandrum sativum*) — citronnées et épicées à la fois — assurent l'équilibre et empêchent l'ensemble de rester trop végétal.\n\nÀ **37°**, c'est la plus alcoolisée des trois Lumière Obscure.\n\n## Le cadre, sans ambiguïté\n\nNous travaillons des variétés de **chanvre** (*Cannabis sativa L.*) dont la teneur en THC reste **strictement inférieure à 0,1 %**, le seuil légal français fixé par l'arrêté du 30 décembre 2021. Le CBD est dosé de façon **aromatique** — quelques milligrammes par verre, très en-deçà des doses étudiées en laboratoire.\n\nNous le travaillons pour ses **terpènes végétaux**, parce qu'ils s'accordent avec nos plantes. Pas pour un effet : **nous ne revendiquons aucun effet médical**, et ce que vous ressentirez dans un verre, c'est l'alcool. Plus de détail dans [notre article sur le CBD et les plantes](/blog/cbd-et-plantes-lumiere-obscure).\n\n## Comment le servir\n\n**En digestif, à température ambiante**, en petite quantité. Pour amateurs avertis.\n\n**Sur glace** si le foin vert vous semble trop présent : le froid l'atténue nettement et fait remonter le citron.\n\n**À goûter avant d'acheter** si vous le pouvez : c'est la référence de la gamme sur laquelle nous conseillons le plus souvent de passer par une dégustation — à l'atelier, par exemple, lors d'une [visite](/ateliers).",
-      "composition": [
-        "Chanvre (CBD, dominant, sans THC)",
-        "Absinthe",
-        "Écorces de citron",
-        "Graines de coriandre"
-      ],
-      "sizes": [
-        "Empilable 20cl",
-        "70cl"
-      ],
-      "tasting": {
-        "nose": "Chanvre, foin vert, citron.",
-        "palate": "Très verte, herbacée, avec l'absinthe en fond mentholé.",
-        "finish": "Chanvre persistant."
       }
     },
     {

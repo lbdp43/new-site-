@@ -32,7 +32,7 @@ export const plants: Plant[] = [
     role: 'Fraîcheur citronnée · digestive',
     description:
       "Originaire d'Amérique du Sud, cultivée en France depuis le XVIIIᵉ siècle. Son parfum frais, citronné, apaisant, en fait la plante reine des digestifs. C'est notre plante la plus utilisée — elle est dans quatre de nos liqueurs.",
-    usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Machurés, Verveine CBD Aurone",
+    usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Machurés",
     season: 'Juin à septembre',
   },
   {
@@ -84,19 +84,8 @@ export const plants: Plant[] = [
     role: 'Amer fin · fruit-bonbon',
     description:
       "Cousine de l'absinthe et de l'armoise. Moins amère, plus subtile — fruit-bonbon et citron à la fois. Longtemps utilisée en tisane fortifiante dans les campagnes françaises.",
-    usedIn: "Le Gorgeon des Machurés, Verveine CBD Aurone",
+    usedIn: "Le Gorgeon des Machurés",
     season: 'Juillet à septembre',
-  },
-  {
-    name: 'Absinthe',
-    latin: 'Artemisia absinthium',
-    family: 'aromatique',
-    role: 'Grande amère · profondeur',
-    description:
-      "La grande amère. Nous la travaillons avec mesure, en accord avec le citron et le CBD, pour une fraîcheur longue et mentholée qui n'étouffe rien.",
-    usedIn: "CBD Absinthe Citron",
-    season: 'Juillet à septembre',
-    signature: true,
   },
   {
     name: 'Menthe poivrée',
@@ -126,20 +115,9 @@ export const plants: Plant[] = [
     family: 'aromatique',
     role: 'Chlorophyllienne · fraîche',
     description:
-      "La plus douce des menthes. Chlorophyllienne, désaltérante, fraîche sans piquer. Elle signe l'équilibre de deux de nos liqueurs — dont une CBD.",
-    usedIn: "Le Menthor, Menthe CBD Ortie",
+      "La plus douce des menthes. Chlorophyllienne, désaltérante, fraîche sans piquer. Elle signe l'équilibre du Menthor.",
+    usedIn: "Le Menthor",
     season: 'Juin à septembre',
-  },
-  {
-    name: 'Ortie',
-    latin: 'Urtica dioica',
-    family: 'aromatique',
-    role: 'Verte · minérale',
-    description:
-      "Mauvaise herbe mal-aimée, mais chargée de minéraux et d'une saveur verte inimitable. Une fois travaillée, elle perd son piquant et révèle un goût subtil de thé vert, presque iodé.",
-    usedIn: "Menthe CBD Ortie",
-    season: 'Avril à juillet',
-    signature: true,
   },
   {
     name: 'Baraban',
@@ -274,8 +252,8 @@ export const plants: Plant[] = [
     family: 'agrume',
     role: 'Zestes · jus · acidulé',
     description:
-      "Zestes pour la richesse aromatique, jus pour l'acidité. Utilisé dans notre trio d'agrumes (Zéleste), dans le Cerf'Gent pour équilibrer l'amer, et en écorces dans notre liqueur CBD citron.",
-    usedIn: "Le Zéleste, Le Cerf'Gent, CBD Absinthe Citron",
+      "Zestes pour la richesse aromatique, jus pour l'acidité. Utilisé dans notre trio d'agrumes (Zéleste), et dans le Cerf'Gent pour équilibrer l'amer.",
+    usedIn: "Le Zéleste, Le Cerf'Gent",
     season: "Toute l'année",
   },
   {
@@ -328,8 +306,8 @@ export const plants: Plant[] = [
     family: 'epice',
     role: 'Citronnée · épicée',
     description:
-      "Les graines plutôt que les feuilles. Elles apportent un profil complexe, à la fois citronné et épicé, qui sert de liant dans les accords amers et dans notre liqueur CBD citron.",
-    usedIn: "Le Cerf'Gent, CBD Absinthe Citron",
+      "Les graines plutôt que les feuilles. Elles apportent un profil complexe, à la fois citronné et épicé, qui sert de liant dans les accords amers.",
+    usedIn: "Le Cerf'Gent",
     season: 'Récolte en août',
   },
   {
@@ -378,14 +356,4 @@ export const plants: Plant[] = [
   },
 
   // ═══ SPÉCIALITÉS ═════════════════════════════════════════════════════════
-  {
-    name: 'Chanvre (CBD)',
-    latin: 'Cannabis sativa L.',
-    family: 'autre',
-    role: 'Terpènes · relaxant',
-    description:
-      "Variétés de chanvre certifiées sans THC (< 0,1 %, conformément à la réglementation française). Nous travaillons le CBD pour ses terpènes végétaux — pas pour un effet psychoactif, mais pour un accord botanique cohérent avec nos plantes. Trois liqueurs dédiées dans la gamme Lumière Obscure.",
-    usedIn: "Verveine CBD Aurone, Menthe CBD Ortie, CBD Absinthe Citron",
-    season: 'Récolte en septembre-octobre',
-  },
 ];

@@ -6,7 +6,7 @@ meta:
 pageHeader:
   kicker: "Botanique"
   title: "Les plantes qui composent<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>nos liqueurs</em>"
-  subtitle: "Verveine, serpolet, carvi, mélisse, hysope, gentiane, génépi, sureau, ortie, chanvre, amande, pitaya… Une quarantaine d'ingrédients botaniques, sélectionnés chez des cueilleurs, des maraîchers, des coopératives et des filières spécialisées."
+  subtitle: "Verveine, serpolet, carvi, mélisse, hysope, gentiane, génépi, sureau, amande, pitaya… Une quarantaine d'ingrédients botaniques, sélectionnés chez des cueilleurs, des maraîchers, des coopératives et des filières spécialisées."
 
 videoBanner:
   src: "/videos/plante-verveine.mp4"

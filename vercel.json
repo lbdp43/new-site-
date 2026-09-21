@@ -141,17 +141,17 @@
     },
     {
       "source": "/shop/verveine-cbd-aurone/:path*",
-      "destination": "/boutique/verveine-cbd-aurone",
+      "destination": "/boutique",
       "permanent": true
     },
     {
       "source": "/shop/menthe-cbd-ortie/:path*",
-      "destination": "/boutique/menthe-cbd-ortie",
+      "destination": "/boutique",
       "permanent": true
     },
     {
       "source": "/shop/absinthe-cbd-citron/:path*",
-      "destination": "/boutique/absinthe-cbd-citron",
+      "destination": "/boutique",
       "permanent": true
     },
     {
@@ -232,6 +232,66 @@
     {
       "source": "/product-tag/:path*",
       "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/lumiere-obscure",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/lumiere-obscure/:path*",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/boutique/menthe-cbd-ortie",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/boutique/verveine-cbd-aurone",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/boutique/absinthe-cbd-citron",
+      "destination": "/boutique",
+      "permanent": true
+    },
+    {
+      "source": "/blog/cbd-et-plantes-lumiere-obscure",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/en/dark-light",
+      "destination": "/en/shop",
+      "permanent": true
+    },
+    {
+      "source": "/en/dark-light/:path*",
+      "destination": "/en/shop",
+      "permanent": true
+    },
+    {
+      "source": "/en/shop/menthe-cbd-ortie",
+      "destination": "/en/shop",
+      "permanent": true
+    },
+    {
+      "source": "/en/shop/verveine-cbd-aurone",
+      "destination": "/en/shop",
+      "permanent": true
+    },
+    {
+      "source": "/en/shop/absinthe-cbd-citron",
+      "destination": "/en/shop",
+      "permanent": true
+    },
+    {
+      "source": "/en/journal/cbd-et-plantes-lumiere-obscure",
+      "destination": "/en/journal",
       "permanent": true
     }
   ]

@@ -113,7 +113,6 @@ export const site = {
 export const nav = [
   { label: "Notre histoire", href: "/notre-histoire" },
   { label: "Boutique", href: "/boutique" },
-  { label: "Lumière Obscure", href: "/lumiere-obscure" },
   { label: "Nos plantes", href: "/nos-plantes" },
   { label: "Cocktails", href: "/cocktails" },
   { label: "Ateliers", href: "/ateliers" },

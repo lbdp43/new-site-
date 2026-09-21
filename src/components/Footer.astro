@@ -16,7 +16,6 @@ const year = new Date().getFullYear();
 const navItems: { labelKey: UIKey; href: string }[] = [
   { labelKey: 'nav.story', href: safeLocalizedPath('/notre-histoire', lang) },
   { labelKey: 'nav.shop', href: safeLocalizedPath('/boutique', lang) },
-  { labelKey: 'nav.lumiere', href: safeLocalizedPath('/lumiere-obscure', lang) },
   { labelKey: 'nav.plants', href: safeLocalizedPath('/nos-plantes', lang) },
   { labelKey: 'nav.cocktails', href: safeLocalizedPath('/cocktails', lang) },
   { labelKey: 'nav.workshops', href: safeLocalizedPath('/ateliers', lang) },
@@ -41,7 +40,7 @@ const explorePillars = lang === 'en'
       // liens 404aient sur les 44 pages EN (corrigé le 21/09/2026). Les
       // rétablir seulement quand les pages EN seront créées.
       { label: 'Our plants', href: '/en/our-plants' },
-      { label: 'Lumière Obscure (CBD)', href: '/en/dark-light' },
+      { label: 'Our story', href: '/en/our-story' },
       { label: 'Build your gift box', href: '/en/build-your-gift-box' },
     ]
   : [

@@ -36,7 +36,7 @@ In liqueur, caraway **anchors** the floral and mentholated notes. Without it, ou
 Each plant has its role. Around this core trio, we also work with:
 
 - **Hyssop** (*Hyssopus officinalis*) — cousin of lavender, with a hint of camphor. Goes into *L'Essence des Cimes*.
-- **Southernwood** (*Artemisia abrotanum*) — cousin of wormwood, much milder, with a spicy note. It gives *Le Gorgeon des Machurés* its depth and structures the *Verveine CBD Aurone* from the Lumière Obscure range.
+- **Southernwood** (*Artemisia abrotanum*) — cousin of wormwood, much milder, with a spicy note. It gives *Le Gorgeon des Machurés* its depth.
 - **Lemon balm** (*Melissa officinalis*) — the great soother of herbal medicine. Floral, lightly lemony, almost sweet. Key in *La Lime des Prés* where it replaces lemon.
 
 ## Why come back to these plants?

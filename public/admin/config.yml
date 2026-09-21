@@ -104,7 +104,6 @@ collections:
         options:
           - { label: "Brasserie (signature)", value: brasserie }
           - { label: "Apéritifs", value: aperitif }
-          - { label: "Lumière Obscure (CBD)", value: lumiere-obscure }
           - { label: "Édition limitée / cuvée", value: edition-limitee }
           - { label: "Coffret / accessoire", value: accessoire }
       - name: draft
@@ -143,10 +142,10 @@ collections:
         required: false
         hint: "La mention de l'étiquette, recopiée dans l'ordre. Ex : eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique. Laisser vide = aucun bloc Ingrédients sur la fiche (voulu pour Le Gorgeon des Machurés et La Pralicoquine)."
       - name: composition
-        label: "Plantes (vignettes /lumiere-obscure)"
+        label: "Plantes (liste secondaire)"
         widget: list
         required: false
-        hint: "N'apparaît PAS sur la fiche produit. Sert aux vignettes de la page Lumière Obscure. Pour la fiche, remplir « Ingrédients » ci-dessus."
+        hint: "N'apparaît PAS sur la fiche produit. Pour la fiche, remplir « Ingrédients » ci-dessus."
         field: { name: ingredient, label: Ingrédient, widget: string }
       - { name: usage, label: "Usage / occasion", widget: string, hint: "Ex: Digestif de prestige, Apéritif amer, Accessoire" }
       - { name: tagline, label: "Accroche (affichée sur la carte)", widget: string, required: false }
@@ -919,25 +918,6 @@ collections:
               - { name: intro, label: "Paragraphe", widget: text, required: false }
               - { name: ctaPrimaryLabel, label: "Bouton — texte", widget: string, required: false }
               - { name: ctaPrimaryHref, label: "Bouton — lien", widget: string, required: false }
-
-      # ═════════════════════════════════════════════════════════════
-      # LUMIÈRE OBSCURE (CBD — YMYL, contenu partiellement extrait)
-      # ═════════════════════════════════════════════════════════════
-      - name: lumiere-obscure
-        label: "Lumière Obscure (CBD)"
-        file: src/content/static-pages/lumiere-obscure.md
-        media_folder: /public/images
-        public_folder: /images
-        preview_path: "lumiere-obscure"
-        fields:
-          - name: meta
-            label: "SEO"
-            widget: object
-            collapsed: false
-            hint: "⚠️ Page YMYL (CBD). Contenu du site figé côté code — modifier uniquement les balises SEO ici."
-            fields:
-              - { name: title, label: "Titre (balise <title>)", widget: string }
-              - { name: description, label: "Meta description Google", widget: text }
 
       # ═════════════════════════════════════════════════════════════
       # LIQUEURS DE PLANTES (landing SEO)

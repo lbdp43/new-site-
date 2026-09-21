@@ -34,8 +34,7 @@ Three keywords to remember:
 - **Eau-de-vie / Plant-based spirit**: doesn't meet the sugar threshold. Absinthe, pastis, gin belong to this category.
 
 In our range, we have:
-- **17 liqueurs** in the strict sense (L'Alchimie Végétale, L'Herbe des Druides, the Lumière Obscure CBD line, botanical aperitifs…)
-- **1 plant-based spirit**: [L'Absinthe CBD Citron](/en/shop/absinthe-cbd-citron), which falls below 100 g/L of sugar.
+- **Liqueurs** in the strict sense (L'Alchimie Végétale, L'Herbe des Druides, botanical aperitifs…), all above 100 g/L of sugar.
 
 ## 2. The 5 criteria that really matter
 
@@ -145,8 +144,6 @@ Full recipes on our [cocktails page](/en/cocktails).
 Build [your own 3-bottle gift box](/en/build-your-gift-box) from the full range — our 20 cl bottles stack naturally thanks to a patented format.
 
 ### For relaxation (specific profile)
-
-The [Lumière Obscure](/en/dark-light) range pairs **CBD** (THC-free hemp) with our signature plants. No psychoactive effect, no euphoria — simply a composition designed for unwinding. [Verveine CBD Aurone](/en/shop/verveine-cbd-aurone), [Menthe CBD Ortie](/en/shop/menthe-cbd-ortie), [Absinthe CBD Citron](/en/shop/absinthe-cbd-citron).
 
 ## 4. Advice by drinker profile
 

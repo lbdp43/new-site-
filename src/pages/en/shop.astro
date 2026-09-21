@@ -4,7 +4,7 @@ import ProductMasonry from '../../components/ProductMasonry.astro';
 import { products, ranges, type ProductRange } from '../../data/products';
 import { site } from '../../data/site';
 
-const order: ProductRange[] = ['brasserie', 'aperitif', 'lumiere-obscure', 'edition-limitee', 'accessoire'];
+const order: ProductRange[] = ['brasserie', 'aperitif', 'edition-limitee', 'accessoire'];
 const productsByRange = Object.fromEntries(
   order.map((r) => [r, products.filter((p) => p.range === r)])
 ) as Record<ProductRange, typeof products>;
@@ -19,10 +19,6 @@ const rangesEn: Record<ProductRange, { name: string; description: string }> = {
   'aperitif': {
     name: 'Aperitifs',
     description: "Four bright, lower-alcohol aperitifs (15.5 to 17.5 % vol.) — ideal to open an evening.",
-  },
-  'lumiere-obscure': {
-    name: 'Lumière Obscure — CBD range',
-    description: "Botanical infusions pairing plants and CBD (THC < 0.1 %). Three creations with a fresh, deep character.",
   },
   'edition-limitee': {
     name: 'Limited editions',
@@ -60,7 +56,7 @@ const itemListSchema = {
 <Layout
   lang="en"
   title="Shop | Craft botanical liqueurs — La Brasserie des Plantes"
-  description="Browse our 18 craft liqueurs made with forgotten plants: signature range, aperitifs, CBD infusions, limited editions. Free shipping above €65."
+  description="Browse our craft liqueurs made with forgotten plants: signature range, aperitifs, limited editions. Free shipping above €65."
   schema={[breadcrumbSchema, itemListSchema]}
 >
   <section class="bg-white border-b border-forest-100/60 py-20">

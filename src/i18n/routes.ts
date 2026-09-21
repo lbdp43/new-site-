@@ -22,7 +22,6 @@ export const routeMap = {
   '/': { fr: '/', en: '/en/', es: '/es/', it: '/it/' },
   '/notre-histoire': { fr: '/notre-histoire', en: '/en/our-story', es: '/es/nuestra-historia', it: '/it/la-nostra-storia' },
   '/boutique': { fr: '/boutique', en: '/en/shop', es: '/es/tienda', it: '/it/bottega' },
-  '/lumiere-obscure': { fr: '/lumiere-obscure', en: '/en/dark-light', es: '/es/luz-oscura', it: '/it/luce-oscura' },
   '/nos-plantes': { fr: '/nos-plantes', en: '/en/our-plants', es: '/es/nuestras-plantas', it: '/it/le-nostre-piante' },
   '/cocktails': { fr: '/cocktails', en: '/en/cocktails', es: '/es/cocteles', it: '/it/cocktail' },
   // Pages-piliers SEO (keywords commerciaux haute valeur)

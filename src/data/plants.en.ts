@@ -24,7 +24,7 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Lemony freshness · digestive',
     description:
       "Native to South America, cultivated in France since the 18th century. Its fresh, lemony, soothing aroma makes it the queen of digestifs. It's our most-used plant — it goes into four of our liqueurs.",
-    usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Machurés, Verveine CBD Aurone",
+    usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Machurés",
     season: 'June to September',
   },
   'Serpolet': {
@@ -59,14 +59,7 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Fine bitter · fruit-candy',
     description:
       "A cousin to absinthe and wormwood. Less bitter, more subtle — fruit-candy and citrus at the same time. Long used as a tonic infusion in the French countryside.",
-    usedIn: "Le Gorgeon des Machurés, Verveine CBD Aurone",
-    season: 'July to September',
-  },
-  'Absinthe': {
-    role: 'Great bitter · depth',
-    description:
-      "The great bitter. We work it with restraint, in accord with lemon and CBD, for a long, mentholated freshness that never overwhelms.",
-    usedIn: "CBD Absinthe Citron",
+    usedIn: "Le Gorgeon des Machurés",
     season: 'July to September',
   },
   'Menthe poivrée': {
@@ -86,16 +79,9 @@ export const plantsEn: Record<string, PlantEn> = {
   'Menthe verte': {
     role: 'Chlorophyllic · fresh',
     description:
-      "The softest of mints. Chlorophyllic, thirst-quenching, fresh without biting. It balances two of our liqueurs — including one with CBD.",
-    usedIn: "Le Menthor, Menthe CBD Ortie",
+      "The softest of mints. Chlorophyllic, thirst-quenching, fresh without biting. It anchors Le Menthor.",
+    usedIn: "Le Menthor",
     season: 'June to September',
-  },
-  'Ortie': {
-    role: 'Green · mineral',
-    description:
-      "An unloved weed, yet mineral-rich and with an unmistakable green flavour. Once worked, it loses its sting and reveals a subtle green-tea taste, almost iodic.",
-    usedIn: "Menthe CBD Ortie",
-    season: 'April to July',
   },
   'Baraban': {
     role: 'Bitter · earthy',
@@ -170,8 +156,8 @@ export const plantsEn: Record<string, PlantEn> = {
   'Citron jaune': {
     role: 'Zest · juice · tangy',
     description:
-      "Zest for aromatic richness, juice for acidity. Used in our citrus trio (Zéleste), in Cerf'Gent to balance the bitter, and as peels in our CBD citrus liqueur.",
-    usedIn: "Le Zéleste, Le Cerf'Gent, CBD Absinthe Citron",
+      "Zest for aromatic richness, juice for acidity. Used in our citrus trio (Zéleste), and in Cerf'Gent to balance the bitter.",
+    usedIn: "Le Zéleste, Le Cerf'Gent",
     season: 'Year-round',
   },
   'Orange': {
@@ -198,8 +184,8 @@ export const plantsEn: Record<string, PlantEn> = {
   'Coriandre': {
     role: 'Citrus · spiced',
     description:
-      "Seeds rather than leaves. They bring a complex profile, both citrusy and spiced, which serves as a binder in our bitter accords and in our CBD citrus liqueur.",
-    usedIn: "Le Cerf'Gent, CBD Absinthe Citron",
+      "Seeds rather than leaves. They bring a complex profile, both citrusy and spiced, which serves as a binder in our bitter accords.",
+    usedIn: "Le Cerf'Gent",
     season: 'Harvested in August',
   },
   'Cannelle': {
@@ -241,12 +227,5 @@ export const plantsEn: Record<string, PlantEn> = {
     description:
       "Worked as praline — almonds slowly caramelised to reach warm notes of toffee and dried fruit. The signature of La Pralicoquine, our gourmand aperitif that sits just as naturally next to an espresso as a chocolate dessert.",
     usedIn: "La Pralicoquine",
-  },
-  'Chanvre (CBD)': {
-    role: 'Terpenes · relaxing',
-    description:
-      "Hemp varieties certified THC-free (< 0.1% per French regulation). We work CBD for its vegetal terpenes — not for a psychoactive effect, but for a botanical accord consistent with our plants. Three dedicated liqueurs in the Lumière Obscure range.",
-    usedIn: "Verveine CBD Aurone, Menthe CBD Ortie, CBD Absinthe Citron",
-    season: 'Harvest September-October',
   },
 };

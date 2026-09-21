@@ -1,12 +1,12 @@
 ---
 meta:
-  title: "Foire aux questions | Livraison, dégustation, CBD — La Brasserie des Plantes"
-  description: "Livraison, conservation, dégustation, CBD, partenariats professionnels : toutes les réponses à vos questions sur nos liqueurs artisanales."
+  title: "Foire aux questions — La Brasserie des Plantes"
+  description: "Livraison, conservation, dégustation, partenariats professionnels : toutes les réponses à vos questions sur nos liqueurs artisanales."
 
 pageHeader:
   kicker: "Foire aux questions"
   title: "Toutes<br />nos réponses"
-  subtitle: "Commande, dégustation, conservation, CBD, partenariats — tout est ici. Si vous ne trouvez pas, écrivez-nous."
+  subtitle: "Commande, dégustation, conservation, partenariats — tout est ici. Si vous ne trouvez pas, écrivez-nous."
 
 faqCategories:
   - name: "Commande"
@@ -32,13 +32,7 @@ faqCategories:
       - q: "La Brasserie des Plantes utilise-t-elle des arômes, colorants ou conservateurs ajoutés ?"
         a: "Pas de conservateur. Nos liqueurs sont faites de plantes, d'alcool et de sucre. Pour la couleur, nous nous appuyons sur un ingrédient naturel qui se boit — le charbon végétal pour le noir du Gorgeon des Machurés, la plante elle-même pour les autres (chlorophylle, anthocyanes, caramel de canne). Jamais de colorant de synthèse."
       - q: "Quel est le degré d'alcool des liqueurs de La Brasserie des Plantes ?"
-        a: "L'Alchimie Végétale titre 50% vol. Les autres liqueurs de la gamme signature se situent entre 30 et 45% vol. Les apéritifs de la gamme Nectar/Lime/Flèche sont plus légers (18 à 22% vol.), ainsi que les infusions Lumière Obscure au CBD."
-  - name: "CBD"
-    questions:
-      - q: "Les infusions CBD Lumière Obscure contiennent-elles du THC ?"
-        a: "Nos infusions de la gamme Lumière Obscure contiennent du CBD (cannabidiol), molécule non psychotrope et légale en France. La teneur en THC reste sous le seuil légal de 0,1 % (arrêté du 30 décembre 2021). Vous ne ressentirez aucun effet psychoactif."
-      - q: "Quels sont les effets du CBD dans les infusions Lumière Obscure ?"
-        a: "Le CBD est reconnu pour ses propriétés apaisantes et relaxantes. Associé à des plantes comme l'ortie, la verveine ou l'absinthe, il s'inscrit dans une logique de détente botanique — pas de médication. Nos infusions ne remplacent pas un avis médical."
+        a: "L'Alchimie Végétale titre 50% vol. Les autres liqueurs de la gamme signature se situent entre 30 et 45% vol. Les apéritifs de la gamme Nectar/Lime/Flèche sont plus légers (18 à 22% vol.)."
   - name: "Pro"
     questions:
       - q: "Comment devenir revendeur de La Brasserie des Plantes (caviste, restaurant, épicerie fine) ?"

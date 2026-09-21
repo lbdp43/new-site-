@@ -20,7 +20,7 @@ heroHome:
 carouselSection:
   kicker: "Notre gamme complète"
   heading: "Dix-huit flacons, quatre gammes"
-  subtitle: "Parcourez toutes nos liqueurs, de la Brasserie signature à la Lumière Obscure."
+  subtitle: "Parcourez toutes nos liqueurs, de la gamme signature aux éditions limitées."
 
 historySection:
   divider: "Notre savoir-faire"
@@ -34,8 +34,6 @@ historySection:
       href: "/notre-histoire"
     - label: "Toutes nos plantes"
       href: "/nos-plantes"
-    - label: "Gamme CBD Lumière Obscure"
-      href: "/lumiere-obscure"
     - label: "Venir faire un atelier"
       href: "/ateliers"
 

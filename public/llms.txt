@@ -25,7 +25,6 @@
 
 - **Brasserie des Plantes** : liqueurs signature (L'Alchimie Végétale 50°, L'Herbe des Druides 28°, Le Gorgeon des Machurés 30°, La Flèche Ardente 22°, L'Essence des Cimes 32°, Le Nectar d'Ostara 24°, La Lime des Prés 18°)
 - **Gamme Apéritif** : Le Cerf'Gent 15,5° (gentiane), La Pralicoquine 15,5° (praline-amande), Le Menthor 17,5° (triple menthe), Le Zéleste 17,5° (trio d'agrumes)
-- **Lumière Obscure** : liqueurs au CBD (Menthe CBD Ortie, Verveine CBD Aurone, CBD Absinthe Citron), THC < 0,1 %
 - **Éditions limitées** : Herbe des Druides finition fût de chêne, Alchimie Végétale Cuvée Michel
 - **Accessoires** : coffret d'initiation, flasque 20 cl + entonnoir
 
@@ -34,7 +33,6 @@
 - [Notre histoire](https://labrasseriedesplantes.fr/notre-histoire)
 - [Boutique complète (18 références)](https://labrasseriedesplantes.fr/boutique)
 - [Espace professionnels (CHR, cavistes, épiceries)](https://labrasseriedesplantes.fr/professionnels)
-- [Univers Lumière Obscure (CBD)](https://labrasseriedesplantes.fr/lumiere-obscure)
 - [Actualité — 28 articles FR + 9 EN](https://labrasseriedesplantes.fr/blog)
 - [Cocktails signature](https://labrasseriedesplantes.fr/cocktails)
 - [Ateliers mixologie](https://labrasseriedesplantes.fr/ateliers)
@@ -47,7 +45,6 @@
 - [Trois amis, une brasserie — comment la Brasserie des Plantes est née](https://labrasseriedesplantes.fr/blog/trois-amis-une-brasserie)
 - [Verveine, serpolet, carvi — les plantes oubliées du Velay](https://labrasseriedesplantes.fr/blog/plantes-oubliees-du-velay)
 - [Comment se passe un concours international de spiritueux](https://labrasseriedesplantes.fr/blog/world-drinks-awards-comment-ca-marche)
-- [Lumière Obscure — pourquoi marier le CBD aux plantes](https://labrasseriedesplantes.fr/blog/cbd-et-plantes-lumiere-obscure)
 - [Nos cueilleurs et maraîchers partenaires — la plupart en bio](https://labrasseriedesplantes.fr/blog/producteurs-partenaires-bio-velay)
 - [La Brasserie des Plantes dans la presse — 2025](https://labrasseriedesplantes.fr/blog/dans-la-presse-2025)
 

@@ -8,14 +8,12 @@ import { site } from '../data/site';
 // Filtrer : bouteilles 20cl empilables uniquement. On exclut :
 // - accessoire (coffrets/flasques, pas des liqueurs 20cl)
 // - edition-limitee (les cuvées ne sont pas déclinées en 20cl)
-// - lumiere-obscure (gamme CBD pas encore shootée en 20cl empilable)
 // - les produits sans wcId (pas achetables via panier)
 const eligibleProducts: CoffretProduct[] = products
   .filter(
     (p) =>
       p.range !== 'accessoire' &&
       p.range !== 'edition-limitee' &&
-      p.range !== 'lumiere-obscure' &&
       p.wcId !== undefined
   )
   .map((p) => {

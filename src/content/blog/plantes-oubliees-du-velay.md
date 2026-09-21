@@ -36,7 +36,7 @@ En liqueur, le carvi **ancre** les notes florales et mentholées. Sans lui, nos 
 Chaque plante a son rôle. Autour de ce trio de base, nous travaillons aussi :
 
 - **L'hysope** (*Hyssopus officinalis*) — cousine de la lavande, avec une pointe de camphre. Elle entre dans l'*Essence des Cimes*.
-- **L'aurone** (*Artemisia abrotanum*) — cousine de l'absinthe, beaucoup plus douce, avec une note épicée. C'est elle qui donne au *Gorgeon des Machurés* sa profondeur et qui structure la *Verveine CBD Aurone* de la gamme Lumière Obscure.
+- **L'aurone** (*Artemisia abrotanum*) — cousine de l'absinthe, beaucoup plus douce, avec une note épicée. C'est elle qui donne au *Gorgeon des Machurés* sa profondeur.
 - **La mélisse** (*Melissa officinalis*) — la grande apaisante des herboristeries. Florale, légèrement citronnée, presque sucrée. Clé dans *La Lime des Prés* où elle remplace le citron.
 
 ## Pourquoi revenir à ces plantes ?

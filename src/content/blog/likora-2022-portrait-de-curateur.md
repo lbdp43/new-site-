@@ -54,7 +54,7 @@ Ce que Likora avait identifié en 2022 tient toujours :
 - **Fruits & fleurs** : sureau, bleuet — dans les déclinaisons plus fraîches
 - **Aromatiques** : thym, thym-citron, hysope — pour la profondeur
 
-Ce qui a changé depuis : nous avons ajouté la gamme **Lumière Obscure** (CBD), la gamme **Apéritif** (15–17,5°), et plusieurs **éditions limitées**. Le cœur, lui, reste intact.
+Ce qui a changé depuis : nous avons ajouté la gamme **Apéritif** (15–17,5°), et plusieurs **éditions limitées**. Le cœur, lui, reste intact.
 
 ---
 

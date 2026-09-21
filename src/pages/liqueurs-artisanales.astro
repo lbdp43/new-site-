@@ -67,7 +67,7 @@ const articleSchema = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${site.url}/liqueurs-artisanales` },
 };
 
-const featured = products.filter((p) => p.seoCategory && p.range !== 'accessoire' && p.range !== 'lumiere-obscure').slice(0, 8);
+const featured = products.filter((p) => p.seoCategory && p.range !== 'accessoire').slice(0, 8);
 ---
 <Layout
   title={title}

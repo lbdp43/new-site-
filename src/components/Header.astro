@@ -19,7 +19,7 @@ const tr = (key: UIKey) => t(key, lang);
  * via le dropdown du parent logique :
  *
  *   Maison         → Notre histoire, Nos plantes, Journal (blog)
- *   Boutique       → Toute la boutique, Lumière Obscure, Cocktails
+ *   Boutique       → Toute la boutique, Cocktails
  *   Ateliers       (direct)
  *   Pros           (direct)
  *   Contact        (direct)
@@ -55,14 +55,12 @@ const navItems: NavItem[] = [
   {
     // Boutique = catalogue par gamme. On scroll vers les sections de /boutique
     // via ancres (#brasserie, #aperitif, etc.) — c'est le pattern utilisé par
-    // la page. Exception : Lumière Obscure a sa page dédiée (ambiance sombre).
     labelKey: 'nav.shop',
     href: shopPath,
     children: [
       { labelKey: 'nav.shop-all', href: shopPath },
       { labelKey: 'nav.range-brasserie', href: `${shopPath}#brasserie` },
       { labelKey: 'nav.range-aperitif', href: `${shopPath}#aperitif` },
-      { labelKey: 'nav.lumiere', href: safeLocalizedPath('/lumiere-obscure', lang) },
       { labelKey: 'nav.range-edition', href: `${shopPath}#edition-limitee` },
       { labelKey: 'nav.range-accessoire', href: `${shopPath}#accessoire` },
     ],

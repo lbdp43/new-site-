@@ -202,4 +202,4 @@ Voici **cinq recettes signatures**, travaillées avec des barmen partenaires à 
 
 ---
 
-**À lire aussi :** [Servir une liqueur aux plantes — températures, verres, accords](/blog/servir-liqueur-aux-plantes-guide) · [CBD et plantes — la gamme Lumière Obscure](/blog/cbd-et-plantes-lumiere-obscure) · [Liqueur, digestif, eau-de-vie, amer — le vocabulaire](/blog/liqueur-digestif-eau-de-vie-amer-difference).
+**À lire aussi :** [Servir une liqueur aux plantes — températures, verres, accords](/blog/servir-liqueur-aux-plantes-guide) · [Liqueur, digestif, eau-de-vie, amer — le vocabulaire](/blog/liqueur-digestif-eau-de-vie-amer-difference).

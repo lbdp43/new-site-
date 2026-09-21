@@ -136,7 +136,7 @@ A quick overview of what happens on our side through the seasons:
 
 One of our commitments is to **reintroduce into modern use** plants that traditional herbalism valued but industry forgot:
 
-- **Southernwood** (Artemisia abrotanum) — used since the Middle Ages, disappeared from commercial liqueurs. Present in [Verveine CBD Aurone](/en/shop/verveine-cbd-aurone).
+- **Southernwood** (Artemisia abrotanum) — used since the Middle Ages, disappeared from commercial liqueurs.
 - **Butcher's broom** (Ruscus aculeatus) — already mentioned by Dioscorides (1st century). Rare use in modern liqueur.
 - **Common centaury** (Centaurium erythraea) — powerful bitter, known as "European cinchona".
 - **Sweet woodruff** (Galium odoratum) — flavoured Rhine wines in the Middle Ages.
