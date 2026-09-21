@@ -59,7 +59,7 @@ Cousine alpine née à Voiron en 1865, à base de **gentiane + quinquina + macé
 
 ### 5. Les liqueurs de gentiane artisanales modernes
 
-Depuis 2018-2020, des liquoristes indépendants reprennent la gentiane en formats plus petits, avec des **assemblages plus contemporains**. C'est dans cette catégorie que se classe notre [Cerf'Gent](/boutique/cerf-gent) — gentiane jaune + quinquina + zestes de citron + muscade + coriandre + cannelle, à 15°.
+Depuis 2018-2020, des liquoristes indépendants reprennent la gentiane en formats plus petits, avec des **assemblages plus contemporains**. C'est dans cette catégorie que se classe notre [Cerf'Gent](/boutique/cerf-gent) — gentiane jaune + quinquina + zestes de citron + muscade + coriandre + cannelle, à 15,5°.
 
 - **Profil** : amertume franche, structure épicée, **moins sucrée** que la Suze, plus aromatique que la Salers
 - **Usage** : apéritif très frais, spritz amer (avec tonic Fever-Tree), ou en cocktail

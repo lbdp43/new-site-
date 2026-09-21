@@ -10,6 +10,7 @@ composition:
   - Génépi bio (partenariat Barcelonnette)
   - Bourgeon de sapin
   - Hysope
+ingredients: "eau, sucre, alcool, génépi issu de l'agriculture biologique, bourgeon de sapin et hysope"
 usage: Digestif de montagne
 tagline: "Un génépi frais, végétal et intensément montagnard."
 highlight: "Médaille d'Argent 2026 — Lyon"

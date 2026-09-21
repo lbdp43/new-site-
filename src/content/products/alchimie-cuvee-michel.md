@@ -9,6 +9,7 @@ alcohol: 50
 composition:
   - 27 plantes (assemblage Alchimie)
   - Variation autour de la réglisse et de la gentiane
+ingredients: "eau, sucre, alcool, assemblage de 27 plantes, racines, écorces, fleurs et épices — élevage en fût de chêne ayant porté du Chardonnay"
 usage: "Digestif de prestige — tirage confidentiel"
 tagline: "Hommage à un vieil ami — variation sur l'Alchimie, en tirage confidentiel."
 tasting:

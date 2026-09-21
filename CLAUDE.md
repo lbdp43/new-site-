@@ -454,6 +454,42 @@ Les slugs d'URL restent en minuscules sans accent
 (`/boutique/gorgeon-des-machures`) : ne jamais les toucher, des liens
 externes et des redirections 301 en dépendent.
 
+## Listes d'ingrédients (champ `ingredients`)
+
+Depuis le 2026-09-21, chaque fiche liqueur porte deux champs distincts :
+
+| Champ | Contenu | Rendu |
+|---|---|---|
+| `composition` | liste éditoriale des plantes | puces dorées |
+| `ingredients` | mention réglementaire type étiquette (eau, sucre, alcool, puis les plantes) | ligne discrète sous les puces |
+
+Pendant EN : `productsEn[slug].ingredients` dans `src/data/products.en.ts`
+(le template retombe sur la valeur FR si la clé EN manque).
+
+**Provenance — à savoir avant de modifier** :
+- **5 mentions reprises mot pour mot du WordPress live** (doc fourni par
+  Guillaume le 21/09/2026) : Herbe des Druides, Lime des Prés, Nectar
+  d'Ostara, Flèche Ardente, Gorgeon des Machurés.
+- **11 mentions dérivées** de `composition` sur le patron des 5 premières,
+  appliquées sur instruction de Guillaume le 21/09/2026. Elles n'ont **pas**
+  été relues sur l'étiquette physique. À confronter aux étiquettes avant la
+  bascule www.
+
+**Mention bio** : ajoutée uniquement là où une source l'atteste (les 3
+produits que le WordPress documente + le génépi de l'Essence des Cimes).
+Jamais généralisée — cf. règle d'or sourcing plantes.
+
+**Allergène** : la Pralicoquine contient des **amandes** (fruits à coque).
+Sur une vraie étiquette l'allergène doit ressortir typographiquement ; la
+ligne du site ne le met pas en gras pour l'instant.
+
+**⚠️ Contradiction FR/EN non résolue sur les colorants** : la FAQ FR
+(`src/content/static-pages/faq.md`) affirme « pas de colorant », alors que
+la FAQ EN (`src/pages/en/faq.astro`) cite le charbon végétal du Gorgeon et
+la **cochenille** de la Pralicoquine — et que `composition` du Gorgeon liste
+bien « Charbon végétal ». Aucun colorant n'a donc été inscrit dans les
+`ingredients`. À trancher avec Guillaume, puis aligner les deux FAQ.
+
 ## Règle d'or CMS (Sveltia)
 
 **NE JAMAIS** utiliser un widget `object` avec clés numériques dans

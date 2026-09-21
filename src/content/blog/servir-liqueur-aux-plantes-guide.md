@@ -61,7 +61,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Servir** : pur très frais, ou en long drink avec tonic et quelques feuilles de menthe.  
 **Accord** : apéritif d'été, fruits de mer, salade verte aux herbes.
 
-### Le Cerf'Gent (15°) — Apéritif amer
+### Le Cerf'Gent (15,5°) — Apéritif amer
 **Température** : 2–4°C (très frais, presque givré).  
 **Verre** : tumbler, verre à Negroni, ou verre à vin.  
 **Servir** : pur, tonic, ou en [Gentiane Oublié](/blog/nos-cocktails-signature).  
@@ -73,7 +73,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Servir** : pur givré, ou en base mojito, ou en fin de repas.  
 **Accord** : chocolat noir à la menthe, fin de repas gras.
 
-### La Pralicoquine (15°) — Praline-amande
+### La Pralicoquine (15,5°) — Praline-amande
 **Température** : 6–8°C (frais).  
 **Verre** : verre à digestif ou flûte.  
 **Servir** : pur, en kir pétillant, ou sur un café.  

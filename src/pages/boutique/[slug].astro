@@ -5,7 +5,7 @@ import ProductCard from '../../components/ProductCard.astro';
 import { Awards } from '@/components/ui/award';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 import AddToCartButton from '../../components/cart/AddToCartButton';
-import { products, ranges } from '../../data/products';
+import { products, ranges, formatAlcoholFr } from '../../data/products';
 import { cocktails } from '../../data/cocktails';
 import { site } from '../../data/site';
 import { reviewsByProduct, aggregateRating } from '../../data/reviews';
@@ -176,7 +176,7 @@ const truncate = (s: string, max = 155) => {
 // pour densifier le mot-clé en SERP.
 const metaDescriptionRaw = product.description
   ? `${product.seoCategory ? product.seoCategory + ' — ' : ''}${product.description}`
-  : `${product.seoCategory ? product.seoCategory + ' — ' : ''}${product.name} — ${product.alcohol}° — ${product.tagline || ''} La Brasserie des Plantes, Haute-Loire.`;
+  : `${product.seoCategory ? product.seoCategory + ' — ' : ''}${product.name} — ${formatAlcoholFr(product.alcohol)}° — ${product.tagline || ''} La Brasserie des Plantes, Haute-Loire.`;
 const metaDescription = truncate(metaDescriptionRaw, 158);
 
 // Parseur simple des distinctions pour les convertir en badges médailles.
@@ -206,8 +206,8 @@ const parsedAwards = (product.awards || []).map(parseAward);
 ---
 <Layout
   title={product.seoCategory
-    ? `${product.seoCategory} — ${product.name}${product.alcohol ? ' ' + product.alcohol + '°' : ''} | La Brasserie des Plantes`
-    : `${product.name}${product.alcohol ? ' ' + product.alcohol + '°' : ''} | La Brasserie des Plantes`}
+    ? `${product.seoCategory} — ${product.name}${product.alcohol ? ' ' + formatAlcoholFr(product.alcohol) + '°' : ''} | La Brasserie des Plantes`
+    : `${product.name}${product.alcohol ? ' ' + formatAlcoholFr(product.alcohol) + '°' : ''} | La Brasserie des Plantes`}
   description={metaDescription}
   ogImage={product.image}
   ogType="product"
@@ -242,7 +242,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
             data-slide="0"
             src={product.sizeImages?.[70] || product.image}
             alt={product.seoCategory
-              ? `${product.seoCategory} — ${product.name}, ${product.alcohol}° — Bouteille La Brasserie des Plantes (Haute-Loire)`
+              ? `${product.seoCategory} — ${product.name}, ${formatAlcoholFr(product.alcohol)}° — Bouteille La Brasserie des Plantes (Haute-Loire)`
               : `${product.name} — liqueur artisanale aux plantes oubliées`}
             class="gallery-slide absolute inset-0 w-full h-full object-contain p-10 transition-opacity duration-500 ease-in-out opacity-100"
             fetchpriority="high"
@@ -293,7 +293,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
           )}
           {product.alcohol > 0 && (
             <span class="absolute top-5 right-5 z-10 text-sm font-medium text-cream-50 bg-forest-800/90 px-3 py-1.5 rounded-full">
-              {product.alcohol}°
+              {formatAlcoholFr(product.alcohol)}°
             </span>
           )}
 
@@ -359,7 +359,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
         <div class="flex flex-wrap gap-2 mb-8">
           {product.alcohol > 0 && (
             <span class="text-xs px-3 py-1.5 rounded-full bg-forest-100 text-forest-800 font-medium">
-              {product.alcohol}% vol.
+              {formatAlcoholFr(product.alcohol)}% vol.
             </span>
           )}
           <span class="text-xs px-3 py-1.5 rounded-full bg-forest-100 text-forest-800 font-medium">

@@ -10,6 +10,7 @@ composition:
   - Verveine
   - Aurone
   - Chanvre (CBD, sans THC)
+ingredients: "eau, sucre, alcool, verveine odorante, aurone et chanvre (CBD)"
 usage: Digestif botanique au CBD
 tagline: "Verveine, aurone et chanvre — herbacée et ronde en bouche."
 tasting:

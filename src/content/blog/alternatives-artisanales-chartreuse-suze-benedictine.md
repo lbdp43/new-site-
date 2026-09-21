@@ -39,7 +39,7 @@ Notre cuvée a été élue **Meilleur Digestif du Monde 2025** aux World Drinks 
 
 **Profil Suze :** 15°, gentiane jaune dominante, dosage sucré assez marqué (~200 g/L), notes d'agrumes confits et écorces amères, finale légèrement persistante. Apéritif amer le plus consommé en France depuis 135 ans.
 
-**Alternative artisanale : [Le Cerf'Gent](/boutique/cerf-gent)** (15°, gentiane + quinquina + zestes + épices)
+**Alternative artisanale : [Le Cerf'Gent](/boutique/cerf-gent)** (15,5°, gentiane + quinquina + zestes + épices)
 
 Médaille d'Or au Concours Général Agricole de Paris 2025 (Salon de l'Agriculture). C'est une **gentiane moderne, traçable, à dosage contemporain** — moins sucrée que la Suze (130 g/L vs 200 g/L), avec une amertume franche assumée. La racine de gentiane vient de gentianaïres professionnels partenaires (récolte à la main entre 1 000 et 1 600 m d'altitude).
 
@@ -82,7 +82,7 @@ Notre best-seller. Médaille d'Or 3× au Concours International de Lyon (2023, 2
 | Référence | Volume FR/an | Style | Notre alternative |
 |---|---|---|---|
 | Chartreuse Verte 55° | ~1 M bouteilles | 130 plantes, mentholé-anisé, complexe | [Alchimie Végétale 50°](/boutique/alchimie-vegetale) — 27 plantes, citron-poivre-épices |
-| Suze 15° | ~5 M bouteilles | Gentiane sucrée, accessible | [Cerf'Gent 15°](/boutique/cerf-gent) — gentiane traçable, dosage moderne |
+| Suze 15° | ~5 M bouteilles | Gentiane sucrée, accessible | [Cerf'Gent 15,5°](/boutique/cerf-gent) — gentiane traçable, dosage moderne |
 | Bénédictine D.O.M. 40° | ~3 M bouteilles | Miel-épices, ronde | [Herbe des Druides 28°](/boutique/herbe-des-druides) — verveine-serpolet-carvi |
 
 ## Le mot de la fin

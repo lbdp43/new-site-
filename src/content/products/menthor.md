@@ -10,6 +10,7 @@ composition:
   - Menthe poivrée (fraîcheur dominante)
   - Menthe coréenne (mentholée, épicée)
   - Menthe verte (chlorophyllienne)
+ingredients: "eau, sucre, alcool, menthe poivrée, menthe coréenne et menthe verte"
 usage: Mojitos, fin de repas
 tagline: "Trois menthes en alliance — rafraîchissant et vivifiant."
 tasting:

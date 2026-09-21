@@ -11,6 +11,7 @@ composition:
   - Serpolet
   - Carvi
   - Finition 6 mois en fût de chêne
+ingredients: "eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique ; élevage en fût de chêne ayant porté du Chardonnay"
 usage: "Digestif — édition limitée"
 tagline: "Notre verveine, affinée six mois en fût de chêne."
 tasting:

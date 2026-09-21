@@ -28,6 +28,8 @@ export const productsEn: Record<string, ProductEn> = {
   // ===== BRASSERIE (SIGNATURE) =====
 
   'alchimie-vegetale': {
+    ingredients:
+      "water, sugar, alcohol, a blend of 27 plants, roots, barks, flowers and spices",
     subtitle: 'The award-winning digestif — 27 plants',
     composition: ['27 plants, roots, barks, flowers and spices, carefully selected'],
     usage: 'Prestige digestif',
@@ -102,6 +104,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'essence-des-alpes': {
+    ingredients:
+      "water, sugar, alcohol, genepi from organic farming, fir bud and hyssop",
     subtitle: 'Mountain digestif — genepi & hyssop',
     composition: [
       'Organic genepi (from our partner in Barcelonnette)',
@@ -159,6 +163,8 @@ export const productsEn: Record<string, ProductEn> = {
   // ===== APERITIFS =====
 
   'cerf-gent': {
+    ingredients:
+      "water, sugar, alcohol, yellow gentian, cinchona, lemon zest, coriander seeds, cinnamon and nutmeg",
     subtitle: 'French bitter aperitif — gentian & cinchona',
     composition: ['Gentian', 'Cinchona', 'Lemon zest', 'Nutmeg', 'Coriander seeds', 'Cinnamon'],
     usage: 'Bitter aperitif — gentian, cinchona, spices',
@@ -176,6 +182,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'pralicoquine': {
+    ingredients:
+      "water, sugar, alcohol, roasted almonds and praline",
     subtitle: 'Praline & almond liqueur',
     composition: ['Pink pralines', 'Macerated roasted almonds'],
     usage: 'Indulgent aperitif or light digestif',
@@ -191,6 +199,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'menthor': {
+    ingredients:
+      "water, sugar, alcohol, peppermint, Korean mint and spearmint",
     subtitle: 'Triple mint aperitif',
     composition: [
       'Peppermint (dominant freshness)',
@@ -210,6 +220,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'zeleste': {
+    ingredients:
+      "water, sugar, alcohol, zest and juice of lemon, orange and lime",
     subtitle: 'Citrus trio aperitif',
     composition: ['Lemon (zest + juice)', 'Orange', 'Lime'],
     usage: 'Fresh aperitif — lemon, orange, lime',
@@ -227,6 +239,8 @@ export const productsEn: Record<string, ProductEn> = {
   // ===== LUMIÈRE OBSCURE (CBD) =====
 
   'menthe-cbd-ortie': {
+    ingredients:
+      "water, sugar, alcohol, spearmint, nettle and hemp (CBD)",
     subtitle: 'Spearmint & hemp aperitif',
     composition: ['Spearmint', 'Hemp (CBD, no THC)', 'Nettle'],
     usage: 'Botanical aperitif with CBD',
@@ -242,6 +256,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'verveine-cbd-aurone': {
+    ingredients:
+      "water, sugar, alcohol, lemon verbena, southernwood and hemp (CBD)",
     subtitle: 'Verbena & hemp digestif',
     composition: ['Verbena', 'Southernwood', 'Hemp (CBD, no THC)'],
     usage: 'Botanical digestif with CBD',
@@ -257,6 +273,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'absinthe-cbd-citron': {
+    ingredients:
+      "water, sugar, alcohol, hemp (CBD), wormwood, lemon peel and coriander seeds",
     subtitle: 'Hemp-forward botanical digestif',
     composition: [
       'Hemp (CBD, dominant, no THC)',
@@ -279,6 +297,8 @@ export const productsEn: Record<string, ProductEn> = {
   // ===== LIMITED EDITIONS =====
 
   'herbe-druides-fut-chene': {
+    ingredients:
+      "water, sugar, alcohol, lemon verbena, wild thyme and caraway — plants from organic farming; aged in an oak cask that previously held Chardonnay",
     subtitle: 'Oak-cask-aged verbena — limited edition',
     composition: ['Verbena', 'Wild thyme', 'Caraway', 'Six months of oak-cask finishing'],
     usage: 'Digestif — limited edition',
@@ -294,6 +314,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'alchimie-cuvee-michel': {
+    ingredients:
+      "water, sugar, alcohol, a blend of 27 plants, roots, barks, flowers and spices — aged in an oak cask that previously held Chardonnay",
     subtitle: 'Tribute cuvée — confidential release',
     composition: ['27 plants (Alchimie blend)', 'Variation around liquorice and gentian'],
     usage: 'Prestige digestif — confidential release',

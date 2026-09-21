@@ -10,6 +10,7 @@ composition:
   - Menthe verte
   - Chanvre (CBD, sans THC)
   - Ortie
+ingredients: "eau, sucre, alcool, menthe verte, ortie et chanvre (CBD)"
 usage: Apéritif botanique au CBD
 tagline: "L'esprit d'un thé à la menthe — menthe verte, chanvre, ortie."
 tasting:

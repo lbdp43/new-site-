@@ -122,9 +122,9 @@ Voici comment on recommande nos 18 liqueurs selon le moment :
 
 ### Pour l'apéritif
 
-- **Amer classique** (en remplacement d'une Suze) : [Cerf'Gent](/boutique/cerf-gent), 15 %, à servir givré ou avec du tonic — Médaille d'Or CGA Paris 2025.
+- **Amer classique** (en remplacement d'une Suze) : [Cerf'Gent](/boutique/cerf-gent), 15,5 %, à servir givré ou avec du tonic — Médaille d'Or CGA Paris 2025.
 - **Floral et frais** : [Nectar d'Ostara](/boutique/nectar-ostara), 24 %, avec un crémant ou simplement sur glace.
-- **Gourmand** : [Pralicoquine](/boutique/pralicoquine), 15 %, praline amande, sur glace en digestif-apéritif.
+- **Gourmand** : [Pralicoquine](/boutique/pralicoquine), 15,5 %, praline amande, sur glace en digestif-apéritif.
 - **Agrumes vibrants** : [Zéleste](/boutique/zeleste), 17,5 %, avec du tonic et un zeste d'orange.
 
 ### Pour le digestif

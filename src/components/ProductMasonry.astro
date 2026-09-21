@@ -7,7 +7,7 @@
  * au moment où il entre dans le viewport. Anti-slop : pas de texte superflu,
  * cartes aérées, dorure au hover, fond blanc.
  */
-import type { Product } from '../data/products';
+import { formatAlcoholFr, type Product } from '../data/products';
 import { GlowCard } from './ui/spotlight-card';
 
 interface Props {
@@ -129,7 +129,7 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
           )}
           {p.alcohol > 0 && (
             <span class="absolute top-3 right-3 z-10 text-[11px] font-medium text-cream-50 bg-forest-800/90 px-2.5 py-1 rounded-full backdrop-blur-sm">
-              {p.alcohol}°
+              {formatAlcoholFr(p.alcohol)}°
             </span>
           )}
 

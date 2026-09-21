@@ -9,6 +9,7 @@ image2: /images/products/alchimie-vegetale-2.webp
 alcohol: 50
 composition:
   - 27 plantes, racines, écorces, fleurs et épices sélectionnées
+ingredients: "eau, sucre, alcool, assemblage de 27 plantes, racines, écorces, fleurs et épices"
 usage: Digestif de prestige
 tagline: "27 plantes, racines, écorces et épices — un hommage à la tradition liquoriste artisanale."
 highlight: Meilleur Digestif du Monde 2025

@@ -121,9 +121,9 @@ Here's how we recommend our 18 liqueurs by moment:
 
 ### For aperitif
 
-- **Classic bitter** (as a Suze alternative): [Cerf'Gent](/en/shop/cerf-gent), 15%, serve frozen or with tonic — Gold Medal at the CGA Paris 2025.
+- **Classic bitter** (as a Suze alternative): [Cerf'Gent](/en/shop/cerf-gent), 15.5%, serve frozen or with tonic — Gold Medal at the CGA Paris 2025.
 - **Floral and fresh**: [Nectar d'Ostara](/en/shop/nectar-ostara), 24%, with crémant or simply on ice.
-- **Indulgent**: [Pralicoquine](/en/shop/pralicoquine), 15%, praline-almond, on ice as a digestif-aperitif.
+- **Indulgent**: [Pralicoquine](/en/shop/pralicoquine), 15.5%, praline-almond, on ice as a digestif-aperitif.
 - **Vibrant citrus**: [Zéleste](/en/shop/zeleste), 17.5%, with tonic and an orange peel.
 
 ### For digestif

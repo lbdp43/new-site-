@@ -28,6 +28,15 @@ via `www.`.
 - [ ] **Preview Astro validé** sur mobile + desktop par au moins 2 personnes.
 - [ ] **TTFB / Core Web Vitals OK** sur test. (LCP < 2.5s, INP < 200ms, CLS <
       0.1).
+- [ ] **Listes d'ingrédients relues sur les étiquettes physiques** — 11 des
+      16 mentions `ingredients` ont été dérivées de la composition, pas
+      recopiées d'une étiquette (toutes sauf Herbe des Druides, Lime des
+      Prés, Nectar d'Ostara, Flèche Ardente et Gorgeon, qui viennent du
+      WordPress). Mention réglementaire : à valider avant d'être publique
+      sur `www.`. Voir la section « Listes d'ingrédients » de `CLAUDE.md`.
+- [ ] **Question des colorants tranchée** et les deux FAQ alignées : la FAQ
+      FR dit « pas de colorant », la FAQ EN cite le charbon végétal du
+      Gorgeon et la cochenille de la Pralicoquine.
 
 ---
 

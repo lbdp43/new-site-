@@ -5,10 +5,11 @@ seoCategory: "Liqueur d'amande artisanale"
 priceMin: 16
 priceMax: 27
 image: /images/products/pralicoquine.webp
-alcohol: 15
+alcohol: 15.5
 composition:
   - Pralines
   - Amandes torréfiées macérées
+ingredients: "eau, sucre, alcool, amandes torréfiées et pralines"
 usage: Apéritif gourmand ou digestif léger
 tagline: "Une liqueur douce, pralinée et résolument gourmande."
 tasting:

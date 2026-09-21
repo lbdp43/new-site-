@@ -10,6 +10,7 @@ composition:
   - Citron jaune (zestes + jus)
   - Orange
   - Citron vert
+ingredients: "eau, sucre, alcool, zestes et jus de citron jaune, orange et citron vert"
 usage: "Apéritif frais — citron jaune, orange, citron vert"
 tagline: "Trio d'agrumes — frais, vif et acidulé."
 tasting:

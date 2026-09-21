@@ -11,6 +11,7 @@ composition:
   - Absinthe
   - Écorces de citron
   - Graines de coriandre
+ingredients: "eau, sucre, alcool, chanvre (CBD), absinthe, écorces de citron et graines de coriandre"
 usage: "Digestif botanique — pour amateurs de chanvre"
 tagline: "Chanvre dominant, absinthe en fond, zeste de citron."
 tasting:

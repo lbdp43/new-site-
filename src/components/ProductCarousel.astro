@@ -1,5 +1,5 @@
 ---
-import type { Product } from '../data/products';
+import { formatAlcoholFr, type Product } from '../data/products';
 import { GlowCard } from './ui/spotlight-card';
 
 interface Props {
@@ -147,7 +147,7 @@ const track = [...items, ...items];
                     'absolute top-3 right-3 z-10 text-[11px] font-medium px-2.5 py-1 rounded-full',
                     theme === 'dark' ? 'bg-cream-50/10 text-cream-50 border border-cream-100/20' : 'bg-forest-800/90 text-cream-50',
                   ]}>
-                    {p.alcohol}°
+                    {formatAlcoholFr(p.alcohol)}°
                   </span>
                 )}
               </div>

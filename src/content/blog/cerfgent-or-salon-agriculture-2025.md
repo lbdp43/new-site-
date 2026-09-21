@@ -15,7 +15,7 @@ C'est un prix moins médiatique que celui des [World Drinks Awards](https://www.
 
 ## Ce qu'est le Cerf'Gent
 
-Le Cerf'Gent est notre **alternative française à la Suze**. Apéritif amer à 15°, centré sur la **gentiane jaune** (*Gentiana lutea*), travaillée avec le **quinquina**, les **zestes de citron**, la **noix de muscade**, les **graines de coriandre** et la **cannelle**.
+Le Cerf'Gent est notre **alternative française à la Suze**. Apéritif amer à 15,5°, centré sur la **gentiane jaune** (*Gentiana lutea*), travaillée avec le **quinquina**, les **zestes de citron**, la **noix de muscade**, les **graines de coriandre** et la **cannelle**.
 
 La gentiane est une grande plante de moyenne montagne — ses **racines sont récoltées à la main** entre 1000 et 1600 mètres d'altitude par une poignée de gentianaïres professionnels, avec un outil spécifique appelé la "fourche du diable" (c'est du vrai métier, très physique).
 
