@@ -10,7 +10,7 @@ composition:
   - Citron jaune (zestes + jus)
   - Orange
   - Citron vert
-usage: "Apéritif frais — alternative au Limoncello"
+usage: "Apéritif frais — citron jaune, orange, citron vert"
 tagline: "Trio d'agrumes — frais, vif et acidulé."
 tasting:
   nose: "Agrumes vifs, zestes frais."
@@ -27,4 +27,4 @@ wcId: 4037
 order: 4
 ---
 
-Un trio d'agrumes : citron jaune, orange, citron vert — zestes et jus. Plus complexe qu'un Limoncello classique, avec une légère amertume en fond qui donne du caractère. L'originalité et la fraîcheur d'un apéritif distinct.
+Un trio d'agrumes : citron jaune, orange, citron vert — zestes et jus. Une légère amertume en fond donne du caractère et de la longueur. L'originalité et la fraîcheur d'un apéritif distinct.

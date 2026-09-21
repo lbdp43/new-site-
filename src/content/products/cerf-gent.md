@@ -13,7 +13,7 @@ composition:
   - Noix de muscade
   - Graines de coriandre
   - Cannelle
-usage: "Apéritif amer — alternative française à la Suze"
+usage: "Apéritif amer — gentiane, quinquina, épices"
 tagline: "Une gentiane légère, fraîche et finement amère."
 highlight: Médaille d'Or Paris 2025
 awards:
