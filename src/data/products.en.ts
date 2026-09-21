@@ -195,8 +195,6 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'menthor': {
-    ingredients:
-      "water, sugar, alcohol, peppermint, Korean mint and spearmint",
     subtitle: 'Triple mint aperitif',
     composition: [
       'Peppermint (dominant freshness)',

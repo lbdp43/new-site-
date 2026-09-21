@@ -5,7 +5,7 @@ seoCategory: "Liqueur de verveine vieillie en fût de chêne"
 priceMin: 50
 priceMax: 50
 image: /images/products/herbe-druides-fut-chene.webp
-alcohol: 28
+alcohol: 27.1
 composition:
   - Verveine
   - Serpolet

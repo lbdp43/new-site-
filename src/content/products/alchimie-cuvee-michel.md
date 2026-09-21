@@ -5,7 +5,7 @@ seoCategory: "Liqueur digestive édition limitée"
 priceMin: 70
 priceMax: 70
 image: /images/products/alchimie-cuvee-michel.webp
-alcohol: 50
+alcohol: 48.3
 composition:
   - 27 plantes (assemblage Alchimie)
   - Variation autour de la réglisse et de la gentiane
