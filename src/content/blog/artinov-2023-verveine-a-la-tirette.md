@@ -43,7 +43,7 @@ Le reportage vidéo tourné par la CMA dans notre atelier montre le système en 
 
 ## Et aujourd'hui ?
 
-**Nous ne faisons plus de tireuse à verveine.** L'aventure Artinov reste ce qu'elle a été — une invention récompensée en 2023 — mais elle appartient au passé.
+**La tireuse n'est plus ce que nous mettons en avant.** Elle reste possible : un établissement qui nous le demande peut toujours avoir sa verveine en fût. Simplement, ce n'est plus notre argument de vente.
 
 Ce qui a pris le relais au comptoir, ce sont des **machines réfrigérées** : une bouteille alimente directement le distributeur, la liqueur est tenue au froid et servie au verre, à la dose près. Il y en a aujourd'hui **une quinzaine installées chez des partenaires**. Pour la plupart, c'est *L'Herbe des Druides* qui y coule (verveine adoucie, servie givrée) ; pour d'autres, *Le Cerf'Gent* en alternative apéritive à la Suze.
 
