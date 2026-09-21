@@ -75,8 +75,6 @@ export const productsEn: Record<string, ProductEn> = {
     composition: ['Verbena', 'Southernwood', 'Dandelion root', 'Activated charcoal'],
     usage: 'Digestif — black verbena',
     tagline: 'Black verbena, a tribute to the Saint-Étienne miners — deep and mysterious.',
-    ingredients:
-      "a blend of verbena liqueur, arquebuse forézienne and barabans, with a touch of charcoal added during maceration",
     description:
       "A black verbena, coloured with activated charcoal, to drink in memory of the Machurés — the Saint-Étienne miners whose faces were black with coal dust at the end of the day. Created for Sainte-Barbe, after three traditional recipes from the Forez: a blend of verbena liqueur, arquebuse forézienne and barabans (one of the vernacular names for dandelion), with a touch of charcoal added during maceration.",
     tasting: {
@@ -182,8 +180,6 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'pralicoquine': {
-    ingredients:
-      "water, sugar, alcohol, roasted almonds and praline",
     subtitle: 'Praline & almond liqueur',
     composition: ['Pink pralines', 'Macerated roasted almonds'],
     usage: 'Indulgent aperitif or light digestif',

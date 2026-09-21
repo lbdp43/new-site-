@@ -319,7 +319,7 @@ remplacer le contenu de la colonne gauche.
 | `src/pages/commande/confirmation.astro` | Route `/commande/confirmation` |
 | `src/pages/blog/index.astro` | Route `/blog` (label UI "Actualité" côté FR). Hero staggered (BlogHeroIntro) + filtre catégories client-side (Fabrication / Terroir / Actualité / Plantes / Recettes). |
 | `src/components/BlogHeroIntro.tsx` | Hero éditorial staggered (flou → net) pour /blog — kicker + titre + script + paragraphe d'intro. |
-| `src/content/products/*.md` | **Source de vérité éditoriale** des fiches produit (1 fichier par SKU). Éditable via Sveltia CMS. Deux champs distincts à ne pas confondre : `composition` = liste éditoriale des plantes (puces) ; `ingredients` = mention réglementaire recopiée de l'étiquette (eau, sucre, alcool…), affichée en petit sous la liste. Pendant EN : `productsEn[slug].ingredients` dans `src/data/products.en.ts`. |
+| `src/content/products/*.md` | **Source de vérité éditoriale** des fiches produit (1 fichier par SKU). Éditable via Sveltia CMS. `ingredients` (mention d'étiquette) et `composition` (même info en puces) alimentent un seul bloc « Ingrédients » — voir la section dédiée. Pendant EN : `productsEn[slug]` dans `src/data/products.en.ts`. |
 | `src/data/products.ts` | Thin wrapper — importe `products.generated.json` + définit types + ranges + helpers |
 | `src/data/products.generated.json` | Généré au prebuild par `generate-products.mjs`. Ne pas éditer à la main. |
 | `scripts/generate-products.mjs` | Script prebuild : compile les .md → JSON consommable sync |
@@ -327,6 +327,7 @@ remplacer le contenu de la colonne gauche.
 | `scripts/indexnow-submit.mjs` | Script postbuild : POST sitemap à IndexNow (Bing/Yandex) |
 | `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, `getSizePrices`, etc. |
 | `src/lib/featurable.ts` | Fetch (mémoïsé) des avis Google via Featurable au build. Expose `getFeaturableWidget()`, `getFeaturableAggregate()` et `buildAggregateRatingSchema()`. Single fetch partagé par `GoogleReviewsEmbed.astro` + le schema `LocalBusiness` (FR + EN home). |
+| `src/data/award-logos.ts` | Table libellé de distinction → visuel officiel du concours (`findAwardLogo`). Consommée par la fiche produit et la section « Des arguments de vente solides » de `/professionnels`. Ajouter un logo = déposer le WebP dans `public/images/awards/` + une entrée avec lookaheads (millésime + concours + niveau). |
 | `src/data/wc-live.json` | Snapshot stock + prix par contenance live (régénéré à chaque build, committé) |
 | `public/admin/index.html` + `public/admin/config.yml` | Interface CMS (Sveltia) + config collections blog |
 | `public/llms.txt` | Manifest IA (Markdown) — résumé structuré pour AI Overviews / ChatGPT / Perplexity. À garder synchronisé avec la gamme produits + distinctions |
@@ -458,10 +459,18 @@ externes et des redirections 301 en dépendent.
 
 Depuis le 2026-09-21, chaque fiche liqueur porte deux champs distincts :
 
-| Champ | Contenu | Rendu |
+**Un seul bloc « Ingrédients » à l'écran** (arbitrage Guillaume, 21/09/2026 :
+« ingrédient et composition sont la même chose »). Les deux champs coexistent
+en base, mais la fiche n'en affiche qu'un :
+
+| Champ | Contenu | Quand il s'affiche |
 |---|---|---|
-| `composition` | liste éditoriale des plantes | puces dorées |
-| `ingredients` | mention réglementaire type étiquette (eau, sucre, alcool, puis les plantes) | ligne discrète sous les puces |
+| `ingredients` | mention type étiquette (eau, sucre, alcool, puis les plantes) | dès qu'il est renseigné — c'est le cas par défaut |
+| `composition` | même info en liste à puces | **uniquement** si `ingredients` est vide |
+
+Deux fiches n'ont volontairement pas de `ingredients` et retombent donc sur
+les puces : **Le Gorgeon des Machurés** et **La Pralicoquine**. Ne pas les
+« compléter » sans l'accord de Guillaume.
 
 Pendant EN : `productsEn[slug].ingredients` dans `src/data/products.en.ts`
 (le template retombe sur la valeur FR si la clé EN manque).

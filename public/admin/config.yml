@@ -132,16 +132,17 @@ collections:
         fields:
           - { name: size, label: "Contenance (cl)", widget: number, value_type: int, hint: "Ex: 20, 50, 70, 150" }
           - { name: image, label: "Photo", widget: image }
-      - name: composition
-        label: "Composition (plantes, ingrédients)"
-        widget: list
-        required: false
-        field: { name: ingredient, label: Ingrédient, widget: string }
       - name: ingredients
-        label: "Liste d'ingrédients (étiquette)"
+        label: "Ingrédients"
         widget: string
         required: false
-        hint: "Recopier la mention de l'étiquette, dans l'ordre. Ex : eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique"
+        hint: "La mention de l'étiquette, recopiée dans l'ordre. Ex : eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique. C'est ce qui s'affiche sur la fiche ; laisser vide affiche la liste à puces ci-dessous."
+      - name: composition
+        label: "Ingrédients — liste à puces (secours)"
+        widget: list
+        required: false
+        hint: "Affichée uniquement si le champ « Ingrédients » ci-dessus est vide."
+        field: { name: ingredient, label: Ingrédient, widget: string }
       - { name: usage, label: "Usage / occasion", widget: string, hint: "Ex: Digestif de prestige, Apéritif amer, Accessoire" }
       - { name: tagline, label: "Accroche (affichée sur la carte)", widget: string, required: false }
       - { name: highlight, label: "Badge (ex: Meilleur Digestif du Monde 2025)", widget: string, required: false }

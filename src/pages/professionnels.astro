@@ -4,12 +4,24 @@ import { site } from '../data/site';
 import { Awards } from '@/components/ui/award';
 import { GlowCard } from '../components/ui/spotlight-card';
 import { getEntry } from 'astro:content';
+import { findAwardLogo } from '../data/award-logos';
 
 const entry = await getEntry('static-pages', 'professionnels');
 if (!entry) throw new Error("Contenu manquant : src/content/static-pages/professionnels.md");
 const { meta } = entry.data;
 
 // Schema breadcrumb + FAQ pour la page pro (actions recommandées par l'audit)
+// Distinctions mises en avant côté pros. Les libellés sont recopiés
+// mot pour mot depuis le frontmatter `awards` des fiches produit, pour que
+// `findAwardLogo` retrouve le visuel officiel du concours. Si un logo venait
+// à manquer, la vignette retombe sur le laurier dessiné — rien ne disparaît.
+const proAwards = [
+  { award: 'Meilleur Digestif du Monde 2025 — World Drinks Awards', product: "L'Alchimie Végétale" },
+  { award: "Médaille d'Or 2026 — Concours de Lyon", product: "L'Herbe des Druides" },
+  { award: "Médaille d'Argent 2024 — Concours Général Agricole de Paris", product: "L'Herbe des Druides" },
+  { award: "Médaille d'Or 2025 — Concours Général Agricole de Paris", product: "Le Cerf'Gent" },
+].map((a) => ({ ...a, logo: findAwardLogo(a.award) }));
+
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -546,43 +558,33 @@ const eventFormats = [
           prêts à mettre en carte ou en rayon.
         </p>
       </div>
-      <div class="flex flex-wrap justify-center gap-2 md:gap-3 max-w-2xl mx-auto">
-        <Awards
-          client:visible
-          variant="award"
-          level="gold"
-          title="Meilleur Digestif du Monde"
-          subtitle="World Drinks Awards 2025"
-          recipient="L'Alchimie Végétale"
-          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
-        />
-        <Awards
-          client:visible
-          variant="award"
-          level="gold"
-          title="Médaille d'Or"
-          subtitle="Concours de Lyon"
-          recipient="L'Herbe des Druides"
-          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
-        />
-        <Awards
-          client:visible
-          variant="award"
-          level="silver"
-          title="Médaille d'Argent"
-          subtitle="Concours Général Paris"
-          recipient="L'Herbe des Druides (×2)"
-          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
-        />
-        <Awards
-          client:visible
-          variant="award"
-          level="gold"
-          title="Médaille d'Or"
-          subtitle="Concours National"
-          recipient="Le Cerf'Gent"
-          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
-        />
+      <div class="flex flex-wrap justify-center gap-5 md:gap-8 max-w-3xl mx-auto">
+        {proAwards.map((a) => (
+          a.logo ? (
+            <figure class="w-[calc(50%-0.625rem)] sm:w-[160px] flex flex-col items-center gap-2.5">
+              <img
+                src={a.logo.logo}
+                alt={a.logo.alt}
+                width="160"
+                height="140"
+                loading="lazy"
+                class="w-full h-[110px] md:h-[140px] object-contain"
+              />
+              <figcaption class="text-[11px] leading-snug text-ink-600 text-center">
+                {a.product}
+              </figcaption>
+            </figure>
+          ) : (
+            <Awards
+              client:visible
+              variant="award"
+              level="gold"
+              title={a.award}
+              recipient={a.product}
+              className="w-[calc(50%-0.625rem)] sm:w-[160px] min-h-[156px]"
+            />
+          )
+        ))}
       </div>
     </div>
   </section>
