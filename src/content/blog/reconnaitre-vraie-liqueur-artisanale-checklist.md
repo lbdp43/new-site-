@@ -32,7 +32,7 @@ L'industriel a tendance à dissimuler ses ingrédients derrière des mentions va
 - ⚠️ "Arômes naturels" — faux ami, ce sont des arômes industriels conformes au [Codex Alimentarius](https://www.fao.org/fao-who-codexalimentarius/fr/)
 - ❌ "Colorant E150" (caramel industriel) ou "E133" (bleu brillant)
 
-La couleur d'une liqueur artisanale doit venir d'**un ingrédient qui se boit** : chlorophylle naturelle des plantes (vert pâle), charbon végétal (noir profond comme [notre Gorgeon des Machurés](/boutique/gorgeon-des-machures)), fruits rouges macérés (rubis pour [La Flèche Ardente](/boutique/fleche-ardente)). Jamais de colorant de synthèse.
+La couleur d'une liqueur artisanale doit venir d'**un ingrédient qui se boit** : chlorophylle naturelle des plantes (vert pâle), charbon végétal (noir profond comme [notre Gorgeon des Mâchurés](/boutique/gorgeon-des-machures)), fruits rouges macérés (rubis pour [La Flèche Ardente](/boutique/fleche-ardente)). Jamais de colorant de synthèse.
 
 ## 3. L'origine traçable des plantes
 

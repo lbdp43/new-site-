@@ -1,5 +1,5 @@
 ---
-name: "Le Gorgeon des Machurés"
+name: "Le Gorgeon des Mâchurés"
 range: brasserie
 seoCategory: "Liqueur de verveine noire artisanale (charbon végétal)"
 priceMin: 17
@@ -36,6 +36,6 @@ wcId: 71
 order: 3
 ---
 
-Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).
+Une verveine noire, colorée au charbon végétal, à boire en mémoire des Mâchurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).
 
 Élue **Meilleure liqueur de plantes française 2026** aux World Liqueur Awards de Londres.

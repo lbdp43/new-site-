@@ -23,7 +23,7 @@ It builds the heart of our *Herbe des Druides* (28%) — which France Bleu featu
 
 A wild cousin of common thyme, wild thyme grows spontaneously on dry, sunny slopes in mid-mountain regions. Small, discreet, it carpets the stones. Its scent is more mentholated, more wild than thyme's — with a **camphor note** that nicely tempers the alcohol in a liqueur.
 
-It is sometimes said to have been the shepherds' favourite plant — chewed during transhumance to refresh themselves. At our place, it softens the verbena of *L'Herbe des Druides* and brings its herbaceous note to *Le Gorgeon des Machurés*.
+It is sometimes said to have been the shepherds' favourite plant — chewed during transhumance to refresh themselves. At our place, it softens the verbena of *L'Herbe des Druides* and brings its herbaceous note to *Le Gorgeon des Mâchurés*.
 
 ## Caraway (*Carum carvi*)
 
@@ -36,7 +36,7 @@ In liqueur, caraway **anchors** the floral and mentholated notes. Without it, ou
 Each plant has its role. Around this core trio, we also work with:
 
 - **Hyssop** (*Hyssopus officinalis*) — cousin of lavender, with a hint of camphor. Goes into *L'Essence des Alpes*.
-- **Southernwood** (*Artemisia abrotanum*) — cousin of wormwood, much milder, with a spicy note. It gives *Le Gorgeon des Machurés* its depth and structures the *Verveine CBD Aurone* from the Lumière Obscure range.
+- **Southernwood** (*Artemisia abrotanum*) — cousin of wormwood, much milder, with a spicy note. It gives *Le Gorgeon des Mâchurés* its depth and structures the *Verveine CBD Aurone* from the Lumière Obscure range.
 - **Lemon balm** (*Melissa officinalis*) — the great soother of herbal medicine. Floral, lightly lemony, almost sweet. Key in *La Lime des Prés* where it replaces lemon.
 
 ## Why come back to these plants?
@@ -47,4 +47,4 @@ Finally, for a slightly more intimate reason: these plants have a story. Our gra
 
 ---
 
-**Going further:** our *Brasserie des Plantes* range (L'Alchimie Végétale, L'Herbe des Druides, Le Gorgeon des Machurés, La Lime des Prés, Le Nectar d'Ostara, La Flèche Ardente) composes around these botanicals.
+**Going further:** our *Brasserie des Plantes* range (L'Alchimie Végétale, L'Herbe des Druides, Le Gorgeon des Mâchurés, La Lime des Prés, Le Nectar d'Ostara, La Flèche Ardente) composes around these botanicals.

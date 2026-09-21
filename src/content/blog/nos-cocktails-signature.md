@@ -48,14 +48,14 @@ schemaRecipes:
       - "Shaker 12 secondes. Double-filtrer dans un verre highball sur glace neuve."
       - "Compléter avec un trait d'eau pétillante. Décorer de menthe fraîche et deux framboises."
   - name: "Le Black Mule"
-    description: "Version végétale du Moscow Mule à base de Gorgeon des Machurés et ginger beer."
+    description: "Version végétale du Moscow Mule à base de Gorgeon des Mâchurés et ginger beer."
     recipeYield: "1 verre"
     prepTime: "PT3M"
     totalTime: "PT3M"
     recipeCategory: "Cocktail"
-    keywords: "cocktail ginger beer, charbon végétal, Gorgeon des Machurés"
+    keywords: "cocktail ginger beer, charbon végétal, Gorgeon des Mâchurés"
     recipeIngredient:
-      - "4 cl de Gorgeon des Machurés"
+      - "4 cl de Gorgeon des Mâchurés"
       - "1,5 cl de jus de citron vert frais pressé"
       - "10 cl de ginger beer type Fever-Tree"
       - "Glaçons"
@@ -63,7 +63,7 @@ schemaRecipes:
       - "Quelques feuilles de menthe"
     recipeInstructions:
       - "Remplir un mug en cuivre ou un verre highball de glace."
-      - "Verser le Gorgeon des Machurés et le jus de citron vert."
+      - "Verser le Gorgeon des Mâchurés et le jus de citron vert."
       - "Compléter avec le ginger beer. Remuer brièvement."
       - "Décorer d'une rondelle de gingembre frais et de feuilles de menthe."
   - name: "La Verveine Printanière"
@@ -144,17 +144,17 @@ Voici **cinq recettes signatures**, travaillées avec des barmen partenaires à 
 
 ## 3. Le Black Mule
 
-*Version végétale du Moscow Mule, à base de Gorgeon des Machurés.*
+*Version végétale du Moscow Mule, à base de Gorgeon des Mâchurés.*
 
 **Ingrédients :**
-- 4 cl de [Gorgeon des Machurés](/boutique/gorgeon-des-machures)
+- 4 cl de [Gorgeon des Mâchurés](/boutique/gorgeon-des-machures)
 - 1,5 cl de jus de citron vert frais
 - 10 cl de ginger beer (type Fever-Tree)
 - Glaçons, rondelle de gingembre frais, menthe
 
 **Montage :** mug en cuivre (ou verre highball), plein de glace. Verser Gorgeon + jus de citron vert. Compléter avec le ginger beer. Remuer brièvement. Piquer une rondelle de gingembre frais et quelques feuilles de menthe.
 
-**Pourquoi ça marche :** le charbon végétal et les racines du Gorgeon des Machurés se marient au piquant du gingembre. Le résultat est noir, profond, étonnamment rafraîchissant.
+**Pourquoi ça marche :** le charbon végétal et les racines du Gorgeon des Mâchurés se marient au piquant du gingembre. Le résultat est noir, profond, étonnamment rafraîchissant.
 
 ## 4. La Verveine Printanière
 
