@@ -1,0 +1,93 @@
+# Généré par scripts/generate-cloudflare-config.mjs — ne pas éditer à la main.
+# Source de vérité : vercel.json. Régénérer après toute modification.
+#
+# Cloudflare évalue de haut en bas, première règle gagnante :
+# les règles exactes passent avant les règles à joker.
+
+# --- 52 règles exactes ---
+/shop/lalchimie-vegetale  /boutique/alchimie-vegetale  301
+/shop/lalchimie-vegetale-cuvee-michel  /boutique/alchimie-cuvee-michel  301
+/shop/lherbe-des-druides  /boutique/herbe-des-druides  301
+/shop/lherbe-des-druides-finition-fut-de-chene  /boutique/herbe-druides-fut-chene  301
+/shop/cerfgent  /boutique/cerf-gent  301
+/shop/lessence-des-alpes  /boutique/essence-des-alpes  301
+/shop/le-gorgeon-des-machures  /boutique/gorgeon-des-machures  301
+/shop/le-nectar-dostara  /boutique/nectar-ostara  301
+/shop/la-fleche-ardente  /boutique/fleche-ardente  301
+/shop/la-lime-des-pres  /boutique/lime-des-pres  301
+/shop/la-pralicoquine  /boutique/pralicoquine  301
+/shop/le-menthor  /boutique/menthor  301
+/shop/zeleste  /boutique/zeleste  301
+/shop/verveine-cbd-aurone  /boutique  301
+/shop/menthe-cbd-ortie  /boutique  301
+/shop/absinthe-cbd-citron  /boutique  301
+/shop/coffret-initiation  /boutique/coffret-initiation  301
+/shop/flasque  /boutique/flasque-entonnoir  301
+/shop  /boutique  301
+/shop/  /boutique  301
+/nos-cocktails  /cocktails  301
+/nous-contacter  /contact  301
+/cart  /panier  301
+/checkout  /commande  301
+/politique-de-cookies-ue  /politique-cookies  301
+/conditions-generales-de-vente  /cgv  301
+/politique-de-retour  /cgv  301
+/my-account  /  301
+/produit-categorie  /boutique  301
+/product-category  /boutique  301
+/etiquette-produit  /boutique  301
+/product-tag  /boutique  301
+/lumiere-obscure  /boutique  301
+/lumiere-obscure/  /boutique  301
+/boutique/menthe-cbd-ortie  /boutique  301
+/boutique/menthe-cbd-ortie/  /boutique  301
+/boutique/verveine-cbd-aurone  /boutique  301
+/boutique/verveine-cbd-aurone/  /boutique  301
+/boutique/absinthe-cbd-citron  /boutique  301
+/boutique/absinthe-cbd-citron/  /boutique  301
+/blog/cbd-et-plantes-lumiere-obscure  /blog  301
+/blog/cbd-et-plantes-lumiere-obscure/  /blog  301
+/en/dark-light  /en/shop  301
+/en/dark-light/  /en/shop  301
+/en/shop/menthe-cbd-ortie  /en/shop  301
+/en/shop/menthe-cbd-ortie/  /en/shop  301
+/en/shop/verveine-cbd-aurone  /en/shop  301
+/en/shop/verveine-cbd-aurone/  /en/shop  301
+/en/shop/absinthe-cbd-citron  /en/shop  301
+/en/shop/absinthe-cbd-citron/  /en/shop  301
+/en/journal/cbd-et-plantes-lumiere-obscure  /en/journal  301
+/en/journal/cbd-et-plantes-lumiere-obscure/  /en/journal  301
+
+# --- 32 règles à joker ---
+/shop/lalchimie-vegetale/*  /boutique/alchimie-vegetale  301
+/shop/lalchimie-vegetale-cuvee-michel/*  /boutique/alchimie-cuvee-michel  301
+/shop/lherbe-des-druides/*  /boutique/herbe-des-druides  301
+/shop/lherbe-des-druides-finition-fut-de-chene/*  /boutique/herbe-druides-fut-chene  301
+/shop/cerfgent/*  /boutique/cerf-gent  301
+/shop/lessence-des-alpes/*  /boutique/essence-des-alpes  301
+/shop/le-gorgeon-des-machures/*  /boutique/gorgeon-des-machures  301
+/shop/le-nectar-dostara/*  /boutique/nectar-ostara  301
+/shop/la-fleche-ardente/*  /boutique/fleche-ardente  301
+/shop/la-lime-des-pres/*  /boutique/lime-des-pres  301
+/shop/la-pralicoquine/*  /boutique/pralicoquine  301
+/shop/le-menthor/*  /boutique/menthor  301
+/shop/zeleste/*  /boutique/zeleste  301
+/shop/verveine-cbd-aurone/*  /boutique  301
+/shop/menthe-cbd-ortie/*  /boutique  301
+/shop/absinthe-cbd-citron/*  /boutique  301
+/shop/coffret-initiation/*  /boutique/coffret-initiation  301
+/shop/flasque/*  /boutique/flasque-entonnoir  301
+/nos-cocktails/*  /cocktails  301
+/nous-contacter/*  /contact  301
+/cart/*  /panier  301
+/checkout/*  /commande  301
+/politique-de-cookies-ue/*  /politique-cookies  301
+/conditions-generales-de-vente/*  /cgv  301
+/politique-de-retour/*  /cgv  301
+/my-account/*  /  301
+/produit-categorie/*  /boutique  301
+/product-category/*  /boutique  301
+/etiquette-produit/*  /boutique  301
+/product-tag/*  /boutique  301
+/lumiere-obscure/*  /boutique  301
+/en/dark-light/*  /en/shop  301

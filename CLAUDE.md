@@ -23,7 +23,13 @@ dupliquer la logique e-commerce.
 - **Tailwind CSS v4** via `@tailwindcss/vite`
 - **Framer Motion** pour les animations
 - **Stripe Elements** (`@stripe/stripe-js`, `@stripe/react-stripe-js`)
-- Hébergement : **Vercel** (auto-deploy depuis GitHub `main`)
+- Hébergement : **Vercel** (auto-deploy depuis GitHub `main`) → **migration
+  vers Cloudflare Pages décidée le 21/09/2026**, le plan gratuit de Vercel
+  interdisant l'usage commercial. Plan en 5 étapes dans
+  `docs/cloudflare-pages.md`. `vercel.json` reste la source de vérité des
+  en-têtes et des redirections ; la config Cloudflare en est dérivée au build,
+  donc les deux plateformes tournent sur le même build et le retour en arrière
+  reste une simple manipulation DNS.
 
 ## Internationalisation (i18n)
 
@@ -342,7 +348,11 @@ remplacer le contenu de la colonne gauche.
 | `public/llms.txt` | Manifest IA (Markdown) — résumé structuré pour AI Overviews / ChatGPT / Perplexity. À garder synchronisé avec la gamme produits + distinctions |
 | `docs/cms-admin.md` | Guide utilisateur du CMS (auth GitHub, rédaction, SEO) |
 | `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande, /admin) + priorités différenciées + locales sitemap **alignées sur les codes courts** (`fr`, `en`, `es`, `it` — pas `fr-FR`) pour cohérence avec `getHreflangLinks` HTML |
-| `vercel.json` | Headers sécurité (HSTS, X-Frame, **CSP enforced** depuis 2026-04-27) + override CSP permissive sur `/admin/*` (pour Sveltia CMS qui charge unpkg.com + auth GitHub) + noindex sur `test.*` |
+| `vercel.json` | **Source de vérité** des en-têtes et des 44 redirections 301. Headers sécurité (HSTS, X-Frame, **CSP enforced** depuis 2026-04-27) + noindex sur `test.*`. Le CSP global est assez permissif pour Sveltia (unpkg, cdn.jsdelivr, auth.sveltia.app, api.github.com) — il n'y a **pas** de règle `/admin/*` séparée, contrairement à ce que disait ce tableau avant le 21/09/2026. |
+| `public/_redirects` + `public/_headers` | **Générés** depuis `vercel.json` par `generate-cloudflare-config.mjs` au prebuild. Config Cloudflare Pages. Ne jamais éditer à la main. |
+| `scripts/generate-cloudflare-config.mjs` | Traduit `vercel.json` → `_redirects` / `_headers` |
+| `scripts/verify-cloudflare-config.mjs` | Rejoue les 44 redirections (152 URL) + contrôle que 23 pages vivantes ne sont capturées par aucune règle. **Fait échouer le build** en cas d'écart. |
+| `docs/cloudflare-pages.md` | Plan de migration Vercel → Cloudflare Pages en 5 étapes |
 | `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
 | `blog-audit-report.md` | Audit qualité 28 articles blog FR (2026-04-27) — scoring 100 pts, action queue priorisée |
 | `seo-technical-report.md` | Audit technique site (2026-04-27) — score 81/100, 5 issues pré-bascule www. |

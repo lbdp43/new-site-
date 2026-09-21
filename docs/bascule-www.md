@@ -50,6 +50,29 @@ dans la section « Actualité temporairement retirée » de `CLAUDE.md`.
 
 ---
 
+## ⚠️ L'hébergement change AVANT la bascule : Cloudflare Pages
+
+Décision Guillaume, 21/09/2026 : le site quitte Vercel, dont le plan gratuit
+interdit l'usage commercial et donc l'encaissement de paiements.
+
+**La migration se fait AVANT et SÉPARÉMENT de la bascule `www.`** — plan en
+5 étapes dans `docs/cloudflare-pages.md`. Le jour J, l'hébergeur doit déjà
+tourner depuis des jours et avoir encaissé un vrai paiement de test.
+
+Conséquences sur les étapes ci-dessous :
+- **Étape 3 (CORS)** : les origines à autoriser incluent l'URL Cloudflare de
+  test, sinon le panier échoue silencieusement.
+- **Étape 4 (DNS)** : la zone sera chez Cloudflare, pas chez IONOS. Le CNAME
+  `www.` pointe sur le projet Pages, et l'apex se règle en ajoutant
+  `www.labrasseriedesplantes.fr` **en premier** dans le projet — Cloudflare
+  redirige alors automatiquement l'apex vers lui.
+- Le `noindex` de `test.` ne passe plus par `vercel.json` mais par une
+  Transform Rule Cloudflare, **à créer avant tout domaine de test**.
+
+Ne pas supprimer le projet Vercel : il reste le plan de repli.
+
+---
+
 ## ☝️ Avant de commencer — pré-requis à valider
 
 - [ ] **Testé un vrai paiement en conditions réelles** (commande de 1-2 €
