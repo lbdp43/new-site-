@@ -62,7 +62,7 @@ export const ranges: Record<ProductRange, { name: string; baseline: string; desc
     name: 'Gamme Apéritif',
     baseline: 'Des apéritifs amers ou gourmands, 15 à 17,5°, à servir givrés.',
     description:
-      "Plus légers en alcool, plus vifs, conçus pour ouvrir les rassemblements. De l'alternative française à la Suze (Cerf'Gent) à la menthe en triple alliance (Menthor), en passant par la praline (Pralicoquine) et les agrumes (Zéleste).",
+      "Plus légers en alcool, plus vifs, conçus pour ouvrir les rassemblements. De la gentiane amère (Cerf'Gent) à la menthe en triple alliance (Menthor), en passant par la praline (Pralicoquine) et les agrumes (Zéleste).",
   },
   'lumiere-obscure': {
     name: 'Lumière Obscure',

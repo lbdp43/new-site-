@@ -153,7 +153,7 @@ export const productsEn: Record<string, ProductEn> = {
   'cerf-gent': {
     subtitle: 'French bitter aperitif — gentian & cinchona',
     composition: ['Gentian', 'Cinchona', 'Lemon zest', 'Nutmeg', 'Coriander seeds', 'Cinnamon'],
-    usage: 'Bitter aperitif — the French answer to Suze',
+    usage: 'Bitter aperitif — gentian, cinchona, spices',
     tagline: 'A light, fresh gentian with a fine bitterness.',
     highlight: 'Gold Medal Paris 2025',
     awards: ['Gold Medal 2025 — Paris Agricultural Competition'],
@@ -204,10 +204,10 @@ export const productsEn: Record<string, ProductEn> = {
   'zeleste': {
     subtitle: 'Citrus trio aperitif',
     composition: ['Lemon (zest + juice)', 'Orange', 'Lime'],
-    usage: 'Fresh aperitif — alternative to Limoncello',
+    usage: 'Fresh aperitif — lemon, orange, lime',
     tagline: 'Citrus trio — fresh, bright and tangy.',
     description:
-      "A trio of citrus: lemon, orange, lime — zests and juices. More complex than a classic Limoncello, with a subtle underlying bitterness that gives it character. The originality and freshness of a distinctive aperitif.",
+      "A trio of citrus: lemon, orange, lime — zests and juices. A subtle underlying bitterness gives it character and length. The originality and freshness of a distinctive aperitif.",
     tasting: {
       nose: 'Bright citrus, fresh zest.',
       palate: 'Tangy, with a light bitterness at the back.',

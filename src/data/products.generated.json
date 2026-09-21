@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T14:26:05.994Z",
+  "generatedAt": "2026-09-21T14:37:21.154Z",
   "productCount": 18,
   "draftCount": 0,
   "products": [
@@ -294,7 +294,7 @@
       "priceMax": 27,
       "image": "/images/products/cerf-gent.webp",
       "alcohol": 15,
-      "usage": "Apéritif amer — alternative française à la Suze",
+      "usage": "Apéritif amer — gentiane, quinquina, épices",
       "tagline": "Une gentiane légère, fraîche et finement amère.",
       "highlight": "Médaille d'Or Paris 2025",
       "serving": "Très frais, en apéritif pur ou allongé d'un trait de tonic.",
@@ -402,13 +402,13 @@
       "priceMax": 27,
       "image": "/images/products/zeleste.webp",
       "alcohol": 17.5,
-      "usage": "Apéritif frais — alternative au Limoncello",
+      "usage": "Apéritif frais — citron jaune, orange, citron vert",
       "tagline": "Trio d'agrumes — frais, vif et acidulé.",
       "serving": "Très frais en apéritif, ou en long drink avec tonic.",
       "seoCategory": "Liqueur d'agrumes (citron · combava · orange)",
       "wcId": 4037,
       "order": 4,
-      "description": "Un trio d'agrumes : citron jaune, orange, citron vert — zestes et jus. Plus complexe qu'un Limoncello classique, avec une légère amertume en fond qui donne du caractère. L'originalité et la fraîcheur d'un apéritif distinct.",
+      "description": "Un trio d'agrumes : citron jaune, orange, citron vert — zestes et jus. Une légère amertume en fond donne du caractère et de la longueur. L'originalité et la fraîcheur d'un apéritif distinct.",
       "composition": [
         "Citron jaune (zestes + jus)",
         "Orange",
