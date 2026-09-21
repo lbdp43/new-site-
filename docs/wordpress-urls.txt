@@ -13,10 +13,8 @@
 # Format : une URL par ligne, chemin seul, avec le slash final tel que
 # WordPress le publie. Les lignes vides et les `#` sont ignorés.
 #
-# Sitemaps encore à relever (Guillaume) :
-#   - category-sitemap1.xml  → les catégories du blog
-#   - post_tag-sitemap1.xml  → les étiquettes du blog
-# Probablement vides ou anecdotiques (voir ci-dessous), mais à confirmer.
+# ✅ RELEVÉ COMPLET AU 21/09/2026 — les 5 sitemaps de l'index ont été
+# vérifiés. Plus rien à demander à Guillaume sur ce sujet.
 
 # --- page-sitemap1.xml (13 URL) ---
 /
@@ -67,3 +65,8 @@
 # qu'on veut — elle ne remplace aucune URL WordPress existante. Les 33 articles
 # sont du contenu NEUF, pas une migration.
 /
+
+# --- category-sitemap1.xml et post_tag-sitemap1.xml : VIDES ---
+# Relevés le 21/09/2026 : les deux affichent un tableau sans aucune ligne.
+# Zéro catégorie, zéro étiquette — cohérent avec l'absence d'article.
+# Rien à rediriger, et donc pas besoin de règle pour /category/* ni /tag/*.

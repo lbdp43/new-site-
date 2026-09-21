@@ -719,10 +719,17 @@ Deux conséquences qui simplifient beaucoup :
    sont du contenu **neuf**, pas une migration. Rien ne se perd à attendre
    que la relecture soit finie.
 
-Restent à relever, par acquit de conscience : `category-sitemap1.xml` et
-`post_tag-sitemap1.xml`. Sans article publié, ils sont probablement vides ou
-anecdotiques — mais aucune redirection n'existe pour `/category/*` ni
-`/tag/*`, donc autant vérifier.
+`category-sitemap1.xml` et `post_tag-sitemap1.xml` ont été relevés dans la
+foulée : **les deux sont vides**, zéro ligne. Cohérent avec l'absence
+d'article. Rien à rediriger, pas besoin de règle `/category/*` ni `/tag/*`.
+
+### ✅ Le relevé du WordPress est COMPLET
+
+Les 5 sitemaps de l'index ont été vérifiés le 21/09/2026. **Le plan de 301
+n'est plus une hypothèse : il est confronté à l'inventaire réel du site
+WordPress, et le contrôle tourne à chaque build.** Ne pas redemander ces
+sitemaps à Guillaume — sauf si le WordPress publie de nouvelles pages d'ici
+la bascule, auquel cas il suffit d'ajouter les URL à `docs/wordpress-urls.txt`.
 
 ## 🔌 MCP Vercel — ce qui marche et ce qui ne marche pas
 

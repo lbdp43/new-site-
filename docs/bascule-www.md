@@ -88,6 +88,11 @@ permettraient de basculer en quelques heures.
       vrai ; elle ne se rabat pas en silence sur le `wc-live.json` committé.
       (Les 3 variables `PUBLIC_*` sont également en place sur les trois
       environnements, et `INDEXNOW_ENABLED` est bien absente.)
+- [x] ✅ **Plan de redirections 301 vérifié contre le WordPress réel** —
+      les 5 sitemaps relevés le 21/09/2026. 32 URL réellement publiées,
+      toutes couvertes (1 trou trouvé et corrigé : `/shop/lessence-des-cimes/`).
+      Le WordPress n'a **aucun article de blog**, aucune catégorie, aucune
+      étiquette. Contrôlé à chaque build.
 - [ ] **Backups WordPress** à jour (complet BDD + fichiers). UpdraftPlus ou
       équivalent vers Google Drive / Dropbox.
 - [ ] **Produit `coffret-original` créé côté Woo** (actuellement manquant, le
