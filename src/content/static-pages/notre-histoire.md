@@ -1,7 +1,7 @@
 ---
 meta:
   title: "Notre histoire — La Brasserie des Plantes, Haute-Loire"
-  description: "Deux amis d'enfance, une passion pour les plantes oubliées. L'aventure de La Brasserie des Plantes depuis Saint-Didier-en-Velay — fondée en 2021, dix distinctions internationales, Meilleur Digestif du Monde 2025."
+  description: "Deux amis d'enfance, une passion pour les plantes oubliées. L'aventure de La Brasserie des Plantes depuis Saint-Didier-en-Velay — fondée en 2021, douze distinctions internationales, Meilleur Digestif du Monde 2025."
 
 pageHeader:
   kicker: "Notre histoire"
@@ -15,14 +15,14 @@ videoHero:
   badge: "En Haute-Loire · Depuis 2021"
   script: "Ça fait plus de vingt ans qu'on se connaît."
   scriptLineBreakAfter: "vingt ans"
-  tagline: "Deux amis d'enfance. Un terroir. Dix distinctions internationales, et des liqueurs faites à quatre mains."
+  tagline: "Deux amis d'enfance. Un terroir. Douze distinctions internationales, et des liqueurs faites à quatre mains."
 
 stats:
   - value: "2021"
     label: "Année de fondation"
   - value: "18"
     label: "Références au catalogue"
-  - value: "10"
+  - value: "12"
     label: "Distinctions internationales"
   - value: "trophy"
     label: "Meilleur digestif du monde 2025"
@@ -76,11 +76,11 @@ storySections:
 
 distinctionsSection:
   kicker: "La consécration"
-  title: "Dix distinctions"
+  title: "Douze distinctions"
   titleAccent: "en quatre ans"
   paragraphs:
     - "Une reconnaissance qui dépasse largement les frontières du Velay. Chacune de ces médailles a récompensé un travail de formulation long, patient, souvent invisible — trois à quatre ans pour une recette aboutie."
-    - "Trois produits de la gamme ont été distingués à ce jour : **L'Herbe des Druides**, notre liqueur la plus médaillée avec **trois Or au Concours International de Lyon**, un Argent au Concours Général Agricole de Paris et un Argent aux World Drinks Awards de Londres ; **Le Cerf'Gent**, notre apéritif amer, **Or à Paris en 2025** ; et **L'Essence des Cimes**, **Argent au Concours International de Lyon en 2026**. Sans oublier *L'Alchimie Végétale*, sacrée Meilleur Digestif du Monde."
+    - "Cinq produits de la gamme ont été distingués à ce jour : **L'Herbe des Druides**, notre liqueur la plus médaillée avec **trois Or au Concours International de Lyon**, un Argent au Concours Général Agricole de Paris et un Argent aux World Drinks Awards de Londres ; **Le Gorgeon des Machurés**, élu **Meilleure liqueur de plantes française 2026** aux World Liqueur Awards de Londres ; **Le Cerf'Gent**, notre apéritif amer, **Or à Paris en 2025** ; et **L'Essence des Cimes**, **Argent au Concours International de Lyon** et **Argent aux World Liqueur Awards** en 2026. Sans oublier *L'Alchimie Végétale*, sacrée Meilleur Digestif du Monde en 2025, puis **Meilleur digestif français 2026**."
   flagship:
     badge: "★ Titre mondial"
     title: "Meilleur Digestif du Monde 2025"
@@ -112,6 +112,14 @@ distinctionsSection:
         - year: "2026"
           tier: "gold"
           competition: "Concours International de Lyon"
+    - product: "Le Gorgeon des Machurés"
+      slug: "gorgeon-des-machures"
+      tagline: "Verveine · aurone · baraban · charbon"
+      note: "Élue Meilleure liqueur de plantes française 2026 aux World Liqueur Awards de Londres."
+      medals:
+        - year: "2026"
+          tier: "gold"
+          competition: "World Liqueur Awards — Londres"
     - product: "Le Cerf'Gent"
       slug: "cerf-gent"
       tagline: "Apéritif amer · gentiane · quinquina"
@@ -123,11 +131,14 @@ distinctionsSection:
     - product: "L'Essence des Cimes"
       slug: "essence-des-alpes"
       tagline: "Génépi · bourgeon de sapin · hysope"
-      note: "Un hommage alpin au génépi, au bourgeon de sapin et à l'hysope — médaillée d'Argent au Concours International de Lyon."
+      note: "Un hommage alpin au génépi, au bourgeon de sapin et à l'hysope — double Argent en 2026, à Lyon et à Londres."
       medals:
         - year: "2026"
           tier: "silver"
           competition: "Concours International de Lyon"
+        - year: "2026"
+          tier: "silver"
+          competition: "World Liqueur Awards — Londres"
   innovationAward:
     year: "2023"
     title: "Lauréat Artinov Haute-Loire"

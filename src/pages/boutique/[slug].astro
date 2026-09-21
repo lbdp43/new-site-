@@ -494,7 +494,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
   <!-- Bandeau horizontal Notes de dégustation / Composition / Conseil — placé
        juste après le hero pour combler le vide à gauche sous la photo tout en
        gardant l'info à portée de scroll. 3 colonnes sur desktop, stack sur mobile. -->
-  {(product.tasting || product.ingredients || (product.composition && product.composition.length > 0) || product.serving) && (
+  {(product.tasting || product.ingredients || product.serving) && (
     <section class="py-10 bg-cream-50 border-y border-forest-100/60">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-3 gap-6 md:gap-10">
@@ -525,28 +525,18 @@ const parsedAwards = (product.awards || []).map(parseAward);
               </dl>
             </div>
           )}
-          {/* Un seul bloc « Ingrédients » : composition et ingrédients désignent
-              la même chose (arbitrage Guillaume, 21/09/2026). On affiche la
-              mention d'étiquette quand elle existe, sinon la liste à puces —
-              c'est le cas du Gorgeon et de la Pralicoquine, qui n'ont
-              volontairement pas de mention rédigée. */}
-          {(product.ingredients || (product.composition && product.composition.length > 0)) && (
+          {/* Un seul bloc « Ingrédients » : composition et ingrédients
+              désignaient la même chose (arbitrage Guillaume, 21/09/2026).
+              Seul `ingredients` est affiché — `composition` reste en base
+              pour les vignettes de /lumiere-obscure. Une fiche sans
+              `ingredients` n'affiche aucun bloc : c'est volontaire pour Le
+              Gorgeon des Machurés et La Pralicoquine. */}
+          {product.ingredients && (
             <div class="md:px-6 md:border-r md:border-forest-100/70">
               <div class="text-xs uppercase tracking-[0.2em] text-forest-700 font-medium mb-3">
                 Ingrédients
               </div>
-              {product.ingredients ? (
-                <p class="text-sm text-ink-700 leading-relaxed">{product.ingredients}</p>
-              ) : (
-                <ul class="text-sm text-ink-700 leading-relaxed space-y-1.5">
-                  {product.composition.map((c) => (
-                    <li class="flex items-start gap-3">
-                      <span class="flex-none w-1.5 h-1.5 rounded-full bg-gold-500 mt-2" aria-hidden="true"></span>
-                      <span>{c}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <p class="text-sm text-ink-700 leading-relaxed">{product.ingredients}</p>
             </div>
           )}
           {product.serving && (

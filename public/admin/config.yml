@@ -136,12 +136,12 @@ collections:
         label: "Ingrédients"
         widget: string
         required: false
-        hint: "La mention de l'étiquette, recopiée dans l'ordre. Ex : eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique. C'est ce qui s'affiche sur la fiche ; laisser vide affiche la liste à puces ci-dessous."
+        hint: "La mention de l'étiquette, recopiée dans l'ordre. Ex : eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique. Laisser vide = aucun bloc Ingrédients sur la fiche (voulu pour Le Gorgeon des Machurés et La Pralicoquine)."
       - name: composition
-        label: "Ingrédients — liste à puces (secours)"
+        label: "Plantes (vignettes /lumiere-obscure)"
         widget: list
         required: false
-        hint: "Affichée uniquement si le champ « Ingrédients » ci-dessus est vide."
+        hint: "N'apparaît PAS sur la fiche produit. Sert aux vignettes de la page Lumière Obscure. Pour la fiche, remplir « Ingrédients » ci-dessus."
         field: { name: ingredient, label: Ingrédient, widget: string }
       - { name: usage, label: "Usage / occasion", widget: string, hint: "Ex: Digestif de prestige, Apéritif amer, Accessoire" }
       - { name: tagline, label: "Accroche (affichée sur la carte)", widget: string, required: false }

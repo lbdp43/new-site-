@@ -327,7 +327,8 @@ remplacer le contenu de la colonne gauche.
 | `scripts/indexnow-submit.mjs` | Script postbuild : POST sitemap à IndexNow (Bing/Yandex) |
 | `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, `getSizePrices`, etc. |
 | `src/lib/featurable.ts` | Fetch (mémoïsé) des avis Google via Featurable au build. Expose `getFeaturableWidget()`, `getFeaturableAggregate()` et `buildAggregateRatingSchema()`. Single fetch partagé par `GoogleReviewsEmbed.astro` + le schema `LocalBusiness` (FR + EN home). |
-| `src/data/award-logos.ts` | Table libellé de distinction → visuel officiel du concours (`findAwardLogo`). Consommée par la fiche produit et la section « Des arguments de vente solides » de `/professionnels`. Ajouter un logo = déposer le WebP dans `public/images/awards/` + une entrée avec lookaheads (millésime + concours + niveau). |
+| `src/content/static-pages/notre-histoire.md` | Contient le **décompte des distinctions** (titre « Douze distinctions », tagline, bloc stats, paragraphe d'intro, cartes `productsWithMedals`). ⚠️ **Non dérivé des fiches produit** — à remettre à jour à la main quand une médaille est ajoutée, en même temps que le pendant EN `src/pages/en/our-story.astro` (compteur + paragraphe, tous deux en dur). Au 21/09/2026 : 12 distinctions, 5 produits. |
+| `src/data/award-logos.ts` | Table libellé de distinction → visuel officiel du concours (`findAwardLogo`). Consommée par la fiche produit et la section « Des arguments de vente solides » de `/professionnels`, qui affiche **toutes** les distinctions de la maison en dérivant les `awards` des fiches produit (12 au 21/09/2026) — aucune liste en dur, une médaille ajoutée à un frontmatter apparaît au build suivant. Ajouter un logo = déposer le WebP dans `public/images/awards/` + une entrée avec lookaheads (millésime + concours + niveau). |
 | `src/data/wc-live.json` | Snapshot stock + prix par contenance live (régénéré à chaque build, committé) |
 | `public/admin/index.html` + `public/admin/config.yml` | Interface CMS (Sveltia) + config collections blog |
 | `public/llms.txt` | Manifest IA (Markdown) — résumé structuré pour AI Overviews / ChatGPT / Perplexity. À garder synchronisé avec la gamme produits + distinctions |
@@ -460,17 +461,16 @@ externes et des redirections 301 en dépendent.
 Depuis le 2026-09-21, chaque fiche liqueur porte deux champs distincts :
 
 **Un seul bloc « Ingrédients » à l'écran** (arbitrage Guillaume, 21/09/2026 :
-« ingrédient et composition sont la même chose »). Les deux champs coexistent
-en base, mais la fiche n'en affiche qu'un :
+« ingrédient et composition sont la même chose »).
 
-| Champ | Contenu | Quand il s'affiche |
+| Champ | Contenu | Où il s'affiche |
 |---|---|---|
-| `ingredients` | mention type étiquette (eau, sucre, alcool, puis les plantes) | dès qu'il est renseigné — c'est le cas par défaut |
-| `composition` | même info en liste à puces | **uniquement** si `ingredients` est vide |
+| `ingredients` | mention type étiquette (eau, sucre, alcool, puis les plantes) | le bloc « Ingrédients » de la fiche produit, FR et EN |
+| `composition` | les plantes en liste | **plus sur la fiche produit** — uniquement les vignettes de `/lumiere-obscure` et `/en/dark-light` |
 
-Deux fiches n'ont volontairement pas de `ingredients` et retombent donc sur
-les puces : **Le Gorgeon des Machurés** et **La Pralicoquine**. Ne pas les
-« compléter » sans l'accord de Guillaume.
+**Une fiche sans `ingredients` n'affiche aucun bloc.** C'est volontaire pour
+**Le Gorgeon des Machurés** et **La Pralicoquine** (Guillaume, 21/09/2026) :
+ne pas les « compléter », et ne pas rétablir de repli sur `composition`.
 
 Pendant EN : `productsEn[slug].ingredients` dans `src/data/products.en.ts`
 (le template retombe sur la valeur FR si la clé EN manque).
@@ -584,6 +584,29 @@ articles" (retiré).
   Velay (Pagès)" ou "Salers (auvergnat)") — c'est factuel sur le concurrent
 - Ancrage géographique du LIEU : "atelier à Saint-Didier-en-Velay" / "fondateurs
   nés au pays" — vrai, n'engage pas la matière première
+
+**Formule de sourcing de référence (Guillaume, 21/09/2026)** — celle du hero
+de la home, à reprendre partout :
+
+> « des plantes soigneusement sélectionnées, notamment auprès de
+> **producteurs et cueilleurs partenaires** »
+
+Elle remplace « des cueilleurs et des maraîchers que nous sélectionnons **un
+par un** », qui sur-promet (on ne choisit ni ne rencontre chacun d'eux).
+Bannir aussi ce qui va avec : « chaque récoltant est rencontré »,
+« producteur rencontré », « tous nous connaissent par leur prénom »,
+EN « we pick one by one », « hand-picked », « every grower is met ».
+
+Appliqué au 21/09/2026 sur la **home** et **/nos-plantes** (+ `/en/our-plants`).
+**Reste à balayer** (~18 occurrences) : `src/content/static-pages/index.md`,
+`liqueurs-de-plantes.astro`, `en/index.astro`, `en/our-story.astro`,
+`products/alchimie-vegetale.md`, `products.en.ts`, et 8 articles de blog
+FR/EN dont `producteurs-partenaires-bio-velay` (titre + description +
+corps), `plantes-liqueur-haute-loire`, `quelle-liqueur-verveine-choisir-2026`,
+`reconnaitre-vraie-liqueur-artisanale-checklist`, `trois-amis-une-brasserie`,
+`velay-attractivite-portrait-institutionnel`, `la-verveine-citronnelle`.
+À faire sur accord de Guillaume — l'article `producteurs-partenaires-bio-velay`
+est construit entièrement sur cette promesse.
 
 **Commande de vérification (à lancer avant tout commit contenu) :**
 ```bash
