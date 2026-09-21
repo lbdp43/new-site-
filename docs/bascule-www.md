@@ -50,31 +50,37 @@ dans la section « Actualité temporairement retirée » de `CLAUDE.md`.
 
 ---
 
-## ⚠️ L'hébergement change AVANT la bascule : Cloudflare Pages
+## 🔒 On reste sur Vercel — mais le plan doit changer
 
-Décision Guillaume, 21/09/2026 : le site quitte Vercel, dont le plan gratuit
-interdit l'usage commercial et donc l'encaissement de paiements.
+Décision Guillaume, 21/09/2026 : après avoir comparé Cloudflare Pages, Railway
+et l'hébergement IONOS, **le site reste sur Vercel**. Pas de zone DNS à
+déplacer, pas de risque sur les emails, pas de configuration à retraduire :
+le plan de bascule ci-dessous s'applique tel quel.
 
-**La migration se fait AVANT et SÉPARÉMENT de la bascule `www.`** — plan en
-5 étapes dans `docs/cloudflare-pages.md`. Le jour J, l'hébergeur doit déjà
-tourner depuis des jours et avoir encaissé un vrai paiement de test.
+⚠️ **Mais le compte est sur le plan gratuit (Hobby)**, qui réserve l'usage à un
+cadre personnel et non commercial et interdit explicitement le traitement de
+paiement et les transactions e-commerce. Vercel se réserve le droit de
+désactiver un projet Hobby « avec ou sans préavis ». Tant que le site vit sur
+`test.`, le risque est théorique ; **le jour où `www.` encaisse des cartes, il
+ne l'est plus**.
 
-Conséquences sur les étapes ci-dessous :
-- **Étape 3 (CORS)** : les origines à autoriser incluent l'URL Cloudflare de
-  test, sinon le panier échoue silencieusement.
-- **Étape 4 (DNS)** : la zone sera chez Cloudflare, pas chez IONOS. Le CNAME
-  `www.` pointe sur le projet Pages, et l'apex se règle en ajoutant
-  `www.labrasseriedesplantes.fr` **en premier** dans le projet — Cloudflare
-  redirige alors automatiquement l'apex vers lui.
-- Le `noindex` de `test.` ne passe plus par `vercel.json` mais par une
-  Transform Rule Cloudflare, **à créer avant tout domaine de test**.
+→ Le passage en **Vercel Pro (20 $/mois)** est donc un pré-requis de la
+bascule, ajouté à la liste ci-dessous. Ce n'est pas un confort : c'est ce qui
+évite que la boutique disparaisse du jour au lendemain, un samedi de décembre.
 
-Ne pas supprimer le projet Vercel : il reste le plan de repli.
+ℹ️ Le travail de migration Cloudflare reste committé comme plan de repli
+(`docs/cloudflare-pages.md`). `public/_redirects` et `public/_headers` sont
+générés à chaque build et ignorés par Vercel : ils ne gênent rien et
+permettraient de basculer en quelques heures.
 
 ---
 
 ## ☝️ Avant de commencer — pré-requis à valider
 
+- [ ] 🔴 **Compte Vercel passé en plan Pro** — le plan Hobby interdit
+      l'usage commercial et l'encaissement de paiements ; un projet en
+      infraction peut être désactivé sans préavis. À faire AVANT que `www.`
+      serve le site. Voir la section « On reste sur Vercel » ci-dessus.
 - [ ] **Testé un vrai paiement en conditions réelles** (commande de 1-2 €
       depuis test.labrasseriedesplantes.fr, puis rembourser depuis l'admin WC).
       Vérifier : commande visible dans WP admin, email client reçu, EasyBee

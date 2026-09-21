@@ -23,13 +23,22 @@ dupliquer la logique e-commerce.
 - **Tailwind CSS v4** via `@tailwindcss/vite`
 - **Framer Motion** pour les animations
 - **Stripe Elements** (`@stripe/stripe-js`, `@stripe/react-stripe-js`)
-- Hébergement : **Vercel** (auto-deploy depuis GitHub `main`) → **migration
-  vers Cloudflare Pages décidée le 21/09/2026**, le plan gratuit de Vercel
-  interdisant l'usage commercial. Plan en 5 étapes dans
-  `docs/cloudflare-pages.md`. `vercel.json` reste la source de vérité des
-  en-têtes et des redirections ; la config Cloudflare en est dérivée au build,
-  donc les deux plateformes tournent sur le même build et le retour en arrière
-  reste une simple manipulation DNS.
+- Hébergement : **Vercel** (auto-deploy depuis GitHub `main`). Arbitrage
+  Guillaume du 21/09/2026 : **on reste sur Vercel**, après avoir envisagé
+  Cloudflare Pages, Railway et l'hébergement IONOS.
+
+  ⚠️ **Point ouvert qui conditionne la bascule** : le plan gratuit de Vercel
+  (Hobby) est réservé à un usage **personnel et non commercial** et interdit
+  explicitement le traitement de paiement et les transactions e-commerce, avec
+  désactivation possible « avec ou sans préavis ». Le compte était sur ce plan
+  au 21/09/2026. **Le passage en Pro doit être fait avant que `www.` encaisse
+  des cartes** — c'est un pré-requis de `docs/bascule-www.md`, pas un détail
+  d'intendance.
+
+  Le travail de migration vers Cloudflare Pages reste en place comme **plan de
+  repli** (`docs/cloudflare-pages.md`) : `public/_redirects` et
+  `public/_headers` sont générés au build et Vercel les ignore, donc ils ne
+  coûtent rien et permettent de basculer en quelques heures si besoin.
 
 ## Internationalisation (i18n)
 
@@ -349,10 +358,10 @@ remplacer le contenu de la colonne gauche.
 | `docs/cms-admin.md` | Guide utilisateur du CMS (auth GitHub, rédaction, SEO) |
 | `astro.config.mjs` | Config Astro + filtre sitemap (exclut /panier, /commande, /admin) + priorités différenciées + locales sitemap **alignées sur les codes courts** (`fr`, `en`, `es`, `it` — pas `fr-FR`) pour cohérence avec `getHreflangLinks` HTML |
 | `vercel.json` | **Source de vérité** des en-têtes et des 44 redirections 301. Headers sécurité (HSTS, X-Frame, **CSP enforced** depuis 2026-04-27) + noindex sur `test.*`. Le CSP global est assez permissif pour Sveltia (unpkg, cdn.jsdelivr, auth.sveltia.app, api.github.com) — il n'y a **pas** de règle `/admin/*` séparée, contrairement à ce que disait ce tableau avant le 21/09/2026. |
-| `public/_redirects` + `public/_headers` | **Générés** depuis `vercel.json` par `generate-cloudflare-config.mjs` au prebuild. Config Cloudflare Pages. Ne jamais éditer à la main. |
+| `public/_redirects` + `public/_headers` | **Générés** depuis `vercel.json` au prebuild. Inertes sur Vercel (qui les ignore) — ils n'existent que pour le plan de repli Cloudflare. Ne jamais éditer à la main. |
 | `scripts/generate-cloudflare-config.mjs` | Traduit `vercel.json` → `_redirects` / `_headers` |
-| `scripts/verify-cloudflare-config.mjs` | Rejoue les 44 redirections (152 URL) + contrôle que 23 pages vivantes ne sont capturées par aucune règle. **Fait échouer le build** en cas d'écart. |
-| `docs/cloudflare-pages.md` | Plan de migration Vercel → Cloudflare Pages en 5 étapes |
+| `scripts/verify-cloudflare-config.mjs` | **Utile indépendamment de l'hébergeur** : rejoue les 44 redirections sur 152 URL (avec ET sans slash final) et contrôle que 23 pages vivantes ne sont capturées par aucune règle. **Fait échouer le build** en cas d'écart. C'est le filet de sécurité du plan 301 de la bascule. |
+| `docs/cloudflare-pages.md` | Plan de repli Cloudflare Pages en 5 étapes (migration envisagée puis écartée le 21/09/2026) |
 | `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
 | `blog-audit-report.md` | Audit qualité 28 articles blog FR (2026-04-27) — scoring 100 pts, action queue priorisée |
 | `seo-technical-report.md` | Audit technique site (2026-04-27) — score 81/100, 5 issues pré-bascule www. |

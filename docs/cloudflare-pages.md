@@ -1,8 +1,28 @@
-# Migration vers Cloudflare Pages
+# Cloudflare Pages — plan de repli (non retenu)
 
-**Décision Guillaume, 21/09/2026.** Le site quitte Vercel pour Cloudflare Pages.
+> ## ⛔ Décision finale du 21/09/2026 : **on reste sur Vercel.**
+>
+> Cette migration a été préparée puis **écartée** le jour même. Guillaume a
+> arbitré en faveur de la simplicité : pas de zone DNS à déplacer, pas de
+> risque sur les emails, pas de configuration à retraduire.
+>
+> **Ne pas exécuter les étapes 1 à 5 sans une nouvelle décision explicite.**
+>
+> Ce qui reste vrai et utile :
+> - L'**étape 0 est faite et committée** — `public/_redirects` et
+>   `public/_headers` sont générés à chaque build. Ils sont inertes sur Vercel,
+>   qui les ignore. Basculer resterait donc une affaire d'heures, pas de jours.
+> - Le script `verify-cloudflare-config.mjs` tourne au build et **protège le
+>   plan de 301 quelle que soit la plateforme** : il a déjà attrapé 10 URL
+>   manquantes. Le garder.
+> - ⚠️ **Le motif qui a déclenché cette réflexion n'a PAS disparu** — voir
+>   ci-dessous. Il est reporté en pré-requis de `docs/bascule-www.md`.
 
-**Motif** : le plan Vercel actuel est le plan gratuit (Hobby), dont les
+---
+
+## Le problème d'origine, toujours ouvert
+
+Le plan Vercel du compte est le plan gratuit (Hobby), dont les
 conditions réservent l'usage à un cadre **personnel et non commercial**, et
 citent explicitement comme interdits « toute méthode de demande ou de
 traitement de paiement auprès des visiteurs » et « les transactions
@@ -10,19 +30,20 @@ e-commerce ». Vercel se réserve le droit de désactiver un projet Hobby **avec
 ou sans préavis**. Tant que le site est sur `test.` en construction, le risque
 est théorique ; le jour où `www.` encaisse des cartes, il ne l'est plus.
 
-Cloudflare Pages autorise explicitement l'usage commercial, offre la bande
-passante illimitée sur le statique, le déploiement automatique depuis GitHub
-et les prévisualisations par branche — donc sans rien perdre du confort
-actuel.
+**La solution retenue est donc le passage en Vercel Pro (20 $/mois)**, à faire
+avant que `www.` encaisse des cartes.
 
-**Alternative écartée** : Vercel Pro à 20 $/mois (zéro travail, mais 240 $/an).
-Également écartés : Railway (mauvais outil pour du statique, une seule région,
-bande passante facturée) et l'hébergement IONOS (pas de CDN, pas de
-déploiement automatique, et perte de l'isolation d'avec WordPress).
+**Options comparées le 21/09/2026, toutes écartées :**
+
+| Option | Coût | Pourquoi écartée |
+|---|---|---|
+| **Cloudflare Pages** | gratuit | Impose de déplacer la zone DNS (risque sur les emails) + retraduction de la config + zone grise sur les vidéos |
+| **Railway** | usage facturé | Mauvais outil pour du statique : une seule région, bande passante facturée, serveur allumé en permanence pour servir des fichiers |
+| **Hébergement IONOS** | déjà payé | Pas de CDN, pas de déploiement automatique, et surtout perte de l'isolation d'avec WordPress — un WP en panne emporterait la boutique |
 
 ---
 
-## ⚠️ Règle d'or : rien en même temps que la bascule `www.`
+## ⚠️ Si la migration est un jour relancée : rien en même temps que la bascule
 
 Chacune des étapes ci-dessous est réversible et se valide seule. Le jour de la
 bascule DNS, **tout doit déjà être en place et éprouvé depuis des jours**.
