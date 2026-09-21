@@ -10,6 +10,7 @@ import { cocktails } from '../../data/cocktails';
 import { site } from '../../data/site';
 import { reviewsByProduct, aggregateRating } from '../../data/reviews';
 import { getSchemaAvailability, isOutOfStock, isOnBackorder, getSizePrices } from '../../lib/wc-live';
+import { findAwardLogo } from '../../data/award-logos';
 
 export function getStaticPaths() {
   return products.map((product) => ({
@@ -199,7 +200,7 @@ const parseAward = (raw: string): ParsedAward => {
   const parts = raw.split(/\s[—–-]\s/);
   const title = (parts[0] || raw).trim();
   const issuer = (parts[1] || 'Distinction').trim();
-  return { level, title, issuer };
+  return { level, title, issuer, logo: findAwardLogo(raw) };
 };
 const parsedAwards = (product.awards || []).map(parseAward);
 ---
@@ -587,17 +588,36 @@ const parsedAwards = (product.awards || []).map(parseAward);
         <h2 class="font-display text-2xl md:text-3xl text-forest-900 mb-10 leading-tight">
           Ce flacon a été primé
         </h2>
-        <div class="flex flex-wrap justify-center gap-2 md:gap-3 max-w-2xl mx-auto">
+        <div class="flex flex-wrap justify-center items-start gap-5 md:gap-8 max-w-3xl mx-auto">
           {parsedAwards.map((a) => (
-            <Awards
-              client:visible
-              variant="award"
-              level={a.level}
-              title={a.title}
-              subtitle={a.issuer}
-              recipient={product.name}
-              className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
-            />
+            a.logo ? (
+              /* Logo officiel du concours. Pas d'animation : ces visuels sont
+                 déposés par les organisateurs, on les affiche tels quels. */
+              <figure class="w-[calc(50%-0.625rem)] sm:w-[150px] flex flex-col items-center gap-2.5">
+                <img
+                  src={a.logo.logo}
+                  alt={a.logo.alt}
+                  width="150"
+                  height="150"
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-[110px] md:h-[130px] object-contain"
+                />
+                <figcaption class="text-[11px] leading-snug text-ink-600 text-center">
+                  {product.name}
+                </figcaption>
+              </figure>
+            ) : (
+              <Awards
+                client:visible
+                variant="award"
+                level={a.level}
+                title={a.title}
+                subtitle={a.issuer}
+                recipient={product.name}
+                className="w-[calc(50%-0.625rem)] sm:w-[150px] min-h-[156px]"
+              />
+            )
           ))}
         </div>
       </div>
