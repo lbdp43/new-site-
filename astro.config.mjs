@@ -13,7 +13,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://labrasseriedesplantes.fr',
+  // Adresse officielle = avec `www.` — doit rester identique à `site.url`
+  // dans src/data/site.ts, sinon canonical et sitemap se contredisent.
+  site: 'https://www.labrasseriedesplantes.fr',
 
   // Inline les CSS < 4 KB dans le HTML pour supprimer le render-blocking
   // sur les routes éditoriales (gain LCP mesuré à l'audit d'avril 2026).

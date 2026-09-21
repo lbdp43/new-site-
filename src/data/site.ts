@@ -6,7 +6,12 @@ export const site = {
   shortName: "LBDP",
   tagline: "Liqueurs artisanales de plantes — Haute-Loire",
   baseline: "Artisans liquoristes depuis 2021, à Saint-Didier-en-Velay.",
-  url: "https://labrasseriedesplantes.fr",
+  // Adresse officielle du site = avec `www.` (arbitrage Guillaume, 21/09/2026).
+  // C'est l'adresse imprimée sur les étiquettes et les cartes, et celle que le
+  // WordPress sert aujourd'hui. L'apex doit rediriger vers `www.` côté Vercel.
+  // Sert de base à TOUTES les URL absolues : canonical, hreflang, Open Graph,
+  // schema.org, sitemap. Ne pas désynchroniser de `site` dans astro.config.mjs.
+  url: "https://www.labrasseriedesplantes.fr",
   locale: "fr_FR",
 
   // NAP unifié (choix utilisateur)

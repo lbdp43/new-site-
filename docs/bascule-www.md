@@ -10,6 +10,28 @@ via `www.`.
 
 ---
 
+## 🏷 Adresse officielle : `www.` (tranché le 21/09/2026)
+
+Guillaume a arbitré : l'adresse canonique du site est
+**`https://www.labrasseriedesplantes.fr`** — c'est celle qui est imprimée sur
+les étiquettes et les cartes, et celle que le WordPress sert déjà.
+
+✅ **Déjà appliqué dans le code** (commit du 21/09/2026) : `site.url`
+(`src/data/site.ts`), `site` (`astro.config.mjs`), `public/robots.txt`,
+`public/llms.txt`, `public/llms-full.txt` et `scripts/generate-llms-full.mjs`
+émettent tous des URL en `www.`. Canonical, hreflang, Open Graph, schema.org
+et le sitemap suivent automatiquement.
+
+⚠️ Conséquence à ne pas oublier à l'étape 4 : **l'apex doit rediriger vers
+`www.`**, jamais l'inverse. Si les deux répondent en 200, Google voit deux
+sites identiques et le référencement se dilue.
+
+ℹ️ Le CSP de `vercel.json` autorise déjà `https://*.labrasseriedesplantes.fr`
+en `connect-src` : le passage de l'API WooCommerce sur `wp.` ne demandera
+aucune retouche.
+
+---
+
 ## ☝️ Avant de commencer — pré-requis à valider
 
 - [ ] **Testé un vrai paiement en conditions réelles** (commande de 1-2 €

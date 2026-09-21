@@ -1,14 +1,14 @@
 # La Brasserie des Plantes — contenu intégral (llms-full)
 
 > Version longue du fichier llms.txt — concatène les pages éditoriales clés et les articles de blog denses, pour les LLM qui préfèrent consommer un contexte complet plutôt que crawler page par page.
-> Attribution demandée : "La Brasserie des Plantes, https://labrasseriedesplantes.fr" avec lien direct vers la page concernée.
+> Attribution demandée : "La Brasserie des Plantes, https://www.labrasseriedesplantes.fr" avec lien direct vers la page concernée.
 > Dernière génération : 2026-09-21
 
 ## Articles de blog (sélection)
 
 ### Meilleur Digestif du Monde 2025 — ce que ce prix signifie pour nous
 
-- URL : https://labrasseriedesplantes.fr/blog/meilleur-digestif-du-monde-2025/
+- URL : https://www.labrasseriedesplantes.fr/blog/meilleur-digestif-du-monde-2025/
 - Date : 2025-04-28
 - Auteur : Guillaume
 - Catégorie : Actualité
@@ -75,7 +75,7 @@ Merci à tous ceux qui nous ont accompagnés. On continue.
 
 ### Les plantes de nos liqueurs : voyage botanique
 
-- URL : https://labrasseriedesplantes.fr/blog/plantes-liqueur-haute-loire/
+- URL : https://www.labrasseriedesplantes.fr/blog/plantes-liqueur-haute-loire/
 - Date : 2026-04-20
 - Auteur : Étienne
 - Catégorie : Plantes
@@ -255,7 +255,7 @@ Ou parcourez [la gamme complète](/boutique) — toutes issues du travail patien
 
 ### Comment nous sourçons nos plantes — cueilleurs, maraîchers et filières
 
-- URL : https://labrasseriedesplantes.fr/blog/producteurs-partenaires-bio-velay/
+- URL : https://www.labrasseriedesplantes.fr/blog/producteurs-partenaires-bio-velay/
 - Date : 2024-09-05
 - Auteur : Guillaume
 - Catégorie : Terroir
@@ -323,7 +323,7 @@ Concrètement, cinq choses :
 
 ### Deux amis, une brasserie — comment la Brasserie des Plantes est née
 
-- URL : https://labrasseriedesplantes.fr/blog/trois-amis-une-brasserie/
+- URL : https://www.labrasseriedesplantes.fr/blog/trois-amis-une-brasserie/
 - Date : 2025-02-05
 - Auteur : Guillaume
 - Catégorie : Terroir
@@ -377,7 +377,7 @@ La suite — la demande qui double, les distributeurs étrangers qui appellent, 
 
 ### L'Alchimie Végétale, entre science et poésie — comment on compose 27 plantes
 
-- URL : https://labrasseriedesplantes.fr/blog/alchimie-vegetale-27-plantes-composition/
+- URL : https://www.labrasseriedesplantes.fr/blog/alchimie-vegetale-27-plantes-composition/
 - Date : 2025-08-14
 - Auteur : Étienne
 - Catégorie : Fabrication
@@ -446,7 +446,7 @@ Trois ans pour sortir la recette. Un an pour la confirmer avant de l'envoyer à 
 
 ### Notre histoire
 
-- URL : https://labrasseriedesplantes.fr/notre-histoire/
+- URL : https://www.labrasseriedesplantes.fr/notre-histoire/
 
 {pageHeader && ( )} {videoHero && ( {videoHero.badge && ( {videoHero.badge} )} {videoHero.script && ( )} {videoHero.tagline && ( {videoHero.tagline} )} )} {stats && stats.length > 0 && ( {stats.map((s) => ( {s.isIcon ? ( ) : ( {s.value} )} {s.label} ))} )} {(storySections ?? []).map((sec) => { const bgClass = sec.background === 'white' ? 'bg-white' : 'bg-cream-50'; if (sec.layout === 'prose') { // Ancres pour Person.url des auteurs blog (uniquement première section prose). return ( {sec.kicker && ( {sec.kicker} )} {sec.title} {sec.titleAccent && ( <> {sec.titleAccent} )} {sec.paragraphs.map((p) => ( ))} {sec.linkLabel && sec.linkHref && ( {sec.linkLabel} )} ); } const imageLeft = sec.layout === 'image-left'; return ( {imageLeft ? ( sec.image && ( ) ) : ( <> {sec.kicker && ( {sec.kicker} )} {sec.title} {sec.titleAccent && ( <> {sec.titleAccent} )} {sec.paragraphs.map((p) => ( ))} {sec.linkLabel && sec.linkHref && ( {sec.linkLabel} )} )} {imageLeft ? ( <> {sec.kicker && ( {sec.kicker} )} {sec.title} {sec.titleAccent && ( <> {sec.titleAccent} )} {sec.paragraphs.map((p) => ( ))} {sec.linkLabel && sec.linkHref && ( {sec.linkLabel} )} ) : ( sec.image && ( ) )} ); })} {distinctionsSection && ( {distinctionsSection.kicker && ( {distinctionsSection.kicker} )} {distinctionsSection.title} {distinctionsSection.titleAccent && ( <> {distinctionsSection.titleAccent} )} {distinctionsSection.paragraphs.map((p) => ( ))} {distinctionsSection.flagship && ( {distinctionsSection.flagship.badge && ( {distinctionsSection.flagship.badge} )} {distinctionsSection.flagship.title} {distinctionsSection.flagship.paragraphs.map((p) => ( ))} {distinctionsSection.flagship.ctaLabel && distinctionsSection.flagship.ctaHref && ( {distinctionsSection.flagship.ctaLabel} )} )} {distinctionsSection.productsWithMedals.length > 0 && ( {distinctionsSection.productsWithMedals.map((p) => ( {p.product} {p.tagline && ( {p.tagline} )} {p.note && ( {p.note} )} {p.medals.map((m) => { const t = tierStyles[m.tier]; return ( {m.tier === 'gold' ? 'Or' : 'Argent'} {m.year} {m.competition} ); })} Voir le produit ))} )} {distinctionsSection.innovationAward && ( Prix innovation · {distinctionsSection.innovationAward.year} {distinctionsSection.innovationAward.title} {distinctionsSection.innovationAward.subtitle && ( {distinctionsSection.innovationAward.subtitle} )} {distinctionsSection.innovationAward.description && ( {distinctionsSection.innovationAward.description} )} )} )} {teamSection && ( {teamSection.kicker && ( {teamSection.kicker} )} {teamSection.title} {teamSection.intro && ( {teamSection.intro} )} {teamSection.members.map((m, i) => { const imageLeft = m.layout === 'image-left'; const isLast = i === teamSection.members.length - 1; return ( {imageLeft ? ( ) : ( <> {m.kicker && ( {m.kicker} )} {m.name} {m.role && ( {m.role} )} {m.paragraphs.map((p) => ( ))} )} {imageLeft ? ( <> {m.kicker && ( {m.kicker} )} {m.name} {m.role && ( {m.role} )} {m.paragraphs.map((p) => ( ))} ) : ( )} ); })} )} {gallerySection && ( {gallerySection.kicker && ( {gallerySection.kicker} )} {gallerySection.title} {gallerySection.titleAccent && ( <> {gallerySection.titleAccent} )} {gallerySection.intro && ( {gallerySection.intro} )} {gallerySection.photos.map((photo) => ( ))} )} {ctaSection && ( {ctaSection.title} {ctaSection.intro && ( {ctaSection.intro} )} {ctaSection.ctaPrimaryLabel && ctaSection.ctaPrimaryHref && ( {ctaSection.ctaPrimaryLabel} )} {ctaSection.ctaSecondaryLabel && ctaSection.ctaSecondaryHref && ( {ctaSection.ctaSecondaryLabel} )} )}
 
@@ -454,7 +454,7 @@ Trois ans pour sortir la recette. Un an pour la confirmer avant de l'envoyer à 
 
 ### Nos plantes
 
-- URL : https://labrasseriedesplantes.fr/nos-plantes/
+- URL : https://www.labrasseriedesplantes.fr/nos-plantes/
 
 {pageHeader && ( )} {videoBanner && ( )} {introParagraphs && introParagraphs.length > 0 && ( {introParagraphs.map((p) => ( ))} )} {sortedPlants.map((plant) => ( {plant.name} {plant.latin && ( {plant.latin} )} {familyLabels[plant.family]} {plant.role && ( {plant.role} )} {plant.description} Dans nos liqueurs {plant.usedIn} {plant.season && ( Saison {plant.season} )} {plant.signature && ( Plante signature )} ))} {listClosing && ( {listClosing} )} {demarcheSection && ( {demarcheSection.kicker && ( {demarcheSection.kicker} )} {demarcheSection.title} {demarcheSection.titleAccent && ( <> {demarcheSection.titleAccent} )} {demarcheSection.paragraphs.map((p) => ( ))} )} {ctaSection && ( {ctaSection.title} {ctaSection.intro && ( {ctaSection.intro} )} {ctaSection.ctaPrimaryLabel && ctaSection.ctaPrimaryHref && ( {ctaSection.ctaPrimaryLabel} )} {ctaSection.ctaSecondaryLabel && ctaSection.ctaSecondaryHref && ( {ctaSection.ctaSecondaryLabel} )} )}
 
