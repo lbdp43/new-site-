@@ -107,7 +107,7 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
   {items.map((p, i) => {
     // On alterne les aspects pour créer l'effet masonry sans casser la lisibilité
     // des flacons (toujours centrés, jamais tronqués).
-    const aspect = i % 5 === 0 ? 'sm:aspect-[3/4]' : i % 4 === 0 ? 'sm:aspect-[4/5]' : 'sm:aspect-[5/6]';
+    const aspect = i % 5 === 0 ? 'sm:aspect-[2/3]' : i % 4 === 0 ? 'sm:aspect-[7/10]' : 'sm:aspect-[3/4]';
     return (
       <a
         href={`/boutique/${p.slug}`}
@@ -127,16 +127,13 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
               reste lisible sur la fiche produit. À partir de sm, largeur
               suffisante : une ligne, pastille visible. */}
           {p.highlight && (
-            <span class="absolute top-3 left-3 z-10 inline-flex items-start sm:items-center gap-1 w-fit max-w-[calc(100%-1.5rem)] sm:max-w-[calc(100%-4.5rem)] px-2.5 py-1 rounded-xl sm:rounded-full bg-gold-500 text-cream-50 text-[10px] leading-tight font-medium uppercase tracking-wide shadow-sm">
-              <svg class="flex-none mt-px sm:mt-0" width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
-              <span class="line-clamp-2 sm:line-clamp-1">{p.highlight}</span>
+            <span class="absolute top-3 left-3 z-10 inline-flex items-start gap-1 w-fit max-w-[calc(100%-1.5rem)] sm:max-w-[calc(100%-4.5rem)] px-2.5 py-1 rounded-xl bg-gold-500 text-cream-50 text-[10px] leading-tight font-medium uppercase tracking-wide shadow-sm">
+              <svg class="flex-none mt-px" width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+              <span class="line-clamp-2">{p.highlight}</span>
             </span>
           )}
           {p.alcohol > 0 && (
-            <span class:list={[
-              'absolute top-3 right-3 z-10 text-[11px] font-medium text-cream-50 bg-forest-800/90 px-2.5 py-1 rounded-full backdrop-blur-sm',
-              p.highlight ? 'hidden sm:inline-block' : '',
-            ]}>
+            <span class="absolute top-3 right-3 z-10 hidden sm:inline-block text-[11px] font-medium text-cream-50 bg-forest-800/90 px-2.5 py-1 rounded-full backdrop-blur-sm">
               {formatAlcoholFr(p.alcohol)}°
             </span>
           )}
@@ -148,7 +145,7 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
               loading="lazy"
               decoding="async"
               class:list={[
-                'absolute inset-0 w-full h-full object-contain p-2 sm:p-4 md:p-6 transition-opacity duration-500 ease-in-out',
+                'absolute inset-0 w-full h-full object-contain p-2 sm:p-3 md:p-4 transition-opacity duration-500 ease-in-out',
                 p.image2 ? 'group-hover:opacity-0' : 'group-hover:scale-105 transition-transform',
               ]}
             />
@@ -170,6 +167,9 @@ const { items, heading, kicker, subtitle, promoCard } = Astro.props;
             <div class="mt-auto pt-3 flex items-center justify-between text-xs">
               <span class="text-forest-700 font-medium">
                 {p.priceMin === p.priceMax ? `${p.priceMin} €` : `dès ${p.priceMin} €`}
+                {p.alcohol > 0 && (
+                  <span class="sm:hidden font-normal text-ink-400"> · {formatAlcoholFr(p.alcohol)}°</span>
+                )}
               </span>
               <span class="text-gold-600 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                 Découvrir

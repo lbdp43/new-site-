@@ -146,7 +146,7 @@ Build [your own 3-bottle gift box](/en/build-your-gift-box) from the full range 
 
 ### For relaxation (specific profile)
 
-The [Lumière Obscure](/en/lumiere-obscure) range pairs **CBD** (THC-free hemp) with our signature plants. No psychoactive effect, no euphoria — simply a composition designed for unwinding. [Verveine CBD Aurone](/en/shop/verveine-cbd-aurone), [Menthe CBD Pimbi](/en/shop/menthe-cbd-pimbi), [Absinthe CBD Citron](/en/shop/absinthe-cbd-citron).
+The [Lumière Obscure](/en/dark-light) range pairs **CBD** (THC-free hemp) with our signature plants. No psychoactive effect, no euphoria — simply a composition designed for unwinding. [Verveine CBD Aurone](/en/shop/verveine-cbd-aurone), [Menthe CBD Ortie](/en/shop/menthe-cbd-ortie), [Absinthe CBD Citron](/en/shop/absinthe-cbd-citron).
 
 ## 4. Advice by drinker profile
 

@@ -116,12 +116,12 @@ const track = [...items, ...items];
                   : 'bg-white border border-forest-100/60'
               }`}
             >
-              <div class="aspect-[3/4] sm:aspect-[4/5] bg-white relative overflow-hidden">
+              <div class="aspect-[3/4] sm:aspect-[3/4] bg-white relative overflow-hidden">
                 <img
                   src={p.image}
                   alt={`${p.name} — liqueur artisanale aux plantes oubliées`}
                   class:list={[
-                    'absolute inset-0 w-full h-full object-contain p-2 sm:p-4 md:p-6 transition-all duration-500 ease-out',
+                    'absolute inset-0 w-full h-full object-contain p-2 sm:p-3 md:p-4 transition-all duration-500 ease-out',
                     p.image2 ? 'opacity-100 group-hover/card:opacity-0' : 'group-hover/card:scale-105',
                   ]}
                   loading="lazy"
@@ -137,16 +137,15 @@ const track = [...items, ...items];
                   />
                 )}
                 {p.highlight && (
-                  <span class="absolute top-3 left-3 z-10 inline-flex items-start sm:items-center gap-1 w-fit max-w-[calc(100%-1.5rem)] sm:max-w-[calc(100%-4.5rem)] px-2.5 py-1 rounded-xl sm:rounded-full bg-gold-500 text-cream-50 text-[10px] leading-tight font-medium uppercase tracking-wide shadow-sm">
-                    <svg class="flex-none mt-px sm:mt-0" width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
-                    <span class="line-clamp-2 sm:line-clamp-1">{p.highlight}</span>
+                  <span class="absolute top-3 left-3 z-10 inline-flex items-start gap-1 w-fit max-w-[calc(100%-1.5rem)] sm:max-w-[calc(100%-4.5rem)] px-2.5 py-1 rounded-xl bg-gold-500 text-cream-50 text-[10px] leading-tight font-medium uppercase tracking-wide shadow-sm">
+                    <svg class="flex-none mt-px" width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+                    <span class="line-clamp-2">{p.highlight}</span>
                   </span>
                 )}
                 {p.alcohol > 0 && (
                   <span class:list={[
-                    'absolute top-3 right-3 z-10 text-[11px] font-medium px-2.5 py-1 rounded-full',
+                    'absolute top-3 right-3 z-10 hidden sm:inline-block text-[11px] font-medium px-2.5 py-1 rounded-full',
                     theme === 'dark' ? 'bg-cream-50/10 text-cream-50 border border-cream-100/20' : 'bg-forest-800/90 text-cream-50',
-                    p.highlight ? 'hidden sm:inline-block' : '',
                   ]}>
                     {formatAlcoholFr(p.alcohol)}°
                   </span>
@@ -160,6 +159,9 @@ const track = [...items, ...items];
                 ]}>
                   <span class="font-medium text-gold-600">
                     {p.priceMin === p.priceMax ? `${p.priceMin} €` : `dès ${p.priceMin} €`}
+                    {p.alcohol > 0 && (
+                      <span class:list={['sm:hidden font-normal', muted]}> · {formatAlcoholFr(p.alcohol)}°</span>
+                    )}
                   </span>
                   <span class:list={['inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform', accent]}>
                     Découvrir

@@ -37,7 +37,7 @@ Formulating and selling isn't enough. **Industrial rigour** — precise dosing, 
 
 On **17 April 2025** in London, at the World Drinks Awards, *L'Alchimie Végétale* is crowned **World's Best Digestif 2025**. Results drop overnight. The phone rings very early in the morning. We didn't expect it. We didn't expect it at all.
 
-What followed — demand doubling, foreign distributors calling, press articles, trade-show meetings — we've told that story [in our spring 2025 press review](/en/journal/dans-la-presse-2025). The essential stays elsewhere: in the workshop, in the tanks, in the gestures that haven't changed.
+What followed — demand doubling, foreign distributors calling, press articles, trade-show meetings — we've told that story in our spring 2025 press review. The essential stays elsewhere: in the workshop, in the tanks, in the gestures that haven't changed.
 
 ## What hasn't changed
 

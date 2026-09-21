@@ -1,7 +1,7 @@
 ---
 import { site } from '../data/site';
 import CartIcon from './cart/CartIcon';
-import { t, localizedPath, alternateLangPath, type Lang } from '../i18n/utils';
+import { t, localizedPath, safeLocalizedPath, alternateLangPath, hasTranslation, type Lang } from '../i18n/utils';
 import type { UIKey } from '../i18n/ui';
 
 interface Props {
@@ -35,21 +35,21 @@ interface NavItem {
   children?: NavChild[];
 }
 
-const shopPath = localizedPath('/boutique', lang);
+const shopPath = safeLocalizedPath('/boutique', lang);
 
 const navItems: NavItem[] = [
   {
     // La Maison = contenu éditorial / culture (pas de vente directe)
     labelKey: 'nav.maison',
-    href: localizedPath('/notre-histoire', lang),
+    href: safeLocalizedPath('/notre-histoire', lang),
     children: [
-      { labelKey: 'nav.story', href: localizedPath('/notre-histoire', lang) },
-      { labelKey: 'nav.plants', href: localizedPath('/nos-plantes', lang) },
-      { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
+      { labelKey: 'nav.story', href: safeLocalizedPath('/notre-histoire', lang) },
+      { labelKey: 'nav.plants', href: safeLocalizedPath('/nos-plantes', lang) },
+      { labelKey: 'nav.cocktails', href: safeLocalizedPath('/cocktails', lang) },
       // Actualité (blog) temporairement retiré du menu — le contenu existe
       // toujours sur disque mais est caché du public (voir aussi Footer,
       // sitemap filter, noindex sur les pages blog).
-      // { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
+      // { labelKey: 'nav.journal', href: safeLocalizedPath('/blog', lang) },
     ],
   },
   {
@@ -62,21 +62,30 @@ const navItems: NavItem[] = [
       { labelKey: 'nav.shop-all', href: shopPath },
       { labelKey: 'nav.range-brasserie', href: `${shopPath}#brasserie` },
       { labelKey: 'nav.range-aperitif', href: `${shopPath}#aperitif` },
-      { labelKey: 'nav.lumiere', href: localizedPath('/lumiere-obscure', lang) },
+      { labelKey: 'nav.lumiere', href: safeLocalizedPath('/lumiere-obscure', lang) },
       { labelKey: 'nav.range-edition', href: `${shopPath}#edition-limitee` },
       { labelKey: 'nav.range-accessoire', href: `${shopPath}#accessoire` },
     ],
   },
-  { labelKey: 'nav.workshops', href: localizedPath('/ateliers', lang) },
-  { labelKey: 'nav.pros', href: localizedPath('/professionnels', lang) },
-  { labelKey: 'nav.contact', href: localizedPath('/contact', lang) },
+  { labelKey: 'nav.workshops', href: safeLocalizedPath('/ateliers', lang) },
+  { labelKey: 'nav.pros', href: safeLocalizedPath('/professionnels', lang) },
+  { labelKey: 'nav.contact', href: safeLocalizedPath('/contact', lang) },
 ];
 
 // Language switcher — on génère le chemin équivalent dans l'autre langue
 const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
 const switchTargetPath = alternateLangPath(Astro.url.pathname, lang, otherLang);
-const homeHref = lang === 'en' ? '/en/' : '/';
-const shopHref = localizedPath('/boutique', lang);
+// La page équivalente n'existe pas toujours : sur les 19 articles de blog
+// non traduits et quelques landings SEO, le bouton « EN » renvoyait vers une
+// 404. `hasTranslation` attend un chemin FR — on repasse donc en FR d'abord
+// quand on est déjà côté EN. Diagnostiqué le 21/09/2026 (35 pages touchées).
+const frPathForCheck =
+  lang === 'fr' ? Astro.url.pathname : alternateLangPath(Astro.url.pathname, lang, 'fr');
+const hasSwitchTarget = hasTranslation(frPathForCheck, otherLang);
+// Les quatre homes existent (/, /en/, /es/, /it/) — contrairement au reste
+// des pages ES et IT.
+const homeHref = lang === 'fr' ? '/' : `/${lang}/`;
+const shopHref = safeLocalizedPath('/boutique', lang);
 ---
 <header
   id="site-header"
@@ -154,15 +163,17 @@ const shopHref = localizedPath('/boutique', lang);
       </nav>
 
       <div class="flex items-center gap-2 md:gap-3 shrink-0">
-        <!-- Language switcher (desktop) -->
-        <a
-          href={switchTargetPath}
-          class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-forest-200/60 text-xs font-medium text-forest-700 hover:border-forest-400 hover:text-forest-900 transition-colors"
-          aria-label={tr('lang.switch')}
-          title={otherLang === 'fr' ? tr('lang.fr') : tr('lang.en')}
-        >
-          <span class="uppercase tracking-wider">{otherLang}</span>
-        </a>
+        <!-- Language switcher (desktop) — masqué si la page n'est pas traduite -->
+        {hasSwitchTarget && (
+          <a
+            href={switchTargetPath}
+            class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-forest-200/60 text-xs font-medium text-forest-700 hover:border-forest-400 hover:text-forest-900 transition-colors"
+            aria-label={tr('lang.switch')}
+            title={otherLang === 'fr' ? tr('lang.fr') : tr('lang.en')}
+          >
+            <span class="uppercase tracking-wider">{otherLang}</span>
+          </a>
+        )}
 
         <CartIcon client:load />
         <!-- CTA "Découvrir la boutique" : visible à partir de lg (1024px)
@@ -223,12 +234,14 @@ const shopHref = localizedPath('/boutique', lang);
           </a>
         )
       ))}
-      <a
-        href={switchTargetPath}
-        class="py-3 text-ink-500 hover:text-forest-700 border-b border-forest-100/60 uppercase text-xs tracking-wider"
-      >
-        {otherLang === 'en' ? 'English' : 'Français'}
-      </a>
+      {hasSwitchTarget && (
+        <a
+          href={switchTargetPath}
+          class="py-3 text-ink-500 hover:text-forest-700 border-b border-forest-100/60 uppercase text-xs tracking-wider"
+        >
+          {otherLang === 'en' ? 'English' : 'Français'}
+        </a>
+      )}
       <a
         href={shopHref}
         class="mt-3 inline-flex justify-center items-center px-5 py-3 rounded-full bg-forest-700 text-cream-100 font-medium"

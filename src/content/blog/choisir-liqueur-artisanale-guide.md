@@ -147,7 +147,7 @@ Composez [votre propre coffret de 3 bouteilles](/composer-mon-coffret) parmi tou
 
 ### Pour la relaxation (profil spécifique)
 
-La gamme [Lumière Obscure](/lumiere-obscure) associe le **CBD** (chanvre sans THC) à nos plantes signatures. Pas d'effet psychoactif, pas d'euphorie — simplement une composition pensée pour le moment de détente. [Verveine CBD Aurone](/boutique/verveine-cbd-aurone), [Menthe CBD Pimbi](/boutique/menthe-cbd-pimbi), [Absinthe CBD Citron](/boutique/absinthe-cbd-citron).
+La gamme [Lumière Obscure](/lumiere-obscure) associe le **CBD** (chanvre sans THC) à nos plantes signatures. Pas d'effet psychoactif, pas d'euphorie — simplement une composition pensée pour le moment de détente. [Verveine CBD Aurone](/boutique/verveine-cbd-aurone), [Menthe CBD Ortie](/boutique/menthe-cbd-ortie), [Absinthe CBD Citron](/boutique/absinthe-cbd-citron).
 
 ## 4. Conseils par profil d'amateur
 
