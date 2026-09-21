@@ -23,7 +23,7 @@ C'est elle qui construit le cœur de notre *Herbe des Druides* (28°) — que Fr
 
 Cousin sauvage du thym commun, le serpolet pousse spontanément sur les pentes sèches et ensoleillées de moyenne montagne, partout en Europe. Petit, discret, il tapisse les pierres. Son parfum est plus mentholé, plus sauvage, que celui du thym — avec une **note camphrée** qui tempère joliment l'alcool d'une liqueur.
 
-On dit parfois que c'était la plante préférée des bergers — qu'ils le mâchaient pendant la transhumance pour se rafraîchir. Chez nous, il adoucit la verveine de *L'Herbe des Druides* et apporte sa note herbacée au *Gorgeon des Mâchurés*.
+On dit parfois que c'était la plante préférée des bergers — qu'ils le mâchaient pendant la transhumance pour se rafraîchir. Chez nous, il adoucit la verveine de *L'Herbe des Druides* et apporte sa note herbacée au *Gorgeon des Machurés*.
 
 ## Le carvi (*Carum carvi*)
 
@@ -36,7 +36,7 @@ En liqueur, le carvi **ancre** les notes florales et mentholées. Sans lui, nos 
 Chaque plante a son rôle. Autour de ce trio de base, nous travaillons aussi :
 
 - **L'hysope** (*Hyssopus officinalis*) — cousine de la lavande, avec une pointe de camphre. Elle entre dans l'*Essence des Alpes*.
-- **L'aurone** (*Artemisia abrotanum*) — cousine de l'absinthe, beaucoup plus douce, avec une note épicée. C'est elle qui donne au *Gorgeon des Mâchurés* sa profondeur et qui structure la *Verveine CBD Aurone* de la gamme Lumière Obscure.
+- **L'aurone** (*Artemisia abrotanum*) — cousine de l'absinthe, beaucoup plus douce, avec une note épicée. C'est elle qui donne au *Gorgeon des Machurés* sa profondeur et qui structure la *Verveine CBD Aurone* de la gamme Lumière Obscure.
 - **La mélisse** (*Melissa officinalis*) — la grande apaisante des herboristeries. Florale, légèrement citronnée, presque sucrée. Clé dans *La Lime des Prés* où elle remplace le citron.
 
 ## Pourquoi revenir à ces plantes ?
@@ -47,6 +47,6 @@ Enfin, pour une raison un peu plus intime : ces plantes ont une histoire. Nos gr
 
 ---
 
-**Pour aller plus loin :** notre gamme *Brasserie des Plantes* (L'Alchimie Végétale, L'Herbe des Druides, Le Gorgeon des Mâchurés, La Lime des Prés, Le Nectar d'Ostara, La Flèche Ardente) compose autour de ces botaniques.
+**Pour aller plus loin :** notre gamme *Brasserie des Plantes* (L'Alchimie Végétale, L'Herbe des Druides, Le Gorgeon des Machurés, La Lime des Prés, Le Nectar d'Ostara, La Flèche Ardente) compose autour de ces botaniques.
 
 **À lire aussi :** [Élixir végétal — les 7 plantes d'une liqueur d'herboristerie](/blog/elixir-vegetal-7-plantes-liqueur) · [Nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) · [La verveine citronnelle, reine des digestifs](/blog/la-verveine-citronnelle) · [L'art de redonner vie aux plantes oubliées — Loire Semène Tourisme](/blog/loire-semene-tourisme-plantes-oubliees).

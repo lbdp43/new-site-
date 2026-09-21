@@ -88,10 +88,10 @@ export const cocktailsEn: Record<string, CocktailEn> = {
   'black-mule': {
     subtitle: 'Moscow Mule, bitter twist',
     description:
-      "A re-reading of the Moscow Mule with our Gorgeon des Mâchurés — the gentian brings a dark bitterness that works wonderfully with ginger.",
+      "A re-reading of the Moscow Mule with our Gorgeon des Machurés — the gentian brings a dark bitterness that works wonderfully with ginger.",
     ingredients: [
       { item: 'Gin', amount: '3 cl' },
-      { item: 'Le Gorgeon des Mâchurés', amount: '2 cl' },
+      { item: 'Le Gorgeon des Machurés', amount: '2 cl' },
       { item: 'Lime juice', amount: '1.5 cl' },
       { item: 'Ginger beer', amount: '10 cl' },
       { item: 'Crushed ice' },

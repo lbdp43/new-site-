@@ -435,6 +435,24 @@ Google Doc.
 warning YMYL**), professionnels sections marketing, catégories SEO
 prose profonde. À faire seulement à la demande de Guillaume.
 
+## ⚠️ Orthographe des noms produit — ne pas « corriger »
+
+Les noms commerciaux suivent **l'étiquette physique de la bouteille**, pas
+l'orthographe du dictionnaire. Ne jamais les corriger sans photo de
+l'étiquette à l'appui.
+
+| Nom correct (= étiquette) | Ne PAS écrire | Note |
+|---|---|---|
+| **Le Gorgeon des Machurés** | ~~Mâchurés~~ | Vérifié sur photo d'étiquette le 2026-09-21. Le mot commun *mâchurer* prend bien un circonflexe, mais l'étiquette imprime MACHURÉS sans accent — le site doit correspondre à ce que le client a en main. Corrigé à tort en septembre 2026 (PR #25), reversé aussitôt (PR #28). |
+| **La Pralicoquine** | ~~PraliCoquine~~ | Minuscule au c, confirmé par Guillaume. |
+
+S'applique aussi au mot commun quand il désigne les mineurs (« en mémoire
+des Machurés »), pour rester cohérent avec le nom du produit.
+
+Les slugs d'URL restent en minuscules sans accent
+(`/boutique/gorgeon-des-machures`) : ne jamais les toucher, des liens
+externes et des redirections 301 en dépendent.
+
 ## Règle d'or CMS (Sveltia)
 
 **NE JAMAIS** utiliser un widget `object` avec clés numériques dans

@@ -71,7 +71,7 @@ export const productsEn: Record<string, ProductEn> = {
     usage: 'Digestif — black verbena',
     tagline: 'Black verbena, a tribute to the Saint-Étienne miners — deep and mysterious.',
     description:
-      "A black verbena, coloured with activated charcoal, to drink in memory of the Mâchurés — the Saint-Étienne miners whose faces were black with coal dust at the end of the day. Inspired by three historic recipes from Saint-Étienne, blending verbena, southernwood and baraban (dandelion in local dialect).",
+      "A black verbena, coloured with activated charcoal, to drink in memory of the Machurés — the Saint-Étienne miners whose faces were black with coal dust at the end of the day. Inspired by three historic recipes from Saint-Étienne, blending verbena, southernwood and baraban (dandelion in local dialect).",
     tasting: {
       nose: 'Hint of Arquebuse in the background, roots, a touch of wood.',
       palate: 'Deep and mysterious, slightly peppery, woody dandelion root notes.',

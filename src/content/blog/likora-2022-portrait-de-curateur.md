@@ -16,7 +16,7 @@ C'est ce type de couverture — hors presse régionale, à destination d'un publ
 
 ## Ce que l'article raconte
 
-Likora identifie d'entrée **le trio de plantes signature** : la **verveine odorante**, le **carvi** et la **mélisse**. Puis il élargit la palette à plusieurs plantes plus rares : *thym-citron*, *thym*, *fleur de sureau*. Ce sont les ingrédients qui donnent à nos liqueurs leur identité — ceux qu'on retrouve, dans des proportions variées, dans les quatre références alors disponibles : *L'Herbe des Druides*, *Le Gorgeon des Mâchurés*, *Le Nectar d'Ostara*, et les prémices de *L'Alchimie Végétale*.
+Likora identifie d'entrée **le trio de plantes signature** : la **verveine odorante**, le **carvi** et la **mélisse**. Puis il élargit la palette à plusieurs plantes plus rares : *thym-citron*, *thym*, *fleur de sureau*. Ce sont les ingrédients qui donnent à nos liqueurs leur identité — ceux qu'on retrouve, dans des proportions variées, dans les quatre références alors disponibles : *L'Herbe des Druides*, *Le Gorgeon des Machurés*, *Le Nectar d'Ostara*, et les prémices de *L'Alchimie Végétale*.
 
 L'article insiste sur la **démarche** : plantes récoltées chez nos cueilleurs et maraîchers partenaires, la plupart en bio, macérations longues, aucun arôme ajouté.
 
@@ -27,7 +27,7 @@ Quatre fiches courtes, qu'on trouve encore en ligne :
 ### L'Herbe des Druides
 *"Une verveine citronnée nette à l'attaque, soutenue par le serpolet sauvage et anoblie par le carvi. L'équilibre est juste, la finale mentholée."*
 
-### Le Gorgeon des Mâchurés
+### Le Gorgeon des Machurés
 *"Une verveine noire, colorée au charbon végétal. Profonde, racinaire, un rien fumée — un digestif de caractère."*
 
 ### Le Nectar d'Ostara

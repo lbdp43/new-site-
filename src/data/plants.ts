@@ -32,7 +32,7 @@ export const plants: Plant[] = [
     role: 'Fraîcheur citronnée · digestive',
     description:
       "Originaire d'Amérique du Sud, cultivée en France depuis le XVIIIᵉ siècle. Son parfum frais, citronné, apaisant, en fait la plante reine des digestifs. C'est notre plante la plus utilisée — elle est dans quatre de nos liqueurs.",
-    usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Mâchurés, Verveine CBD Aurone",
+    usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Machurés, Verveine CBD Aurone",
     season: 'Juin à septembre',
   },
   {
@@ -42,7 +42,7 @@ export const plants: Plant[] = [
     role: 'Thym sauvage · profondeur épicée',
     description:
       "Cousin sauvage du thym commun, plus fin et plus floral. Il pousse à ras du sol sur les pelouses sèches de moyenne montagne. Présent dans notre trio signature avec la verveine et le carvi.",
-    usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Mâchurés",
+    usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Machurés",
     season: 'Juillet à août',
   },
   {
@@ -84,7 +84,7 @@ export const plants: Plant[] = [
     role: 'Amer fin · fruit-bonbon',
     description:
       "Cousine de l'absinthe et de l'armoise. Moins amère, plus subtile — fruit-bonbon et citron à la fois. Longtemps utilisée en tisane fortifiante dans les campagnes auvergnates.",
-    usedIn: "Le Gorgeon des Mâchurés, Verveine CBD Aurone",
+    usedIn: "Le Gorgeon des Machurés, Verveine CBD Aurone",
     season: 'Juillet à septembre',
   },
   {
@@ -148,7 +148,7 @@ export const plants: Plant[] = [
     role: 'Amer · terreux',
     description:
       "Un des noms vernaculaires du pissenlit. On travaille surtout ses feuilles, amères et terreuses — une amertume de sous-bois, de terre humide de printemps.",
-    usedIn: "Le Gorgeon des Mâchurés",
+    usedIn: "Le Gorgeon des Machurés",
     season: 'Mars à mai',
     signature: true,
   },
@@ -319,7 +319,7 @@ export const plants: Plant[] = [
     role: 'Anisé · chaleur',
     description:
       "Aussi appelé cumin des prés, ou anis des prés. Ses graines, longuement macérées, offrent une chaleur anisée et légèrement mentholée. Un incontournable des liqueurs de tradition auvergnate.",
-    usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Mâchurés",
+    usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Machurés",
     season: 'Récolte en juillet',
   },
   {
