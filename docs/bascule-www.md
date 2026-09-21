@@ -130,6 +130,53 @@ SEO et pour éviter les oublis.
 
 ### Dans les 24h après bascule
 
+- [ ] **Google Analytics — marquer les événements clés** ⚠️ *non rétroactif*
+
+  Le code envoie déjà `view_item`, `add_to_cart`, `begin_checkout` et
+  `purchase` (avec montant, devise et lignes depuis le 21/09/2026). Mais
+  GA4 ne compte une conversion qu'**à partir du moment où on coche** :
+  tout ce qui arrive avant reste en donnée brute et n'apparaîtra jamais
+  dans les rapports de conversion. À faire dans les jours qui suivent la
+  mise en ligne, pas dans six mois.
+
+  1. [analytics.google.com](https://analytics.google.com) → propriété
+     **G-DK89M6D81H**.
+  2. **Admin** (roue dentée, en bas à gauche) → **Événements clés**
+     (libellé *Conversions* dans les versions plus anciennes).
+  3. Activer l'interrupteur sur **`purchase`**, puis sur `add_to_cart`
+     et `begin_checkout` pour avoir l'entonnoir complet.
+  4. Si `purchase` n'est pas dans la liste : c'est que l'événement n'est
+     jamais arrivé. GA4 n'affiche que ce qu'il a déjà reçu. Passer une
+     commande réelle, ou utiliser **Créer un événement clé** et saisir
+     `purchase` à la main.
+
+- [ ] **Google Analytics — vérifier que le montant remonte**
+
+  Passer une commande de 1-2 € puis la rembourser depuis l'admin
+  WooCommerce (test de toute façon au programme, voir les pré-requis).
+  Dans GA4 : **Rapports → Temps réel**, l'événement `purchase` doit
+  apparaître **avec sa valeur**. Avant la correction du 21/09/2026 il
+  arrivait sans montant et GA4 affichait 0 € de chiffre d'affaires.
+
+- [ ] **Google Analytics — flux de données sur le bon domaine**
+
+  **Admin → Flux de données** : vérifier que l'URL déclarée correspond à
+  l'hôte réellement servi (voir la question apex / `www.` dans
+  `audit-pre-bascule-2026-09-21.md`). Un flux pointant sur l'ancien
+  domaine continue de collecter, mais les rapports d'acquisition et les
+  liens vers les pages deviennent faux.
+
+- [ ] **Google Analytics — relier Search Console**
+
+  **Admin → Associations de produits → Search Console**. Sans ça, les
+  requêtes de recherche n'apparaissent pas dans GA4 et il faut jongler
+  entre deux interfaces.
+
+  > Rappel : les statistiques ne se déclenchent que si le visiteur
+  > accepte dans le portail d'âge (case décochée par défaut, conforme
+  > CNIL). Les chiffres seront donc structurellement inférieurs au trafic
+  > réel — c'est normal et commun à tous les sites français conformes.
+
 - [ ] **Google Search Console — Sitemaps**
   1. Ouvrir la propriété domaine `labrasseriedesplantes.fr` dans GSC.
   2. Section *Sitemaps* → supprimer l'ancien `sitemap_index.xml` (format
