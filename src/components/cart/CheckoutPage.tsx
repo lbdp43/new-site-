@@ -491,10 +491,23 @@ function CheckoutInner() {
             </div>
           </dl>
 
+          {/* Vente à distance : le droit de rétractation doit être porté à la
+              connaissance du client AVANT qu'il valide sa commande, pas
+              seulement au fond des CGV. Mention reprise du checkout
+              WooCommerce, à conserver au-dessus du bouton de paiement. */}
+          <p className="mt-6 rounded-xl border border-forest-100/70 bg-cream-50 px-4 py-3 text-xs leading-relaxed text-ink-600">
+            Vous bénéficiez d'un droit de rétractation de 14 jours selon les
+            modalités précisées dans nos{" "}
+            <a href="/cgv" className="underline hover:text-forest-800">
+              conditions générales de vente
+            </a>
+            .
+          </p>
+
           <button
             type="submit"
             disabled={submitting || !stripe}
-            className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium disabled:opacity-60"
+            className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium disabled:opacity-60"
           >
             {submitting ? (
               <>
