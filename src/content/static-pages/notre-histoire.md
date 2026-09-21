@@ -35,7 +35,7 @@ storySections:
     layout: "prose"
     paragraphs:
       - "Tout commence dans la cour de l'école, à Saint-Didier-en-Velay. Étienne et Guillaume grandissent ensemble, dans ce village du Velay posé sur les contreforts du Massif central, à la lisière de la Haute-Loire et de la Loire. Chacun prend sa route — Étienne étudie la biotechnologie des plantes à Toulouse, Guillaume fait ses armes dans la restauration et ouvre un bar-restaurant à Saint-Étienne."
-      - "Mais la Haute-Loire les rappelle. Ses forêts, ses estives, ses plantes. Un savoir qui ne demande qu'à être remis au jour — celui des grand-mères qui préparaient la mélisse pour le rhume, la gentiane pour l'estomac, parfumaient leurs liqueurs d'hysope ou d'aurone. En 2021, ils décident d'assembler leurs expertises : la rigueur scientifique d'un côté, la sensibilité du service et du goût de l'autre. La Brasserie des Plantes naît — artisanale, auvergnate, sans compromis."
+      - "Mais la Haute-Loire les rappelle. Ses forêts, ses estives, ses paysages. Un savoir qui ne demande qu'à être remis au jour — celui des grand-mères qui préparaient la mélisse pour le rhume, la gentiane pour l'estomac, parfumaient leurs liqueurs d'hysope ou d'aurone. En 2021, ils décident d'assembler leurs expertises : la rigueur scientifique d'un côté, la sensibilité du service et du goût de l'autre. La Brasserie des Plantes naît — artisanale, auvergnate, sans compromis."
 
   - kicker: "Le lancement"
     title: "Lancés par ceux qui"
