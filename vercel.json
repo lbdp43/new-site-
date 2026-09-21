@@ -100,6 +100,11 @@
       "permanent": true
     },
     {
+      "source": "/shop/lessence-des-cimes/:path*",
+      "destination": "/boutique/essence-des-alpes",
+      "permanent": true
+    },
+    {
       "source": "/shop/lessence-des-alpes/:path*",
       "destination": "/boutique/essence-des-alpes",
       "permanent": true

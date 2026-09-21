@@ -14,7 +14,7 @@
  * Usage : node scripts/verify-cloudflare-config.mjs
  */
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -95,8 +95,39 @@ for (const url of mustNotRedirect) {
   if (hit) failures.push(`⚠️ PAGE VIVANTE capturée : ${url} → ${hit.to} (règle « ${hit.from} »)`);
 }
 
+// --- URL RÉELLES du WordPress live ---------------------------------------
+// Le contrôle ci-dessus vérifie que la traduction Cloudflare est fidèle à
+// `vercel.json`. Il ne dit rien de ce qui MANQUE dans `vercel.json`. Ce
+// second contrôle confronte les règles aux URL réellement publiées par le
+// WordPress (relevées depuis son sitemap — voir docs/wordpress-urls.txt) :
+// c'est ce qui garantit qu'aucune page indexée par Google ne tombera en 404
+// le jour de la bascule. Il a déjà attrapé `/shop/lessence-des-cimes/`.
+const wpFile = join(root, 'docs/wordpress-urls.txt');
+let wpChecked = 0;
+if (existsSync(wpFile)) {
+  // Pages servies à la même adresse côté Astro : aucune redirection attendue.
+  const sameUrl = new Set(
+    readFileSync(join(root, 'vercel.json'), 'utf-8') && [
+      '/', '/notre-histoire/', '/mentions-legales/',
+    ],
+  );
+  const wpUrls = readFileSync(wpFile, 'utf-8')
+    .split('\n')
+    .map((l) => l.trim())
+    .filter((l) => l && !l.startsWith('#'));
+
+  for (const url of wpUrls) {
+    wpChecked++;
+    if (sameUrl.has(url)) continue;
+    if (!resolve(url)) {
+      failures.push(`🔴 URL WordPress SANS REDIRECTION → 404 le jour J : ${url}`);
+    }
+  }
+}
+
 console.log(`[verify] ${checked} URL testées · ${sta} règles exactes · ${dyn} à joker`);
 console.log(`[verify] ${mustNotRedirect.length} pages vivantes contrôlées (ne doivent pas rediriger)`);
+console.log(`[verify] ${wpChecked} URL réelles du WordPress contrôlées (aucune ne doit tomber en 404)`);
 
 if (failures.length) {
   console.error(`\n❌ ${failures.length} problème(s) :`);

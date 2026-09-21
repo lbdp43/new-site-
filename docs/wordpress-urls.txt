@@ -1,0 +1,60 @@
+# URL réellement publiées sur le WordPress live
+#
+# Relevées le 21/09/2026 depuis le sitemap Yoast du site WordPress
+# (https://labrasseriedesplantes.fr/sitemaps.xml), copiées par Guillaume —
+# l'environnement de développement ne peut pas joindre le domaine (bloqué par
+# le proxy réseau), et le MCP WordPress est verrouillé faute de plan Jetpack
+# payant.
+#
+# ⚠️ CE FICHIER EST UN JEU DE TEST, PAS DE LA DOCUMENTATION.
+# `scripts/verify-cloudflare-config.mjs` le lit et vérifie qu'AUCUNE de ces
+# URL ne tombera en 404 le jour de la bascule www. Le build échoue sinon.
+#
+# Format : une URL par ligne, chemin seul, avec le slash final tel que
+# WordPress le publie. Les lignes vides et les `#` sont ignorés.
+#
+# Sitemaps encore à relever (Guillaume) :
+#   - post-sitemap1.xml      → les articles du blog WordPress
+#   - category-sitemap1.xml  → les catégories du blog
+#   - post_tag-sitemap1.xml  → les étiquettes du blog
+# Tant qu'ils ne sont pas là, ces URL n'ont AUCUNE redirection et tomberaient
+# en 404. Les ajouter ici au fur et à mesure.
+
+# --- page-sitemap1.xml (13 URL) ---
+/
+/lumiere-obscure/
+/cart/
+/checkout/
+/notre-histoire/
+/nos-cocktails/
+/shop/
+/nous-contacter/
+/politique-de-cookies-ue/
+/politique-de-retour/
+/conditions-generales-de-vente/
+/mentions-legales/
+/my-account/
+
+# --- product-sitemap1.xml (19 URL) ---
+# ⚠️ `lessence-des-cimes` : le slug WordPress a suivi le renommage du produit,
+# alors que le slug Astro est resté `essence-des-alpes`. La redirection avait
+# été écrite de mémoire sur l'ancien slug — c'est ce relevé qui a révélé
+# l'écart. Les deux slugs sont désormais redirigés.
+/shop/lessence-des-cimes/
+/shop/la-fleche-ardente/
+/shop/coffret-initiation/
+/shop/la-pralicoquine/
+/shop/le-menthor/
+/shop/cerfgent/
+/shop/zeleste/
+/shop/lherbe-des-druides-finition-fut-de-chene/
+/shop/lalchimie-vegetale-cuvee-michel/
+/shop/lalchimie-vegetale/
+/shop/lherbe-des-druides/
+/shop/flasque/
+/shop/absinthe-cbd-citron/
+/shop/menthe-cbd-ortie/
+/shop/la-lime-des-pres/
+/shop/le-nectar-dostara/
+/shop/le-gorgeon-des-machures/
+/shop/verveine-cbd-aurone/

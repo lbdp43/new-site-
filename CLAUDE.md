@@ -362,7 +362,8 @@ remplacer le contenu de la colonne gauche.
 | `vercel.json` | **Source de vérité** des en-têtes et des 44 redirections 301. Headers sécurité (HSTS, X-Frame, **CSP enforced** depuis 2026-04-27) + noindex sur `test.*`. Le CSP global est assez permissif pour Sveltia (unpkg, cdn.jsdelivr, auth.sveltia.app, api.github.com) — il n'y a **pas** de règle `/admin/*` séparée, contrairement à ce que disait ce tableau avant le 21/09/2026. |
 | `public/_redirects` + `public/_headers` | **Générés** depuis `vercel.json` au prebuild. Inertes sur Vercel (qui les ignore) — ils n'existent que pour le plan de repli Cloudflare. Ne jamais éditer à la main. |
 | `scripts/generate-cloudflare-config.mjs` | Traduit `vercel.json` → `_redirects` / `_headers` |
-| `scripts/verify-cloudflare-config.mjs` | **Utile indépendamment de l'hébergeur** : rejoue les 44 redirections sur 152 URL (avec ET sans slash final) et contrôle que 23 pages vivantes ne sont capturées par aucune règle. **Fait échouer le build** en cas d'écart. C'est le filet de sécurité du plan 301 de la bascule. |
+| `scripts/verify-cloudflare-config.mjs` | **Filet de sécurité du plan 301**, indépendant de l'hébergeur. Trois contrôles, qui **font échouer le build** : (1) les redirections de `vercel.json` sont fidèlement traduites, testées sur 156 URL avec ET sans slash final ; (2) 23 pages vivantes ne sont capturées par aucune règle ; (3) **aucune URL réellement publiée par le WordPress ne tombe en 404** — lues dans `docs/wordpress-urls.txt`. |
+| `docs/wordpress-urls.txt` | **Jeu de test, pas de la doc.** Les URL réelles du WordPress live, relevées depuis son sitemap Yoast. Le domaine étant injoignable depuis l'environnement de dev (proxy) et le MCP WordPress verrouillé, elles sont **copiées à la main par Guillaume**. ⚠️ Incomplet : il manque encore les articles, catégories et étiquettes du blog WP. |
 | `docs/cloudflare-pages.md` | Plan de repli Cloudflare Pages en 5 étapes (migration envisagée puis écartée le 21/09/2026) |
 | `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
 | `blog-audit-report.md` | Audit qualité 28 articles blog FR (2026-04-27) — scoring 100 pts, action queue priorisée |
@@ -682,6 +683,38 @@ grep -rn -iE "\b(1[0-9]|2[0-9])\s*(liqueurs?|références?)" src/ public/*.txt |
   Druides` (28 %) et sa finition fût de chêne (27,1 %). Un matching par nom
   court produit de faux écarts. Et « à 4°C » ou « +40 % de ventes » ne sont pas
   des degrés d'alcool.
+
+## 🔗 Redirections 301 : confrontées aux VRAIES URL du WordPress
+
+Jusqu'au 21/09/2026, les 44 redirections de `vercel.json` avaient été écrites
+**de mémoire**, sans jamais avoir pu lire le WordPress — le domaine est bloqué
+par le proxy réseau de l'environnement de dev (en `www.` comme en apex, en
+curl comme en fetch), et le MCP WordPress est verrouillé faute de plan Jetpack.
+
+Guillaume a relevé le sitemap Yoast (`/sitemaps.xml`, **pas** `wp-sitemap.xml`
+— le format natif n'existe pas sur ce site) et collé les URL. Résultat sur les
+31 premières : **30 couvertes, 1 trou**.
+
+⚠️ **Le trou était instructif** : `/shop/lessence-des-cimes/`. Le slug
+WordPress a suivi le renommage du produit (Essence des Alpes → des Cimes),
+alors que le slug Astro est resté `essence-des-alpes`. La redirection visait
+l'ancien slug. **Leçon : un renommage produit côté WooCommerce change le
+permalien WP, donc casse une redirection écrite depuis le slug Astro.** Les
+deux slugs sont désormais redirigés.
+
+Ces URL sont maintenant un **jeu de test permanent** (`docs/wordpress-urls.txt`,
+relu à chaque build). Contrôle négatif effectué : une URL non couverte fait
+bien échouer le build.
+
+### ❗ Reste à relever (3 sitemaps)
+
+`post-sitemap1.xml`, `category-sitemap1.xml`, `post_tag-sitemap1.xml` — les
+articles, catégories et étiquettes du **blog WordPress**. Il n'existe
+**aucune redirection** pour ces URL aujourd'hui : elles tomberaient toutes en
+404 le jour de la bascule. À demander à Guillaume et à ajouter au jeu de test.
+
+Note : l'Actualité du site Astro restant masquée, ces articles ne pourront pas
+être redirigés vers leur équivalent — il faudra choisir une cible pertinente.
 
 ## 🔌 MCP Vercel — ce qui marche et ce qui ne marche pas
 

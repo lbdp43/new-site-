@@ -4,12 +4,13 @@
 # Cloudflare évalue de haut en bas, première règle gagnante :
 # les règles exactes passent avant les règles à joker.
 
-# --- 52 règles exactes ---
+# --- 53 règles exactes ---
 /shop/lalchimie-vegetale  /boutique/alchimie-vegetale  301
 /shop/lalchimie-vegetale-cuvee-michel  /boutique/alchimie-cuvee-michel  301
 /shop/lherbe-des-druides  /boutique/herbe-des-druides  301
 /shop/lherbe-des-druides-finition-fut-de-chene  /boutique/herbe-druides-fut-chene  301
 /shop/cerfgent  /boutique/cerf-gent  301
+/shop/lessence-des-cimes  /boutique/essence-des-alpes  301
 /shop/lessence-des-alpes  /boutique/essence-des-alpes  301
 /shop/le-gorgeon-des-machures  /boutique/gorgeon-des-machures  301
 /shop/le-nectar-dostara  /boutique/nectar-ostara  301
@@ -58,12 +59,13 @@
 /en/journal/cbd-et-plantes-lumiere-obscure  /en/journal  301
 /en/journal/cbd-et-plantes-lumiere-obscure/  /en/journal  301
 
-# --- 32 règles à joker ---
+# --- 33 règles à joker ---
 /shop/lalchimie-vegetale/*  /boutique/alchimie-vegetale  301
 /shop/lalchimie-vegetale-cuvee-michel/*  /boutique/alchimie-cuvee-michel  301
 /shop/lherbe-des-druides/*  /boutique/herbe-des-druides  301
 /shop/lherbe-des-druides-finition-fut-de-chene/*  /boutique/herbe-druides-fut-chene  301
 /shop/cerfgent/*  /boutique/cerf-gent  301
+/shop/lessence-des-cimes/*  /boutique/essence-des-alpes  301
 /shop/lessence-des-alpes/*  /boutique/essence-des-alpes  301
 /shop/le-gorgeon-des-machures/*  /boutique/gorgeon-des-machures  301
 /shop/le-nectar-dostara/*  /boutique/nectar-ostara  301
