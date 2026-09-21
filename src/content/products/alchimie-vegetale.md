@@ -14,6 +14,8 @@ tagline: "27 plantes, racines, écorces et épices — un hommage à la traditio
 highlight: Meilleur Digestif du Monde 2025
 awards:
   - Meilleur Digestif du Monde 2025 — World Drinks Awards
+  - Médaille d'Or 2025 — World Liqueur Awards
+  - Meilleur digestif français 2026 — World Liqueur Awards
 tasting:
   nose: "Frais, herbacé, mentholé."
   palate: "Notes citronnées en attaque, épicées en structure, avec une rondeur poivrée."

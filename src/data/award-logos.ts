@@ -44,9 +44,24 @@ export const awardLogos: AwardLogo[] = [
     alt: 'France Herbal Winner 2026 — World Liqueur Awards',
   },
   {
+    match: /(?=.*2026)(?=.*(world drinks|world liqueur))(?=.*digestif)/i,
+    logo: '/images/awards/wla-2026-france-digestive-winner.webp',
+    alt: 'France Digestive Winner 2026 — World Liqueur Awards',
+  },
+  {
+    match: /(?=.*2025)(?=.*(world drinks|world liqueur))(?=.*\bor\b)/i,
+    logo: '/images/awards/wla-2025-gold.webp',
+    alt: 'Gold 2025 — World Liqueur Awards',
+  },
+  {
     match: /(?=.*2025)(?=.*(world drinks|world liqueur))(?=.*argent)/i,
     logo: '/images/awards/wla-2025-silver.webp',
     alt: 'Silver 2025 — World Liqueur Awards',
+  },
+  {
+    match: /(?=.*2026)(?=.*(world drinks|world liqueur))(?=.*argent)/i,
+    logo: '/images/awards/wla-2026-silver.webp',
+    alt: 'Silver 2026 — World Liqueur Awards',
   },
 
   // ─── Concours International de Lyon ──────────────────────────
@@ -83,16 +98,6 @@ export const awardLogos: AwardLogo[] = [
     alt: "Médaille d'Argent 2024 — Concours Général Agricole de Paris",
   },
 ];
-
-/**
- * Trois logos sont disponibles dans `public/images/awards/` sans distinction
- * publiée qui leur corresponde encore :
- *   wla-2025-gold.webp                     — L'Alchimie Végétale
- *   wla-2026-france-digestive-winner.webp  — L'Alchimie Végétale
- *   wla-2026-silver.webp                   — L'Essence des Alpes
- * Il suffira d'ajouter la distinction au champ `awards` de la fiche et une
- * entrée ci-dessus pour qu'ils s'affichent.
- */
 
 /** Renvoie le logo officiel d'une distinction, ou undefined si aucun ne correspond. */
 export function findAwardLogo(award: string): AwardLogo | undefined {

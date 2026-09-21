@@ -122,8 +122,8 @@ distinctionsSection:
           competition: "Concours Général Agricole — Paris"
     - product: "L'Essence des Alpes"
       slug: "essence-des-alpes"
-      tagline: "Génépi · épine de sapin · hysope"
-      note: "Un hommage alpin au génépi, à l'épine de sapin et à l'hysope — médaillée d'Argent au Concours International de Lyon."
+      tagline: "Génépi · bourgeon de sapin · hysope"
+      note: "Un hommage alpin au génépi, au bourgeon de sapin et à l'hysope — médaillée d'Argent au Concours International de Lyon."
       medals:
         - year: "2026"
           tier: "silver"
