@@ -82,7 +82,12 @@ permettraient de basculer en quelques heures.
       notifié, facture générée.
 - [ ] **Testé le Coffret DIY** en commande réelle — vérifier que les 3 lignes
       apparaissent dans l'admin WC avec la metadata `_coffret_diy`.
-- [ ] **Clés API WC "Astro site" régénérées** (point backlog sécurité).
+- [x] ✅ **Clés API WC présentes sur Vercel** — `WC_CONSUMER_KEY` et
+      `WC_CONSUMER_SECRET` vérifiées le 21/09/2026 via l'API, posées sur
+      Production ET Preview. La synchronisation du stock tourne donc pour de
+      vrai ; elle ne se rabat pas en silence sur le `wc-live.json` committé.
+      (Les 3 variables `PUBLIC_*` sont également en place sur les trois
+      environnements, et `INDEXNOW_ENABLED` est bien absente.)
 - [ ] **Backups WordPress** à jour (complet BDD + fichiers). UpdraftPlus ou
       équivalent vers Google Drive / Dropbox.
 - [ ] **Produit `coffret-original` créé côté Woo** (actuellement manquant, le

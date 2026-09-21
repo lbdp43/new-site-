@@ -683,20 +683,50 @@ grep -rn -iE "\b(1[0-9]|2[0-9])\s*(liqueurs?|références?)" src/ public/*.txt |
   court produit de faux écarts. Et « à 4°C » ou « +40 % de ventes » ne sont pas
   des degrés d'alcool.
 
-## 🔌 MCP Vercel — portée limitée
+## 🔌 MCP Vercel — ce qui marche et ce qui ne marche pas
 
-Connecté le 21/09/2026. **Portée projet uniquement** : `list_projects`,
-`list_project_domains` et `list_deployments` répondent, mais `get_team` et
-`filter_project_envs` renvoient un **403** (« scope lbdp43s-projects »).
+Connecté le 21/09/2026, ré-autorisé dans la foulée. Portée **partielle** :
 
-Conséquence : on **ne peut pas vérifier depuis ici** le plan de l'abonnement
-(Hobby / Pro) ni la présence des variables d'environnement. Ces deux points
-restent des vérifications manuelles côté tableau de bord — et le passage en
-Pro reste le premier pré-requis de `docs/bascule-www.md`.
+| Marche | Refuse (403 « scope lbdp43s-projects ») |
+|---|---|
+| `list_projects` | `get_team` → le **plan de l'abonnement n'est pas lisible** |
+| `list_project_domains` | `list_deployment_events` → **pas d'accès aux logs de build** |
+| `list_deployments` | |
+| `filter_project_envs` | |
+
+Conséquences pratiques :
+- Le plan (Hobby / Pro) ne se vérifie **que** dans le tableau de bord.
+- On ne peut pas lire un log de build pour diagnostiquer un échec : il faut
+  passer par l'interface, ou reproduire en local avec `npm run build`.
 
 Projet : `prj_l85xURdLb1X1S0RzCyZB96OgfdzJ` (`new-site`), équipe
 `team_4z7NhXXiwGttRzsD5ifwUPEU`. Domaines à ce jour : `test.` uniquement
 (+ l'URL `.vercel.app` qui redirige dessus). `www.` n'est pas encore ajouté.
+
+### ✅ Variables d'environnement vérifiées (21/09/2026)
+
+Les 5 variables attendues sont bien présentes — vérifié via l'API, sans
+déchiffrer les valeurs :
+
+| Variable | Environnements |
+|---|---|
+| `PUBLIC_WC_BASE_URL` | development, preview, production |
+| `PUBLIC_STRIPE_PUBLISHABLE_KEY` | development, preview, production |
+| `PUBLIC_STRIPE_ACCOUNT_ID` | development, preview, production |
+| `WC_CONSUMER_KEY` | preview, production |
+| `WC_CONSUMER_SECRET` | preview, production |
+
+Deux points confirmés au passage :
+- Les clés `WC_CONSUMER_*` sont bien posées sur **Production ET Preview** —
+  donc `sync-wc-stock.mjs` synchronise un vrai stock, il ne se rabat pas
+  silencieusement sur le `wc-live.json` committé. Elles sont absentes de
+  `development`, ce qui est voulu : le dev local passe par `.env`.
+- `INDEXNOW_ENABLED` est **absente**, comme prévu. À ne créer qu'**après** la
+  bascule `www.` — sinon on soumet aux moteurs des URL qui redirigent encore
+  vers WordPress.
+
+⚠️ Ne jamais déchiffrer une valeur (`decrypt: true`) sans demande explicite
+de Guillaume.
 
 ## 🚧 Actualité temporairement retirée — décision du 21/09/2026
 
