@@ -37,7 +37,7 @@ Une liqueur de framboise bâtie sur trois ingrédients seulement, où chacun tie
 
 La **framboise** (*Rubus idaeus*) est travaillée entière — pas en jus, pas en sirop. C'est elle qui porte tout l'assemblage, sur des notes fraîches, légèrement florales.
 
-Les **pétales de rose de Damas** (*Rosa × damascena*), dosés avec retenue, subliment le fruit sans jamais l'écraser : un floral discret qui ouvre la fin de bouche. Et le **jus de citron** (*Citrus limon*), pressé et ajouté en fin de recette, ramène la tension — c'est l'acidité qui empêche la douceur florale de basculer dans le sirupeux.
+Les **pétales de rose de Provins** (*Rosa gallica* var. *officinalis*), dosés avec retenue, subliment le fruit sans jamais l'écraser : un floral discret qui ouvre la fin de bouche. Et le **jus de citron** (*Citrus limon*), pressé et ajouté en fin de recette, ramène la tension — c'est l'acidité qui empêche la douceur florale de basculer dans le sirupeux.
 
 Trois ingrédients : la couleur vient du fruit, pas d'un colorant.
 

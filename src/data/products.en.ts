@@ -92,7 +92,7 @@ export const productsEn: Record<string, ProductEn> = {
     usage: 'Digestif or cocktail',
     tagline: 'Raspberry, elevated by rose, sharpened by a tension of lemon.',
     description:
-      "A ruby-red liqueur built on whole raspberries. Damask rose lifts the fruit without ever covering it, and a dash of fresh lemon juice keeps the sweetness from tipping into syrup. At 22%, it holds its own as a digestif and shines in cocktails (see our Philtre d'Éros).",
+      "A ruby-red liqueur built on whole raspberries. Provins rose (Rosa gallica) lifts the fruit without ever covering it, and a dash of fresh lemon juice keeps the sweetness from tipping into syrup. At 22%, it holds its own as a digestif and shines in cocktails (see our Philtre d'Éros).",
     tasting: {
       nose: 'Ripe raspberry, a discreet floral note.',
       palate: 'Round and indulgent, carried by the fruit.',

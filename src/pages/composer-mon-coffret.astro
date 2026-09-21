@@ -43,8 +43,12 @@ const eligibleProducts: CoffretProduct[] = products
       // supprime tout le transparent autour de la bouteille → empilement
       // propre bout-à-bout. Fallback sur la version non-croppée ou l'image
       // principale si pas disponible.
+      // `?v=2` : la Flèche Ardente a été servie un temps avec un fichier
+      // stack à fond blanc opaque. Le fichier a été corrigé mais reste à
+      // la même URL — les navigateurs qui l'ont mis en cache continuaient
+      // d'afficher la bouteille minuscule dans un rectangle blanc.
       stackImage: p.sizeImages?.[20]
-        ? p.sizeImages[20].replace('-20cl.webp', '-20cl-stack.webp')
+        ? `${p.sizeImages[20].replace('-20cl.webp', '-20cl-stack.webp')}?v=2`
         : undefined,
       alcohol: p.alcohol,
       tagline: p.tagline,

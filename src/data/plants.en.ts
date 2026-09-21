@@ -212,7 +212,7 @@ export const plantsEn: Record<string, PlantEn> = {
   'Pétale de rose': {
     role: 'Floral · romantic',
     description:
-      "Damask rose petals, used with restraint. They lift the raspberry of La Flèche Ardente without ever overpowering it — a discreet floral note that opens up the finish.",
+      "Provins rose petals (Rosa gallica), used with restraint. They lift the raspberry of La Flèche Ardente without ever overpowering it — a discreet floral note that opens up the finish.",
     usedIn: "La Flèche Ardente",
     season: 'May to July',
   },

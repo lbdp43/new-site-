@@ -21,8 +21,10 @@ const eligibleProducts: CoffretProduct[] = products
     priceMin: p.priceMin,
     image: p.image,
     // Pre-cropped stack image (see scripts/crop-stack-images.mjs).
+    // `?v=2` — see composer-mon-coffret.astro: busts the browser cache on
+    // the old opaque-white Flèche Ardente stack file.
     stackImage: p.sizeImages?.[20]
-      ? p.sizeImages[20].replace('-20cl.webp', '-20cl-stack.webp')
+      ? `${p.sizeImages[20].replace('-20cl.webp', '-20cl-stack.webp')}?v=2`
       : undefined,
     alcohol: p.alcohol,
     tagline: p.tagline,

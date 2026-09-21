@@ -189,11 +189,11 @@ export const plants: Plant[] = [
   },
   {
     name: 'Pétale de rose',
-    latin: 'Rosa × damascena',
+    latin: 'Rosa gallica var. officinalis',
     family: 'fleur',
     role: 'Floral · romantique',
     description:
-      "Pétales de rose de Damas, dosés avec retenue. Ils subliment la framboise de La Flèche Ardente sans jamais l'écraser — un floral discret qui ouvre la fin de bouche.",
+      "Pétales de rose de Provins, dosés avec retenue. Ils subliment la framboise de La Flèche Ardente sans jamais l'écraser — un floral discret qui ouvre la fin de bouche.",
     usedIn: "La Flèche Ardente",
     season: 'Mai à juillet',
     signature: true,
