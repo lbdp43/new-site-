@@ -222,7 +222,7 @@ export const productsEn: Record<string, ProductEn> = {
     subtitle: 'Spearmint & hemp aperitif',
     composition: ['Spearmint', 'Hemp (CBD, no THC)', 'Nettle'],
     usage: 'Botanical aperitif with CBD',
-    tagline: 'A fermented mint tea — spearmint, hemp, nettle.',
+    tagline: 'The spirit of a mint tea — spearmint, hemp, nettle.',
     description:
       "The herbaceous side of our CBD range. Spearmint dominates — you find the chlorophyll of a mint tea, softened by nettle and hemp. Exactly the opposite of Menthor, which plays on mentholated freshness.",
     tasting: {
@@ -237,7 +237,7 @@ export const productsEn: Record<string, ProductEn> = {
     subtitle: 'Verbena & hemp digestif',
     composition: ['Verbena', 'Southernwood', 'Hemp (CBD, no THC)'],
     usage: 'Botanical digestif with CBD',
-    tagline: 'Verbena + southernwood + hemp — relaxing digestif.',
+    tagline: 'Verbena, southernwood and hemp — herbaceous and round.',
     description:
       "A CBD digestif. Lemon verbena, southernwood (a cousin of wormwood, less bitter) and hemp come together for a smooth experience. At 30%, it is a true digestif, but with that touch of relaxation that CBD brings.",
     tasting: {
@@ -257,7 +257,7 @@ export const productsEn: Record<string, ProductEn> = {
       'Coriander seeds',
     ],
     usage: 'Botanical digestif — for hemp enthusiasts',
-    tagline: 'Hemp-forward, wormwood in the background, citrus — for enthusiasts.',
+    tagline: 'Hemp-forward, wormwood in the background, lemon zest.',
     description:
       "The most assertive of the Lumière Obscure range. Hemp takes the lead — you clearly feel the distinctive green-hay note, not for everyone. Wormwood brings a mentholated, liquorice structure; lemon peel and coriander the freshness needed for balance.",
     tasting: {

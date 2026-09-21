@@ -11,7 +11,7 @@ composition:
   - Chanvre (CBD, sans THC)
   - Ortie
 usage: Apéritif botanique au CBD
-tagline: "Un thé à la menthe fermenté — menthe verte, chanvre, ortie."
+tagline: "L'esprit d'un thé à la menthe — menthe verte, chanvre, ortie."
 tasting:
   nose: "Menthe verte, herbe fraîche."
   palate: "Herbacé, thé à la menthe, assez doux."

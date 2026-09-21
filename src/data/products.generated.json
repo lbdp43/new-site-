@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T14:37:21.154Z",
+  "generatedAt": "2026-09-21T14:39:54.477Z",
   "productCount": 18,
   "draftCount": 0,
   "products": [
@@ -437,7 +437,7 @@
       "image": "/images/products/menthe-cbd-ortie.webp",
       "alcohol": 21,
       "usage": "Apéritif botanique au CBD",
-      "tagline": "Un thé à la menthe fermenté — menthe verte, chanvre, ortie.",
+      "tagline": "L'esprit d'un thé à la menthe — menthe verte, chanvre, ortie.",
       "serving": "Apéritif, frais, en long drink ou pur.",
       "seoCategory": "Infusion CBD menthe et ortie (sans THC)",
       "wcId": 626,
@@ -466,7 +466,7 @@
       "image": "/images/products/verveine-cbd-aurone.webp",
       "alcohol": 30,
       "usage": "Digestif botanique au CBD",
-      "tagline": "Verveine + aurone + chanvre — détente digestif.",
+      "tagline": "Verveine, aurone et chanvre — herbacée et ronde en bouche.",
       "serving": "Digestif, à température ambiante.",
       "seoCategory": "Infusion CBD verveine et aurone (sans THC)",
       "wcId": 616,
@@ -495,7 +495,7 @@
       "image": "/images/products/absinthe-cbd-citron.webp",
       "alcohol": 37,
       "usage": "Digestif botanique — pour amateurs de chanvre",
-      "tagline": "Chanvre dominant, absinthe en fond, agrumes — pour amateurs.",
+      "tagline": "Chanvre dominant, absinthe en fond, zeste de citron.",
       "serving": "Digestif, à température ambiante. Pour amateurs avertis.",
       "seoCategory": "Infusion CBD absinthe-citron (sans THC)",
       "wcId": 629,
