@@ -10,7 +10,7 @@ composition:
   - Pralines
   - Amandes torréfiées macérées
 usage: Apéritif gourmand ou digestif léger
-tagline: "Onctueuse, gourmande — la praline et l'amande en liqueur."
+tagline: "Une liqueur douce, pralinée et résolument gourmande."
 tasting:
   nose: "Praline rose, amande grillée."
   palate: "Onctueux, sucré, rond."

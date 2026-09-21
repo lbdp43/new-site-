@@ -9,7 +9,7 @@ heroHome:
   logoAlt: "La Brasserie des Plantes — emblème"
   titleScript: "La Brasserie des Plantes"
   titleAccent: "Artisanat, Terroir<br />Passion"
-  intro: "Depuis Saint-Didier-en-Velay, nous composons des liqueurs et infusions à partir de plantes oubliées, sourcées chez nos cueilleurs et maraîchers partenaires. L'Alchimie Végétale, couronnée **Meilleur Digestif du Monde 2025** aux World Drinks Awards."
+  intro: "À Saint-Didier-en-Velay, nous composons des liqueurs et infusions à partir de plantes soigneusement sélectionnées, notamment auprès de producteurs et cueilleurs partenaires. L'Alchimie Végétale, couronnée **Meilleur Digestif du Monde 2025** aux World Drinks Awards."
   ctaPrimaryLabel: "Découvrir la boutique"
   ctaPrimaryHref: "/boutique"
   ctaSecondaryLabel: "Notre histoire"

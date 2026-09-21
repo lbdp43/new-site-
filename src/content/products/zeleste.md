@@ -11,7 +11,7 @@ composition:
   - Orange
   - Citron vert
 usage: "Apéritif frais — alternative au Limoncello"
-tagline: "Trio d'agrumes — change du Limoncello classique."
+tagline: "Trio d'agrumes — frais, vif et acidulé."
 tasting:
   nose: "Agrumes vifs, zestes frais."
   palate: "Acidulé, légère amertume en fond."
