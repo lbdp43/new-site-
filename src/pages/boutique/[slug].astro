@@ -279,8 +279,8 @@ const parsedAwards = (product.awards || []).map(parseAward);
 
               {/* Dots */}
               <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-                <button type="button" class="gallery-dot w-2.5 h-2.5 rounded-full bg-forest-800 transition-all" data-index="0" aria-label="Vue 1"></button>
-                <button type="button" class="gallery-dot w-2.5 h-2.5 rounded-full bg-forest-800/30 transition-all" data-index="1" aria-label="Vue 2"></button>
+                <button type="button" class="gallery-dot relative w-2.5 h-2.5 rounded-full bg-forest-800 transition-all before:absolute before:content-[''] before:-inset-2" data-index="0" aria-label="Vue 1"></button>
+                <button type="button" class="gallery-dot relative w-2.5 h-2.5 rounded-full bg-forest-800/30 transition-all before:absolute before:content-[''] before:-inset-2" data-index="1" aria-label="Vue 2"></button>
               </div>
             </>
           )}

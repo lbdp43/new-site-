@@ -24,18 +24,25 @@ export default function BlogHeroIntro({ kicker, title, scriptSuffix, intro }: Pr
           {kicker}
         </div>
       </ContainerAnimated>
+      {/* Le titre est visuellement coupé en deux pour l'effet staggered, mais
+          il ne doit former qu'un seul H1 : deux <h1> sur la même page, c'est
+          ce que /blog émettait jusqu'au 21/09/2026. La seconde moitié devient
+          donc décorative, et le H1 porte le titre complet pour les lecteurs
+          d'écran et les moteurs. */}
       <ContainerAnimated>
         <h1 className="font-display text-5xl md:text-7xl text-forest-900 leading-[1.05]">
-          {title}
+          <span className="sr-only">{`${title} ${scriptSuffix}`}</span>
+          <span aria-hidden="true">{title}</span>
         </h1>
       </ContainerAnimated>
       <ContainerAnimated>
-        <h1
+        <div
+          aria-hidden="true"
           className="font-display text-5xl md:text-7xl text-forest-600 italic leading-[1.05] -mt-1"
           style={{ fontFamily: 'Sunshine Script, Dancing Script, cursive', fontStyle: 'normal' }}
         >
           {scriptSuffix}
-        </h1>
+        </div>
       </ContainerAnimated>
       <ContainerAnimated className="my-6">
         <p className="leading-normal text-ink-700 max-w-xl mx-auto">

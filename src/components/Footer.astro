@@ -223,11 +223,11 @@ const hoursDisplay = lang === 'en'
     <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-cream-200/60">
       <div>© {year} {site.name}. {tr('footer.rights')}.</div>
       <div class="flex flex-wrap gap-5">
-        <a href={safeLocalizedPath('/faq', lang)} class="hover:text-cream-100">{tr('footer.faq')}</a>
-        <a href={safeLocalizedPath('/presse', lang)} class="hover:text-cream-100">{tr('footer.press')}</a>
-        <a href={safeLocalizedPath('/mentions-legales', lang)} class="hover:text-cream-100">{tr('footer.legal')}</a>
-        <a href={safeLocalizedPath('/cgv', lang)} class="hover:text-cream-100">{tr('footer.cgv')}</a>
-        <a href={safeLocalizedPath('/politique-cookies', lang)} class="hover:text-cream-100">{tr('footer.cookies')}</a>
+        <a href={safeLocalizedPath('/faq', lang)} class="py-1 hover:text-cream-100">{tr('footer.faq')}</a>
+        <a href={safeLocalizedPath('/presse', lang)} class="py-1 hover:text-cream-100">{tr('footer.press')}</a>
+        <a href={safeLocalizedPath('/mentions-legales', lang)} class="py-1 hover:text-cream-100">{tr('footer.legal')}</a>
+        <a href={safeLocalizedPath('/cgv', lang)} class="py-1 hover:text-cream-100">{tr('footer.cgv')}</a>
+        <a href={safeLocalizedPath('/politique-cookies', lang)} class="py-1 hover:text-cream-100">{tr('footer.cookies')}</a>
         <button
           type="button"
           onclick="window.lbdpOpenAgeGate && window.lbdpOpenAgeGate()"
