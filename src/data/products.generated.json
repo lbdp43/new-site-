@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T16:52:29.373Z",
+  "generatedAt": "2026-09-21T16:57:24.881Z",
   "productCount": 18,
   "draftCount": 0,
   "products": [
@@ -443,7 +443,7 @@
       "slug": "menthe-cbd-ortie",
       "name": "Menthe CBD Ortie",
       "range": "lumiere-obscure",
-      "priceMin": 34,
+      "priceMin": 16,
       "priceMax": 34,
       "image": "/images/products/menthe-cbd-ortie.webp",
       "alcohol": 21,
@@ -461,19 +461,24 @@
         "Ortie"
       ],
       "sizes": [
+        "Empilable 20cl",
+        "50cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Menthe verte, herbe fraîche.",
         "palate": "Herbacé, thé à la menthe, assez doux.",
         "finish": "Longue menthe verte."
+      },
+      "sizeImages": {
+        "20": "/images/products/sizes/menthe-cbd-ortie-20cl.webp"
       }
     },
     {
       "slug": "verveine-cbd-aurone",
       "name": "Verveine CBD Aurone",
       "range": "lumiere-obscure",
-      "priceMin": 34,
+      "priceMin": 17,
       "priceMax": 34,
       "image": "/images/products/verveine-cbd-aurone.webp",
       "alcohol": 30,
@@ -491,19 +496,23 @@
         "Chanvre (CBD, sans THC)"
       ],
       "sizes": [
+        "Empilable 20cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Verveine citronnée, touche résineuse.",
         "palate": "Verveine dominante, chanvre en fond.",
         "finish": "Persistante, légèrement camphrée."
+      },
+      "sizeImages": {
+        "20": "/images/products/sizes/verveine-cbd-aurone-20cl.webp"
       }
     },
     {
       "slug": "absinthe-cbd-citron",
       "name": "CBD Absinthe Citron",
       "range": "lumiere-obscure",
-      "priceMin": 39,
+      "priceMin": 18,
       "priceMax": 39,
       "image": "/images/products/absinthe-cbd-citron.webp",
       "alcohol": 37,
@@ -522,12 +531,16 @@
         "Graines de coriandre"
       ],
       "sizes": [
+        "Empilable 20cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Chanvre, foin vert, citron.",
         "palate": "Très verte, herbacée, avec l'absinthe en fond mentholé.",
         "finish": "Chanvre persistant."
+      },
+      "sizeImages": {
+        "20": "/images/products/sizes/absinthe-cbd-citron-20cl.webp"
       }
     },
     {

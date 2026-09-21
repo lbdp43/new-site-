@@ -129,6 +129,33 @@ function CheckoutInner() {
 
   const effectiveShipping = shippingSame ? billing : shipping;
 
+  // ── GA4 ──────────────────────────────────────────────────────────────
+  // Le paiement se termine côté WooCommerce : la page de confirmation ne
+  // reçoit qu'un numéro de commande, sans montant ni lignes. Sans ça, GA4
+  // comptait les conversions mais affichait 0 € de chiffre d'affaires.
+  // On mémorise donc le panier ici, juste avant le paiement, et la page de
+  // confirmation le relit pour envoyer un `purchase` complet.
+  const beginSentRef = useRef(false);
+  useEffect(() => {
+    if (!cart || beginSentRef.current) return;
+    const items = (cart.items ?? []).map((it: any, i: number) => ({
+      item_id: String(it.id),
+      item_name: it.name,
+      price: Number(it.prices?.price ?? 0) / Math.pow(10, minorUnit),
+      quantity: it.quantity,
+      index: i,
+    }));
+    const value = Number(cart.totals?.total_price ?? 0) / Math.pow(10, minorUnit);
+    try {
+      window.sessionStorage.setItem(
+        'lbdp_ga_pending_order',
+        JSON.stringify({ value, currency: cart.totals?.currency_code ?? 'EUR', items })
+      );
+    } catch { /* sessionStorage indisponible */ }
+    (window as any).lbdpTrack?.('begin_checkout', { value, currency: cart.totals?.currency_code ?? 'EUR', items });
+    beginSentRef.current = true;
+  }, [cart, minorUnit]);
+
   // Dès qu'on a un code postal + pays + ville, on demande à WC de calculer
   // les frais de port (debounce simple).
   const postcodeKey = `${effectiveShipping.country}|${effectiveShipping.postcode}|${effectiveShipping.city}`;

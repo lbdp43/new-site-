@@ -2,7 +2,7 @@
 name: "Menthe CBD Ortie"
 range: lumiere-obscure
 seoCategory: "Infusion CBD menthe et ortie (sans THC)"
-priceMin: 34
+priceMin: 16
 priceMax: 34
 image: /images/products/menthe-cbd-ortie.webp
 alcohol: 21
@@ -18,7 +18,10 @@ tasting:
   palate: "Herbacé, thé à la menthe, assez doux."
   finish: "Longue menthe verte."
 serving: "Apéritif, frais, en long drink ou pur."
-sizes: [70cl]
+sizes: [Empilable 20cl, 50cl, 70cl]
+sizeImages:
+  - size: 20
+    image: /images/products/sizes/menthe-cbd-ortie-20cl.webp
 wcId: 626
 order: 1
 ---

@@ -2,7 +2,7 @@
 name: "Verveine CBD Aurone"
 range: lumiere-obscure
 seoCategory: "Infusion CBD verveine et aurone (sans THC)"
-priceMin: 34
+priceMin: 17
 priceMax: 34
 image: /images/products/verveine-cbd-aurone.webp
 alcohol: 30
@@ -18,7 +18,10 @@ tasting:
   palate: "Verveine dominante, chanvre en fond."
   finish: "Persistante, légèrement camphrée."
 serving: "Digestif, à température ambiante."
-sizes: [70cl]
+sizes: [Empilable 20cl, 70cl]
+sizeImages:
+  - size: 20
+    image: /images/products/sizes/verveine-cbd-aurone-20cl.webp
 wcId: 616
 order: 2
 ---

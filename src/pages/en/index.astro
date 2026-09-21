@@ -310,7 +310,7 @@ const schema = [localBusinessSchema, websiteSchema, videoSchema];
   <section class="relative py-0 bg-forest-950 overflow-hidden">
     <div class="relative w-full aspect-[21/9] md:aspect-[21/8] max-h-[85vh]">
       <video
-        autoplay
+        data-defer-play
         muted
         loop
         playsinline
@@ -318,7 +318,7 @@ const schema = [localBusinessSchema, websiteSchema, videoSchema];
         poster="/videos/lbdp-intro-poster.jpg"
         class="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/videos/lbdp-intro.mp4" type="video/mp4" />
+        <source data-src="/videos/lbdp-intro.mp4" type="video/mp4" />
       </video>
       <div class="absolute inset-0 bg-gradient-to-b from-forest-950/65 via-forest-950/25 to-forest-950/80"></div>
       <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-cream-100">
@@ -418,4 +418,26 @@ const schema = [localBusinessSchema, websiteSchema, videoSchema];
       </a>
     </div>
   </section>
+
+<!-- Off-screen videos load only when scrolled to: `autoplay` overrides
+     `preload="none"`, so the browser was downloading them upfront. -->
+<script is:inline>
+  (function () {
+    var vids = document.querySelectorAll('video[data-defer-play]');
+    if (!vids.length) return;
+    var start = function (v) {
+      var s = v.querySelector('source[data-src]');
+      if (s && !s.src) { s.src = s.dataset.src; v.load(); }
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    if (!('IntersectionObserver' in window)) { vids.forEach(start); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { start(e.target); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </Layout>

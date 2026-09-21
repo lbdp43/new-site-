@@ -261,7 +261,7 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
     <section class="relative py-0 bg-forest-950 overflow-hidden">
       <div class="relative w-full aspect-[21/9] md:aspect-[21/8] max-h-[85vh]">
         <video
-          autoplay
+          data-defer-play
           muted
           loop
           playsinline
@@ -269,7 +269,7 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
           poster={introVideoSection.poster}
           class="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={introVideoSection.video} type="video/mp4" />
+          <source data-src={introVideoSection.video} type="video/mp4" />
         </video>
         <div class="absolute inset-0 bg-gradient-to-b from-forest-950/65 via-forest-950/25 to-forest-950/80"></div>
         <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-cream-100">
@@ -417,7 +417,7 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
         {visitSection.video && (
           <div class="aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl bg-forest-950 order-2 lg:order-1">
             <video
-              autoplay
+              data-defer-play
               muted
               loop
               playsinline
@@ -426,7 +426,7 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
               aria-label={visitSection.videoAlt}
               class="w-full h-full object-cover"
             >
-              <source src={visitSection.video} type="video/mp4" />
+              <source data-src={visitSection.video} type="video/mp4" />
             </video>
           </div>
         )}
@@ -532,4 +532,29 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
       </div>
     </section>
   )}
+
+<!-- Vidéos hors écran : chargées seulement quand on arrive dessus.
+     `autoplay` annule `preload="none"` — le navigateur téléchargeait donc les
+     trois vidéos de la home au chargement, soit 26,6 Mo sur mobile. On retire
+     l'attribut du markup et on déclenche la lecture à l'entrée dans le champ
+     de vision. La vidéo du hero, elle, garde son autoplay. -->
+<script is:inline>
+  (function () {
+    var vids = document.querySelectorAll('video[data-defer-play]');
+    if (!vids.length) return;
+    var start = function (v) {
+      var s = v.querySelector('source[data-src]');
+      if (s && !s.src) { s.src = s.dataset.src; v.load(); }
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    if (!('IntersectionObserver' in window)) { vids.forEach(start); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { start(e.target); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </Layout>

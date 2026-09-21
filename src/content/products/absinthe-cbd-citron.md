@@ -2,7 +2,7 @@
 name: "CBD Absinthe Citron"
 range: lumiere-obscure
 seoCategory: "Infusion CBD absinthe-citron (sans THC)"
-priceMin: 39
+priceMin: 18
 priceMax: 39
 image: /images/products/absinthe-cbd-citron.webp
 alcohol: 37
@@ -19,7 +19,10 @@ tasting:
   palate: "Très verte, herbacée, avec l'absinthe en fond mentholé."
   finish: "Chanvre persistant."
 serving: "Digestif, à température ambiante. Pour amateurs avertis."
-sizes: [70cl]
+sizes: [Empilable 20cl, 70cl]
+sizeImages:
+  - size: 20
+    image: /images/products/sizes/absinthe-cbd-citron-20cl.webp
 wcId: 629
 order: 3
 ---
