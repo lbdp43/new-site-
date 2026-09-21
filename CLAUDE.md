@@ -27,13 +27,15 @@ dupliquer la logique e-commerce.
   Guillaume du 21/09/2026 : **on reste sur Vercel**, après avoir envisagé
   Cloudflare Pages, Railway et l'hébergement IONOS.
 
-  ⚠️ **Point ouvert qui conditionne la bascule** : le plan gratuit de Vercel
-  (Hobby) est réservé à un usage **personnel et non commercial** et interdit
-  explicitement le traitement de paiement et les transactions e-commerce, avec
-  désactivation possible « avec ou sans préavis ». Le compte était sur ce plan
-  au 21/09/2026. **Le passage en Pro doit être fait avant que `www.` encaisse
-  des cartes** — c'est un pré-requis de `docs/bascule-www.md`, pas un détail
-  d'intendance.
+  ✅ **Compte passé en plan Pro le 21/09/2026** (confirmé par Guillaume).
+  Le plan gratuit (Hobby) était bloquant : il réserve l'usage à un cadre
+  **personnel et non commercial** et interdit explicitement le traitement de
+  paiement et les transactions e-commerce, avec désactivation possible
+  « avec ou sans préavis ». Le sujet est clos — ne pas le rouvrir, et ne pas
+  redescendre en Hobby tant que le site encaisse des paiements.
+
+  ℹ️ Non vérifiable depuis ici : le MCP Vercel est limité à la portée projet
+  et `get_team` renvoie 403. L'information vient de Guillaume, pas de l'API.
 
   Le travail de migration vers Cloudflare Pages reste en place comme **plan de
   repli** (`docs/cloudflare-pages.md`) : `public/_redirects` et

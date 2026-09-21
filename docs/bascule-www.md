@@ -50,23 +50,19 @@ dans la section « Actualité temporairement retirée » de `CLAUDE.md`.
 
 ---
 
-## 🔒 On reste sur Vercel — mais le plan doit changer
+## 🔒 Hébergement : Vercel, en plan Pro ✅
 
 Décision Guillaume, 21/09/2026 : après avoir comparé Cloudflare Pages, Railway
 et l'hébergement IONOS, **le site reste sur Vercel**. Pas de zone DNS à
 déplacer, pas de risque sur les emails, pas de configuration à retraduire :
 le plan de bascule ci-dessous s'applique tel quel.
 
-⚠️ **Mais le compte est sur le plan gratuit (Hobby)**, qui réserve l'usage à un
-cadre personnel et non commercial et interdit explicitement le traitement de
-paiement et les transactions e-commerce. Vercel se réserve le droit de
-désactiver un projet Hobby « avec ou sans préavis ». Tant que le site vit sur
-`test.`, le risque est théorique ; **le jour où `www.` encaisse des cartes, il
-ne l'est plus**.
+✅ **Le compte est passé en plan Pro le 21/09/2026.** C'était le point
+bloquant : le plan gratuit réserve l'usage à un cadre personnel et non
+commercial et interdit le traitement de paiement, avec désactivation possible
+sans préavis. Le sujet est réglé — `www.` peut encaisser des cartes.
 
-→ Le passage en **Vercel Pro (20 $/mois)** est donc un pré-requis de la
-bascule, ajouté à la liste ci-dessous. Ce n'est pas un confort : c'est ce qui
-évite que la boutique disparaisse du jour au lendemain, un samedi de décembre.
+⚠️ Ne pas redescendre en Hobby tant que la boutique est en ligne.
 
 ℹ️ Le travail de migration Cloudflare reste committé comme plan de repli
 (`docs/cloudflare-pages.md`). `public/_redirects` et `public/_headers` sont
@@ -77,10 +73,9 @@ permettraient de basculer en quelques heures.
 
 ## ☝️ Avant de commencer — pré-requis à valider
 
-- [ ] 🔴 **Compte Vercel passé en plan Pro** — le plan Hobby interdit
-      l'usage commercial et l'encaissement de paiements ; un projet en
-      infraction peut être désactivé sans préavis. À faire AVANT que `www.`
-      serve le site. Voir la section « On reste sur Vercel » ci-dessus.
+- [x] ✅ **Compte Vercel passé en plan Pro** — fait le 21/09/2026. Le plan
+      Hobby interdisait l'usage commercial et l'encaissement de paiements ;
+      un projet en infraction pouvait être désactivé sans préavis.
 - [ ] **Testé un vrai paiement en conditions réelles** (commande de 1-2 €
       depuis test.labrasseriedesplantes.fr, puis rembourser depuis l'admin WC).
       Vérifier : commande visible dans WP admin, email client reçu, EasyBee
