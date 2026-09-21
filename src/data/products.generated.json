@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T17:22:13.930Z",
+  "generatedAt": "2026-09-21T17:35:27.295Z",
   "productCount": 18,
   "draftCount": 0,
   "products": [
@@ -462,16 +462,12 @@
       ],
       "sizes": [
         "Empilable 20cl",
-        "50cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Menthe verte, herbe fraîche.",
         "palate": "Herbacé, thé à la menthe, assez doux.",
         "finish": "Longue menthe verte."
-      },
-      "sizeImages": {
-        "20": "/images/products/sizes/menthe-cbd-ortie-20cl.webp"
       }
     },
     {
@@ -503,9 +499,6 @@
         "nose": "Verveine citronnée, touche résineuse.",
         "palate": "Verveine dominante, chanvre en fond.",
         "finish": "Persistante, légèrement camphrée."
-      },
-      "sizeImages": {
-        "20": "/images/products/sizes/verveine-cbd-aurone-20cl.webp"
       }
     },
     {
@@ -538,9 +531,6 @@
         "nose": "Chanvre, foin vert, citron.",
         "palate": "Très verte, herbacée, avec l'absinthe en fond mentholé.",
         "finish": "Chanvre persistant."
-      },
-      "sizeImages": {
-        "20": "/images/products/sizes/absinthe-cbd-citron-20cl.webp"
       }
     },
     {

@@ -20,9 +20,6 @@ tasting:
   finish: "Chanvre persistant."
 serving: "Digestif, à température ambiante. Pour amateurs avertis."
 sizes: [Empilable 20cl, 70cl]
-sizeImages:
-  - size: 20
-    image: /images/products/sizes/absinthe-cbd-citron-20cl.webp
 wcId: 629
 order: 3
 ---

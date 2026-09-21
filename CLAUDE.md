@@ -889,6 +889,45 @@ propriété est simplement omise du schema (pas d'invention de valeurs).
   admin. Corriger côté WP avec un plugin type "Stop User Enumeration"
   (indépendant de notre code)
 
+## ⚠️ Visuels 20 cl de la gamme Lumière Obscure — abîmés
+
+Les trois fichiers `sizes/{menthe-cbd-ortie,verveine-cbd-aurone,absinthe-cbd-citron}-20cl.webp`
+et leurs variantes `-20cl-stack.webp` ont subi un détourage trop agressif :
+la transparence a été **découpée à travers la bouteille**. L'étiquette est
+rongée — le vert est mangé par des trous semi-transparents, les mentions
+« 21 % VOL » et « 20 CL » sont blanchies. À l'écran, le fond de page
+traverse le flacon.
+
+Mesure : 18 % de pixels semi-transparents pour la menthe, 12,5 % pour
+l'absinthe, 9,3 % pour la verveine — contre **7,5 %** de simple
+anti-aliasing de bord sur tous les autres produits, qui sont sains.
+
+**Les trois fiches n'utilisent donc plus ces visuels** : `sizeImages` a été
+retiré de leur frontmatter le 21/09/2026, elles retombent sur la photo
+principale 70 cl, qui est propre.
+
+Pour rétablir un visuel 20 cl, il faut **repartir du packshot d'origine**
+(fond blanc, non détouré) — ceux du WordPress, `wp-content/uploads/2022/01/
+liqueurs-artisanales-verveine-cadeau-*.png`. Ne pas tenter de réparer les
+fichiers actuels, l'information est perdue.
+
+Voir la recette sharp de la section « Coffret DIY » pour le détourage,
+et **vérifier le résultat à l'œil sur fond blanc** avant de commettre :
+un seuil de blanc trop permissif mange les zones claires du produit
+lui-même (reflets du verre, blancs de l'étiquette).
+
+## Contenances de la gamme Lumière Obscure
+
+**Il n'y a pas de 50 cl en Lumière Obscure** (Guillaume, 21/09/2026). Le
+document de reprise du WordPress en mentionnait un pour la Menthe CBD
+Ortie : c'est une erreur du document, pas du catalogue.
+
+| Référence | Formats | Prix |
+|---|---|---|
+| Menthe CBD Ortie | 20 cl, 70 cl | 16 – 34 € |
+| Verveine CBD Aurone | 20 cl, 70 cl | 17 – 34 € |
+| Absinthe CBD Citron | 20 cl, 70 cl | 18 – 39 € |
+
 ## Images manquantes — TODO
 
 (Rien à signaler pour l'instant. Les 3 CBD ont leurs 20cl depuis avril 2026.)
