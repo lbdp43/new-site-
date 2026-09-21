@@ -14,11 +14,9 @@
 # WordPress le publie. Les lignes vides et les `#` sont ignorés.
 #
 # Sitemaps encore à relever (Guillaume) :
-#   - post-sitemap1.xml      → les articles du blog WordPress
 #   - category-sitemap1.xml  → les catégories du blog
 #   - post_tag-sitemap1.xml  → les étiquettes du blog
-# Tant qu'ils ne sont pas là, ces URL n'ont AUCUNE redirection et tomberaient
-# en 404. Les ajouter ici au fur et à mesure.
+# Probablement vides ou anecdotiques (voir ci-dessous), mais à confirmer.
 
 # --- page-sitemap1.xml (13 URL) ---
 /
@@ -58,3 +56,14 @@
 /shop/le-nectar-dostara/
 /shop/le-gorgeon-des-machures/
 /shop/verveine-cbd-aurone/
+
+# --- post-sitemap1.xml (1 URL) ---
+# ✅ RELEVÉ LE 21/09/2026 — et c'est une excellente nouvelle : ce sitemap ne
+# contient QUE la page d'accueil. Il n'y a AUCUN article de blog publié sur
+# le WordPress. Le risque redouté (des dizaines d'articles indexés tombant en
+# 404 faute de redirection) n'existe pas.
+#
+# Conséquence : l'Actualité du site Astro peut rester masquée aussi longtemps
+# qu'on veut — elle ne remplace aucune URL WordPress existante. Les 33 articles
+# sont du contenu NEUF, pas une migration.
+/

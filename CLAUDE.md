@@ -706,15 +706,23 @@ Ces URL sont maintenant un **jeu de test permanent** (`docs/wordpress-urls.txt`,
 relu à chaque build). Contrôle négatif effectué : une URL non couverte fait
 bien échouer le build.
 
-### ❗ Reste à relever (3 sitemaps)
+### ✅ Le WordPress n'a AUCUN article de blog
 
-`post-sitemap1.xml`, `category-sitemap1.xml`, `post_tag-sitemap1.xml` — les
-articles, catégories et étiquettes du **blog WordPress**. Il n'existe
-**aucune redirection** pour ces URL aujourd'hui : elles tomberaient toutes en
-404 le jour de la bascule. À demander à Guillaume et à ajouter au jeu de test.
+`post-sitemap1.xml` relevé le 21/09/2026 : **1 seule URL, la page d'accueil**.
+Le risque redouté — des dizaines d'articles indexés tombant en 404 faute de
+redirection — **n'existe pas**.
 
-Note : l'Actualité du site Astro restant masquée, ces articles ne pourront pas
-être redirigés vers leur équivalent — il faudra choisir une cible pertinente.
+Deux conséquences qui simplifient beaucoup :
+1. Aucune redirection d'article à écrire.
+2. **L'Actualité du site Astro peut rester masquée aussi longtemps qu'on
+   veut.** Elle ne remplace aucune URL WordPress existante : les 33 articles
+   sont du contenu **neuf**, pas une migration. Rien ne se perd à attendre
+   que la relecture soit finie.
+
+Restent à relever, par acquit de conscience : `category-sitemap1.xml` et
+`post_tag-sitemap1.xml`. Sans article publié, ils sont probablement vides ou
+anecdotiques — mais aucune redirection n'existe pour `/category/*` ni
+`/tag/*`, donc autant vérifier.
 
 ## 🔌 MCP Vercel — ce qui marche et ce qui ne marche pas
 
