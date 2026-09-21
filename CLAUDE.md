@@ -137,6 +137,25 @@ transporteur EasyBee) reste géré par WooCommerce côté serveur.
 6. WooPayments crée la commande, débite la carte (après 3DS), envoie les
    emails, notifie EasyBee. Redirection vers `/commande/confirmation?order=XXX&key=YYY`.
 
+## 🟠 PayPal est actif côté WooCommerce, absent du checkout Astro
+
+Relevé le 21/09/2026 sur `/wp-json/wc/store/v1/cart` : la Store API déclare
+`"payment_methods": ["woocommerce_payments", "ppcp"]`.
+
+`ppcp` = PayPal (extension `pymntpl-paypal-woocommerce`). Or `CheckoutPage.tsx`
+envoie `payment_method: "woocommerce_payments"` en dur et filtre Stripe à
+`paymentMethodTypes: ["card"]`. **Le checkout Astro ne propose donc que la
+carte.**
+
+⚠️ Conséquence à la bascule : les clients **perdent PayPal**, sans qu'aucune
+erreur n'apparaisse. Tout fonctionne, il y a juste un bouton en moins.
+
+Ce n'est pas un oubli technique à « corriger » — c'est un arbitrage
+commercial en attente (pré-requis de `docs/bascule-www.md`). Ne pas ajouter
+PayPal de sa propre initiative : le flux headless demande de gérer
+l'approbation côté PayPal puis de repasser le résultat dans `payment_data`,
+c'est un chantier à part.
+
 ## Variables d'environnement
 
 Variables `PUBLIC_*` → exposées côté client (non-secret par design).

@@ -130,6 +130,37 @@ permettraient de basculer en quelques heures.
       Backup est déjà installé** sur le WP (vu le 21/09/2026) — il suffit de
       lancer une sauvegarde complète et de vérifier qu'elle part bien vers un
       stockage externe (Drive / Dropbox), pas seulement sur le serveur.
+- [ ] 🟠 **Décider du sort de PayPal** — arbitrage commercial, pas technique.
+
+      La Store API déclare **deux** moyens de paiement actifs côté
+      WooCommerce (relevé le 21/09/2026 sur `/wp-json/wc/store/v1/cart`) :
+
+      ```json
+      "payment_methods": ["woocommerce_payments", "ppcp"]
+      ```
+
+      `ppcp` = PayPal (extension `pymntpl-paypal-woocommerce`, avec Fastlane
+      et détection d'e-mail activées).
+
+      **Le checkout Astro ne propose QUE la carte** via WooPayments
+      (`CheckoutPage.tsx` : `paymentMethodTypes: ["card"]` et
+      `payment_method: "woocommerce_payments"` en dur). Donc **le jour de la
+      bascule, les clients perdent le paiement PayPal** sans que personne
+      ne s'en aperçoive côté code — tout fonctionnera parfaitement, il y
+      aura juste un bouton en moins.
+
+      Ce n'est pas un bug, c'est un choix à faire en connaissance de cause :
+      - **On assume** → penser à désactiver l'extension PayPal côté
+        WooCommerce après la bascule, pour ne pas payer un abonnement à un
+        moyen de paiement que plus personne ne peut utiliser.
+      - **On le garde** → c'est un chantier à part entière. Le flux PayPal
+        en headless n'est pas un simple champ à ajouter : il faut gérer
+        l'approbation côté PayPal puis repasser le résultat dans
+        `payment_data`. À chiffrer avant de s'engager.
+
+      Élément de décision utile : **quelle part des commandes passe
+      aujourd'hui par PayPal ?** Ça se lit dans WooCommerce → Analyse →
+      Commandes. Si c'est marginal, la question se referme vite.
 - [ ] **Produit `coffret-original` créé côté Woo** (actuellement manquant, le
       bouton affiche "bientôt disponible").
 - [ ] **Site soumis à Google Search Console + Bing Webmaster Tools** avec le
