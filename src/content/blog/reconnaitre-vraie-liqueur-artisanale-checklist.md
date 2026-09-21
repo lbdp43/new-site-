@@ -28,11 +28,11 @@ L'industriel a tendance à dissimuler ses ingrédients derrière des mentions va
 **Le test** : cherchez ces mentions exactes sur la bouteille ou sur le site web du producteur.
 
 - ✅ "Sans arôme ajouté, sans colorant"
-- ✅ "100 % macération naturelle"
+- ✅ "Plantes entières, pas d'extrait"
 - ⚠️ "Arômes naturels" — faux ami, ce sont des arômes industriels conformes au [Codex Alimentarius](https://www.fao.org/fao-who-codexalimentarius/fr/)
 - ❌ "Colorant E150" (caramel industriel) ou "E133" (bleu brillant)
 
-La couleur d'une liqueur artisanale doit venir d'**un ingrédient qui se boit** : chlorophylle naturelle des plantes (vert pâle), charbon végétal (noir profond comme [notre Gorgeon des Machurés](/boutique/gorgeon-des-machures)), fruits rouges macérés (rubis pour [La Flèche Ardente](/boutique/fleche-ardente)). Jamais de colorant de synthèse.
+La couleur d'une liqueur artisanale doit venir d'**un ingrédient qui se boit** : chlorophylle naturelle des plantes (vert pâle), charbon végétal (noir profond comme [notre Gorgeon des Machurés](/boutique/gorgeon-des-machures)), fruits rouges (rubis pour [La Flèche Ardente](/boutique/fleche-ardente)). Jamais de colorant de synthèse.
 
 ## 3. L'origine traçable des plantes
 
@@ -58,7 +58,7 @@ Pour aller plus loin, voir [notre voyage botanique](/blog/plantes-liqueur-haute-
 - ❌ "Sourcing local" sans aucun détail
 - ❌ Site silencieux sur l'amont agricole
 
-Chez nous, on a [un article entier sur nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — gentianaïres professionnels, maraîchers, apiculteurs, arboriculteur. Tous sont rencontrés un par un.
+Chez nous, on a [un article entier sur nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) — gentianaïres professionnels, maraîchers, coopératives, apiculteurs, arboriculteur.
 
 ## 5. Le prix au litre cohérent
 
@@ -73,7 +73,7 @@ Chez nous, on a [un article entier sur nos cueilleurs et maraîchers partenaires
 
 En dessous de ces prix, ce n'est presque jamais artisanal — l'économie ne tient pas. Au-dessus, c'est plausible (mais pas garanti — vérifier les 4 points précédents).
 
-Pourquoi ce coût plancher ? L'artisan paie ses plantes 2 à 4 fois plus cher que l'industriel (pas de gros volumes négociés), immobilise du capital pendant 3 à 12 mois de macération, embouteille à la main, et amortit ses frais fixes sur quelques milliers de bouteilles vs des millions. C'est mathématique.
+Pourquoi ce coût plancher ? L'artisan paie ses plantes 2 à 4 fois plus cher que l'industriel (pas de gros volumes négociés), immobilise du capital pendant 3 à 12 mois, embouteille à la main, et amortit ses frais fixes sur quelques milliers de bouteilles vs des millions. C'est mathématique.
 
 ## Bonus : 3 signes supplémentaires (pour les puristes)
 

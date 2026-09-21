@@ -27,7 +27,7 @@ C'est cette complexité qui fait son intérêt en liqueur. Là où un simple cit
 
 Notre Herbe des Druides est une composition autour de la verveine. Nous la travaillons à deux temps :
 
-1. **Macération à froid** pendant trois semaines dans un alcool à 60%, pour extraire les huiles essentielles sans les brûler.
+1. **Travail à froid** pendant trois semaines dans un alcool à 60%, pour extraire les huiles essentielles sans les brûler.
 2. **Infusion courte** d'une deuxième cuvée de feuilles, cette fois à chaud, pour en tirer les notes plus lourdes et sucrées.
 
 Les deux extraits sont ensuite assemblés, dilués à 32% vol., et laissés reposer trois mois minimum. C'est long. C'est nécessaire.
@@ -47,7 +47,7 @@ Deux façons de la goûter chez soi :
 
 ---
 
-*La Brasserie des Plantes travaille la verveine citronnelle depuis 2021, en la sourçant auprès de maraîchers partenaires sélectionnés un par un (la plupart en bio).*
+*La Brasserie des Plantes travaille la verveine citronnelle depuis 2021, en la sourçant auprès de maraîchers et de coopératives partenaires (la plupart en bio).*
 
 ---
 

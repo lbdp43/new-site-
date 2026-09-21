@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T14:56:29.255Z",
+  "generatedAt": "2026-09-21T16:58:58.114Z",
   "productCount": 18,
   "draftCount": 0,
   "products": [
@@ -17,14 +17,17 @@
       "highlight": "Meilleur Digestif du Monde 2025",
       "serving": "À 3°C en digestif, après le repas. Ou un trait dans un café long.",
       "seoCategory": "Liqueur digestive aux 27 plantes",
+      "ingredients": "eau, sucre, alcool, assemblage de 27 plantes, racines, écorces, fleurs et épices",
       "wcId": 348,
       "order": 1,
-      "description": "Notre **digestif** de prestige. Macérat complexe inspiré des grandes liqueurs monastiques, L'Alchimie Végétale assemble 27 plantes, racines, écorces et épices choisies une à une pour leur équilibre. À 50° d'alcool, c'est une **liqueur naturelle** — pas d'arôme, pas de colorant, juste l'alcool et les plantes. Trois ans de formulation, un hommage à la tradition liquoriste artisanale française — et une reconnaissance mondiale en 2025.\n\n## Le grand assemblage\n\nCinq familles structurent la recette : les **racines** (gentiane jaune de moyenne montagne, angélique, réglisse) posent la colonne vertébrale et donnent la longueur en bouche. Le **cœur herbacé** (verveine odorante, mélisse, serpolet sauvage) fait respirer la liqueur. Les **fleurs** (sureau, camomille) arrondissent et signent les notes qu'on identifie d'abord au nez. Les **épices et écorces** (cannelle de Ceylan, cardamome verte, combava, badiane, quinquina) jouent le rôle de sel — elles apportent la tension sans laquelle une liqueur devient bavarde. Enfin quelques **fruits rouges sauvages** (myrtille, en micro-dose) posent des touches presque invisibles de fruité sombre.\n\nLes plantes viennent de [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) sélectionnés un par un, la plupart en bio. Six ingrédients tropicaux (cardamome, combava, cannelle, badiane, réglisse, quinquina) sont sourcés chez des grossistes européens spécialisés avec traçabilité complète — pas d'arôme de synthèse, jamais.\n\n## Comment la servir\n\n**En digestif** : à 3°C, dans un petit verre tulipé. Le froid tend la bouche, ouvre les racines, laisse les épices prendre leur place. Laisser respirer trente secondes avant la première gorgée.\n\n**En long drink** : 4 cl d'Alchimie, glaçons, tonic sec (Fever-Tree Indian), zeste d'orange amère. Une variation spritz-amer qui met en avant le cardamome-combava.\n\n**En cuisine** : un trait dans un **café long** juste après le repas (recette signature de la maison) ; une réduction pour glacer un gibier ; un splash dans une **crème dessert** au chocolat amer.\n\n## Pourquoi ce prix\n\n*L'Alchimie Végétale* a été élue **[Meilleur Digestif du Monde 2025](/blog/meilleur-digestif-du-monde-2025)** aux World Drinks Awards à Londres, le 17 avril. Le jury a salué une \"signature aromatique claire sans être dominante, une longueur en bouche inhabituelle pour un digestif sucré, une intégration racinaire rare\". Quatre ans de recherche et développement pour arriver à la cuvée actuelle — que nous n'avons volontairement pas modifiée depuis.\n\nLa cuvée en vente aujourd'hui est celle que le jury a dégustée. Pour l'anecdote de composition et les arbitrages de recette, voir [l'histoire des 27 plantes](/blog/alchimie-vegetale-27-plantes-composition).",
+      "description": "Notre **digestif** de prestige. Assemblage complexe inspiré des grandes liqueurs monastiques, L'Alchimie Végétale assemble 27 plantes, racines, écorces et épices choisies une à une pour leur équilibre. À 50° d'alcool, c'est une **liqueur naturelle** — pas d'arôme, pas de colorant, juste l'alcool et les plantes. Trois ans de formulation, un hommage à la tradition liquoriste artisanale française — et une reconnaissance mondiale en 2025.\n\n## Le grand assemblage\n\nCinq familles structurent la recette : les **racines** (gentiane jaune de moyenne montagne, angélique, réglisse) posent la colonne vertébrale et donnent la longueur en bouche. Le **cœur herbacé** (verveine odorante, mélisse, serpolet sauvage) fait respirer la liqueur. Les **fleurs** (sureau, camomille) arrondissent et signent les notes qu'on identifie d'abord au nez. Les **épices et écorces** (cannelle de Ceylan, cardamome verte, combava, badiane, quinquina) jouent le rôle de sel — elles apportent la tension sans laquelle une liqueur devient bavarde. Enfin quelques **fruits rouges sauvages** (myrtille, en micro-dose) posent des touches presque invisibles de fruité sombre.\n\nLes plantes viennent de [cueilleurs, maraîchers, coopératives et filières spécialisées](/blog/producteurs-partenaires-bio-velay), la plupart en bio. Six ingrédients tropicaux (cardamome, combava, cannelle, badiane, réglisse, quinquina) sont sourcés chez des grossistes européens spécialisés avec traçabilité complète — pas d'arôme de synthèse, jamais.\n\n## Comment la servir\n\n**En digestif** : à 3°C, dans un petit verre tulipé. Le froid tend la bouche, ouvre les racines, laisse les épices prendre leur place. Laisser respirer trente secondes avant la première gorgée.\n\n**En long drink** : 4 cl d'Alchimie, glaçons, tonic sec (Fever-Tree Indian), zeste d'orange amère. Une variation spritz-amer qui met en avant le cardamome-combava.\n\n**En cuisine** : un trait dans un **café long** juste après le repas (recette signature de la maison) ; une réduction pour glacer un gibier ; un splash dans une **crème dessert** au chocolat amer.",
       "composition": [
         "27 plantes, racines, écorces, fleurs et épices sélectionnées"
       ],
       "awards": [
-        "Meilleur Digestif du Monde 2025 — World Drinks Awards"
+        "Meilleur Digestif du Monde 2025 — World Drinks Awards",
+        "Médaille d'Or 2025 — World Liqueur Awards",
+        "Meilleur digestif français 2026 — World Liqueur Awards"
       ],
       "sizes": [
         "Empilable 20cl",
@@ -58,9 +61,10 @@
       "highlight": "Multi-médaillée Lyon, Paris, Londres",
       "serving": "En apéritif givré, ou en digestif à température ambiante.",
       "seoCategory": "Liqueur de verveine artisanale",
+      "ingredients": "eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique",
       "wcId": 70,
       "order": 2,
-      "description": "Notre best-seller. L'Herbe des Druides est une **liqueur de verveine artisanale** à 28° d'alcool, adoucie par le **serpolet** (thym sauvage de moyenne montagne) et épicée par le **carvi** (cumin des prés). Une **liqueur naturelle** — sans arôme ni colorant ajouté — où la verveine et l'alcool dialoguent dans un équilibre floral, sauvage, tempéré par les notes épicées.\n\n## Trois plantes, aucun arôme ajouté\n\nLa recette tient sur trois plantes, récoltées chez nos [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) (la plupart en bio). La **verveine odorante** (*Aloysia citrodora*) est notre plante totem — elle donne le haut du nez, ce parfum citronné sans acidité, enrichi de nérol et de linalol. Le **serpolet** sauvage (*Thymus serpyllum*), cueilli sur des pentes rocailleuses au moment de la floraison, apporte la concentration thymée et une note résineuse. Le **carvi** (*Carum carvi*) pose la structure épicée en bouche et ancre la finale.\n\nPas d'arôme ajouté, pas de colorant : la couleur vert pâle vient de la chlorophylle des plantes macérées. Macération froide longue, filtration lente, repos minimum deux mois.\n\n## Cinq distinctions internationales\n\n- **Or 2023, 2024, 2026** — Concours International de Lyon\n- **Argent 2024** — Concours Général Agricole, Salon de l'Agriculture Paris\n- **Argent 2025** — World Drinks Awards, Londres\n\nLe [Concours International de Lyon](https://concours-vinslyon.com/) nous a décerné trois médailles d'or sur les trois cuvées présentées, ce qui place la verveine-serpolet-carvi parmi les rares recettes à avoir un palmarès aussi stable. Lire [le récit de la première médaille 2023](/blog/premiere-medaille-or-concours-lyon-2023).\n\n## Comment la servir\n\n**En apéritif givré** : au congélateur quelques heures, servi à 0°C dans un verre tulipé. Les huiles essentielles prennent de l'épaisseur. Avec un zeste de citron jaune pour accentuer la verveine.\n\n**En digestif pur** : à température ambiante, un fond de verre après un repas riche. Le carvi aide.\n\n**En cocktail** : base de notre [Verveine Printanière](/cocktails#verveine-printaniere) — 4 cl, citron vert, sirop de sucre de canne, eau pétillante, feuilles fraîches.",
+      "description": "Notre best-seller. L'Herbe des Druides est une **liqueur de verveine artisanale** à 28° d'alcool, adoucie par le **serpolet** (thym sauvage de moyenne montagne) et épicée par le **carvi** (cumin des prés). Une **liqueur naturelle** — sans arôme ni colorant ajouté — où la verveine et l'alcool dialoguent dans un équilibre floral, sauvage, tempéré par les notes épicées.\n\n## Trois plantes, aucun arôme ajouté\n\nLa recette tient sur trois plantes, récoltées chez nos [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) (la plupart en bio). La **verveine odorante** (*Aloysia citrodora*) est notre plante totem — elle donne le haut du nez, ce parfum citronné sans acidité, enrichi de nérol et de linalol. Le **serpolet** sauvage (*Thymus serpyllum*), cueilli sur des pentes rocailleuses au moment de la floraison, apporte la concentration thymée et une note résineuse. Le **carvi** (*Carum carvi*) pose la structure épicée en bouche et ancre la finale.\n\nPas de colorant : la couleur vert pâle vient de la chlorophylle des plantes. Élaboration lente, filtration soignée, repos minimum deux mois.\n\n## Cinq distinctions internationales\n\n- **Or 2023, 2024, 2026** — Concours International de Lyon\n- **Argent 2024** — Concours Général Agricole, Salon de l'Agriculture Paris\n- **Argent 2025** — World Drinks Awards, Londres\n\nLe [Concours International de Lyon](https://concours-vinslyon.com/) nous a décerné trois médailles d'or sur les trois cuvées présentées, ce qui place la verveine-serpolet-carvi parmi les rares recettes à avoir un palmarès aussi stable. Lire [le récit de la première médaille 2023](/blog/premiere-medaille-or-concours-lyon-2023).\n\n## Comment la servir\n\n**En apéritif givré** : au congélateur quelques heures, servi à 0°C dans un verre tulipé. Les huiles essentielles prennent de l'épaisseur. Avec un zeste de citron jaune pour accentuer la verveine.\n\n**En digestif pur** : à température ambiante, un fond de verre après un repas riche. Le carvi aide.\n\n**En cocktail** : base de notre [Verveine Printanière](/cocktails#verveine-printaniere) — 4 cl, citron vert, sirop de sucre de canne, eau pétillante, feuilles fraîches.",
       "composition": [
         "Verveine",
         "Serpolet (thym sauvage)",
@@ -107,7 +111,7 @@
       "seoCategory": "Liqueur de verveine noire artisanale (charbon végétal)",
       "wcId": 71,
       "order": 3,
-      "description": "Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Inspiration de trois recettes stéphanoises historiques, assemblage de verveine, aurone et baraban (pissenlit en patois auvergnat).\n\nÉlue **Meilleure liqueur de plantes française 2026** aux World Liqueur Awards de Londres.",
+      "description": "Une verveine noire, colorée au charbon végétal, à boire en mémoire des Machurés — les mineurs de Saint-Étienne dont le visage était noir de poussière en fin de journée. Créée pour la Sainte-Barbe, patronne des mineurs, d'après trois recettes traditionnelles du Forez.\n\n## Un assemblage, pas une recette unique\n\nLà où nos autres liqueurs partent d'une recette unique, Le Gorgeon est un **assemblage** : une liqueur de verveine, une **arquebuse forézienne** et des barabans, réunis après coup. C'est ce qui lui donne sa profondeur — trois profils construits séparément, puis accordés.\n\nL'**arquebuse** est une vieille tradition liquoriste française, un assemblage de plantes amères dont l'**aurone** (*Artemisia abrotanum*) est la signature — cousine de l'absinthe, moins amère qu'elle, sur des notes de fruit-bonbon et de citron. Le **baraban** (*Taraxacum officinale*), un des noms vernaculaires du pissenlit, apporte ses feuilles amères et terreuses : une amertume de sous-bois, de terre humide de printemps. La **verveine odorante** (*Aloysia citrodora*) tient le haut du nez, citronnée, sans acidité.\n\nLe **charbon végétal** est ajouté en cours d'élaboration. Il ne parfume pas — il assombrit. C'est de là que vient ce noir d'encre, et rien d'autre : pas de colorant de synthèse.\n\n## Meilleure liqueur de plantes française 2026\n\nAux **World Liqueur Awards** de Londres, Le Gorgeon des Machurés a été élu **meilleure liqueur de plantes française de l'année 2026**, toutes maisons confondues. Pour comprendre comment se juge un concours de ce type, lire [notre article sur le fonctionnement des World Drinks Awards](/blog/world-drinks-awards-comment-ca-marche).\n\n## Comment le servir\n\n**En digestif pur** : à température ambiante, dans un petit verre. C'est là qu'on perçoit le mieux le fond boisé de racine et la finale un rien fumée.\n\n**En cocktail** : base de notre [Black Mule](/cocktails#black-mule) — 2 cl avec du gin, du citron vert et de la ginger beer, dans une tasse en cuivre. L'amertume sombre du baraban et le gingembre se répondent particulièrement bien.\n\n**À offrir** : c'est notre seule référence disponible en magnum 150 cl.",
       "composition": [
         "Verveine",
         "Aurone",
@@ -148,9 +152,10 @@
       "tagline": "La framboise, sublimée par la rose, relevée par la tension du citron.",
       "serving": "En digestif, dégustation optimale à 3 °C.",
       "seoCategory": "Liqueur de framboise artisanale",
+      "ingredients": "eau, sucre, alcool, framboise, pétale de rose et jus de citron",
       "wcId": 72,
       "order": 4,
-      "description": "La Flèche Ardente est une liqueur de framboise, sublimée par les pétales de rose et le jus de citron pour ramener de la tension. Miroir d'Éros par sa recette originale à la fois complexe et intense, elle exaltera vos sens. Laissez-vous tenter par cet envoûtant philtre d'amour et libérez-vous de vos désirs.\n\nÀ 22°, elle se déguste en digestif, servie très fraîche (autour de 3 °C). Elle fait aussi merveille en cocktail — voir notre [Philtre d'Éros](/cocktails#philtre-eros).",
+      "description": "Une liqueur de framboise bâtie sur trois ingrédients seulement, où chacun tient un rôle précis : le fruit porte, la fleur élève, l'acide retient. Robe rubis, attaque légère, bouche ronde et gourmande.\n\n## La framboise, tenue par deux contrepoids\n\nLa **framboise** (*Rubus idaeus*) est travaillée entière — pas en jus, pas en sirop. C'est elle qui porte tout l'assemblage, sur des notes fraîches, légèrement florales.\n\nLes **pétales de rose de Damas** (*Rosa × damascena*), dosés avec retenue, subliment le fruit sans jamais l'écraser : un floral discret qui ouvre la fin de bouche. Et le **jus de citron** (*Citrus limon*), pressé et ajouté en fin de recette, ramène la tension — c'est l'acidité qui empêche la douceur florale de basculer dans le sirupeux.\n\nTrois ingrédients : la couleur vient du fruit, pas d'un colorant.\n\n## Comment la servir\n\n**En digestif, très frais** : dégustation optimale autour de **3 °C**. Le froid resserre le fruit et fait ressortir la rose.\n\n**En cocktail** : base de notre [Philtre d'Éros](/cocktails#philtre-eros) — avec du jus de fraise, du citron, de la menthe et de l'eau pétillante. C'est le service qui lui va le mieux en été.\n\n**Au dessert** : versée sur une glace vanille, ou en déglaçage sur des fruits rouges poêlés.",
       "composition": [
         "Framboise",
         "Pétale de rose",
@@ -174,7 +179,7 @@
     },
     {
       "slug": "essence-des-alpes",
-      "name": "L'Essence des Alpes",
+      "name": "L'Essence des Cimes",
       "range": "brasserie",
       "priceMin": 17,
       "priceMax": 36,
@@ -185,16 +190,18 @@
       "highlight": "Médaille d'Argent 2026 — Lyon",
       "serving": "Digestif à température ambiante, ou très frais en été.",
       "seoCategory": "Liqueur de génépi artisanale",
+      "ingredients": "eau, sucre, alcool, génépi issu de l'agriculture biologique, bourgeon de sapin et hysope",
       "wcId": 4042,
       "order": 5,
-      "description": "Un digestif de montagne. Génépi biologique en provenance d'un partenaire de Barcelonnette, marié à notre liqueur d'épine de sapin et à l'hysope — cette cousine de la lavande aux notes mentholées et camphrées. Douceur, fraîcheur, petite note résineuse de fond.",
+      "description": "Un digestif de montagne, construit autour du génépi et tenu par deux plantes résineuses. Douceur, fraîcheur, petite note de résine en fond — l'idée était de faire un génépi qui reste buvable longtemps, sans l'amertume mordante qu'on trouve parfois.\n\n## Trois plantes d'altitude\n\nLe **génépi** (*Artemisia genipi*) est la plante reine des Alpes. Nous le travaillons en partenariat avec un producteur de **Barcelonnette**, en agriculture biologique : amertume noble, caractère minéral, un profil très recherché en digestif de montagne. C'est la seule de nos plantes dont nous nommons le partenaire, parce que la filière génépi est étroite et que ce lien compte.\n\nLe **bourgeon de sapin** (*Abies alba*) vient des jeunes pousses, cueillies au printemps quand elles sont encore tendres. Il apporte un boisé résineux, presque balsamique, qui ancre l'ensemble. L'**hysope** (*Hyssopus officinalis*), plante médiévale des jardins monastiques, ferme l'accord sur une note camphrée et légèrement amère.\n\n## Double Argent en 2026\n\nDeux distinctions la même année, à Lyon et à Londres :\n\n- **Argent 2026** — Concours International de Lyon\n- **Argent 2026** — World Liqueur Awards\n\nPour une liqueur arrivée récemment au catalogue, c'est une entrée en matière solide — [comment se jugent ces concours](/blog/world-drinks-awards-comment-ca-marche).\n\n## Comment la servir\n\n**En digestif** : à température ambiante, après un repas de montagne. Le génépi se déploie mieux quand il n'est pas glacé.\n\n**Très frais en été** : sortie du réfrigérateur, elle devient beaucoup plus désaltérante et la résine passe au second plan.\n\n**En cocktail montagnard** : 4 cl avec un vin blanc sec, un trait de miel de montagne, du citron vert et de la poire.",
       "composition": [
         "Génépi bio (partenariat Barcelonnette)",
-        "Liqueur d'épine de sapin",
+        "Bourgeon de sapin",
         "Hysope"
       ],
       "awards": [
-        "Médaille d'Argent 2026 — Concours International de Lyon"
+        "Médaille d'Argent 2026 — Concours International de Lyon",
+        "Médaille d'Argent 2026 — World Liqueur Awards"
       ],
       "sizes": [
         "Empilable 20cl",
@@ -225,9 +232,10 @@
       "tagline": "Une liqueur florale, douce, miellée et ronde.",
       "serving": "En spritz avec Prosecco et Mandarine Napoléon (cf. Spritz Efflorescent), ou pur à température ambiante.",
       "seoCategory": "Liqueur de fleurs de sureau",
+      "ingredients": "eau, sucre, alcool, fleurs de sureau, de bleuet et de camomille — plantes issues de l'agriculture biologique",
       "wcId": 65,
       "order": 6,
-      "description": "Notre liqueur la plus florale. Trois fleurs d'avril : sureau pour le pollen, bleuet pour la rondeur, camomille pour la tenue. Un Nectar d'Ostara très mielleux, très rond, à 24° — idéal en spritz ou en apéritif sans ajout.",
+      "description": "Notre liqueur la plus florale. Trois fleurs de printemps — sureau, bleuet, camomille — pour un résultat très miellé, très rond, à 24°. Le nom vient d'**Ostara**, la fête de l'équinoxe de printemps : c'est la saison de la cueillette, et c'est le goût qu'on a cherché à mettre en bouteille.\n\n## Trois fleurs, une fenêtre courte\n\nLa **fleur de sureau** (*Sambucus nigra*) donne le pollen et le miel. Ce sont ces petites ombelles blanches qui fleurissent début juin, sur un arôme presque muscaté — et dont la fenêtre de cueillette tient en quinze jours à peine. Le **bleuet** (*Centaurea cyanus*), la fleur bleue des moissons presque disparue des blés conventionnels, apporte un floral discret, légèrement herbacé. La **camomille matricaire** (*Matricaria chamomilla*), dont l'arôme rappelle la pomme mûre, vient arrondir l'accord et lui donner de la tenue.\n\nLes plantes sont **issues de l'agriculture biologique**, sélectionnées avec soin, notamment auprès de producteurs et cueilleurs partenaires.\n\n## Comment le servir\n\n**En spritz** : c'est son terrain de jeu. Base de notre [Spritz Efflorescent](/cocktails#spritz-efflorescent), avec du Prosecco et une pointe de Mandarine Napoléon.\n\n**Pur, bien frais** : à 3 °C en apéritif d'été, sans rien ajouter. La rondeur miellée suffit.\n\n**À table** : il supporte très bien la cuisine. En déglaçage sur des travers de porc caramélisés, dans une pâte à beignets de courgettes, ou versé sur une salade de fruits.",
       "composition": [
         "Fleur de sureau",
         "Bleuet",
@@ -262,9 +270,10 @@
       "tagline": "Une liqueur végétale fraîche aux notes citronnées.",
       "serving": "À température ambiante avec glaçons, ou avec un trait de Porto blanc en apéritif.",
       "seoCategory": "Liqueur de tilleul (élixir floral)",
+      "ingredients": "eau, sucre, alcool, thym citron, mélisse et houblon — plantes issues de l'agriculture biologique",
       "wcId": 69,
       "order": 7,
-      "description": "Un tour de passe-passe botanique : une liqueur citronnée sans un gramme de citron réel. Le thym citron apporte l'attaque zestée, la mélisse la fraîcheur florale, le houblon l'amertume noble. Aucune acidité — juste une vague de prairie citronnée.",
+      "description": "Un tour de passe-passe botanique : une liqueur franchement citronnée qui ne contient pas un gramme de citron. Tout vient des plantes — et l'absence d'acidité change complètement la façon dont elle se boit.\n\n## Le citron sans le citron\n\nLe **thym-citron** (*Thymus × citriodorus*), hybride rustique du thym commun et du thym à larges feuilles, donne l'attaque zestée et la légèreté. La **mélisse** (*Melissa officinalis*) — « baume » en grec — apporte la fraîcheur florale, sur des notes douces de citron et de miel. Le **houblon** (*Humulus lupulus*), en cônes femelles séchés, ferme la bouche sur une amertume noble et légèrement résineuse : dans cette recette, il joue exactement le rôle que la peau du citron joue ailleurs.\n\nLe résultat est une liqueur verte, herbacée, sans la moindre pointe acide — une vague de prairie citronnée plutôt qu'un limoncello. Les plantes sont **issues de l'agriculture biologique**.\n\nÀ 18°, c'est la plus légère de notre gamme Brasserie.\n\n## Comment la servir\n\n**Sur glace** : à température ambiante avec des glaçons, en apéritif. C'est le service le plus simple et le plus juste.\n\n**Avec un trait de Porto blanc** : l'accord qu'on recommande le plus souvent en boutique. Le Porto épaissit la texture sans écraser l'herbacé.\n\n**En cocktail** : base de notre [Bonbon au Citron](/cocktails#bonbon-citron) — 2 cl avec de la vodka, du jus de citron frais et un verre givré au sucre.\n\n**À table** : en marinade sur un carpaccio de saumon, en badigeon sur des brochettes de poulet, ou versée sur un sorbet à la fraise.",
       "composition": [
         "Thym citron",
         "Mélisse",
@@ -293,12 +302,13 @@
       "priceMin": 16,
       "priceMax": 27,
       "image": "/images/products/cerf-gent.webp",
-      "alcohol": 15,
+      "alcohol": 15.5,
       "usage": "Apéritif amer — gentiane, quinquina, épices",
       "tagline": "Une gentiane légère, fraîche et finement amère.",
       "highlight": "Médaille d'Or Paris 2025",
       "serving": "Très frais, en apéritif pur ou allongé d'un trait de tonic.",
       "seoCategory": "Liqueur de gentiane artisanale",
+      "ingredients": "eau, sucre, alcool, gentiane jaune, quinquina, zestes de citron, graines de coriandre, cannelle et noix de muscade",
       "wcId": 4030,
       "order": 1,
       "description": "Un apéritif amer pour amateurs. La **gentiane** donne la colonne, le **quinquina** la profondeur, les épices (muscade, coriandre, cannelle, zestes de citron) la complexité. Un caractère puissant, authentique, à la hauteur des grandes eaux-de-vie amères de tradition française.\n\n## La gentiane jaune, reine des amères de montagne\n\nLa clé du Cerf'Gent, c'est la **[gentiane jaune](/blog/plantes-liqueur-haute-loire#gentiane)** (*Gentiana lutea*) — la grande racine amère de moyenne montagne, récoltée entre 1 000 et 1 600 mètres d'altitude. La cueillette est un métier rare : moins d'une centaine de **gentianaïres** professionnels en France, travaillant à la main avec la \"fourche du Diable\", un outil traditionnel permettant d'extraire la racine pivot sans fragmenter la plante. Nos partenaires récoltent en octobre-novembre, juste avant les premières gelées. Une journée de travail donne 30 à 50 kg de racines fraîches, qui deviennent environ 15 kg de gentiane séchée utilisable.\n\nL'[article sur nos cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) détaille le reste de la filière.\n\n## Médaille d'Or au Salon de l'Agriculture 2025\n\nLe Cerf'Gent a reçu la **[Médaille d'Or au Concours Général Agricole 2025](https://www.concours-general-agricole.fr/)** à Paris, catégorie liqueur — un prix rare sur ce segment. Le jury a noté \"une amertume noble, sans agressivité, une structure épicée moderne qui dialogue avec une gentiane de grande qualité\". Lire [le récit de la médaille](/blog/cerfgent-or-salon-agriculture-2025).\n\n## Comment le servir\n\n**En apéritif pur** : très frais, autour de 3-4°C, dans un petit verre à pied. La gentiane prend toute sa place.\n\n**En spritz amer** : 4 cl de Cerf'Gent, 6 cl de tonic sec (Fever-Tree Indian ou Thomas Henry Sec), un zeste d'orange amère. Plus nerveux qu'un Spritz classique, avec une vraie amertume botanique.\n\n**Avec un zeste d'orange ou de pamplemousse** : le zeste active les huiles essentielles et adoucit l'ouverture — format simple pour ceux qui découvrent les amers.\n\n**En cuisine** : un trait dans une vinaigrette au noix, ou en réduction pour glacer un foie de veau.",
@@ -334,17 +344,17 @@
       "priceMin": 16,
       "priceMax": 27,
       "image": "/images/products/pralicoquine.webp",
-      "alcohol": 15,
+      "alcohol": 15.5,
       "usage": "Apéritif gourmand ou digestif léger",
       "tagline": "Une liqueur douce, pralinée et résolument gourmande.",
       "serving": "En apéritif pur, en cocktail, ou en digestif léger.",
       "seoCategory": "Liqueur d'amande artisanale",
       "wcId": 2947,
       "order": 2,
-      "description": "La liqueur plaisir. Pralines et amandes torréfiées macérées dans l'alcool — onctueuse, gourmande, très sympa à l'apéritif. Se prête aussi aux cocktails créatifs : kir pétillant, association gin, ou même une margherita avec un twist.",
+      "description": "La liqueur plaisir de la maison. Pralines et amandes torréfiées — onctueuse, sucrée, ronde, avec cette finale d'amande grillée qui persiste longtemps.\n\n## L'amande travaillée en praline\n\nL'**amande** (*Prunus dulcis*) n'est pas utilisée telle quelle : elle est travaillée **en praline**, caramélisée longuement pour aller chercher des notes chaudes de caramel et de fruits secs. C'est ce passage par le caramel qui fait toute la différence avec une simple liqueur d'amande — on est sur du gourmand assumé, pas sur de l'amaretto.\n\nÀ 15,5°, c'est la moins alcoolisée de nos références. Elle dialogue aussi bien avec un café qu'avec un dessert au chocolat.\n\n> **Allergène** — cette liqueur contient des **amandes** (fruits à coque).\n\n## Comment la servir\n\n**Pure, sur glace** : en apéritif gourmand ou en digestif léger, deux ou trois glaçons suffisent.\n\n**En kir pétillant** : 1,5 cl au fond d'une flûte, allongé au crémant. C'est le service qui plaît le plus largement.\n\n**Avec un gin** : 2 cl de Pralicoquine sur 4 cl de gin, beaucoup de glace, un zeste d'orange. Le genévrier et la praline font un accord inattendu.\n\n**Au café** : un trait dans un expresso serré, à la place du sucre.",
       "composition": [
         "Pralines",
-        "Amandes torréfiées macérées"
+        "Amandes torréfiées"
       ],
       "sizes": [
         "Empilable 20cl",
@@ -374,7 +384,7 @@
       "seoCategory": "Liqueur de menthe artisanale",
       "wcId": 3617,
       "order": 3,
-      "description": "L'alternative artisanale à la menthe industrielle. Trois menthes s'associent : poivrée pour la fraîcheur dominante, coréenne pour la note épicée, verte pour l'assise chlorophyllienne. Tout en légèreté, tout en fraîcheur — parfait pour mojitos ou en fin de repas.",
+      "description": "Une liqueur de menthe construite sur trois menthes, là où l'usage veut qu'on en utilise une seule. Il existe environ **250 variétés de menthes** — l'intérêt était d'en faire dialoguer plusieurs plutôt que d'empiler du mentholé.\n\n## Trois menthes en alliance\n\nLa **menthe poivrée** (*Mentha × piperita*) mène la danse : c'est la plus puissante et la plus éclatante, elle donne la fraîcheur dominante. La **menthe coréenne** (*Agastache rugosa*), plus rare et plus épicée, la complète d'un léger goût anisé, presque réglissé — c'est elle qui fait toute la richesse de l'accord. La **menthe verte** (*Mentha spicata*), la plus douce des trois, chlorophyllienne et désaltérante, pose l'assise sans jamais piquer.\n\nÀ 17,5°, il reste léger — c'est voulu, une liqueur de menthe trop alcoolisée devient vite agressive.\n\n## Comment le servir\n\n**En base de mojito** : remplacez le sucre et une partie du rhum par 3 cl de Menthor, ajoutez citron vert, menthe fraîche et eau pétillante. Le plus simple et le plus efficace.\n\n**En fin de repas, glacé** : dans un verre sorti du congélateur, pur. La menthe coréenne ressort d'un coup.\n\n**En cuisine** : sur une salade de fraises, ou dans une ganache au chocolat noir.",
       "composition": [
         "Menthe poivrée (fraîcheur dominante)",
         "Menthe coréenne (mentholée, épicée)",
@@ -405,10 +415,11 @@
       "usage": "Apéritif frais — citron jaune, orange, citron vert",
       "tagline": "Trio d'agrumes — frais, vif et acidulé.",
       "serving": "Très frais en apéritif, ou en long drink avec tonic.",
-      "seoCategory": "Liqueur d'agrumes (citron · combava · orange)",
+      "seoCategory": "Liqueur d'agrumes (citron · orange · citron vert)",
+      "ingredients": "eau, sucre, alcool, zestes et jus de citron jaune, orange et citron vert",
       "wcId": 4037,
       "order": 4,
-      "description": "Un trio d'agrumes : citron jaune, orange, citron vert — zestes et jus. Une légère amertume en fond donne du caractère et de la longueur. L'originalité et la fraîcheur d'un apéritif distinct.",
+      "description": "Un trio d'agrumes — citron jaune, orange, citron vert — travaillés en zestes **et** en jus. Les zestes pour la richesse aromatique et les huiles essentielles, le jus pour l'acidité. Une légère amertume en fond donne du caractère et de la longueur.\n\n## Trois agrumes, trois rôles\n\nLe **citron jaune** (*Citrus limon*) pose la base acidulée. L'**orange** (*Citrus sinensis*) intervient en écorces plutôt qu'en jus, pour leur chaleur sucrée : c'est elle qui arrondit l'accord et l'empêche d'être seulement mordant. Le **citron vert** (*Citrus aurantiifolia*), plus acide que le jaune et plus floral, apporte la vivacité finale.\n\nCe qui distingue Le Zéleste d'un limoncello, c'est cette amertume de fond — elle vient des zestes, travaillés avec leur part de blanc, et elle allonge la bouche au lieu de la couper net.\n\nÀ 17,5°, c'est un apéritif, pas un digestif : il se boit avant le repas, très froid.\n\n## Comment le servir\n\n**Très frais, pur** : sorti du congélateur, dans un petit verre. La texture épaissit légèrement et les agrumes gagnent en netteté.\n\n**En long drink** : allongé au tonic, avec beaucoup de glace et un zeste. L'amertume du tonic prolonge celle des écorces.\n\n**En cuisine** : sur un carpaccio d'agrumes, ou en trait dans une vinaigrette pour un poisson cru.",
       "composition": [
         "Citron jaune (zestes + jus)",
         "Orange",
@@ -432,7 +443,7 @@
       "slug": "menthe-cbd-ortie",
       "name": "Menthe CBD Ortie",
       "range": "lumiere-obscure",
-      "priceMin": 34,
+      "priceMin": 16,
       "priceMax": 34,
       "image": "/images/products/menthe-cbd-ortie.webp",
       "alcohol": 21,
@@ -440,28 +451,34 @@
       "tagline": "L'esprit d'un thé à la menthe — menthe verte, chanvre, ortie.",
       "serving": "Apéritif, frais, en long drink ou pur.",
       "seoCategory": "Infusion CBD menthe et ortie (sans THC)",
+      "ingredients": "eau, sucre, alcool, menthe verte, ortie et chanvre (CBD)",
       "wcId": 626,
       "order": 1,
-      "description": "Le versant herbacé de notre gamme CBD. La menthe verte domine — on y retrouve la chlorophylle d'un thé à la menthe, adoucie par l'ortie et le chanvre. Exactement l'opposée du Menthor, qui mise lui sur la fraîcheur mentholée.",
+      "description": "Le versant herbacé de notre gamme [Lumière Obscure](/lumiere-obscure). La menthe verte domine — on y retrouve la chlorophylle d'un thé à la menthe — adoucie par l'ortie et le chanvre. Exactement l'opposé du [Menthor](/boutique/menthor), qui mise lui sur la fraîcheur mentholée.\n\n## Menthe, ortie, chanvre\n\nLa **menthe verte** (*Mentha spicata*) est la plus douce des menthes : chlorophyllienne, désaltérante, fraîche sans piquer. Elle tient le haut de la bouche sans jamais agresser.\n\nL'**ortie** (*Urtica dioica*) est la surprise de la recette. Mauvaise herbe mal-aimée, chargée de minéraux, elle perd tout son piquant à l'élaboration et révèle un goût vert subtil, proche du thé vert, presque iodé. C'est elle qui donne à cette liqueur son épaisseur végétale.\n\nLe **chanvre** ferme l'accord sur un fond herbacé.\n\n## Le cadre, sans ambiguïté\n\nNous travaillons des variétés de **chanvre** (*Cannabis sativa L.*) dont la teneur en THC reste **strictement inférieure à 0,1 %**, le seuil légal français fixé par l'arrêté du 30 décembre 2021. Le CBD est dosé de façon **aromatique** — quelques milligrammes par verre, très en-deçà des doses étudiées en laboratoire.\n\nNous le travaillons pour ses **terpènes végétaux**, parce qu'ils s'accordent avec nos plantes. Pas pour un effet : **nous ne revendiquons aucun effet médical**, et ce que vous ressentirez dans un verre, c'est l'alcool. Plus de détail dans [notre article sur le CBD et les plantes](/blog/cbd-et-plantes-lumiere-obscure).\n\n## Comment le servir\n\n**En apéritif, très frais** : à 3 °C, pur, dans un petit verre.\n\n**En long drink** : allongé à l'eau pétillante avec beaucoup de glace et une feuille de menthe. À 21°, il supporte très bien l'allongement.\n\n**En digestif** aussi, à température ambiante, pour qui préfère les fins de repas végétales.",
       "composition": [
         "Menthe verte",
         "Chanvre (CBD, sans THC)",
         "Ortie"
       ],
       "sizes": [
+        "Empilable 20cl",
+        "50cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Menthe verte, herbe fraîche.",
         "palate": "Herbacé, thé à la menthe, assez doux.",
         "finish": "Longue menthe verte."
+      },
+      "sizeImages": {
+        "20": "/images/products/sizes/menthe-cbd-ortie-20cl.webp"
       }
     },
     {
       "slug": "verveine-cbd-aurone",
       "name": "Verveine CBD Aurone",
       "range": "lumiere-obscure",
-      "priceMin": 34,
+      "priceMin": 17,
       "priceMax": 34,
       "image": "/images/products/verveine-cbd-aurone.webp",
       "alcohol": 30,
@@ -469,28 +486,33 @@
       "tagline": "Verveine, aurone et chanvre — herbacée et ronde en bouche.",
       "serving": "Digestif, à température ambiante.",
       "seoCategory": "Infusion CBD verveine et aurone (sans THC)",
+      "ingredients": "eau, sucre, alcool, verveine odorante, aurone et chanvre (CBD)",
       "wcId": 616,
       "order": 2,
-      "description": "Un digestif au CBD. La verveine citronnée, l'aurone (cousine de l'absinthe, moins amère) et le chanvre s'associent pour une expérience en douceur. À 30°, c'est un vrai digestif, mais avec cette pointe de détente propre au CBD.",
+      "description": "Le versant digestif de la gamme [Lumière Obscure](/lumiere-obscure). À 30°, c'est une vraie liqueur de fin de repas — la verveine citronnée mène, l'aurone épice, le chanvre pose le fond.\n\n## Verveine, aurone, chanvre\n\nLa **verveine odorante** (*Aloysia citrodora*) est notre plante la plus utilisée : un parfum frais, citronné, sans acidité, qui tient le haut du nez. C'est la même plante que dans [L'Herbe des Druides](/boutique/herbe-des-druides), mais dans un tout autre contexte.\n\nL'**aurone** (*Artemisia abrotanum*), cousine de l'absinthe et de l'armoise, est moins amère et plus subtile qu'elles — sur des notes de fruit-bonbon et de citron. Elle prolonge la verveine au lieu de la contredire, et signe la finale légèrement camphrée.\n\nLe **chanvre** apporte un fond herbacé et beurré, qui épaissit la bouche.\n\n## Le cadre, sans ambiguïté\n\nNous travaillons des variétés de **chanvre** (*Cannabis sativa L.*) dont la teneur en THC reste **strictement inférieure à 0,1 %**, le seuil légal français fixé par l'arrêté du 30 décembre 2021. Le CBD est dosé de façon **aromatique** — quelques milligrammes par verre, très en-deçà des doses étudiées en laboratoire.\n\nNous le travaillons pour ses **terpènes végétaux**, parce qu'ils s'accordent avec nos plantes. Pas pour un effet : **nous ne revendiquons aucun effet médical**, et ce que vous ressentirez dans un verre, c'est l'alcool. Plus de détail dans [notre article sur le CBD et les plantes](/blog/cbd-et-plantes-lumiere-obscure).\n\n## Comment le servir\n\n**En digestif pur**, à température ambiante. À 30°, c'est le service pour lequel la recette a été pensée.\n\n**Très frais** en fin de repas d'été, si vous préférez resserrer la verveine.\n\n**En petit verre** plutôt qu'en long drink : cette recette-là ne gagne rien à être allongée.",
       "composition": [
         "Verveine",
         "Aurone",
         "Chanvre (CBD, sans THC)"
       ],
       "sizes": [
+        "Empilable 20cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Verveine citronnée, touche résineuse.",
         "palate": "Verveine dominante, chanvre en fond.",
         "finish": "Persistante, légèrement camphrée."
+      },
+      "sizeImages": {
+        "20": "/images/products/sizes/verveine-cbd-aurone-20cl.webp"
       }
     },
     {
       "slug": "absinthe-cbd-citron",
       "name": "CBD Absinthe Citron",
       "range": "lumiere-obscure",
-      "priceMin": 39,
+      "priceMin": 18,
       "priceMax": 39,
       "image": "/images/products/absinthe-cbd-citron.webp",
       "alcohol": 37,
@@ -498,9 +520,10 @@
       "tagline": "Chanvre dominant, absinthe en fond, zeste de citron.",
       "serving": "Digestif, à température ambiante. Pour amateurs avertis.",
       "seoCategory": "Infusion CBD absinthe-citron (sans THC)",
+      "ingredients": "eau, sucre, alcool, chanvre (CBD), absinthe, écorces de citron et graines de coriandre",
       "wcId": 629,
       "order": 3,
-      "description": "Le plus marqué de la gamme Lumière Obscure. Le chanvre prend le dessus — on y perçoit nettement la note de foin vert, très particulière, pas pour tout le monde. L'absinthe apporte une structure mentholée et réglissée, les écorces de citron et la coriandre la fraîcheur nécessaire à l'équilibre.",
+      "description": "Le plus marqué de la gamme [Lumière Obscure](/lumiere-obscure), et le plus clivant. Le chanvre prend le dessus — on perçoit nettement la note de foin vert, très particulière. Ce n'est pas une liqueur d'initiation.\n\n## Le chanvre en tête, l'absinthe en fond\n\nIci le **chanvre** est dominant, pas d'appoint. Il donne cette attaque herbacée et cette note de foin vert qui font toute l'identité de la recette — et qui ne plaisent pas à tout le monde, on le dit franchement.\n\nL'**absinthe** (*Artemisia absinthium*), la grande amère, est travaillée avec mesure : elle apporte une structure mentholée et réglissée, une fraîcheur longue qui n'étouffe rien. Les **écorces de citron** (*Citrus limon*) et les **graines de coriandre** (*Coriandrum sativum*) — citronnées et épicées à la fois — assurent l'équilibre et empêchent l'ensemble de rester trop végétal.\n\nÀ **37°**, c'est la plus alcoolisée des trois Lumière Obscure.\n\n## Le cadre, sans ambiguïté\n\nNous travaillons des variétés de **chanvre** (*Cannabis sativa L.*) dont la teneur en THC reste **strictement inférieure à 0,1 %**, le seuil légal français fixé par l'arrêté du 30 décembre 2021. Le CBD est dosé de façon **aromatique** — quelques milligrammes par verre, très en-deçà des doses étudiées en laboratoire.\n\nNous le travaillons pour ses **terpènes végétaux**, parce qu'ils s'accordent avec nos plantes. Pas pour un effet : **nous ne revendiquons aucun effet médical**, et ce que vous ressentirez dans un verre, c'est l'alcool. Plus de détail dans [notre article sur le CBD et les plantes](/blog/cbd-et-plantes-lumiere-obscure).\n\n## Comment le servir\n\n**En digestif, à température ambiante**, en petite quantité. Pour amateurs avertis.\n\n**Sur glace** si le foin vert vous semble trop présent : le froid l'atténue nettement et fait remonter le citron.\n\n**À goûter avant d'acheter** si vous le pouvez : c'est la référence de la gamme sur laquelle nous conseillons le plus souvent de passer par une dégustation — à l'atelier, par exemple, lors d'une [visite](/ateliers).",
       "composition": [
         "Chanvre (CBD, dominant, sans THC)",
         "Absinthe",
@@ -508,12 +531,16 @@
         "Graines de coriandre"
       ],
       "sizes": [
+        "Empilable 20cl",
         "70cl"
       ],
       "tasting": {
         "nose": "Chanvre, foin vert, citron.",
         "palate": "Très verte, herbacée, avec l'absinthe en fond mentholé.",
         "finish": "Chanvre persistant."
+      },
+      "sizeImages": {
+        "20": "/images/products/sizes/absinthe-cbd-citron-20cl.webp"
       }
     },
     {
@@ -523,14 +550,15 @@
       "priceMin": 50,
       "priceMax": 50,
       "image": "/images/products/herbe-druides-fut-chene.webp",
-      "alcohol": 28,
+      "alcohol": 27.1,
       "usage": "Digestif — édition limitée",
       "tagline": "Notre verveine, affinée six mois en fût de chêne.",
       "serving": "Digestif, à température ambiante.",
       "seoCategory": "Liqueur de verveine vieillie en fût de chêne",
+      "ingredients": "eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique ; élevage en fût de chêne ayant porté du Chardonnay",
       "wcId": 2553,
       "order": 1,
-      "description": "Une édition limitée qui passe six mois en fût de chêne français. Le bois arrondit les arômes de verveine, ajoute des notes de vanille et de caramel, transforme une liqueur vive en digestif suave. Quelques centaines de bouteilles par an, numérotées.",
+      "description": "Notre verveine signature, passée **six mois en fût de chêne**. Même recette de départ — verveine, serpolet, carvi — mais un produit qui n'a plus grand-chose à voir : le bois arrondit tout, et transforme une liqueur vive en digestif suave.\n\n## Ce que le fût change\n\nLe fût utilisé a porté du **Chardonnay** avant nous. Il ne fait pas qu'adoucir : il ajoute sa propre empreinte. L'attaque épicée du carvi est arrondie par le chêne, la **verveine** reste centrale mais s'accompagne désormais de notes de **pêche, d'abricot et de vanille**, et la finale anisée se pose sur un fond boisé.\n\nLa base reste celle de [L'Herbe des Druides](/boutique/herbe-des-druides) : la **verveine odorante** (*Aloysia citrodora*) pour le haut du nez citronné, le **serpolet** (*Thymus serpyllum*) pour la concentration thymée, le **carvi** (*Carum carvi*) pour la structure épicée. Plantes **issues de l'agriculture biologique**.\n\n## Une édition limitée, numérotée\n\nMoins de **300 bouteilles par an**, numérotées une à une. Le fût impose son rythme : on ne peut pas en produire davantage sans changer la nature du produit.\n\n## Comment la servir\n\n**En digestif, entre 4 et 6 °C** : plus frais que la version classique, mais pas glacé — le bois a besoin d'un peu de chaleur pour s'exprimer.\n\n**Dans un verre large** : le boisé et la vanille gagnent à être aérés. Un verre tulipé ou un petit ballon plutôt qu'un verre droit.\n\n**À offrir** : c'est notre format cadeau le plus demandé après l'Alchimie.",
       "composition": [
         "Verveine",
         "Serpolet",
@@ -553,14 +581,15 @@
       "priceMin": 70,
       "priceMax": 70,
       "image": "/images/products/alchimie-cuvee-michel.webp",
-      "alcohol": 50,
+      "alcohol": 48.3,
       "usage": "Digestif de prestige — tirage confidentiel",
       "tagline": "Hommage à un vieil ami — variation sur l'Alchimie, en tirage confidentiel.",
       "serving": "Digestif à 3°C, lentement.",
       "seoCategory": "Liqueur digestive édition limitée",
+      "ingredients": "eau, sucre, alcool, assemblage de 27 plantes, racines, écorces, fleurs et épices — élevage en fût de chêne ayant porté du Chardonnay",
       "wcId": 2547,
       "order": 2,
-      "description": "Notre cuvée hommage à Michel — vieil ami d'enfance disparu, qui aurait aimé ce prix du monde. Légère variation autour de la base de L'Alchimie Végétale, avec un surcroît de réglisse et de gentiane. Tirage confidentiel, quelques dizaines de bouteilles par an.",
+      "description": "Notre cuvée hommage à Michel — un ami d'enfance disparu, qui aurait aimé voir ce titre mondial arriver. Une variation autour de la base de [L'Alchimie Végétale](/boutique/alchimie-vegetale), poussée vers la réglisse et la gentiane, puis élevée sous bois.\n\n## Une variation, pas une réédition\n\nL'assemblage de départ est celui de l'Alchimie : **27 plantes, racines, écorces, fleurs et épices** — [le détail de la composition est ici](/blog/alchimie-vegetale-27-plantes-composition). Mais deux plantes y prennent plus de place.\n\nLa **réglisse** (*Glycyrrhiza glabra*), utilisée en quantité mesurée, enveloppe les amers et arrondit les agrumes. La **gentiane jaune** (*Gentiana lutea*) tire l'ensemble vers le bas, sur une amertume franche et longue. Le résultat est plus sombre que l'Alchimie classique.\n\nL'élevage se fait en **fût de chêne sélectionné ayant porté du Chardonnay**. Il donne un nez boisé et vanillé sur les herbes fraîches et la menthe, une bouche citronnée et ronde marquée par le vin, et un final épicé sur le chêne toasté.\n\n## Un tirage confidentiel\n\nMoins de **300 bouteilles par an**, numérotées. C'est la référence la plus rare du catalogue.\n\n## Comment la servir\n\n**En digestif, entre 4 et 6 °C**, lentement. Ce n'est pas une liqueur qu'on sert à la volée.\n\n**Dans un verre large**, pour laisser le fût s'ouvrir. Comptez quelques minutes après le service avant la première gorgée.",
       "composition": [
         "27 plantes (assemblage Alchimie)",
         "Variation autour de la réglisse et de la gentiane"

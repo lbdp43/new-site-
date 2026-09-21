@@ -13,7 +13,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 
 ## La règle générale : trois températures, trois rôles
 
-- **Ambiante (18–22°C)** — pour les digestifs riches, où l'on veut toute la palette aromatique. Les macérations complexes s'étalent mieux à cette température.
+- **Ambiante (18–22°C)** — pour les digestifs riches, où l'on veut toute la palette aromatique. Les assemblages complexes s'étalent mieux à cette température.
 - **Fraîche (8–12°C)** — pour la plupart des apéritifs. Le froid arrondit le sucre, raccourcit la finale, ouvre les notes hautes.
 - **Très froide / givrée (0–3°C)** — pour les apéritifs légers (17,5°) et pour la gamme Lumière Obscure (CBD). Le froid neutralise certaines notes lourdes et laisse les florales parler.
 
@@ -43,7 +43,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Servir** : glaçon possible, ou en long drink (voir [Le Philtre d'Éros](/blog/nos-cocktails-signature)).  
 **Accord** : tarte aux fruits rouges, panna cotta, fromage de chèvre frais.
 
-### L'Essence des Alpes (32°) — Digestif de montagne
+### L'Essence des Cimes (32°) — Digestif de montagne
 **Température** : 8–10°C (pierre à whisky ou très légèrement glacé).  
 **Verre** : verre à digestif, ou petit tumbler.  
 **Servir** : pur, en fin de repas copieux ou en après-ski.  
@@ -61,7 +61,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Servir** : pur très frais, ou en long drink avec tonic et quelques feuilles de menthe.  
 **Accord** : apéritif d'été, fruits de mer, salade verte aux herbes.
 
-### Le Cerf'Gent (15°) — Apéritif amer
+### Le Cerf'Gent (15,5°) — Apéritif amer
 **Température** : 2–4°C (très frais, presque givré).  
 **Verre** : tumbler, verre à Negroni, ou verre à vin.  
 **Servir** : pur, tonic, ou en [Gentiane Oublié](/blog/nos-cocktails-signature).  
@@ -73,7 +73,7 @@ On nous demande souvent : *"À quelle température servez-vous vos liqueurs ?"* 
 **Servir** : pur givré, ou en base mojito, ou en fin de repas.  
 **Accord** : chocolat noir à la menthe, fin de repas gras.
 
-### La Pralicoquine (15°) — Praline-amande
+### La Pralicoquine (15,5°) — Praline-amande
 **Température** : 6–8°C (frais).  
 **Verre** : verre à digestif ou flûte.  
 **Servir** : pur, en kir pétillant, ou sur un café.  

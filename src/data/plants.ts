@@ -73,7 +73,7 @@ export const plants: Plant[] = [
     role: 'Camphrée · alpine',
     description:
       "Plante médiévale des jardins monastiques, légèrement camphrée, un peu amère. Elle apporte de la profondeur et un caractère « alpin » aux assemblages de montagne.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'Juin à août',
     signature: true,
   },
@@ -83,7 +83,7 @@ export const plants: Plant[] = [
     family: 'aromatique',
     role: 'Amer fin · fruit-bonbon',
     description:
-      "Cousine de l'absinthe et de l'armoise. Moins amère, plus subtile — fruit-bonbon et citron à la fois. Longtemps utilisée en tisane fortifiante dans les campagnes auvergnates.",
+      "Cousine de l'absinthe et de l'armoise. Moins amère, plus subtile — fruit-bonbon et citron à la fois. Longtemps utilisée en tisane fortifiante dans les campagnes françaises.",
     usedIn: "Le Gorgeon des Machurés, Verveine CBD Aurone",
     season: 'Juillet à septembre',
   },
@@ -136,7 +136,7 @@ export const plants: Plant[] = [
     family: 'aromatique',
     role: 'Verte · minérale',
     description:
-      "Mauvaise herbe mal-aimée, mais chargée de minéraux et d'une saveur verte inimitable. Cuite ou macérée, elle perd son piquant et révèle un goût subtil de thé vert, presque iodé.",
+      "Mauvaise herbe mal-aimée, mais chargée de minéraux et d'une saveur verte inimitable. Une fois travaillée, elle perd son piquant et révèle un goût subtil de thé vert, presque iodé.",
     usedIn: "Menthe CBD Ortie",
     season: 'Avril à juillet',
     signature: true,
@@ -159,7 +159,7 @@ export const plants: Plant[] = [
     role: 'Montagnard · amer fin',
     description:
       "Plante reine des Alpes. Nous le travaillons en partenariat avec un cueilleur de Barcelonnette. Amertume noble, caractère minéral, profil très recherché en digestif de montagne.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'Juillet à août',
     signature: true,
   },
@@ -170,7 +170,7 @@ export const plants: Plant[] = [
     role: 'Résineux · boisé',
     description:
       "Les jeunes pousses de sapin, cueillies au printemps quand elles sont encore tendres. Elles apportent un boisé résineux, presque balsamique, qui ancre les accords alpins.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'Avril à juin',
     signature: true,
   },
@@ -182,7 +182,7 @@ export const plants: Plant[] = [
     family: 'fleur',
     role: 'Floral · miellé',
     description:
-      "Petits ombelles blanches qui fleurissent début juin. Arôme floral, miellé, presque muscaté. Cueillies au plus près de l'atelier, elles signent notre liqueur d'Ostara.",
+      "Petits ombelles blanches qui fleurissent début juin. Arôme floral, miellé, presque muscaté. Une cueillette courte — quinze jours à peine — qui signe notre liqueur d'Ostara.",
     usedIn: "Le Nectar d'Ostara",
     season: 'Fin mai à juin',
     signature: true,
@@ -215,7 +215,7 @@ export const plants: Plant[] = [
     family: 'fleur',
     role: 'Floral · romantique',
     description:
-      "Pétales de rose de Damas, macérés délicatement. Ils subliment la framboise de La Flèche Ardente sans jamais l'écraser — un floral discret qui ouvre la fin de bouche.",
+      "Pétales de rose de Damas, dosés avec retenue. Ils subliment la framboise de La Flèche Ardente sans jamais l'écraser — un floral discret qui ouvre la fin de bouche.",
     usedIn: "La Flèche Ardente",
     season: 'Mai à juillet',
     signature: true,
@@ -318,7 +318,7 @@ export const plants: Plant[] = [
     family: 'epice',
     role: 'Anisé · chaleur',
     description:
-      "Aussi appelé cumin des prés, ou anis des prés. Ses graines, longuement macérées, offrent une chaleur anisée et légèrement mentholée. Un incontournable des liqueurs de tradition auvergnate.",
+      "Aussi appelé cumin des prés, ou anis des prés. Ses graines, longuement travaillées, offrent une chaleur anisée et légèrement mentholée. Un incontournable des liqueurs de tradition auvergnate.",
     usedIn: "L'Herbe des Druides, Herbe des Druides Fût de Chêne, Le Gorgeon des Machurés",
     season: 'Récolte en juillet',
   },
@@ -349,7 +349,7 @@ export const plants: Plant[] = [
     family: 'epice',
     role: 'Épicée · balsamique',
     description:
-      "La noix de muscade, râpée fraîche avant macération. Sa chaleur balsamique complète la cannelle dans l'assemblage du Cerf'Gent.",
+      "La noix de muscade, râpée fraîche. Sa chaleur balsamique complète la cannelle dans l'assemblage du Cerf'Gent.",
     usedIn: "Le Cerf'Gent",
     season: 'Importée',
     signature: true,
@@ -361,7 +361,7 @@ export const plants: Plant[] = [
     family: 'fruit',
     role: 'Fruit rouge · acidulé',
     description:
-      "Petite baie acidulée et parfumée, macérée entière. Elle porte tout l'assemblage de La Flèche Ardente — notes fraîches, légèrement florales, une gourmandise juste tenue par l'acidité.",
+      "Petite baie acidulée et parfumée, travaillée entière. Elle porte tout l'assemblage de La Flèche Ardente — notes fraîches, légèrement florales, une gourmandise juste tenue par l'acidité.",
     usedIn: "La Flèche Ardente",
     season: 'Juin à septembre',
     signature: true,

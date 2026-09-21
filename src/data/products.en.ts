@@ -9,6 +9,8 @@ export interface ProductEn {
   /** English subtitle shown below the FR name */
   subtitle?: string;
   composition?: string[];
+  /** Regulatory ingredient list, as printed on the label. */
+  ingredients?: string;
   usage?: string;
   tagline?: string;
   highlight?: string;
@@ -26,6 +28,8 @@ export const productsEn: Record<string, ProductEn> = {
   // ===== BRASSERIE (SIGNATURE) =====
 
   'alchimie-vegetale': {
+    ingredients:
+      "water, sugar, alcohol, a blend of 27 plants, roots, barks, flowers and spices",
     subtitle: 'The award-winning digestif — 27 plants',
     composition: ['27 plants, roots, barks, flowers and spices, carefully selected'],
     usage: 'Prestige digestif',
@@ -33,7 +37,7 @@ export const productsEn: Record<string, ProductEn> = {
     highlight: 'World\'s Best Digestif 2025',
     awards: ['World\'s Best Digestif 2025 — World Drinks Awards'],
     description:
-      "Our prestige liqueur. A complex maceration inspired by the great monastic liqueurs, L'Alchimie Végétale assembles 27 plants, roots, barks and spices chosen one by one for their balance. Three years of formulation, a tribute to the know-how of Haute-Loire — and international recognition in 2025.",
+      "Our prestige liqueur. A complex blend inspired by the great monastic liqueurs, L'Alchimie Végétale assembles 27 plants, roots, barks and spices chosen for their balance. Three years of formulation, a tribute to the know-how of Haute-Loire — and international recognition in 2025.",
     tasting: {
       nose: 'Fresh, herbaceous, mentholated.',
       palate: 'Citrus on the attack, spice on the structure, with a peppery roundness.',
@@ -43,6 +47,7 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'herbe-des-druides': {
+    ingredients: 'water, sugar, alcohol, lemon verbena, wild thyme and caraway — plants from organic farming',
     subtitle: 'Verbena — multi-award-winning',
     composition: ['Lemon verbena', 'Wild thyme (serpolet)', 'Caraway'],
     usage: 'Aperitif or digestif',
@@ -56,7 +61,7 @@ export const productsEn: Record<string, ProductEn> = {
       'Silver Medal 2025 — World Drinks Awards',
     ],
     description:
-      "Our best-seller. L'Herbe des Druides is a 28% verbena liqueur, softened by wild thyme (serpolet from our hillsides) and spiced with caraway. A floral, wild expression, where the spicy notes temper the alcohol. Serve chilled as an aperitif with a zest, or neat as a digestif.",
+      "Our best-seller. L'Herbe des Druides is a 28% verbena liqueur, softened by wild thyme (serpolet) and spiced with caraway. A floral, wild expression, where the spicy notes temper the alcohol. Serve chilled as an aperitif with a zest, or neat as a digestif.",
     tasting: {
       nose: 'Lemon verbena, wild thyme, a touch of anise.',
       palate: 'Floral and wild — spicy notes soften the alcohol.',
@@ -71,7 +76,7 @@ export const productsEn: Record<string, ProductEn> = {
     usage: 'Digestif — black verbena',
     tagline: 'Black verbena, a tribute to the Saint-Étienne miners — deep and mysterious.',
     description:
-      "A black verbena, coloured with activated charcoal, to drink in memory of the Machurés — the Saint-Étienne miners whose faces were black with coal dust at the end of the day. Inspired by three historic recipes from Saint-Étienne, blending verbena, southernwood and baraban (dandelion in local dialect).",
+      "A black verbena, coloured with activated charcoal, to drink in memory of the Machurés — the Saint-Étienne miners whose faces were black with coal dust at the end of the day. Created for Sainte-Barbe, after three traditional recipes from the Forez: a blend of verbena liqueur, arquebuse forézienne and barabans (one of the vernacular names for dandelion), with a touch of charcoal added along the way.",
     tasting: {
       nose: 'Hint of Arquebuse in the background, roots, a touch of wood.',
       palate: 'Deep and mysterious, slightly peppery, woody dandelion root notes.',
@@ -81,21 +86,24 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'fleche-ardente': {
-    subtitle: 'Red fruit liqueur with vanilla',
-    composition: ['Blackcurrant', 'Raspberry', 'Blueberry', 'Dragon fruit', 'Vanilla'],
+    subtitle: 'Raspberry, rose and lemon',
+    composition: ['Raspberry', 'Rose petal', 'Lemon juice'],
+    ingredients: 'water, sugar, alcohol, raspberry, rose petal and lemon juice',
     usage: 'Digestif or cocktail',
     tagline: 'Raspberry, elevated by rose, sharpened by a tension of lemon.',
     description:
-      "A red-fruit liqueur that evokes childhood sweets — blackcurrant, raspberry, blueberry and a hint of dragon fruit for surprise. Vanilla weaves through the back and rounds out the fruit's acidity. At 27%, it stands perfectly as a digestif but shines in cocktails (see our Philtre d'Éros).",
+      "A ruby-red liqueur built on whole raspberries. Damask rose lifts the fruit without ever covering it, and a dash of fresh lemon juice keeps the sweetness from tipping into syrup. At 22%, it holds its own as a digestif and shines in cocktails (see our Philtre d'Éros).",
     tasting: {
-      nose: 'Ripe red fruits, a touch of bourbon vanilla.',
-      palate: 'Candy-like, round, indulgent.',
-      finish: 'Long vanilla, lightly tangy.',
+      nose: 'Ripe raspberry, a discreet floral note.',
+      palate: 'Round and indulgent, carried by the fruit.',
+      finish: 'Tightened by rose and lemon, lightly tangy.',
     },
     serving: 'Digestif or long drink with sparkling water and mint.',
   },
 
   'essence-des-alpes': {
+    ingredients:
+      "water, sugar, alcohol, genepi from organic farming, fir bud and hyssop",
     subtitle: 'Mountain digestif — genepi & hyssop',
     composition: [
       'Organic genepi (from our partner in Barcelonnette)',
@@ -119,6 +127,7 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'nectar-ostara': {
+    ingredients: 'water, sugar, alcohol, elderflower, cornflower and chamomile — plants from organic farming',
     subtitle: 'Spring flower liqueur',
     composition: ['Elderflower', 'Cornflower', 'Chamomile'],
     usage: 'Flower liqueur — spritz, floral aperitif',
@@ -134,6 +143,7 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'lime-des-pres': {
+    ingredients: 'water, sugar, alcohol, lemon thyme, lemon balm and hops — plants from organic farming',
     subtitle: 'Lemon without lemon — meadow freshness',
     composition: ['Lemon thyme', 'Lemon balm', 'Hops'],
     usage: 'Lemony liqueur — without lemon',
@@ -151,6 +161,8 @@ export const productsEn: Record<string, ProductEn> = {
   // ===== APERITIFS =====
 
   'cerf-gent': {
+    ingredients:
+      "water, sugar, alcohol, yellow gentian, cinchona, lemon zest, coriander seeds, cinnamon and nutmeg",
     subtitle: 'French bitter aperitif — gentian & cinchona',
     composition: ['Gentian', 'Cinchona', 'Lemon zest', 'Nutmeg', 'Coriander seeds', 'Cinnamon'],
     usage: 'Bitter aperitif — gentian, cinchona, spices',
@@ -169,11 +181,11 @@ export const productsEn: Record<string, ProductEn> = {
 
   'pralicoquine': {
     subtitle: 'Praline & almond liqueur',
-    composition: ['Pink pralines', 'Macerated roasted almonds'],
+    composition: ['Pink pralines', 'Roasted almonds'],
     usage: 'Indulgent aperitif or light digestif',
     tagline: 'A soft, praline-rich liqueur — unashamedly indulgent.',
     description:
-      "The pleasure liqueur. Pralines and roasted almonds macerated in alcohol — silky, indulgent, very easy-drinking as an aperitif. Also excellent in creative cocktails: sparkling kir, gin-based drinks, even a twisted margarita.",
+      "The pleasure liqueur. Pralines and roasted almonds — silky, indulgent, very easy-drinking as an aperitif. Also excellent in creative cocktails: sparkling kir, gin-based drinks, even a twisted margarita.",
     tasting: {
       nose: 'Pink praline, toasted almond.',
       palate: 'Creamy, sweet, round.',
@@ -202,6 +214,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'zeleste': {
+    ingredients:
+      "water, sugar, alcohol, zest and juice of lemon, orange and lime",
     subtitle: 'Citrus trio aperitif',
     composition: ['Lemon (zest + juice)', 'Orange', 'Lime'],
     usage: 'Fresh aperitif — lemon, orange, lime',
@@ -219,6 +233,8 @@ export const productsEn: Record<string, ProductEn> = {
   // ===== LUMIÈRE OBSCURE (CBD) =====
 
   'menthe-cbd-ortie': {
+    ingredients:
+      "water, sugar, alcohol, spearmint, nettle and hemp (CBD)",
     subtitle: 'Spearmint & hemp aperitif',
     composition: ['Spearmint', 'Hemp (CBD, no THC)', 'Nettle'],
     usage: 'Botanical aperitif with CBD',
@@ -234,6 +250,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'verveine-cbd-aurone': {
+    ingredients:
+      "water, sugar, alcohol, lemon verbena, southernwood and hemp (CBD)",
     subtitle: 'Verbena & hemp digestif',
     composition: ['Verbena', 'Southernwood', 'Hemp (CBD, no THC)'],
     usage: 'Botanical digestif with CBD',
@@ -249,6 +267,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'absinthe-cbd-citron': {
+    ingredients:
+      "water, sugar, alcohol, hemp (CBD), wormwood, lemon peel and coriander seeds",
     subtitle: 'Hemp-forward botanical digestif',
     composition: [
       'Hemp (CBD, dominant, no THC)',
@@ -271,6 +291,8 @@ export const productsEn: Record<string, ProductEn> = {
   // ===== LIMITED EDITIONS =====
 
   'herbe-druides-fut-chene': {
+    ingredients:
+      "water, sugar, alcohol, lemon verbena, wild thyme and caraway — plants from organic farming; aged in an oak cask that previously held Chardonnay",
     subtitle: 'Oak-cask-aged verbena — limited edition',
     composition: ['Verbena', 'Wild thyme', 'Caraway', 'Six months of oak-cask finishing'],
     usage: 'Digestif — limited edition',
@@ -286,6 +308,8 @@ export const productsEn: Record<string, ProductEn> = {
   },
 
   'alchimie-cuvee-michel': {
+    ingredients:
+      "water, sugar, alcohol, a blend of 27 plants, roots, barks, flowers and spices — aged in an oak cask that previously held Chardonnay",
     subtitle: 'Tribute cuvée — confidential release',
     composition: ['27 plants (Alchimie blend)', 'Variation around liquorice and gentian'],
     usage: 'Prestige digestif — confidential release',

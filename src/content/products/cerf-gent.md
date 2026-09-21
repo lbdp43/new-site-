@@ -5,7 +5,7 @@ seoCategory: "Liqueur de gentiane artisanale"
 priceMin: 16
 priceMax: 27
 image: /images/products/cerf-gent.webp
-alcohol: 15
+alcohol: 15.5
 composition:
   - Gentiane
   - Quinquina
@@ -13,6 +13,7 @@ composition:
   - Noix de muscade
   - Graines de coriandre
   - Cannelle
+ingredients: "eau, sucre, alcool, gentiane jaune, quinquina, zestes de citron, graines de coriandre, cannelle et noix de muscade"
 usage: "Apéritif amer — gentiane, quinquina, épices"
 tagline: "Une gentiane légère, fraîche et finement amère."
 highlight: Médaille d'Or Paris 2025

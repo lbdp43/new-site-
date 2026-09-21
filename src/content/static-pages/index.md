@@ -1,7 +1,7 @@
 ---
 meta:
-  title: "La Brasserie des Plantes — Liqueurs artisanales françaises aux plantes oubliées (Haute-Loire)"
-  description: "Liqueur de verveine, gentiane, menthe, digestif aux 27 plantes — Meilleur Digestif du Monde 2025. Liqueurs artisanales françaises fabriquées à la main en Haute-Loire, sans arôme ni colorant ajouté. Boutique en ligne, livraison offerte dès 65 €."
+  title: "Liqueurs artisanales aux plantes oubliées — Haute-Loire"
+  description: "Liqueur de verveine, gentiane, menthe et digestif aux 27 plantes — Meilleur Digestif du Monde 2025. Fabriqué à la main en Haute-Loire."
 
 heroHome:
   badge: "Meilleur Digestif du Monde 2025"
@@ -27,7 +27,7 @@ historySection:
   title: "Des plantes oubliées,<br />assemblées avec patience."
   paragraphs:
     - "La Brasserie des Plantes est née en 2021 dans un petit village de la **Haute-Loire**, à Saint-Didier-en-Velay. Deux amis d'enfance — Étienne et Guillaume — réunis autour d'une idée simple : faire revivre les plantes médicinales et aromatiques que nos grand-mères préparaient, et les inviter dans la mixologie contemporaine."
-    - "Étienne, biotechnologue des plantes formé à Toulouse, choisit, compose et conduit la production. Guillaume, ancien de la restauration, imagine les accords et les usages. Ensemble, ils travaillent avec une **quarantaine de plantes, racines, écorces, fleurs et épices** — verveine, serpolet, gentiane, génépi, hysope, sureau… — récoltées par des cueilleurs et des maraîchers choisis un par un."
+    - "Étienne, biotechnologue des plantes formé à Toulouse, choisit, compose et conduit la production. Guillaume, ancien de la restauration, imagine les accords et les usages. Ensemble, ils travaillent avec une **quarantaine de plantes, racines, écorces, fleurs et épices** — verveine, serpolet, gentiane, génépi, hysope, sureau… — sélectionnées chez des cueilleurs, des maraîchers, des coopératives et des filières spécialisées."
     - "En 2025, leur liqueur phare *L'Alchimie Végétale* remporte le titre de **Meilleur Digestif du Monde** aux World Drinks Awards — une reconnaissance internationale pour un terroir discret, confirmée par le palais des plus grands jurys."
   links:
     - label: "Notre histoire"

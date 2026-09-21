@@ -12,7 +12,7 @@ const schema = [
     url: `${site.url}/en/our-story`,
     inLanguage: 'en-US',
     description:
-      "The story of La Brasserie des Plantes, founded in 2021 by Étienne and Guillaume in Saint-Didier-en-Velay, Haute-Loire. Craft organic liqueurs, World's Best Digestif 2025.",
+      "The story of La Brasserie des Plantes, founded in 2021 by Étienne and Guillaume in Saint-Didier-en-Velay, Haute-Loire. Craft botanical liqueurs, World's Best Digestif 2025.",
     about: { '@id': `${site.url}#localbusiness` },
     mainEntity: [
       { '@id': `${site.url}#etienne` },
@@ -30,7 +30,7 @@ const schema = [
     worksFor: { '@id': `${site.url}#localbusiness` },
     knowsAbout: [
       'Plant biotechnology',
-      'Maceration techniques',
+      'Plant craft',
       'Craft liqueur blending',
       'Haute-Loire botany',
     ],
@@ -85,7 +85,7 @@ const productsWithMedals = [
     ],
   },
   {
-    product: "L'Essence des Alpes",
+    product: "L'Essence des Cimes",
     slug: 'essence-des-alpes',
     tagline: 'Génépi · spruce tips · hyssop',
     note: "Our Alpine tribute to génépi, spruce tips and hyssop — awarded Silver at the Concours International de Lyon.",
@@ -123,7 +123,7 @@ const galleryPhotos = [
 <Layout
   lang="en"
   title="Our story — La Brasserie des Plantes, Haute-Loire"
-  description="Two childhood friends, a shared passion for forgotten plants. La Brasserie des Plantes, from Saint-Didier-en-Velay, France — founded in 2021, ten international distinctions, World's Best Digestif 2025."
+  description="Two childhood friends, a shared passion for forgotten plants. La Brasserie des Plantes since 2021: twelve distinctions, World's Best Digestif 2025."
   schema={schema}
 >
   <PageHeader
@@ -214,7 +214,7 @@ const galleryPhotos = [
           But the Haute-Loire called them back. Its forests, its highland
           pastures, its plants. A knowledge waiting to be brought back to
           light — that of grandmothers who prepared lemon balm for the cold,
-          macerated gentian for the stomach, perfumed their liqueurs with
+          gentian for the stomach, perfumed their liqueurs with
           hyssop or southernwood. In 2021 they decided to combine their
           expertise: scientific rigour on one side, the sensitivity of
           service and taste on the other. La Brasserie des Plantes was born
@@ -342,13 +342,13 @@ const galleryPhotos = [
         </h2>
         <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
           <p>
-            Our plants come from <strong class="font-medium text-forest-800">foragers
-            and market gardeners</strong> we pick one by one — met, questioned,
-            visited. Sometimes close to the workshop, sometimes further away
-            when the plant requires it (Alpine génépi, citrus, cinchona bark).
+            We select our plants carefully, in particular from
+            <strong class="font-medium text-forest-800">partner growers and
+            foragers</strong>. Some come from specialised supply chains when the
+            plant requires it (Alpine génépi, citrus, cinchona bark).
           </p>
           <p>
-            No added flavouring, no preservative: craft, patience and time do
+            No preservative: craft, patience and time do
             the rest. Each bottle is filled, corked and labelled by hand —
             four hands, to be precise.
           </p>
@@ -363,7 +363,7 @@ const galleryPhotos = [
       <div class="text-center mb-14 max-w-3xl mx-auto">
         <div class="text-xs uppercase tracking-[0.25em] text-gold-600 font-medium mb-3">Recognition</div>
         <h2 class="font-display text-3xl md:text-5xl text-forest-900 mb-6 leading-tight">
-          Ten distinctions<br />
+          Twelve distinctions<br />
           <em class="not-italic text-gold-600 font-normal" style="font-family: var(--font-script);">in four years</em>
         </h2>
         <div class="space-y-4 text-lg text-ink-700 leading-relaxed">
@@ -373,17 +373,22 @@ const galleryPhotos = [
             years of formulation for a finished recipe.
           </p>
           <p>
-            Three liqueurs have been distinguished so far:
+            Five liqueurs have been distinguished so far:
             <strong class="font-medium text-forest-800">L'Herbe des Druides</strong>,
             our most-medalled liqueur with <strong class="font-medium text-forest-800">three
             Gold medals at the Concours International de Lyon</strong>, Silver at
             France's Concours Général Agricole and Silver at the World Drinks
-            Awards in London; <strong class="font-medium text-forest-800">Le Cerf'Gent</strong>,
+            Awards in London;
+            <strong class="font-medium text-forest-800">Le Gorgeon des Machurés</strong>,
+            named <strong class="font-medium text-forest-800">France's Best Herbal
+            Liqueur 2026</strong> at the World Liqueur Awards in London;
+            <strong class="font-medium text-forest-800">Le Cerf'Gent</strong>,
             our bitter aperitif, <strong class="font-medium text-forest-800">Gold in Paris
             in 2025</strong>; and <strong class="font-medium text-forest-800">L'Essence
-            des Alpes</strong>, <strong class="font-medium text-forest-800">Silver at the
-            Concours International de Lyon in 2026</strong>. Without mentioning
-            <em>L'Alchimie Végétale</em>, crowned World's Best Digestif.
+            des Cimes</strong>, <strong class="font-medium text-forest-800">Silver at both
+            the Concours International de Lyon and the World Liqueur Awards in
+            2026</strong>. Without mentioning <em>L'Alchimie Végétale</em>, crowned
+            World's Best Digestif in 2025, then France's Best Digestif in 2026.
           </p>
         </div>
       </div>
@@ -516,7 +521,7 @@ const galleryPhotos = [
             <p>
               Trained in plant biotechnology in Toulouse, Étienne is the
               nose of the house — the one who translates botany into flavour.
-              He composes the recipes, picks the plants, tunes the maceration
+              He composes the recipes, picks the plants, tunes the resting
               times.
             </p>
             <p>

@@ -121,9 +121,9 @@ Here's how we recommend our 18 liqueurs by moment:
 
 ### For aperitif
 
-- **Classic bitter** (as a Suze alternative): [Cerf'Gent](/en/shop/cerf-gent), 15%, serve frozen or with tonic — Gold Medal at the CGA Paris 2025.
+- **Classic bitter** (as a Suze alternative): [Cerf'Gent](/en/shop/cerf-gent), 15.5%, serve frozen or with tonic — Gold Medal at the CGA Paris 2025.
 - **Floral and fresh**: [Nectar d'Ostara](/en/shop/nectar-ostara), 24%, with crémant or simply on ice.
-- **Indulgent**: [Pralicoquine](/en/shop/pralicoquine), 15%, praline-almond, on ice as a digestif-aperitif.
+- **Indulgent**: [Pralicoquine](/en/shop/pralicoquine), 15.5%, praline-almond, on ice as a digestif-aperitif.
 - **Vibrant citrus**: [Zéleste](/en/shop/zeleste), 17.5%, with tonic and an orange peel.
 
 ### For digestif
@@ -146,7 +146,7 @@ Build [your own 3-bottle gift box](/en/build-your-gift-box) from the full range 
 
 ### For relaxation (specific profile)
 
-The [Lumière Obscure](/en/lumiere-obscure) range pairs **CBD** (THC-free hemp) with our signature plants. No psychoactive effect, no euphoria — simply a composition designed for unwinding. [Verveine CBD Aurone](/en/shop/verveine-cbd-aurone), [Menthe CBD Pimbi](/en/shop/menthe-cbd-pimbi), [Absinthe CBD Citron](/en/shop/absinthe-cbd-citron).
+The [Lumière Obscure](/en/dark-light) range pairs **CBD** (THC-free hemp) with our signature plants. No psychoactive effect, no euphoria — simply a composition designed for unwinding. [Verveine CBD Aurone](/en/shop/verveine-cbd-aurone), [Menthe CBD Ortie](/en/shop/menthe-cbd-ortie), [Absinthe CBD Citron](/en/shop/absinthe-cbd-citron).
 
 ## 4. Advice by drinker profile
 

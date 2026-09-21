@@ -54,7 +54,7 @@ Il ne change pas non plus notre **rythme de production**. Nous ne sortons pas de
 
 - **27 plantes** — racines (gentiane, angélique, réglisse), fleurs (sureau, camomille), écorces (cannelle, quinquina), épices (cardamome, combava, badiane), aromatiques (verveine, mélisse, serpolet) et fruits (myrtille sauvage en micro-touches).
 - **50 % vol.** — construction autour d'un équilibre amer-racinaire. Les racines structurent, les fleurs arrondissent, les épices tendent.
-- **Macération froide** pendant plusieurs semaines, assemblage, repos long minimum trois mois.
+- **Travail à froid** pendant plusieurs semaines, assemblage, repos long minimum trois mois.
 - **4 ans de R&D** et 32 essais documentés avant la version commerciale.
 
 Pour comprendre la démarche complète de composition, voir [L'Alchimie Végétale, entre science et poésie](/blog/alchimie-vegetale-27-plantes-composition).
@@ -82,7 +82,7 @@ Merci à tous ceux qui nous ont accompagnés. On continue.
 
 Quand on nous demande **ce qui fait la différence** entre nos liqueurs et celles des grandes maisons, la réponse tient en un mot : les **plantes**.
 
-Nous ne les cultivons pas nous-mêmes. Nous travaillons avec des **cueilleurs** et des **maraîchers partenaires** — [des gens qu'on a choisis un par un](/blog/producteurs-partenaires-bio-velay) — la plupart en bio, pas tous. Notre atelier, lui, est à **Saint-Didier-en-Velay** (Haute-Loire) : c'est là que la macération et l'embouteillage se font à la main.
+Nous ne les cultivons pas nous-mêmes. Nous les sélectionnons chez des **cueilleurs**, des **maraîchers**, des **coopératives** et des [**filières spécialisées**](/blog/producteurs-partenaires-bio-velay) — la plupart en bio, pas toutes. Notre atelier, lui, est à **Saint-Didier-en-Velay** (Haute-Loire) : c'est là que la fabrication et l'embouteillage se font à la main.
 
 Ce guide est le voyage botanique d'une bouteille. **12 plantes signatures**, leur identité, leur usage, et dans quelles liqueurs on les retrouve.
 
@@ -147,7 +147,7 @@ Ces plantes sont les "touches de finition" dans nos compositions les plus comple
 - **Origine botanique** : plateaux de 1 000 à 1 600 m d'altitude. Plante protégée, cueillette réglementée.
 - **Profil** : amertume franche, note terreuse, finale longue et racinaire.
 - **Récolte** : octobre-novembre, avant les premières gelées. La racine se cueille à la main, avec une "fourche du Diable" (outil traditionnel).
-- **Nos partenaires** : **gentianaires professionnels** que nous sourçons un par un.
+- **Nos partenaires** : **gentianaires professionnels**, un métier rare.
 
 Un gentianaire est un métier rare — moins de 100 personnes en France. Ils travaillent debout, courbés, sous la pluie ou le gel. Une journée de travail = 30 à 50 kg de racines fraîches. Après séchage (qui divise le poids par 3), ça donne environ 15 kg de gentiane séchée prête à travailler.
 
@@ -253,26 +253,26 @@ Ou parcourez [la gamme complète](/boutique) — toutes issues du travail patien
 
 ---
 
-### Cueilleurs et maraîchers partenaires — comment nous sourçons nos plantes
+### Comment nous sourçons nos plantes — cueilleurs, maraîchers et filières
 
 - URL : https://labrasseriedesplantes.fr/blog/producteurs-partenaires-bio-velay/
 - Date : 2024-09-05
 - Auteur : Guillaume
 - Catégorie : Terroir
 
-Nous ne cultivons pas nos plantes nous-mêmes. Chaque feuille, chaque racine, chaque zeste qui entre dans nos cuves vient d'un **cueilleur** ou d'un **maraîcher partenaire** — des gens qui ont fait de la plante leur métier, et que nous avons choisis un par un. **La plupart sont en [agriculture biologique](https://www.agencebio.org/) — pas tous.** Tous nous connaissent par leur prénom. C'est un **écosystème** que nous avons construit lentement, par visites, par dégustations, par confiance.
+Nous ne cultivons pas nos plantes — à de rares exceptions près, que nous cueillons nous-mêmes. Elles viennent de **cueilleurs**, de **maraîchers**, de **coopératives** et de **filières spécialisées**, selon ce que chaque plante exige : certaines ne poussent qu'en altitude, d'autres à l'autre bout du monde. **La plupart sont en [agriculture biologique](https://www.agencebio.org/) — pas toutes.** Ce qui ne change jamais, c'est l'exigence : on goûte, on compare, on refuse ce qui ne tient pas.
 
-## Pourquoi des partenaires sélectionnés un par un
+## Ce que nous regardons avant de dire oui
 
 Trois raisons, toujours les mêmes :
 
 1. **Traçabilité** — nous savons de quel champ vient chaque plante. Si un lot a un souci, on remonte la chaîne en 24 heures.
-2. **Qualité** — les producteurs partenaires récoltent à la bonne saison, à la bonne heure, et nous livrent rapidement. Une verveine cueillie le mardi matin peut être en cuve le mercredi après-midi.
-3. **Relation directe** — un producteur rencontré, qu'on a vu travailler, c'est une qualité qu'on peut faire évoluer ensemble. Pas une ligne anonyme sur une facture.
+2. **Qualité** — récolte à la bonne saison, à la bonne heure, et livraison rapide. Une verveine cueillie le mardi matin peut être en cuve le mercredi après-midi.
+3. **Constance** — une plante qui tient d'un lot à l'autre, c'est une recette qui ne bouge pas. Quand la qualité varie, on change de source.
 
 ## Les grandes familles de partenaires
 
-Par respect pour nos producteurs, nous n'affichons pas tous les noms — certains préfèrent l'anonymat et nous respectons ce choix. Nous pouvons présenter les grandes familles :
+Par respect pour nos fournisseurs, nous n'affichons pas tous les noms — certains préfèrent l'anonymat et nous respectons ce choix. Nous pouvons présenter les grandes familles :
 
 ### Les gentianaïres
 La **gentiane jaune** (clé du Cerf'Gent) vient de gentianaïres professionnels qui récoltent à la main les racines, entre 1 000 et 1 600 m d'altitude. C'est un métier rare — moins d'une centaine de personnes en France.
@@ -303,7 +303,7 @@ Au fil des saisons, notre calendrier ressemble à ceci :
 - **Juin-juillet** : pleine saison aromatique (mélisse, thym, coriandre, camomille)
 - **Août-septembre** : récolte tardive (carvi, lavande, hysope), début des racines
 - **Octobre-novembre** : récolte des racines (gentiane, angélique, réglisse) avant les premières gelées
-- **Hiver** : macérations longues, tests de nouvelles recettes, visites chez les producteurs, préparation du calendrier de récoltes suivant
+- **Hiver** : préparations longues, tests de nouvelles recettes, visites chez les producteurs, préparation du calendrier de récoltes suivant
 
 ## Ce qui change quand on connaît ses producteurs
 
@@ -336,13 +336,13 @@ C'est aussi à ce moment précis qu'une idée devient un projet.
 
 **Étienne** et **Guillaume** se connaissent depuis la cour de récréation, à Saint-Didier-en-Velay. Ce village est posé entre les contreforts du Massif central et la vallée du Gier — peu d'industrie, beaucoup de pentes, et le calme dont on avait besoin pour démarrer.
 
-Chacun prend sa route. Étienne étudie la **biotechnologie végétale** à Toulouse — comprendre les molécules, les macérations, les équilibres aromatiques. Guillaume ouvre un **bar-restaurant à Saint-Étienne**, côté service, côté clients, côté carte. Ils se revoient tous les ans, en été, à Saint-Didier.
+Chacun prend sa route. Étienne étudie la **biotechnologie végétale** à Toulouse — comprendre les molécules, les extraits, les équilibres aromatiques. Guillaume ouvre un **bar-restaurant à Saint-Étienne**, côté service, côté clients, côté carte. Ils se revoient tous les ans, en été, à Saint-Didier.
 
 En 2019, la conversation change de ton. *"Et si on faisait quelque chose ?"* On sait ce qu'on ne veut pas : ni une distillerie à l'américaine, ni une marque marketing. On sait ce qu'on veut : des plantes qu'on reconnaît, un territoire qu'on revendique, un geste qu'on maîtrise.
 
 ## Le garage, les premiers essais
 
-Pendant dix-huit mois, Étienne formule dans un garage. Les macérations traînent sur des rayonnages en plastique, les bouteilles expérimentales sont étiquetées à la main, les étiquettes disent toutes *"test-37"*, *"test-48"*. Certaines finissent dans l'évier. D'autres passent à la dégustation — chez Guillaume d'abord, puis chez des cavistes amis à Saint-Étienne qui font office de premier jury.
+Pendant dix-huit mois, Étienne formule dans un garage. Les préparations traînent sur des rayonnages en plastique, les bouteilles expérimentales sont étiquetées à la main, les étiquettes disent toutes *"test-37"*, *"test-48"*. Certaines finissent dans l'évier. D'autres passent à la dégustation — chez Guillaume d'abord, puis chez des cavistes amis à Saint-Étienne qui font office de premier jury.
 
 Le ratio verveine / serpolet / carvi de *L'Herbe des Druides* se stabilise au test 54. L'idée d'*Alchimie Végétale* — plus complexe, 27 plantes — commence en parallèle. Ce sera long : **quatre ans de recherche et développement** avant que cette liqueur ne soit présentée à un concours international.
 
@@ -361,7 +361,7 @@ La suite — la demande qui double, les distributeurs étrangers qui appellent, 
 ## Ce qui n'a pas changé
 
 - **Saint-Didier-en-Velay**. Nous n'avons pas quitté le village. L'atelier est à 300 mètres de l'école où Étienne et Guillaume se sont rencontrés.
-- **Les plantes**. La plupart en bio, toutes récoltées par nos cueilleurs et maraîchers partenaires (sélectionnés un par un).
+- **Les plantes**. La plupart en bio, sélectionnées chez des cueilleurs, des maraîchers, des coopératives et des filières spécialisées.
 - **L'embouteillage à la main**. Un remplisseur semi-automatique pour les grosses séries, un embouteillage manuel pour les éditions limitées. Chaque bouchon est posé à la main.
 - **La taille de l'équipe**. Deux. Étienne et Guillaume. Ça suffit.
 
@@ -402,15 +402,15 @@ Les 27 plantes se répartissent en **cinq grandes familles fonctionnelles** — 
 
 **Les agrumes** évitent l'effet « sirop médicinal » qu'une liqueur complexe peut prendre — ils ouvrent, rafraîchissent, allègent.
 
-## Les quatre étapes de macération
+## Les quatre étapes de fabrication
 
-**Étape 1 — Macération longue (12 semaines)** des racines dans l'alcool neutre à 70° vol., à température ambiante, dans des cuves inox fermées. Les racines ont besoin de temps ; les fleurs n'y survivraient pas.
+**Étape 1 — Travail long (12 semaines)** des racines dans l'alcool neutre à 70° vol., à température ambiante, dans des cuves inox fermées. Les racines ont besoin de temps ; les fleurs n'y survivraient pas.
 
-**Étape 2 — Macération courte (72 heures)** des herbes et fleurs, dans un second alcool moins concentré (45°), à température fraîche. Les arômes volatils se préservent mieux à froid et à plus faible degré.
+**Étape 2 — Travail court (72 heures)** des herbes et fleurs, dans un second alcool moins concentré (45°), à température fraîche. Les arômes volatils se préservent mieux à froid et à plus faible degré.
 
 **Étape 3 — Infusion des épices (48 heures)** dans un alcool chaud (60°, tiède — pas bouillant). La chaleur libère mieux les huiles essentielles des graines et écorces.
 
-**Étape 4 — Assemblage et repos (8 semaines)** — on réunit les trois macérations dans une cuve unique, on ajuste au sucre (juste ce qu'il faut pour équilibrer, pas pour masquer), et on laisse reposer. C'est pendant ces huit semaines que l'assemblage se "soude".
+**Étape 4 — Assemblage et repos (8 semaines)** — on réunit les trois préparations dans une cuve unique, on ajuste au sucre (juste ce qu'il faut pour équilibrer, pas pour masquer), et on laisse reposer. C'est pendant ces huit semaines que l'assemblage se "soude".
 
 Total : **environ six mois** entre la première plante et la bouteille.
 

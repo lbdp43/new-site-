@@ -4,12 +4,26 @@ import { site } from '../data/site';
 import { Awards } from '@/components/ui/award';
 import { GlowCard } from '../components/ui/spotlight-card';
 import { getEntry } from 'astro:content';
+import { findAwardLogo } from '../data/award-logos';
+import { products } from '../data/products';
 
 const entry = await getEntry('static-pages', 'professionnels');
 if (!entry) throw new Error("Contenu manquant : src/content/static-pages/professionnels.md");
 const { meta } = entry.data;
 
 // Schema breadcrumb + FAQ pour la page pro (actions recommandées par l'audit)
+// Toutes les distinctions de la maison, dérivées des fiches produit — pas de
+// liste en dur : une médaille ajoutée au frontmatter `awards` d'un produit
+// apparaît ici au prochain build. `findAwardLogo` retrouve le visuel officiel
+// du concours ; si un logo manque, la vignette retombe sur le laurier dessiné.
+const proAwards = products.flatMap((p) =>
+  (p.awards ?? []).map((award) => ({
+    award,
+    product: p.name,
+    logo: findAwardLogo(award),
+  }))
+);
+
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -542,48 +556,41 @@ const eventFormats = [
           Des arguments de vente solides
         </h2>
         <p class="text-ink-700 max-w-2xl mx-auto leading-relaxed">
-          Plusieurs distinctions internationales — des supports de vente
-          prêts à mettre en carte ou en rayon.
+          {proAwards.length} distinctions internationales — des supports de
+          vente prêts à mettre en carte ou en rayon.
         </p>
       </div>
-      <div class="flex flex-wrap justify-center gap-2 md:gap-3 max-w-2xl mx-auto">
-        <Awards
-          client:visible
-          variant="award"
-          level="gold"
-          title="Meilleur Digestif du Monde"
-          subtitle="World Drinks Awards 2025"
-          recipient="L'Alchimie Végétale"
-          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
-        />
-        <Awards
-          client:visible
-          variant="award"
-          level="gold"
-          title="Médaille d'Or"
-          subtitle="Concours de Lyon"
-          recipient="L'Herbe des Druides"
-          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
-        />
-        <Awards
-          client:visible
-          variant="award"
-          level="silver"
-          title="Médaille d'Argent"
-          subtitle="Concours Général Paris"
-          recipient="L'Herbe des Druides (×2)"
-          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
-        />
-        <Awards
-          client:visible
-          variant="award"
-          level="gold"
-          title="Médaille d'Or"
-          subtitle="Concours National"
-          recipient="Le Cerf'Gent"
-          className="w-[calc(50%-0.25rem)] sm:w-[150px] min-h-[156px]"
-        />
-      </div>
+      <!-- Grille : 3 médailles par ligne sur mobile, jusqu'à 6 sur desktop.
+           Le nombre de vignettes suit les fiches produit, la grille doit donc
+           encaisser une médaille de plus sans se déformer. -->
+      <ul class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-7 md:gap-x-6 md:gap-y-9">
+        {proAwards.map((a) => (
+          <li class="flex flex-col items-center gap-2">
+            {a.logo ? (
+              <img
+                src={a.logo.logo}
+                alt={a.logo.alt}
+                width="140"
+                height="110"
+                loading="lazy"
+                class="w-full max-w-[120px] h-[84px] md:h-[104px] object-contain"
+              />
+            ) : (
+              <Awards
+                client:visible
+                variant="award"
+                level="gold"
+                title={a.award}
+                recipient={a.product}
+                className="w-full max-w-[120px] min-h-[104px]"
+              />
+            )}
+            <span class="text-[11px] leading-snug text-ink-600 text-center">
+              {a.product}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

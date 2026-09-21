@@ -541,7 +541,7 @@ export default function CoffretBuilder({
                     </div>
                     <div className="flex items-center justify-between text-xs">
                       <span className="text-ink-500">
-                        {p.alcohol}% vol.
+                        {lang === 'fr' ? String(p.alcohol).replace('.', ',') : p.alcohol}% vol.
                       </span>
                       <span className="text-gold-700 font-medium tracking-wide">
                         {t.format(p.priceMin)}

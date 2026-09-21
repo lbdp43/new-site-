@@ -30,7 +30,7 @@ export const plantsEn: Record<string, PlantEn> = {
   'Serpolet': {
     role: 'Wild thyme · spiced depth',
     description:
-      "The wild thyme of our Velay highlands. Finer and more floral than common thyme, it grows flat on alpine pasture. Present in our signature trio with verbena and caraway.",
+      "The wild cousin of common thyme, finer and more floral. It grows flat on dry upland pasture. Present in our signature trio with verbena and caraway.",
     usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Machurés",
     season: 'July to August',
   },
@@ -52,13 +52,13 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Camphorated · alpine',
     description:
       "A medieval plant from monastic gardens, lightly camphorated, a touch bitter. It brings depth and an \"alpine\" character to our mountain blends.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'June to August',
   },
   'Aurone': {
     role: 'Fine bitter · fruit-candy',
     description:
-      "A cousin to absinthe and wormwood. Less bitter, more subtle — fruit-candy and citrus at the same time. Long used as a tonic infusion in Auvergne countryside.",
+      "A cousin to absinthe and wormwood. Less bitter, more subtle — fruit-candy and citrus at the same time. Long used as a tonic infusion in the French countryside.",
     usedIn: "Le Gorgeon des Machurés, Verveine CBD Aurone",
     season: 'July to September',
   },
@@ -93,14 +93,14 @@ export const plantsEn: Record<string, PlantEn> = {
   'Ortie': {
     role: 'Green · mineral',
     description:
-      "An unloved weed, yet mineral-rich and with an unmistakable green flavour. Cooked or macerated, it loses its sting and reveals a subtle green-tea taste, almost iodic.",
+      "An unloved weed, yet mineral-rich and with an unmistakable green flavour. Once worked, it loses its sting and reveals a subtle green-tea taste, almost iodic.",
     usedIn: "Menthe CBD Ortie",
     season: 'April to July',
   },
   'Baraban': {
     role: 'Bitter · earthy',
     description:
-      "The Auvergnat name for dandelion. We work mainly its leaves — bitter and earthy, an undergrowth bitterness, like damp spring soil. Locally foraged.",
+      "One of the vernacular names for dandelion. We work mainly its leaves — bitter and earthy, an undergrowth bitterness, like damp spring soil.",
     usedIn: "Le Gorgeon des Machurés",
     season: 'March to May',
   },
@@ -108,20 +108,20 @@ export const plantsEn: Record<string, PlantEn> = {
     role: 'Mountain · fine bitter',
     description:
       "The queen plant of the Alps. We work it in partnership with a forager from Barcelonnette. Noble bitterness, mineral character, highly sought-after profile for mountain digestifs.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'July to August',
   },
   'Bourgeon de sapin': {
     role: 'Resinous · woody',
     description:
       "Young fir shoots, picked in spring while still tender. They add a resinous, almost balsamic woodiness that anchors our alpine blends.",
-    usedIn: "L'Essence des Alpes",
+    usedIn: "L'Essence des Cimes",
     season: 'April to June',
   },
   'Fleur de sureau': {
     role: 'Floral · honeyed',
     description:
-      "Small white umbels that bloom in early June. Floral, honeyed aroma, almost muscat. Picked close to the workshop, they define our Nectar d'Ostara.",
+      "Small white umbels that bloom in early June. Floral, honeyed aroma, almost muscat. A short picking window — barely a fortnight — that defines our Nectar d'Ostara.",
     usedIn: "Le Nectar d'Ostara",
     season: 'Late May to June',
   },
@@ -191,7 +191,7 @@ export const plantsEn: Record<string, PlantEn> = {
   'Carvi': {
     role: 'Aniseed · warmth',
     description:
-      "Also called meadow caraway, or meadow anise. Its seeds, after long maceration, offer an aniseed warmth with a light mentholated edge. A staple of traditional Auvergnat liqueurs.",
+      "Also called meadow caraway, or meadow anise. Its seeds, slowly worked, offer an aniseed warmth with a light mentholated edge. A staple of traditional Auvergnat liqueurs.",
     usedIn: "L'Herbe des Druides, Herbe des Druides Oak Cask, Le Gorgeon des Machurés",
     season: 'Harvested in July',
   },
@@ -212,21 +212,21 @@ export const plantsEn: Record<string, PlantEn> = {
   'Muscade': {
     role: 'Spiced · balsamic',
     description:
-      "Nutmeg, freshly grated before maceration. Its balsamic warmth complements cinnamon in the Cerf'Gent blend.",
+      "Nutmeg, freshly grated. Its balsamic warmth complements cinnamon in the Cerf'Gent blend.",
     usedIn: "Le Cerf'Gent",
     season: 'Imported',
   },
   'Framboise': {
     role: 'Red fruit · tangy',
     description:
-      "A small, tangy and fragrant berry, macerated whole. It carries the whole Flèche Ardente blend — fresh, faintly floral notes, an indulgence held together by acidity.",
+      "A small, tangy and fragrant berry, worked whole. It carries the whole Flèche Ardente blend — fresh, faintly floral notes, an indulgence held together by acidity.",
     usedIn: "La Flèche Ardente",
     season: 'June to September',
   },
   'Pétale de rose': {
     role: 'Floral · romantic',
     description:
-      "Damask rose petals, gently macerated. They lift the raspberry of La Flèche Ardente without ever overpowering it — a discreet floral note that opens up the finish.",
+      "Damask rose petals, used with restraint. They lift the raspberry of La Flèche Ardente without ever overpowering it — a discreet floral note that opens up the finish.",
     usedIn: "La Flèche Ardente",
     season: 'May to July',
   },

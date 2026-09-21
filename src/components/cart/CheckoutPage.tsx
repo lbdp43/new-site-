@@ -129,6 +129,33 @@ function CheckoutInner() {
 
   const effectiveShipping = shippingSame ? billing : shipping;
 
+  // ── GA4 ──────────────────────────────────────────────────────────────
+  // Le paiement se termine côté WooCommerce : la page de confirmation ne
+  // reçoit qu'un numéro de commande, sans montant ni lignes. Sans ça, GA4
+  // comptait les conversions mais affichait 0 € de chiffre d'affaires.
+  // On mémorise donc le panier ici, juste avant le paiement, et la page de
+  // confirmation le relit pour envoyer un `purchase` complet.
+  const beginSentRef = useRef(false);
+  useEffect(() => {
+    if (!cart || beginSentRef.current) return;
+    const items = (cart.items ?? []).map((it: any, i: number) => ({
+      item_id: String(it.id),
+      item_name: it.name,
+      price: Number(it.prices?.price ?? 0) / Math.pow(10, minorUnit),
+      quantity: it.quantity,
+      index: i,
+    }));
+    const value = Number(cart.totals?.total_price ?? 0) / Math.pow(10, minorUnit);
+    try {
+      window.sessionStorage.setItem(
+        'lbdp_ga_pending_order',
+        JSON.stringify({ value, currency: cart.totals?.currency_code ?? 'EUR', items })
+      );
+    } catch { /* sessionStorage indisponible */ }
+    (window as any).lbdpTrack?.('begin_checkout', { value, currency: cart.totals?.currency_code ?? 'EUR', items });
+    beginSentRef.current = true;
+  }, [cart, minorUnit]);
+
   // Dès qu'on a un code postal + pays + ville, on demande à WC de calculer
   // les frais de port (debounce simple).
   const postcodeKey = `${effectiveShipping.country}|${effectiveShipping.postcode}|${effectiveShipping.city}`;
@@ -491,10 +518,23 @@ function CheckoutInner() {
             </div>
           </dl>
 
+          {/* Vente à distance : le droit de rétractation doit être porté à la
+              connaissance du client AVANT qu'il valide sa commande, pas
+              seulement au fond des CGV. Mention reprise du checkout
+              WooCommerce, à conserver au-dessus du bouton de paiement. */}
+          <p className="mt-6 rounded-xl border border-forest-100/70 bg-cream-50 px-4 py-3 text-xs leading-relaxed text-ink-600">
+            Vous bénéficiez d'un droit de rétractation de 14 jours selon les
+            modalités précisées dans nos{" "}
+            <a href="/cgv" className="underline hover:text-forest-800">
+              conditions générales de vente
+            </a>
+            .
+          </p>
+
           <button
             type="submit"
             disabled={submitting || !stripe}
-            className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium disabled:opacity-60"
+            className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-forest-800 hover:bg-forest-900 text-cream-100 font-medium disabled:opacity-60"
           >
             {submitting ? (
               <>

@@ -41,7 +41,7 @@ C'est ce cadre qui imprime sa signature à notre travail au quotidien.
 
 Concrètement, quelques repères :
 
-- **Des cueilleurs et maraîchers partenaires** sélectionnés un par un, la plupart en agriculture biologique (voir [notre article sur la filière](/blog/producteurs-partenaires-bio-velay))
+- **Des cueilleurs, maraîchers, coopératives et filières spécialisées**, la plupart en agriculture biologique (voir [notre article sur la filière](/blog/producteurs-partenaires-bio-velay))
 - **Des apiculteurs partenaires** pour les miels (cocktails, éditions limitées)
 - **Des gentianaïres professionnels** pour la racine de gentiane jaune
 - **100 % de nos embouteillages** réalisés à la main dans notre atelier de Saint-Didier-en-Velay

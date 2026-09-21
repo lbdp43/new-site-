@@ -10,7 +10,7 @@ readingTime: "10 min"
 
 When people ask us **what makes our liqueurs different** from those of larger houses, the answer is one word: the **plants**.
 
-We don't grow them ourselves. We work with partner **foragers** and **market gardeners** — [people we picked one by one](/en/journal/producteurs-partenaires-bio-velay) — most of them organic, not all. Our workshop is in **Saint-Didier-en-Velay** (Haute-Loire, France): that's where maceration and bottling happen, by hand.
+We don't grow them ourselves. We select them from **foragers**, **market gardeners**, **cooperatives** and [**specialist suppliers**](/en/journal/producteurs-partenaires-bio-velay) — most of them organic, not all. Our workshop is in **Saint-Didier-en-Velay** (Haute-Loire, France): that's where production and bottling happen, by hand.
 
 This guide is the botanical journey of a bottle. **12 signature plants**, their identity, their use, and which of our liqueurs they end up in.
 
@@ -75,7 +75,7 @@ These 4 plants are the "finishing touches" in our most complex compositions.
 - **Botanical origin**: plateaus of 1,000 to 1,600 m altitude. Protected plant, regulated harvest.
 - **Profile**: frank bitterness, earthy note, long rooty finish.
 - **Harvest**: October-November, before first frosts. The root is dug by hand, with a "Devil's fork" (traditional tool).
-- **Our partners**: **professional gentian harvesters** we source one by one.
+- **Our partners**: **professional gentian harvesters** — a rare trade.
 
 A gentian harvester is a rare trade — fewer than 100 people in France. They work standing, bent over, in rain or frost. A workday = 30 to 50 kg of fresh roots. After drying (which divides weight by 3), that gives about 15 kg of dried gentian ready to work.
 

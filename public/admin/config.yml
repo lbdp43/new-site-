@@ -69,6 +69,11 @@ collections:
         widget: select
         options: [Plantes, Recettes, Terroir, Fabrication, Actualité]
       - { name: readingTime, label: "Temps de lecture (ex: \"5 min\")", widget: string, default: "5 min" }
+      - name: draft
+        label: "Brouillon — caché du site"
+        widget: boolean
+        default: false
+        hint: "Coché = l'article n'est pas publié. Décoché = visible sur /blog."
       - { name: body, label: "Contenu de l'article", widget: markdown }
 
   # ─── PRODUITS (fiches boutique) ───────────────────────────────────────
@@ -132,10 +137,16 @@ collections:
         fields:
           - { name: size, label: "Contenance (cl)", widget: number, value_type: int, hint: "Ex: 20, 50, 70, 150" }
           - { name: image, label: "Photo", widget: image }
+      - name: ingredients
+        label: "Ingrédients"
+        widget: string
+        required: false
+        hint: "La mention de l'étiquette, recopiée dans l'ordre. Ex : eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique. Laisser vide = aucun bloc Ingrédients sur la fiche (voulu pour Le Gorgeon des Machurés et La Pralicoquine)."
       - name: composition
-        label: "Composition (plantes, ingrédients)"
+        label: "Plantes (vignettes /lumiere-obscure)"
         widget: list
         required: false
+        hint: "N'apparaît PAS sur la fiche produit. Sert aux vignettes de la page Lumière Obscure. Pour la fiche, remplir « Ingrédients » ci-dessus."
         field: { name: ingredient, label: Ingrédient, widget: string }
       - { name: usage, label: "Usage / occasion", widget: string, hint: "Ex: Digestif de prestige, Apéritif amer, Accessoire" }
       - { name: tagline, label: "Accroche (affichée sur la carte)", widget: string, required: false }
@@ -1154,4 +1165,9 @@ collections:
         widget: select
         options: [Plants, Recipes, Terroir, Craft, News]
       - { name: readingTime, label: "Reading time (e.g. \"5 min\")", widget: string, default: "5 min" }
+      - name: draft
+        label: "Draft — hidden from the site"
+        widget: boolean
+        default: false
+        hint: "Checked = not published. Unchecked = live on /en/journal."
       - { name: body, label: "Article content", widget: markdown }

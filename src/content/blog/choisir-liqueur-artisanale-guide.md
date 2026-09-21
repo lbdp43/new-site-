@@ -122,9 +122,9 @@ Voici comment on recommande nos 18 liqueurs selon le moment :
 
 ### Pour l'apéritif
 
-- **Amer classique** (en remplacement d'une Suze) : [Cerf'Gent](/boutique/cerf-gent), 15 %, à servir givré ou avec du tonic — Médaille d'Or CGA Paris 2025.
+- **Amer classique** (en remplacement d'une Suze) : [Cerf'Gent](/boutique/cerf-gent), 15,5 %, à servir givré ou avec du tonic — Médaille d'Or CGA Paris 2025.
 - **Floral et frais** : [Nectar d'Ostara](/boutique/nectar-ostara), 24 %, avec un crémant ou simplement sur glace.
-- **Gourmand** : [Pralicoquine](/boutique/pralicoquine), 15 %, praline amande, sur glace en digestif-apéritif.
+- **Gourmand** : [Pralicoquine](/boutique/pralicoquine), 15,5 %, praline amande, sur glace en digestif-apéritif.
 - **Agrumes vibrants** : [Zéleste](/boutique/zeleste), 17,5 %, avec du tonic et un zeste d'orange.
 
 ### Pour le digestif
@@ -147,7 +147,7 @@ Composez [votre propre coffret de 3 bouteilles](/composer-mon-coffret) parmi tou
 
 ### Pour la relaxation (profil spécifique)
 
-La gamme [Lumière Obscure](/lumiere-obscure) associe le **CBD** (chanvre sans THC) à nos plantes signatures. Pas d'effet psychoactif, pas d'euphorie — simplement une composition pensée pour le moment de détente. [Verveine CBD Aurone](/boutique/verveine-cbd-aurone), [Menthe CBD Pimbi](/boutique/menthe-cbd-pimbi), [Absinthe CBD Citron](/boutique/absinthe-cbd-citron).
+La gamme [Lumière Obscure](/lumiere-obscure) associe le **CBD** (chanvre sans THC) à nos plantes signatures. Pas d'effet psychoactif, pas d'euphorie — simplement une composition pensée pour le moment de détente. [Verveine CBD Aurone](/boutique/verveine-cbd-aurone), [Menthe CBD Ortie](/boutique/menthe-cbd-ortie), [Absinthe CBD Citron](/boutique/absinthe-cbd-citron).
 
 ## 4. Conseils par profil d'amateur
 
@@ -172,7 +172,7 @@ Les éditions limitées et cuvées : [Herbe des Druides Fût de Chêne](/boutiqu
 
 ## 5. Les 6 pièges à éviter
 
-1. **"Aux extraits naturels de plantes"** ≠ "aux plantes". Les extraits peuvent être reconstitués à partir de molécules isolées — c'est légal, c'est "naturel", mais ce n'est pas de la macération de plante entière.
+1. **"Aux extraits naturels de plantes"** ≠ "aux plantes". Les extraits peuvent être reconstitués à partir de molécules isolées — c'est légal, c'est "naturel", mais ce n'est pas de la plante entière.
 
 2. **Couleur trop vive** (vert fluo, rouge cerise) : presque toujours un colorant ajouté. Les plantes donnent des teintes plus nuancées (vert olive, jaune miel, ambre).
 

@@ -25,7 +25,7 @@ Cette combinaison fait de la verveine une plante à la fois **fraîche en attaqu
 
 ### 1. La Verveine du Velay ([Pagès](https://www.distilleriepages.com/))
 
-La plus connue, fondée en 1859 à Saint-Germain-Laprade (Haute-Loire). Décliné en deux versions : **verte** (55°, recette historique macérée et distillée) et **jaune** (40°, plus douce). Le profil est très **herbacé-mentholé**, avec une amertume notable issue d'autres plantes aromatiques.
+La plus connue, fondée en 1859 à Saint-Germain-Laprade (Haute-Loire). Décliné en deux versions : **verte** (55°, recette historique) et **jaune** (40°, plus douce). Le profil est très **herbacé-mentholé**, avec une amertume notable issue d'autres plantes aromatiques.
 
 - **Pour qui ?** Les amateurs de classiques puissants type Chartreuse Verte
 - **Prix** : 25-35 € le 70 cl
@@ -70,7 +70,7 @@ Quand on a sorti notre première verveine en 2021, on s'est posé la question : 
 
 2. **28°, pas 40° ni 55°.** Plus accessible, plus facile à intégrer dans un cocktail, plus respectueux de la plante (moins d'alcool, plus de nez).
 
-3. **Plantes traçables.** Toutes nos plantes viennent de [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) sélectionnés un par un, la plupart en bio. On peut vous nommer les producteurs.
+3. **Plantes traçables.** Nos plantes viennent de [cueilleurs, maraîchers, coopératives et filières spécialisées](/blog/producteurs-partenaires-bio-velay), la plupart en bio — et nous savons dire d'où vient chaque lot.
 
 L'Herbe des Druides a été distinguée trois fois Médaille d'Or au [Concours International de Lyon](https://concours-vinslyon.com/) (2023, 2024, 2026) et Médaille d'Argent au [World Drinks Awards](https://www.worldliqueurawards.com/) 2025 à Londres.
 

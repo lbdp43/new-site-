@@ -17,13 +17,13 @@ It's also the precise moment an idea becomes a project.
 
 **Étienne** and **Guillaume** have known each other since the playground in Saint-Didier-en-Velay. This Velay village, on the border of Haute-Loire and Loire, sits between the foothills of the Massif Central and the Gier valley. Little industry, many slopes, wild plants everywhere.
 
-Each takes their own road. Étienne studies **plant biotechnology** in Toulouse — understanding molecules, macerations, aromatic balance. Guillaume opens a **bar-restaurant in Saint-Étienne**, working service, customers, the menu. They see each other every year, in summer, in Saint-Didier.
+Each takes their own road. Étienne studies **plant biotechnology** in Toulouse — understanding molecules, extracts, aromatic balance. Guillaume opens a **bar-restaurant in Saint-Étienne**, working service, customers, the menu. They see each other every year, in summer, in Saint-Didier.
 
 In 2019, the conversation takes a different turn. *"What if we did something?"* We know what we don't want: neither an American-style production line, nor a marketing-first brand. We know what we want: plants we recognise, a territory we claim, a craft we master.
 
 ## The garage, the early trials
 
-For eighteen months, Étienne formulates in a garage. Macerations sit on plastic shelves, experimental bottles labelled by hand, labels all reading *"test-37"*, *"test-48"*. Some end up in the sink. Others go to tasting — first with Guillaume, then with fellow wine merchants in Saint-Étienne who become the first jury.
+For eighteen months, Étienne formulates in a garage. Preparations sit on plastic shelves, experimental bottles labelled by hand, labels all reading *"test-37"*, *"test-48"*. Some end up in the sink. Others go to tasting — first with Guillaume, then with fellow wine merchants in Saint-Étienne who become the first jury.
 
 The verbena / wild thyme / caraway ratio for *L'Herbe des Druides* stabilises at test 54. The idea of *Alchimie Végétale* — more complex, 27 plants — starts in parallel. It will be long: **four years of R&D** before this liqueur is entered in an international competition.
 
@@ -37,12 +37,12 @@ Formulating and selling isn't enough. **Industrial rigour** — precise dosing, 
 
 On **17 April 2025** in London, at the World Drinks Awards, *L'Alchimie Végétale* is crowned **World's Best Digestif 2025**. Results drop overnight. The phone rings very early in the morning. We didn't expect it. We didn't expect it at all.
 
-What followed — demand doubling, foreign distributors calling, press articles, trade-show meetings — we've told that story [in our spring 2025 press review](/en/journal/dans-la-presse-2025). The essential stays elsewhere: in the workshop, in the tanks, in the gestures that haven't changed.
+What followed — demand doubling, foreign distributors calling, press articles, trade-show meetings — we've told that story in our spring 2025 press review. The essential stays elsewhere: in the workshop, in the tanks, in the gestures that haven't changed.
 
 ## What hasn't changed
 
 - **Saint-Didier-en-Velay.** We haven't left the village. The workshop is 300 metres from the school where Étienne and Guillaume met.
-- **The plants.** Most of them organic, all harvested by our partner foragers and market gardeners (hand-picked one by one).
+- **The plants.** Most of them organic, selected from foragers, market gardeners, cooperatives and specialist suppliers.
 - **Hand bottling.** A semi-automatic filler for the larger runs, hand bottling for the limited editions. Every cork is placed by hand.
 - **Team size.** Two. Étienne and Guillaume. That's enough.
 

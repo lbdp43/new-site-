@@ -107,7 +107,7 @@ export const cocktails: Cocktail[] = [
     slug: 'black-mule',
     name: 'Le Black Mule',
     description:
-      "Relecture du Moscow Mule avec notre Gorgeon des Machurés — la gentiane donne une amertume sombre qui fait merveille avec le gingembre.",
+      "Relecture du Moscow Mule avec notre Gorgeon des Machurés — le baraban donne une amertume sombre, presque terreuse, qui fait merveille avec le gingembre.",
     image: '/images/cocktails/black-mule.webp',
     liqueurProductSlug: 'gorgeon-des-machures',
     liqueurName: 'Le Gorgeon des Machurés',

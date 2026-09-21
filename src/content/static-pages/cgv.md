@@ -15,7 +15,7 @@ Les présentes conditions générales de vente (ci-après « CGV ») régissent 
 
 ## 2. Produits
 
-Nous commercialisons des **liqueurs et spiritueux artisanaux** fabriqués en Haute-Loire à partir de plantes (la plupart en agriculture biologique). Les produits sont présentés avec le maximum de précision (photos, descriptions, taux d'alcool, composition). Des écarts mineurs de teinte entre la photo et le produit livré peuvent exister du fait de macérations naturelles.
+Nous commercialisons des **liqueurs et spiritueux artisanaux** fabriqués en Haute-Loire à partir de plantes (la plupart en agriculture biologique). Les produits sont présentés avec le maximum de précision (photos, descriptions, taux d'alcool, composition). Des écarts mineurs de teinte entre la photo et le produit livré peuvent exister, les ingrédients naturels variant d'un lot à l'autre.
 
 ## 3. Interdiction de vente aux mineurs
 

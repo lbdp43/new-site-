@@ -13,6 +13,11 @@ const blogSchema = z.object({
   // À renseigner pour les articles dont le cover apporte une info distincte
   // du titre (ex: photo d'atelier, plante, coulisses).
   coverAlt: z.string().optional(),
+  // Article caché du site. Le champ n'existait que pour les produits : posé
+  // sur un article, Zod le supprimait silencieusement et l'article partait
+  // quand même en ligne. Filtré depuis le 21/09/2026 dans /blog et
+  // /en/journal (index + pages d'article).
+  draft: z.boolean().default(false),
   category: z.enum(['Plantes', 'Recettes', 'Terroir', 'Fabrication', 'Actualité']),
   readingTime: z.string().default('5 min'),
   // Recipes structurées (opt-in) — émet du schema Recipe @ Schema.org
@@ -56,6 +61,7 @@ const blogEn = defineCollection({
     author: z.enum(['Étienne', 'Guillaume', 'La Brasserie des Plantes']).default('La Brasserie des Plantes'),
     cover: z.string().optional(),
     coverAlt: z.string().optional(),
+    draft: z.boolean().default(false),
     category: z.enum(['Plants', 'Recipes', 'Terroir', 'Craft', 'News']),
     readingTime: z.string().default('5 min'),
   }),
@@ -103,6 +109,10 @@ const products = defineCollection({
     highlight: emptyToUndefined(z.string()),
     serving: emptyToUndefined(z.string()),
     wcSizeAttribute: emptyToUndefined(z.string()),
+    /** Liste d'ingrédients réglementaire, telle qu'elle figure sur
+     *  l'étiquette : eau, sucre, alcool, puis les plantes. Distincte de
+     *  `composition`, qui ne liste que les plantes à visée éditoriale. */
+    ingredients: emptyToUndefined(z.string()),
     /** Catégorie SEO descriptive (mot-clé cible). Ex : "Liqueur de
      *  verveine artisanale", "Liqueur de gentiane" — apparaît en kicker
      *  au-dessus du H1 + dans le <title>, la meta description, le schema

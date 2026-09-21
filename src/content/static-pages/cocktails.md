@@ -1,7 +1,7 @@
 ---
 meta:
   title: "Recettes cocktails aux plantes — 5 idées cocktails maison | La Brasserie des Plantes"
-  description: "5 recettes cocktails faciles aux liqueurs artisanales : Spritz Efflorescent, Verveine Printanière, Philtre d'Éros, Black Mule, Bonbon au Citron. Idées cocktails apéritifs, digestifs et mixologie aux plantes — proportions, montage, accords."
+  description: "5 recettes de cocktails aux liqueurs de plantes : Spritz Efflorescent, Verveine Printanière, Philtre d'Éros, Black Mule, Bonbon au Citron."
 
 pageHeader:
   kicker: "Mixologie"
@@ -10,7 +10,7 @@ pageHeader:
 
 ctaSection:
   title: "Venez nous voir à l'atelier."
-  intro: "À Saint-Didier-en-Velay, nous organisons des soirées dégustation et des ateliers où vous composez votre propre liqueur — une après-midi à sentir, goûter, macérer, et vous repartez avec votre bouteille."
+  intro: "À Saint-Didier-en-Velay, nous organisons des soirées dégustation et des ateliers où vous composez votre propre liqueur — une après-midi à sentir, goûter, assembler, et vous repartez avec votre bouteille."
   ctaPrimaryLabel: "Découvrir nos ateliers"
   ctaPrimaryHref: "/ateliers"
 ---

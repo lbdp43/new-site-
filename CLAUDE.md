@@ -319,7 +319,7 @@ remplacer le contenu de la colonne gauche.
 | `src/pages/commande/confirmation.astro` | Route `/commande/confirmation` |
 | `src/pages/blog/index.astro` | Route `/blog` (label UI "Actualité" côté FR). Hero staggered (BlogHeroIntro) + filtre catégories client-side (Fabrication / Terroir / Actualité / Plantes / Recettes). |
 | `src/components/BlogHeroIntro.tsx` | Hero éditorial staggered (flou → net) pour /blog — kicker + titre + script + paragraphe d'intro. |
-| `src/content/products/*.md` | **Source de vérité éditoriale** des fiches produit (1 fichier par SKU). Éditable via Sveltia CMS. |
+| `src/content/products/*.md` | **Source de vérité éditoriale** des fiches produit (1 fichier par SKU). Éditable via Sveltia CMS. `ingredients` (mention d'étiquette) et `composition` (même info en puces) alimentent un seul bloc « Ingrédients » — voir la section dédiée. Pendant EN : `productsEn[slug]` dans `src/data/products.en.ts`. |
 | `src/data/products.ts` | Thin wrapper — importe `products.generated.json` + définit types + ranges + helpers |
 | `src/data/products.generated.json` | Généré au prebuild par `generate-products.mjs`. Ne pas éditer à la main. |
 | `scripts/generate-products.mjs` | Script prebuild : compile les .md → JSON consommable sync |
@@ -327,6 +327,8 @@ remplacer le contenu de la colonne gauche.
 | `scripts/indexnow-submit.mjs` | Script postbuild : POST sitemap à IndexNow (Bing/Yandex) |
 | `src/lib/wc-live.ts` | Helpers `getSchemaAvailability`, `isOutOfStock`, `getSizePrices`, etc. |
 | `src/lib/featurable.ts` | Fetch (mémoïsé) des avis Google via Featurable au build. Expose `getFeaturableWidget()`, `getFeaturableAggregate()` et `buildAggregateRatingSchema()`. Single fetch partagé par `GoogleReviewsEmbed.astro` + le schema `LocalBusiness` (FR + EN home). |
+| `src/content/static-pages/notre-histoire.md` | Contient le **décompte des distinctions** (titre « Douze distinctions », tagline, bloc stats, paragraphe d'intro, cartes `productsWithMedals`). ⚠️ **Non dérivé des fiches produit** — à remettre à jour à la main quand une médaille est ajoutée, en même temps que le pendant EN `src/pages/en/our-story.astro` (compteur + paragraphe, tous deux en dur). Au 21/09/2026 : 12 distinctions, 5 produits. |
+| `src/data/award-logos.ts` | Table libellé de distinction → visuel officiel du concours (`findAwardLogo`). Consommée par la fiche produit et la section « Des arguments de vente solides » de `/professionnels`, qui affiche **toutes** les distinctions de la maison en dérivant les `awards` des fiches produit (12 au 21/09/2026) — aucune liste en dur, une médaille ajoutée à un frontmatter apparaît au build suivant. Ajouter un logo = déposer le WebP dans `public/images/awards/` + une entrée avec lookaheads (millésime + concours + niveau). |
 | `src/data/wc-live.json` | Snapshot stock + prix par contenance live (régénéré à chaque build, committé) |
 | `public/admin/index.html` + `public/admin/config.yml` | Interface CMS (Sveltia) + config collections blog |
 | `public/llms.txt` | Manifest IA (Markdown) — résumé structuré pour AI Overviews / ChatGPT / Perplexity. À garder synchronisé avec la gamme produits + distinctions |
@@ -445,6 +447,7 @@ l'étiquette à l'appui.
 |---|---|---|
 | **Le Gorgeon des Machurés** | ~~Mâchurés~~ | Vérifié sur photo d'étiquette le 2026-09-21. Le mot commun *mâchurer* prend bien un circonflexe, mais l'étiquette imprime MACHURÉS sans accent — le site doit correspondre à ce que le client a en main. Corrigé à tort en septembre 2026 (PR #25), reversé aussitôt (PR #28). |
 | **La Pralicoquine** | ~~PraliCoquine~~ | Minuscule au c, confirmé par Guillaume. |
+| **L'Essence des Cimes** | ~~L'Essence des Alpes~~ | Renommé le 2026-09-21 (arbitrage Guillaume). Le slug reste `essence-des-alpes` — fichier `.md`, images `sizes/essence-des-alpes-*.webp`, clé `products.en.ts` et URL inchangés. |
 
 S'applique aussi au mot commun quand il désigne les mineurs (« en mémoire
 des Machurés »), pour rester cohérent avec le nom du produit.
@@ -452,6 +455,120 @@ des Machurés »), pour rester cohérent avec le nom du produit.
 Les slugs d'URL restent en minuscules sans accent
 (`/boutique/gorgeon-des-machures`) : ne jamais les toucher, des liens
 externes et des redirections 301 en dépendent.
+
+## Listes d'ingrédients (champ `ingredients`)
+
+Depuis le 2026-09-21, chaque fiche liqueur porte deux champs distincts :
+
+**Un seul bloc « Ingrédients » à l'écran** (arbitrage Guillaume, 21/09/2026 :
+« ingrédient et composition sont la même chose »).
+
+| Champ | Contenu | Où il s'affiche |
+|---|---|---|
+| `ingredients` | mention type étiquette (eau, sucre, alcool, puis les plantes) | le bloc « Ingrédients » de la fiche produit, FR et EN |
+| `composition` | les plantes en liste | **plus sur la fiche produit** — uniquement les vignettes de `/lumiere-obscure` et `/en/dark-light` |
+
+**Une fiche sans `ingredients` n'affiche aucun bloc.** C'est volontaire pour
+**Le Gorgeon des Machurés** et **La Pralicoquine** (Guillaume, 21/09/2026) :
+ne pas les « compléter », et ne pas rétablir de repli sur `composition`.
+
+Pendant EN : `productsEn[slug].ingredients` dans `src/data/products.en.ts`
+(le template retombe sur la valeur FR si la clé EN manque).
+
+**Provenance — à savoir avant de modifier** :
+- **5 mentions reprises mot pour mot du WordPress live** (doc fourni par
+  Guillaume le 21/09/2026) : Herbe des Druides, Lime des Prés, Nectar
+  d'Ostara, Flèche Ardente, Gorgeon des Machurés.
+- **11 mentions dérivées** de `composition` sur le patron des 5 premières,
+  appliquées sur instruction de Guillaume le 21/09/2026. Elles n'ont **pas**
+  été relues sur l'étiquette physique. À confronter aux étiquettes avant la
+  bascule www.
+
+**Mention bio** : ajoutée uniquement là où une source l'atteste (les 3
+produits que le WordPress documente + le génépi de l'Essence des Cimes).
+Jamais généralisée — cf. règle d'or sourcing plantes.
+
+**Allergène** : la Pralicoquine contient des **amandes** (fruits à coque).
+Sur une vraie étiquette l'allergène doit ressortir typographiquement ; la
+ligne du site ne le met pas en gras pour l'instant.
+
+**⚠️ Contradiction FR/EN non résolue sur les colorants** : la FAQ FR
+(`src/content/static-pages/faq.md`) affirme « pas de colorant », alors que
+la FAQ EN (`src/pages/en/faq.astro`) cite le charbon végétal du Gorgeon et
+la **cochenille** de la Pralicoquine — et que `composition` du Gorgeon liste
+bien « Charbon végétal ». Aucun colorant n'a donc été inscrit dans les
+`ingredients`. À trancher avec Guillaume, puis aligner les deux FAQ.
+
+## 🚨 Vocabulaire interdit — procédé de fabrication
+
+**Consigne de Guillaume (2026-09-21)** : ne jamais écrire **macération**,
+**macérat**, **macérer**, **macéré(e)(s)** — ni leurs équivalents anglais
+*maceration*, *macerated*, *macerating* — nulle part sur le site.
+
+Vocabulaire de remplacement, **qui ne doit pas nommer un autre procédé** :
+« élaboration », « fabrication », « préparation », « travail des plantes »,
+« extrait », « travaillé à froid », « temps longs ». Ne pas substituer
+« infusion » ou « distillation », qui affirmeraient une autre technique.
+
+Balayage fait le 2026-09-21 : 162 occurrences → **1 restante**, dans un
+**avis client recopié mot pour mot** sur `/ateliers`
+(`src/data/wecandoo-reviews.json`). On ne réécrit pas les mots d'un client :
+à remplacer par un autre avis si Guillaume le souhaite.
+
+L'article `src/content/blog/maceration-froide-pourquoi-pas-distillation.md`
+est passé en **`draft: true`** : son titre, son URL et sa thèse entière
+reposaient sur le procédé. À réécrire sous un autre angle et une autre URL,
+ou à supprimer.
+
+**Commande de vérification :**
+```bash
+grep -rniE "mac[ée]r" src/ public/*.txt | grep -v generated.json | grep -v wecandoo-reviews
+```
+
+## 🚨 « Sans arôme ajouté » — ne JAMAIS généraliser à la gamme
+
+**Guillaume, 2026-09-21 : il y a de l'arôme dans Le Menthor et La
+Pralicoquine.** Toute formulation qui affirme l'absence d'arôme pour
+*l'ensemble* de la gamme est donc fausse.
+
+**Deux interdits :**
+1. Ne jamais écrire que la gamme, « nos liqueurs » ou « toutes nos
+   recettes » sont sans arôme ajouté.
+2. Ne jamais écrire non plus **qu'il y a** de l'arôme dans Le Menthor ou
+   La Pralicoquine. Ces deux fiches ne parlent pas d'arôme, dans un sens
+   ni dans l'autre.
+
+**Ce qui reste autorisé** : le claim au niveau d'un produit précis dont
+c'est vrai. Conservé à date sur **L'Herbe des Druides** et **L'Alchimie
+Végétale**. Ne pas l'étendre à un autre produit sans confirmation.
+
+Nettoyage du 2026-09-21 — claims gamme retirés de : FAQ FR et EN,
+meta de la home, `/boutique` (meta + texte), `/liqueurs-artisanales`
+(meta + intro), `/liqueurs-de-plantes` (meta + bloc « nos trois
+engagements »), `/digestif-naturel` (×2), `/aperitif-artisanal`,
+`/en/our-story`, `public/llms.txt`, article `likora-2022`.
+
+Au passage, la FAQ FR affirmait aussi « pas de colorant » alors que le
+Gorgeon est coloré au charbon végétal. Les deux FAQ disent maintenant la
+même chose : pas de conservateur, un ingrédient naturel pour la couleur,
+jamais de colorant de synthèse. La mention « cochenille pour le rose de
+la Pralicoquine », qui n'existait que côté EN, a été retirée faute de
+confirmation.
+
+**⚠️ Tension non résolue** : `/liqueurs-artisanales`,
+`/liqueurs-de-plantes`, `/aperitif-artisanal` et deux articles de blog
+conseillent au lecteur de chercher la mention « sans arôme ajouté » pour
+reconnaître une vraie liqueur artisanale. Ce ne sont pas des claims sur
+nos produits, mais un lecteur qui applique cette grille au Menthor en
+tirerait une mauvaise conclusion. À arbitrer avec Guillaume.
+
+## Brouillons d'articles
+
+`draft: true` masque un article de `/blog` et `/en/journal` (index + page
+d'article). Le champ n'existait que pour les produits jusqu'au 2026-09-21 :
+posé sur un article, **Zod le supprimait silencieusement et l'article
+partait quand même en ligne**. Il est désormais déclaré dans `blogSchema` et
+`blogEn`, filtré dans les quatre templates, et exposé dans Sveltia.
 
 ## Règle d'or CMS (Sveltia)
 
@@ -538,6 +655,29 @@ articles" (retiré).
   Velay (Pagès)" ou "Salers (auvergnat)") — c'est factuel sur le concurrent
 - Ancrage géographique du LIEU : "atelier à Saint-Didier-en-Velay" / "fondateurs
   nés au pays" — vrai, n'engage pas la matière première
+
+**Formule de sourcing de référence (Guillaume, 21/09/2026)** — celle du hero
+de la home, à reprendre partout :
+
+> « des plantes soigneusement sélectionnées, notamment auprès de
+> **producteurs et cueilleurs partenaires** »
+
+Elle remplace « des cueilleurs et des maraîchers que nous sélectionnons **un
+par un** », qui sur-promet (on ne choisit ni ne rencontre chacun d'eux).
+Bannir aussi ce qui va avec : « chaque récoltant est rencontré »,
+« producteur rencontré », « tous nous connaissent par leur prénom »,
+EN « we pick one by one », « hand-picked », « every grower is met ».
+
+Appliqué au 21/09/2026 sur la **home** et **/nos-plantes** (+ `/en/our-plants`).
+**Reste à balayer** (~18 occurrences) : `src/content/static-pages/index.md`,
+`liqueurs-de-plantes.astro`, `en/index.astro`, `en/our-story.astro`,
+`products/alchimie-vegetale.md`, `products.en.ts`, et 8 articles de blog
+FR/EN dont `producteurs-partenaires-bio-velay` (titre + description +
+corps), `plantes-liqueur-haute-loire`, `quelle-liqueur-verveine-choisir-2026`,
+`reconnaitre-vraie-liqueur-artisanale-checklist`, `trois-amis-une-brasserie`,
+`velay-attractivite-portrait-institutionnel`, `la-verveine-citronnelle`.
+À faire sur accord de Guillaume — l'article `producteurs-partenaires-bio-velay`
+est construit entièrement sur cette promesse.
 
 **Commande de vérification (à lancer avant tout commit contenu) :**
 ```bash

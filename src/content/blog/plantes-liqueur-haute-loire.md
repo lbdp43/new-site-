@@ -11,7 +11,7 @@ readingTime: "10 min"
 
 Quand on nous demande **ce qui fait la différence** entre nos liqueurs et celles des grandes maisons, la réponse tient en un mot : les **plantes**.
 
-Nous ne les cultivons pas nous-mêmes. Nous travaillons avec des **cueilleurs** et des **maraîchers partenaires** — [des gens qu'on a choisis un par un](/blog/producteurs-partenaires-bio-velay) — la plupart en bio, pas tous. Notre atelier, lui, est à **Saint-Didier-en-Velay** (Haute-Loire) : c'est là que la macération et l'embouteillage se font à la main.
+Nous ne les cultivons pas nous-mêmes. Nous les sélectionnons chez des **cueilleurs**, des **maraîchers**, des **coopératives** et des [**filières spécialisées**](/blog/producteurs-partenaires-bio-velay) — la plupart en bio, pas toutes. Notre atelier, lui, est à **Saint-Didier-en-Velay** (Haute-Loire) : c'est là que la fabrication et l'embouteillage se font à la main.
 
 Ce guide est le voyage botanique d'une bouteille. **12 plantes signatures**, leur identité, leur usage, et dans quelles liqueurs on les retrouve.
 
@@ -76,7 +76,7 @@ Ces plantes sont les "touches de finition" dans nos compositions les plus comple
 - **Origine botanique** : plateaux de 1 000 à 1 600 m d'altitude. Plante protégée, cueillette réglementée.
 - **Profil** : amertume franche, note terreuse, finale longue et racinaire.
 - **Récolte** : octobre-novembre, avant les premières gelées. La racine se cueille à la main, avec une "fourche du Diable" (outil traditionnel).
-- **Nos partenaires** : **gentianaires professionnels** que nous sourçons un par un.
+- **Nos partenaires** : **gentianaires professionnels**, un métier rare.
 
 Un gentianaire est un métier rare — moins de 100 personnes en France. Ils travaillent debout, courbés, sous la pluie ou le gel. Une journée de travail = 30 à 50 kg de racines fraîches. Après séchage (qui divise le poids par 3), ça donne environ 15 kg de gentiane séchée prête à travailler.
 

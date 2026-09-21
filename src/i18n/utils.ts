@@ -211,3 +211,19 @@ export function hasTranslation(frPath: string, targetLang: Lang): boolean {
   const withoutSlash = translated.endsWith('/') ? translated.slice(0, -1) : translated;
   return translatedPages[targetLang].some((p) => p === withSlash || p === withoutSlash);
 }
+
+/**
+ * Comme `localizedPath`, mais ne renvoie jamais une URL qui n'existe pas.
+ *
+ * `localizedPath('/boutique', 'es')` calcule `/es/tienda` à partir du
+ * `routeMap` — or les pages ES et IT ne sont pas encore créées. Sur les
+ * homes `/es/` et `/it/`, les 17 liens de navigation menaient donc tous à
+ * une 404 (diagnostiqué le 21/09/2026). Tant que la traduction n'existe
+ * pas, on retombe sur la page française, qui existe toujours.
+ *
+ * À utiliser dans toute navigation partagée (header, footer). Pour un lien
+ * écrit à la main dans une page, vérifier la cible soi-même.
+ */
+export function safeLocalizedPath(frPath: string, lang: Lang): string {
+  return hasTranslation(frPath, lang) ? localizedPath(frPath, lang) : frPath;
+}

@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
-import { products } from '../data/products';
+import { products, formatAlcoholFr } from '../data/products';
 import { getEntry } from 'astro:content';
 
 const entry = await getEntry('static-pages', 'liqueur-digestive');
@@ -37,7 +37,7 @@ const faq = [
   },
   {
     q: "Liqueur digestive ou digestif : quelle différence ?",
-    a: "« Digestif » est le mot générique pour tout alcool servi en fin de repas — cela inclut les eaux-de-vie (cognac, calvados, marc, génépi alpin), les liqueurs digestives (à base de plantes ou de fruits, sucrées) et les amers italiens (Amaro). « Liqueur digestive » désigne précisément la sous-catégorie sucrée à base de macération de plantes.",
+    a: "« Digestif » est le mot générique pour tout alcool servi en fin de repas — cela inclut les eaux-de-vie (cognac, calvados, marc, génépi alpin), les liqueurs digestives (à base de plantes ou de fruits, sucrées) et les amers italiens (Amaro). « Liqueur digestive » désigne précisément la sous-catégorie sucrée à base de plantes.",
   },
   {
     q: "Une liqueur digestive aide-t-elle vraiment à digérer ?",
@@ -120,7 +120,7 @@ const featured = slugs.map((s) => productBySlug[s]).filter(Boolean);
       <h2>Qu'est-ce qu'une liqueur digestive exactement ?</h2>
       <p>
         Une <strong>liqueur digestive</strong> est un spiritueux sucré, à base
-        de macération de plantes (racines, écorces, feuilles, fleurs, épices),
+        de plantes travaillées (racines, écorces, feuilles, fleurs, épices),
         servi traditionnellement en fin de repas. Le titre alcoolique varie de
         <strong>25° à 50°</strong>, et la formule mise sur des plantes
         <em>carminatives</em> (qui aident à évacuer les gaz) et <em>cholérétiques</em>
@@ -167,7 +167,7 @@ const featured = slugs.map((s) => productBySlug[s]).filter(Boolean);
         de l'alcool. Idéal pour
         <a href="/boutique/cerf-gent">notre Cerf'Gent</a> à la gentiane jaune
         ou pour
-        <a href="/boutique/essence-des-alpes">L'Essence des Alpes</a> au génépi.
+        <a href="/boutique/essence-des-alpes">L'Essence des Cimes</a> au génépi.
       </p>
       <h3>2. À température ambiante (les grands assemblages)</h3>
       <p>
@@ -226,7 +226,7 @@ const featured = slugs.map((s) => productBySlug[s]).filter(Boolean);
       </p>
       <p>
         La recette : <strong>27 plantes</strong>, racines, écorces et épices
-        macérées une à une, puis assemblées au gramme près. Quatre ans de
+        travaillées une à une, puis assemblées au gramme près. Quatre ans de
         recherche et développement, trente-deux essais documentés, pour
         arriver à l'équilibre actuel — racines en colonne vertébrale,
         herbacé pour l'oxygène, fleurs pour la rondeur, épices pour la
@@ -255,7 +255,7 @@ const featured = slugs.map((s) => productBySlug[s]).filter(Boolean);
               <img src={p.image} alt={`${p.seoCategory ?? p.name} — ${p.name}`} class="max-h-full max-w-full object-contain p-4" loading="lazy" />
             </div>
             <div class="text-[10px] uppercase tracking-[0.2em] text-forest-600 font-medium mb-1">
-              {p.seoCategory ?? 'Liqueur digestive'} · {p.alcohol}°
+              {p.seoCategory ?? 'Liqueur digestive'} · {formatAlcoholFr(p.alcohol)}°
             </div>
             <h3 class="font-display text-xl text-forest-900 leading-tight mb-2">{p.name}</h3>
             <p class="text-sm text-ink-700 leading-snug mb-3 line-clamp-2">{p.tagline ?? ''}</p>

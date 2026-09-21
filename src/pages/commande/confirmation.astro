@@ -76,10 +76,22 @@ const orderKey = url.searchParams.get('key') ?? '';
     } catch (e) { /* localStorage indispo (private mode strict) */ }
     try {
       if (order) {
-        window.lbdpTrack && window.lbdpTrack('purchase', {
-          transaction_id: String(order),
-          currency: 'EUR',
-        });
+        // Le montant et les lignes ne sont pas dans l'URL de retour : ils ont
+        // été mémorisés par CheckoutPage juste avant le paiement. Sans eux,
+        // GA4 comptait la conversion mais affichait 0 € de chiffre d'affaires.
+        var pending = null;
+        try {
+          var raw = window.sessionStorage.getItem('lbdp_ga_pending_order');
+          if (raw) pending = JSON.parse(raw);
+        } catch (e) {}
+        var payload = { transaction_id: String(order), currency: 'EUR' };
+        if (pending) {
+          if (typeof pending.value === 'number') payload.value = pending.value;
+          if (pending.currency) payload.currency = pending.currency;
+          if (Array.isArray(pending.items)) payload.items = pending.items;
+        }
+        window.lbdpTrack && window.lbdpTrack('purchase', payload);
+        try { window.sessionStorage.removeItem('lbdp_ga_pending_order'); } catch (e) {}
       }
     } catch (e) {}
   </script>

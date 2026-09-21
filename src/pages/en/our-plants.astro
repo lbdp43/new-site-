@@ -19,7 +19,7 @@ const plantsListSchema = {
   '@type': 'ItemList',
   name: 'Plants and botanicals used at La Brasserie des Plantes',
   description:
-    'Aromatic herbs, roots, barks, flowers, citrus, spices and fruits used in our craft liqueurs. Sourced from hand-picked foragers and market gardeners in Haute-Loire and beyond, mostly from organic farming.',
+    'Aromatic herbs, roots, barks, flowers, citrus, spices and fruits used in our craft liqueurs. Carefully selected, in particular from partner growers and foragers, most of them from organic farming.',
   numberOfItems: plants.length,
   inLanguage: 'en-US',
   itemListElement: plants.map((p, i) => {
@@ -52,13 +52,13 @@ const sortedPlants = [...plants].sort((a, b) => {
 <Layout
   lang="en"
   title="Our plants — around forty botanicals | La Brasserie des Plantes"
-  description="Verbena, lemon balm, wild thyme, caraway, hyssop, gentian, génépi, elderflower, dragon fruit, almond… about forty plants, roots, barks, flowers, citrus, spices and fruits in our craft liqueurs from Haute-Loire, France."
+  description="Verbena, lemon balm, wild thyme, caraway, hyssop, gentian, génépi, elderflower: the forty-odd plants, roots and flowers behind our craft liqueurs."
   schema={schema}
 >
   <PageHeader
     kicker="Botany"
     title="The plants behind<br /><em class='not-italic font-normal text-forest-600' style='font-family: var(--font-script);'>our liqueurs</em>"
-    subtitle="Verbena, wild thyme, caraway, lemon balm, hyssop, gentian, génépi, elderflower, nettle, hemp, almond, dragon fruit… around forty botanical ingredients, sourced from foragers and market gardeners we pick one by one."
+    subtitle="Verbena, wild thyme, caraway, lemon balm, hyssop, gentian, génépi, elderflower, nettle, hemp, almond, dragon fruit… around forty botanical ingredients, carefully selected, in particular from partner growers and foragers."
     breadcrumb={[{ label: 'Home', href: '/en/' }, { label: 'Our plants' }]}
   />
 
@@ -97,11 +97,9 @@ const sortedPlants = [...plants].sort((a, b) => {
           Across the entire range, we work with
           <strong class="font-medium text-forest-800">around forty botanical
           ingredients</strong> — aromatics, roots, barks, flowers, citrus,
-          spices, fruits. We don't grow our own plants: we source them from
-          foragers and market gardeners we pick one by one. Most come from
-          organic farming; some grow a few kilometres from the workshop,
-          others come from further afield when the plant demands it. Known
-          origin every time, producer met in person.
+          spices, fruits. We don't grow our own plants: we select them carefully,
+          in particular from partner growers and foragers. Most come from
+          organic farming — not all. Known origin every time.
         </p>
       </div>
 
@@ -172,8 +170,8 @@ const sortedPlants = [...plants].sort((a, b) => {
       <div class="space-y-5 text-lg text-ink-700 leading-relaxed">
         <p>
           We never write a recipe without knowing where the plants come from.
-          We work with foragers and market gardeners we pick one by one:
-          every plant has a grower, every grower is met.
+          We select them carefully, in particular from partner growers and
+          foragers.
         </p>
         <p>
           Most of our plants come from <strong class="font-medium text-forest-800">organic

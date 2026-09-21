@@ -30,7 +30,7 @@ faqCategories:
       - q: "Les liqueurs de La Brasserie des Plantes sont-elles biologiques ?"
         a: "La plupart de nos plantes sont issues de l'agriculture biologique, sourcées chez nos cueilleurs et maraîchers partenaires. Toutes ne le sont pas : pour certains ingrédients (agrumes, épices, fruits exotiques), l'approvisionnement dépend des saisons et de la disponibilité — quand le bio est possible, on le privilégie ; quand il ne l'est pas, on reste exigeants sur la qualité et l'origine."
       - q: "La Brasserie des Plantes utilise-t-elle des arômes, colorants ou conservateurs ajoutés ?"
-        a: "Pas d'arôme ajouté, pas de colorant, pas de conservateur. Nos liqueurs sont faites de plantes, d'alcool et de sucre. Ce qu'il y a dans la bouteille, c'est ce qui a poussé dans la cuve."
+        a: "Pas de conservateur. Nos liqueurs sont faites de plantes, d'alcool et de sucre. Pour la couleur, nous nous appuyons sur un ingrédient naturel qui se boit — le charbon végétal pour le noir du Gorgeon des Machurés, la plante elle-même pour les autres (chlorophylle, anthocyanes, caramel de canne). Jamais de colorant de synthèse."
       - q: "Quel est le degré d'alcool des liqueurs de La Brasserie des Plantes ?"
         a: "L'Alchimie Végétale titre 50% vol. Les autres liqueurs de la gamme signature se situent entre 30 et 45% vol. Les apéritifs de la gamme Nectar/Lime/Flèche sont plus légers (18 à 22% vol.), ainsi que les infusions Lumière Obscure au CBD."
   - name: "CBD"

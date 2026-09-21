@@ -15,7 +15,7 @@ C'est un prix moins médiatique que celui des [World Drinks Awards](https://www.
 
 ## Ce qu'est le Cerf'Gent
 
-Le Cerf'Gent est notre **alternative française à la Suze**. Apéritif amer à 15°, centré sur la **gentiane jaune** (*Gentiana lutea*), travaillée avec le **quinquina**, les **zestes de citron**, la **noix de muscade**, les **graines de coriandre** et la **cannelle**.
+Le Cerf'Gent est notre **alternative française à la Suze**. Apéritif amer à 15,5°, centré sur la **gentiane jaune** (*Gentiana lutea*), travaillée avec le **quinquina**, les **zestes de citron**, la **noix de muscade**, les **graines de coriandre** et la **cannelle**.
 
 La gentiane est une grande plante de moyenne montagne — ses **racines sont récoltées à la main** entre 1000 et 1600 mètres d'altitude par une poignée de gentianaïres professionnels, avec un outil spécifique appelé la "fourche du diable" (c'est du vrai métier, très physique).
 
@@ -23,7 +23,7 @@ La gentiane est une grande plante de moyenne montagne — ses **racines sont ré
 
 [La Suze](https://www.suze.com/) est une grande marque française, connue depuis 1889. Nous n'avons aucune ambition de la remplacer. Ce que nous proposons avec le Cerf'Gent, c'est une **autre lecture** de la gentiane :
 
-- **Artisanale** : macération à froid, pas d'extraction industrielle
+- **Artisanale** : travail à froid, pas d'extraction industrielle
 - **Plus complexe** : cinq épices + quinquina + gentiane, là où la Suze mise sur une structure plus directe
 - **Plus amère** : nous poussons l'amertume plus loin, pour les amateurs qui cherchent ce profil
 - **Sourcing transparent** : nos racines de gentiane viennent de gentianaïres professionnels partenaires, pas d'un sourcing industriel. Le quinquina et certaines épices, eux, sont importés via des filières bio sélectionnées — [voir notre transparence sourcing](/blog/producteurs-partenaires-bio-velay)

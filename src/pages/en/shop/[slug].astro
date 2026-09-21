@@ -39,7 +39,7 @@ const related = products
 const relatedCocktails = cocktails.filter((c) => c.liqueurProductSlug === product.slug);
 
 // Fallback to FR values if EN is missing
-const composition = en.composition ?? product.composition;
+const ingredients = en.ingredients ?? product.ingredients;
 const description = en.description ?? product.description;
 const tagline = en.tagline ?? product.tagline;
 const highlight = en.highlight ?? product.highlight;
@@ -121,7 +121,7 @@ const parsedAwards = awardsList.map(parseAward);
 ---
 <Layout
   lang="en"
-  title={`${product.name} ${product.alcohol ? product.alcohol + '%' : ''} | ${rangesEn[product.range]} — La Brasserie des Plantes`}
+  title={`${product.name} — ${rangesEn[product.range]}`}
   description={metaDescription}
   ogImage={product.image}
   ogType="product"
@@ -394,17 +394,13 @@ const parsedAwards = awardsList.map(parseAward);
   <!-- Ingredients + Tasting notes -->
   <section class="py-16">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10">
-      {composition && composition.length > 0 && (
+      {/* One "Ingredients" block only — composition and ingredients named the
+          same thing. A sheet without `ingredients` shows no block at all:
+          deliberate for Le Gorgeon des Machurés and La Pralicoquine. */}
+      {ingredients && (
         <div>
           <h2 class="font-display text-2xl text-forest-900 mb-5">Ingredients</h2>
-          <ul class="space-y-3">
-            {composition.map((c) => (
-              <li class="flex items-start gap-3 text-ink-700">
-                <svg class="w-5 h-5 mt-0.5 text-forest-500 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c0 5-4 8-4 13h8c0-5-4-8-4-13z"/></svg>
-                <span>{c}</span>
-              </li>
-            ))}
-          </ul>
+          <p class="text-ink-700 leading-relaxed">{ingredients}</p>
         </div>
       )}
 

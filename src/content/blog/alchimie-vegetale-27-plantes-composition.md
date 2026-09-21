@@ -29,15 +29,15 @@ Les 27 plantes se répartissent en **cinq grandes familles fonctionnelles** — 
 
 **Les agrumes** évitent l'effet « sirop médicinal » qu'une liqueur complexe peut prendre — ils ouvrent, rafraîchissent, allègent.
 
-## Les quatre étapes de macération
+## Les quatre étapes de fabrication
 
-**Étape 1 — Macération longue (12 semaines)** des racines dans l'alcool neutre à 70° vol., à température ambiante, dans des cuves inox fermées. Les racines ont besoin de temps ; les fleurs n'y survivraient pas.
+**Étape 1 — Travail long (12 semaines)** des racines dans l'alcool neutre à 70° vol., à température ambiante, dans des cuves inox fermées. Les racines ont besoin de temps ; les fleurs n'y survivraient pas.
 
-**Étape 2 — Macération courte (72 heures)** des herbes et fleurs, dans un second alcool moins concentré (45°), à température fraîche. Les arômes volatils se préservent mieux à froid et à plus faible degré.
+**Étape 2 — Travail court (72 heures)** des herbes et fleurs, dans un second alcool moins concentré (45°), à température fraîche. Les arômes volatils se préservent mieux à froid et à plus faible degré.
 
 **Étape 3 — Infusion des épices (48 heures)** dans un alcool chaud (60°, tiède — pas bouillant). La chaleur libère mieux les huiles essentielles des graines et écorces.
 
-**Étape 4 — Assemblage et repos (8 semaines)** — on réunit les trois macérations dans une cuve unique, on ajuste au sucre (juste ce qu'il faut pour équilibrer, pas pour masquer), et on laisse reposer. C'est pendant ces huit semaines que l'assemblage se "soude".
+**Étape 4 — Assemblage et repos (8 semaines)** — on réunit les trois préparations dans une cuve unique, on ajuste au sucre (juste ce qu'il faut pour équilibrer, pas pour masquer), et on laisse reposer. C'est pendant ces huit semaines que l'assemblage se "soude".
 
 Total : **environ six mois** entre la première plante et la bouteille.
 

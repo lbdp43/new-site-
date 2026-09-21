@@ -11,6 +11,7 @@ composition:
   - Framboise
   - Pétale de rose
   - Jus de citron
+ingredients: "eau, sucre, alcool, framboise, pétale de rose et jus de citron"
 usage: Digestif
 tagline: "La framboise, sublimée par la rose, relevée par la tension du citron."
 tasting:
@@ -30,6 +31,20 @@ wcId: 72
 order: 4
 ---
 
-La Flèche Ardente est une liqueur de framboise, sublimée par les pétales de rose et le jus de citron pour ramener de la tension. Miroir d'Éros par sa recette originale à la fois complexe et intense, elle exaltera vos sens. Laissez-vous tenter par cet envoûtant philtre d'amour et libérez-vous de vos désirs.
+Une liqueur de framboise bâtie sur trois ingrédients seulement, où chacun tient un rôle précis : le fruit porte, la fleur élève, l'acide retient. Robe rubis, attaque légère, bouche ronde et gourmande.
 
-À 22°, elle se déguste en digestif, servie très fraîche (autour de 3 °C). Elle fait aussi merveille en cocktail — voir notre [Philtre d'Éros](/cocktails#philtre-eros).
+## La framboise, tenue par deux contrepoids
+
+La **framboise** (*Rubus idaeus*) est travaillée entière — pas en jus, pas en sirop. C'est elle qui porte tout l'assemblage, sur des notes fraîches, légèrement florales.
+
+Les **pétales de rose de Damas** (*Rosa × damascena*), dosés avec retenue, subliment le fruit sans jamais l'écraser : un floral discret qui ouvre la fin de bouche. Et le **jus de citron** (*Citrus limon*), pressé et ajouté en fin de recette, ramène la tension — c'est l'acidité qui empêche la douceur florale de basculer dans le sirupeux.
+
+Trois ingrédients : la couleur vient du fruit, pas d'un colorant.
+
+## Comment la servir
+
+**En digestif, très frais** : dégustation optimale autour de **3 °C**. Le froid resserre le fruit et fait ressortir la rose.
+
+**En cocktail** : base de notre [Philtre d'Éros](/cocktails#philtre-eros) — avec du jus de fraise, du citron, de la menthe et de l'eau pétillante. C'est le service qui lui va le mieux en été.
+
+**Au dessert** : versée sur une glace vanille, ou en déglaçage sur des fruits rouges poêlés.

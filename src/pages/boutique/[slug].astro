@@ -5,7 +5,7 @@ import ProductCard from '../../components/ProductCard.astro';
 import { Awards } from '@/components/ui/award';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 import AddToCartButton from '../../components/cart/AddToCartButton';
-import { products, ranges } from '../../data/products';
+import { products, ranges, formatAlcoholFr } from '../../data/products';
 import { cocktails } from '../../data/cocktails';
 import { site } from '../../data/site';
 import { reviewsByProduct, aggregateRating } from '../../data/reviews';
@@ -176,7 +176,7 @@ const truncate = (s: string, max = 155) => {
 // pour densifier le mot-clé en SERP.
 const metaDescriptionRaw = product.description
   ? `${product.seoCategory ? product.seoCategory + ' — ' : ''}${product.description}`
-  : `${product.seoCategory ? product.seoCategory + ' — ' : ''}${product.name} — ${product.alcohol}° — ${product.tagline || ''} La Brasserie des Plantes, Haute-Loire.`;
+  : `${product.seoCategory ? product.seoCategory + ' — ' : ''}${product.name} — ${formatAlcoholFr(product.alcohol)}° — ${product.tagline || ''} La Brasserie des Plantes, Haute-Loire.`;
 const metaDescription = truncate(metaDescriptionRaw, 158);
 
 // Parseur simple des distinctions pour les convertir en badges médailles.
@@ -203,11 +203,17 @@ const parseAward = (raw: string): ParsedAward => {
   return { level, title, issuer, logo: findAwardLogo(raw) };
 };
 const parsedAwards = (product.awards || []).map(parseAward);
+
+// Title : « catégorie SEO — nom » tant que ça tient dans la limite de Google,
+// sinon le nom seul. Le degré n'est pas un terme de recherche, il sort du
+// title (il reste dans la meta description et sur la page).
+const seoTitleFull = product.seoCategory
+  ? `${product.seoCategory} — ${product.name}`
+  : product.name;
+const pageTitle = seoTitleFull.length <= 60 ? seoTitleFull : product.name;
 ---
 <Layout
-  title={product.seoCategory
-    ? `${product.seoCategory} — ${product.name}${product.alcohol ? ' ' + product.alcohol + '°' : ''} | La Brasserie des Plantes`
-    : `${product.name}${product.alcohol ? ' ' + product.alcohol + '°' : ''} | La Brasserie des Plantes`}
+  title={pageTitle}
   description={metaDescription}
   ogImage={product.image}
   ogType="product"
@@ -242,7 +248,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
             data-slide="0"
             src={product.sizeImages?.[70] || product.image}
             alt={product.seoCategory
-              ? `${product.seoCategory} — ${product.name}, ${product.alcohol}° — Bouteille La Brasserie des Plantes (Haute-Loire)`
+              ? `${product.seoCategory} — ${product.name}, ${formatAlcoholFr(product.alcohol)}° — Bouteille La Brasserie des Plantes (Haute-Loire)`
               : `${product.name} — liqueur artisanale aux plantes oubliées`}
             class="gallery-slide absolute inset-0 w-full h-full object-contain p-10 transition-opacity duration-500 ease-in-out opacity-100"
             fetchpriority="high"
@@ -279,8 +285,8 @@ const parsedAwards = (product.awards || []).map(parseAward);
 
               {/* Dots */}
               <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-                <button type="button" class="gallery-dot w-2.5 h-2.5 rounded-full bg-forest-800 transition-all" data-index="0" aria-label="Vue 1"></button>
-                <button type="button" class="gallery-dot w-2.5 h-2.5 rounded-full bg-forest-800/30 transition-all" data-index="1" aria-label="Vue 2"></button>
+                <button type="button" class="gallery-dot relative w-2.5 h-2.5 rounded-full bg-forest-800 transition-all before:absolute before:content-[''] before:-inset-2" data-index="0" aria-label="Vue 1"></button>
+                <button type="button" class="gallery-dot relative w-2.5 h-2.5 rounded-full bg-forest-800/30 transition-all before:absolute before:content-[''] before:-inset-2" data-index="1" aria-label="Vue 2"></button>
               </div>
             </>
           )}
@@ -293,7 +299,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
           )}
           {product.alcohol > 0 && (
             <span class="absolute top-5 right-5 z-10 text-sm font-medium text-cream-50 bg-forest-800/90 px-3 py-1.5 rounded-full">
-              {product.alcohol}°
+              {formatAlcoholFr(product.alcohol)}°
             </span>
           )}
 
@@ -359,7 +365,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
         <div class="flex flex-wrap gap-2 mb-8">
           {product.alcohol > 0 && (
             <span class="text-xs px-3 py-1.5 rounded-full bg-forest-100 text-forest-800 font-medium">
-              {product.alcohol}% vol.
+              {formatAlcoholFr(product.alcohol)}% vol.
             </span>
           )}
           <span class="text-xs px-3 py-1.5 rounded-full bg-forest-100 text-forest-800 font-medium">
@@ -494,7 +500,7 @@ const parsedAwards = (product.awards || []).map(parseAward);
   <!-- Bandeau horizontal Notes de dégustation / Composition / Conseil — placé
        juste après le hero pour combler le vide à gauche sous la photo tout en
        gardant l'info à portée de scroll. 3 colonnes sur desktop, stack sur mobile. -->
-  {(product.tasting || (product.composition && product.composition.length > 0) || product.serving) && (
+  {(product.tasting || product.ingredients || product.serving) && (
     <section class="py-10 bg-cream-50 border-y border-forest-100/60">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-3 gap-6 md:gap-10">
@@ -525,19 +531,18 @@ const parsedAwards = (product.awards || []).map(parseAward);
               </dl>
             </div>
           )}
-          {product.composition && product.composition.length > 0 && (
+          {/* Un seul bloc « Ingrédients » : composition et ingrédients
+              désignaient la même chose (arbitrage Guillaume, 21/09/2026).
+              Seul `ingredients` est affiché — `composition` reste en base
+              pour les vignettes de /lumiere-obscure. Une fiche sans
+              `ingredients` n'affiche aucun bloc : c'est volontaire pour Le
+              Gorgeon des Machurés et La Pralicoquine. */}
+          {product.ingredients && (
             <div class="md:px-6 md:border-r md:border-forest-100/70">
               <div class="text-xs uppercase tracking-[0.2em] text-forest-700 font-medium mb-3">
-                Composition
+                Ingrédients
               </div>
-              <ul class="text-sm text-ink-700 leading-relaxed space-y-1.5">
-                {product.composition.map((c) => (
-                  <li class="flex items-start gap-3">
-                    <span class="flex-none w-1.5 h-1.5 rounded-full bg-gold-500 mt-2" aria-hidden="true"></span>
-                    <span>{c}</span>
-                  </li>
-                ))}
-              </ul>
+              <p class="text-sm text-ink-700 leading-relaxed">{product.ingredients}</p>
             </div>
           )}
           {product.serving && (

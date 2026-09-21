@@ -17,13 +17,13 @@ C'est aussi à ce moment précis qu'une idée devient un projet.
 
 **Étienne** et **Guillaume** se connaissent depuis la cour de récréation, à Saint-Didier-en-Velay. Ce village est posé entre les contreforts du Massif central et la vallée du Gier — peu d'industrie, beaucoup de pentes, et le calme dont on avait besoin pour démarrer.
 
-Chacun prend sa route. Étienne étudie la **biotechnologie végétale** à Toulouse — comprendre les molécules, les macérations, les équilibres aromatiques. Guillaume ouvre un **bar-restaurant à Saint-Étienne**, côté service, côté clients, côté carte. Ils se revoient tous les ans, en été, à Saint-Didier.
+Chacun prend sa route. Étienne étudie la **biotechnologie végétale** à Toulouse — comprendre les molécules, les extraits, les équilibres aromatiques. Guillaume ouvre un **bar-restaurant à Saint-Étienne**, côté service, côté clients, côté carte. Ils se revoient tous les ans, en été, à Saint-Didier.
 
 En 2019, la conversation change de ton. *"Et si on faisait quelque chose ?"* On sait ce qu'on ne veut pas : ni une distillerie à l'américaine, ni une marque marketing. On sait ce qu'on veut : des plantes qu'on reconnaît, un territoire qu'on revendique, un geste qu'on maîtrise.
 
 ## Le garage, les premiers essais
 
-Pendant dix-huit mois, Étienne formule dans un garage. Les macérations traînent sur des rayonnages en plastique, les bouteilles expérimentales sont étiquetées à la main, les étiquettes disent toutes *"test-37"*, *"test-48"*. Certaines finissent dans l'évier. D'autres passent à la dégustation — chez Guillaume d'abord, puis chez des cavistes amis à Saint-Étienne qui font office de premier jury.
+Pendant dix-huit mois, Étienne formule dans un garage. Les préparations traînent sur des rayonnages en plastique, les bouteilles expérimentales sont étiquetées à la main, les étiquettes disent toutes *"test-37"*, *"test-48"*. Certaines finissent dans l'évier. D'autres passent à la dégustation — chez Guillaume d'abord, puis chez des cavistes amis à Saint-Étienne qui font office de premier jury.
 
 Le ratio verveine / serpolet / carvi de *L'Herbe des Druides* se stabilise au test 54. L'idée d'*Alchimie Végétale* — plus complexe, 27 plantes — commence en parallèle. Ce sera long : **quatre ans de recherche et développement** avant que cette liqueur ne soit présentée à un concours international.
 
@@ -42,7 +42,7 @@ La suite — la demande qui double, les distributeurs étrangers qui appellent, 
 ## Ce qui n'a pas changé
 
 - **Saint-Didier-en-Velay**. Nous n'avons pas quitté le village. L'atelier est à 300 mètres de l'école où Étienne et Guillaume se sont rencontrés.
-- **Les plantes**. La plupart en bio, toutes récoltées par nos cueilleurs et maraîchers partenaires (sélectionnés un par un).
+- **Les plantes**. La plupart en bio, sélectionnées chez des cueilleurs, des maraîchers, des coopératives et des filières spécialisées.
 - **L'embouteillage à la main**. Un remplisseur semi-automatique pour les grosses séries, un embouteillage manuel pour les éditions limitées. Chaque bouchon est posé à la main.
 - **La taille de l'équipe**. Deux. Étienne et Guillaume. Ça suffit.
 

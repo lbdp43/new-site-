@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
-import { products } from '../data/products';
+import { products, formatAlcoholFr } from '../data/products';
 import { GlowCard } from '../components/ui/spotlight-card';
 import { getEntry } from 'astro:content';
 
@@ -196,7 +196,7 @@ const faqSchema = {
                   {/* halo doux derrière */}
                   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full bg-[color:var(--color-moon-400)]/12 blur-3xl pointer-events-none"></div>
                   <span class="absolute top-5 right-5 z-10 text-xs font-medium bg-[color:var(--color-moon-400)]/15 text-[color:var(--color-moon-300)] px-3 py-1.5 rounded-full border border-[color:var(--color-moon-400)]/40 backdrop-blur-sm">
-                    {p.alcohol}° vol.
+                    {formatAlcoholFr(p.alcohol)}° vol.
                   </span>
                 </GlowCard>
               </div>

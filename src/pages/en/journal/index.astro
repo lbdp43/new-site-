@@ -4,7 +4,8 @@ import Layout from '../../../layouts/Layout.astro';
 import InstagramFeed from '../../../components/InstagramFeed.astro';
 import { site } from '../../../data/site';
 
-const posts = (await getCollection('blog-en')).sort(
+// Les brouillons (`draft: true`) sont exclus du site.
+const posts = (await getCollection('blog-en', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 

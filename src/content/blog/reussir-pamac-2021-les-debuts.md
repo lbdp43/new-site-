@@ -10,7 +10,7 @@ readingTime: "4 min"
 
 Notre premier passage dans la presse professionnelle date du **4 mai 2021**, dans *Réussir – Agriculture Massif Central* (PAMAC), le titre de référence de l'agriculture régionale. À l'époque, nous venions tout juste de déclarer l'entreprise. Trois bouteilles à la carte. Onze cavistes partenaires. Un atelier loué de quelques dizaines de mètres carrés.
 
-L'article, titré *"Entreprenariat : des liqueurs artisanales à base de plantes oubliées"*, nous a d'abord fait sourire par son mot "entreprenariat" — un peu sérieux pour deux copains qui macéraient de la verveine dans un garage. Mais l'angle choisi par la rédaction a durablement structuré notre discours.
+L'article, titré *"Entreprenariat : des liqueurs artisanales à base de plantes oubliées"*, nous a d'abord fait sourire par son mot "entreprenariat" — un peu sérieux pour deux copains qui travaillaient de la verveine dans un garage. Mais l'angle choisi par la rédaction a durablement structuré notre discours.
 
 > [Lire l'article original de Réussir / PAMAC →](https://www.reussir.fr/agriculture-massif-central/des-liqueurs-artisanales-base-de-plantes-oubliees)
 

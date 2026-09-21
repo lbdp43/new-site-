@@ -61,7 +61,17 @@ const ogLocale = getOgLocale(lang);
 
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site.url).toString();
 const ogImageUrl = new URL(ogImage, site.url).toString();
-const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+// Google coupe le title vers 60 caractères. Le suffixe de marque (25 car.)
+// faisait déborder 95 pages sur 121 : on ne l'ajoute que s'il tient. Google
+// ajoute de toute façon le nom du site de son côté quand il manque.
+const TITLE_MAX = 60;
+const bareTitle = title
+  .replace(new RegExp(`\\s*[|—-]\\s*${site.name}\\s*$`), '')
+  .trim();
+const fullTitle =
+  bareTitle.length + 3 + site.name.length <= TITLE_MAX
+    ? `${bareTitle} | ${site.name}`
+    : bareTitle;
 
 // hreflang — getHreflangLinks gère maintenant les 4 langues nativement et
 // recalcule le chemin FR canonique en interne. On lui passe directement la

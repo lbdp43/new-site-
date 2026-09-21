@@ -11,6 +11,7 @@ composition:
   - Verveine
   - Serpolet (thym sauvage)
   - Carvi (cumin des prés)
+ingredients: "eau, sucre, alcool, verveine odorante, serpolet et carvi — plantes issues de l'agriculture biologique"
 usage: Apéritif ou digestif
 tagline: "La verveine dans sa version la plus noble — florale, sauvage, épicée."
 highlight: "Multi-médaillée Lyon, Paris, Londres"
@@ -45,7 +46,7 @@ Notre best-seller. L'Herbe des Druides est une **liqueur de verveine artisanale*
 
 La recette tient sur trois plantes, récoltées chez nos [cueilleurs et maraîchers partenaires](/blog/producteurs-partenaires-bio-velay) (la plupart en bio). La **verveine odorante** (*Aloysia citrodora*) est notre plante totem — elle donne le haut du nez, ce parfum citronné sans acidité, enrichi de nérol et de linalol. Le **serpolet** sauvage (*Thymus serpyllum*), cueilli sur des pentes rocailleuses au moment de la floraison, apporte la concentration thymée et une note résineuse. Le **carvi** (*Carum carvi*) pose la structure épicée en bouche et ancre la finale.
 
-Pas d'arôme ajouté, pas de colorant : la couleur vert pâle vient de la chlorophylle des plantes macérées. Macération froide longue, filtration lente, repos minimum deux mois.
+Pas de colorant : la couleur vert pâle vient de la chlorophylle des plantes. Élaboration lente, filtration soignée, repos minimum deux mois.
 
 ## Cinq distinctions internationales
 

@@ -1,6 +1,6 @@
 ---
 import { site } from '../data/site';
-import { t, localizedPath, type Lang } from '../i18n/utils';
+import { t, safeLocalizedPath, type Lang } from '../i18n/utils';
 import type { UIKey } from '../i18n/ui';
 
 interface Props {
@@ -14,31 +14,35 @@ const year = new Date().getFullYear();
 
 // Navigation footer localisée
 const navItems: { labelKey: UIKey; href: string }[] = [
-  { labelKey: 'nav.story', href: localizedPath('/notre-histoire', lang) },
-  { labelKey: 'nav.shop', href: localizedPath('/boutique', lang) },
-  { labelKey: 'nav.lumiere', href: localizedPath('/lumiere-obscure', lang) },
-  { labelKey: 'nav.plants', href: localizedPath('/nos-plantes', lang) },
-  { labelKey: 'nav.cocktails', href: localizedPath('/cocktails', lang) },
-  { labelKey: 'nav.workshops', href: localizedPath('/ateliers', lang) },
+  { labelKey: 'nav.story', href: safeLocalizedPath('/notre-histoire', lang) },
+  { labelKey: 'nav.shop', href: safeLocalizedPath('/boutique', lang) },
+  { labelKey: 'nav.lumiere', href: safeLocalizedPath('/lumiere-obscure', lang) },
+  { labelKey: 'nav.plants', href: safeLocalizedPath('/nos-plantes', lang) },
+  { labelKey: 'nav.cocktails', href: safeLocalizedPath('/cocktails', lang) },
+  { labelKey: 'nav.workshops', href: safeLocalizedPath('/ateliers', lang) },
   // Actualité temporairement retirée (voir Header, sitemap filter, noindex).
-  // { labelKey: 'nav.journal', href: localizedPath('/blog', lang) },
-  { labelKey: 'nav.pros', href: localizedPath('/professionnels', lang) },
-  { labelKey: 'nav.contact', href: localizedPath('/contact', lang) },
+  // { labelKey: 'nav.journal', href: safeLocalizedPath('/blog', lang) },
+  { labelKey: 'nav.pros', href: safeLocalizedPath('/professionnels', lang) },
+  { labelKey: 'nav.contact', href: safeLocalizedPath('/contact', lang) },
 ];
 
 // Bloc "à propos" — traduit selon la langue
 const aboutBlurb = lang === 'en'
-  ? `Craft botanical liqueur house in Haute-Loire, France. We compose liqueurs and infusions from forgotten plants, sourced from carefully chosen partners.`
-  : `Artisans liquoristes en Haute-Loire. Nous composons des liqueurs et infusions à partir de plantes oubliées, sourcées auprès de cueilleurs et maraîchers partenaires.`;
+  ? `Craft botanical liqueur house in Haute-Loire, France. We compose liqueurs and infusions from forgotten plants, selected from foragers, market gardeners, cooperatives and specialist suppliers.`
+  : `Artisans liquoristes en Haute-Loire. Nous composons des liqueurs et infusions à partir de plantes oubliées, sélectionnées chez des cueilleurs, des maraîchers, des coopératives et des filières spécialisées.`;
 
 const findUsLabel = lang === 'en' ? 'Find us' : 'Nous trouver';
 const navTitle = lang === 'en' ? 'Navigation' : 'Navigation';
 const exploreTitle = lang === 'en' ? 'Discover' : 'Découvrir';
 const explorePillars = lang === 'en'
   ? [
-      { label: 'Craft liqueurs', href: '/en/craft-liqueurs' },
-      { label: 'Botanical liqueurs', href: '/en/botanical-liqueurs' },
-      { label: 'Digestif', href: '/en/digestif' },
+      // ⚠️ Ne pas remettre /en/craft-liqueurs, /en/botanical-liqueurs ni
+      // /en/digestif : ces landings SEO n'existent qu'en français, et les
+      // liens 404aient sur les 44 pages EN (corrigé le 21/09/2026). Les
+      // rétablir seulement quand les pages EN seront créées.
+      { label: 'Our plants', href: '/en/our-plants' },
+      { label: 'Lumière Obscure (CBD)', href: '/en/dark-light' },
+      { label: 'Build your gift box', href: '/en/build-your-gift-box' },
     ]
   : [
       { label: 'Liqueurs artisanales', href: '/liqueurs-artisanales' },
@@ -219,11 +223,11 @@ const hoursDisplay = lang === 'en'
     <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-cream-200/60">
       <div>© {year} {site.name}. {tr('footer.rights')}.</div>
       <div class="flex flex-wrap gap-5">
-        <a href={localizedPath('/faq', lang)} class="hover:text-cream-100">{tr('footer.faq')}</a>
-        <a href={localizedPath('/presse', lang)} class="hover:text-cream-100">{tr('footer.press')}</a>
-        <a href={localizedPath('/mentions-legales', lang)} class="hover:text-cream-100">{tr('footer.legal')}</a>
-        <a href={localizedPath('/cgv', lang)} class="hover:text-cream-100">{tr('footer.cgv')}</a>
-        <a href={localizedPath('/politique-cookies', lang)} class="hover:text-cream-100">{tr('footer.cookies')}</a>
+        <a href={safeLocalizedPath('/faq', lang)} class="py-1 hover:text-cream-100">{tr('footer.faq')}</a>
+        <a href={safeLocalizedPath('/presse', lang)} class="py-1 hover:text-cream-100">{tr('footer.press')}</a>
+        <a href={safeLocalizedPath('/mentions-legales', lang)} class="py-1 hover:text-cream-100">{tr('footer.legal')}</a>
+        <a href={safeLocalizedPath('/cgv', lang)} class="py-1 hover:text-cream-100">{tr('footer.cgv')}</a>
+        <a href={safeLocalizedPath('/politique-cookies', lang)} class="py-1 hover:text-cream-100">{tr('footer.cookies')}</a>
         <button
           type="button"
           onclick="window.lbdpOpenAgeGate && window.lbdpOpenAgeGate()"

@@ -36,7 +36,7 @@ workshops:
       - "Des connaissances en fabrication de liqueur"
       - "Votre liqueur artisanale (50 cl) à emporter"
     steps:
-      - "Visite du lieu de macération où vous allez travailler."
+      - "Visite de l'atelier où vous allez travailler."
       - "Dégustation des 6 liqueurs de la gamme Brasserie des Plantes."
       - "Choix de vos arômes et saveurs parmi une belle sélection de plantes — Étienne vous guide pour le dosage."
       - "Création de votre liqueur dans un bocal type Parfait de 1 L (vous repartez avec 50 cl)."
@@ -53,7 +53,7 @@ workshops:
   - id: "visite"
     kicker: "Visite & dégustation"
     title: "Dégustez des liqueurs d'exception"
-    subtitle: "Découvrez les secrets de la macération et dégustez six liqueurs exceptionnelles avec Étienne — 1 h 30 dans les coulisses de la maison."
+    subtitle: "Découvrez les secrets de fabrication et dégustez six liqueurs exceptionnelles avec Étienne — 1 h 30 dans les coulisses de la maison."
     price: 17
     duration: "1 h 30"
     participants: "2 à 7 personnes"
@@ -66,7 +66,7 @@ workshops:
     steps:
       - "Accueil en boutique : présentation par Étienne, introduction aux plantes et à la création des liqueurs."
       - "Dégustation des 6 liqueurs de la gamme — différents arômes et caractères."
-      - "Passage en laboratoire : les cuves, le procédé de macération expliqué dans le détail."
+      - "Passage en laboratoire : les cuves, le procédé de fabrication expliqué dans le détail."
       - "Questions-réponses autour de la conservation et de la mise en bouteille."
     image: "/images/ateliers/visite-1.jpg"
     gallery:
@@ -97,8 +97,8 @@ artisanSection:
   image: "/images/ateliers/artisans.webp"
   imageAlt: "Étienne, artisan liquoriste de la Brasserie des Plantes"
   bio:
-    - "Originaire de Saint-Didier-en-Velay, Étienne connaît son coin comme sa poche. Ingénieur en biotechnologie végétale de formation, il a monté La Brasserie des Plantes pour produire des liqueurs macérées à base de plantes oubliées."
-    - "Son atelier est installé dans une ancienne boulangerie, au cœur du village. Précis, organisé, passionné — il a à cœur de partager son savoir-faire : sélection des plantes, arômes, processus de macération, mise en bouteille."
+    - "Originaire de Saint-Didier-en-Velay, Étienne connaît son coin comme sa poche. Ingénieur en biotechnologie végétale de formation, il a monté La Brasserie des Plantes pour produire des liqueurs à base de plantes oubliées."
+    - "Son atelier est installé dans une ancienne boulangerie, au cœur du village. Précis, organisé, passionné — il a à cœur de partager son savoir-faire : sélection des plantes, équilibres aromatiques, fabrication, mise en bouteille."
 
 groupsSection:
   kicker: "Groupes, EVJF / EVG, entreprises"

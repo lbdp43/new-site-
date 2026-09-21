@@ -26,6 +26,9 @@ export interface Product {
   image2?: string;
   alcohol: number;
   composition: string[];
+  /** Liste d'ingrédients réglementaire (eau, sucre, alcool, plantes…),
+   *  telle qu'elle figure sur l'étiquette. Affichée sous la composition. */
+  ingredients?: string;
   usage: string;
   tagline?: string;
   highlight?: string;
@@ -60,7 +63,7 @@ export const ranges: Record<ProductRange, { name: string; baseline: string; desc
   },
   aperitif: {
     name: 'Gamme Apéritif',
-    baseline: 'Des apéritifs amers ou gourmands, 15 à 17,5°, à servir givrés.',
+    baseline: 'Des apéritifs amers ou gourmands, 15,5 à 17,5°, à servir givrés.',
     description:
       "Plus légers en alcool, plus vifs, conçus pour ouvrir les rassemblements. De la gentiane amère (Cerf'Gent) à la menthe en triple alliance (Menthor), en passant par la praline (Pralicoquine) et les agrumes (Zéleste).",
   },
@@ -102,3 +105,15 @@ export const featuredProducts: Product[] = [
 export const productsBySlug: Record<string, Product> = Object.fromEntries(
   products.map((p) => [p.slug, p])
 );
+
+/**
+ * Degré alcoolique en notation française : `15,5` et non `15.5`.
+ *
+ * Les degrés non entiers (Cerf'Gent et Pralicoquine à 15,5 ; Cuvée Michel à
+ * 48,28) sont stockés en `number` dans le frontmatter, donc rendus avec un
+ * point par défaut. À utiliser partout où on affiche `product.alcohol` côté
+ * FR — l'anglais garde le point décimal et n'en a pas besoin.
+ */
+export function formatAlcoholFr(value: number): string {
+  return String(value).replace('.', ',');
+}

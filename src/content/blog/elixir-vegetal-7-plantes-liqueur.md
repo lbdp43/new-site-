@@ -9,7 +9,7 @@ cover: /images/stories/plantes.webp
 readingTime: "10 min"
 ---
 
-Le mot "élixir" vient de l'arabe *al-iksīr*, lui-même issu du grec *xêrion* — la poudre médicinale. Aujourd'hui, en France, "élixir végétal" désigne une catégorie spécifique de liqueur : un assemblage complexe de plantes médicinales et aromatiques macérées dans l'alcool, héritière de l'herboristerie monastique du Moyen-Âge. Voici les sept familles de plantes qui, mélangées avec savoir-faire, transforment une simple eau-de-vie en élixir.
+Le mot "élixir" vient de l'arabe *al-iksīr*, lui-même issu du grec *xêrion* — la poudre médicinale. Aujourd'hui, en France, "élixir végétal" désigne une catégorie spécifique de liqueur : un assemblage complexe de plantes médicinales et aromatiques travaillées dans l'alcool, héritière de l'herboristerie monastique du Moyen-Âge. Voici les sept familles de plantes qui, mélangées avec savoir-faire, transforment une simple eau-de-vie en élixir.
 
 ## Qu'est-ce qu'un élixir végétal exactement
 
@@ -83,7 +83,7 @@ Souvent oubliées, les écorces apportent **le côté "vieilli", presque tanniqu
 
 ### 7. Les fruits sauvages en touches (la rondeur fruitée discrète)
 
-En micro-doses, des fruits sauvages macérés ajoutent **une rondeur fruitée presque invisible** mais qui change tout en fond de bouche.
+En micro-doses, des fruits sauvages ajoutent **une rondeur fruitée presque invisible** mais qui change tout en fond de bouche.
 
 - **Myrtille sauvage** (*Vaccinium myrtillus*) — pas la myrtille de culture, celle des sous-bois d'altitude
 - **Mûre sauvage**
@@ -93,7 +93,7 @@ En micro-doses, des fruits sauvages macérés ajoutent **une rondeur fruitée pr
 
 La Chartreuse Verte tient sur 130 plantes, la Bénédictine sur 27, notre [Alchimie Végétale](/boutique/alchimie-vegetale) sur 27 également. Pourquoi ces nombres ?
 
-L'idée reçue qu'**"plus de plantes = meilleur élixir"** est fausse. Au-delà d'une certaine complexité (autour de 25-30 plantes bien dosées), les nuances supplémentaires deviennent **imperceptibles au palais humain**. Les grands assemblages historiques ont tous trouvé leur "sweet spot" entre 20 et 35 plantes — la Chartreuse à 130 est l'exception, pas la règle, et son secret de fabrication tient autant aux longues macérations qu'à la pléthore d'ingrédients.
+L'idée reçue qu'**"plus de plantes = meilleur élixir"** est fausse. Au-delà d'une certaine complexité (autour de 25-30 plantes bien dosées), les nuances supplémentaires deviennent **imperceptibles au palais humain**. Les grands assemblages historiques ont tous trouvé leur "sweet spot" entre 20 et 35 plantes — la Chartreuse à 130 est l'exception, pas la règle, et son secret de fabrication tient autant aux temps longs qu'à la pléthore d'ingrédients.
 
 Pour [composer notre Alchimie Végétale](/blog/alchimie-vegetale-27-plantes-composition), Étienne a documenté **32 essais successifs** sur quatre ans. Chaque essai ajustait une plante, parfois deux, pour resserrer l'équilibre des sept familles. Le résultat a été élu [Meilleur Digestif du Monde 2025](/blog/meilleur-digestif-du-monde-2025) aux World Drinks Awards — preuve que la rigueur compte plus que le nombre brut.
 
@@ -105,7 +105,7 @@ Si vous voulez découvrir la catégorie, voici une petite bibliothèque de réf�
 2. **Bénédictine** (Normandie, 27 plantes, 40°) — créée à Fécamp au XIX<sup>e</sup>
 3. **L'Alchimie Végétale** ([nous](/boutique/alchimie-vegetale), Haute-Loire, 27 plantes, 50°) — Meilleur Digestif du Monde 2025
 4. **Élixir du Suédois** (Allemagne/France, formule du Dr Samst, 1450) — strictement médicinal
-5. **Génépi des Alpes** ([L'Essence des Alpes](/boutique/essence-des-alpes), formules variées, 30-40°) — la version alpine
+5. **Génépi des Alpes** ([L'Essence des Cimes](/boutique/essence-des-alpes), formules variées, 30-40°) — la version alpine
 
 ## Comment déguster un élixir végétal
 

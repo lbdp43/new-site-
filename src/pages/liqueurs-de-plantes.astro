@@ -21,7 +21,7 @@ const breadcrumb = {
 const faq = [
   {
     q: "Qu'est-ce qu'une liqueur de plantes ?",
-    a: "Une liqueur de plantes est un spiritueux sucré obtenu en faisant macérer des plantes (feuilles, fleurs, racines, écorces) dans de l'alcool, généralement entre 15° et 50°. Selon la composition, on parle d'élixir végétal (assemblage complexe inspiré des grandes liqueurs monastiques), d'amer (dominante racinaire et amère, type gentiane), de digestif (formule pensée pour la fin de repas) ou de liqueur de fleurs (sureau, coquelicot, fleur d'oranger).",
+    a: "Une liqueur de plantes est un spiritueux sucré obtenu à partir de plantes (feuilles, fleurs, racines, écorces) travaillées dans de l'alcool, généralement entre 15° et 50°. Selon la composition, on parle d'élixir végétal (assemblage complexe inspiré des grandes liqueurs monastiques), d'amer (dominante racinaire et amère, type gentiane), de digestif (formule pensée pour la fin de repas) ou de liqueur de fleurs (sureau, coquelicot, fleur d'oranger).",
   },
   {
     q: "Quelle différence entre une liqueur de plantes et un élixir végétal ?",
@@ -96,7 +96,7 @@ const families = [
   },
   {
     family: "Liqueur d'absinthe",
-    desc: "Absinthe macérée colorée au charbon végétal — le noir profond du Gorgeon. Notes anisées, herbacées, finale longue.",
+    desc: "Verveine et baraban colorés au charbon végétal — le noir profond du Gorgeon. Notes boisées, racinaires, finale longue.",
     productSlug: 'gorgeon-des-machures',
   },
   {
@@ -106,7 +106,7 @@ const families = [
   },
   {
     family: "Liqueur de fruits rouges",
-    desc: "Macération longue de fruits rouges sauvages. Couleur rubis naturelle, mâche en bouche, finale veloutée. Sublime sur un dessert chocolaté.",
+    desc: "Framboise, pétale de rose et jus de citron. Couleur rubis naturelle, mâche en bouche, finale veloutée. Sublime sur un dessert chocolaté.",
     productSlug: 'fleche-ardente',
   },
 ];
@@ -158,7 +158,7 @@ const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
       <p>
         Les trois termes désignent des cousines proches. <strong>« Liqueur de
         plantes »</strong> est la catégorie générique : tout spiritueux sucré
-        obtenu par macération de matière végétale dans l'alcool. Quand
+        obtenu à partir de matière végétale travaillée dans l'alcool. Quand
         l'assemblage est complexe (15 plantes ou plus) et inspiré de la
         tradition monastique, on parle volontiers d'<strong>élixir végétal</strong>
         — c'est le cas de la Chartreuse Verte (130 plantes), de la Bénédictine
@@ -171,7 +171,7 @@ const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
 
       <h2>D'où vient la tradition de la liqueur de plantes ?</h2>
       <p>
-        La macération de plantes médicinales dans l'alcool remonte à
+        Le travail des plantes médicinales dans l'alcool remonte à
         l'<strong>herboristerie médiévale</strong>. Les ordres religieux —
         Chartreux, Bénédictins, Trappistes — ont systématisé la pratique entre
         le XVI<sup>e</sup> et le XVIII<sup>e</sup> siècle, dans les
@@ -223,8 +223,8 @@ const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
       </p>
       <ul>
         <li>
-          <strong>Pas d'arôme ajouté.</strong> Le goût vient uniquement des
-          plantes macérées. Aucun extrait industriel.
+          <strong>La plante d'abord.</strong> C'est elle qui donne le
+          caractère de chaque recette — pas une formule standardisée.
         </li>
         <li>
           <strong>Pas de colorant.</strong> Les couleurs naturelles sont celles
@@ -234,10 +234,10 @@ const productBySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
           <a href="/boutique/gorgeon-des-machures">Gorgeon des Machurés</a>).
         </li>
         <li>
-          <strong>Plantes majoritairement bio</strong> de cueilleurs et
-          maraîchers partenaires que nous sélectionnons un par un. On tend
-          vers le bio à chaque cuvée, même si toutes les plantes ne le sont
-          pas encore.
+          <strong>Plantes majoritairement bio</strong>, sélectionnées avec
+          soin, notamment auprès de producteurs et cueilleurs partenaires. On
+          tend vers le bio à chaque cuvée, même si toutes les plantes ne le
+          sont pas encore.
         </li>
       </ul>
     </div>
