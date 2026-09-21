@@ -191,15 +191,40 @@ Chaque produit a un `wcId` (ID numérique WooCommerce).
 
 ## Plugin WordPress CORS
 
-`wordpress-plugin/astro-cors/astro-cors.php` est installé + activé sur le WP
-live. Il autorise uniquement ces origines à taper sur `/wp-json/*` :
+`wordpress-plugin/astro-cors/astro-cors.php` autorise le site Astro à appeler
+`/wp-json/*` depuis un navigateur, et expose les en-têtes `Cart-Token` /
+`Nonce` du panier.
 
-- `https://test.labrasseriedesplantes.fr`
-- `http://localhost:4321` (dev Astro)
-- `http://127.0.0.1:4321`
+**Version installée sur le WP live : 1.1.0** (capture d'écran de l'admin,
+21/09/2026) — elle n'autorise que `test.` et localhost.
 
-Pour ajouter le domaine `www.` au moment de la bascule, éditer la fonction
-`lbdp_astro_allowed_origins()` dans le plugin.
+**Version dans le dépôt : 1.2.0** — ajoute `www.` et l'apex. ⚠️ **Elle peut
+être téléversée dès maintenant**, sans attendre la bascule : autoriser une
+origine qui n'existe pas encore n'a aucun effet, le navigateur n'envoie un
+en-tête `Origin` que depuis le domaine réellement servi. L'installer tôt
+retire une étape du jour J.
+
+L'origine est celle du site qui **affiche** les pages (Astro), pas celle qui
+sert l'API — donc le passage du WordPress sur `wp.labrasseriedesplantes.fr`
+ne demandera aucune retouche de cette liste.
+
+## 🚨 Deux plugins de cache sur le WordPress — risque panier
+
+Vu le 21/09/2026 dans l'admin WP : **IONOS Performance** et **WP Fastest
+Cache** tournent en parallèle.
+
+**Le danger** : si l'un des deux met en cache les réponses de
+`/wp-json/wc/store/v1/*`, deux clients différents peuvent recevoir le même
+panier. Le second voit les articles du premier, et une commande peut partir
+avec le mauvais contenu. Rien ne le signale — tout a l'air de fonctionner.
+
+C'est un pré-requis de `docs/bascule-www.md` : vérifier les en-têtes de
+réponse (`x-cache`, `age`, `x-fastest-cache`) sur un appel à la Store API, et
+exclure `/wp-json/*` dans les réglages des deux plugins.
+
+Autres plugins repérés au passage : **WPvivid Backup** (le pré-requis backup
+est donc à portée de clic), Complianz (bandeau cookies), Yoast SEO, WPForms,
+Flamingo, Contact Form 7, Popup Maker, thème Flatsome.
 
 ## Commandes clés
 

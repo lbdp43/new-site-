@@ -93,8 +93,28 @@ permettraient de basculer en quelques heures.
       toutes couvertes (1 trou trouvé et corrigé : `/shop/lessence-des-cimes/`).
       Le WordPress n'a **aucun article de blog**, aucune catégorie, aucune
       étiquette. Contrôlé à chaque build.
-- [ ] **Backups WordPress** à jour (complet BDD + fichiers). UpdraftPlus ou
-      équivalent vers Google Drive / Dropbox.
+- [ ] 🔴 **Vérifier qu'AUCUN cache ne met en cache `/wp-json/`** — deux
+      plugins de cache tournent en parallèle sur le WordPress (**IONOS
+      Performance** et **WP Fastest Cache**, vus le 21/09/2026). Si l'un des
+      deux met en cache les réponses de la Store API, **deux clients
+      différents peuvent recevoir le même panier** : le second voit les
+      articles du premier, et une commande peut partir avec le mauvais
+      contenu. C'est le risque le plus grave de toute la bascule, et il est
+      silencieux — rien ne le signale, tout a l'air de fonctionner.
+
+      Comment vérifier : ouvrir `/wp-json/wc/store/v1/cart` en navigation
+      privée, regarder les en-têtes de réponse. Aucun `x-cache: HIT`,
+      `x-fastest-cache`, `age:` ou équivalent ne doit apparaître. Dans les
+      réglages des deux plugins, exclure explicitement `/wp-json/*`.
+
+      À faire aussi : décider s'il faut **garder les deux plugins de cache**.
+      Deux caches HTML superposés se marchent dessus et rendent tout
+      diagnostic difficile. Après la bascule, le WordPress ne sert plus de
+      pages publiques — un cache HTML n'a quasiment plus d'objet.
+- [ ] **Backups WordPress** à jour (complet BDD + fichiers). **WPvivid
+      Backup est déjà installé** sur le WP (vu le 21/09/2026) — il suffit de
+      lancer une sauvegarde complète et de vérifier qu'elle part bien vers un
+      stockage externe (Drive / Dropbox), pas seulement sur le serveur.
 - [ ] **Produit `coffret-original` créé côté Woo** (actuellement manquant, le
       bouton affiche "bientôt disponible").
 - [ ] **Site soumis à Google Search Console + Bing Webmaster Tools** avec le
@@ -149,6 +169,16 @@ Tester sur `test.labrasseriedesplantes.fr` :
 - [ ] Commande visible dans WP admin
 
 ### Étape 3 — Mettre à jour le plugin CORS WordPress
+
+✅ **Peut être fait DÈS MAINTENANT, sans attendre le jour J.** La version
+**1.2.0** du plugin (dans le dépôt) contient déjà `www.` et l'apex. Autoriser
+une origine qui n'existe pas encore n'a **aucun effet** : le navigateur
+n'envoie un en-tête `Origin` que depuis le domaine réellement servi.
+
+L'installer à l'avance retire une étape du jour J — et surtout, évite le
+scénario où le panier casse sur `www.` parce que le plugin n'a pas été
+téléversé dans le feu de l'action. Zippe `wordpress-plugin/astro-cors/`,
+téléverse, remplace, réactive.
 
 Dans `wordpress-plugin/astro-cors/astro-cors.php`, la fonction
 `lbdp_astro_allowed_origins()` doit autoriser :

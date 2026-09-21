@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: LBDP Astro CORS
- * Description: Autorise le site Astro (test.labrasseriedesplantes.fr + localhost:4321) à dialoguer avec la WooCommerce Store API depuis un navigateur. Expose aussi les headers Cart-Token / Nonce nécessaires au panier.
- * Version:     1.1.0
+ * Description: Autorise le site Astro (www. + apex + test.labrasseriedesplantes.fr + localhost:4321) à dialoguer avec la WooCommerce Store API depuis un navigateur. Expose aussi les headers Cart-Token / Nonce nécessaires au panier.
+ * Version:     1.2.0
  * Author:      La Brasserie des Plantes
  *
  * =====================================================================
@@ -13,6 +13,14 @@
  *  Pour retirer le CORS : désactive simplement le plugin.
  *
  *  CHANGELOG
+ *  1.2.0 — Ajoute `www.` et l'apex aux origines autorisées, en prévision
+ *          de la bascule du domaine public sur le site Astro.
+ *          ⚠️ AUCUN RISQUE À L'INSTALLER AVANT LA BASCULE : autoriser une
+ *          origine qui n'existe pas encore n'a aucun effet. Le navigateur
+ *          n'envoie un en-tête `Origin` que depuis le domaine réellement
+ *          servi. Installer cette version tôt retire une étape du jour J —
+ *          et évite le scénario où le panier casse sur `www.` parce qu'on
+ *          a oublié de téléverser le plugin dans le feu de l'action.
  *  1.1.0 — Ajoute les headers CORS dès l'action `init` (avant que WC
  *          ait le temps de wp_die() en cas d'erreur fatale). Sans ça,
  *          un 500 dans WooPayments arrivait sans Access-Control-Allow-
@@ -30,6 +38,12 @@ defined( 'ABSPATH' ) || exit;
  */
 function lbdp_astro_allowed_origins() : array {
     return [
+        // Domaine public après la bascule. L'origine est celle du site qui
+        // AFFICHE les pages (Astro), pas celle qui sert l'API — donc quand le
+        // WordPress passera sur wp.labrasseriedesplantes.fr, rien à changer ici.
+        'https://www.labrasseriedesplantes.fr',
+        'https://labrasseriedesplantes.fr',  // apex (redirige vers www.)
+
         'https://test.labrasseriedesplantes.fr',
         'http://localhost:4321',  // Astro dev
         'http://127.0.0.1:4321',
