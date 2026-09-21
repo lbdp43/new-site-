@@ -276,6 +276,14 @@ depuis un design handoff professionnel (variante "Chute & rebond" choisie).
   À NE PAS FAIRE pour les fichiers stack.
 
   Diagnostiqué le 29 août 2026 sur la Flèche Ardente 20cl.
+
+  **Cache navigateur** : le fichier corrigé garde la même URL, donc les
+  visiteurs qui avaient chargé la version à fond blanc continuaient de la
+  voir (bouteille minuscule dans un rectangle blanc) — signalé par Guillaume
+  le 21/09/2026, des semaines après le correctif. Les deux pages coffret
+  suffixent désormais les images empilables d'un `?v=2`. Si un fichier stack
+  est re-corrigé un jour, incrémenter ce numéro dans
+  `composer-mon-coffret.astro` **et** `en/build-your-gift-box.astro`.
 - **Trios suggérés** (`src/data/coffret-trios.ts`) — 6 compositions curées
   affichées sous le configurateur, clic → remplit la pile d'un coup
 - **Intégration panier** : à l'ajout, `cartActions.addItem` est appelé N fois
@@ -455,6 +463,24 @@ des Machurés »), pour rester cohérent avec le nom du produit.
 Les slugs d'URL restent en minuscules sans accent
 (`/boutique/gorgeon-des-machures`) : ne jamais les toucher, des liens
 externes et des redirections 301 en dépendent.
+
+### ⚠️ Flèche Ardente 20 cl — l'étiquette de la photo ne correspond PAS à la fiche
+
+`sizes/fleche-ardente-20cl*.webp` montre l'**ancienne bouteille** :
+« Alc 27% vol » et « CASSIS · FRAMBOISE · MYRTILLE · PITAYA », là où la fiche
+annonce 22 % et framboise / pétale de rose / jus de citron.
+
+**C'est voulu** — confirmé par Guillaume le 21/09/2026 : on écoule l'ancien
+stock, donc la photo montre ce que le client va recevoir. Ne pas « corriger »
+la photo ni aligner le degré ou les plantes dessus. Décision d'origine :
+commit `529fb8c` « garde l'ancienne bouteille (écoulement stock) ». À revoir
+seulement quand le stock 20 cl sera écoulé.
+
+**La rose est une rose de Provins** (*Rosa gallica* var. *officinalis*), pas
+une rose de Damas — corrigé le 21/09/2026 sur la fiche produit FR, la fiche
+plante FR/EN et la description EN. Ne pas rétablir *Rosa × damascena*. Comme
+pour toute plante, on ne mentionne pas son origine géographique (règle d'or
+sourcing) : « rose de Provins » est un nom de variété, pas une provenance.
 
 ## Listes d'ingrédients (champ `ingredients`)
 
