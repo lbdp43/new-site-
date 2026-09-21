@@ -12,7 +12,7 @@ composition:
   - Écorces de citron
   - Graines de coriandre
 usage: "Digestif botanique — pour amateurs de chanvre"
-tagline: "Chanvre dominant, absinthe en fond, agrumes — pour amateurs."
+tagline: "Chanvre dominant, absinthe en fond, zeste de citron."
 tasting:
   nose: "Chanvre, foin vert, citron."
   palate: "Très verte, herbacée, avec l'absinthe en fond mentholé."

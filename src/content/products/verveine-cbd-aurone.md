@@ -11,7 +11,7 @@ composition:
   - Aurone
   - Chanvre (CBD, sans THC)
 usage: Digestif botanique au CBD
-tagline: "Verveine + aurone + chanvre — détente digestif."
+tagline: "Verveine, aurone et chanvre — herbacée et ronde en bouche."
 tasting:
   nose: "Verveine citronnée, touche résineuse."
   palate: "Verveine dominante, chanvre en fond."
