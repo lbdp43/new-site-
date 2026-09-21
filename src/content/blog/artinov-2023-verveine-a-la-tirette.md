@@ -23,12 +23,11 @@ Objection immédiate : la liqueur est à 28° ou 30° — très loin des 5° d'u
 
 ## Le prototype
 
-Nous avons travaillé pendant **environ six mois** avec un fabricant de matériel de bar français pour adapter un système existant. Le BIB (bag-in-box) 5 litres devient la source : il se vide par une poche souple, sans contact avec l'air, connectée à une tirette en inox. Le débit est réglé pour servir 2 cl ou 4 cl, sans goutte, sans oxydation.
+Nous avons travaillé pendant **environ six mois** avec un fabricant de matériel de bar français pour adapter un système existant. C'est une **bouteille** qui alimente le distributeur réfrigéré : la liqueur est servie à température, au comptoir, et le débit est réglé pour servir 2 cl ou 4 cl, sans goutte.
 
 Résultat côté bar :
-- **Zéro perte** d'oxydation
-- **Zéro casse** (plus de bouteille)
-- Service à la **vitesse d'une pression**, à la dose près
+- La liqueur servie **à la bonne température**, sans passer par le congélateur
+- Service **rapide**, à la dose près
 - Un **objet de comptoir** qui intrigue — les clients demandent ce que c'est
 
 ## L'angle Artinov
