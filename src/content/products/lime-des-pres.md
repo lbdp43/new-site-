@@ -12,7 +12,7 @@ composition:
   - Mélisse
   - Houblon
 usage: Liqueur citronnée sans citron
-tagline: "L'effet citron, sans le citron — thym citron, mélisse, houblon."
+tagline: "Une liqueur végétale fraîche aux notes citronnées."
 tasting:
   nose: "Thym citron à l'attaque."
   palate: "Vert, herbacé, sans acidité."

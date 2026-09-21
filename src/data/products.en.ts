@@ -69,7 +69,7 @@ export const productsEn: Record<string, ProductEn> = {
     subtitle: 'Black verbena — miners\' tribute',
     composition: ['Verbena', 'Southernwood', 'Dandelion root', 'Activated charcoal'],
     usage: 'Digestif — black verbena',
-    tagline: 'A tribute to the Saint-Étienne miners — deep and mysterious.',
+    tagline: 'Black verbena, a tribute to the Saint-Étienne miners — deep and mysterious.',
     description:
       "A black verbena, coloured with activated charcoal, to drink in memory of the Machurés — the Saint-Étienne miners whose faces were black with coal dust at the end of the day. Inspired by three historic recipes from Saint-Étienne, blending verbena, southernwood and baraban (dandelion in local dialect).",
     tasting: {
@@ -84,7 +84,7 @@ export const productsEn: Record<string, ProductEn> = {
     subtitle: 'Red fruit liqueur with vanilla',
     composition: ['Blackcurrant', 'Raspberry', 'Blueberry', 'Dragon fruit', 'Vanilla'],
     usage: 'Digestif or cocktail',
-    tagline: 'Red-fruit candy with a long vanilla note.',
+    tagline: 'Raspberry, elevated by rose, sharpened by a tension of lemon.',
     description:
       "A red-fruit liqueur that evokes childhood sweets — blackcurrant, raspberry, blueberry and a hint of dragon fruit for surprise. Vanilla weaves through the back and rounds out the fruit's acidity. At 27%, it stands perfectly as a digestif but shines in cocktails (see our Philtre d'Éros).",
     tasting: {
@@ -103,7 +103,7 @@ export const productsEn: Record<string, ProductEn> = {
       'Hyssop',
     ],
     usage: 'Mountain digestif',
-    tagline: 'Softened genepi — hyssop, fir, a mountain character.',
+    tagline: 'A fresh, green genepi with an intense mountain character.',
     highlight: 'Silver Medal 2026 — Lyon',
     awards: [
       'Silver Medal 2026 — Lyon International Competition',
@@ -122,7 +122,7 @@ export const productsEn: Record<string, ProductEn> = {
     subtitle: 'Spring flower liqueur',
     composition: ['Elderflower', 'Cornflower', 'Chamomile'],
     usage: 'Flower liqueur — spritz, floral aperitif',
-    tagline: 'Very floral, very honeyed, very round — perfect for spring spritz.',
+    tagline: 'A floral liqueur — soft, honeyed and round.',
     description:
       "Our most floral liqueur. Three April flowers: elder for the pollen, cornflower for the roundness, chamomile for the backbone. A very honeyed, very round Nectar d'Ostara at 24% — ideal in a spritz or neat as an aperitif.",
     tasting: {
@@ -137,7 +137,7 @@ export const productsEn: Record<string, ProductEn> = {
     subtitle: 'Lemon without lemon — meadow freshness',
     composition: ['Lemon thyme', 'Lemon balm', 'Hops'],
     usage: 'Lemony liqueur — without lemon',
-    tagline: 'The lemon effect, without the lemon — lemon thyme, lemon balm, hops.',
+    tagline: 'A fresh, green liqueur with citrus notes.',
     description:
       "A botanical sleight of hand: a lemony liqueur without a single gram of real lemon. Lemon thyme brings the zesty attack, lemon balm brings the floral freshness, hops the noble bitterness. No acidity — just a wave of lemon-scented meadow.",
     tasting: {
@@ -154,7 +154,7 @@ export const productsEn: Record<string, ProductEn> = {
     subtitle: 'French bitter aperitif — gentian & cinchona',
     composition: ['Gentian', 'Cinchona', 'Lemon zest', 'Nutmeg', 'Coriander seeds', 'Cinnamon'],
     usage: 'Bitter aperitif — the French answer to Suze',
-    tagline: 'Our French alternative to Suze — gentian, cinchona, spices.',
+    tagline: 'A light, fresh gentian with a fine bitterness.',
     highlight: 'Gold Medal Paris 2025',
     awards: ['Gold Medal 2025 — Paris Agricultural Competition'],
     description:
@@ -171,7 +171,7 @@ export const productsEn: Record<string, ProductEn> = {
     subtitle: 'Praline & almond liqueur',
     composition: ['Pink pralines', 'Macerated roasted almonds'],
     usage: 'Indulgent aperitif or light digestif',
-    tagline: 'Silky, indulgent — praline and almond in a bottle.',
+    tagline: 'A soft, praline-rich liqueur — unashamedly indulgent.',
     description:
       "The pleasure liqueur. Pralines and roasted almonds macerated in alcohol — silky, indulgent, very easy-drinking as an aperitif. Also excellent in creative cocktails: sparkling kir, gin-based drinks, even a twisted margarita.",
     tasting: {
@@ -205,7 +205,7 @@ export const productsEn: Record<string, ProductEn> = {
     subtitle: 'Citrus trio aperitif',
     composition: ['Lemon (zest + juice)', 'Orange', 'Lime'],
     usage: 'Fresh aperitif — alternative to Limoncello',
-    tagline: 'Citrus trio — a change from classic Limoncello.',
+    tagline: 'Citrus trio — fresh, bright and tangy.',
     description:
       "A trio of citrus: lemon, orange, lime — zests and juices. More complex than a classic Limoncello, with a subtle underlying bitterness that gives it character. The originality and freshness of a distinctive aperitif.",
     tasting: {

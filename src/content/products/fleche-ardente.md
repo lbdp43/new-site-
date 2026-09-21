@@ -12,7 +12,7 @@ composition:
   - Pétale de rose
   - Jus de citron
 usage: Digestif
-tagline: "Framboise sublimée par la rose, tension du citron."
+tagline: "La framboise, sublimée par la rose, relevée par la tension du citron."
 tasting:
   nose: "Couleur rubis. Accroche légère et fruitée — framboise, pétale de rose, jus de citron."
   palate: "Rond et gourmand, dominante framboise."

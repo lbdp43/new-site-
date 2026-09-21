@@ -45,9 +45,9 @@ storySections:
     layout: "image-left"
     background: "white"
     paragraphs:
-      - "Étienne rentre tout juste en Haute-Loire ; Guillaume, lui, vient de **vendre ses parts du bar-restaurant à son associé** à Saint-Étienne. Et **on se lance à deux, dans notre atelier** — sans équipe, sans gros carnet d'adresses, juste deux amis d'enfance et l'envie de faire revivre des plantes oubliées."
-      - "Pour que le projet parte vraiment, on a lancé **une campagne de financement participatif sur Ulule**. Des amis de Saint-Étienne et de Saint-Didier, des curieux croisés sur les marchés du Velay, des inconnus qui ont simplement aimé le pitch — chacun a pré-commandé ses premières bouteilles ou mis quelques euros pour qu'on démarre. **C'est aussi grâce à ces gens-là** qu'on a réussi à créer la société."
-      - "Ce qu'on crée, c'est du **patrimoine vivant** — ça se partage. Et on se complète dans ce qu'on fait."
+      - "Étienne vient tout juste de rentrer en Haute-Loire. Guillaume, lui, vient de **céder ses parts du bar-restaurant** qu'il tenait à Saint-Étienne. On se lance alors à deux, dans notre atelier — sans équipe, sans gros carnet d'adresses, juste deux amis d'enfance et l'envie de faire découvrir autrement les plantes."
+      - "Pour que le projet voie vraiment le jour, on lance **une campagne de financement participatif sur Ulule**. Des amis de Saint-Étienne et de Saint-Didier, des curieux rencontrés sur les marchés du Velay, mais aussi de parfaits inconnus séduits par le projet précommandent nos premières bouteilles ou participent à la campagne. **C'est aussi grâce à eux** que La Brasserie des Plantes a pu voir le jour."
+      - "Depuis le début, notre idée reste la même : explorer le végétal comme un **patrimoine vivant**, à faire découvrir, évoluer et partager à travers nos créations."
 
   - kicker: "Le terroir"
     title: "Un hommage aux"
@@ -58,7 +58,8 @@ storySections:
     background: "cream"
     paragraphs:
       - "Notre démarche tient en une idée : redonner leur place à des plantes que nos grand-mères connaissaient bien. Verveine citronnée, serpolet (thym sauvage), carvi, mélisse, hysope, aurone, gentiane jaune, génépi, sureau, baraban, ortie — chaque liqueur raconte son petit bouquet."
-      - "Certaines liqueurs sont simples, signatures d'un terroir : *L'Herbe des Druides* ne marie que trois plantes (verveine, serpolet, carvi). D'autres sont des assemblages complexes : *L'Alchimie Végétale* compose à elle seule **27 plantes, racines, écorces et épices**. Au total, à travers toute la gamme, **une quarantaine de plantes** — aromatiques, médicinales, parfois amères, toujours chargées d'histoire — passent par nos macérats."
+      - "Certaines liqueurs sont simples, signatures d'un terroir : *L'Herbe des Druides* ne marie que trois plantes (verveine, serpolet, carvi). D'autres sont des assemblages complexes : *L'Alchimie Végétale* compose à elle seule **27 plantes, racines, écorces et épices** — aromatiques, médicinales, parfois amères, toujours chargées d'histoire."
+      - "Au total, une quarantaine de plantes entrent dans nos différentes recettes, avec une même envie : faire découvrir toute la diversité des saveurs que le végétal peut offrir."
     linkLabel: "Voir toutes nos plantes et dans quelles liqueurs on les retrouve →"
     linkHref: "/nos-plantes"
 
@@ -70,8 +71,8 @@ storySections:
     layout: "image-left"
     background: "white"
     paragraphs:
-      - "Nos plantes viennent de **cueilleurs et de maraîchers partenaires** que nous sélectionnons un par un — rencontrés, questionnés, visités. La plupart sont en agriculture biologique, pas tous : pour certaines plantes ou ingrédients (génépi, agrumes, réglisse, quinquina, épices), on s'appuie sur des filières spécialisées quand la plante l'exige."
-      - "Pas d'arôme ajouté, pas de conservateur : le savoir-faire, la patience et le temps font le reste. Chaque bouteille est remplie, bouchée, étiquetée à la main — à quatre mains, pour être précis."
+      - "Nous sélectionnons nos plantes et ingrédients avec soin, notamment auprès de **producteurs, cueilleurs et filières spécialisées**. Une grande partie est issue de l'agriculture biologique, mais nos choix dépendent avant tout de la plante, de son origine et de la qualité recherchée. Génépi, agrumes, réglisse, quinquina, épices… chaque ingrédient suit ainsi la filière la plus adaptée."
+      - "Ensuite viennent le savoir-faire, la patience et le temps. De la préparation de nos recettes jusqu'à la mise en bouteille, **tout se passe dans notre atelier**. Notre production reste artisanale, avec un suivi attentif à chaque étape, de l'assemblage jusqu'aux dernières finitions."
 
 distinctionsSection:
   kicker: "La consécration"

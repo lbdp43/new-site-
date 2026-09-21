@@ -13,7 +13,7 @@ composition:
   - Baraban
   - Charbon végétal
 usage: "Digestif — verveine noire"
-tagline: "Hommage aux mineurs de Saint-Étienne — profond et mystérieux."
+tagline: "La verveine noire en hommage aux mineurs stéphanois — profonde et mystérieuse."
 highlight: "Meilleure liqueur de plantes française 2026"
 awards:
   - Meilleure liqueur de plantes française 2026 — World Liqueur Awards (Londres)

@@ -12,7 +12,7 @@ composition:
   - Bleuet
   - Camomille
 usage: "Liqueur de fleurs — spritz, apéritif floral"
-tagline: "Très florale, très mielleuse, très ronde — pour les spritz de printemps."
+tagline: "Une liqueur florale, douce, miellée et ronde."
 tasting:
   nose: "Pollen, miel d'acacia, touche d'amande."
   palate: "Très florale, très ronde. Notes principales de pollen et de miel, secondaires d'agrumes, amandes et réglisse."

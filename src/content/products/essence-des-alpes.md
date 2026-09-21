@@ -11,7 +11,7 @@ composition:
   - Liqueur d'épine de sapin
   - Hysope
 usage: Digestif de montagne
-tagline: "Un génépi dans la douceur — hysope, sapin, caractère montagnard."
+tagline: "Un génépi frais, végétal et intensément montagnard."
 highlight: "Médaille d'Argent 2026 — Lyon"
 awards:
   - Médaille d'Argent 2026 — Concours International de Lyon
