@@ -525,19 +525,42 @@ ou à supprimer.
 grep -rniE "mac[ée]r" src/ public/*.txt | grep -v generated.json | grep -v wecandoo-reviews
 ```
 
-## ⚠️ « Sans arôme ajouté » — claim à ne pas généraliser
+## 🚨 « Sans arôme ajouté » — ne JAMAIS généraliser à la gamme
 
-Guillaume a demandé le 2026-09-21 de **retirer ce claim du Menthor**. La
-mention a donc disparu de `src/content/products/menthor.md`.
+**Guillaume, 2026-09-21 : il y a de l'arôme dans Le Menthor et La
+Pralicoquine.** Toute formulation qui affirme l'absence d'arôme pour
+*l'ensemble* de la gamme est donc fausse.
 
-**Point non tranché** : le claim reste affirmé **pour toute la gamme** dans
-une vingtaine d'endroits (FAQ FR et EN, `boutique/index.astro`,
-`liqueurs-artisanales.astro`, `liqueurs-de-plantes.astro`,
-`digestif-naturel.astro`, `aperitif-artisanal.astro`, metas des pages SEO,
-fiches Herbe des Druides et Alchimie, plusieurs articles). Si le Menthor
-contient un arôme, ces formulations générales sont fausses. **À arbitrer
-avec Guillaume avant d'y toucher** — ne pas les supprimer d'office, c'est
-un argument de vente réel pour le reste de la gamme.
+**Deux interdits :**
+1. Ne jamais écrire que la gamme, « nos liqueurs » ou « toutes nos
+   recettes » sont sans arôme ajouté.
+2. Ne jamais écrire non plus **qu'il y a** de l'arôme dans Le Menthor ou
+   La Pralicoquine. Ces deux fiches ne parlent pas d'arôme, dans un sens
+   ni dans l'autre.
+
+**Ce qui reste autorisé** : le claim au niveau d'un produit précis dont
+c'est vrai. Conservé à date sur **L'Herbe des Druides** et **L'Alchimie
+Végétale**. Ne pas l'étendre à un autre produit sans confirmation.
+
+Nettoyage du 2026-09-21 — claims gamme retirés de : FAQ FR et EN,
+meta de la home, `/boutique` (meta + texte), `/liqueurs-artisanales`
+(meta + intro), `/liqueurs-de-plantes` (meta + bloc « nos trois
+engagements »), `/digestif-naturel` (×2), `/aperitif-artisanal`,
+`/en/our-story`, `public/llms.txt`, article `likora-2022`.
+
+Au passage, la FAQ FR affirmait aussi « pas de colorant » alors que le
+Gorgeon est coloré au charbon végétal. Les deux FAQ disent maintenant la
+même chose : pas de conservateur, un ingrédient naturel pour la couleur,
+jamais de colorant de synthèse. La mention « cochenille pour le rose de
+la Pralicoquine », qui n'existait que côté EN, a été retirée faute de
+confirmation.
+
+**⚠️ Tension non résolue** : `/liqueurs-artisanales`,
+`/liqueurs-de-plantes`, `/aperitif-artisanal` et deux articles de blog
+conseillent au lecteur de chercher la mention « sans arôme ajouté » pour
+reconnaître une vraie liqueur artisanale. Ce ne sont pas des claims sur
+nos produits, mais un lecteur qui applique cette grille au Menthor en
+tirerait une mauvaise conclusion. À arbitrer avec Guillaume.
 
 ## Brouillons d'articles
 

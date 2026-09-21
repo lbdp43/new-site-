@@ -1,7 +1,7 @@
 ---
 meta:
   title: "La Brasserie des Plantes — Liqueurs artisanales françaises aux plantes oubliées (Haute-Loire)"
-  description: "Liqueur de verveine, gentiane, menthe, digestif aux 27 plantes — Meilleur Digestif du Monde 2025. Liqueurs artisanales françaises fabriquées à la main en Haute-Loire, sans arôme ni colorant ajouté. Boutique en ligne, livraison offerte dès 65 €."
+  description: "Liqueur de verveine, gentiane, menthe, digestif aux 27 plantes — Meilleur Digestif du Monde 2025. Liqueurs artisanales françaises fabriquées à la main en Haute-Loire, à partir de plantes oubliées. Boutique en ligne, livraison offerte dès 65 €."
 
 heroHome:
   badge: "Meilleur Digestif du Monde 2025"
