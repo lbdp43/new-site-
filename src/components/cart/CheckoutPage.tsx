@@ -518,17 +518,18 @@ function CheckoutInner() {
             </div>
           </dl>
 
-          {/* Vente à distance : le droit de rétractation doit être porté à la
-              connaissance du client AVANT qu'il valide sa commande, pas
-              seulement au fond des CGV. Mention reprise du checkout
-              WooCommerce, à conserver au-dessus du bouton de paiement. */}
+          {/* Une seule mention, au-dessus du bouton : elle porte à la fois
+              l'acceptation des CGV et le droit de rétractation. En vente à
+              distance, ce droit doit être connu du client AVANT qu'il valide
+              sa commande, pas seulement au fond des CGV. Ne pas la dédoubler
+              sous le bouton, c'était le cas avant le 21/09/2026. */}
           <p className="mt-6 rounded-xl border border-forest-100/70 bg-cream-50 px-4 py-3 text-xs leading-relaxed text-ink-600">
-            Vous bénéficiez d'un droit de rétractation de 14 jours selon les
-            modalités précisées dans nos{" "}
+            En validant votre commande, vous acceptez nos{" "}
             <a href="/cgv" className="underline hover:text-forest-800">
               conditions générales de vente
-            </a>
-            .
+            </a>{" "}
+            et bénéficiez d'un droit de rétractation de 14 jours, selon les
+            modalités qui y sont précisées.
           </p>
 
           <button
