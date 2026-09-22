@@ -1,22 +1,32 @@
 /**
  * Chargement du SDK JavaScript PayPal.
  *
- * Les paramètres reproduisent **exactement** ceux que le checkout WordPress
- * utilise aujourd'hui, relevés dans l'onglet Réseau le 22/09/2026 :
+ * Paramètres calqués sur ceux du checkout WordPress (relevés dans l'onglet
+ * Réseau le 22/09/2026), à une exception près — voir `disable-funding` :
  *
- *   intent=capture        → encaissement immédiat, pas une simple autorisation
- *   commit=true           → le bouton affiche « Payer maintenant » : le client
- *                           valide définitivement chez PayPal
+ *   intent=capture   → encaissement immédiat, pas une simple autorisation
+ *   commit=true      → le bouton affiche « Payer maintenant » : le client
+ *                      valide définitivement chez PayPal
  *   currency=EUR
- *   enable-funding=paylater → ⚠️ le paiement en plusieurs fois est ACTIF sur le
- *                           WordPress. L'oublier ici retirerait discrètement
- *                           une facilité de paiement offerte aux clients.
+ *
+ * 🔒 **`disable-funding=paylater,card` — arbitrage Guillaume du 22/09/2026 :
+ * « mets juste le bouton PayPal ».**
+ *
+ * Sans ce paramètre, le SDK affiche trois boutons : PayPal, « Payer en
+ * plusieurs fois » (Pay Later) et « Carte bancaire » (paiement invité via
+ * PayPal). Guillaume n'en veut qu'un.
+ *
+ * ⚠️ Ne pas « rétablir » `enable-funding=paylater` en croyant corriger un
+ * oubli : le Pay Later est bien actif sur le WordPress, et cette doc a
+ * d'abord recommandé de le reproduire — la décision l'a ensuite écarté.
+ * La carte, elle, reste offerte par WooPayments via l'autre onglet du
+ * sélecteur, donc rien n'est perdu pour le client.
  *
  * `components` est volontairement réduit à `buttons` : le WordPress charge en
  * plus `messages`, `card-fields`, `googlepay` et `applepay`, mais les
  * passerelles correspondantes (`ppcp_card`, `ppcp_googlepay`, `ppcp_applepay`)
  * sont **désactivées** côté WooCommerce. Les charger alourdirait la page sans
- * rien offrir de plus — les wallets passent par WooPayments côté carte.
+ * rien offrir de plus.
  *
  * ⚠️ CSP : `vercel.json` doit autoriser `https://*.paypal.com` et
  * `https://*.paypalobjects.com` en `script-src`, `frame-src` et `connect-src`,
@@ -74,7 +84,8 @@ export function loadPayPalSdk(): Promise<PayPalNamespace> {
       commit: "true",
       currency: "EUR",
       components: "buttons",
-      "enable-funding": "paylater",
+      // Un seul bouton PayPal — cf. l'arbitrage en tête de fichier.
+      "disable-funding": "paylater,card",
     });
 
     const script = document.createElement("script");

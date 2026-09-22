@@ -113,9 +113,41 @@ export default function PayPalButtons({
                 payment_data: buildPpcpPaymentData(data.orderID),
               });
 
-              if (result.payment_result.payment_status !== "success") {
+              // ⚠️ NE JAMAIS se fier au seul `payment_status`.
+              //
+              // Le 22/09/2026, un vrai paiement de test a produit une
+              // commande WooCommerce #26518 en statut `pending`, sans
+              // `transaction_id` ni métadonnée `_ppcp_paypal_order_id` — donc
+              // JAMAIS encaissée — alors que la réponse annonçait
+              // `payment_status: "success"`. Le client a vu « Merci pour
+              // votre commande » pour une commande impayée.
+              //
+              // Le plugin renvoie en effet « success » aussi bien pour « la
+              // commande est payée » que pour « la commande est créée, il
+              // reste à la faire approuver chez PayPal » — auquel cas il
+              // joint une `redirect_url` vers paypal.com.
+              //
+              // On exige donc trois conditions, et on refuse au moindre
+              // doute : une page de confirmation mensongère est bien pire
+              // qu'un message d'échec.
+              const redirect = result.payment_result.redirect_url ?? "";
+              const stillNeedsPayPal = /paypal\.com/i.test(redirect);
+              const notPaidYet =
+                result.status === "pending" || result.status === "failed";
+
+              if (
+                result.payment_result.payment_status !== "success" ||
+                stillNeedsPayPal ||
+                notPaidYet
+              ) {
+                console.error("[PayPal] finalisation incomplète", {
+                  status: result.status,
+                  payment_status: result.payment_result.payment_status,
+                  redirect,
+                });
                 onError(
-                  "Le paiement PayPal n'a pas abouti. Aucun montant n'a été débité — réessaie ou choisis la carte bancaire.",
+                  "Le paiement n'a pas pu être finalisé et aucun montant n'a été débité. " +
+                    "Choisis la carte bancaire, ou contacte-nous — ta commande n'a pas été enregistrée comme payée.",
                 );
                 return;
               }
@@ -190,7 +222,7 @@ export default function PayPalButtons({
       {status === "ready" && (
         <p className="mt-3 text-xs text-ink-500">
           Vous serez redirigé vers PayPal pour valider le paiement, puis ramené
-          ici. Paiement en plusieurs fois disponible selon votre compte.
+          ici.
         </p>
       )}
     </div>

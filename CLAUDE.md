@@ -224,9 +224,15 @@ Deux enseignements :
 
 ✅ **SDK PayPal relevé le 22/09/2026** : `client-id` complet (dans
 `docs/paypal-checkout.md`), `intent=capture`, `commit=true`, `currency=EUR`,
-**`enable-funding=paylater`** et **aucun `merchant-id`** (compte marchand
-direct). ⚠️ Le Pay Later est donc actif aujourd'hui sur le WordPress : ne pas
-l'oublier côté Astro, sinon la bascule retire une facilité de paiement.
+`enable-funding=paylater` et **aucun `merchant-id`** (compte marchand direct).
+
+🔒 **Arbitrage Guillaume du 22/09/2026 : « mets juste le bouton PayPal ».**
+Côté Astro, `src/lib/paypal.ts` envoie donc **`disable-funding=paylater,card`**
+— un seul bouton, sans « Payer en plusieurs fois » ni « Carte bancaire ».
+⚠️ **Ne pas rétablir `enable-funding=paylater`** en croyant corriger un oubli :
+le Pay Later est bien actif sur le WordPress et cette doc a d'abord
+recommandé de le reproduire, mais la décision l'a écarté. La carte reste
+offerte par WooPayments dans l'autre onglet du sélecteur.
 
 ✅ **`cart/order` disséqué le 22/09/2026** (relevé réseau complet dans
 `docs/paypal-checkout.md`) :
@@ -276,11 +282,56 @@ du formulaire classique ne sont pas nécessaires à cette étape.
 C'est donc **le même endpoint que la carte**. ⚠️ Commande #26516 à supprimer,
 résidu de la sonde.
 
-⛔ **Reste** : poser `PUBLIC_PPCP_ENABLED` et `PUBLIC_PAYPAL_CLIENT_ID` sur
-Vercel, **redéployer** (site statique : les `PUBLIC_*` sont figées au build),
-puis passer un vrai paiement sur `test.` et le rembourser. Mode opératoire
-dans `docs/paypal-checkout.md`. Aucun risque client : la boutique publique
-reste le WordPress sur `www.` jusqu'à la bascule DNS.
+## 🚨 PayPal — la commande fantôme du 22/09/2026 (À LIRE)
+
+**Premier vrai paiement de test : le client a vu « Merci pour votre commande »
+pour une commande JAMAIS ENCAISSÉE.** C'est le pire scénario possible, et il
+est passé à deux doigts de la production.
+
+Commande **#26518** (`created_via: store-api`, `payment_method: ppcp`) :
+
+| Champ | Valeur |
+|---|---|
+| `status` | **pending** |
+| `transaction_id` | **vide** |
+| `date_paid` | **null** |
+| meta `_ppcp_paypal_order_id` | **absente** |
+
+Guillaume était bien allé au bout côté PayPal, et n'a reçu **aucun e-mail**
+PayPal — cohérent : avec `intent=capture`, l'approbation n'débite rien, c'est
+le marchand qui encaisse ensuite côté serveur. **L'approbation a eu lieu,
+l'encaissement non.**
+
+### Les deux enseignements
+
+1. 🔑 **`ppcp_paypal_order_id` n'est PAS la bonne clé pour la Store API.**
+   Elle vient du formulaire de commande **classique**. Envoyée dans
+   `payment_data`, le plugin ne la lit pas : d'où l'absence de la métadonnée
+   et l'absence de capture. **La bonne clé reste à trouver** — ou il faut
+   basculer sur `/wc-ppcp/v1/cart/checkout` (architecture A), la route que le
+   front du plugin utilise lui-même.
+
+2. ⚠️ **`payment_status: "success"` NE VEUT PAS DIRE « payé ».** Le plugin
+   renvoie « success » aussi bien pour « c'est payé » que pour « la commande
+   est créée, il reste à l'approuver chez PayPal » — avec alors une
+   `redirect_url` vers paypal.com. La sonde A/B l'avait montré ; on ne l'avait
+   pas interprété.
+
+**`PayPalButtons.tsx` exige désormais trois conditions** avant d'afficher la
+confirmation : `payment_status === "success"`, **et** aucune `redirect_url`
+vers paypal.com, **et** un `status` de commande qui n'est ni `pending` ni
+`failed`. Au moindre doute, message d'échec explicite. Une page de
+confirmation mensongère est bien pire qu'une erreur.
+
+⛔ **Reste à faire** : trouver la bonne clé (ou passer par `cart/checkout`),
+puis refaire un paiement réel de bout en bout et **vérifier dans WooCommerce
+que la commande est en « En cours » avec un `transaction_id`** — ne jamais se
+fier à la seule page de confirmation. Mode opératoire dans
+`docs/paypal-checkout.md`.
+
+Aucun risque client : la boutique publique reste le WordPress sur `www.`
+jusqu'à la bascule DNS, et les deux variables ne sont posées que sur ce
+projet Vercel.
 
 Rappel : ces relevés se font **côté Guillaume**, l'environnement de dev ne
 joint pas le WordPress. Pistes de lecture du code du plugin épuisées le
