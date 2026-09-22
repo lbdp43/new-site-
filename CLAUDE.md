@@ -1348,6 +1348,12 @@ qui précède cette suppression.
    rembourser depuis l'admin WooCommerce. Vérifier que la commande tombe bien
    dans le WP admin comme une commande classique, que l'email part, que
    EasyBeerr reçoit.
+
+   ℹ️ 22/09/2026 : le plugin PayPal expose un **mode sandbox** (réglages API,
+   liste « Environnement »). Il permettrait de tester sans argent réel — mais
+   il s'applique à **tout le site**, donc il couperait PayPal pour les vrais
+   clients pendant le test. Arbitrage à rendre par Guillaume le moment venu.
+   Rien d'équivalent côté WooPayments, qui reste en mode LIVE.
 2. ~~**Régénérer la clé REST API WC "Astro site"**~~ ✅ **FAIT (avril 2026)** —
    clé régénérée côté WooCommerce + injectée dans Vercel env vars
    (`WC_CONSUMER_KEY` + `WC_CONSUMER_SECRET` en Production + Preview).

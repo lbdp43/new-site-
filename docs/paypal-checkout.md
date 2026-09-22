@@ -176,6 +176,45 @@ s'y branche.
 Elle ne dit ni la forme complète des corps de requête, ni celle des réponses.
 Le relevé réseau reste indispensable.
 
+### Réglages du plugin observés le 22/09/2026
+
+Relevés sur `wp-admin` → WooCommerce → Réglages → Paiements →
+« Passerelle PayPal par Payment Plugins » → **Paramètres de l'API** :
+
+| Réglage | Valeur |
+|---|---|
+| Environnement | **production** (un mode *sandbox* existe dans la liste déroulante) |
+| Connexion PayPal | Connecté ✅ |
+| Webhook | Créé ✅ — ID `2R08013951191004F` |
+| URL du webhook | `https://labrasseriedesplantes.fr/wp-json/wc-ppcp/v1/webhook/production` |
+| Admin Only Mode | décoché |
+| **Débogage activé** | **coché** ✅ |
+
+Trois conséquences :
+
+1. **L'URL du webhook confirme le namespace** `wc-ppcp/v1` relevé plus haut.
+2. **Le débogage est actif** → le plugin écrit un journal dans
+   WooCommerce → État → **Journaux**. Il contient potentiellement les
+   échanges réels avec PayPal, donc une partie de ce qu'on cherche, **sans
+   rien avoir à payer**. ⚠️ Ces journaux contiennent des données clients
+   (noms, e-mails, adresses) et parfois des jetons : ne jamais les coller
+   en entier, extraire seulement les lignes utiles.
+3. 🎯 **Un mode sandbox existe.** Ça rouvre la question du test final :
+   le backlog prévoyait « une vraie commande de 1-2 € puis remboursement ».
+   Une bascule temporaire en sandbox permettrait de tester sans argent réel
+   — mais elle s'applique **à tout le site**, donc elle couperait PayPal
+   pour les vrais clients pendant la durée du test. **Arbitrage à rendre
+   par Guillaume le moment venu**, pas une décision technique.
+
+⚠️ **L'« ID client production » est tronqué à l'écran** par la largeur du
+champ : la capture n'en montre que le début. Il reste à relever en entier —
+le plus fiable étant l'URL `paypal.com/sdk/js` côté navigateur, qui le porte
+tel que le front l'utilise vraiment.
+
+⚠️ **Ne jamais copier la « Clé secrète production »**, ni capturer cette page
+lorsqu'elle est révélée. WordPress la masque par défaut ; elle doit rester
+côté serveur. Elle n'est d'aucune utilité au front Astro.
+
 ---
 
 ## ❗ Ce qui reste inconnu
