@@ -190,12 +190,13 @@ pas été passé puis remboursé.
 2. Clic → `wc.createPaypalOrder()` → `POST /wc-ppcp/v1/cart/order` → ID PayPal.
 3. Le client approuve dans la fenêtre PayPal (flux **popup**, pas redirection :
    on garde la main sur la redirection finale).
-4. `onApprove` → `POST /wc-ppcp/v1/cart/checkout` avec `ppcp_paypal_order_id`
-   — **la route propre de l'extension, PAS celle de la carte.** Elle répond
-   comme le checkout classique (`{result, redirect}`) : on extrait l'ID et la
-   clé de commande de l'URL « commande reçue ». Tout ce qui n'est pas une
-   telle URL lève une erreur (cf. `wc.finalizePaypalOrder`).
-5. Redirection vers `/commande/confirmation`.
+4. `onApprove` → `POST /wc-ppcp/v1/cart/checkout` avec `ppcp_paypal_order_id`.
+   🔴 **Cette étape N'ENCAISSE PAS** — voir la section « `cart/checkout`
+   n'encaisse pas » : la route est celle du flux express et renvoie vers la
+   page de relecture WordPress. `wc.finalizePaypalOrder()` lève donc
+   systématiquement une erreur en l'état. **Le tunnel est protégé mais pas
+   fonctionnel** ; la piste en cours est `/wc-ppcp/v1/order/pay`.
+5. Redirection vers `/commande/confirmation` (jamais atteinte à ce jour).
 
 Le front **ne capture jamais** : c'est WooCommerce qui le fait, donc commande,
 e-mails, stock et EasyBeer restent synchronisés comme pour une carte.
@@ -356,6 +357,47 @@ confirmation : `payment_status === "success"`, **et** aucune `redirect_url`
 vers paypal.com, **et** un `status` de commande qui n'est ni `pending` ni
 `failed`. Au moindre doute, message d'échec explicite. Une page de
 confirmation mensongère est bien pire qu'une erreur.
+
+### 🔴 `cart/checkout` N'ENCAISSE PAS — c'est la route du flux « express »
+
+**Vrai paiement de test du 22/09/2026, après recâblage sur `cart/checkout`.**
+Guillaume a approuvé chez PayPal ; la route a répondu :
+
+```json
+{"result":"success",
+ "redirect":"…/checkout/?_ppcp_order_review=…",
+ "notApproved":true}
+```
+
+et le `_ppcp_order_review` décodé montre que **le plugin avait bien reçu et
+retenu la commande PayPal approuvée** :
+
+```json
+{"payment_method":"ppcp","paypal_order":"1NB13994BK111421E","fields":[]}
+```
+
+Donc : la requête est comprise, le champ est le bon, la session est bonne —
+mais la route répond « envoie le client à la page de relecture » au lieu
+d'encaisser. **`cart/checkout` sert au flux express** (bouton PayPal depuis
+la fiche produit ou le panier, sans formulaire rempli) : elle renvoie le
+client vers le checkout WordPress pour qu'il confirme, et c'est ce
+formulaire-là qui encaisse.
+
+✅ **Bilan de ce test** : aucune commande WooCommerce créée (total resté à
+511), **aucun débit**, et le garde-fou a affiché un message d'échec au lieu
+d'une fausse confirmation. Le filet fonctionne.
+
+🔎 **Piste suivante, non vérifiée** : la route
+**`POST /wc-ppcp/v1/order/pay`** (`payment_method`, `order_id`), décrite
+comme « payer une commande WooCommerce **déjà créée** ». Le tunnel serait
+alors en deux temps — `/wc/store/v1/checkout` crée la commande (ce qu'on
+sait faire, c'est ainsi que #26516 et #26518 sont nées), puis `order/pay`
+encaisse. **À confirmer par relevé avant d'écrire quoi que ce soit.**
+
+⚠️ **Repli garanti si le headless bute** : toute commande WooCommerce porte
+un `payment_url` de la forme
+`/checkout/order-pay/{id}/?pay_for_order=true&key=…`. Rediriger le client
+dessus fonctionne à coup sûr, au prix d'une page WordPress dans le tunnel.
 
 ### 🧪 `cart/checkout` est une sonde GRATUITE
 
