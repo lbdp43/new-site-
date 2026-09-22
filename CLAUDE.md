@@ -157,9 +157,135 @@ l'intégration headless est réaliste, pas un contournement.
 ⚠️ Attendre une surprise dans le format de `payment_data`, comme pour
 WooPayments (où il a fallu dupliquer `payment_method`).
 
-**Cadrage, étapes et statut : `docs/paypal-checkout.md`.** Ne pas démarrer
-l'implémentation avant d'avoir les routes REST du plugin — elles ne sont pas
-devinables, et l'environnement de dev ne peut pas joindre le WordPress.
+**Cadrage, étapes et statut : `docs/paypal-checkout.md`.**
+
+### État au 22/09/2026
+
+Deux vraies commandes PayPal ont été lues via le MCP WooCommerce (#26042,
+#25926). Ce qu'elles établissent :
+
+- passerelle `ppcp`, **seule des quatre passerelles PayPal à être active**
+  (`ppcp_card`, `ppcp_googlepay`, `ppcp_applepay` sont désactivées) ;
+- `transaction_id` = ID de **capture** PayPal, meta `_ppcp_paypal_order_id`
+  = ID de **commande** PayPal, plus `_ppcp_environment`, `_paypal_fee`,
+  `_paypal_net` ;
+- donc **le front fait approuver une commande PayPal et transmet son ID ;
+  c'est WooCommerce qui capture côté serveur.** La dernière étape reste un
+  `POST /wc/store/v1/checkout`, comme pour la carte.
+
+**Livré côté Astro** : `src/lib/payment-methods.ts` (source unique du choix de
+passerelle + hypothèses PPCP regroupées), types `extensions.wc_ppcp` dans
+`woocommerce.ts`, et un sélecteur de moyen de paiement dans `CheckoutPage.tsx`
+— affiché seulement s'il y a un vrai choix, donc **tunnel carte inchangé**.
+
+✅ **Tunnel écrit et livré le 22/09/2026** — `PPCP_FLOW_IMPLEMENTED` est passé
+à `true`. Reste verrouillé par les deux variables d'environnement, **absentes
+de Vercel** : PayPal n'apparaît donc nulle part tant qu'un vrai paiement n'a
+pas été passé puis remboursé.
+
+### Flux PayPal implémenté
+
+1. `src/lib/paypal.ts` charge le SDK (`intent=capture`, `commit=true`, EUR,
+   `enable-funding=paylater`, `components=buttons` seulement).
+2. Clic → `wc.createPaypalOrder()` → `POST /wc-ppcp/v1/cart/order` → ID PayPal.
+3. Le client approuve dans la fenêtre PayPal (flux **popup**, pas redirection :
+   on garde la main sur la redirection finale).
+4. `onApprove` → `POST /wc/store/v1/checkout` avec `payment_method: "ppcp"` et
+   `ppcp_paypal_order_id` en `payment_data` — **le même endpoint que la
+   carte**, seul à renvoyer `order_id` + `order_key`.
+5. Redirection vers `/commande/confirmation`.
+
+Le front **ne capture jamais** : c'est WooCommerce qui le fait, donc commande,
+e-mails, stock et EasyBeer restent synchronisés comme pour une carte.
+
+⚠️ **CSP** : `vercel.json` autorise désormais `*.paypal.com` et
+`*.paypalobjects.com` en `script-src`, `frame-src`, `connect-src` et
+`form-action`. Sans ça le navigateur bloque le SDK **sans message clair** —
+piège coûteux à rediagnostiquer.
+
+⚠️ **Les callbacks PayPal sont figés au rendu des boutons.**
+`PayPalButtons.tsx` passe donc les valeurs du formulaire par une `ref`. Ne
+pas « simplifier » en lisant directement les props : l'adresse envoyée à
+WooCommerce serait celle d'avant la saisie.
+
+✅ **Routes REST relevées le 22/09/2026** — namespace **`wc-ppcp/v1`**, 13
+routes, listées dans `docs/paypal-checkout.md`. Les deux qui comptent :
+`POST /wc-ppcp/v1/cart/order` (crée la commande PayPal depuis le panier) et
+`POST /wc-ppcp/v1/cart/checkout` (crée la commande WC + capture).
+
+Deux enseignements :
+- **Le plugin a son propre tunnel, parallèle à la Store API.** Deux
+  architectures sont donc possibles et le relevé réseau tranchera : **A**
+  tout dans `wc-ppcp/v1` (et alors aucune inconnue sur `payment_data`), ou
+  **B** finalisation via `/wc/store/v1/checkout` avec l'ID en `payment_data`.
+- `cart/order-update-callback` prend un **`cart_token`** — le plugin raisonne
+  en session de panier Store API, celle que le front Astro gère déjà. Signal
+  très encourageant pour le headless.
+
+✅ **SDK PayPal relevé le 22/09/2026** : `client-id` complet (dans
+`docs/paypal-checkout.md`), `intent=capture`, `commit=true`, `currency=EUR`,
+**`enable-funding=paylater`** et **aucun `merchant-id`** (compte marchand
+direct). ⚠️ Le Pay Later est donc actif aujourd'hui sur le WordPress : ne pas
+l'oublier côté Astro, sinon la bascule retire une facilité de paiement.
+
+✅ **`cart/order` disséqué le 22/09/2026** (relevé réseau complet dans
+`docs/paypal-checkout.md`) :
+
+- l'appel passe par le **tunnel AJAX** `/?wc-ajax=wc_ppcp_frontend_request&path=/wc-ppcp/v1/cart/order`,
+  pas par `/wp-json/` — le tunnel démarre la session WooCommerce ;
+- le corps est le **formulaire de commande classique** à plat
+  (`billing_first_name`…), pas le format Store API ;
+- 🔑 **le champ qui porte l'ID PayPal est `ppcp_paypal_order_id`** — vu en
+  clair, vide à la création. C'était la dernière inconnue de fond ;
+- la réponse est une simple chaîne JSON : `"3Y617367DX331090K"` ;
+- ⚠️ un **`woocommerce-process-checkout-nonce`** est transmis : c'est le
+  nouvel obstacle, le front Astro n'a pas de moyen évident de l'obtenir.
+
+✅ **Test décisif exécuté le 22/09/2026** (console sur `test.`, aucun
+paiement) : le **même `Cart-Token`** renvoie un panier complet sur
+`/wc/store/v1/cart` (1 article, 5500) et **un corps vide** sur
+`/wc-ppcp/v1/cart/order` — 200, `application/json`, `""`. Pas de 403, pas
+d'erreur CORS, aucune plainte sur le nonce.
+
+**Le plugin ignore donc le `Cart-Token`** et cherche un cookie de session,
+que le front Astro n'a pas (autre domaine). Le nonce n'est pas l'obstacle
+immédiat : le plugin sort avant d'y arriver.
+
+🌉 **Corrigé dans `astro-cors` 1.3.0** (cf. section « Plugin WordPress CORS »)
+— deux hooks qui étendent le gestionnaire de session Store API aux routes
+`wc-ppcp` et chargent le panier.
+
+🎉 **PONT VÉRIFIÉ EN PRODUCTION le 22/09/2026.** Plugin installé sur le WP
+live, test console rejoué depuis `test.` :
+
+```
+PPCP → 200 | corps : "36L47978HU4613710"
+```
+
+Une vraie commande PayPal créée depuis le front Astro avec le seul
+`Cart-Token` — **sans cookie de session et sans nonce**. L'approche headless
+est validée sur le terrain. Un corps minimal suffit
+(`{ payment_method: "ppcp", context: "checkout" }`) : les dizaines de champs
+du formulaire classique ne sont pas nécessaires à cette étape.
+
+✅ **Chemin de finalisation tranché le 22/09/2026** par une sonde gratuite
+(commande PayPal non approuvée, donc incapturable) : `POST
+/wc/store/v1/checkout` avec `payment_method: "ppcp"` et
+`ppcp_paypal_order_id` en `payment_data` a créé la commande WooCommerce
+**#26516** (`order_key`, statut `pending`, `payment_status: "success"`).
+C'est donc **le même endpoint que la carte**. ⚠️ Commande #26516 à supprimer,
+résidu de la sonde.
+
+⛔ **Reste** : poser `PUBLIC_PPCP_ENABLED` et `PUBLIC_PAYPAL_CLIENT_ID` sur
+Vercel, **redéployer** (site statique : les `PUBLIC_*` sont figées au build),
+puis passer un vrai paiement sur `test.` et le rembourser. Mode opératoire
+dans `docs/paypal-checkout.md`. Aucun risque client : la boutique publique
+reste le WordPress sur `www.` jusqu'à la bascule DNS.
+
+Rappel : ces relevés se font **côté Guillaume**, l'environnement de dev ne
+joint pas le WordPress. Pistes de lecture du code du plugin épuisées le
+22/09/2026 (`downloads.wordpress.org`, `plugins.svn.wordpress.org`, miroirs
+CDN, `add_repo` GitHub) — ne pas repartir en chasse.
 
 ## Variables d'environnement
 
@@ -170,6 +296,12 @@ Variables `PUBLIC_*` → exposées côté client (non-secret par design).
 | `PUBLIC_WC_BASE_URL` | `https://www.labrasseriedesplantes.fr` | Base URL de la Store API |
 | `PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_live_51ETDmy…TvtxNs` | Clé Stripe publique (WooPayments) |
 | `PUBLIC_STRIPE_ACCOUNT_ID` | `acct_1Mg83iFkUaBLmhte` | Compte Stripe Connect de WooPayments |
+| `PUBLIC_PPCP_ENABLED` | **absente** | Futur interrupteur PayPal — ne pas créer tant que le tunnel n'est pas écrit |
+| `PUBLIC_PAYPAL_CLIENT_ID` | **absente** — valeur connue : `AeaxgVz2Vfk…9cr5MI` (complète dans `docs/paypal-checkout.md`) | `client-id` du SDK PayPal (clé publique, pas un secret) |
+
+⚠️ Les deux variables PayPal sont déclarées dans `.env.example` mais
+**neutralisées par le verrou `PPCP_FLOW_IMPLEMENTED`** — les poser sur Vercel
+n'active rien. Voir `docs/paypal-checkout.md`.
 
 Variables non-`PUBLIC_` (optionnelles, jamais exposées client) :
 
@@ -222,11 +354,31 @@ Chaque produit a un `wcId` (ID numérique WooCommerce).
 **Version installée sur le WP live : 1.1.0** (capture d'écran de l'admin,
 21/09/2026) — elle n'autorise que `test.` et localhost.
 
-**Version dans le dépôt : 1.2.0** — ajoute `www.` et l'apex. ⚠️ **Elle peut
-être téléversée dès maintenant**, sans attendre la bascule : autoriser une
-origine qui n'existe pas encore n'a aucun effet, le navigateur n'envoie un
-en-tête `Origin` que depuis le domaine réellement servi. L'installer tôt
-retire une étape du jour J.
+**Version dans le dépôt : 1.3.0** — deux apports par rapport à l'installée :
+
+- **1.2.0** ajoute `www.` et l'apex aux origines. ⚠️ **Téléversable dès
+  maintenant** sans attendre la bascule : autoriser une origine qui n'existe
+  pas encore n'a aucun effet, le navigateur n'envoie un en-tête `Origin` que
+  depuis le domaine réellement servi. L'installer tôt retire une étape du
+  jour J.
+- **1.3.0** ajoute le **pont de session PayPal** : WooCommerce n'installe son
+  gestionnaire de session « Store API » (celui qui lit l'en-tête
+  `Cart-Token`) que sur les routes `/wc/store/*`. Les routes `wc-ppcp`
+  cherchent un cookie, n'en trouvent pas depuis Astro, et renvoient un 200
+  avec un corps vide. Deux hooks corrigent ça :
+  `woocommerce_session_handler` (étend le gestionnaire) et `rest_api_init`
+  (appelle `wc_load_cart()`).
+
+  ✅ **Sans danger pour le checkout WordPress actuel** : tout est conditionné
+  à la présence de l'en-tête `Cart-Token`, que seul le front Astro envoie.
+  Le nom de classe est protégé par `class_exists()` — en cas de renommage
+  côté WooCommerce, on retombe sur le gestionnaire par défaut plutôt que de
+  provoquer une erreur fatale.
+
+  ⚠️ **Écrit sans pouvoir être testé** (l'env de dev ne joint pas le WP).
+  `php -l` passe, donc pas d'erreur fatale au téléversement, mais le
+  comportement reste à confirmer en rejouant le test console de
+  `docs/paypal-checkout.md`. Désactiver l'extension remet tout en état.
 
 L'origine est celle du site qui **affiche** les pages (Astro), pas celle qui
 sert l'API — donc le passage du WordPress sur `wp.labrasseriedesplantes.fr`
@@ -253,6 +405,20 @@ groupes pour des extensions non installées (ACF, Events Calendar, BuddyPress,
 Yoast, Rank Math, AIOSEO, Slim SEO, SEO Framework).
 
 C'est `mcp_wordpress` qu'il faut utiliser pour toute lecture du WordPress.
+
+**Limites relevées le 22/09/2026** — à connaître pour ne pas les redécouvrir :
+
+- **Pas d'accès aux options WP** ni aux réglages d'une extension. En
+  particulier, `wp_wc_list_payment_gateways` **retire volontairement** le bloc
+  `settings` de chaque passerelle (il contiendrait des identifiants d'API).
+- **Pas de lecture des routes REST** (`/wp-json/`) ni du code des extensions :
+  aucun outil générique de requête n'est exposé.
+- `wp_ability_woocommerce_orders_query` est **cassé** : ses dates ne valident
+  pas contre son propre schéma de sortie. Utiliser `wp_wc_list_orders`.
+- `wp_wc_list_orders` **ne renvoie pas `payment_method`** — impossible de
+  filtrer ou compter les commandes par passerelle sans tirer chaque commande.
+- Les **notes de commande sont invisibles** de `wp_list_comments` (WooCommerce
+  les masque de l'API commentaires). Passer par `wp_wc_list_order_notes`.
 Il lève enfin la limite qui pesait sur le projet : le domaine est bloqué par
 le proxy réseau de l'environnement de dev, donc c'était jusqu'ici le seul
 moyen d'accéder au WP — et il ne marchait pas.
@@ -284,18 +450,22 @@ et ce que ça révèle :
 
    ℹ️ EasyBeer est aussi accessible en MCP dans les sessions Claude
    (`mcp__easybeer__*`) : commandes, clients, stocks, indicateurs de vente.
-3. **Trois passerelles de paiement, pas deux.** En plus de WooPayments et
-   PayPal, **SumUp Payment Gateway 2.17.1** est actif. Il n'apparaît pas dans
-   les `payment_methods` de la Store API — donc probablement pas activé comme
-   moyen de paiement, ou incompatible Blocks. À vérifier.
+3. **Trois extensions de paiement, mais deux passerelles actives.** En plus de
+   WooPayments et PayPal, **SumUp Payment Gateway 2.17.1** est installé.
+   ✅ **Tranché le 22/09/2026** via `wp_wc_list_payment_gateways` : la
+   passerelle `sumup` est **désactivée** (`enabled: false`). Elle n'apparaît
+   donc légitimement pas dans les `payment_methods` de la Store API, et n'est
+   **pas un sujet pour la bascule**. Ne pas rouvrir la question.
 
 ### ⚠️ Deux extensions qui touchent DIRECTEMENT le checkout Astro
 
 - **Checkout Field Editor for WooCommerce 2.2.0** — personnalise les champs
-  de la page de commande. Si des champs personnalisés **obligatoires** ont
-  été ajoutés, le checkout Astro ne les envoie pas : la commande peut être
-  refusée, ou partir sans une information dont l'équipe a besoin. **À
-  inspecter avant la bascule.**
+  de la page de commande. ✅ **Risque levé le 22/09/2026** : les `meta_data`
+  de quatre commandes récentes passées par le checkout WordPress (#26042,
+  #26012, #25953, #25926) ne contiennent **aucun champ personnalisé** — que
+  `is_vat_exempt`, l'attribution WC, les métadonnées de paiement et le suivi.
+  L'extension est active mais **ne collecte rien de plus**. À re-vérifier
+  seulement si quelqu'un touche à ses réglages.
 - **Age Gate 3.7.3** — vérification d'âge, obligatoire pour l'alcool.
   ✅ Le site Astro a bien son propre `src/components/AgeGate.astro`
   (18 ans, France). Rien de perdu à la bascule.
@@ -471,6 +641,9 @@ remplacer le contenu de la colonne gauche.
 |---|---|
 | `src/lib/woocommerce.ts` | Client Store API (fetch wrapper, Cart-Token, Nonce) |
 | `src/lib/cart-store.tsx` | Store de panier partagé entre îles Astro (module singleton + `useSyncExternalStore`, pas de Context) |
+| `src/lib/paypal.ts` | Chargeur du SDK JS PayPal (mémoïsé). Paramètres calqués sur ceux du checkout WordPress — dont `enable-funding=paylater`. |
+| `src/components/cart/PayPalButtons.tsx` | Boutons PayPal du checkout : création de commande, approbation, finalisation Store API, annulation et erreurs. ⚠️ Les valeurs du formulaire passent par une `ref` (les callbacks PayPal sont figés au rendu). |
+| `src/lib/payment-methods.ts` | **Source unique** du choix de moyen de paiement : croise `cart.payment_methods` (déclaré par WC) avec ce que le front sait faire. Porte le verrou `PPCP_FLOW_IMPLEMENTED` et toutes les hypothèses PayPal, regroupées et annotées. Ne jamais coder une liste de passerelles en dur ailleurs. |
 | `src/components/cart/CartIcon.tsx` | Icône panier Header (badge + total) |
 | `src/components/cart/AddToCartButton.tsx` | Bouton ajouter au panier fiche produit |
 | `src/components/cart/CartPage.tsx` | Page panier (tableau + récap + code promo) |
@@ -1277,6 +1450,12 @@ qui précède cette suppression.
    rembourser depuis l'admin WooCommerce. Vérifier que la commande tombe bien
    dans le WP admin comme une commande classique, que l'email part, que
    EasyBeerr reçoit.
+
+   ℹ️ 22/09/2026 : le plugin PayPal expose un **mode sandbox** (réglages API,
+   liste « Environnement »). Il permettrait de tester sans argent réel — mais
+   il s'applique à **tout le site**, donc il couperait PayPal pour les vrais
+   clients pendant le test. Arbitrage à rendre par Guillaume le moment venu.
+   Rien d'équivalent côté WooPayments, qui reste en mode LIVE.
 2. ~~**Régénérer la clé REST API WC "Astro site"**~~ ✅ **FAIT (avril 2026)** —
    clé régénérée côté WooCommerce + injectée dans Vercel env vars
    (`WC_CONSUMER_KEY` + `WC_CONSUMER_SECRET` en Production + Preview).
