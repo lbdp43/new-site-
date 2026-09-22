@@ -366,6 +366,36 @@ total n'a pas bougé** avant de débiter.
 **Règle générale qui sort de tout ça** : *ne jamais faire payer un montant
 que le client n'a pas vu à l'écran.*
 
+### ✅ VALIDÉ DE BOUT EN BOUT — commande #26535, 22/09/2026
+
+Le premier test qui réunit **tous** les critères, et pour la bonne raison :
+
+| Critère | Valeur |
+|---|---|
+| Statut | **processing** |
+| `transaction_id` | **`70T940984M4093806`** |
+| **Total** | **16,00 €** — celui que le client a vu et approuvé |
+| **Livraison** | **« Retrait à la Brasserie », `local_pickup`, 0,00 €** — le choix du client a tenu |
+| meta `_ppcp_paypal_order_id` | `59267861CM888731T` |
+| Notes de commande | « Commande PayPal créée. ID de capture… » + « Paiement via PayPal » |
+| E-mails | les deux partis (boutique + client) |
+| Écran client | **page de confirmation** |
+
+**Le tunnel PayPal headless est opérationnel** : le client ne quitte pas le
+site Astro, la commande porte le bon montant, le bon mode de livraison, et
+WooCommerce fait le reste (e-mails, stock, TVA).
+
+⚠️ **Ce qui n'est PAS validé pour autant** :
+- le **tunnel carte (WooPayments)** n'a pas été rejoué depuis qu'il a reçu
+  la même protection de montant. À tester avant la bascule ;
+- la réception dans **EasyBeer** n'a pas été vérifiée.
+
+⚠️ **Remboursements** : #26530 a été remboursée en **manuel**
+(`refunded_payment: false`) — WooCommerce a écrit « Remboursée » dans ses
+livres **sans rien demander à PayPal**. Sur une vraie commande client, ça
+laisse le client débité en croyant être remboursé. Toujours utiliser
+« Rembourser via PayPal », pas « manuellement ».
+
 ### 🚨 Pas de redirection automatique vers la page de paiement WordPress
 
 Après un échec, le composant renvoyait le client vers `order.payUrl` au bout
@@ -1889,17 +1919,24 @@ qui précède cette suppression.
 
 ## Backlog (ce qui reste à faire)
 
-1. ~~**Tester un paiement réel PayPal**~~ ✅ **FAIT le 22/09/2026** —
-   commande **#26530**, 16,00 €, statut « En cours »,
-   `transaction_id: 3PU60583A60848358`, e-mail marchand PayPal reçu, e-mail
-   WooCommerce parti. Le tunnel headless est validé de bout en bout.
+1. ~~**Tester un paiement réel PayPal**~~ ✅ **VALIDÉ le 22/09/2026** —
+   commande **#26535** : processing, `transaction_id: 70T940984M4093806`,
+   **16,00 €** (le montant approuvé), **« Retrait à la Brasserie » à 0,00 €**
+   (le choix du client a tenu), les deux e-mails partis, page de confirmation
+   affichée. Le tunnel headless est opérationnel.
 
-   ⛔ **Reste à faire sur cette commande** : la **rembourser** depuis l'admin
-   WooCommerce (c'est un vrai paiement de 16 €, frais PayPal 0,81 €), et
-   vérifier au passage que **EasyBeer** l'a bien reçue.
+   ⛔ **Commandes de test à traiter** :
+   - **#26535** — vrai paiement de 16 €, **à rembourser via PayPal**
+   - **#26530** — remboursée en **manuel**, donc les 16 € sont **toujours
+     chez PayPal** (transaction `3PU60583A60848358`). À rembourser pour de
+     bon depuis le compte marchand.
+   - **#26534** — fantôme à 31 €, jamais payée, à supprimer
 
-   ⛔ **Reste à faire côté carte** : le même test de bout en bout avec
-   **WooPayments**, qui n'a jamais été rejoué depuis ces changements.
+   ⛔ **Vérifier qu'EasyBeer a reçu #26535.**
+
+   ⛔ **Reste à faire côté carte** : le test de bout en bout avec
+   **WooPayments**, jamais rejoué — et qui vient justement de recevoir la
+   vérification de montant.
 
    ℹ️ 22/09/2026 : le plugin PayPal expose un **mode sandbox** (réglages API,
    liste « Environnement »). Il permettrait de tester sans argent réel — mais
