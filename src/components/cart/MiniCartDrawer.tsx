@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useCart, formatMoney, useMiniCart, closeMiniCart } from "../../lib/cart-store";
+import { addMinor, useCart, formatMoney, useMiniCart, closeMiniCart } from "../../lib/cart-store";
 import { decodeEntities } from "../../lib/wc-text";
 
 /**
@@ -105,7 +105,12 @@ export default function MiniCartDrawer() {
             <ul className="space-y-4">
               {items.map((item) => {
                 const img = item.images?.[0];
-                const linePrice = formatMoney(item.totals.line_total, minorUnit, currencySymbol);
+                // TTC — cf. la note fiscale sur `WcCart.totals`.
+                const linePrice = formatMoney(
+                  addMinor(item.totals.line_total, item.totals.line_total_tax),
+                  minorUnit,
+                  currencySymbol,
+                );
                 const variation = (item.variation ?? [])
                   .map((v) => decodeEntities(v.value))
                   .join(" · ");

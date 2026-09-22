@@ -190,9 +190,11 @@ pas été passé puis remboursé.
 2. Clic → `wc.createPaypalOrder()` → `POST /wc-ppcp/v1/cart/order` → ID PayPal.
 3. Le client approuve dans la fenêtre PayPal (flux **popup**, pas redirection :
    on garde la main sur la redirection finale).
-4. `onApprove` → `POST /wc/store/v1/checkout` avec `payment_method: "ppcp"` et
-   `ppcp_paypal_order_id` en `payment_data` — **le même endpoint que la
-   carte**, seul à renvoyer `order_id` + `order_key`.
+4. `onApprove` → `POST /wc-ppcp/v1/cart/checkout` avec `ppcp_paypal_order_id`
+   — **la route propre de l'extension, PAS celle de la carte.** Elle répond
+   comme le checkout classique (`{result, redirect}`) : on extrait l'ID et la
+   clé de commande de l'URL « commande reçue ». Tout ce qui n'est pas une
+   telle URL lève une erreur (cf. `wc.finalizePaypalOrder`).
 5. Redirection vers `/commande/confirmation`.
 
 Le front **ne capture jamais** : c'est WooCommerce qui le fait, donc commande,
@@ -283,13 +285,16 @@ est validée sur le terrain. Un corps minimal suffit
 (`{ payment_method: "ppcp", context: "checkout" }`) : les dizaines de champs
 du formulaire classique ne sont pas nécessaires à cette étape.
 
-✅ **Chemin de finalisation tranché le 22/09/2026** par une sonde gratuite
-(commande PayPal non approuvée, donc incapturable) : `POST
-/wc/store/v1/checkout` avec `payment_method: "ppcp"` et
-`ppcp_paypal_order_id` en `payment_data` a créé la commande WooCommerce
-**#26516** (`order_key`, statut `pending`, `payment_status: "success"`).
-C'est donc **le même endpoint que la carte**. ⚠️ Commande #26516 à supprimer,
-résidu de la sonde.
+❌ **Conclusion ERRONÉE du 22/09/2026, conservée ici comme mise en garde** :
+une sonde avait créé la commande **#26516** via `POST /wc/store/v1/checkout`
+avec `ppcp_paypal_order_id` en `payment_data`, réponse `payment_status:
+"success"` — et on en avait déduit « même endpoint que la carte ». Faux : la
+commande était créée mais **jamais encaissée**. Voir la section « commande
+fantôme » pour le chemin réel (`/wc-ppcp/v1/cart/checkout`).
+
+**Leçon** : « une commande WooCommerce est apparue » ne prouve pas qu'un
+paiement a eu lieu. Le seul critère est `transaction_id` non vide et un
+statut « En cours ».
 
 ## 🚨 PayPal — la commande fantôme du 22/09/2026 (À LIRE)
 
@@ -313,24 +318,32 @@ l'encaissement non.**
 
 ### Les deux enseignements
 
-1. 🔑 **`ppcp_paypal_order_id` n'est PAS la bonne clé pour la Store API.**
-   Elle vient du formulaire de commande **classique**. Envoyée dans
-   `payment_data`, le plugin ne la lit pas : d'où l'absence de la métadonnée
-   et l'absence de capture.
+1. 🔑 **Ce n'est PAS un problème de nom de champ — c'est la MAUVAISE ROUTE.**
 
-   ✅ **Le nom réel est `paypal_order_id`** — établi le 22/09/2026 sans
-   dépenser un centime. `POST /wc-ppcp/v1/cart/checkout` **renvoie en clair
-   ce qu'il a compris de la requête**, encodé en base64 dans le paramètre
-   `_ppcp_order_review` de sa `redirect` :
+   `POST /wc/store/v1/checkout` avec `ppcp_paypal_order_id` en `payment_data`
+   crée bien une commande WooCommerce, mais **ne l'encaisse jamais**. Le
+   `payment_data` de la Store API n'atteint pas la logique PayPal.
+
+   ✅ **La bonne route est `POST /wc-ppcp/v1/cart/checkout`**, celle de
+   l'extension — établi le 22/09/2026 sans dépenser un centime. Cette route
+   renvoie dans sa `redirect` un paramètre `_ppcp_order_review` qui contient,
+   en base64, **ce qu'elle a compris de la requête**. Sonde A/B/C :
 
    ```
-   {"payment_method":"ppcp","paypal_order_id":null,"fields":[]}
+   envoyé paypal_order_id      → {"paypal_order":null}                 ignoré
+   envoyé ppcp_paypal_order_id → {"paypal_order":"4XS78307X1722144X"}  ✅
+   envoyé rien                 → {"paypal_order":null}                 témoin
    ```
 
-   Le plugin a donc **deux conventions de nommage** — piège coûteux :
-   `ppcp_paypal_order_id` dans le formulaire classique (préfixé pour ne pas
-   entrer en collision dans `$_POST`), `paypal_order_id` dans sa propre
-   couche REST. J'avais repris la première pour appeler la seconde.
+   ⚠️ **Deux noms cohabitent** : le champ **envoyé** est
+   `ppcp_paypal_order_id`, le champ **interne** `paypal_order`. Ne pas
+   confondre, et ne pas « corriger » l'un en l'autre.
+
+   ⚠️ **Erreur de méthode à ne pas refaire** : une première lecture de ce
+   `_ppcp_order_review` avait conclu à `paypal_order_id`. Le base64 avait été
+   reconstitué à partir d'une capture d'écran en devinant les caractères
+   illisibles — la reconstruction donnait un JSON valide, donc crédible, mais
+   fausse. **Ne jamais deviner un base64 : le faire décoder en console.**
 
 2. ⚠️ **`payment_status: "success"` NE VEUT PAS DIRE « payé ».** Le plugin
    renvoie « success » aussi bien pour « c'est payé » que pour « la commande
@@ -370,6 +383,41 @@ Rappel : ces relevés se font **côté Guillaume**, l'environnement de dev ne
 joint pas le WordPress. Pistes de lecture du code du plugin épuisées le
 22/09/2026 (`downloads.wordpress.org`, `plugins.svn.wordpress.org`, miroirs
 CDN, `add_repo` GitHub) — ne pas repartir en chasse.
+
+## 💶 Store API : tous les montants sont HORS TAXE (sauf `total_price`)
+
+Piège contre-intuitif sur une boutique française, repéré par Guillaume le
+22/09/2026 : le checkout annonçait **« Forfait 12,50 € »** pour un forfait
+facturé **15 € TTC**.
+
+WooCommerce est réglé en prix TTC (`prices_include_tax: true`), les fiches
+produit affichent 55 €… mais la Store API renvoie les montants **hors taxe**,
+avec la TVA dans un champ séparé :
+
+| Champ | Contenu | Son pendant TVA |
+|---|---|---|
+| `totals.total_items` | HT | `total_items_tax` |
+| `totals.total_shipping` | HT | `total_shipping_tax` |
+| `items[].totals.line_total` | HT | `line_total_tax` |
+| `shipping_rates[].price` | HT | `taxes` |
+| **`totals.total_price`** | **TTC** | — (seul montant TTC) |
+
+⚠️ `items[].prices.price` (prix unitaire), lui, **suit** le réglage
+d'affichage de la boutique : il était donc TTC. Le panier affichait « 55,00 €
+l'unité / 45,83 € le sous-total » sur la même ligne, pour une quantité de 1.
+
+⚠️ **Pourquoi ça a survécu si longtemps** : les deux présentations tombent
+juste arithmétiquement (45,83 + 12,50 + 11,67 de TVA = 70,00 comme
+55,00 + 15,00 = 70,00). Un contrôle par l'addition ne l'aurait pas détecté.
+En revanche le récapitulatif, qui dit « **dont** TVA » (donc comprise), était
+bel et bien faux : 45,83 + 12,50 = 58,33 pour un total affiché à 70,00.
+
+**Règle** : tout montant montré au client se calcule en TTC avec
+`addMinor()` (`src/lib/cart-store.tsx`), et la TVA s'affiche en « dont TVA ».
+Ne jamais afficher un `total_*` brut, sauf `total_price`.
+
+Appliqué au panier, au mini-panier et au checkout (lignes, sous-total,
+livraison, sélecteur de mode de livraison).
 
 ## Variables d'environnement
 

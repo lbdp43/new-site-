@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cartActions, setCart } from "../../lib/cart-store";
 import { wc, type WcAddress } from "../../lib/woocommerce";
-import { buildPpcpPaymentData } from "../../lib/payment-methods";
 import { loadPayPalSdk } from "../../lib/paypal";
 
 interface Props {
@@ -39,10 +38,16 @@ function missingFields(billing: WcAddress, shipping: WcAddress): string[] {
  *      un identifiant de commande PayPal ;
  *   2. PayPal ouvre sa fenêtre, le client approuve (`commit=true` : il valide
  *      définitivement là-bas) ;
- *   3. `onApprove` envoie cet identifiant à `POST /wc/store/v1/checkout` dans
- *      `payment_data.ppcp_paypal_order_id` — le même endpoint que la carte,
- *      qui crée la commande WooCommerce et déclenche la capture côté serveur ;
+ *   3. `onApprove` envoie cet identifiant à `POST /wc-ppcp/v1/cart/checkout`
+ *      dans `ppcp_paypal_order_id` — la route propre de l'extension, la seule
+ *      dont on ait la preuve qu'elle lit ce champ (cf. `finalizePaypalOrder`).
+ *      Elle crée la commande WooCommerce et déclenche la capture côté serveur ;
  *   4. redirection vers la page de confirmation Astro.
+ *
+ * ⚠️ Ce n'est PAS le même endpoint que la carte, contrairement à ce que cette
+ * doc a longtemps affirmé. `/wc/store/v1/checkout` avec l'identifiant en
+ * `payment_data` crée bien une commande, mais sans jamais l'encaisser : c'est
+ * ce qui a produit la commande fantôme #26518.
  *
  * Le front ne capture jamais lui-même : c'est WooCommerce qui le fait, ce qui
  * garantit que la commande, les e-mails, le stock et EasyBeer restent
@@ -121,60 +126,29 @@ export default function PayPalButtons({
             try {
               const { billing: b, shipping: s, customerNote: note } = latest.current;
 
-              const result = await wc.checkout({
+              // L'extension PayPal travaille sur la session WooCommerce : on
+              // y pousse l'adresse et la note AVANT de finaliser, puisque
+              // `cart/checkout` ne les prend pas dans son corps de requête.
+              await cartActions.updateCustomer({
                 billing_address: b,
                 shipping_address: s,
-                customer_note: note || undefined,
-                payment_method: "ppcp",
-                payment_data: buildPpcpPaymentData(data.orderID),
               });
 
-              // ⚠️ NE JAMAIS se fier au seul `payment_status`.
-              //
-              // Le 22/09/2026, un vrai paiement de test a produit une
-              // commande WooCommerce #26518 en statut `pending`, sans
-              // `transaction_id` ni métadonnée `_ppcp_paypal_order_id` — donc
-              // JAMAIS encaissée — alors que la réponse annonçait
-              // `payment_status: "success"`. Le client a vu « Merci pour
-              // votre commande » pour une commande impayée.
-              //
-              // Le plugin renvoie en effet « success » aussi bien pour « la
-              // commande est payée » que pour « la commande est créée, il
-              // reste à la faire approuver chez PayPal » — auquel cas il
-              // joint une `redirect_url` vers paypal.com.
-              //
-              // On exige donc trois conditions, et on refuse au moindre
-              // doute : une page de confirmation mensongère est bien pire
-              // qu'un message d'échec.
-              const redirect = result.payment_result.redirect_url ?? "";
-              const stillNeedsPayPal = /paypal\.com/i.test(redirect);
-              const notPaidYet =
-                result.status === "pending" || result.status === "failed";
-
-              if (
-                result.payment_result.payment_status !== "success" ||
-                stillNeedsPayPal ||
-                notPaidYet
-              ) {
-                console.error("[PayPal] finalisation incomplète", {
-                  status: result.status,
-                  payment_status: result.payment_result.payment_status,
-                  redirect,
-                });
-                onError(
-                  "Le paiement n'a pas pu être finalisé et aucun montant n'a été débité. " +
-                    "Choisis la carte bancaire, ou contacte-nous — ta commande n'a pas été enregistrée comme payée.",
-                );
-                return;
-              }
+              // Finalisation par la route propre de l'extension. Elle lève
+              // une erreur si la commande n'a pas réellement été encaissée —
+              // voir `wc.finalizePaypalOrder`.
+              const { orderId, orderKey } = await wc.finalizePaypalOrder(
+                data.orderID,
+                note,
+              );
 
               // Même nettoyage que le tunnel carte : sans clearSession(), le
               // prochain getCart() ressort le panier en cache et l'icône du
               // header garde les anciens articles après un paiement réussi.
               setCart(null);
               wc.clearSession();
-              window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
-                result.order_key,
+              window.location.href = `/commande/confirmation?order=${orderId}&key=${encodeURIComponent(
+                orderKey,
               )}`;
             } catch (err) {
               onError(

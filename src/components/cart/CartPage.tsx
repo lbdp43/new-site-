@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ensureCartLoaded, formatMoney, useCart } from "../../lib/cart-store";
+import { addMinor, ensureCartLoaded, formatMoney, useCart } from "../../lib/cart-store";
 import { decodeEntities } from "../../lib/wc-text";
 
 export default function CartPage() {
@@ -98,7 +98,14 @@ export default function CartPage() {
         <ul className="divide-y divide-forest-100/80">
           {cart?.items.map((item) => {
             const image = item.images[0];
-            const subtotal = formatMoney(item.totals.line_total, minorUnit, currencySymbol);
+            // TTC, comme le prix unitaire juste à côté (`prices.price` suit le
+            // réglage d'affichage de la boutique, `totals.*` non) : sans ça la
+            // même ligne affichait 55,00 € l'unité et 45,83 € le sous-total.
+            const subtotal = formatMoney(
+              addMinor(item.totals.line_total, item.totals.line_total_tax),
+              minorUnit,
+              currencySymbol,
+            );
             const unit = formatMoney(item.prices.price, minorUnit, currencySymbol);
             return (
               <li key={item.key} className="py-5 md:grid md:grid-cols-[1fr_120px_150px_100px_40px] md:gap-4 md:items-center">
@@ -195,19 +202,32 @@ export default function CartPage() {
         <div className="rounded-2xl bg-cream-50 border border-forest-100 p-6 shadow-cream-lg">
           <h2 className="font-display text-xl text-forest-900 mb-5">Récapitulatif</h2>
 
+          {/* Récapitulatif entièrement TTC — cf. la note fiscale sur
+              `WcCart.totals` : les montants de la Store API sont hors taxe,
+              seul `total_price` est TTC. Avec « dont TVA » (donc comprise),
+              sous-total + livraison doivent égaler le total. */}
           <dl className="space-y-3 text-sm">
             <div className="flex justify-between text-ink-700">
               <dt>Sous-total</dt>
               <dd className="tabular-nums">
-                {cart && formatMoney(cart.totals.total_items, minorUnit, currencySymbol)}
+                {cart &&
+                  formatMoney(
+                    addMinor(cart.totals.total_items, cart.totals.total_items_tax),
+                    minorUnit,
+                    currencySymbol,
+                  )}
               </dd>
             </div>
 
-            {cart && Number(cart.totals.total_shipping) > 0 ? (
+            {cart && Number(addMinor(cart.totals.total_shipping, cart.totals.total_shipping_tax)) > 0 ? (
               <div className="flex justify-between text-ink-700">
                 <dt>Livraison</dt>
                 <dd className="tabular-nums">
-                  {formatMoney(cart.totals.total_shipping, minorUnit, currencySymbol)}
+                  {formatMoney(
+                    addMinor(cart.totals.total_shipping, cart.totals.total_shipping_tax),
+                    minorUnit,
+                    currencySymbol,
+                  )}
                 </dd>
               </div>
             ) : cart?.needs_shipping ? (
