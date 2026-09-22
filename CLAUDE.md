@@ -195,20 +195,75 @@ paiement WordPress a été construit, montré, puis **écarté** : il fonctionna
 (commande #26521 créée et page affichée correctement) mais sortait le client
 du site. Ne pas le rétablir sans nouvel arbitrage.
 
-**L'ordre des opérations est TOUTE la sûreté du tunnel :**
+✅ **PREMIER PAIEMENT RÉUSSI DE BOUT EN BOUT — commande #26530, 22/09/2026.**
+Les trois preuves, enfin réunies :
+
+| Preuve | Valeur |
+|---|---|
+| Statut WooCommerce | **processing** (« En cours ») |
+| `transaction_id` | **`3PU60583A60848358`** (non vide) |
+| `date_paid` | 2026-09-22 12:40:54 |
+| meta `_ppcp_paypal_order_id` | `1E06925614160531M` |
+| `_paypal_fee` / `_paypal_net` | 0,81 € / 15,19 € |
+| Livraison | **Retrait à la Brasserie, 0,00 €** — le correctif tient |
+| E-mail marchand PayPal | « Vous avez reçu un paiement de 16,00 € » |
+| E-mail WooCommerce | « Nouvelle commande : #26530 » |
+
+**Le tunnel headless fonctionne.** Le client n'a jamais quitté `test.`
+
+**L'ordre des opérations :**
 
 1. `wc.createPaypalOrder()` → `POST /wc-ppcp/v1/cart/order` → commande PayPal.
    **Rien n'est débité** : avec `intent=capture`, l'argent ne bouge qu'à
    l'encaissement.
 2. Le client approuve dans la fenêtre PayPal (popup).
-3. `POST /wc/store/v1/checkout` → **la commande WooCommerce est créée**, en
-   attente, toujours sans mouvement d'argent.
-4. `wc.payExistingOrder()` → `POST /lbdp-astro/v1/pay-order`, route maison du
-   plugin `astro-cors` ≥ 1.4.0 : elle appelle `process_payment()` sur la
-   passerelle **côté serveur**. C'est là, et seulement là, que l'argent part.
-5. On relit le statut réel de la commande (`is_paid` + `transaction_id`) avant
-   d'afficher quoi que ce soit, puis redirection vers
-   `/commande/confirmation`.
+3. `POST /wc/store/v1/checkout` → **la commande WooCommerce est créée, ET
+   encaissée**. Voir ci-dessous : c'est la surprise de #26530.
+4. `wc.payExistingOrder()` → `POST /lbdp-astro/v1/pay-order` — **filet**,
+   appelé seulement si l'étape 3 a laissé la commande en attente.
+5. On n'affiche la confirmation que sur un **statut de commande payé**
+   (`processing`, `completed`, `on-hold`), lu chez WooCommerce.
+
+### 🔑 `/wc/store/v1/checkout` ENCAISSE — quand la session porte l'approbation
+
+**Découvert sur #26530.** La console montrait un `409 Conflict` sur
+`/lbdp-astro/v1/pay-order`, alors que la commande était payée. Explication :
+l'étape 3 avait **déjà encaissé**, donc le verrou anti-double-encaissement de
+la route maison a fait son travail en refusant.
+
+**Pourquoi ça marche maintenant alors que #26518 était restée fantôme** : le
+plugin PPCP retrouve l'ID de la commande PayPal **dans la session WooCommerce**,
+celle que le pont d'`astro-cors` ≥ 1.3.0 rattache au `Cart-Token`. Le
+`payment_data` de la Store API n'y est pour rien — on n'y met que
+`payment_method`.
+
+⚠️ **Ne pas en conclure que `pay-order` est inutile.** Rien ne garantit que la
+session porte toujours l'approbation ; la route reste le filet, et c'est elle
+qui rendait le tunnel possible avant qu'on comprenne ça.
+
+### 🚨 Un 409 sur `pay-order` est un SUCCÈS, pas un échec
+
+**Le bug que #26530 a révélé** : le paiement a réussi, mais le client est
+resté sur un écran **« Panier vide »**, sans confirmation ni numéro de
+commande. De quoi le pousser à payer une deuxième fois.
+
+Enchaînement : `/wc/store/v1/checkout` encaisse et **vide le panier** →
+`pay-order` renvoie 409 → le front partait dans sa branche d'erreur → mais
+`CheckoutPage` affichait déjà « Panier vide », qui masque le message.
+
+**Corrigé le 22/09/2026** :
+- `WcHttpError` (nouveau) conserve le **code HTTP et le corps** de la réponse —
+  un `Error` nu les perdait, et le 409 porte justement `data.order_status` ;
+- `payExistingOrder()` traite un 409 dont le statut est payé comme un succès ;
+- `PayPalCheckoutButton` n'appelle plus `pay-order` du tout quand l'étape 3
+  a déjà renvoyé un statut payé ;
+- la confirmation ne dépend plus d'un `transaction_id` côté front : un statut
+  payé venu de WooCommerce fait foi. Le 409 ne renvoie pas le
+  `transaction_id`, et **on ne l'invente pas**.
+
+⚠️ **Règle** : `PAID_ORDER_STATUSES` (`woocommerce.ts`) est la liste de
+référence — `processing`, `completed`, `on-hold`. **`refunded` n'en fait pas
+partie** et ne doit jamais y entrer.
 
 🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Ainsi tout débit
 est nécessairement rattaché à une commande : visible en back-office,
@@ -249,19 +304,22 @@ silencieusement.
 empêche *notre* code de re-basculer sur le retrait, pas WooCommerce de
 réinitialiser sa sélection côté serveur.
 
-**C'est très probablement la cause de l'échec d'encaissement du 22/09/2026**,
-et non un défaut du tunnel : `astro-cors` **1.4.0 est bien actif** sur le WP
-live (vérifié par `wp_list_plugins`), donc la route d'encaissement existait.
-#26523 porte `date_modified` **1 seconde** après sa création, `transaction_id`
-vide et **aucune note** : `process_payment()` a échoué immédiatement, ce que
-fait une passerelle dont la commande PayPal approuvée ne couvre pas le montant.
-À reconfirmer au prochain test réel.
+✅ **CONFIRMÉ** : c'était bien la cause de l'échec de #26523. Une fois le
+correctif déployé, #26530 est passée du premier coup, avec « Retrait à la
+Brasserie » à 0,00 € et un total de 16,00 € conforme à ce que le client avait
+approuvé chez PayPal.
 
-### 💳 Aucun test n'a jamais encaissé — et comment on l'a su
+### 💳 Aucun test n'avait encaissé AVANT #26530 — et comment on l'a su
 
-**Le compte marchand PayPal de la SAS BRASSERIE DES PLANTES ne montre AUCUNE
-transaction le 22/09/2026.** Le dernier paiement reçu date du **09/09/2026**
-(70 €). Vérifié sur capture d'écran du compte marchand.
+ℹ️ Section écrite **avant** le paiement réussi de #26530. Elle reste valable
+pour tous les tests qui l'ont précédé, et la règle de méthode qu'elle pose
+est celle qui a fini par trancher : c'est l'e-mail du **compte marchand**
+(« Vous avez reçu un paiement de 16,00 € ») qui a prouvé le succès de #26530,
+pas la page de confirmation.
+
+**Le compte marchand PayPal de la SAS BRASSERIE DES PLANTES ne montrait AUCUNE
+transaction le 22/09/2026** avant #26530. Le dernier paiement reçu datait du
+**09/09/2026** (70 €). Vérifié sur capture d'écran du compte marchand.
 
 Les lignes de 16 € apparues sur le relevé **personnel** de Guillaume pendant
 les tests portent la mention **« Restitué »** : ce sont des **autorisations**
@@ -1760,10 +1818,17 @@ qui précède cette suppression.
 
 ## Backlog (ce qui reste à faire)
 
-1. **Tester un paiement réel** de 1-2 € en conditions réelles, puis
-   rembourser depuis l'admin WooCommerce. Vérifier que la commande tombe bien
-   dans le WP admin comme une commande classique, que l'email part, que
-   EasyBeerr reçoit.
+1. ~~**Tester un paiement réel PayPal**~~ ✅ **FAIT le 22/09/2026** —
+   commande **#26530**, 16,00 €, statut « En cours »,
+   `transaction_id: 3PU60583A60848358`, e-mail marchand PayPal reçu, e-mail
+   WooCommerce parti. Le tunnel headless est validé de bout en bout.
+
+   ⛔ **Reste à faire sur cette commande** : la **rembourser** depuis l'admin
+   WooCommerce (c'est un vrai paiement de 16 €, frais PayPal 0,81 €), et
+   vérifier au passage que **EasyBeer** l'a bien reçue.
+
+   ⛔ **Reste à faire côté carte** : le même test de bout en bout avec
+   **WooPayments**, qui n'a jamais été rejoué depuis ces changements.
 
    ℹ️ 22/09/2026 : le plugin PayPal expose un **mode sandbox** (réglages API,
    liste « Environnement »). Il permettrait de tester sans argent réel — mais
