@@ -8,9 +8,6 @@
  * change à chaque mutation : on le met à jour depuis les headers de réponse.
  */
 
-// `payment-methods.ts` ne dépend de ce fichier que pour des TYPES (effacés au
-// build), donc cet import de valeur ne crée pas de cycle à l'exécution.
-import { buildPpcpPaymentData } from "./payment-methods";
 
 const BASE = import.meta.env.PUBLIC_WC_BASE_URL as string | undefined;
 
@@ -271,6 +268,26 @@ export interface WcPpcpExtension {
 
 // ---------- API ----------
 
+/**
+ * Page de paiement d'une commande existante, côté WooCommerce.
+ *
+ * Forme relevée sur de vraies commandes — c'est le champ `payment_url` que
+ * WooCommerce renvoie lui-même (ex. #26519) :
+ *
+ *   {base}/checkout/order-pay/{id}/?pay_for_order=true&key=wc_order_xxx
+ *
+ * ⚠️ `/checkout/` est le **slug de la page de commande WordPress**. C'est la
+ * seule valeur de ce fichier qui dépende d'un réglage WP : la renommer
+ * là-bas casserait le tunnel PayPal ici.
+ */
+function orderPayUrl(orderId: string, orderKey: string): string {
+  const base = (BASE ?? "").replace(/\/$/, "");
+  return (
+    `${base}/checkout/order-pay/${encodeURIComponent(orderId)}/` +
+    `?pay_for_order=true&key=${encodeURIComponent(orderKey)}`
+  );
+}
+
 export const wc = {
   async listProducts(params: { per_page?: number; search?: string } = {}): Promise<WcProduct[]> {
     const q = new URLSearchParams();
@@ -343,112 +360,62 @@ export const wc = {
   },
 
   /**
-   * Crée une commande PayPal à partir du panier courant et renvoie son
-   * identifiant (ex. `"8L3502990F093683F"`).
+   * Prépare un paiement PayPal en créant la commande WooCommerce **en
+   * attente**, puis renvoie l'adresse de sa page de paiement WordPress.
    *
-   * Vérifié en production le 22/09/2026 depuis `test.` : un corps minimal
-   * suffit, et le `Cart-Token` identifie le panier — ni cookie de session ni
-   * `woocommerce-process-checkout-nonce` ne sont nécessaires ici.
+   * ⚠️ **Le front Astro ne parle JAMAIS à PayPal dans ce tunnel.** Il crée
+   * une commande, rien d'autre. L'approbation et l'encaissement se font
+   * entièrement sur la page WooCommerce, celle que le WordPress sert déjà
+   * aujourd'hui à ses vrais clients.
    *
-   * ⚠️ Cette route ne lit le `Cart-Token` que si le plugin **`astro-cors`
-   * 1.3.0 ou supérieur** est installé sur le WordPress : WooCommerce
-   * n'installe son gestionnaire de session « Store API » que sur les routes
-   * `/wc/store/*`, et le plugin étend ce mécanisme à `wc-ppcp`. Sans lui, la
-   * route répond 200 avec un corps vide — d'où le message explicite
-   * ci-dessous plutôt qu'un plantage obscur.
+   * C'est la conséquence directe de l'incident du 22/09/2026 : appelée
+   * depuis Astro, `POST /wc-ppcp/v1/cart/checkout` **encaisse** puis renvoie
+   * vers sa page de relecture **sans créer de commande**. Deux paiements de
+   * 16 € ont été débités sans qu'aucune commande n'existe. Aucune
+   * vérification côté navigateur ne pouvait l'empêcher : elle juge la
+   * réponse, donc après coup.
+   *
+   * 🔒 **Ce tunnel rend ce scénario impossible, par construction et non par
+   * prudence** : la commande existe AVANT qu'une page de paiement ne
+   * s'affiche, et le front n'a aucun moyen de déclencher un encaissement.
+   * Tout débit est donc nécessairement rattaché à une commande, donc visible
+   * en back-office et remboursable depuis WooCommerce.
+   *
+   * L'étape de création est éprouvée : #26516, #26518 et #26519 ont toutes
+   * été créées ainsi, avec les bons montants et la bonne adresse, et aucune
+   * n'a donné lieu au moindre débit.
+   *
+   * ⚠️ `payment_data` ne porte QUE `payment_method`, volontairement. On
+   * n'envoie aucun identifiant PayPal : il n'y en a pas à ce stade, et c'est
+   * précisément ce qui garantit qu'aucune capture ne peut partir d'ici. Le
+   * doublon de `payment_method` reste nécessaire — `Legacy.php` remplace
+   * `$_POST`, donc la valeur de premier niveau n'y arriverait jamais.
    */
-  async createPaypalOrder(): Promise<string> {
-    const raw = await requestWpJson<unknown>("/wc-ppcp/v1/cart/order", {
-      method: "POST",
-      body: JSON.stringify({ payment_method: "ppcp", context: "checkout" }),
-    });
-
-    if (typeof raw !== "string" || !raw.trim()) {
-      throw new Error(
-        "PayPal n'a pas pu préparer le paiement (réponse vide de la boutique). " +
-          "Réessaie, ou choisis la carte bancaire.",
-      );
-    }
-
-    return raw;
-  },
-
-  /**
-   * Finalise un paiement PayPal **approuvé** par le client.
-   *
-   * Retour à `POST /wc/store/v1/checkout`, la route de la carte — parce que
-   * c'est la seule qui crée la commande WooCommerce de façon fiable et qui
-   * renvoie `order_id` + `order_key`. Relevés du 22/09/2026 :
-   *
-   *   /wc-ppcp/v1/cart/checkout  crée 0 commande, renvoie la page de
-   *                              relecture même avec une commande PayPal
-   *                              approuvée → c'est la route du flux EXPRESS
-   *   /wc-ppcp/v1/order/pay      répond 200 vide, n'inscrit aucune note de
-   *                              commande, ne change rien (essayé sur #26519)
-   *   /wc/store/v1/checkout      ✅ crée la commande, montants et adresse
-   *                              justes (#26516, #26518, #26519)
-   *
-   * 🔑 **Les trois noms de champ candidats sont envoyés ENSEMBLE.**
-   * `payment_data` est une liste de couples clé/valeur que
-   * `WooCommerce/StoreApi/Legacy.php` déverse dans `$_POST` ; une clé que la
-   * passerelle ne connaît pas est simplement ignorée. Plutôt que de parier
-   * sur un nom — ce qui a déjà produit la commande fantôme #26518 — on pose
-   * les trois et le plugin prend celui qu'il lit.
-   *
-   * Les trois ne sont pas inventés : `ppcp_paypal_order_id` est le champ du
-   * formulaire de commande classique (relevé réseau) et celui que
-   * `cart/checkout` accepte ; `paypal_order` est le nom **interne** que le
-   * plugin renvoie dans son `_ppcp_order_review` ; `paypal_order_id` est la
-   * métadonnée `_ppcp_paypal_order_id` des commandes payées, sans préfixe.
-   *
-   * ⚠️ **`payment_method` est dupliqué** dans `payment_data`, comme pour
-   * WooPayments : `Legacy.php` REMPLACE `$_POST`, donc la valeur de premier
-   * niveau n'y arriverait jamais.
-   *
-   * **La fonction échoue plutôt que de supposer.** Le plugin répond
-   * `payment_status: "success"` aussi bien pour « c'est payé » que pour « il
-   * reste à faire approuver » — c'est ce qui avait fait afficher « Merci pour
-   * votre commande » sur la commande impayée #26518. On exige donc trois
-   * conditions, et on refuse au moindre doute.
-   */
-  async finalizePaypalOrder(
-    paypalOrderId: string,
-    args: {
-      billing: WcAddress;
-      shipping: WcAddress;
-      customerNote?: string;
-    },
-  ): Promise<{ orderId: string; orderKey: string }> {
+  async startPaypalOrderPayment(args: {
+    billing: WcAddress;
+    shipping: WcAddress;
+    customerNote?: string;
+  }): Promise<{ orderId: string; orderKey: string; payUrl: string }> {
     const result = await this.checkout({
       billing_address: args.billing,
       shipping_address: args.shipping,
       customer_note: args.customerNote || undefined,
       payment_method: "ppcp",
-      payment_data: buildPpcpPaymentData(paypalOrderId),
+      payment_data: [{ key: "payment_method", value: "ppcp" }],
     });
 
-    const redirect = result.payment_result?.redirect_url ?? "";
-    const stillNeedsPayPal = /paypal\.com|_ppcp_order_review/i.test(redirect);
-    const notPaidYet = result.status === "pending" || result.status === "failed";
+    const orderId = result.order_id != null ? String(result.order_id) : "";
+    const orderKey = result.order_key ?? "";
 
-    if (
-      result.payment_result?.payment_status !== "success" ||
-      stillNeedsPayPal ||
-      notPaidYet
-    ) {
-      console.error("[PayPal] finalisation refusée", {
-        order_id: result.order_id,
-        status: result.status,
-        payment_status: result.payment_result?.payment_status,
-        redirect,
-      });
+    if (!orderId || !orderKey) {
+      console.error("[PayPal] commande non créée", result);
       throw new Error(
-        "Le paiement n'a pas pu être finalisé et aucun montant n'a été débité. " +
-          "Choisis la carte bancaire, ou contacte-nous — ta commande n'a pas été enregistrée comme payée.",
+        "La commande n'a pas pu être enregistrée et aucun montant n'a été débité. " +
+          "Choisis la carte bancaire, ou réessaie dans un instant.",
       );
     }
 
-    return { orderId: String(result.order_id), orderKey: result.order_key };
+    return { orderId, orderKey, payUrl: orderPayUrl(orderId, orderKey) };
   },
 
   async checkout(args: WcCheckoutPayload): Promise<WcCheckoutResponse> {

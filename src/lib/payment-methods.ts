@@ -45,60 +45,57 @@ const CATALOGUE: Record<PaymentMethodId, PaymentMethodOption> = {
 const DISPLAY_ORDER: PaymentMethodId[] = ["woocommerce_payments", "ppcp"];
 
 /* ──────────────────────────────────────────────────────────────────────
- * PayPal — garde-fou
+ * PayPal — pourquoi le tunnel headless a été abandonné
  *
- * 🔴 Le tunnel PayPal n'est PAS encore opérationnel. Il manque trois
- * informations qui ne sont pas devinables depuis l'environnement de dev
- * (le WordPress est injoignable via le proxy réseau, et la source du plugin
- * `pymntpl-paypal-woocommerce` n'est récupérable ni sur wordpress.org ni via
- * un CDN — vérifié le 22/09/2026). Détail et mode opératoire du relevé :
- * `docs/paypal-checkout.md`.
+ * 🛑 **Incident du 22/09/2026.** Appelée depuis Astro,
+ * `POST /wc-ppcp/v1/cart/checkout` **encaisse réellement l'argent**, puis
+ * renvoie vers sa page de relecture **sans créer la moindre commande
+ * WooCommerce**. Deux paiements de 16 € ont été débités et aucune commande
+ * n'existait côté boutique : ni #26520 ni #26521, total resté à 512.
  *
- * Tant que les deux variables ci-dessous ne sont pas posées, PayPal n'est
- * jamais proposé au client — même si WooCommerce le déclare disponible.
- * C'est volontaire : mieux vaut un checkout sans PayPal qu'un bouton PayPal
- * qui échoue sur une boutique qui encaisse réellement.
+ * Pire que la commande fantôme #26518 : là, une commande existait au moins.
+ * Ici, pas de commande — donc pas d'e-mail, pas de préparation, pas de stock
+ * décrémenté, rien dans EasyBeer.
+ *
+ * ⚠️ **Le garde-fou du front n'y pouvait rien, et aucun autre ne le pourrait.**
+ * Il juge la réponse HTTP, donc *après* l'encaissement. Aucune vérification
+ * côté navigateur n'empêche une passerelle de débiter.
+ *
+ * ⚠️ **Et aucune sonde ne pouvait le prévoir** : toutes utilisaient une
+ * commande PayPal non approuvée, donc incapturable par construction. Elles
+ * concluaient « cette route ne fait rien ». Elle débite.
+ *
+ * ✅ **D'où le tunnel actuel** (`wc.startPaypalOrderPayment`) : Astro crée la
+ * commande WooCommerce **en attente**, puis redirige vers la page de paiement
+ * WordPress. Le front ne parle jamais à PayPal et n'a aucun moyen technique
+ * de déclencher un débit. Un encaissement sans commande n'est plus
+ * improbable, il est **impossible** — et tout débit reste remboursable depuis
+ * WooCommerce.
+ *
+ * Le prix à payer est une page WordPress en fin de tunnel. C'est assumé.
  * ────────────────────────────────────────────────────────────────────── */
 
 /**
- * 🛑 **COUPE-CIRCUIT — repassé à `false` le 22/09/2026 après un incident.**
+ * Le tunnel PayPal existe et ne peut pas encaisser sans commande.
  *
- * `POST /wc-ppcp/v1/cart/checkout` **encaisse réellement l'argent**, puis
- * renvoie vers sa page de relecture sans créer la moindre commande
- * WooCommerce. Deux vrais paiements de 16 € ont été débités sur le compte de
- * Guillaume (relevé bancaire, 12:36 et 12:39), et **aucune commande
- * n'existe** côté boutique : ni #26520 ni #26521, total resté à 512.
- *
- * C'est le pire scénario possible — pire encore que la commande fantôme :
- * le client est débité et la boutique n'en garde aucune trace. Pas de
- * commande, donc pas d'e-mail, pas de préparation, pas de stock décrémenté,
- * pas de remontée EasyBeer. Un vrai client aurait payé dans le vide.
- *
- * Le garde-fou côté front a bien fait son travail (message d'échec au lieu
- * d'une confirmation), mais **il ne peut rien contre un encaissement déjà
- * survenu côté serveur** : il juge la réponse, après coup.
- *
- * Tant que ce verrou est à `false`, PayPal n'apparaît nulle part, quelles que
- * soient les variables d'environnement.
- *
- * ⚠️ **Ne le repasser à `true` qu'après** avoir établi, par un vrai paiement
- * suivi d'une lecture dans WooCommerce, qu'une commande est créée ET porte un
- * `transaction_id`. Jamais sur la seule foi d'une page de confirmation, ni
- * d'une sonde : une sonde utilise une commande PayPal non approuvée et ne
- * prouve donc rien sur l'encaissement.
+ * ⚠️ Ce verrou ne doit **jamais** être remis à `true` pour un tunnel où le
+ * front déclenche lui-même l'encaissement. Ce qui l'autorise ici, ce n'est
+ * pas la confiance dans le code : c'est que ce chemin rend la faute
+ * structurellement impossible.
  */
-const PPCP_FLOW_IMPLEMENTED = false;
+const PPCP_FLOW_IMPLEMENTED = true;
 
 const PPCP_ENABLED = import.meta.env.PUBLIC_PPCP_ENABLED === "true";
-const PAYPAL_CLIENT_ID = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID as string | undefined;
 
-/** true seulement si le tunnel existe ET qu'il a été activé et configuré. */
+/**
+ * true seulement si le tunnel existe ET qu'il est activé côté environnement.
+ *
+ * ℹ️ `PUBLIC_PAYPAL_CLIENT_ID` n'est **plus requise** : le SDK JavaScript de
+ * PayPal n'est plus chargé du tout, puisque c'est WooCommerce qui présente le
+ * bouton sur sa propre page. La variable peut être retirée de Vercel.
+ */
 export function isPpcpConfigured(): boolean {
-  return PPCP_FLOW_IMPLEMENTED && PPCP_ENABLED && Boolean(PAYPAL_CLIENT_ID);
-}
-
-export function getPaypalClientId(): string | null {
-  return PAYPAL_CLIENT_ID ?? null;
+  return PPCP_FLOW_IMPLEMENTED && PPCP_ENABLED;
 }
 
 /** Lit le bloc publié par l'extension PayPal dans le panier, ou null. */
@@ -137,84 +134,34 @@ export function getAvailablePaymentMethods(cart: WcCart | null): PaymentMethodOp
 }
 
 /* ──────────────────────────────────────────────────────────────────────
- * Contrat `payment_data` de la passerelle PPCP
+ * Ce qu'on sait des commandes PayPal réelles
  *
- * ⚠️ TOUT CE QUI SUIT EST UNE HYPOTHÈSE À CONFIRMER, pas un fait vérifié.
- *
- * Ce qui EST établi, en lisant deux vraies commandes PayPal du WP live
- * (#26042 et #25926, relevées le 22/09/2026 via le MCP WooCommerce) :
+ * Lu sur deux vraies commandes du WP live (#26042, #25926) :
  *
  *   payment_method       = "ppcp"
  *   payment_method_title = "PayPal - {email du payeur}"
  *   transaction_id       = ID de CAPTURE PayPal   (ex 5KY21287UR815640M)
- *   meta _ppcp_paypal_order_id = ID de COMMANDE PayPal (ex 26D99705JH087882R)
- *   meta _ppcp_environment     = "production"
- *   meta _paypal_fee / _paypal_net
+ *   meta _ppcp_paypal_order_id = ID de COMMANDE PayPal
+ *   meta _ppcp_environment, _paypal_fee, _paypal_net
  *
- * Et la note de commande générée par le plugin :
- *   « Commande PayPal {order_id} créée. ID de capture : {capture_id} »
+ * 👉 **C'est le seul critère valable pour dire « c'est payé »** :
+ * `transaction_id` non vide et statut « En cours ». Ni une page de
+ * confirmation, ni un `payment_status: "success"` dans une réponse HTTP ne
+ * prouvent quoi que ce soit — les deux ont déjà menti (#26518).
  *
- * On en déduit la forme du tunnel : le front fait approuver une **commande
- * PayPal** par le client, puis transmet son identifiant à WooCommerce, qui
- * déclenche la capture côté serveur. Le front n'a donc jamais à capturer
- * lui-même — c'est cohérent avec le fait que la commande WC passe directement
- * en « En cours » avec les frais PayPal déjà enregistrés.
+ * ⚠️ **Routes de l'extension essayées et écartées le 22/09/2026.** Ne pas y
+ * retourner sans élément nouveau :
  *
- * ✅ **Vérifié en production le 22/09/2026**, depuis
- * `test.labrasseriedesplantes.fr`, sans qu'aucun paiement n'ait eu lieu :
- * `POST /wc-ppcp/v1/cart/order` avec `{payment_method:"ppcp",
- * context:"checkout"}` renvoie une chaîne JSON nue, l'ID de commande PayPal
- * (ex. `"8L3502990F093683F"`). Le `Cart-Token` suffit : ni cookie, ni
- * `woocommerce-process-checkout-nonce`. Exige `astro-cors` ≥ 1.3.0 côté WP.
+ *   `/wc-ppcp/v1/cart/order`    crée une commande PayPal depuis le panier ;
+ *                               fonctionne en headless, mais n'est plus
+ *                               utilisée — le front ne parle plus à PayPal
+ *   `/wc-ppcp/v1/cart/checkout` flux **express** : ENCAISSE puis renvoie vers
+ *                               la page de relecture sans créer de commande.
+ *                               C'est la cause de l'incident.
+ *   `/wc-ppcp/v1/order/pay`     200, corps vide, aucune note de commande,
+ *                               aucun effet (essayé sur #26519)
  *
- * ⚠️ **Les deux autres routes de l'extension ne finalisent pas** — vérifié le
- * 22/09/2026, ne pas y retourner :
- *
- *   `/wc-ppcp/v1/cart/checkout` → route du flux **express** (bouton PayPal
- *      sur une fiche produit ou le panier). Même avec une commande PayPal
- *      réellement approuvée, elle renvoie vers la page de relecture
- *      WordPress et ne crée aucune commande.
- *   `/wc-ppcp/v1/order/pay` → répond 200 avec un corps vide, n'inscrit
- *      aucune note de commande et ne modifie rien (essayé sur #26519).
- *
- * La commande WooCommerce se crée donc par `POST /wc/store/v1/checkout`,
- * comme pour la carte. Reste l'encaissement, dont le nom de champ attendu
- * est traité ci-dessous — voir `wc.finalizePaypalOrder()`.
+ * La création de commande, elle, est fiable par `POST /wc/store/v1/checkout`
+ * et ne débite rien (#26516, #26518, #26519 : aucune n'a donné lieu à un
+ * mouvement d'argent). C'est ce que fait `wc.startPaypalOrderPayment()`.
  * ────────────────────────────────────────────────────────────────────── */
-
-/**
- * Construit le `payment_data` d'un checkout PayPal.
- *
- * 🔑 **Les trois noms candidats sont envoyés ensemble, volontairement.**
- * `payment_data` est une liste de couples clé/valeur que
- * `WooCommerce/StoreApi/Legacy.php` déverse dans `$_POST` ; une clé inconnue
- * de la passerelle est simplement ignorée. Plutôt que de parier sur un nom —
- * ce qui a produit la commande fantôme #26518 — on pose les trois et le
- * plugin lit celui qu'il connaît.
- *
- * Aucun n'est inventé :
- *
- *   `ppcp_paypal_order_id` — champ du formulaire de commande classique
- *                            (relevé réseau), accepté par `cart/checkout`
- *   `paypal_order`         — nom **interne**, renvoyé par le plugin dans son
- *                            `_ppcp_order_review`
- *   `paypal_order_id`      — la métadonnée `_ppcp_paypal_order_id` des
- *                            commandes réellement payées, sans son préfixe
- *
- * `payment_method` est dupliqué ici exprès, comme pour WooPayments :
- * `Legacy.php` **remplace** `$_POST`, donc la valeur de premier niveau du
- * JSON n'atterrit jamais dans `$_POST['payment_method']`.
- *
- * ⚠️ Si un jour le relevé désigne un seul nom avec certitude, réduire cette
- * liste — mais ne jamais la réduire sur une intuition.
- */
-export function buildPpcpPaymentData(
-  paypalOrderId: string,
-): Array<{ key: string; value: string }> {
-  return [
-    { key: "payment_method", value: "ppcp" },
-    { key: "ppcp_paypal_order_id", value: paypalOrderId },
-    { key: "paypal_order", value: paypalOrderId },
-    { key: "paypal_order_id", value: paypalOrderId },
-  ];
-}
