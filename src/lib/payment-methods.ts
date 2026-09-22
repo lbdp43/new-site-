@@ -61,18 +61,15 @@ const DISPLAY_ORDER: PaymentMethodId[] = ["woocommerce_payments", "ppcp"];
  * ────────────────────────────────────────────────────────────────────── */
 
 /**
- * 🔴 Interrupteur maître, à laisser à `false`.
+ * ✅ Le tunnel d'approbation PayPal est écrit (22/09/2026) : chargement du
+ * SDK, boutons, création de commande, finalisation, annulation et erreurs.
  *
- * Le tunnel d'approbation PayPal (chargement du SDK, bouton, récupération de
- * l'ID de commande approuvé, gestion des annulations) n'est PAS écrit : il
- * dépend des trois inconnues listées ci-dessus. Passer les variables
- * d'environnement ne suffit donc pas, et c'est délibéré — sans ce verrou, une
- * variable posée par erreur sur Vercel afficherait un bouton PayPal
- * inopérant sur une boutique qui encaisse réellement.
- *
- * À basculer à `true` dans le même commit que l'implémentation du tunnel.
+ * Il reste néanmoins **verrouillé par deux variables d'environnement**
+ * absentes de Vercel à ce jour. Tant qu'elles ne sont pas posées, PayPal
+ * n'est jamais proposé — le temps qu'un vrai paiement de bout en bout ait
+ * été passé puis remboursé.
  */
-const PPCP_FLOW_IMPLEMENTED = false;
+const PPCP_FLOW_IMPLEMENTED = true;
 
 const PPCP_ENABLED = import.meta.env.PUBLIC_PPCP_ENABLED === "true";
 const PAYPAL_CLIENT_ID = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID as string | undefined;
@@ -145,20 +142,23 @@ export function getAvailablePaymentMethods(cart: WcCart | null): PaymentMethodOp
  * lui-même — c'est cohérent avec le fait que la commande WC passe directement
  * en « En cours » avec les frais PayPal déjà enregistrés.
  *
- * ✅ Relevé réseau du 22/09/2026 sur le checkout WordPress — ce qui n'est
- * plus une hypothèse :
+ * ✅ **Tout ce qui suit est vérifié en production le 22/09/2026**, depuis
+ * `test.labrasseriedesplantes.fr`, sans qu'aucun paiement n'ait eu lieu :
  *
- *   - la commande PayPal se crée via `POST /wc-ppcp/v1/cart/order` avec
- *     `payment_method: "ppcp"` et `context: "checkout"` ;
- *   - la réponse est une simple chaîne JSON : `"3Y617367DX331090K"` ;
- *   - 🔑 le champ qui porte l'ID est **`ppcp_paypal_order_id`**, vu en clair
- *     dans le formulaire (vide à la création, rempli à la finalisation).
+ *   1. `POST /wc-ppcp/v1/cart/order` avec `{payment_method:"ppcp",
+ *      context:"checkout"}` → renvoie une chaîne JSON nue, l'ID de commande
+ *      PayPal (ex. `"8L3502990F093683F"`). Le `Cart-Token` suffit : ni
+ *      cookie, ni `woocommerce-process-checkout-nonce`.
+ *   2. `POST /wc/store/v1/checkout` avec `payment_method:"ppcp"` et
+ *      `ppcp_paypal_order_id` dans `payment_data` → crée la commande
+ *      WooCommerce (`order_id`, `order_key`, statut `pending`) et renvoie
+ *      `payment_status:"success"`.
  *
- * Ce qui reste à trancher (cf. `docs/paypal-checkout.md`) :
- *   - le `Cart-Token` suffit-il sur la route REST, et le nonce
- *     `woocommerce-process-checkout-nonce` est-il exigé hors tunnel wc-ajax ;
- *   - la finalisation passe-t-elle par `/wc-ppcp/v1/cart/checkout` ou par
- *     `/wc/store/v1/checkout` avec `ppcp_paypal_order_id` en `payment_data`.
+ * C'est donc le **même endpoint que la carte** qui finalise, ce qui était
+ * l'issue souhaitée : lui seul renvoie `order_id` + `order_key`, dont la page
+ * de confirmation a besoin.
+ *
+ * ⚠️ L'étape 1 exige le plugin **`astro-cors` ≥ 1.3.0** côté WordPress.
  * ────────────────────────────────────────────────────────────────────── */
 
 /**
@@ -173,10 +173,12 @@ export function getAvailablePaymentMethods(cart: WcCart | null): PaymentMethodOp
  *
  * @param paypalOrderId ID de commande PayPal approuvé par le client.
  * @param orderIdKey    Nom de la clé attendue par le plugin. La valeur par
- *                      défaut `ppcp_paypal_order_id` n'est PAS devinée : elle
- *                      est relevée dans le formulaire réel du checkout
- *                      WordPress le 22/09/2026, et correspond à la métadonnée
- *                      `_ppcp_paypal_order_id` des commandes payées.
+ *                      défaut `ppcp_paypal_order_id` n'est pas devinée : elle
+ *                      a été relevée dans le formulaire réel du checkout
+ *                      WordPress, correspond à la métadonnée
+ *                      `_ppcp_paypal_order_id` des commandes payées, et a été
+ *                      **confirmée par un appel réel** à la Store API le
+ *                      22/09/2026 (commande WooCommerce créée avec succès).
  */
 export function buildPpcpPaymentData(
   paypalOrderId: string,

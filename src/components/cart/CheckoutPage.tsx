@@ -7,6 +7,7 @@ import {
   getAvailablePaymentMethods,
   type PaymentMethodId,
 } from "../../lib/payment-methods";
+import PayPalButtons from "./PayPalButtons";
 
 const STRIPE_KEY = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY as string | undefined;
 /**
@@ -203,17 +204,10 @@ function CheckoutInner() {
     e.preventDefault();
     setFormError(null);
 
-    if (paymentMethod === "ppcp") {
-      // Garde-fou : `payment-methods.ts` ne met PayPal dans la liste que si
-      // le tunnel d'approbation existe. Si on arrive ici, c'est qu'on l'a
-      // ouvert sans l'écrire — on refuse explicitement plutôt que d'envoyer
-      // à WooCommerce un checkout sans ID de commande PayPal, qui créerait
-      // une commande impayée.
-      setFormError(
-        "Le paiement PayPal n'est pas encore disponible sur ce site. Choisissez la carte bancaire.",
-      );
-      return;
-    }
+    // PayPal a son propre bouton : le formulaire ne soumet rien dans ce cas.
+    // (La touche Entrée dans un champ déclenche quand même un submit, d'où ce
+    // garde-fou plutôt qu'un simple masquage du bouton.)
+    if (paymentMethod === "ppcp") return;
 
     await submitCardPayment();
   }
@@ -525,6 +519,16 @@ function CheckoutInner() {
               </p>
             </>
           )}
+
+          {paymentMethod === "ppcp" && (
+            <PayPalButtons
+              billing={billing}
+              shipping={effectiveShipping}
+              customerNote={customerNote}
+              onError={setFormError}
+              onBusyChange={setSubmitting}
+            />
+          )}
         </Section>
 
         <Section title="Note à la commande (optionnel)">
@@ -612,6 +616,12 @@ function CheckoutInner() {
             modalités qui y sont précisées.
           </p>
 
+          {paymentMethod === "ppcp" ? (
+            <p className="mt-4 rounded-xl bg-forest-50 border border-forest-100 px-4 py-3 text-center text-sm text-ink-700">
+              Terminez avec le bouton <strong>PayPal</strong> de la section
+              « Paiement ».
+            </p>
+          ) : (
           <button
             type="submit"
             disabled={submitting || !stripe}
@@ -633,6 +643,7 @@ function CheckoutInner() {
               </>
             )}
           </button>
+          )}
         </div>
       </aside>
     </form>

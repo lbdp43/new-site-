@@ -9,7 +9,15 @@
  */
 
 const BASE = import.meta.env.PUBLIC_WC_BASE_URL as string | undefined;
-const STORE_API = BASE ? `${BASE.replace(/\/$/, "")}/wp-json/wc/store/v1` : null;
+
+/**
+ * Racine `/wp-json`, et non la Store API directement : le tunnel PayPal a
+ * besoin d'appeler `/wc-ppcp/v1/…`, qui vit dans un autre espace de noms.
+ * Les deux partagent la même mécanique d'en-têtes (Cart-Token, Nonce), d'où
+ * la factorisation dans `requestWpJson`.
+ */
+const WP_JSON = BASE ? `${BASE.replace(/\/$/, "")}/wp-json` : null;
+const STORE_API_PREFIX = "/wc/store/v1";
 
 const CART_TOKEN_KEY = "lbdp_cart_token";
 const NONCE_KEY = "lbdp_wc_nonce";
@@ -42,8 +50,9 @@ export interface WcStoreError {
   data?: { status: number };
 }
 
-async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
-  if (!STORE_API) {
+/** Requête vers n'importe quelle route `/wp-json/…` du WordPress. */
+async function requestWpJson<T>(path: string, init: RequestInit = {}): Promise<T> {
+  if (!WP_JSON) {
     throw new Error(
       "PUBLIC_WC_BASE_URL n'est pas défini — copie .env.example vers .env et renseigne l'URL de ton WordPress.",
     );
@@ -60,7 +69,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 
   let res: Response;
   try {
-    res = await fetch(`${STORE_API}${path}`, { ...init, headers });
+    res = await fetch(`${WP_JSON}${path}`, { ...init, headers });
   } catch (err) {
     // fetch() lui-même a rejeté (network, CORS preflight, CSP…).
     // On enrichit le message générique "Failed to fetch" avec le contexte utile.
@@ -99,6 +108,11 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   }
 
   return body as T;
+}
+
+/** Requête vers la Store API (`/wp-json/wc/store/v1/…`). */
+function request<T>(path: string, init: RequestInit = {}): Promise<T> {
+  return requestWpJson<T>(`${STORE_API_PREFIX}${path}`, init);
 }
 
 // ---------- Types (sous-ensemble utile) ----------
@@ -291,6 +305,37 @@ export const wc = {
       method: "POST",
       body: JSON.stringify({ code }),
     });
+  },
+
+  /**
+   * Crée une commande PayPal à partir du panier courant et renvoie son
+   * identifiant (ex. `"8L3502990F093683F"`).
+   *
+   * Vérifié en production le 22/09/2026 depuis `test.` : un corps minimal
+   * suffit, et le `Cart-Token` identifie le panier — ni cookie de session ni
+   * `woocommerce-process-checkout-nonce` ne sont nécessaires ici.
+   *
+   * ⚠️ Cette route ne lit le `Cart-Token` que si le plugin **`astro-cors`
+   * 1.3.0 ou supérieur** est installé sur le WordPress : WooCommerce
+   * n'installe son gestionnaire de session « Store API » que sur les routes
+   * `/wc/store/*`, et le plugin étend ce mécanisme à `wc-ppcp`. Sans lui, la
+   * route répond 200 avec un corps vide — d'où le message explicite
+   * ci-dessous plutôt qu'un plantage obscur.
+   */
+  async createPaypalOrder(): Promise<string> {
+    const raw = await requestWpJson<unknown>("/wc-ppcp/v1/cart/order", {
+      method: "POST",
+      body: JSON.stringify({ payment_method: "ppcp", context: "checkout" }),
+    });
+
+    if (typeof raw !== "string" || !raw.trim()) {
+      throw new Error(
+        "PayPal n'a pas pu préparer le paiement (réponse vide de la boutique). " +
+          "Réessaie, ou choisis la carte bancaire.",
+      );
+    }
+
+    return raw;
   },
 
   async checkout(args: WcCheckoutPayload): Promise<WcCheckoutResponse> {
