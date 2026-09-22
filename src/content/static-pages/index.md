@@ -15,7 +15,7 @@ heroHome:
   ctaSecondaryLabel: "Notre histoire"
   ctaSecondaryHref: "/notre-histoire"
   video: "/videos/lbdp-pro.mp4"
-  videoPoster: "/videos/lbdp-pro-poster.jpg"
+  videoPoster: "/videos/lbdp-pro-poster.webp"
 
 carouselSection:
   kicker: "Notre gamme complète"
@@ -39,7 +39,7 @@ historySection:
 
 introVideoSection:
   video: "/videos/lbdp-intro.mp4"
-  poster: "/videos/lbdp-intro-poster.jpg"
+  poster: "/videos/lbdp-intro-poster.webp"
   script: "— Dans notre atelier —"
   title: "Chaque flacon, une histoire"
   titleAccent: "faite main"
@@ -97,7 +97,7 @@ visitSection:
   ctaSecondaryLabel: "Nous contacter"
   ctaSecondaryHref: "/contact"
   video: "/videos/boutique-sortie.mp4"
-  videoPoster: "/videos/boutique-sortie-poster.jpg"
+  videoPoster: "/videos/boutique-sortie-poster.webp"
   videoAlt: "Sortie de la boutique de La Brasserie des Plantes à Saint-Didier-en-Velay"
 
 ctaSection:

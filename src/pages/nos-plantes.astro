@@ -95,16 +95,16 @@ const renderInline = (s: string) =>
       {videoBanner && (
         <div class="aspect-[5/2] rounded-3xl overflow-hidden shadow-xl mb-16 bg-forest-50">
           <video
-            autoplay
+            data-defer-play
             muted
             loop
             playsinline
-            preload="metadata"
+            preload="none"
             poster={videoBanner.poster}
             aria-label={videoBanner.alt}
             class="w-full h-full object-cover"
           >
-            <source src={videoBanner.src} type="video/mp4" />
+            <source data-src={videoBanner.src} type="video/mp4" />
           </video>
         </div>
       )}

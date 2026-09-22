@@ -137,16 +137,16 @@ const galleryPhotos = [
   <section class="relative w-full bg-forest-950 overflow-hidden">
     <div class="relative aspect-[21/9] md:aspect-[21/8] w-full">
       <video
-        autoplay
+        data-defer-play
         muted
         loop
         playsinline
-        preload="metadata"
-        poster="/videos/duo-making-of-poster.jpg"
+        preload="none"
+        poster="/videos/duo-making-of-poster.webp"
         aria-label="Étienne and Guillaume, co-founders, in the La Brasserie des Plantes workshop"
         class="absolute inset-0 w-full h-full object-cover object-top"
       >
-        <source src="/videos/duo-making-of.mp4" type="video/mp4" />
+        <source data-src="/videos/duo-making-of.mp4" type="video/mp4" />
       </video>
       <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/30 to-forest-950/80"></div>
       <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6 gap-3 md:gap-5">

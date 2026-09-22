@@ -170,5 +170,59 @@ const otherLocales: Lang[] = (['fr', 'en', 'es', 'it'] as Lang[]).filter((l) => 
     <Footer lang={lang} />
     <!-- Mini-panier slide-in (overlay sur toutes les pages) -->
     <MiniCartDrawer client:idle />
+
+    <!-- Chargement différé des vidéos — pour TOUTES les pages.
+         `autoplay` annule `preload="none"` : sans ça le navigateur télécharge
+         chaque vidéo dès l'ouverture de la page (jusqu'à ~35 Mo sur la home).
+         On retire donc l'attribut du markup et on décide nous-mêmes :
+           • `data-defer-play="onload"` (héros, déjà à l'écran) → après le
+             `load` de la page. Le poster est préchargé : c'est lui le LCP, la
+             vidéo ne lui dispute plus la bande passante.
+           • `data-defer-play` seul (vidéos plus bas) → à l'entrée dans le
+             champ de vision.
+         Le `<source>` porte `data-src` (et non `src`) : tant qu'on ne l'a pas
+         recopié, il n'y a aucune requête réseau. -->
+    <script is:inline>
+      (function () {
+        var vids = document.querySelectorAll('video[data-defer-play]');
+        if (!vids.length) return;
+        var start = function (v) {
+          // Toutes les <source> d'un coup : certaines vidéos proposent un
+          // WebM avant le MP4, et n'en poser qu'une priverait le navigateur
+          // de son choix de format.
+          var srcs = v.querySelectorAll('source[data-src]');
+          var posed = false;
+          for (var i = 0; i < srcs.length; i++) {
+            if (!srcs[i].getAttribute('src')) {
+              srcs[i].setAttribute('src', srcs[i].dataset.src);
+              posed = true;
+            }
+          }
+          if (posed) v.load();
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        };
+
+        var hero = [], lazy = [];
+        vids.forEach(function (v) {
+          (v.dataset.deferPlay === 'onload' ? hero : lazy).push(v);
+        });
+
+        var startHero = function () { hero.forEach(start); };
+        if (hero.length) {
+          if (document.readyState === 'complete') startHero();
+          else window.addEventListener('load', startHero, { once: true });
+        }
+
+        if (!lazy.length) return;
+        if (!('IntersectionObserver' in window)) { lazy.forEach(start); return; }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { start(e.target); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '200px' });
+        lazy.forEach(function (v) { io.observe(v); });
+      })();
+    </script>
   </body>
 </html>

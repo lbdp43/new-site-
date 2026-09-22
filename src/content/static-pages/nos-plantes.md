@@ -10,7 +10,7 @@ pageHeader:
 
 videoBanner:
   src: "/videos/plante-verveine.mp4"
-  poster: "/videos/plante-verveine-poster.jpg"
+  poster: "/videos/plante-verveine-poster.webp"
   alt: "Étienne, cofondateur, prépare la verveine fraîche — plante signature de La Brasserie des Plantes"
 
 introParagraphs:

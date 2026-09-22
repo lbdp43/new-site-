@@ -995,23 +995,29 @@ formulaires en parallèle).
 ℹ️ E-mail d'administration du WP : `commande@labrasseriedesplantes.com`
 — noter le **`.com`**, pas `.fr`.
 
-## 🚨 Cache WordPress — risque de panier partagé
+## ✅ Cache WordPress — le risque de panier partagé est écarté
 
-Deux plugins de cache tournaient en parallèle (vu le 21/09/2026) :
-**IONOS Performance** et **WP Fastest Cache**. Guillaume a **désactivé IONOS
-Performance** le jour même. **WP Fastest Cache reste actif.**
+**Vérifié le 22/09/2026 sur `/wp-json/wc/store/v1/cart`, déconnecté** :
+`x-cache`, `age`, `x-wp-fastest-cache`, `x-litespeed-cache`,
+`cf-cache-status` et `x-proxy-cache` sont **tous absents**, et
+`cache-control` vaut **`no-store`** — le serveur interdit lui-même la mise
+en cache de cette route.
 
-⚠️ « IONOS Performance » est aussi un service **côté serveur** : désactiver
-le plugin ne coupe pas forcément le cache appliqué par l'hébergeur en amont.
+Aucune couche de cache ne touche donc la Store API : ni WP Fastest Cache
+(toujours actif), ni le cache IONOS en amont (le plugin IONOS Performance a
+été désactivé le 21/09/2026, mais le service hébergeur, lui, ne se désactive
+pas depuis WordPress).
 
-**Le danger** : si l'un des deux met en cache les réponses de
-`/wp-json/wc/store/v1/*`, deux clients différents peuvent recevoir le même
-panier. Le second voit les articles du premier, et une commande peut partir
-avec le mauvais contenu. Rien ne le signale — tout a l'air de fonctionner.
+**Le danger écarté** : une réponse de panier mise en cache aurait fait
+recevoir **le même panier à deux clients différents**. Le second voit les
+articles du premier, et une commande peut partir avec le mauvais contenu.
+Rien ne l'aurait signalé — tout aurait eu l'air de fonctionner.
 
-C'est un pré-requis de `docs/bascule-www.md` : vérifier les en-têtes de
-réponse (`x-cache`, `age`, `x-fastest-cache`) sur un appel à la Store API, et
-exclure `/wp-json/*` dans les réglages des deux plugins.
+⚠️ **Refaire ce contrôle déconnecté** si un jour on y revient : les caches
+contournent les visiteurs connectés, donc une vérification faite en session
+admin donne un faux « tout va bien ». Le lire **en console**
+(`fetch(...).then(r => r.headers.get(...))`), pas dans l'onglet Réseau de
+l'inspecteur — dont une capture exposerait le cookie de session admin.
 
 Autres plugins repérés au passage : **WPvivid Backup** (le pré-requis backup
 est donc à portée de clic), Complianz (bandeau cookies), SEOPress, WPForms,
@@ -1758,6 +1764,48 @@ Historique :
   press.ts + 4 pages statiques + FAQ). Le grep de vérification ne renvoie
   plus que des matches légitimes (slugs URL, qualifs maison, citations
   externes).
+
+## 🎬 Vidéos : jamais d'`autoplay` dans le markup
+
+**Règle** : aucun `<video>` du site ne porte l'attribut `autoplay`.
+
+**Pourquoi** : `autoplay` **annule `preload="none"`**. Le navigateur télécharge
+alors chaque vidéo dès l'ouverture de la page, en concurrence avec le rendu —
+~35 Mo sur la seule page d'accueil, dont un fichier de **8,3 Mo**
+(`lbdp-pro.mp4`) juste pour le hero.
+
+**Le pattern, unique et centralisé dans `Layout.astro`** (un seul script
+`is:inline`, en bas de `<body>`, actif sur toutes les pages) :
+
+| Sur le `<video>` | Quand la vidéo se charge |
+|---|---|
+| `data-defer-play="onload"` | après le `load` de la page — pour un héros déjà à l'écran |
+| `data-defer-play` | à l'entrée dans le champ de vision (IntersectionObserver, marge 200 px) |
+
+- le `<source>` porte **`data-src`**, pas `src` — tant qu'il n'est pas recopié,
+  **aucune requête réseau** ;
+- le script pose **toutes** les `<source>` d'un coup (certaines vidéos
+  proposent un WebM avant le MP4 — n'en poser qu'une priverait le navigateur
+  de son choix) ;
+- `preload="none"` sur le `<video>` ;
+- le `poster` reste affiché en attendant : c'est **lui** le LCP, et il est
+  préchargé (`preloadImage` du Layout) sur les pages à héros.
+
+⚠️ **Ne pas dupliquer ce script dans une page** : il vivait en double dans
+`index.astro` et `en/index.astro`, désormais uniquement dans `Layout.astro`.
+
+**Posters en WebP** (22/09/2026) : les 6 posters de `public/videos/` ont un
+pendant `.webp` (−45 % en moyenne, le LCP de la home passe de 140 à 83 Ko).
+Les attributs `poster=` et `preloadImage` pointent sur le WebP.
+
+⚠️ **Les `.jpg` restent sur le disque et doivent y rester** : le schema
+`VideoObject` les utilise en `thumbnailUrl`, et **Google n'accepte que
+.jpg / .png / .gif** comme vignette vidéo. Idem pour les `cover:` d'articles
+(og:image). Ne pas « finir le nettoyage » en les supprimant.
+
+⛔ **Reste à faire** : `lbdp-pro.mp4` pèse toujours 8,3 Mo — il est désormais
+hors du chemin critique, mais un ré-encodage (720p, CRF ~30) le ramènerait
+sous 2 Mo. Pas faisable depuis l'environnement de dev : **pas de ffmpeg**.
 
 ## Gotchas
 
