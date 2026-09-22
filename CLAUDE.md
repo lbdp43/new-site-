@@ -82,12 +82,12 @@ Navigateur ─(browser)─▶ Astro SSG (Vercel CDN)
          │
          └─(fetch Store API)─▶ WordPress (WooCommerce + WooPayments)
                                  └─ Stripe (via WooPayments)
-                                 └─ Emails, EasyBee, factures, stock, TVA...
+                                 └─ Emails, EasyBeer, factures, stock, TVA...
 ```
 
 Le front Astro ne dédouble **aucune** logique e-commerce : tout (panier, stock,
 prix, TVA, livraison, codes promo, emails de confirmation, intégration
-transporteur EasyBee) reste géré par WooCommerce côté serveur.
+logiciel de gestion EasyBeerr) reste géré par WooCommerce côté serveur.
 
 ### Flux panier
 
@@ -135,7 +135,7 @@ transporteur EasyBee) reste géré par WooCommerce côté serveur.
    reste en "En attente de paiement" indéfiniment. Diagnostiqué le 26
    avril 2026.
 6. WooPayments crée la commande, débite la carte (après 3DS), envoie les
-   emails, notifie EasyBee. Redirection vers `/commande/confirmation?order=XXX&key=YYY`.
+   emails, synchronise EasyBeerr. Redirection vers `/commande/confirmation?order=XXX&key=YYY`.
 
 ## 🔴 PayPal — chantier bloquant pour la bascule
 
@@ -257,12 +257,22 @@ et ce que ça révèle :
    qui explique le format `/sitemaps.xml` du plan de site — Yoast produit
    `sitemap_index.xml`. Toutes les mentions « sitemap Yoast » de ce fichier
    étaient fausses.
-2. **Sendcloud, pas (seulement) EasyBee.** L'extension de livraison active
-   est **Sendcloud Shipping 1.0.33**. Aucune extension EasyBee n'est
-   installée. ⚠️ **À CLARIFIER AVEC GUILLAUME** avant de réécrire : EasyBee
-   existe peut-être hors WordPress (API, e-mail, logiciel métier). Cette doc
-   le mentionne 6 fois comme le transporteur notifié à la commande — c'est
-   peut-être Sendcloud qu'il faut lire.
+2. ✅ **EasyBeer n'est PAS un transporteur** — clarifié par Guillaume le
+   22/09/2026. C'est **le logiciel de gestion de la brasserie**
+   (app.easybeer.fr) : stocks, production, clients, commandes, comptabilité,
+   douanes, traçabilité. Il est **connecté à WooCommerce** via son écran
+   Intégrations partenaires, et chaque produit WooCommerce est associé à un
+   stock EasyBeer, **contenance par contenance** (Empilable 20 cl, 50 cl,
+   70 cl, Magnum 150 cl…). Association vérifiée complète sur capture.
+
+   Le **transporteur**, lui, c'est **Sendcloud Shipping 1.0.33**, l'extension
+   WordPress qui gère les étiquettes et l'expédition.
+
+   Cette doc écrivait « EasyBee » (orthographe fausse) et le présentait comme
+   le transporteur notifié à la commande. Corrigé partout.
+
+   ℹ️ EasyBeer est aussi accessible en MCP dans les sessions Claude
+   (`mcp__easybeer__*`) : commandes, clients, stocks, indicateurs de vente.
 3. **Trois passerelles de paiement, pas deux.** En plus de WooPayments et
    PayPal, **SumUp Payment Gateway 2.17.1** est actif. Il n'apparaît pas dans
    les `payment_methods` de la Store API — donc probablement pas activé comme
@@ -424,7 +434,7 @@ depuis un design handoff professionnel (variante "Chute & rebond" choisie).
   ces métadonnées apparaissent dans l'admin de commande sous chaque ligne.
 - **Pas de plugin WP requis** : la Store API native accepte `cart_item_data`
   et WC Blocks le préserve en BO. Stock, TVA, livraison, emails, WooPayments,
-  EasyBee → fonctionnent comme d'habitude.
+  EasyBeer → fonctionnent comme d'habitude.
 - **Contenance commandée** : 20 cl (format empilable) si dispo côté WC,
   sinon la plus petite taille. Ajustable dans la page `.astro` via le champ
   `defaultSize` et `wcSizeAttribute`.
@@ -1255,7 +1265,7 @@ qui précède cette suppression.
 1. **Tester un paiement réel** de 1-2 € en conditions réelles, puis
    rembourser depuis l'admin WooCommerce. Vérifier que la commande tombe bien
    dans le WP admin comme une commande classique, que l'email part, que
-   EasyBee reçoit.
+   EasyBeerr reçoit.
 2. ~~**Régénérer la clé REST API WC "Astro site"**~~ ✅ **FAIT (avril 2026)** —
    clé régénérée côté WooCommerce + injectée dans Vercel env vars
    (`WC_CONSUMER_KEY` + `WC_CONSUMER_SECRET` en Production + Preview).

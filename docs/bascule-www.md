@@ -78,8 +78,9 @@ permettraient de basculer en quelques heures.
       un projet en infraction pouvait être désactivé sans préavis.
 - [ ] **Testé un vrai paiement en conditions réelles** (commande de 1-2 €
       depuis test.labrasseriedesplantes.fr, puis rembourser depuis l'admin WC).
-      Vérifier : commande visible dans WP admin, email client reçu, EasyBee
-      notifié, facture générée.
+      Vérifier : commande visible dans WP admin, email client reçu, commande
+      remontée dans **EasyBeer** (le logiciel de gestion, pas un transporteur),
+      étiquette d'expédition créée dans **Sendcloud**, facture générée.
 - [ ] **Testé le Coffret DIY** en commande réelle — vérifier que les 3 lignes
       apparaissent dans l'admin WC avec la metadata `_coffret_diy`.
 - [x] ✅ **Clés API WC présentes sur Vercel** — `WC_CONSUMER_KEY` et
