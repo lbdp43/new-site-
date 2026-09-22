@@ -237,7 +237,7 @@ Ce que chaque paramètre nous apprend :
 
 | Paramètre | Valeur | Conséquence |
 |---|---|---|
-| `intent` | `capture` | le paiement est **encaissé immédiatement**, pas seulement autorisé. Cohérent avec les commandes observées (payées 3 s après création). |
+| `intent` | `capture` | ⚠️ **ne veut PAS dire « débité à l'approbation ».** L'approbation du client autorise la capture ; c'est **le marchand qui capture ensuite, côté serveur**. Sur les commandes observées, la capture suit de ~3 s, d'où l'illusion. Un test qui s'arrête à l'approbation ne débite donc rien — mais peut laisser une **autorisation** visible sur le relevé du client. |
 | `commit` | `true` | le bouton PayPal affiche « Payer maintenant » : le client valide définitivement **chez PayPal**, pas au retour sur le site. |
 | `currency` | `EUR` | pas de multi-devise à gérer. |
 | `components` | `buttons,messages,card-fields,googlepay,applepay` | le SDK charge plus que le bouton, mais seules les passerelles **activées** comptent, et `ppcp` est la seule. |
@@ -638,16 +638,32 @@ Dans les deux cas, l'intégration s'écrit ensuite sans rien deviner.
 Le site étant **statique**, les variables `PUBLIC_*` sont figées au moment du
 build : les poser ne suffit pas, **il faut redéployer**.
 
+0. **Téléverser `astro-cors` ≥ 1.4.0** sur le WordPress (Extensions →
+   Ajouter → Téléverser). Sans la route `/lbdp-astro/v1/pay-order`, l'étape
+   d'encaissement renvoie une 404 : la commande reste en attente, aucun débit,
+   échec propre — mais aucun test concluant possible.
 1. Vercel → projet `new-site` → Settings → Environment Variables. Ajouter sur
    **Production et Preview** :
    - `PUBLIC_PPCP_ENABLED` = `true`
    - `PUBLIC_PAYPAL_CLIENT_ID` = le `client-id` relevé plus haut
 2. Redéployer (Deployments → dernier déploiement → Redeploy).
 3. Sur `test.labrasseriedesplantes.fr`, mettre l'article le moins cher au
-   panier, aller sur `/commande`, choisir **PayPal**, payer pour de vrai.
-4. Vérifier côté WooCommerce : commande en « En cours », e-mail parti, stock
-   décrémenté, EasyBeer synchronisé — exactement comme une commande carte.
-5. **Rembourser** depuis l'admin WooCommerce.
+   panier, aller sur `/commande`, **ouvrir la console (F12) avant de cliquer**,
+   choisir **PayPal**, payer pour de vrai.
+4. Vérifier côté WooCommerce : commande en « En cours », **`transaction_id`
+   non vide**, e-mail parti, stock décrémenté, EasyBeer synchronisé —
+   exactement comme une commande carte.
+5. Vérifier dans le **compte marchand PayPal** que la transaction y figure.
+   ⚠️ C'est la seule source qui prouve un encaissement : un relevé bancaire
+   **personnel** ne distingue pas une autorisation d'une capture (cf. le faux
+   incident du 22/09/2026 dans `CLAUDE.md`).
+6. **Rembourser** depuis l'admin WooCommerce.
+
+⚠️ **Si l'écran affiche « le paiement n'a pas pu être confirmé »** : relever
+dans la console la ligne rouge `[PayPal] encaissement non confirmé`. Elle
+porte la réponse du serveur (`status`, `transaction_id`, `gateway_result`) et
+c'est le seul moyen de savoir *pourquoi* l'encaissement a échoué — la commande
+elle-même ne porte aucune note dans ce cas.
 
 ✅ **Aucun risque pour les clients** : `test.labrasseriedesplantes.fr` est le
 déploiement de production de ce projet Vercel, mais la **boutique publique
@@ -662,9 +678,8 @@ Le travail qui ne dépendait d'aucune des trois inconnues a été livré :
 
 - **`src/lib/payment-methods.ts`** (nouveau) — seul endroit qui décide des
   moyens de paiement proposés. Il croise ce que WooCommerce déclare
-  (`cart.payment_methods`) avec ce que le front sait faire. Contient le
-  constructeur de `payment_data` PayPal et toutes les hypothèses, regroupées
-  et annotées.
+  (`cart.payment_methods`) avec ce que le front sait faire. Porte le verrou
+  `PPCP_FLOW_IMPLEMENTED` et l'ordre des appels du tunnel, documenté.
 - **`src/lib/woocommerce.ts`** — les types Store API portent désormais
   `extensions.wc_ppcp` et documentent `payment_methods`.
 - **`src/components/cart/CheckoutPage.tsx`** — sélecteur de moyen de paiement
@@ -674,16 +689,19 @@ Le travail qui ne dépendait d'aucune des trois inconnues a été livré :
 - **`.env.example`** — `PUBLIC_PPCP_ENABLED` et `PUBLIC_PAYPAL_CLIENT_ID`
   déclarées à l'avance.
 
-### 🔴 Le verrou
+### ✅ Le verrou est levé
 
-`PPCP_FLOW_IMPLEMENTED = false` dans `src/lib/payment-methods.ts`.
+`PPCP_FLOW_IMPLEMENTED = true` dans `src/lib/payment-methods.ts` depuis le
+22/09/2026 — le tunnel est écrit.
 
-Tant qu'il vaut `false`, PayPal **n'est jamais proposé**, même si WooCommerce
-le déclare et même si les variables d'environnement sont posées. C'est
-délibéré : une variable activée par erreur sur Vercel afficherait sinon un
-bouton PayPal inopérant sur une boutique qui encaisse réellement.
+PayPal reste néanmoins invisible tant que les **deux variables
+d'environnement** ne sont pas posées sur Vercel (`PUBLIC_PPCP_ENABLED=true`
+et `PUBLIC_PAYPAL_CLIENT_ID`). Ce sont elles, désormais, qui font office
+d'interrupteur.
 
-À passer à `true` **dans le même commit** que l'implémentation du tunnel.
+⚠️ Ne repasser `PPCP_FLOW_IMPLEMENTED` à `false` que pour couper PayPal en
+urgence — et ne jamais le remettre à `true` pour un tunnel qui encaisserait
+**avant** d'avoir créé la commande WooCommerce.
 
 ---
 
@@ -719,11 +737,21 @@ constat de Guillaume. Il ne change pas la décision : PayPal reste bloquant.
 - [x] **Chemin B tranché** — `/wc/store/v1/checkout` finalise (commande #26516 créée)
 - [x] **Tunnel écrit** — SDK, boutons, création, finalisation, annulation, erreurs
 - [x] **CSP** — `*.paypal.com` / `*.paypalobjects.com` autorisés dans `vercel.json`
+- [x] Flux de création / approbation PayPal
+- [x] Gestion des annulations et des échecs
+- [x] `PPCP_FLOW_IMPLEMENTED` passé à `true`
+- [x] **Encaissement côté serveur** — route `/lbdp-astro/v1/pay-order` dans
+      `astro-cors` 1.4.0
+- [x] **Mode de livraison rétabli** avant la création de la commande PayPal
+      (sinon le montant approuvé diverge de celui de la commande — #26523)
+- [ ] **Téléverser `astro-cors` 1.4.0** sur le WordPress *(Guillaume)*
 - [ ] **Poser les 2 variables sur Vercel + redéployer** *(Guillaume)*
-- [ ] **Paiement réel de bout en bout** sur `test.` puis remboursement *(Guillaume)*
-- [ ] Supprimer la commande **#26516**, résidu de la sonde *(Guillaume)*
-- [ ] Reproduire **PayPal Pay Later** côté Astro (`enable-funding=paylater`)
-- [ ] Flux de création / approbation PayPal
-- [ ] Gestion des annulations et des échecs
-- [ ] Passer `PPCP_FLOW_IMPLEMENTED` à `true`
-- [ ] Test réel 1-2 € en PayPal + remboursement
+- [ ] **Paiement réel de bout en bout** sur `test.`, console ouverte, puis
+      remboursement *(Guillaume)*
+- [ ] Vérifier la transaction dans le **compte marchand PayPal**
+- [ ] Supprimer les commandes de test **#26516**, **#26518**, **#26519**,
+      **#26521**, **#26523** *(Guillaume)*
+
+~~Reproduire PayPal Pay Later côté Astro~~ — **écarté** par Guillaume le
+22/09/2026 (« mets juste le bouton PayPal »). `src/lib/paypal.ts` envoie
+`disable-funding=paylater,card`.

@@ -48,15 +48,14 @@ function missingFields(billing: WcAddress, shipping: WcAddress): string[] {
  *   5. on relit le statut réel de la commande avant d'afficher quoi que ce
  *      soit au client.
  *
- * 🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Le 22/09/2026,
- * le tunnel qui encaissait d'abord a débité deux fois 16 € sans qu'aucune
- * commande n'existe — donc sans e-mail, sans préparation, sans trace. Ici,
- * tout débit est nécessairement rattaché à une commande : visible en
- * back-office et remboursable depuis WooCommerce.
+ * 🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Ainsi tout débit
+ * est nécessairement rattaché à une commande : visible en back-office et
+ * remboursable depuis WooCommerce. L'inverse — encaisser puis créer — laisse
+ * la porte ouverte à un débit sans trace côté boutique.
  *
  * ⚠️ **Ne jamais inverser les étapes 3 et 4**, et ne jamais revenir à
- * `/wc-ppcp/v1/cart/checkout` : cette route encaisse sans créer de commande.
- * C'est la cause exacte de l'incident.
+ * `/wc-ppcp/v1/cart/checkout` : c'est la route du flux **express**, elle
+ * renvoie vers la page de relecture du plugin au lieu de finaliser.
  *
  * ⚠️ **Les callbacks PayPal sont figés au rendu des boutons** : les valeurs du
  * formulaire passent donc par une `ref`. Ne pas « simplifier » en lisant les
