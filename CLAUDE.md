@@ -190,13 +190,12 @@ pas été passé puis remboursé.
 2. Clic → `wc.createPaypalOrder()` → `POST /wc-ppcp/v1/cart/order` → ID PayPal.
 3. Le client approuve dans la fenêtre PayPal (flux **popup**, pas redirection :
    on garde la main sur la redirection finale).
-4. `onApprove` → `POST /wc-ppcp/v1/cart/checkout` avec `ppcp_paypal_order_id`.
-   🔴 **Cette étape N'ENCAISSE PAS** — voir la section « `cart/checkout`
-   n'encaisse pas » : la route est celle du flux express et renvoie vers la
-   page de relecture WordPress. `wc.finalizePaypalOrder()` lève donc
-   systématiquement une erreur en l'état. **Le tunnel est protégé mais pas
-   fonctionnel** ; la piste en cours est `/wc-ppcp/v1/order/pay`.
-5. Redirection vers `/commande/confirmation` (jamais atteinte à ce jour).
+4. `onApprove` → `POST /wc/store/v1/checkout` — **le même endpoint que la
+   carte**, seul à créer la commande de façon fiable et à renvoyer
+   `order_id` + `order_key`. L'identifiant PayPal y part sous **trois noms
+   de champ à la fois** (`buildPpcpPaymentData`).
+5. Redirection vers `/commande/confirmation` — **jamais atteinte à ce jour** :
+   aucun encaissement n'a encore été obtenu, le garde-fou lève une erreur.
 
 Le front **ne capture jamais** : c'est WooCommerce qui le fait, donc commande,
 e-mails, stock et EasyBeer restent synchronisés comme pour une carte.
@@ -387,12 +386,35 @@ formulaire-là qui encaisse.
 511), **aucun débit**, et le garde-fou a affiché un message d'échec au lieu
 d'une fausse confirmation. Le filet fonctionne.
 
-🔎 **Piste suivante, non vérifiée** : la route
-**`POST /wc-ppcp/v1/order/pay`** (`payment_method`, `order_id`), décrite
-comme « payer une commande WooCommerce **déjà créée** ». Le tunnel serait
-alors en deux temps — `/wc/store/v1/checkout` crée la commande (ce qu'on
-sait faire, c'est ainsi que #26516 et #26518 sont nées), puis `order/pay`
-encaisse. **À confirmer par relevé avant d'écrire quoi que ce soit.**
+### 🔴 `order/pay` n'encaisse pas non plus
+
+Essayée le 22/09/2026 sur une vraie commande WooCommerce (#26519, créée via
+la Store API) avec les trois noms de champ candidats : **200 à chaque fois,
+corps vide, aucune note de commande, `transaction_id` toujours vide**. La
+route ne se plaint de rien et ne fait rien.
+
+**Les deux routes propres de l'extension sont donc écartées.** Ne pas y
+retourner sans élément nouveau.
+
+### ✅ Ce qui marche de façon fiable
+
+`POST /wc/store/v1/checkout` **crée la commande WooCommerce** à tous les
+coups, avec les bons montants et la bonne adresse (#26516, #26518, #26519).
+C'est donc là que se fait la finalisation, comme pour la carte.
+
+🔑 **Les trois noms de champ candidats partent ENSEMBLE** dans
+`payment_data` (`buildPpcpPaymentData`). C'est une liste de couples
+clé/valeur que `Legacy.php` déverse dans `$_POST` : une clé inconnue de la
+passerelle est ignorée sans dommage. Plutôt que de parier — ce qui a produit
+la commande fantôme — on pose `ppcp_paypal_order_id` (formulaire classique),
+`paypal_order` (nom interne du plugin) et `paypal_order_id` (la métadonnée
+des commandes payées, sans préfixe), et le plugin lit celui qu'il connaît.
+
+⚠️ **Les sondes ne peuvent pas trancher l'encaissement.** Toutes utilisaient
+une commande PayPal **non approuvée**, donc incapturable par construction :
+elles ne disent que « le plugin a compris la requête ». Seul un **vrai
+paiement approuvé** peut répondre à « est-ce encaissé ». C'est pourquoi le
+prochain pas est un paiement réel, protégé par le garde-fou.
 
 ⚠️ **Repli garanti si le headless bute** : toute commande WooCommerce porte
 un `payment_url` de la forme

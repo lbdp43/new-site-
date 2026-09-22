@@ -38,16 +38,17 @@ function missingFields(billing: WcAddress, shipping: WcAddress): string[] {
  *      un identifiant de commande PayPal ;
  *   2. PayPal ouvre sa fenêtre, le client approuve (`commit=true` : il valide
  *      définitivement là-bas) ;
- *   3. `onApprove` envoie cet identifiant à `POST /wc-ppcp/v1/cart/checkout`
- *      dans `ppcp_paypal_order_id` — la route propre de l'extension, la seule
- *      dont on ait la preuve qu'elle lit ce champ (cf. `finalizePaypalOrder`).
- *      Elle crée la commande WooCommerce et déclenche la capture côté serveur ;
+ *   3. `onApprove` envoie cet identifiant à `POST /wc/store/v1/checkout` — le
+ *      même endpoint que la carte, seul à créer la commande WooCommerce de
+ *      façon fiable et à renvoyer `order_id` + `order_key`. L'identifiant y
+ *      part sous **trois noms de champ à la fois**, pour ne plus parier sur
+ *      un nom (cf. `buildPpcpPaymentData`) ;
  *   4. redirection vers la page de confirmation Astro.
  *
- * ⚠️ Ce n'est PAS le même endpoint que la carte, contrairement à ce que cette
- * doc a longtemps affirmé. `/wc/store/v1/checkout` avec l'identifiant en
- * `payment_data` crée bien une commande, mais sans jamais l'encaisser : c'est
- * ce qui a produit la commande fantôme #26518.
+ * ⚠️ Les deux routes propres de l'extension ont été essayées et écartées le
+ * 22/09/2026 : `cart/checkout` sert au flux express et renvoie vers la page
+ * de relecture WordPress même après une vraie approbation, et `order/pay`
+ * répond 200 sans rien faire. Ne pas y retourner sans élément nouveau.
  *
  * Le front ne capture jamais lui-même : c'est WooCommerce qui le fait, ce qui
  * garantit que la commande, les e-mails, le stock et EasyBeer restent
@@ -137,10 +138,11 @@ export default function PayPalButtons({
               // Finalisation par la route propre de l'extension. Elle lève
               // une erreur si la commande n'a pas réellement été encaissée —
               // voir `wc.finalizePaypalOrder`.
-              const { orderId, orderKey } = await wc.finalizePaypalOrder(
-                data.orderID,
-                note,
-              );
+              const { orderId, orderKey } = await wc.finalizePaypalOrder(data.orderID, {
+                billing: b,
+                shipping: s,
+                customerNote: note,
+              });
 
               // Même nettoyage que le tunnel carte : sans clearSession(), le
               // prochain getCart() ressort le panier en cache et l'icône du

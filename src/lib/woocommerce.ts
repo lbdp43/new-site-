@@ -8,6 +8,10 @@
  * change à chaque mutation : on le met à jour depuis les headers de réponse.
  */
 
+// `payment-methods.ts` ne dépend de ce fichier que pour des TYPES (effacés au
+// build), donc cet import de valeur ne crée pas de cycle à l'exécution.
+import { buildPpcpPaymentData } from "./payment-methods";
+
 const BASE = import.meta.env.PUBLIC_WC_BASE_URL as string | undefined;
 
 /**
@@ -372,63 +376,71 @@ export const wc = {
   /**
    * Finalise un paiement PayPal **approuvé** par le client.
    *
-   * On passe par la route propre de l'extension, `/wc-ppcp/v1/cart/checkout`,
-   * et non par `/wc/store/v1/checkout` comme pour la carte. Raison : c'est la
-   * seule dont on ait la preuve qu'elle comprend l'identifiant de commande
-   * PayPal qu'on lui transmet.
+   * Retour à `POST /wc/store/v1/checkout`, la route de la carte — parce que
+   * c'est la seule qui crée la commande WooCommerce de façon fiable et qui
+   * renvoie `order_id` + `order_key`. Relevés du 22/09/2026 :
    *
-   * Preuve, relevée en console le 22/09/2026 sans dépenser un centime — la
-   * route renvoie dans sa `redirect` un paramètre `_ppcp_order_review` qui
-   * contient, en base64, ce qu'elle a compris de la requête :
+   *   /wc-ppcp/v1/cart/checkout  crée 0 commande, renvoie la page de
+   *                              relecture même avec une commande PayPal
+   *                              approuvée → c'est la route du flux EXPRESS
+   *   /wc-ppcp/v1/order/pay      répond 200 vide, n'inscrit aucune note de
+   *                              commande, ne change rien (essayé sur #26519)
+   *   /wc/store/v1/checkout      ✅ crée la commande, montants et adresse
+   *                              justes (#26516, #26518, #26519)
    *
-   *   envoyé `paypal_order_id`      → {"paypal_order":null}                ignoré
-   *   envoyé `ppcp_paypal_order_id` → {"paypal_order":"4XS78307X1722144X"} ✅
-   *   envoyé rien                   → {"paypal_order":null}                témoin
+   * 🔑 **Les trois noms de champ candidats sont envoyés ENSEMBLE.**
+   * `payment_data` est une liste de couples clé/valeur que
+   * `WooCommerce/StoreApi/Legacy.php` déverse dans `$_POST` ; une clé que la
+   * passerelle ne connaît pas est simplement ignorée. Plutôt que de parier
+   * sur un nom — ce qui a déjà produit la commande fantôme #26518 — on pose
+   * les trois et le plugin prend celui qu'il lit.
    *
-   * ⚠️ Deux noms cohabitent, et s'y tromper coûte cher : le champ **envoyé**
-   * s'appelle `ppcp_paypal_order_id`, le champ **interne** `paypal_order`.
+   * Les trois ne sont pas inventés : `ppcp_paypal_order_id` est le champ du
+   * formulaire de commande classique (relevé réseau) et celui que
+   * `cart/checkout` accepte ; `paypal_order` est le nom **interne** que le
+   * plugin renvoie dans son `_ppcp_order_review` ; `paypal_order_id` est la
+   * métadonnée `_ppcp_paypal_order_id` des commandes payées, sans préfixe.
    *
-   * ⚠️ Cette route ne renvoie PAS `order_id` / `order_key` : elle répond
-   * comme le checkout classique de WooCommerce, par `{result, redirect}`, où
-   * `redirect` est l'URL « commande reçue ». On en extrait les deux valeurs
-   * dont la page de confirmation Astro a besoin.
+   * ⚠️ **`payment_method` est dupliqué** dans `payment_data`, comme pour
+   * WooPayments : `Legacy.php` REMPLACE `$_POST`, donc la valeur de premier
+   * niveau n'y arriverait jamais.
    *
-   * **La fonction échoue plutôt que de supposer.** Tant que la commande PayPal
-   * n'est pas approuvée, l'extension répond `result: "success"` avec une
-   * redirection vers sa page de relecture — c'est exactement ce qui avait
-   * produit la commande fantôme #26518, annoncée payée sans l'être. Ici, tout
-   * ce qui n'est pas une URL « commande reçue » exploitable lève une erreur.
+   * **La fonction échoue plutôt que de supposer.** Le plugin répond
+   * `payment_status: "success"` aussi bien pour « c'est payé » que pour « il
+   * reste à faire approuver » — c'est ce qui avait fait afficher « Merci pour
+   * votre commande » sur la commande impayée #26518. On exige donc trois
+   * conditions, et on refuse au moindre doute.
    */
   async finalizePaypalOrder(
     paypalOrderId: string,
-    customerNote?: string,
+    args: {
+      billing: WcAddress;
+      shipping: WcAddress;
+      customerNote?: string;
+    },
   ): Promise<{ orderId: string; orderKey: string }> {
-    const raw = await requestWpJson<unknown>("/wc-ppcp/v1/cart/checkout", {
-      method: "POST",
-      body: JSON.stringify({
-        payment_method: "ppcp",
-        ppcp_paypal_order_id: paypalOrderId,
-        // Nom du champ de note du formulaire de commande classique, dont
-        // cette route reprend le format. L'adresse, elle, vient de la
-        // session (poussée par `cart/update-customer`).
-        order_comments: customerNote ?? "",
-      }),
+    const result = await this.checkout({
+      billing_address: args.billing,
+      shipping_address: args.shipping,
+      customer_note: args.customerNote || undefined,
+      payment_method: "ppcp",
+      payment_data: buildPpcpPaymentData(paypalOrderId),
     });
 
-    const res = (raw ?? {}) as { result?: string; redirect?: string };
-    const redirect = typeof res.redirect === "string" ? res.redirect : "";
+    const redirect = result.payment_result?.redirect_url ?? "";
+    const stillNeedsPayPal = /paypal\.com|_ppcp_order_review/i.test(redirect);
+    const notPaidYet = result.status === "pending" || result.status === "failed";
 
-    // Page de relecture = la commande PayPal n'a pas été encaissée.
-    const notApproved = redirect.includes("_ppcp_order_review");
-    const match = /\/order-received\/(\d+)\/?[^#]*[?&]key=(wc_order_[A-Za-z0-9]+)/.exec(
-      redirect,
-    );
-
-    if (res.result !== "success" || notApproved || !match) {
+    if (
+      result.payment_result?.payment_status !== "success" ||
+      stillNeedsPayPal ||
+      notPaidYet
+    ) {
       console.error("[PayPal] finalisation refusée", {
-        result: res.result,
+        order_id: result.order_id,
+        status: result.status,
+        payment_status: result.payment_result?.payment_status,
         redirect,
-        notApproved,
       });
       throw new Error(
         "Le paiement n'a pas pu être finalisé et aucun montant n'a été débité. " +
@@ -436,7 +448,7 @@ export const wc = {
       );
     }
 
-    return { orderId: match[1], orderKey: match[2] };
+    return { orderId: String(result.order_id), orderKey: result.order_key };
   },
 
   async checkout(args: WcCheckoutPayload): Promise<WcCheckoutResponse> {
