@@ -328,7 +328,43 @@ commande — et re-sélectionne le sien par défaut.
 
 ⚠️ **Garder la vérification même si le rétablissement semble fiable.** Un
 rétablissement peut échouer en silence ; une comparaison, non. C'est elle le
-vrai filet.
+vrai filet — et c'est elle qui a attrapé la faute décrite juste en dessous.
+
+### 🔑 La cause racine : le « choix du client » était lu dans le panier
+
+**Le vrai coupable de #26534**, trouvé le 22/09/2026 grâce au garde-fou, qui
+a enfin fourni des chiffres au lieu d'une hypothèse :
+
+```
+approuvéChezPayPal: "1600"   livraison: "Forfait"   totalMaintenant: "3100"
+```
+
+`CheckoutPage` calculait le tarif « choisi » ainsi :
+
+```js
+const selectedRate = shippingRates.find((r) => r.selected)?.rate_id ?? …
+```
+
+**C'est-à-dire dans le panier — donc dans l'état du serveur.** Quand
+WooCommerce bascule sur « Forfait », cette valeur bascule avec lui, et le
+rétablissement bâti dessus remet donc « Forfait ». Un **no-op par
+construction** : la cible était lue dans la chose même qu'il fallait corriger.
+
+**Correctif** : `chosenRate` (`useState`), **écrit uniquement par un clic du
+client**. C'est lui la cible du rétablissement et la référence de la
+vérification. `selectedRate` retombe sur le serveur seulement si le tarif
+choisi n'est plus proposé (changement d'adresse).
+
+⚠️ **Ne jamais redériver `chosenRate` du panier**, quelle que soit la bonne
+raison apparente. C'est exactement la faute ci-dessus.
+
+🔒 **La même protection a été posée sur le tunnel CARTE** : `wc.checkout`
+pousse lui aussi les adresses, donc le client pouvait voir 16 € et être
+débité 31 €. Il rétablit désormais le tarif choisi puis **vérifie que le
+total n'a pas bougé** avant de débiter.
+
+**Règle générale qui sort de tout ça** : *ne jamais faire payer un montant
+que le client n'a pas vu à l'écran.*
 
 ### 🚨 Pas de redirection automatique vers la page de paiement WordPress
 

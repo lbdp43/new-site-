@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe, type Stripe } from "@stripe/stripe-js";
 import { addMinor, ensureCartLoaded, formatMoney, setCart, useCart } from "../../lib/cart-store";
-import { wc, type WcAddress } from "../../lib/woocommerce";
+import { wc, type WcAddress, type WcCart } from "../../lib/woocommerce";
 import {
   getAvailablePaymentMethods,
   type PaymentMethodId,
@@ -121,7 +121,7 @@ export default function CheckoutPage() {
 }
 
 function CheckoutInner() {
-  const { cart, minorUnit, currencySymbol, updateCustomer, selectShippingRate } = useCart();
+  const { cart, minorUnit, currencySymbol, updateCustomer, selectShippingRate, refresh } = useCart();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -199,7 +199,32 @@ function CheckoutInner() {
   }, [postcodeKey]);
 
   const shippingRates = cart?.shipping_rates?.[0]?.shipping_rates ?? [];
-  const selectedRate = shippingRates.find((r) => r.selected)?.rate_id ?? shippingRates[0]?.rate_id;
+
+  /**
+   * Mode de livraison **choisi par le client**, mémorisé à part.
+   *
+   * ⚠️ Ne PAS le redériver du panier. C'est l'erreur qui a produit #26534 :
+   * `selectedRate` était lu dans `shipping_rates` (donc dans l'état du
+   * serveur), et WooCommerce re-sélectionne le sien par défaut dès qu'on lui
+   * pousse une adresse. Le « choix du client » suivait donc la
+   * réinitialisation, et le rétablissement construit dessus remettait…
+   * exactement ce qu'il devait corriger.
+   *
+   * Cette valeur-ci n'est écrite que par un clic du client. Elle sert de
+   * cible au rétablissement (`PayPalCheckoutButton`) et de référence à la
+   * vérification du montant avant tout paiement.
+   */
+  const [chosenRate, setChosenRate] = useState<string | null>(null);
+
+  const serverRate =
+    shippingRates.find((r) => r.selected)?.rate_id ?? shippingRates[0]?.rate_id;
+
+  // Un tarif choisi puis devenu indisponible (changement d'adresse) ne doit
+  // pas figer l'écran sur une option fantôme : on retombe sur le serveur.
+  const selectedRate =
+    chosenRate && shippingRates.some((r) => r.rate_id === chosenRate)
+      ? chosenRate
+      : serverRate;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -211,6 +236,26 @@ function CheckoutInner() {
     if (paymentMethod === "ppcp") return;
 
     await submitCardPayment();
+  }
+
+  /**
+   * Rétablit le mode de livraison choisi par le client si WooCommerce l'a
+   * réinitialisé, et renvoie le panier à jour.
+   *
+   * ⚠️ La cible est `chosenRate`, jamais la sélection du serveur — sinon on
+   * « rétablit » la réinitialisation qu'on veut corriger (cf. #26534).
+   */
+  async function restoreChosenShippingRate(): Promise<WcCart | null> {
+    if (!chosenRate) return cart;
+
+    const fresh = await refresh();
+    const stillSelected = fresh?.shipping_rates?.[0]?.shipping_rates?.some(
+      (r) => r.rate_id === chosenRate && r.selected,
+    );
+    if (stillSelected) return fresh;
+
+    const pkgId = fresh?.shipping_rates?.[0]?.package_id ?? 0;
+    return await selectShippingRate(pkgId, chosenRate);
   }
 
   async function submitCardPayment() {
@@ -279,6 +324,31 @@ function CheckoutInner() {
       // pour qu'il existe dans $_POST côté serveur.
       // Cf. fatal-errors-2026-04-25.log + woocommerce-payments@trunk
       // includes/class-wc-payment-gateway-wcpay.php:2279.
+      // 🔒 Le montant affiché fait loi, ici aussi. `wc.checkout` pousse les
+      // adresses, donc WooCommerce recalcule les frais de port et
+      // re-sélectionne le sien par défaut — le client verrait 16 € et serait
+      // débité 31 €. On rétablit son choix, puis on vérifie que le total
+      // n'a pas bougé depuis le récapitulatif qu'il a sous les yeux.
+      const shown = cart?.totals.total_price ?? null;
+      const synced = await restoreChosenShippingRate();
+      const now = synced?.totals.total_price ?? null;
+
+      if (shown && now && shown !== now) {
+        console.error("[Carte] montant divergent — paiement annulé", {
+          affichéAuClient: shown,
+          totalWooCommerceMaintenant: now,
+          livraison: synced?.shipping_rates?.[0]?.shipping_rates?.find(
+            (r) => r.selected,
+          )?.name,
+        });
+        setFormError(
+          "Le montant de ta commande a changé (les frais de livraison ont été " +
+            "recalculés). Rien n'a été débité. Revérifie le mode de livraison, " +
+            "puis relance le paiement.",
+        );
+        return;
+      }
+
       const result = await wc.checkout({
         billing_address: billing,
         shipping_address: effectiveShipping,
@@ -458,6 +528,9 @@ function CheckoutInner() {
                           name="shipping-rate"
                           checked={checked}
                           onChange={() => {
+                            // Le clic du client fait foi — c'est la seule
+                            // écriture de `chosenRate`.
+                            setChosenRate(r.rate_id);
                             const pkgId = cart?.shipping_rates?.[0]?.package_id ?? 0;
                             selectShippingRate(pkgId, r.rate_id).catch(() => {});
                           }}
