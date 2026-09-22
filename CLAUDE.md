@@ -179,9 +179,13 @@ passerelle + hypothèses PPCP regroupées), types `extensions.wc_ppcp` dans
 — affiché seulement s'il y a un vrai choix, donc **tunnel carte inchangé**.
 
 ✅ **Tunnel écrit et livré le 22/09/2026** — `PPCP_FLOW_IMPLEMENTED` est passé
-à `true`. Reste verrouillé par les deux variables d'environnement, **absentes
-de Vercel** : PayPal n'apparaît donc nulle part tant qu'un vrai paiement n'a
-pas été passé puis remboursé.
+à `true`, et les **deux variables d'environnement sont posées sur Vercel**
+(Production + Preview, le 22/09/2026 à 9h33–9h38 UTC). PayPal s'affiche donc
+sur le checkout de `test.`
+
+⚠️ Aucun risque client : `test.` est le déploiement de production de ce projet
+Vercel, mais la boutique publique reste le WordPress sur `www.` jusqu'à la
+bascule DNS.
 
 ### Flux PayPal implémenté — le client reste sur le site Astro
 
@@ -602,13 +606,15 @@ Variables `PUBLIC_*` → exposées côté client (non-secret par design).
 | `PUBLIC_WC_BASE_URL` | `https://www.labrasseriedesplantes.fr` | Base URL de la Store API |
 | `PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_live_51ETDmy…TvtxNs` | Clé Stripe publique (WooPayments) |
 | `PUBLIC_STRIPE_ACCOUNT_ID` | `acct_1Mg83iFkUaBLmhte` | Compte Stripe Connect de WooPayments |
-| `PUBLIC_PPCP_ENABLED` | **absente** | Futur interrupteur PayPal — ne pas créer tant que le tunnel n'est pas écrit |
-| `PUBLIC_PAYPAL_CLIENT_ID` | **requise** — le client restant sur le site Astro, c'est nous qui chargeons le SDK PayPal. Valeur dans `docs/paypal-checkout.md` (clé publique, pas un secret). |
+| `PUBLIC_PPCP_ENABLED` | `true` — **posée le 22/09/2026** (Production + Preview) | Interrupteur PayPal |
+| `PUBLIC_PAYPAL_CLIENT_ID` | **posée le 22/09/2026** (Production + Preview) | `client-id` du SDK PayPal — c'est le site Astro qui le charge, le client restant sur place. Valeur dans `docs/paypal-checkout.md` (clé publique, pas un secret). |
 
-⚠️ **`PUBLIC_PPCP_ENABLED=true` suffit désormais** à faire apparaître PayPal
-sur le checkout — le verrou `PPCP_FLOW_IMPLEMENTED` est à `true` et le
-`client-id` n'est plus lu. Comme toutes les `PUBLIC_*`, elle est figée au
-build : la poser exige un redéploiement.
+⚠️ **Les deux sont requises** pour que PayPal s'affiche : `isPpcpConfigured()`
+exige `PUBLIC_PPCP_ENABLED === "true"` **et** un `client-id` non vide. Sans le
+`client-id`, on préfère ne rien proposer plutôt qu'un bouton mort.
+
+⚠️ Comme toutes les `PUBLIC_*`, elles sont **figées au build** : les modifier
+exige un redéploiement pour prendre effet.
 
 Variables non-`PUBLIC_` (optionnelles, jamais exposées client) :
 

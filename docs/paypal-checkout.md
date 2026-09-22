@@ -643,11 +643,18 @@ build : les poser ne suffit pas, **il faut redéployer**.
    par `wp_list_plugins` le 22/09/2026). Sans lui, l'étape d'encaissement
    renvoie une 404 : commande en attente, aucun débit, échec propre — mais
    aucun test concluant possible.
-1. Vercel → projet `new-site` → Settings → Environment Variables. Ajouter sur
-   **Production et Preview** :
-   - `PUBLIC_PPCP_ENABLED` = `true`
-   - `PUBLIC_PAYPAL_CLIENT_ID` = le `client-id` relevé plus haut
-2. Redéployer (Deployments → dernier déploiement → Redeploy).
+1. ✅ **Déjà fait le 22/09/2026** — les deux variables sont posées sur
+   **Production et Preview** (vérifié via l'API Vercel, sans déchiffrer les
+   valeurs) : `PUBLIC_PPCP_ENABLED` = `true` et `PUBLIC_PAYPAL_CLIENT_ID`.
+   Elles sont **figées au build** : les modifier exigerait un redéploiement.
+2. **Déployer le code à tester.** `test.` sert la branche `main` : une PR
+   fusionnée suffit, Vercel redéploie tout seul en ~90 s. Sinon, Deployments →
+   dernier déploiement → Redeploy.
+
+   ⚠️ **Piège vécu le 22/09/2026** : le test de 11h35 UTC tournait sur le
+   déploiement de 11h30, donc **sans le correctif du mode de livraison** (PR
+   #36, pas encore fusionnée). Vérifier le commit servi avant de conclure
+   quoi que ce soit d'un échec.
 3. Sur `test.labrasseriedesplantes.fr`, mettre l'article le moins cher au
    panier, aller sur `/commande`, **ouvrir la console (F12) avant de cliquer**,
    choisir **PayPal**, payer pour de vrai.
@@ -746,7 +753,8 @@ constat de Guillaume. Il ne change pas la décision : PayPal reste bloquant.
 - [x] **Mode de livraison rétabli** avant la création de la commande PayPal
       (sinon le montant approuvé diverge de celui de la commande — #26523)
 - [x] **`astro-cors` 1.4.0 actif** sur le WordPress live
-- [ ] **Poser les 2 variables sur Vercel + redéployer** *(Guillaume)*
+- [x] **Les 2 variables posées sur Vercel** (Production + Preview, 22/09/2026)
+- [ ] **Fusionner la PR #36** pour déployer le correctif du mode de livraison
 - [ ] **Paiement réel de bout en bout** sur `test.`, console ouverte, puis
       remboursement *(Guillaume)*
 - [ ] Vérifier la transaction dans le **compte marchand PayPal**
