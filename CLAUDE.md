@@ -137,24 +137,29 @@ transporteur EasyBee) reste géré par WooCommerce côté serveur.
 6. WooPayments crée la commande, débite la carte (après 3DS), envoie les
    emails, notifie EasyBee. Redirection vers `/commande/confirmation?order=XXX&key=YYY`.
 
-## 🟠 PayPal est actif côté WooCommerce, absent du checkout Astro
+## 🔴 PayPal — chantier bloquant pour la bascule
 
-Relevé le 21/09/2026 sur `/wp-json/wc/store/v1/cart` : la Store API déclare
-`"payment_methods": ["woocommerce_payments", "ppcp"]`.
+**Guillaume, 22/09/2026 : « les clients utilisent PayPal souvent ».** La
+question est tranchée : PayPal doit exister sur le checkout Astro avant la
+bascule `www.`.
 
-`ppcp` = PayPal (extension `pymntpl-paypal-woocommerce`). Or `CheckoutPage.tsx`
-envoie `payment_method: "woocommerce_payments"` en dur et filtre Stripe à
-`paymentMethodTypes: ["card"]`. **Le checkout Astro ne propose donc que la
-carte.**
+Constat (relevé le 21/09/2026 sur `/wp-json/wc/store/v1/cart`) : WooCommerce
+déclare `"payment_methods": ["woocommerce_payments", "ppcp"]`, et la réponse
+contient un bloc `extensions.wc_ppcp`. Or le checkout Astro envoie
+`payment_method: "woocommerce_payments"` en dur. **Sans ce chantier, la
+bascule fait perdre des commandes sans afficher la moindre erreur.**
 
-⚠️ Conséquence à la bascule : les clients **perdent PayPal**, sans qu'aucune
-erreur n'apparaisse. Tout fonctionne, il y a juste un bouton en moins.
+✅ **Bonne nouvelle** : la présence de `extensions.wc_ppcp` prouve que
+l'extension (`pymntpl-paypal-woocommerce`) s'est enregistrée auprès de la
+Store API. Elle sait donc parler au même endpoint que le site Astro —
+l'intégration headless est réaliste, pas un contournement.
 
-Ce n'est pas un oubli technique à « corriger » — c'est un arbitrage
-commercial en attente (pré-requis de `docs/bascule-www.md`). Ne pas ajouter
-PayPal de sa propre initiative : le flux headless demande de gérer
-l'approbation côté PayPal puis de repasser le résultat dans `payment_data`,
-c'est un chantier à part.
+⚠️ Attendre une surprise dans le format de `payment_data`, comme pour
+WooPayments (où il a fallu dupliquer `payment_method`).
+
+**Cadrage, étapes et statut : `docs/paypal-checkout.md`.** Ne pas démarrer
+l'implémentation avant d'avoir les routes REST du plugin — elles ne sont pas
+devinables, et l'environnement de dev ne peut pas joindre le WordPress.
 
 ## Variables d'environnement
 
