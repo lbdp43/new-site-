@@ -76,7 +76,45 @@ surprise du même ordre côté PPCP.
 
 ---
 
-## ❗ Ce qu'il me faut pour avancer
+## 🔓 DÉBLOQUÉ — l'accès WooCommerce existe maintenant
+
+**22/09/2026.** Guillaume a activé les **46 outils WooCommerce** du MCP
+`mcp_wordpress` (extension Easy MCP AI → onglet Plugins → WooCommerce →
+`46 / 46 tools enabled`). Ils exposent la **REST API WooCommerce v3** :
+produits, **commandes**, clients, coupons, rapports, webhooks, réglages.
+
+Outils utiles, préfixe `wp_wc_` : `wp_wc_list_orders`, `wp_wc_get_order`,
+`wp_wc_list_products`, `wp_wc_get_product`, et leurs équivalents en écriture
+(à n'utiliser qu'avec l'accord explicite de Guillaume).
+
+⚠️ **Les outils n'apparaissent QUE dans une conversation ouverte APRÈS leur
+activation** — la liste est figée à l'ouverture de chaque conversation. Le
+bandeau de l'extension le dit : *« refresh its tools or start a new
+conversation »*. Reconnecter le serveur en cours de conversation ne suffit
+pas. Vérifié à nos dépens sur trois tentatives.
+
+### ▶️ Par quoi commencer, dans la prochaine session
+
+1. **`wp_wc_list_orders`** — filtrer les commandes récentes et regarder le
+   `payment_method` de chacune. Ça donne enfin la part réelle de PayPal, que
+   les indicateurs EasyBeer ne savent pas isoler (ils couvrent toute
+   l'activité, B2B compris).
+2. **`wp_wc_get_order`** sur une commande PayPal existante — c'est la pièce
+   maîtresse : elle montre **exactement** quelles métadonnées le plugin
+   enregistre (identifiant de commande PayPal, jeton, statut). On saura quoi
+   envoyer dans `payment_data` sans le deviner.
+3. **Les champs du checkout** — vérifier si l'extension Checkout Field Editor
+   a ajouté des champs obligatoires que `CheckoutPage.tsx` n'envoie pas.
+
+⚠️ **Contrainte qui demeure** : l'environnement de développement ne peut PAS
+joindre `labrasseriedesplantes.fr` (proxy réseau), ni lire le code du plugin
+(`plugins.trac.wordpress.org` est bloqué aussi). Le MCP est donc le seul
+canal vers le WordPress. Et **rien ne peut être testé d'ici** : c'est
+Guillaume qui teste dans son navigateur. Écrire un tunnel de paiement à
+l'aveugle sur une boutique qui encaisse réellement n'est pas acceptable —
+d'où l'importance de lire les commandes existantes avant d'écrire une ligne.
+
+## ❗ Ce qu'il me faut pour avancer (obsolète depuis l'accès WooCommerce)
 
 L'environnement de développement **ne peut pas joindre le WordPress** (domaine
 bloqué par le proxy réseau, en `www.` comme en apex), et le MCP WordPress est

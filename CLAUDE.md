@@ -239,7 +239,18 @@ ne demandera aucune retouche de cette liste.
 | Serveur | État | Pourquoi |
 |---|---|---|
 | **`WordPress_com`** | ❌ inutilisable | Les 60 opérations renvoient « requires a paid Jetpack plan ». Le site est auto-hébergé chez IONOS, simplement rattaché via Jetpack. **Ne plus le retester** — le verrou est côté WordPress.com, ni la reconnexion ni la réautorisation n'y changent rien. |
-| **`mcp_wordpress`** | ✅ **fonctionne** | Connecté le 22/09/2026 via l'extension **Easy MCP AI** installée sur le WP. Accès administrateur complet : pages, articles, médias, plugins, réglages, utilisateurs, menus, révisions. |
+| **`mcp_wordpress`** | ✅ **fonctionne** | Connecté le 22/09/2026 via l'extension **Easy MCP AI** installée sur le WP. Accès administrateur complet : pages, articles, médias, plugins, réglages, utilisateurs, menus, révisions. **+ 46 outils WooCommerce** (préfixe `wp_wc_`) activés le 22/09/2026 : produits, commandes, clients, coupons, rapports, webhooks. |
+
+⚠️ **Piège des outils Easy MCP AI** : activer un groupe d'outils dans
+WordPress (onglet Plugins de l'extension) ne le rend PAS disponible dans la
+conversation en cours. La liste des outils est figée à l'ouverture de chaque
+conversation — il faut **ouvrir une nouvelle conversation**. Reconnecter le
+serveur ne suffit pas. Vérifié sur trois tentatives le 22/09/2026, le bandeau
+de l'extension le dit explicitement.
+
+Autres groupes disponibles mais **non activés** : SEOPress (7 outils), et des
+groupes pour des extensions non installées (ACF, Events Calendar, BuddyPress,
+Yoast, Rank Math, AIOSEO, Slim SEO, SEO Framework).
 
 C'est `mcp_wordpress` qu'il faut utiliser pour toute lecture du WordPress.
 Il lève enfin la limite qui pesait sur le projet : le domaine est bloqué par
