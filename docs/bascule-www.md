@@ -88,11 +88,10 @@ permettraient de basculer en quelques heures.
       | 3D Secure | — | passé (28 s entre `date_created` et `date_paid`) |
       | E-mails | boutique + client | boutique + client |
 
-      ✅ **EasyBeer a bien reçu la commande** (confirmé par Guillaume).
-      Les commandes de test ont été remboursées.
-
-      ⛔ **Reste à faire** : rembourser **#26537** (16 €, frais 0,49 €) —
-      via **WooPayments**, jamais « manuellement ».
+      ✅ **EasyBeer a bien reçu la commande** (confirmé par Guillaume), et
+      **les deux commandes de test sont remboursées** — #26537 via
+      WooPayments, avec `_wcpay_refund_status: successful` (un vrai
+      remboursement passerelle, pas un « manuel » qui ne rend rien).
 
       ⛔ **Non encore vérifiés sur ces deux commandes** : l'étiquette
       d'expédition **Sendcloud** et la facture (les deux commandes étaient
@@ -167,17 +166,28 @@ permettraient de basculer en quelques heures.
       Production + Preview.
 
       Détail du tunnel et mode opératoire : **`docs/paypal-checkout.md`**.
-- [ ] 🔴 **Inspecter les champs personnalisés du checkout WooCommerce** —
-      l'extension **Checkout Field Editor for WooCommerce** est active sur le
-      WP (relevé le 22/09/2026). Elle permet d'ajouter, modifier ou rendre
-      obligatoires des champs sur la page de commande.
+- [x] ✅ **Champs personnalisés du checkout — répondu par les faits (22/09/2026)**
 
-      Si des champs **obligatoires** ont été ajoutés, le checkout Astro ne les
-      envoie pas — la commande peut être refusée par WooCommerce, ou partir
-      sans une information dont l'équipe a besoin pour préparer le colis.
+      L'extension **Checkout Field Editor for WooCommerce** est active sur le
+      WP. Elle permet d'ajouter, de modifier ou de rendre obligatoires des
+      champs sur la page de commande — et le checkout Astro, lui, n'envoie que
+      les champs standard de la Store API.
 
-      À vérifier dans WooCommerce → Checkout Form → liste des champs, et à
-      reporter dans `CheckoutPage.tsx` si nécessaire.
+      🔑 **La preuve ne vient pas des réglages, elle vient des commandes.**
+      #26535 (PayPal) et #26537 (carte) sont toutes deux `created_via:
+      store-api` — donc passées par le checkout Astro — et toutes deux
+      **acceptées et payées**. Si un champ obligatoire manquait, WooCommerce
+      aurait refusé la commande au lieu de l'encaisser.
+
+      Leurs `meta_data` le confirment côté contenu : aucun champ personnalisé,
+      seulement `is_vat_exempt`, les hachages de panier, les métadonnées de
+      paiement et le suivi. Même constat sur quatre commandes passées par le
+      checkout **WordPress** (#26042, #26012, #25953, #25926).
+
+      ⚠️ **À re-vérifier uniquement si quelqu'un touche aux réglages de
+      l'extension.** Le contrôle est alors le même : passer une commande de
+      bout en bout depuis Astro. Lire les réglages n'est pas possible — le MCP
+      WordPress n'expose ni les options WP ni celles d'une extension.
 - [ ] **Produit `coffret-original` créé côté Woo** (actuellement manquant, le
       bouton affiche "bientôt disponible").
 - [ ] **Site soumis à Google Search Console + Bing Webmaster Tools** avec le
