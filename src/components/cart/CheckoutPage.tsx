@@ -530,6 +530,8 @@ function CheckoutInner() {
               billing={billing}
               shipping={effectiveShipping}
               customerNote={customerNote}
+              shippingRateId={selectedRate}
+              shippingPackageId={cart?.shipping_rates?.[0]?.package_id ?? 0}
               onError={setFormError}
               onBusyChange={setSubmitting}
             />

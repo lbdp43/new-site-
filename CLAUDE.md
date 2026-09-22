@@ -223,6 +223,38 @@ client a toujours une issue, et jamais un débit orphelin.
 l'étape 4 renvoie une 404 et la commande reste en attente (donc aucun débit,
 échec propre).
 
+### 🚚 Le mode de livraison DOIT être rétabli après `update-customer`
+
+Piège coûteux, trouvé sur la commande **#26523** du 22/09/2026 : à l'écran,
+« Retrait à la Brasserie » (offert) était coché ; la commande est partie en
+« **Forfait** » à 12,50 €. PayPal avait approuvé **16 €**, WooCommerce
+attendait **31 €** — l'encaissement ne pouvait pas aboutir.
+
+**Cause** : `POST /wc/store/v1/cart/update-customer` fait recalculer les
+tarifs à WooCommerce pour la nouvelle adresse, et **re-sélectionne le sien
+par défaut**. L'appel de resynchronisation ajouté dans `createOrder` écrasait
+donc le choix du client, juste avant de créer la commande PayPal.
+
+`PayPalCheckoutButton` rétablit désormais le tarif choisi **avant** de créer
+la commande PayPal. ⚠️ Ne pas retirer ce rétablissement : sans lui, le montant
+approuvé par le client et celui de la commande WooCommerce divergent
+silencieusement.
+
+ℹ️ Le garde-fou `autoPickup: false` de `cart-store` ne protège pas de ça : il
+empêche *notre* code de re-basculer sur le retrait, pas WooCommerce de
+réinitialiser sa sélection côté serveur.
+
+### 💳 Les « débits » PayPal observés se sont auto-annulés
+
+Relevé bancaire de Guillaume, 22/09/2026 : les prélèvements de 16 € apparus
+pendant les tests portent la mention **« Restitué »** peu après. Ce sont donc
+très probablement des **autorisations** (empreintes) posées à la création de
+la commande PayPal, pas des encaissements — elles se libèrent seules.
+
+⚠️ **Ne pas en conclure qu'un test est sans conséquence** : une autorisation
+non libérée immobilise l'argent du client, et rien ne garantit le délai. Le
+seul critère de paiement reste `transaction_id` non vide + statut « En cours ».
+
 ✅ **Routes REST relevées le 22/09/2026** — namespace **`wc-ppcp/v1`**, 13
 routes, listées dans `docs/paypal-checkout.md`. Les deux qui comptent :
 `POST /wc-ppcp/v1/cart/order` (crée la commande PayPal depuis le panier) et
