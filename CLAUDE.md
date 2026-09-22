@@ -245,6 +245,14 @@ silencieusement.
 empêche *notre* code de re-basculer sur le retrait, pas WooCommerce de
 réinitialiser sa sélection côté serveur.
 
+**C'est très probablement la cause de l'échec d'encaissement du 22/09/2026**,
+et non un défaut du tunnel : `astro-cors` **1.4.0 est bien actif** sur le WP
+live (vérifié par `wp_list_plugins`), donc la route d'encaissement existait.
+#26523 porte `date_modified` **1 seconde** après sa création, `transaction_id`
+vide et **aucune note** : `process_payment()` a échoué immédiatement, ce que
+fait une passerelle dont la commande PayPal approuvée ne couvre pas le montant.
+À reconfirmer au prochain test réel.
+
 ### 💳 Aucun test n'a jamais encaissé — et comment on l'a su
 
 **Le compte marchand PayPal de la SAS BRASSERIE DES PLANTES ne montre AUCUNE

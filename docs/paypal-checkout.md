@@ -638,10 +638,11 @@ Dans les deux cas, l'intégration s'écrit ensuite sans rien deviner.
 Le site étant **statique**, les variables `PUBLIC_*` sont figées au moment du
 build : les poser ne suffit pas, **il faut redéployer**.
 
-0. **Téléverser `astro-cors` ≥ 1.4.0** sur le WordPress (Extensions →
-   Ajouter → Téléverser). Sans la route `/lbdp-astro/v1/pay-order`, l'étape
-   d'encaissement renvoie une 404 : la commande reste en attente, aucun débit,
-   échec propre — mais aucun test concluant possible.
+0. **Pré-requis : `astro-cors` ≥ 1.4.0**, qui porte la route d'encaissement
+   `/lbdp-astro/v1/pay-order`. ✅ **1.4.0 est actif sur le WP live** (vérifié
+   par `wp_list_plugins` le 22/09/2026). Sans lui, l'étape d'encaissement
+   renvoie une 404 : commande en attente, aucun débit, échec propre — mais
+   aucun test concluant possible.
 1. Vercel → projet `new-site` → Settings → Environment Variables. Ajouter sur
    **Production et Preview** :
    - `PUBLIC_PPCP_ENABLED` = `true`
@@ -744,7 +745,7 @@ constat de Guillaume. Il ne change pas la décision : PayPal reste bloquant.
       `astro-cors` 1.4.0
 - [x] **Mode de livraison rétabli** avant la création de la commande PayPal
       (sinon le montant approuvé diverge de celui de la commande — #26523)
-- [ ] **Téléverser `astro-cors` 1.4.0** sur le WordPress *(Guillaume)*
+- [x] **`astro-cors` 1.4.0 actif** sur le WordPress live
 - [ ] **Poser les 2 variables sur Vercel + redéployer** *(Guillaume)*
 - [ ] **Paiement réel de bout en bout** sur `test.`, console ouverte, puis
       remboursement *(Guillaume)*
