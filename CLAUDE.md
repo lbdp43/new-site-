@@ -179,9 +179,13 @@ passerelle + hypothèses PPCP regroupées), types `extensions.wc_ppcp` dans
 — affiché seulement s'il y a un vrai choix, donc **tunnel carte inchangé**.
 
 ✅ **Tunnel écrit et livré le 22/09/2026** — `PPCP_FLOW_IMPLEMENTED` est passé
-à `true`. Reste verrouillé par les deux variables d'environnement, **absentes
-de Vercel** : PayPal n'apparaît donc nulle part tant qu'un vrai paiement n'a
-pas été passé puis remboursé.
+à `true`, et les **deux variables d'environnement sont posées sur Vercel**
+(Production + Preview, le 22/09/2026 à 9h33–9h38 UTC). PayPal s'affiche donc
+sur le checkout de `test.`
+
+⚠️ Aucun risque client : `test.` est le déploiement de production de ce projet
+Vercel, mais la boutique publique reste le WordPress sur `www.` jusqu'à la
+bascule DNS.
 
 ### Flux PayPal implémenté — le client reste sur le site Astro
 
@@ -206,14 +210,15 @@ du site. Ne pas le rétablir sans nouvel arbitrage.
    d'afficher quoi que ce soit, puis redirection vers
    `/commande/confirmation`.
 
-🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Le tunnel qui
-encaissait d'abord a débité deux fois 16 € sans qu'aucune commande n'existe.
-Ici, tout débit est nécessairement rattaché à une commande : visible en
-back-office, remboursable depuis WooCommerce, et le client reçoit son numéro
-même en cas d'échec partiel.
+🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Ainsi tout débit
+est nécessairement rattaché à une commande : visible en back-office,
+remboursable depuis WooCommerce, et le client reçoit son numéro même en cas
+d'échec partiel. L'inverse — encaisser puis créer — laisse la porte ouverte à
+un débit sans trace côté boutique.
 
 ⚠️ **Ne JAMAIS inverser les étapes 3 et 4**, et ne jamais revenir à
-`/wc-ppcp/v1/cart/checkout` : cette route encaisse sans créer de commande.
+`/wc-ppcp/v1/cart/checkout` : elle ne finalise rien, elle renvoie vers la page
+de relecture du plugin (flux express).
 
 ⚠️ **En cas d'échec à l'étape 4**, le composant affiche le numéro de commande
 et bascule après 6 s vers la page de paiement WooCommerce (`payUrl`) — le
@@ -222,6 +227,57 @@ client a toujours une issue, et jamais un débit orphelin.
 ⚠️ Ce tunnel exige **`astro-cors` ≥ 1.4.0** côté WordPress. Sans lui,
 l'étape 4 renvoie une 404 et la commande reste en attente (donc aucun débit,
 échec propre).
+
+### 🚚 Le mode de livraison DOIT être rétabli après `update-customer`
+
+Piège coûteux, trouvé sur la commande **#26523** du 22/09/2026 : à l'écran,
+« Retrait à la Brasserie » (offert) était coché ; la commande est partie en
+« **Forfait** » à 12,50 €. PayPal avait approuvé **16 €**, WooCommerce
+attendait **31 €** — l'encaissement ne pouvait pas aboutir.
+
+**Cause** : `POST /wc/store/v1/cart/update-customer` fait recalculer les
+tarifs à WooCommerce pour la nouvelle adresse, et **re-sélectionne le sien
+par défaut**. L'appel de resynchronisation ajouté dans `createOrder` écrasait
+donc le choix du client, juste avant de créer la commande PayPal.
+
+`PayPalCheckoutButton` rétablit désormais le tarif choisi **avant** de créer
+la commande PayPal. ⚠️ Ne pas retirer ce rétablissement : sans lui, le montant
+approuvé par le client et celui de la commande WooCommerce divergent
+silencieusement.
+
+ℹ️ Le garde-fou `autoPickup: false` de `cart-store` ne protège pas de ça : il
+empêche *notre* code de re-basculer sur le retrait, pas WooCommerce de
+réinitialiser sa sélection côté serveur.
+
+**C'est très probablement la cause de l'échec d'encaissement du 22/09/2026**,
+et non un défaut du tunnel : `astro-cors` **1.4.0 est bien actif** sur le WP
+live (vérifié par `wp_list_plugins`), donc la route d'encaissement existait.
+#26523 porte `date_modified` **1 seconde** après sa création, `transaction_id`
+vide et **aucune note** : `process_payment()` a échoué immédiatement, ce que
+fait une passerelle dont la commande PayPal approuvée ne couvre pas le montant.
+À reconfirmer au prochain test réel.
+
+### 💳 Aucun test n'a jamais encaissé — et comment on l'a su
+
+**Le compte marchand PayPal de la SAS BRASSERIE DES PLANTES ne montre AUCUNE
+transaction le 22/09/2026.** Le dernier paiement reçu date du **09/09/2026**
+(70 €). Vérifié sur capture d'écran du compte marchand.
+
+Les lignes de 16 € apparues sur le relevé **personnel** de Guillaume pendant
+les tests portent la mention **« Restitué »** : ce sont des **autorisations**
+(empreintes de carte) posées à la création de la commande PayPal, jamais des
+encaissements. Avec `intent=capture`, l'argent ne bouge qu'à la capture — et
+aucune capture n'a jamais eu lieu.
+
+🔑 **Règle de méthode, apprise à la dure** : un relevé bancaire **personnel**
+ne prouve pas un encaissement. Une autorisation y ressemble trait pour trait,
+et elle se libère seule. Le seul endroit qui répond à « la boutique a-t-elle
+encaissé ? » est le **compte marchand PayPal**, doublé côté WooCommerce par
+`transaction_id` non vide + statut « En cours ». Regarder le compte marchand
+**avant** de qualifier un incident.
+
+⚠️ **Un test n'est pas pour autant sans conséquence** : une autorisation non
+libérée immobilise l'argent du client, et rien ne garantit le délai.
 
 ✅ **Routes REST relevées le 22/09/2026** — namespace **`wc-ppcp/v1`**, 13
 routes, listées dans `docs/paypal-checkout.md`. Les deux qui comptent :
@@ -305,47 +361,54 @@ fantôme » pour le chemin réel (`/wc-ppcp/v1/cart/checkout`).
 paiement a eu lieu. Le seul critère est `transaction_id` non vide et un
 statut « En cours ».
 
-## 🛑 PayPal — l'incident qui a décidé de l'architecture (22/09/2026, À LIRE EN PREMIER)
+## 🛑 PayPal — le faux incident du 22/09/2026 (À LIRE EN PREMIER)
 
-**Ce qui s'est passé** : `POST /wc-ppcp/v1/cart/checkout` **encaisse réellement
-l'argent**, puis renvoie vers sa page de relecture **sans créer la moindre
-commande WooCommerce**. Deux paiements de 16 € ont été débités sur le compte
-de Guillaume (relevé bancaire à 12:36 et 12:39) et **aucune commande n'existe**
-côté boutique — ni #26520 ni #26521, total resté à 512.
+**Cette section a longtemps affirmé que `POST /wc-ppcp/v1/cart/checkout` avait
+encaissé 16 € deux fois sans créer la moindre commande WooCommerce. C'était
+FAUX**, et la version fausse est conservée ici pour que personne ne la
+reconstitue à partir des mêmes indices.
 
-ℹ️ Les deux montants ont été **remboursés automatiquement** (Guillaume,
-22/09/2026). Ça n'atténue rien : on ne peut pas bâtir un tunnel de paiement
-sur l'espoir qu'une passerelle se rétracte d'elle-même.
+**Ce qui s'est réellement passé** : trois lignes de 16 € sont apparues sur le
+relevé bancaire **personnel** de Guillaume pendant les tests, sans commande
+WooCommerce en face. J'en ai conclu « encaissement orphelin », qualifié ça
+d'incident grave, et réécrit l'architecture autour de cette prémisse.
 
-✅ **Conséquence architecturale, appliquée** : le front Astro **ne parle plus
-du tout à PayPal**. Voir « Flux PayPal » ci-dessous — Astro crée la commande
-en attente, WooCommerce encaisse sur sa propre page.
+**Ce que le compte marchand a montré ensuite** : **aucune transaction ce
+jour-là**, dernier paiement reçu le 09/09/2026. Les lignes de 16 € étaient des
+**autorisations de carte**, dont deux portaient déjà la mention
+« Restitué ». **La brasserie n'a jamais encaissé un centime d'aucun test.**
 
-C'est **pire que la commande fantôme** : là, au moins, une commande existait.
-Ici le client est débité et la boutique n'en garde aucune trace : pas d'e-mail,
-pas de préparation, pas de stock décrémenté, rien dans EasyBeer.
+### La leçon de méthode, qui est la vraie valeur de cet épisode
 
-⚠️ **Le garde-fou du front ne protège pas de ça.** Il juge la réponse, donc
-*après* l'encaissement. Il a correctement affiché une erreur — l'argent était
-déjà parti. **Aucune vérification côté client ne peut empêcher une passerelle
-de débiter.**
+🔑 **Un relevé bancaire personnel n'est pas une preuve d'encaissement.** Une
+autorisation y ressemble exactement et se libère seule. La seule source qui
+répond à « la boutique a-t-elle encaissé ? » est le **compte marchand PayPal**,
+doublé côté WooCommerce par `transaction_id` non vide + statut « En cours ».
+Regarder le compte marchand **avant** de qualifier un incident — pas après
+avoir réécrit l'architecture.
 
-### Les trois leçons
+### Ce qui reste vrai, et qu'il ne faut pas jeter avec l'erreur
 
-1. **`cart/checkout` encaisse.** Toutes les sondes concluaient « elle ne fait
-   rien » parce qu'elles utilisaient une commande PayPal **non approuvée**,
-   donc incapturable. Dès qu'une vraie approbation est en jeu, elle débite.
-   **Une sonde ne prouve jamais rien sur l'encaissement.**
-2. **Ne jamais laisser un moyen de paiement actif tant qu'un cycle complet
+1. **`cart/checkout` n'est PAS la route de finalisation.** Elle renvoie vers
+   sa page de relecture (`_ppcp_order_review`) au lieu d'encaisser — c'est le
+   flux **express**. Rien ne prouve qu'elle encaisse ; rien ne prouve non plus
+   qu'elle ne le fera jamais. Elle reste écartée : on ne la remet pas dans le
+   tunnel.
+2. **Une sonde ne prouve rien sur l'encaissement**, puisqu'elle travaille sur
+   une commande PayPal non approuvée, donc incapturable par construction.
+3. **Ne jamais laisser un moyen de paiement actif tant qu'un cycle complet
    n'a pas été observé dans WooCommerce** — commande créée **et**
-   `transaction_id` non vide. La page de confirmation ne vaut rien comme
-   preuve, la réponse HTTP non plus.
-3. **Un test « à 16 € remboursables » n'est pas sans risque** : il l'est tant
-   que l'argent reste traçable. Ici il ne l'était pas côté boutique.
+   `transaction_id` non vide. Ni la page de confirmation ni la réponse HTTP
+   ne valent comme preuve.
+4. **Créer la commande WooCommerce AVANT tout encaissement reste la bonne
+   architecture**, même si la raison invoquée à l'époque était fausse : elle
+   garantit que tout débit est rattaché à une commande, donc visible et
+   remboursable depuis le back-office.
 
-⛔ **À faire avant toute reprise** : rembourser les deux paiements depuis le
-compte PayPal (aucune commande WooCommerce ne permet de le faire depuis
-WordPress), puis retrouver ce que ces deux captures référencent côté PayPal.
+⚠️ **L'architecture décrite plus haut (« Flux PayPal implémenté ») est celle
+qui fait foi** : le client reste sur le site Astro, l'encaissement se fait
+côté serveur via `astro-cors`. Le repli par redirection vers la page de
+paiement WordPress a été **écarté par Guillaume** le 22/09/2026.
 
 ## 🚨 PayPal — la commande fantôme du 22/09/2026 (À LIRE)
 
@@ -543,13 +606,15 @@ Variables `PUBLIC_*` → exposées côté client (non-secret par design).
 | `PUBLIC_WC_BASE_URL` | `https://www.labrasseriedesplantes.fr` | Base URL de la Store API |
 | `PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_live_51ETDmy…TvtxNs` | Clé Stripe publique (WooPayments) |
 | `PUBLIC_STRIPE_ACCOUNT_ID` | `acct_1Mg83iFkUaBLmhte` | Compte Stripe Connect de WooPayments |
-| `PUBLIC_PPCP_ENABLED` | **absente** | Futur interrupteur PayPal — ne pas créer tant que le tunnel n'est pas écrit |
-| `PUBLIC_PAYPAL_CLIENT_ID` | **requise** — le client restant sur le site Astro, c'est nous qui chargeons le SDK PayPal. Valeur dans `docs/paypal-checkout.md` (clé publique, pas un secret). |
+| `PUBLIC_PPCP_ENABLED` | `true` — **posée le 22/09/2026** (Production + Preview) | Interrupteur PayPal |
+| `PUBLIC_PAYPAL_CLIENT_ID` | **posée le 22/09/2026** (Production + Preview) | `client-id` du SDK PayPal — c'est le site Astro qui le charge, le client restant sur place. Valeur dans `docs/paypal-checkout.md` (clé publique, pas un secret). |
 
-⚠️ **`PUBLIC_PPCP_ENABLED=true` suffit désormais** à faire apparaître PayPal
-sur le checkout — le verrou `PPCP_FLOW_IMPLEMENTED` est à `true` et le
-`client-id` n'est plus lu. Comme toutes les `PUBLIC_*`, elle est figée au
-build : la poser exige un redéploiement.
+⚠️ **Les deux sont requises** pour que PayPal s'affiche : `isPpcpConfigured()`
+exige `PUBLIC_PPCP_ENABLED === "true"` **et** un `client-id` non vide. Sans le
+`client-id`, on préfère ne rien proposer plutôt qu'un bouton mort.
+
+⚠️ Comme toutes les `PUBLIC_*`, elles sont **figées au build** : les modifier
+exige un redéploiement pour prendre effet.
 
 Variables non-`PUBLIC_` (optionnelles, jamais exposées client) :
 
@@ -889,7 +954,7 @@ remplacer le contenu de la colonne gauche.
 |---|---|
 | `src/lib/woocommerce.ts` | Client Store API (fetch wrapper, Cart-Token, Nonce) |
 | `src/lib/cart-store.tsx` | Store de panier partagé entre îles Astro (module singleton + `useSyncExternalStore`, pas de Context) |
-| `src/components/cart/PayPalCheckoutButton.tsx` | Boutons PayPal du checkout. ⚠️ **L'ordre des appels EST la sûreté** : commande PayPal → approbation → création de la commande WooCommerce → encaissement serveur via `astro-cors`. Ne jamais inverser les deux derniers, ni revenir à `cart/checkout` (elle encaisse sans créer de commande). Les valeurs du formulaire passent par une `ref`, les callbacks PayPal étant figés au rendu. |
+| `src/components/cart/PayPalCheckoutButton.tsx` | Boutons PayPal du checkout. ⚠️ **L'ordre des appels EST la sûreté** : commande PayPal → approbation → création de la commande WooCommerce → encaissement serveur via `astro-cors`. Ne jamais inverser les deux derniers, ni revenir à `cart/checkout` (flux express : elle ne finalise rien). Les valeurs du formulaire passent par une `ref`, les callbacks PayPal étant figés au rendu. |
 | `src/lib/paypal.ts` | Chargeur du SDK JS PayPal (mémoïsé). Porte `disable-funding=paylater,card` — l'arbitrage « un seul bouton ». |
 | `src/lib/wc-text.ts` | `decodeEntities()` — WooCommerce renvoie ses libellés **échappés en HTML** (`Mariage Aurore &amp; Damien`, `L&#8217;ALCHIMIE`, `&times;`). React ré-échappe ce qu'il affiche, donc sans décodage le client lit les entités en clair. À appeler sur **tout** texte venu de la Store API (nom d'article, variation, tarif de livraison, `alt`). Volontairement sans DOM (les îles sont rendues au build) et **en un seul passage** : `&amp;times;` doit donner `&times;`, pas `×`. |
 | `src/lib/payment-methods.ts` | **Source unique** du choix de moyen de paiement : croise `cart.payment_methods` (déclaré par WC) avec ce que le front sait faire. Porte le verrou `PPCP_FLOW_IMPLEMENTED` et toutes les hypothèses PayPal, regroupées et annotées. Ne jamais coder une liste de passerelles en dur ailleurs. |

@@ -45,43 +45,41 @@ const CATALOGUE: Record<PaymentMethodId, PaymentMethodOption> = {
 const DISPLAY_ORDER: PaymentMethodId[] = ["woocommerce_payments", "ppcp"];
 
 /* ──────────────────────────────────────────────────────────────────────
- * PayPal — pourquoi le tunnel headless a été abandonné
+ * PayPal — l'ordre des opérations est toute la sûreté du tunnel
  *
- * 🛑 **Incident du 22/09/2026.** Appelée depuis Astro,
- * `POST /wc-ppcp/v1/cart/checkout` **encaisse réellement l'argent**, puis
- * renvoie vers sa page de relecture **sans créer la moindre commande
- * WooCommerce**. Deux paiements de 16 € ont été débités et aucune commande
- * n'existait côté boutique : ni #26520 ni #26521, total resté à 512.
+ * Le tunnel retenu (`PayPalCheckoutButton`) fait, dans cet ordre :
  *
- * Pire que la commande fantôme #26518 : là, une commande existait au moins.
- * Ici, pas de commande — donc pas d'e-mail, pas de préparation, pas de stock
- * décrémenté, rien dans EasyBeer.
+ *   1. `wc.createPaypalOrder()`        commande PayPal, rien n'est débité
+ *   2. approbation du client           toujours rien, `intent=capture`
+ *   3. `POST /wc/store/v1/checkout`    la commande WooCommerce est créée
+ *   4. `wc.payExistingOrder()`         encaissement, **côté serveur**
+ *   5. relecture du statut réel        `is_paid` + `transaction_id`
  *
- * ⚠️ **Le garde-fou du front n'y pouvait rien, et aucun autre ne le pourrait.**
- * Il juge la réponse HTTP, donc *après* l'encaissement. Aucune vérification
- * côté navigateur n'empêche une passerelle de débiter.
+ * 🔒 **La commande est créée AVANT l'encaissement**, et ce n'est pas un
+ * détail : tout débit est ainsi rattaché à une commande, donc visible en
+ * back-office et remboursable depuis WooCommerce. Encaisser d'abord
+ * laisserait la porte ouverte à un débit sans trace côté boutique.
  *
- * ⚠️ **Et aucune sonde ne pouvait le prévoir** : toutes utilisaient une
- * commande PayPal non approuvée, donc incapturable par construction. Elles
- * concluaient « cette route ne fait rien ». Elle débite.
+ * ⚠️ **Aucun garde-fou côté navigateur n'empêche une passerelle de débiter.**
+ * Le front juge la réponse HTTP, donc *après* coup. La sûreté vient de
+ * l'ordre des appels, pas des vérifications.
  *
- * ✅ **D'où le tunnel actuel** (`wc.startPaypalOrderPayment`) : Astro crée la
- * commande WooCommerce **en attente**, puis redirige vers la page de paiement
- * WordPress. Le front ne parle jamais à PayPal et n'a aucun moyen technique
- * de déclencher un débit. Un encaissement sans commande n'est plus
- * improbable, il est **impossible** — et tout débit reste remboursable depuis
- * WooCommerce.
+ * ⚠️ **Une sonde ne prouve rien sur l'encaissement** : elle travaille sur une
+ * commande PayPal non approuvée, donc incapturable par construction. Elle ne
+ * dit que « le plugin a compris la requête ».
  *
- * Le prix à payer est une page WordPress en fin de tunnel. C'est assumé.
+ * ⚠️ **Ne jamais revenir à `/wc-ppcp/v1/cart/checkout`** : c'est la route du
+ * flux **express**, elle renvoie vers la page de relecture du plugin au lieu
+ * de finaliser. Écartée le 22/09/2026, ne pas y retourner sans élément neuf.
  * ────────────────────────────────────────────────────────────────────── */
 
 /**
  * Le tunnel PayPal existe et ne peut pas encaisser sans commande.
  *
- * ⚠️ Ce verrou ne doit **jamais** être remis à `true` pour un tunnel où le
- * front déclenche lui-même l'encaissement. Ce qui l'autorise ici, ce n'est
- * pas la confiance dans le code : c'est que ce chemin rend la faute
- * structurellement impossible.
+ * ⚠️ Ce verrou ne doit **jamais** être remis à `true` pour un tunnel qui
+ * encaisserait avant d'avoir créé la commande WooCommerce. Ce qui l'autorise
+ * ici, ce n'est pas la confiance dans le code : c'est que l'ordre des appels
+ * rend la faute structurellement impossible.
  */
 const PPCP_FLOW_IMPLEMENTED = true;
 
@@ -151,19 +149,20 @@ export function getAvailablePaymentMethods(cart: WcCart | null): PaymentMethodOp
  * confirmation, ni un `payment_status: "success"` dans une réponse HTTP ne
  * prouvent quoi que ce soit — les deux ont déjà menti (#26518).
  *
- * ⚠️ **Routes de l'extension essayées et écartées le 22/09/2026.** Ne pas y
- * retourner sans élément nouveau :
+ * ⚠️ **Routes de l'extension, statut au 22/09/2026** :
  *
  *   `/wc-ppcp/v1/cart/order`    crée une commande PayPal depuis le panier ;
- *                               fonctionne en headless, mais n'est plus
- *                               utilisée — le front ne parle plus à PayPal
- *   `/wc-ppcp/v1/cart/checkout` flux **express** : ENCAISSE puis renvoie vers
- *                               la page de relecture sans créer de commande.
- *                               C'est la cause de l'incident.
+ *                               fonctionne en headless avec le seul
+ *                               `Cart-Token` (pont `astro-cors` ≥ 1.3.0).
+ *                               ✅ C'est l'étape 1 du tunnel.
+ *   `/wc-ppcp/v1/cart/checkout` flux **express** : renvoie vers la page de
+ *                               relecture (`_ppcp_order_review`) au lieu de
+ *                               finaliser. Écartée.
  *   `/wc-ppcp/v1/order/pay`     200, corps vide, aucune note de commande,
- *                               aucun effet (essayé sur #26519)
+ *                               aucun effet (essayé sur #26519). Écartée.
  *
  * La création de commande, elle, est fiable par `POST /wc/store/v1/checkout`
  * et ne débite rien (#26516, #26518, #26519 : aucune n'a donné lieu à un
  * mouvement d'argent). C'est ce que fait `wc.startPaypalOrderPayment()`.
+ * L'encaissement passe ensuite par `wc.payExistingOrder()`.
  * ────────────────────────────────────────────────────────────────────── */

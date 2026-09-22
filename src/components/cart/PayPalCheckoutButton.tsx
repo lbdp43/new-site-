@@ -7,6 +7,9 @@ interface Props {
   billing: WcAddress;
   shipping: WcAddress;
   customerNote: string;
+  /** Mode de livraison choisi à l'écran — voir `createOrder`. */
+  shippingRateId?: string;
+  shippingPackageId?: number;
   onError: (message: string | null) => void;
   onBusyChange: (busy: boolean) => void;
 }
@@ -45,15 +48,14 @@ function missingFields(billing: WcAddress, shipping: WcAddress): string[] {
  *   5. on relit le statut réel de la commande avant d'afficher quoi que ce
  *      soit au client.
  *
- * 🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Le 22/09/2026,
- * le tunnel qui encaissait d'abord a débité deux fois 16 € sans qu'aucune
- * commande n'existe — donc sans e-mail, sans préparation, sans trace. Ici,
- * tout débit est nécessairement rattaché à une commande : visible en
- * back-office et remboursable depuis WooCommerce.
+ * 🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Ainsi tout débit
+ * est nécessairement rattaché à une commande : visible en back-office et
+ * remboursable depuis WooCommerce. L'inverse — encaisser puis créer — laisse
+ * la porte ouverte à un débit sans trace côté boutique.
  *
  * ⚠️ **Ne jamais inverser les étapes 3 et 4**, et ne jamais revenir à
- * `/wc-ppcp/v1/cart/checkout` : cette route encaisse sans créer de commande.
- * C'est la cause exacte de l'incident.
+ * `/wc-ppcp/v1/cart/checkout` : c'est la route du flux **express**, elle
+ * renvoie vers la page de relecture du plugin au lieu de finaliser.
  *
  * ⚠️ **Les callbacks PayPal sont figés au rendu des boutons** : les valeurs du
  * formulaire passent donc par une `ref`. Ne pas « simplifier » en lisant les
@@ -63,16 +65,30 @@ export default function PayPalCheckoutButton({
   billing,
   shipping,
   customerNote,
+  shippingRateId,
+  shippingPackageId,
   onError,
   onBusyChange,
 }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "failed">("loading");
 
-  const latest = useRef({ billing, shipping, customerNote });
+  const latest = useRef({
+    billing,
+    shipping,
+    customerNote,
+    shippingRateId,
+    shippingPackageId,
+  });
   useEffect(() => {
-    latest.current = { billing, shipping, customerNote };
-  }, [billing, shipping, customerNote]);
+    latest.current = {
+      billing,
+      shipping,
+      customerNote,
+      shippingRateId,
+      shippingPackageId,
+    };
+  }, [billing, shipping, customerNote, shippingRateId, shippingPackageId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -101,10 +117,32 @@ export default function PayPalCheckoutButton({
               // L'extension lit l'adresse dans la session WooCommerce, que le
               // checkout ne pousse que sur changement de code postal, ville ou
               // pays. On resynchronise avant d'ouvrir la fenêtre PayPal.
-              await cartActions.updateCustomer({
+              const synced = await cartActions.updateCustomer({
                 billing_address: b,
                 shipping_address: s,
               });
+
+              // ⚠️ **Cet appel RÉINITIALISE le mode de livraison côté
+              // WooCommerce**, qui recalcule les tarifs pour la nouvelle
+              // adresse et re-sélectionne le sien par défaut.
+              //
+              // Le 22/09/2026, la commande #26523 est née de là : « Retrait à
+              // la Brasserie » (offert) était coché à l'écran, la commande
+              // est partie en « Forfait » à 12,50 €. PayPal avait approuvé
+              // 16 €, WooCommerce attendait 31 € — l'encaissement ne pouvait
+              // pas aboutir.
+              //
+              // On rétablit donc le choix du client AVANT de créer la
+              // commande PayPal, sans quoi le montant approuvé serait faux.
+              const { shippingRateId: rateId, shippingPackageId: pkgId } =
+                latest.current;
+              const stillSelected = synced?.shipping_rates?.[0]?.shipping_rates?.some(
+                (r) => r.rate_id === rateId && r.selected,
+              );
+              if (rateId && !stillSelected) {
+                await cartActions.selectShippingRate(pkgId ?? 0, rateId);
+              }
+
               return await wc.createPaypalOrder();
             } catch (err) {
               onError(err instanceof Error ? err.message : "Erreur PayPal.");

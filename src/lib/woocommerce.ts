@@ -426,12 +426,13 @@ export const wc = {
    * commande — la même méthode publique que WooCommerce invoque sur sa propre
    * page de paiement. On ne passe donc par aucune route de l'extension PayPal :
    * les deux qu'elle expose ont été essayées et écartées (`cart/checkout`
-   * encaisse sans créer de commande, `order/pay` ne fait rien).
+   * renvoie vers sa page de relecture — flux express — et `order/pay` ne fait
+   * rien).
    *
    * 🔒 **L'ordre des opérations est la garantie de sûreté** : la commande
-   * existe avant tout encaissement. Un débit sans commande — ce qui est arrivé
-   * le 22/09/2026 — est donc impossible, et tout débit reste visible en
-   * back-office et remboursable depuis WooCommerce.
+   * existe avant tout encaissement, donc un débit sans commande est impossible
+   * et tout débit reste visible en back-office et remboursable depuis
+   * WooCommerce.
    *
    * ⚠️ **On ne se fie pas à ce que la passerelle prétend.** La route relit la
    * commande en base et renvoie son `status` et son `transaction_id` réels ;
