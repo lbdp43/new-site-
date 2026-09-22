@@ -86,16 +86,18 @@ const DISPLAY_ORDER: PaymentMethodId[] = ["woocommerce_payments", "ppcp"];
 const PPCP_FLOW_IMPLEMENTED = true;
 
 const PPCP_ENABLED = import.meta.env.PUBLIC_PPCP_ENABLED === "true";
+const PAYPAL_CLIENT_ID = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID as string | undefined;
 
 /**
- * true seulement si le tunnel existe ET qu'il est activé côté environnement.
+ * true seulement si le tunnel existe ET qu'il est activé et configuré.
  *
- * ℹ️ `PUBLIC_PAYPAL_CLIENT_ID` n'est **plus requise** : le SDK JavaScript de
- * PayPal n'est plus chargé du tout, puisque c'est WooCommerce qui présente le
- * bouton sur sa propre page. La variable peut être retirée de Vercel.
+ * ⚠️ `PUBLIC_PAYPAL_CLIENT_ID` est **de nouveau requise** : le client restant
+ * sur le site Astro (arbitrage Guillaume du 22/09/2026), c'est bien nous qui
+ * chargeons le SDK PayPal. Sans elle, le bouton ne peut pas s'afficher — on
+ * préfère donc ne pas proposer PayPal du tout plutôt qu'un bouton mort.
  */
 export function isPpcpConfigured(): boolean {
-  return PPCP_FLOW_IMPLEMENTED && PPCP_ENABLED;
+  return PPCP_FLOW_IMPLEMENTED && PPCP_ENABLED && Boolean(PAYPAL_CLIENT_ID);
 }
 
 /** Lit le bloc publié par l'extension PayPal dans le panier, ou null. */

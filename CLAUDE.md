@@ -183,43 +183,45 @@ passerelle + hypothèses PPCP regroupées), types `extensions.wc_ppcp` dans
 de Vercel** : PayPal n'apparaît donc nulle part tant qu'un vrai paiement n'a
 pas été passé puis remboursé.
 
-### Flux PayPal implémenté — le front ne parle JAMAIS à PayPal
+### Flux PayPal implémenté — le client reste sur le site Astro
 
-1. Le client remplit le checkout Astro et choisit PayPal.
-2. Clic sur « Payer avec PayPal » → `wc.startPaypalOrderPayment()` crée la
-   commande WooCommerce **en attente** via `POST /wc/store/v1/checkout`
-   (`payment_data` ne porte que `payment_method`, aucun identifiant PayPal).
-3. Redirection vers la **page de paiement WordPress** de cette commande :
-   `/checkout/order-pay/{id}/?pay_for_order=true&key=…`
-4. Approbation PayPal, encaissement, e-mails, stock, EasyBeer : **tout se fait
-   côté WooCommerce**, sur la page qu'il sert déjà à ses vrais clients.
+**Arbitrage Guillaume du 22/09/2026 : « je veux rester sur
+test.labrasseriedesplantes ».** Le repli par redirection vers la page de
+paiement WordPress a été construit, montré, puis **écarté** : il fonctionnait
+(commande #26521 créée et page affichée correctement) mais sortait le client
+du site. Ne pas le rétablir sans nouvel arbitrage.
 
-🔒 **Pourquoi ce détour, et pourquoi il ne faut pas le « moderniser ».**
-Le tunnel entièrement headless a débité deux fois sans créer de commande
-(section ci-dessus). Ici la commande existe **avant** toute page de paiement,
-et le front n'a aucun moyen technique de déclencher un débit : un encaissement
-sans commande n'est pas improbable, il est **impossible**. Tout débit est donc
-rattaché à une commande, visible en back-office et remboursable depuis
-WooCommerce.
+**L'ordre des opérations est TOUTE la sûreté du tunnel :**
 
-⚠️ **Ne pas réintroduire le SDK JavaScript PayPal ni une finalisation en JS.**
-C'est exactement ce qui a échoué, deux fois. Le prix payé est une page
-WordPress en fin de tunnel : c'est assumé, pas un oubli.
+1. `wc.createPaypalOrder()` → `POST /wc-ppcp/v1/cart/order` → commande PayPal.
+   **Rien n'est débité** : avec `intent=capture`, l'argent ne bouge qu'à
+   l'encaissement.
+2. Le client approuve dans la fenêtre PayPal (popup).
+3. `POST /wc/store/v1/checkout` → **la commande WooCommerce est créée**, en
+   attente, toujours sans mouvement d'argent.
+4. `wc.payExistingOrder()` → `POST /lbdp-astro/v1/pay-order`, route maison du
+   plugin `astro-cors` ≥ 1.4.0 : elle appelle `process_payment()` sur la
+   passerelle **côté serveur**. C'est là, et seulement là, que l'argent part.
+5. On relit le statut réel de la commande (`is_paid` + `transaction_id`) avant
+   d'afficher quoi que ce soit, puis redirection vers
+   `/commande/confirmation`.
 
-Conséquences pratiques :
-- `src/lib/paypal.ts` (chargeur du SDK) et `PayPalButtons.tsx` ont été
-  **supprimés**. Le composant actuel est `PayPalCheckoutButton.tsx`.
-- **`PUBLIC_PAYPAL_CLIENT_ID` n'est plus nécessaire** — le SDK n'est plus
-  chargé. La variable peut être retirée de Vercel. Seule
-  `PUBLIC_PPCP_ENABLED=true` compte encore.
-- Les autorisations `*.paypal.com` du CSP dans `vercel.json` sont devenues
-  inutiles mais inoffensives ; les retirer un jour ne casse rien.
-- ⚠️ L'URL de paiement contient le slug `/checkout/` de la page de commande
-  WordPress. Le renommer côté WP casserait le tunnel.
-- Après paiement, le client atterrit sur la page « commande reçue » de
-  WordPress, pas sur `/commande/confirmation`. **Amélioration possible** :
-  un hook `woocommerce_get_return_url` dans `astro-cors` qui renvoie les
-  commandes `created_via: store-api` vers le site Astro.
+🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Le tunnel qui
+encaissait d'abord a débité deux fois 16 € sans qu'aucune commande n'existe.
+Ici, tout débit est nécessairement rattaché à une commande : visible en
+back-office, remboursable depuis WooCommerce, et le client reçoit son numéro
+même en cas d'échec partiel.
+
+⚠️ **Ne JAMAIS inverser les étapes 3 et 4**, et ne jamais revenir à
+`/wc-ppcp/v1/cart/checkout` : cette route encaisse sans créer de commande.
+
+⚠️ **En cas d'échec à l'étape 4**, le composant affiche le numéro de commande
+et bascule après 6 s vers la page de paiement WooCommerce (`payUrl`) — le
+client a toujours une issue, et jamais un débit orphelin.
+
+⚠️ Ce tunnel exige **`astro-cors` ≥ 1.4.0** côté WordPress. Sans lui,
+l'étape 4 renvoie une 404 et la commande reste en attente (donc aucun débit,
+échec propre).
 
 ✅ **Routes REST relevées le 22/09/2026** — namespace **`wc-ppcp/v1`**, 13
 routes, listées dans `docs/paypal-checkout.md`. Les deux qui comptent :
@@ -243,16 +245,14 @@ Deux enseignements :
 sans « Payer en plusieurs fois » ni « Carte bancaire ». Il avait été appliqué
 côté Astro via `disable-funding=paylater,card` dans le SDK.
 
-⚠️ **Cet arbitrage n'est PLUS tenu par le code Astro** depuis le passage au
-tunnel par redirection : le SDK n'est plus chargé, et c'est la page de
-paiement WordPress qui décide des boutons affichés. Or le WordPress a
-`enable-funding=paylater` — le Pay Later **réapparaîtra donc** sur cette page.
+✅ **Toujours tenu par le code Astro** : `src/lib/paypal.ts` envoie
+`disable-funding=paylater,card`. C'est un avantage du tunnel retenu — sur la
+page de paiement WordPress, au contraire, c'est le réglage de l'extension qui
+décidait, et le Pay Later réapparaissait.
 
-C'est un **réglage WordPress** désormais, à faire dans les options de
-l'extension PayPal si Guillaume maintient son choix. À lui soumettre quand le
-tunnel sera validé : la perte de contrôle est réelle, mais elle est le prix de
-la sécurité du paiement, et elle n'a pas paru justifier de garder un tunnel
-qui peut débiter sans commande.
+⚠️ **Ne pas rétablir `enable-funding=paylater`** en croyant corriger un oubli :
+le Pay Later est bien actif sur le WordPress et cette doc a d'abord
+recommandé de le reproduire, mais la décision l'a écarté.
 
 ✅ **`cart/order` disséqué le 22/09/2026** (relevé réseau complet dans
 `docs/paypal-checkout.md`) :
@@ -544,7 +544,7 @@ Variables `PUBLIC_*` → exposées côté client (non-secret par design).
 | `PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_live_51ETDmy…TvtxNs` | Clé Stripe publique (WooPayments) |
 | `PUBLIC_STRIPE_ACCOUNT_ID` | `acct_1Mg83iFkUaBLmhte` | Compte Stripe Connect de WooPayments |
 | `PUBLIC_PPCP_ENABLED` | **absente** | Futur interrupteur PayPal — ne pas créer tant que le tunnel n'est pas écrit |
-| `PUBLIC_PAYPAL_CLIENT_ID` | ~~requise~~ — **plus utilisée** depuis le 22/09/2026 : le SDK PayPal n'est plus chargé. Peut être retirée de Vercel. |
+| `PUBLIC_PAYPAL_CLIENT_ID` | **requise** — le client restant sur le site Astro, c'est nous qui chargeons le SDK PayPal. Valeur dans `docs/paypal-checkout.md` (clé publique, pas un secret). |
 
 ⚠️ **`PUBLIC_PPCP_ENABLED=true` suffit désormais** à faire apparaître PayPal
 sur le checkout — le verrou `PPCP_FLOW_IMPLEMENTED` est à `true` et le
@@ -889,7 +889,8 @@ remplacer le contenu de la colonne gauche.
 |---|---|
 | `src/lib/woocommerce.ts` | Client Store API (fetch wrapper, Cart-Token, Nonce) |
 | `src/lib/cart-store.tsx` | Store de panier partagé entre îles Astro (module singleton + `useSyncExternalStore`, pas de Context) |
-| `src/components/cart/PayPalCheckoutButton.tsx` | Bouton PayPal du checkout. **Ne parle jamais à PayPal** : il crée la commande WooCommerce en attente puis redirige vers la page de paiement WordPress. Un double-clic ne peut pas créer deux commandes (`startedRef`). ⚠️ Ne pas y réintroduire le SDK PayPal — cf. l'incident du 22/09/2026. |
+| `src/components/cart/PayPalCheckoutButton.tsx` | Boutons PayPal du checkout. ⚠️ **L'ordre des appels EST la sûreté** : commande PayPal → approbation → création de la commande WooCommerce → encaissement serveur via `astro-cors`. Ne jamais inverser les deux derniers, ni revenir à `cart/checkout` (elle encaisse sans créer de commande). Les valeurs du formulaire passent par une `ref`, les callbacks PayPal étant figés au rendu. |
+| `src/lib/paypal.ts` | Chargeur du SDK JS PayPal (mémoïsé). Porte `disable-funding=paylater,card` — l'arbitrage « un seul bouton ». |
 | `src/lib/wc-text.ts` | `decodeEntities()` — WooCommerce renvoie ses libellés **échappés en HTML** (`Mariage Aurore &amp; Damien`, `L&#8217;ALCHIMIE`, `&times;`). React ré-échappe ce qu'il affiche, donc sans décodage le client lit les entités en clair. À appeler sur **tout** texte venu de la Store API (nom d'article, variation, tarif de livraison, `alt`). Volontairement sans DOM (les îles sont rendues au build) et **en un seul passage** : `&amp;times;` doit donner `&times;`, pas `×`. |
 | `src/lib/payment-methods.ts` | **Source unique** du choix de moyen de paiement : croise `cart.payment_methods` (déclaré par WC) avec ce que le front sait faire. Porte le verrou `PPCP_FLOW_IMPLEMENTED` et toutes les hypothèses PayPal, regroupées et annotées. Ne jamais coder une liste de passerelles en dur ailleurs. |
 | `src/components/cart/CartIcon.tsx` | Icône panier Header (badge + total) |

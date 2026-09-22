@@ -418,6 +418,81 @@ export const wc = {
     return { orderId, orderKey, payUrl: orderPayUrl(orderId, orderKey) };
   },
 
+  /**
+   * Encaisse une commande **déjà créée**, via la route maison du plugin
+   * `astro-cors` ≥ 1.4.0 (`POST /lbdp-astro/v1/pay-order`).
+   *
+   * Côté WordPress, elle appelle `process_payment()` sur la passerelle de la
+   * commande — la même méthode publique que WooCommerce invoque sur sa propre
+   * page de paiement. On ne passe donc par aucune route de l'extension PayPal :
+   * les deux qu'elle expose ont été essayées et écartées (`cart/checkout`
+   * encaisse sans créer de commande, `order/pay` ne fait rien).
+   *
+   * 🔒 **L'ordre des opérations est la garantie de sûreté** : la commande
+   * existe avant tout encaissement. Un débit sans commande — ce qui est arrivé
+   * le 22/09/2026 — est donc impossible, et tout débit reste visible en
+   * back-office et remboursable depuis WooCommerce.
+   *
+   * ⚠️ **On ne se fie pas à ce que la passerelle prétend.** La route relit la
+   * commande en base et renvoie son `status` et son `transaction_id` réels ;
+   * c'est sur eux qu'on décide, jamais sur un `result: "success"`.
+   */
+  async payExistingOrder(args: {
+    orderId: string;
+    orderKey: string;
+    paypalOrderId: string;
+  }): Promise<{ status: string | null; transactionId: string; isPaid: boolean }> {
+    const raw = await requestWpJson<unknown>("/lbdp-astro/v1/pay-order", {
+      method: "POST",
+      body: JSON.stringify({
+        order_id: args.orderId,
+        order_key: args.orderKey,
+        ppcp_paypal_order_id: args.paypalOrderId,
+      }),
+    });
+
+    const res = (raw ?? {}) as {
+      status?: string | null;
+      transaction_id?: string;
+      is_paid?: boolean;
+    };
+
+    return {
+      status: res.status ?? null,
+      transactionId: res.transaction_id ?? "",
+      isPaid: res.is_paid === true,
+    };
+  },
+
+  /**
+   * Crée une commande PayPal à partir du panier courant et renvoie son
+   * identifiant (ex. `"8L3502990F093683F"`).
+   *
+   * ⚠️ Exige `astro-cors` ≥ 1.3.0 côté WordPress : WooCommerce n'installe son
+   * gestionnaire de session « Store API » que sur `/wc/store/*`, et le plugin
+   * étend ce mécanisme aux routes `wc-ppcp`. Sans lui, la route répond 200
+   * avec un corps vide — d'où le message explicite plutôt qu'un plantage
+   * obscur.
+   *
+   * ℹ️ Créer une commande PayPal **ne débite rien** : avec `intent=capture`,
+   * l'argent ne bouge qu'à l'encaissement, déclenché côté serveur.
+   */
+  async createPaypalOrder(): Promise<string> {
+    const raw = await requestWpJson<unknown>("/wc-ppcp/v1/cart/order", {
+      method: "POST",
+      body: JSON.stringify({ payment_method: "ppcp", context: "checkout" }),
+    });
+
+    if (typeof raw !== "string" || !raw.trim()) {
+      throw new Error(
+        "PayPal n'a pas pu préparer le paiement (réponse vide de la boutique). " +
+          "Réessaie, ou choisis la carte bancaire.",
+      );
+    }
+
+    return raw;
+  },
+
   async checkout(args: WcCheckoutPayload): Promise<WcCheckoutResponse> {
     return request<WcCheckoutResponse>("/checkout", {
       method: "POST",
