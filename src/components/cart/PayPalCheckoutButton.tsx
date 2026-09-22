@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { cartActions, setCart } from "../../lib/cart-store";
-import { wc, PAID_ORDER_STATUSES, type WcAddress } from "../../lib/woocommerce";
+import {
+  wc,
+  PAID_ORDER_STATUSES,
+  type WcAddress,
+  type WcCart,
+} from "../../lib/woocommerce";
 import { loadPayPalSdk } from "../../lib/paypal";
 
 interface Props {
@@ -91,6 +96,30 @@ export default function PayPalCheckoutButton({
     };
   }, [billing, shipping, customerNote, shippingRateId, shippingPackageId]);
 
+  /** Total TTC du panier au moment où le client approuve chez PayPal. */
+  const approvedTotal = useRef<string | null>(null);
+
+  /**
+   * Rétablit le mode de livraison choisi par le client si WooCommerce l'a
+   * réinitialisé, et renvoie le panier à jour.
+   *
+   * ⚠️ À rappeler après **chaque** opération qui pousse une adresse : le
+   * serveur recalcule les tarifs et re-sélectionne le sien par défaut, sans
+   * rien signaler. Le faire une seule fois ne suffit pas — c'est ce qui a
+   * produit #26534.
+   */
+  async function restoreShippingRate(cart: WcCart | null): Promise<WcCart | null> {
+    const { shippingRateId: rateId, shippingPackageId: pkgId } = latest.current;
+    if (!rateId) return cart;
+
+    const stillSelected = cart?.shipping_rates?.[0]?.shipping_rates?.some(
+      (r) => r.rate_id === rateId && r.selected,
+    );
+    if (stillSelected) return cart;
+
+    return await cartActions.selectShippingRate(pkgId ?? 0, rateId);
+  }
+
   useEffect(() => {
     let cancelled = false;
     let instance: { close?: () => void } | null = null;
@@ -135,14 +164,12 @@ export default function PayPalCheckoutButton({
               //
               // On rétablit donc le choix du client AVANT de créer la
               // commande PayPal, sans quoi le montant approuvé serait faux.
-              const { shippingRateId: rateId, shippingPackageId: pkgId } =
-                latest.current;
-              const stillSelected = synced?.shipping_rates?.[0]?.shipping_rates?.some(
-                (r) => r.rate_id === rateId && r.selected,
-              );
-              if (rateId && !stillSelected) {
-                await cartActions.selectShippingRate(pkgId ?? 0, rateId);
-              }
+              const cart = await restoreShippingRate(synced);
+
+              // Le montant que le client s'apprête à approuver chez PayPal.
+              // On le retient pour pouvoir vérifier, au retour, que la
+              // commande WooCommerce porte bien le MÊME total — cf. `onApprove`.
+              approvedTotal.current = cart?.totals?.total_price ?? null;
 
               return await wc.createPaypalOrder();
             } catch (err) {
@@ -162,7 +189,41 @@ export default function PayPalCheckoutButton({
             try {
               const { billing: b, shipping: s, customerNote: note } = latest.current;
 
-              // 1) La commande d'abord. Aucun argent en jeu à cette étape.
+              // 0) 🔒 **Le montant approuvé fait loi.** WooCommerce recalcule
+              //    les frais de port à chaque fois qu'on lui pousse une
+              //    adresse, et re-sélectionne le sien par défaut. Rétablir le
+              //    choix du client une fois ne suffit donc pas : on le
+              //    rétablit à nouveau ici, puis on VÉRIFIE que le total n'a
+              //    pas bougé depuis l'approbation.
+              //
+              //    Sans ce contrôle, la commande #26534 est partie en
+              //    « Forfait » à 31 € alors que le client avait approuvé 16 €
+              //    avec une livraison offerte. On refuse donc de créer la
+              //    commande plutôt que d'en créer une au mauvais montant :
+              //    rien n'est enregistré, rien n'est débité, le panier est
+              //    intact.
+              const cart = await restoreShippingRate(await cartActions.refresh());
+              const expected = approvedTotal.current;
+              const current = cart?.totals?.total_price ?? null;
+
+              if (expected && current && expected !== current) {
+                console.error("[PayPal] montant divergent — commande non créée", {
+                  approuvéChezPayPal: expected,
+                  totalWooCommerceMaintenant: current,
+                  livraison: cart?.shipping_rates?.[0]?.shipping_rates?.find(
+                    (r) => r.selected,
+                  )?.name,
+                });
+                onError(
+                  "Le montant de ta commande a changé pendant le paiement " +
+                    "(les frais de livraison ont été recalculés). Rien n'a été " +
+                    "débité et ton panier est intact. Revérifie le mode de " +
+                    "livraison, puis relance le paiement.",
+                );
+                return;
+              }
+
+              // 1) La commande ensuite. Aucun argent en jeu à cette étape.
               const order = await wc.startPaypalOrderPayment({
                 billing: b,
                 shipping: s,
@@ -195,15 +256,18 @@ export default function PayPalCheckoutButton({
                   ...paid,
                 });
                 onError(
-                  `Ta commande n° ${order.orderId} a bien été enregistrée, mais le paiement n'a pas pu être confirmé. ` +
-                    "Termine-le depuis le lien ci-dessous, ou contacte-nous en indiquant ce numéro — " +
-                    "rien ne sera débité deux fois.",
+                  `Ta commande n° ${order.orderId} a bien été enregistrée, mais le paiement ` +
+                    "n'a pas pu être confirmé, et rien n'a été débité. " +
+                    "Contacte-nous en indiquant ce numéro, nous la finaliserons avec toi.",
                 );
-                // On expose la page de paiement WooCommerce comme issue de
-                // secours plutôt que de laisser le client sans recours.
-                window.setTimeout(() => {
-                  window.location.href = order.payUrl;
-                }, 6000);
+                // ⚠️ **Pas de redirection automatique vers `order.payUrl`.**
+                // Elle existait, et elle était dangereuse : elle envoyait le
+                // client payer une commande dont on vient justement
+                // d'établir qu'on ne sait pas l'encaisser, donc à un montant
+                // qu'on n'a pas vérifié. Sur #26534 elle menait à une page
+                // réclamant 31 € pour une commande approuvée à 16 €.
+                // Elle effaçait aussi la console au bout de 6 s, avec la
+                // seule trace exploitable de l'échec.
                 return;
               }
 
