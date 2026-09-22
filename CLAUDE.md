@@ -183,14 +183,29 @@ PayPal n'est jamais proposé tant qu'il vaut `false`, même si les variables
 `PUBLIC_PPCP_ENABLED` / `PUBLIC_PAYPAL_CLIENT_ID` sont posées. À basculer dans
 le même commit que l'implémentation du tunnel.
 
-⛔ **Trois inconnues bloquent la suite** : le nom de la clé `payment_data`, la
-route REST du plugin, et le `client_id` PayPal. Elles sont **inaccessibles
-depuis l'environnement de dev** — pistes épuisées le 22/09/2026 :
+✅ **Routes REST relevées le 22/09/2026** — namespace **`wc-ppcp/v1`**, 13
+routes, listées dans `docs/paypal-checkout.md`. Les deux qui comptent :
+`POST /wc-ppcp/v1/cart/order` (crée la commande PayPal depuis le panier) et
+`POST /wc-ppcp/v1/cart/checkout` (crée la commande WC + capture).
+
+Deux enseignements :
+- **Le plugin a son propre tunnel, parallèle à la Store API.** Deux
+  architectures sont donc possibles et le relevé réseau tranchera : **A**
+  tout dans `wc-ppcp/v1` (et alors aucune inconnue sur `payment_data`), ou
+  **B** finalisation via `/wc/store/v1/checkout` avec l'ID en `payment_data`.
+- `cart/order-update-callback` prend un **`cart_token`** — le plugin raisonne
+  en session de panier Store API, celle que le front Astro gère déjà. Signal
+  très encourageant pour le headless.
+
+⛔ **Deux inconnues bloquent encore** : la forme exacte des échanges (et donc
+A ou B), et le `client_id` PayPal. Elles sont **inaccessibles depuis
+l'environnement de dev** — pistes épuisées le 22/09/2026 :
 `downloads.wordpress.org`, `plugins.svn.wordpress.org`, les miroirs CDN
 (jsdelivr, unpkg) et `add_repo` GitHub sont tous bloqués ou refusés, et aucun
 outil du MCP n'expose les options WP ni les routes REST. **Ne pas repartir en
 chasse : c'est un relevé navigateur côté Guillaume**, décrit pas à pas dans
-`docs/paypal-checkout.md` (3 relevés, tous en lecture seule).
+`docs/paypal-checkout.md`. Le relevé 2 ne demande **aucun paiement** (on
+annule à la fenêtre PayPal) et donnera peut-être déjà tout.
 
 ## Variables d'environnement
 

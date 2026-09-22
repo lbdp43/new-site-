@@ -132,17 +132,63 @@ risque est levé — à re-vérifier seulement si quelqu'un touche à ses régla
 
 ---
 
-## ❗ Les trois inconnues qui restent — et pourquoi je ne peux pas les lever
+## ✅ Les routes REST du plugin — relevées le 22/09/2026
 
-Il manque exactement trois informations. Aucune n'est devinable, et **aucune
-n'est accessible depuis l'environnement de développement** :
+Namespace : **`wc-ppcp/v1`** (plus un `wc-ppcp/v1/admin` réservé au back-office).
+Relevé par Guillaume sur `/wp-json/` puis `/wp-json/wc-ppcp/v1`.
 
-1. **Le nom exact de la clé** qui porte l'ID de commande PayPal dans
-   `payment_data`. La métadonnée s'appelle `_ppcp_paypal_order_id`, mais la
-   clé POST attendue par `process_payment()` peut s'appeler autrement
-   (`paypal_order_id`, `ppcp_order_id`, `wc-ppcp-order-id`…).
-2. **La route REST du plugin** qui crée la commande PayPal côté serveur.
-3. **Le `client_id` PayPal** à passer au SDK JS pour afficher le bouton.
+| Route (POST sauf mention) | Args obligatoires | Lecture |
+|---|---|---|
+| `/wc-ppcp/v1/checkout-validation` | — | valide les champs du formulaire **avant** d'ouvrir PayPal |
+| `/wc-ppcp/v1/cart/order` | `payment_method` | **crée la commande PayPal** depuis le panier → renvoie son ID |
+| `/wc-ppcp/v1/cart/checkout` | `payment_method` | **finalise** : crée la commande WooCommerce et capture |
+| `/wc-ppcp/v1/cart/item` (POST/PUT/PATCH/DELETE) | `payment_method`, ou `key` au DELETE | boutons express (fiche produit / panier) |
+| `/wc-ppcp/v1/cart/shipping` (POST/PUT/PATCH) | `payment_method` | applique l'adresse de livraison renvoyée par PayPal |
+| `/wc-ppcp/v1/cart/billing` | `payment_method` | idem pour la facturation |
+| `/wc-ppcp/v1/cart/refresh` | — | recalcule le panier |
+| `/wc-ppcp/v1/cart/order-update-callback` | **`cart_token`** | callback serveur→serveur de PayPal quand le client change d'adresse |
+| `/wc-ppcp/v1/order/pay` | `payment_method`, `order_id` | payer une commande WooCommerce **déjà créée** |
+| `/wc-ppcp/v1/vault/setup-tokens`, `/vault/payment-tokens`, `/billing-agreement/token/…` | variable | moyens de paiement enregistrés |
+| `/wc-ppcp/v1/webhook/{environment}` | — | webhooks PayPal entrants |
+
+### 🎯 Deux enseignements majeurs
+
+**1. Le plugin a son PROPRE tunnel, parallèle à la Store API.** `cart/order`
+puis `cart/checkout` suffisent à aller du panier à la commande payée sans
+jamais toucher `/wc/store/v1/checkout`. Deux architectures sont donc
+possibles pour Astro, et **le relevé réseau tranchera** :
+
+- **A** — `cart/order` → approbation PayPal → `cart/checkout` : tout se joue
+  dans le namespace du plugin. Plus d'inconnue sur `payment_data`, puisqu'on
+  ne s'en sert pas.
+- **B** — `cart/order` → approbation PayPal → `POST /wc/store/v1/checkout`
+  avec `payment_method: "ppcp"` et l'ID dans `payment_data`. C'est le chemin
+  que le checkout Blocks emprunterait.
+
+**2. `order-update-callback` prend un `cart_token`.** C'est le même jeton que
+celui que le front Astro stocke déjà en `localStorage` et renvoie en en-tête
+`Cart-Token`. **Le plugin raisonne donc en session de panier Store API**, pas
+en cookie de session PHP. C'est le signal le plus encourageant du relevé :
+une intégration headless ne se bat pas contre l'architecture du plugin, elle
+s'y branche.
+
+⚠️ L'introspection REST ne liste que les arguments **obligatoires** déclarés.
+Elle ne dit ni la forme complète des corps de requête, ni celle des réponses.
+Le relevé réseau reste indispensable.
+
+---
+
+## ❗ Ce qui reste inconnu
+
+Il manque désormais **deux** informations (la route REST, qui était le point
+n°2, est levée) :
+
+1. **La forme exacte des échanges** : que renvoie `cart/order`, et lequel des
+   deux chemins (A ou B ci-dessus) le plugin emprunte réellement. Si c'est B,
+   il faut en plus **le nom de la clé** portant l'ID de commande PayPal dans
+   `payment_data` — la métadonnée s'appelle `_ppcp_paypal_order_id`, mais la
+   clé POST peut différer.
+2. **Le `client_id` PayPal** à passer au SDK JS pour afficher le bouton.
 
 ### Pistes épuisées le 22/09/2026
 
@@ -167,73 +213,60 @@ pas acceptable.
 
 ---
 
-## ▶️ Ce qu'il me faut — relevé à faire dans le navigateur
+## ▶️ Ce qu'il me faut — relevés à faire dans le navigateur
 
-Trois relevés, tous en lecture seule, tous depuis un navigateur connecté au
-site. Aucun ne modifie quoi que ce soit.
+### ✅ Relevé 1 — namespace et routes REST *(fait le 22/09/2026)*
 
-### Relevé 1 — la route REST du plugin
+`/wp-json/` puis `/wp-json/wc-ppcp/v1`. Résultat consigné plus haut.
 
-Ouvrir :
+### Relevé 2 — le SDK PayPal et la création de commande *(sans payer)*
 
-```
-https://labrasseriedesplantes.fr/wp-json/
-```
+⚠️ **Ne demande aucun paiement** : on va jusqu'à la fenêtre PayPal puis on
+annule. Le plugin aura déjà joué ses appels côté serveur.
 
-Grosse réponse JSON. Chercher (Ctrl+F) **`ppcp`** dans le tableau
-`"namespaces"` au tout début. Copier la ligne trouvée — quelque chose comme
-`wc-ppcp/v1` ou `pymntpl-paypal/v1`.
-
-Puis ouvrir ce namespace pour voir ses routes, par exemple :
-
-```
-https://labrasseriedesplantes.fr/wp-json/wc-ppcp/v1
-```
-
-et copier la **liste des routes** (les clés de l'objet `"routes"`).
-
-### Relevé 2 — le `client_id` PayPal et les clés de `payment_data`
-
-C'est le relevé le plus important : il donne les points 1 et 3 d'un coup.
-
-1. Ouvrir la **page de commande du site WordPress** avec un article au panier :
-   `https://labrasseriedesplantes.fr/checkout/`
-2. Ouvrir les outils de développement (F12) → onglet **Réseau**.
+1. Sur un ordinateur, mettre un article au panier sur `labrasseriedesplantes.fr`
+   et aller sur `/checkout/`.
+2. F12 → onglet **Réseau**, cocher **« Conserver le journal » / « Preserve
+   log »** (sans ça, la redirection PayPal efface tout).
 3. Recharger la page.
-4. Chercher une requête vers **`paypal.com/sdk/js`**. Copier son **URL
-   complète** — elle contient `client-id=...`, `merchant-id=...`,
-   `currency=...`, `intent=...`. C'est tout ce qu'il faut pour le point 3.
+4. Filtrer sur **`sdk/js`** → copier l'**URL complète** de la requête vers
+   `paypal.com/sdk/js` (elle porte `client-id=`, `merchant-id=`, `currency=`,
+   `intent=`).
+5. Vider le filtre, taper **`ppcp`**, puis **cliquer sur le bouton PayPal**.
+6. Quand la fenêtre PayPal s'ouvre, **la fermer sans payer**.
+7. Copier, pour chaque requête `wc-ppcp/v1/…` apparue : l'**URL**, la
+   **charge utile** et la **réponse**. Celle vers `cart/order` est la clé —
+   sa réponse contient l'ID de commande PayPal.
 
-⚠️ Ce `client_id` est une **clé publique**, conçue pour être visible dans le
-code de la page — il n'y a aucun risque à me la transmettre. Ne me transmettez
-en revanche **jamais** le *secret* PayPal, qui vit uniquement côté serveur.
+⚠️ Le `client-id` est une **clé publique**, visible par n'importe quel
+visiteur dans le code de la page : aucun risque à le transmettre. Le *secret*
+PayPal, lui, ne quitte jamais le serveur — ne jamais le copier, et ne pas
+capturer d'écran de la page de réglages du plugin, qui l'affiche.
 
-### Relevé 3 — la requête de commande réelle (le plus décisif)
+### Relevé 3 — la finalisation *(nécessite une vraie commande)*
 
-Toujours dans l'onglet **Réseau**, **filtrer sur `checkout`**, puis aller au
-bout d'une vraie commande PayPal (une petite, qu'on remboursera ensuite).
+À ne faire qu'après le relevé 2, qui aura peut-être déjà tout donné.
 
-Repérer la requête `POST` vers **`/wp-json/wc/store/v1/checkout`** →
-onglet **Charge utile / Payload** → copier le JSON envoyé.
+Même préparation (Réseau + « Conserver le journal »), mais cette fois aller
+**au bout du paiement**, avec l'article le moins cher, puis rembourser depuis
+l'admin WooCommerce.
 
-On y verra la vraie forme :
+Ce que je cherche : la requête envoyée **juste après le retour de PayPal**.
+Copier son URL et sa charge utile. Deux cas possibles :
+
+- `POST /wp-json/wc-ppcp/v1/cart/checkout` → **architecture A**, le tunnel
+  reste dans le namespace du plugin ;
+- `POST /wp-json/wc/store/v1/checkout` → **architecture B**, et sa charge
+  utile donne enfin le nom de la clé :
 
 ```json
 {
   "payment_method": "ppcp",
-  "payment_data": [
-    { "key": "???", "value": "26D99705JH087882R" },
-    ...
-  ]
+  "payment_data": [ { "key": "???", "value": "26D99705JH087882R" } ]
 }
 ```
 
-**Ce JSON répond au point 1 et confirme le point 2.** Avec lui, l'intégration
-s'écrit sans deviner.
-
-💡 Si le checkout WordPress est en blocks et que la requête part vers
-`/wc/store/v1/checkout`, on est dans le cas idéal : c'est **exactement**
-l'endpoint que le site Astro utilise déjà.
+Dans les deux cas, l'intégration s'écrit ensuite sans rien deviner.
 
 ---
 
@@ -290,9 +323,9 @@ constat de Guillaume. Il ne change pas la décision : PayPal reste bloquant.
 - [x] Confirmer qu'une seule passerelle PayPal est active (`ppcp`)
 - [x] Écarter le risque Checkout Field Editor
 - [x] Sélecteur de moyen de paiement dans `CheckoutPage.tsx`
-- [ ] **Relevé 1** — routes REST du namespace PPCP *(Guillaume)*
-- [ ] **Relevé 2** — URL du SDK PayPal (`client-id`) *(Guillaume)*
-- [ ] **Relevé 3** — payload réel du `POST /wc/store/v1/checkout` *(Guillaume)*
+- [x] **Relevé 1** — namespace `wc-ppcp/v1` et ses 13 routes
+- [ ] **Relevé 2** — URL du SDK PayPal + appels `cart/order` (sans payer) *(Guillaume)*
+- [ ] **Relevé 3** — la requête de finalisation, qui tranche entre A et B *(Guillaume)*
 - [ ] Flux de création / approbation PayPal
 - [ ] Gestion des annulations et des échecs
 - [ ] Passer `PPCP_FLOW_IMPLEMENTED` à `true`
