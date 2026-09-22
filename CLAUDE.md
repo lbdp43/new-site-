@@ -385,16 +385,32 @@ Le premier test qui réunit **tous** les critères, et pour la bonne raison :
 site Astro, la commande porte le bon montant, le bon mode de livraison, et
 WooCommerce fait le reste (e-mails, stock, TVA).
 
-⚠️ **Ce qui n'est PAS validé pour autant** :
-- le **tunnel carte (WooPayments)** n'a pas été rejoué depuis qu'il a reçu
-  la même protection de montant. À tester avant la bascule ;
-- la réception dans **EasyBeer** n'a pas été vérifiée.
+⚠️ **Ce qui n'est PAS validé pour autant** : le **tunnel carte
+(WooPayments)** n'a pas été rejoué depuis qu'il a reçu la même protection de
+montant. C'est le moyen de paiement majoritaire — à tester avant la bascule.
 
-⚠️ **Remboursements** : #26530 a été remboursée en **manuel**
-(`refunded_payment: false`) — WooCommerce a écrit « Remboursée » dans ses
-livres **sans rien demander à PayPal**. Sur une vraie commande client, ça
-laisse le client débité en croyant être remboursé. Toujours utiliser
-« Rembourser via PayPal », pas « manuellement ».
+✅ **EasyBeer a bien reçu la commande** (confirmé par Guillaume le
+22/09/2026). Les commandes de test ont été remboursées et la fantôme #26534
+supprimée.
+
+### 💶 Remboursements : deux pièges, dans les deux sens
+
+**1. Le remboursement « manuel » ne rend pas l'argent.** WooCommerce écrit
+« Remboursée » dans ses livres **sans rien demander à PayPal**. Sur une vraie
+commande, le client reste débité en croyant être remboursé. Toujours choisir
+**« Rembourser via PayPal »**, jamais « manuellement ». Un vrai remboursement
+passerelle porte `refunded_payment: true` et une meta `_paypal_refund`
+(exemple sur #26535 : `59Y03386NJ649042L`).
+
+**2. À l'inverse, un remboursement fait DIRECTEMENT dans PayPal n'apparaît
+pas dans WooCommerce** — c'est PayPal qui l'initie, WooCommerce n'en sait
+rien. `refunded_payment: false` ne prouve donc **pas** que l'argent est resté.
+C'est le cas de #26530 : remboursée à la main dans PayPal, invisible ici.
+
+🔑 **Même leçon que pour l'encaissement, mais dans l'autre sens** : pour
+savoir où est l'argent, c'est le **compte marchand** qu'il faut regarder, pas
+les registres WooCommerce — qui ne voient que ce qu'ils ont eux-mêmes
+déclenché.
 
 ### 🚨 Pas de redirection automatique vers la page de paiement WordPress
 
