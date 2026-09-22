@@ -216,20 +216,28 @@ l'oublier côté Astro, sinon la bascule retire une facilité de paiement.
 - ⚠️ un **`woocommerce-process-checkout-nonce`** est transmis : c'est le
   nouvel obstacle, le front Astro n'a pas de moyen évident de l'obtenir.
 
-⛔ **Ne restent que des questions de plomberie**, toutes tranchables sans
-écrire de code de production :
+✅ **Test décisif exécuté le 22/09/2026** (console sur `test.`, aucun
+paiement) : le **même `Cart-Token`** renvoie un panier complet sur
+`/wc/store/v1/cart` (1 article, 5500) et **un corps vide** sur
+`/wc-ppcp/v1/cart/order` — 200, `application/json`, `""`. Pas de 403, pas
+d'erreur CORS, aucune plainte sur le nonce.
 
-1. le `Cart-Token` suffit-il sur la route REST, et le nonce est-il exigé hors
-   tunnel wc-ajax ? → **un test console d'une ligne** y répond, sans paiement
-   ni risque ; le snippet est dans `docs/paypal-checkout.md` ;
+**Le plugin ignore donc le `Cart-Token`** et cherche un cookie de session,
+que le front Astro n'a pas (autre domaine). Le nonce n'est pas l'obstacle
+immédiat : le plugin sort avant d'y arriver.
+
+🌉 **Corrigé dans `astro-cors` 1.3.0** (cf. section « Plugin WordPress CORS »)
+— deux hooks qui étendent le gestionnaire de session Store API aux routes
+`wc-ppcp` et chargent le panier. **À installer et à vérifier côté Guillaume.**
+
+⛔ **Restent deux étapes**, aucune bloquante :
+
+1. installer `astro-cors` 1.3.0 puis **rejouer le test console** : si le pont
+   marche, la ligne `PPCP` passe de `""` à `"3Y617367DX331090K"` ;
 2. la finalisation passe-t-elle par `/wc-ppcp/v1/cart/checkout` ou par
    `/wc/store/v1/checkout` avec `ppcp_paypal_order_id` en `payment_data` ?
    Le WordPress utilisant le checkout **classique**, le relevé ne montre que
    son chemin ; le chemin Blocks (celui qu'Astro imite) reste à confirmer.
-
-Au pire des cas, il faudra exposer le nonce ou un petit relais depuis
-**`wordpress-plugin/astro-cors/`**, une extension qu'on maintient déjà — une
-dizaine de lignes. **Plus rien n'est bloquant.**
 
 Rappel : ces relevés se font **côté Guillaume**, l'environnement de dev ne
 joint pas le WordPress. Pistes de lecture du code du plugin épuisées le
@@ -303,11 +311,31 @@ Chaque produit a un `wcId` (ID numérique WooCommerce).
 **Version installée sur le WP live : 1.1.0** (capture d'écran de l'admin,
 21/09/2026) — elle n'autorise que `test.` et localhost.
 
-**Version dans le dépôt : 1.2.0** — ajoute `www.` et l'apex. ⚠️ **Elle peut
-être téléversée dès maintenant**, sans attendre la bascule : autoriser une
-origine qui n'existe pas encore n'a aucun effet, le navigateur n'envoie un
-en-tête `Origin` que depuis le domaine réellement servi. L'installer tôt
-retire une étape du jour J.
+**Version dans le dépôt : 1.3.0** — deux apports par rapport à l'installée :
+
+- **1.2.0** ajoute `www.` et l'apex aux origines. ⚠️ **Téléversable dès
+  maintenant** sans attendre la bascule : autoriser une origine qui n'existe
+  pas encore n'a aucun effet, le navigateur n'envoie un en-tête `Origin` que
+  depuis le domaine réellement servi. L'installer tôt retire une étape du
+  jour J.
+- **1.3.0** ajoute le **pont de session PayPal** : WooCommerce n'installe son
+  gestionnaire de session « Store API » (celui qui lit l'en-tête
+  `Cart-Token`) que sur les routes `/wc/store/*`. Les routes `wc-ppcp`
+  cherchent un cookie, n'en trouvent pas depuis Astro, et renvoient un 200
+  avec un corps vide. Deux hooks corrigent ça :
+  `woocommerce_session_handler` (étend le gestionnaire) et `rest_api_init`
+  (appelle `wc_load_cart()`).
+
+  ✅ **Sans danger pour le checkout WordPress actuel** : tout est conditionné
+  à la présence de l'en-tête `Cart-Token`, que seul le front Astro envoie.
+  Le nom de classe est protégé par `class_exists()` — en cas de renommage
+  côté WooCommerce, on retombe sur le gestionnaire par défaut plutôt que de
+  provoquer une erreur fatale.
+
+  ⚠️ **Écrit sans pouvoir être testé** (l'env de dev ne joint pas le WP).
+  `php -l` passe, donc pas d'erreur fatale au téléversement, mais le
+  comportement reste à confirmer en rejouant le test console de
+  `docs/paypal-checkout.md`. Désactiver l'extension remet tout en état.
 
 L'origine est celle du site qui **affiche** les pages (Astro), pas celle qui
 sert l'API — donc le passage du WordPress sur `wp.labrasseriedesplantes.fr`

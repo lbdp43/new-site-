@@ -366,15 +366,67 @@ console.log(r.status, await r.text());
 personne. Une commande non approuvée expire d'elle-même. Aucune commande
 WooCommerce n'est créée à cette étape.
 
-Lecture du résultat :
+### ✅ Résultat — exécuté le 22/09/2026
 
-- **200 + une chaîne du type `"3Y617367DX331090K"`** → issue **A**, le
-  chemin est libre.
-- **403 / erreur de nonce** → issue **B**.
-- **erreur de panier vide, ou un ID alors que le panier Astro n'est pas
-  celui-là** → issue **C**.
-- **erreur CORS** → il faut ajouter la route aux origines autorisées du
-  plugin `astro-cors` ; ça ne dit rien sur le fond.
+```
+Jeton : eyJhbGciOiJIUzI1NiIs…
+Store API → 200 | articles : 1 | total : 5500
+PPCP      → 200 | application/json; charset=UTF-8 | corps : ""
+```
+
+**Verdict : issue C.** Le même `Cart-Token` renvoie un panier complet sur la
+Store API et **rien** sur la route PayPal. Pas de 403, pas d'erreur CORS, pas
+de plainte sur le nonce : un 200 avec un corps vide.
+
+Le plugin **ignore le `Cart-Token`** : il cherche la session WooCommerce dans
+un cookie, n'en trouve pas (le front Astro est sur un autre domaine, les
+cookies ne le suivent pas), et abandonne silencieusement.
+
+ℹ️ Le nonce n'est donc **pas** l'obstacle immédiat — le plugin sort avant
+d'en arriver là. Il pourra le redevenir une fois la session résolue.
+
+---
+
+## 🌉 Le pont de session — `astro-cors` 1.3.0
+
+WooCommerce **sait** lire le `Cart-Token` : il installe pour ça un
+gestionnaire de session dédié… mais uniquement sur ses propres routes
+`/wc/store/*`. Les routes `wc-ppcp` n'en bénéficient pas.
+
+La correction tient en deux hooks, ajoutés à
+`wordpress-plugin/astro-cors/astro-cors.php` :
+
+1. `woocommerce_session_handler` → installe le gestionnaire Store API
+   (`Automattic\WooCommerce\StoreApi\SessionHandler`) sur les routes
+   `wc-ppcp` ;
+2. `rest_api_init` → charge le panier (`wc_load_cart()`), ce que le tunnel
+   `wc-ajax` faisait tout seul mais que le REST direct ne fait pas.
+
+### Pourquoi c'est sans danger pour le WordPress actuel
+
+**Tout est conditionné à la présence de l'en-tête `Cart-Token`.** Un
+visiteur normal du site WordPress n'en envoie jamais — seul le front Astro
+le fait. Les deux hooks sortent immédiatement pour tout le reste : le tunnel
+de commande WordPress n'est pas modifié d'un iota.
+
+Le nom de classe est protégé par un `class_exists()` : si WooCommerce le
+renomme un jour, on retombe sur le gestionnaire par défaut. PayPal cesserait
+de fonctionner côté Astro — visible et réparable — plutôt que de provoquer
+une erreur fatale sur tout le site.
+
+⚠️ **Écrit sans pouvoir être testé** (l'environnement de dev ne joint pas le
+WordPress). La syntaxe est vérifiée (`php -l` passe), donc pas de risque
+d'erreur fatale au téléversement, mais le comportement reste à confirmer.
+
+### Comment le vérifier après installation
+
+Téléverser la version 1.3.0 (Extensions → Ajouter → Téléverser, remplacer +
+réactiver), puis **relancer exactement le même test console**. Si le pont
+fonctionne, la ligne `PPCP` passe de `corps : ""` à une chaîne du type
+`"3Y617367DX331090K"`.
+
+En cas de souci : désactiver l'extension suffit à tout remettre en état, le
+site WordPress n'en dépend pas.
 
 ---
 
@@ -532,7 +584,11 @@ constat de Guillaume. Il ne change pas la décision : PayPal reste bloquant.
 - [x] Sélecteur de moyen de paiement dans `CheckoutPage.tsx`
 - [x] **Relevé 1** — namespace `wc-ppcp/v1` et ses 13 routes
 - [x] **Relevé 2a** — URL du SDK PayPal (`client-id`, `intent`, `commit`, `enable-funding`)
-- [ ] **Relevé 2b** — requête + réponse de `cart/order` (sans payer) *(Guillaume)*
+- [x] **Relevé 2b** — requête + réponse de `cart/order` → clé `ppcp_paypal_order_id`
+- [x] **Test décisif** — le plugin ignore le `Cart-Token` (issue C)
+- [x] **Pont de session** écrit dans `astro-cors` 1.3.0
+- [ ] **Installer `astro-cors` 1.3.0** sur le WordPress *(Guillaume)*
+- [ ] **Rejouer le test console** pour confirmer que le pont marche *(Guillaume)*
 - [ ] **Relevé 3** — la requête de finalisation, qui tranche entre A et B *(Guillaume)*
 - [ ] Reproduire **PayPal Pay Later** côté Astro (`enable-funding=paylater`)
 - [ ] Flux de création / approbation PayPal
