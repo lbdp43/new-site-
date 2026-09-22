@@ -215,19 +215,49 @@ tel que le front l'utilise vraiment.
 lorsqu'elle est révélée. WordPress la masque par défaut ; elle doit rester
 côté serveur. Elle n'est d'aucune utilité au front Astro.
 
+### ✅ Le SDK PayPal — URL relevée le 22/09/2026
+
+Relevée dans l'onglet Réseau du checkout WordPress :
+
+```
+https://www.paypal.com/sdk/js
+  ?client-id=AeaxgVz2Vfk81PcRSvufUnHeDT-XdqMktlP8KhnLARufYhUrQu4FK-L2p9C1PtJoOB1Q1kpgNS9cr5MI
+  &intent=capture
+  &commit=true
+  &components=buttons,messages,card-fields,googlepay,applepay
+  &currency=EUR
+  &enable-funding=paylater
+```
+
+C'est la valeur à poser dans `PUBLIC_PAYPAL_CLIENT_ID`. **Clé publique** :
+elle est servie à tout visiteur du site dans le code de la page, au même
+titre que la clé publique Stripe déjà documentée dans `CLAUDE.md`.
+
+Ce que chaque paramètre nous apprend :
+
+| Paramètre | Valeur | Conséquence |
+|---|---|---|
+| `intent` | `capture` | le paiement est **encaissé immédiatement**, pas seulement autorisé. Cohérent avec les commandes observées (payées 3 s après création). |
+| `commit` | `true` | le bouton PayPal affiche « Payer maintenant » : le client valide définitivement **chez PayPal**, pas au retour sur le site. |
+| `currency` | `EUR` | pas de multi-devise à gérer. |
+| `components` | `buttons,messages,card-fields,googlepay,applepay` | le SDK charge plus que le bouton, mais seules les passerelles **activées** comptent, et `ppcp` est la seule. |
+| `enable-funding` | `paylater` | 💡 **PayPal Pay Later (paiement en plusieurs fois) est activé.** Le reproduire côté Astro, sinon la bascule retire une facilité de paiement offerte aujourd'hui. |
+
+⚠️ **Aucun `merchant-id`** dans l'URL : c'est un compte marchand direct, pas
+une intégration de plateforme. Ça simplifie le front Astro — rien d'autre à
+transmettre que le `client-id`.
+
 ---
 
 ## ❗ Ce qui reste inconnu
 
-Il manque désormais **deux** informations (la route REST, qui était le point
-n°2, est levée) :
+Il n'en reste plus qu'**une** (la route REST et le `client_id` sont levés) :
 
-1. **La forme exacte des échanges** : que renvoie `cart/order`, et lequel des
-   deux chemins (A ou B ci-dessus) le plugin emprunte réellement. Si c'est B,
-   il faut en plus **le nom de la clé** portant l'ID de commande PayPal dans
-   `payment_data` — la métadonnée s'appelle `_ppcp_paypal_order_id`, mais la
-   clé POST peut différer.
-2. **Le `client_id` PayPal** à passer au SDK JS pour afficher le bouton.
+**La forme exacte des échanges** : que contient la requête vers `cart/order`,
+que renvoie-t-elle, et lequel des deux chemins (A ou B ci-dessus) le plugin
+emprunte réellement pour finaliser. Si c'est B, il faut en plus **le nom de
+la clé** portant l'ID de commande PayPal dans `payment_data` — la métadonnée
+s'appelle `_ppcp_paypal_order_id`, mais la clé POST peut différer.
 
 ### Pistes épuisées le 22/09/2026
 
@@ -363,8 +393,10 @@ constat de Guillaume. Il ne change pas la décision : PayPal reste bloquant.
 - [x] Écarter le risque Checkout Field Editor
 - [x] Sélecteur de moyen de paiement dans `CheckoutPage.tsx`
 - [x] **Relevé 1** — namespace `wc-ppcp/v1` et ses 13 routes
-- [ ] **Relevé 2** — URL du SDK PayPal + appels `cart/order` (sans payer) *(Guillaume)*
+- [x] **Relevé 2a** — URL du SDK PayPal (`client-id`, `intent`, `commit`, `enable-funding`)
+- [ ] **Relevé 2b** — requête + réponse de `cart/order` (sans payer) *(Guillaume)*
 - [ ] **Relevé 3** — la requête de finalisation, qui tranche entre A et B *(Guillaume)*
+- [ ] Reproduire **PayPal Pay Later** côté Astro (`enable-funding=paylater`)
 - [ ] Flux de création / approbation PayPal
 - [ ] Gestion des annulations et des échecs
 - [ ] Passer `PPCP_FLOW_IMPLEMENTED` à `true`

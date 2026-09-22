@@ -197,8 +197,14 @@ Deux enseignements :
   en session de panier Store API, celle que le front Astro gère déjà. Signal
   très encourageant pour le headless.
 
-⛔ **Deux inconnues bloquent encore** : la forme exacte des échanges (et donc
-A ou B), et le `client_id` PayPal. Elles sont **inaccessibles depuis
+✅ **SDK PayPal relevé le 22/09/2026** : `client-id` complet (dans
+`docs/paypal-checkout.md`), `intent=capture`, `commit=true`, `currency=EUR`,
+**`enable-funding=paylater`** et **aucun `merchant-id`** (compte marchand
+direct). ⚠️ Le Pay Later est donc actif aujourd'hui sur le WordPress : ne pas
+l'oublier côté Astro, sinon la bascule retire une facilité de paiement.
+
+⛔ **Une seule inconnue bloque encore** : la forme exacte des échanges (et
+donc A ou B). Elle est **inaccessible depuis
 l'environnement de dev** — pistes épuisées le 22/09/2026 :
 `downloads.wordpress.org`, `plugins.svn.wordpress.org`, les miroirs CDN
 (jsdelivr, unpkg) et `add_repo` GitHub sont tous bloqués ou refusés, et aucun
@@ -217,7 +223,7 @@ Variables `PUBLIC_*` → exposées côté client (non-secret par design).
 | `PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_live_51ETDmy…TvtxNs` | Clé Stripe publique (WooPayments) |
 | `PUBLIC_STRIPE_ACCOUNT_ID` | `acct_1Mg83iFkUaBLmhte` | Compte Stripe Connect de WooPayments |
 | `PUBLIC_PPCP_ENABLED` | **absente** | Futur interrupteur PayPal — ne pas créer tant que le tunnel n'est pas écrit |
-| `PUBLIC_PAYPAL_CLIENT_ID` | **absente** | Futur `client-id` du SDK PayPal (clé publique, pas un secret) |
+| `PUBLIC_PAYPAL_CLIENT_ID` | **absente** — valeur connue : `AeaxgVz2Vfk…9cr5MI` (complète dans `docs/paypal-checkout.md`) | `client-id` du SDK PayPal (clé publique, pas un secret) |
 
 ⚠️ Les deux variables PayPal sont déclarées dans `.env.example` mais
 **neutralisées par le verrou `PPCP_FLOW_IMPLEMENTED`** — les poser sur Vercel
