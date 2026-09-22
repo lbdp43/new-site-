@@ -276,8 +276,8 @@ un débit sans trace côté boutique.
 de relecture du plugin (flux express).
 
 ⚠️ **En cas d'échec à l'étape 4**, le composant affiche le numéro de commande
-et bascule après 6 s vers la page de paiement WooCommerce (`payUrl`) — le
-client a toujours une issue, et jamais un débit orphelin.
+et invite à nous contacter. Il ne redirige **plus** vers `payUrl` — voir la
+section dédiée plus bas, cette redirection était dangereuse.
 
 ⚠️ Ce tunnel exige **`astro-cors` ≥ 1.4.0** côté WordPress. Sans lui,
 l'étape 4 renvoie une 404 et la commande reste en attente (donc aucun débit,
@@ -295,19 +295,54 @@ tarifs à WooCommerce pour la nouvelle adresse, et **re-sélectionne le sien
 par défaut**. L'appel de resynchronisation ajouté dans `createOrder` écrasait
 donc le choix du client, juste avant de créer la commande PayPal.
 
-`PayPalCheckoutButton` rétablit désormais le tarif choisi **avant** de créer
-la commande PayPal. ⚠️ Ne pas retirer ce rétablissement : sans lui, le montant
-approuvé par le client et celui de la commande WooCommerce divergent
-silencieusement.
-
 ℹ️ Le garde-fou `autoPickup: false` de `cart-store` ne protège pas de ça : il
 empêche *notre* code de re-basculer sur le retrait, pas WooCommerce de
 réinitialiser sa sélection côté serveur.
 
-✅ **CONFIRMÉ** : c'était bien la cause de l'échec de #26523. Une fois le
-correctif déployé, #26530 est passée du premier coup, avec « Retrait à la
-Brasserie » à 0,00 € et un total de 16,00 € conforme à ce que le client avait
-approuvé chez PayPal.
+### ⚠️ Rétablir le tarif UNE fois ne suffit pas — #26534
+
+**Premier correctif (PR #36)** : rétablir le tarif choisi juste avant de créer
+la commande PayPal. #26530 est passée derrière, et on a cru le sujet clos.
+
+**Faux.** Commande **#26534** du 22/09/2026 : « Mariage Aurore & Damien »
+(offerte) coché à l'écran, commande partie en « **Forfait** » à 31 € pour
+16 € approuvés chez PayPal. Statut `pending`, `transaction_id` vide, aucune
+note — rien encaissé.
+
+**Pourquoi #26530 était passée** : par coïncidence. Avec « Retrait à la
+Brasserie », le choix du client et le défaut de WooCommerce tombaient pareil.
+Un test qui réussit pour la mauvaise raison ne valide rien.
+
+**Cause réelle** : WooCommerce recalcule les frais de port à **chaque** fois
+qu'on lui pousse une adresse — `update-customer` **et** la création de la
+commande — et re-sélectionne le sien par défaut.
+
+**Correctif (PR #38), en deux temps** :
+
+1. `restoreShippingRate()` est appelé après **chaque** opération qui pousse
+   une adresse, plus une seule fois ;
+2. 🔒 **le montant approuvé fait loi** : le total TTC est mémorisé quand le
+   client approuve chez PayPal, puis **comparé** avant de créer la commande.
+   S'il a bougé, on **refuse de créer la commande** — rien d'enregistré, rien
+   de débité, panier intact.
+
+⚠️ **Garder la vérification même si le rétablissement semble fiable.** Un
+rétablissement peut échouer en silence ; une comparaison, non. C'est elle le
+vrai filet.
+
+### 🚨 Pas de redirection automatique vers la page de paiement WordPress
+
+Après un échec, le composant renvoyait le client vers `order.payUrl` au bout
+de 6 s. **Retiré le 22/09/2026, et à ne pas rétablir** :
+
+- il envoyait le client payer une commande dont on venait d'établir qu'on ne
+  savait pas l'encaisser, **à un montant non vérifié** — sur #26534, une page
+  réclamant **31 € pour une commande approuvée à 16 €** ;
+- il **effaçait la console au bout de 6 s**, avec la seule trace exploitable
+  de l'échec. Ça a coûté un cycle de diagnostic complet.
+
+En cas d'échec, on affiche le numéro de commande et on invite à nous
+contacter. Le `payUrl` reste disponible côté back-office.
 
 ### 💳 Aucun test n'avait encaissé AVANT #26530 — et comment on l'a su
 
