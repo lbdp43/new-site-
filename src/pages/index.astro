@@ -115,6 +115,8 @@ const videoSchema = {
   name: "Visite de l'atelier — La Brasserie des Plantes",
   description:
     "Tour des cuves, du séchage des plantes et de l'embouteillage dans notre atelier de Saint-Didier-en-Velay (Haute-Loire).",
+  // Schema.org VideoObject : Google n'accepte que .jpg / .png / .gif comme
+  // vignette. On garde donc le JPG ici, même si le <video poster> sert le WebP.
   thumbnailUrl: new URL('/videos/lbdp-pro-poster.jpg', site.url).toString(),
   contentUrl: new URL('/videos/lbdp-pro.mp4', site.url).toString(),
   uploadDate: '2025-04-18',
@@ -153,22 +155,26 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
   description={meta.description}
   schema={schema}
   hasHero={true}
-  preloadImage={heroHome?.videoPoster ?? '/videos/lbdp-pro-poster.jpg'}
+  preloadImage={heroHome?.videoPoster ?? '/videos/lbdp-pro-poster.webp'}
 >
   <!-- HERO VIDÉO plein écran -->
   {heroHome && (
     <section class="relative min-h-[100dvh] w-full overflow-hidden bg-forest-950">
       {heroHome.video && (
+        <!-- Pas d'`autoplay` : il force le téléchargement immédiat de la
+             vidéo (8,3 Mo) et la met en concurrence avec le rendu. Le poster
+             est préchargé et s'affiche tout de suite ; la vidéo démarre après
+             le `load` de la page. Le déclencheur est dans `Layout.astro`. -->
         <video
-          autoplay
+          data-defer-play="onload"
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
           poster={heroHome.videoPoster}
           class="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={heroHome.video} type="video/mp4" />
+          <source data-src={heroHome.video} type="video/mp4" />
         </video>
       )}
       <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/40 to-forest-950/80"></div>
@@ -533,28 +539,4 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
     </section>
   )}
 
-<!-- Vidéos hors écran : chargées seulement quand on arrive dessus.
-     `autoplay` annule `preload="none"` — le navigateur téléchargeait donc les
-     trois vidéos de la home au chargement, soit 26,6 Mo sur mobile. On retire
-     l'attribut du markup et on déclenche la lecture à l'entrée dans le champ
-     de vision. La vidéo du hero, elle, garde son autoplay. -->
-<script is:inline>
-  (function () {
-    var vids = document.querySelectorAll('video[data-defer-play]');
-    if (!vids.length) return;
-    var start = function (v) {
-      var s = v.querySelector('source[data-src]');
-      if (s && !s.src) { s.src = s.dataset.src; v.load(); }
-      var p = v.play();
-      if (p && p.catch) p.catch(function () {});
-    };
-    if (!('IntersectionObserver' in window)) { vids.forEach(start); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { start(e.target); io.unobserve(e.target); }
-      });
-    }, { rootMargin: '200px' });
-    vids.forEach(function (v) { io.observe(v); });
-  })();
-</script>
 </Layout>

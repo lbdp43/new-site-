@@ -10,7 +10,7 @@ pageHeader:
 
 videoHero:
   src: "/videos/duo-making-of.mp4"
-  poster: "/videos/duo-making-of-poster.jpg"
+  poster: "/videos/duo-making-of-poster.webp"
   alt: "Étienne et Guillaume, cofondateurs, dans l'atelier de la Brasserie des Plantes"
   badge: "En Haute-Loire · Depuis 2021"
   script: "Ça fait plus de vingt ans qu'on se connaît."

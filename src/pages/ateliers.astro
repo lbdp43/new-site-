@@ -131,16 +131,16 @@ const fmtDate = (iso: string) => {
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       {hero.video && (
         <video
-          autoplay
+          data-defer-play="onload"
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
           poster={hero.videoPoster}
           aria-label={hero.videoAlt}
           class="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={hero.video} type="video/mp4" />
+          <source data-src={hero.video} type="video/mp4" />
         </video>
       )}
     </div>
@@ -352,16 +352,16 @@ const fmtDate = (iso: string) => {
       {locationSection.video && (
         <div class="aspect-square rounded-2xl overflow-hidden bg-forest-950">
           <video
-            autoplay
+            data-defer-play
             muted
             loop
             playsinline
-            preload="metadata"
+            preload="none"
             poster={locationSection.videoPoster}
             aria-label={locationSection.videoAlt}
             class="w-full h-full object-cover"
           >
-            <source src={locationSection.video} type="video/mp4" />
+            <source data-src={locationSection.video} type="video/mp4" />
           </video>
         </div>
       )}

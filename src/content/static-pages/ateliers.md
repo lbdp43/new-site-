@@ -87,7 +87,7 @@ locationSection:
   parking: "Place du village, gratuit"
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=18+Grand+Place+43140+Saint-Didier-en-Velay"
   video: "/videos/boutique-sortie.mp4"
-  videoPoster: "/videos/boutique-sortie-poster.jpg"
+  videoPoster: "/videos/boutique-sortie-poster.webp"
   videoAlt: "Sortie de la boutique de La Brasserie des Plantes à Saint-Didier-en-Velay"
 
 artisanSection:

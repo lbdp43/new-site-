@@ -101,6 +101,8 @@ const videoSchema = {
   name: 'Inside our workshop — La Brasserie des Plantes',
   description:
     'A tour of our plant-drying room, composition room and bottling floor at our workshop in Saint-Didier-en-Velay, Haute-Loire (France).',
+  // Schema.org VideoObject : Google n'accepte que .jpg / .png / .gif comme
+  // vignette. On garde donc le JPG ici, même si le <video poster> sert le WebP.
   thumbnailUrl: new URL('/videos/lbdp-pro-poster.jpg', site.url).toString(),
   contentUrl: new URL('/videos/lbdp-pro.mp4', site.url).toString(),
   uploadDate: '2025-04-18',
@@ -117,20 +119,23 @@ const schema = [localBusinessSchema, websiteSchema, videoSchema];
   description="Craft botanical liqueurs and digestifs, handmade in Haute-Loire, France. L'Alchimie Végétale — World's Best Digestif 2025. EU-wide shipping."
   schema={schema}
   hasHero={true}
-  preloadImage="/videos/lbdp-pro-poster.jpg"
+  preloadImage="/videos/lbdp-pro-poster.webp"
 >
   <!-- HERO VIDEO fullscreen — same pattern as /professionnels -->
   <section class="relative min-h-[100dvh] w-full overflow-hidden bg-forest-950">
+    <!-- No `autoplay`: it forces the 8.3 MB file to download immediately and
+         compete with rendering. The poster is preloaded and shows at once;
+         the video starts after the page `load` event. See script below. -->
     <video
-      autoplay
+      data-defer-play="onload"
       muted
       loop
       playsinline
-      preload="metadata"
-      poster="/videos/lbdp-pro-poster.jpg"
+      preload="none"
+      poster="/videos/lbdp-pro-poster.webp"
       class="absolute inset-0 w-full h-full object-cover"
     >
-      <source src="/videos/lbdp-pro.mp4" type="video/mp4" />
+      <source data-src="/videos/lbdp-pro.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/40 to-forest-950/80"></div>
 
@@ -311,7 +316,7 @@ const schema = [localBusinessSchema, websiteSchema, videoSchema];
         loop
         playsinline
         preload="none"
-        poster="/videos/lbdp-intro-poster.jpg"
+        poster="/videos/lbdp-intro-poster.webp"
         class="absolute inset-0 w-full h-full object-cover"
       >
         <source data-src="/videos/lbdp-intro.mp4" type="video/mp4" />
@@ -415,25 +420,4 @@ const schema = [localBusinessSchema, websiteSchema, videoSchema];
     </div>
   </section>
 
-<!-- Off-screen videos load only when scrolled to: `autoplay` overrides
-     `preload="none"`, so the browser was downloading them upfront. -->
-<script is:inline>
-  (function () {
-    var vids = document.querySelectorAll('video[data-defer-play]');
-    if (!vids.length) return;
-    var start = function (v) {
-      var s = v.querySelector('source[data-src]');
-      if (s && !s.src) { s.src = s.dataset.src; v.load(); }
-      var p = v.play();
-      if (p && p.catch) p.catch(function () {});
-    };
-    if (!('IntersectionObserver' in window)) { vids.forEach(start); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { start(e.target); io.unobserve(e.target); }
-      });
-    }, { rootMargin: '200px' });
-    vids.forEach(function (v) { io.observe(v); });
-  })();
-</script>
 </Layout>

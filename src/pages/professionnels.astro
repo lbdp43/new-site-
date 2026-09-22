@@ -200,14 +200,15 @@ const eventFormats = [
   <!-- HERO VIDÉO plein écran — entrée immersive -->
   <section class="relative min-h-[100dvh] w-full overflow-hidden bg-forest-950">
     <video
-      autoplay
+      data-defer-play="onload"
+      preload="none"
       muted
       loop
       playsinline
-      poster="/videos/lbdp-pro-poster.jpg"
+      poster="/videos/lbdp-pro-poster.webp"
       class="absolute inset-0 w-full h-full object-cover"
     >
-      <source src="/videos/lbdp-pro.mp4" type="video/mp4" />
+      <source data-src="/videos/lbdp-pro.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/40 to-forest-950/80"></div>
 
@@ -310,11 +311,11 @@ const eventFormats = [
   <section class="bg-forest-900">
     <div class="aspect-[21/9] md:aspect-[21/8] w-full max-h-[75vh] overflow-hidden">
       <video
-        autoplay
+        data-defer-play
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="none"
         poster="/videos/atelier-pro-poster.webp"
         aria-label="Dans l'atelier de la Brasserie des Plantes — Saint-Didier-en-Velay"
         class="w-full h-full object-cover"
@@ -324,8 +325,8 @@ const eventFormats = [
             Edge, Safari 16+ — 2,9 MB), MP4 H.264 en fallback (3,5 MB) pour
             iOS/macOS Safari < 16 et legacy. La page /ateliers utilise une
             vidéo différente (atelier-brasserie.mp4). */}
-        <source src="/videos/atelier-pro.webm" type="video/webm" />
-        <source src="/videos/atelier-pro.mp4" type="video/mp4" />
+        <source data-src="/videos/atelier-pro.webm" type="video/webm" />
+        <source data-src="/videos/atelier-pro.mp4" type="video/mp4" />
       </video>
     </div>
   </section>

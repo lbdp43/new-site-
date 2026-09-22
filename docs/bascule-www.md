@@ -76,11 +76,27 @@ permettraient de basculer en quelques heures.
 - [x] ✅ **Compte Vercel passé en plan Pro** — fait le 21/09/2026. Le plan
       Hobby interdisait l'usage commercial et l'encaissement de paiements ;
       un projet en infraction pouvait être désactivé sans préavis.
-- [ ] **Testé un vrai paiement en conditions réelles** (commande de 1-2 €
-      depuis test.labrasseriedesplantes.fr, puis rembourser depuis l'admin WC).
-      Vérifier : commande visible dans WP admin, email client reçu, commande
-      remontée dans **EasyBeer** (le logiciel de gestion, pas un transporteur),
-      étiquette d'expédition créée dans **Sendcloud**, facture générée.
+- [x] ✅ **Deux vrais paiements validés de bout en bout — 22/09/2026**
+
+      | | PayPal | Carte (WooPayments) |
+      |---|---|---|
+      | Commande | **#26535** | **#26537** |
+      | Statut | processing | processing |
+      | `transaction_id` | `70T940984M4093806` | `pi_3UIUGaFkUaBLmhte1VIXFc9V` |
+      | Total | **16,00 €** — le montant affiché | **16,00 €** — le montant affiché |
+      | Livraison | « Retrait à la Brasserie », 0,00 € | « Retrait à la Brasserie », 0,00 € |
+      | 3D Secure | — | passé (28 s entre `date_created` et `date_paid`) |
+      | E-mails | boutique + client | boutique + client |
+
+      ✅ **EasyBeer a bien reçu la commande** (confirmé par Guillaume).
+      Les commandes de test ont été remboursées.
+
+      ⛔ **Reste à faire** : rembourser **#26537** (16 €, frais 0,49 €) —
+      via **WooPayments**, jamais « manuellement ».
+
+      ⛔ **Non encore vérifiés sur ces deux commandes** : l'étiquette
+      d'expédition **Sendcloud** et la facture (les deux commandes étaient
+      en retrait à la brasserie, donc sans expédition).
 - [ ] **Testé le Coffret DIY** en commande réelle — vérifier que les 3 lignes
       apparaissent dans l'admin WC avec la metadata `_coffret_diy`.
 - [x] ✅ **Clés API WC présentes sur Vercel** — `WC_CONSUMER_KEY` et
@@ -94,35 +110,37 @@ permettraient de basculer en quelques heures.
       toutes couvertes (1 trou trouvé et corrigé : `/shop/lessence-des-cimes/`).
       Le WordPress n'a **aucun article de blog**, aucune catégorie, aucune
       étiquette. Contrôlé à chaque build.
-- [ ] 🔴 **Vérifier que WP Fastest Cache ne met pas en cache `/wp-json/`**
+- [x] ✅ **Aucun cache sur `/wp-json/` — vérifié le 22/09/2026**
 
-      Deux plugins de cache tournaient en parallèle (IONOS Performance et WP
-      Fastest Cache). **Guillaume a désactivé IONOS Performance le
-      21/09/2026** — il en reste un.
+      Le danger écarté : si un cache servait les réponses de la Store API,
+      **deux clients différents recevraient le même panier**. Le second voit
+      les articles du premier, et une commande peut partir avec le mauvais
+      contenu. Rien ne l'aurait signalé — tout aurait eu l'air de
+      fonctionner.
 
-      Le danger, s'il met en cache les réponses de la Store API : **deux
-      clients différents reçoivent le même panier**. Le second voit les
-      articles du premier, et une commande peut partir avec le mauvais
-      contenu. Rien ne le signale — tout a l'air de fonctionner.
+      **Relevé sur `/wp-json/wc/store/v1/cart`, déconnecté :**
 
-      **Le contrôle** (2 minutes) : ouvrir
-      `https://www.labrasseriedesplantes.fr/wp-json/wc/store/v1/cart` en
-      navigation privée, puis l'inspecteur → onglet Réseau → en-têtes de
-      réponse. Aucun `x-cache: HIT`, `age:`, `x-wp-fastest-cache` ni
-      équivalent ne doit apparaître. Recharger deux fois : le contenu doit
-      pouvoir différer.
+      | En-tête | Valeur |
+      |---|---|
+      | `x-cache` | absent |
+      | `age` | absent |
+      | `x-wp-fastest-cache` | absent |
+      | `x-litespeed-cache` | absent |
+      | `cf-cache-status` | absent |
+      | `x-proxy-cache` | absent |
+      | **`cache-control`** | **`no-store`** |
 
-      **Le réglage** : WP Fastest Cache → onglet *Exclure* → ajouter une
-      règle sur l'URL commençant par `/wp-json/`. Par défaut le plugin ne
-      met en cache que les pages HTML pour les visiteurs déconnectés, donc
-      il y a de bonnes chances que ce soit déjà propre — mais c'est à
-      vérifier, pas à supposer.
+      Aucune couche de cache ne touche la Store API, et le serveur
+      **interdit lui-même** de la mettre en cache (`no-store`). Ni WP Fastest
+      Cache ni le cache IONOS en amont n'intercepte la route.
 
-      ⚠️ **Attention au cache de l'hébergeur** : « IONOS Performance » est
-      aussi un service côté serveur. Désactiver le plugin ne coupe pas
-      forcément le cache appliqué par IONOS en amont. Si le contrôle
-      ci-dessus montre encore un `age:` ou un `x-cache`, regarder du côté du
-      panneau IONOS, pas seulement des plugins WordPress.
+      ⚠️ **Le relevé doit se faire déconnecté** : les caches contournent les
+      visiteurs connectés, donc un contrôle fait en session admin donne un
+      faux « tout va bien ».
+
+      ℹ️ Méthode : lire les en-têtes en console (`fetch(...).then(r => …)`),
+      **pas** l'onglet Réseau de l'inspecteur — dont une capture d'écran
+      exposerait le cookie de session admin du WordPress.
 
       À décider après la bascule : le WordPress ne servira plus aucune page
       publique. Un cache HTML n'aura quasiment plus d'objet — autant s'en
@@ -131,18 +149,24 @@ permettraient de basculer en quelques heures.
       Backup est déjà installé** sur le WP (vu le 21/09/2026) — il suffit de
       lancer une sauvegarde complète et de vérifier qu'elle part bien vers un
       stockage externe (Drive / Dropbox), pas seulement sur le serveur.
-- [ ] 🔴 **PayPal sur le checkout Astro** — **BLOQUANT**.
+- [x] ✅ **PayPal sur le checkout Astro** — **le blocant est levé (22/09/2026)**.
 
       Guillaume, 22/09/2026 : « les clients utilisent PayPal souvent ». La
-      question est tranchée : on ne bascule pas en supprimant un moyen de
-      paiement réellement utilisé.
+      bascule ne pouvait pas se faire en supprimant un moyen de paiement
+      réellement utilisé.
 
-      Aujourd'hui WooCommerce propose carte **et** PayPal ; le checkout Astro
-      ne propose que la carte. Sans ce chantier, la bascule ferait perdre des
-      commandes — silencieusement, sans la moindre erreur à l'écran.
+      Le tunnel headless est livré et validé par un vrai paiement (#26535) :
+      le client **ne quitte pas le site Astro**, la commande WooCommerce est
+      créée **avant** tout encaissement, et le montant approuvé chez PayPal
+      est **comparé** au total WooCommerce avant création — si les deux
+      divergent, on refuse plutôt que de faire payer un montant non affiché.
 
-      Cadrage complet, état d'avancement et informations à relever :
-      **`docs/paypal-checkout.md`**.
+      Pré-requis côté WordPress, **déjà en place** : plugin `astro-cors`
+      ≥ 1.4.0 (pont de session + route d'encaissement). Côté Vercel :
+      `PUBLIC_PPCP_ENABLED` et `PUBLIC_PAYPAL_CLIENT_ID`, posées sur
+      Production + Preview.
+
+      Détail du tunnel et mode opératoire : **`docs/paypal-checkout.md`**.
 - [ ] 🔴 **Inspecter les champs personnalisés du checkout WooCommerce** —
       l'extension **Checkout Field Editor for WooCommerce** est active sur le
       WP (relevé le 22/09/2026). Elle permet d'ajouter, modifier ou rendre
