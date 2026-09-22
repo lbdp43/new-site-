@@ -7,7 +7,7 @@ import {
   getAvailablePaymentMethods,
   type PaymentMethodId,
 } from "../../lib/payment-methods";
-import PayPalButtons from "./PayPalButtons";
+import PayPalCheckoutButton from "./PayPalCheckoutButton";
 import { decodeEntities } from "../../lib/wc-text";
 
 const STRIPE_KEY = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY as string | undefined;
@@ -526,7 +526,7 @@ function CheckoutInner() {
           )}
 
           {paymentMethod === "ppcp" && (
-            <PayPalButtons
+            <PayPalCheckoutButton
               billing={billing}
               shipping={effectiveShipping}
               customerNote={customerNote}
@@ -640,8 +640,8 @@ function CheckoutInner() {
 
           {paymentMethod === "ppcp" ? (
             <p className="mt-4 rounded-xl bg-forest-50 border border-forest-100 px-4 py-3 text-center text-sm text-ink-700">
-              Terminez avec le bouton <strong>PayPal</strong> de la section
-              « Paiement ».
+              Continuez avec le bouton <strong>Payer avec PayPal</strong> de la
+              section « Paiement ».
             </p>
           ) : (
           <button

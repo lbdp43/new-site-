@@ -8,6 +8,7 @@
  * change à chaque mutation : on le met à jour depuis les headers de réponse.
  */
 
+
 const BASE = import.meta.env.PUBLIC_WC_BASE_URL as string | undefined;
 
 /**
@@ -267,6 +268,26 @@ export interface WcPpcpExtension {
 
 // ---------- API ----------
 
+/**
+ * Page de paiement d'une commande existante, côté WooCommerce.
+ *
+ * Forme relevée sur de vraies commandes — c'est le champ `payment_url` que
+ * WooCommerce renvoie lui-même (ex. #26519) :
+ *
+ *   {base}/checkout/order-pay/{id}/?pay_for_order=true&key=wc_order_xxx
+ *
+ * ⚠️ `/checkout/` est le **slug de la page de commande WordPress**. C'est la
+ * seule valeur de ce fichier qui dépende d'un réglage WP : la renommer
+ * là-bas casserait le tunnel PayPal ici.
+ */
+function orderPayUrl(orderId: string, orderKey: string): string {
+  const base = (BASE ?? "").replace(/\/$/, "");
+  return (
+    `${base}/checkout/order-pay/${encodeURIComponent(orderId)}/` +
+    `?pay_for_order=true&key=${encodeURIComponent(orderKey)}`
+  );
+}
+
 export const wc = {
   async listProducts(params: { per_page?: number; search?: string } = {}): Promise<WcProduct[]> {
     const q = new URLSearchParams();
@@ -339,104 +360,62 @@ export const wc = {
   },
 
   /**
-   * Crée une commande PayPal à partir du panier courant et renvoie son
-   * identifiant (ex. `"8L3502990F093683F"`).
+   * Prépare un paiement PayPal en créant la commande WooCommerce **en
+   * attente**, puis renvoie l'adresse de sa page de paiement WordPress.
    *
-   * Vérifié en production le 22/09/2026 depuis `test.` : un corps minimal
-   * suffit, et le `Cart-Token` identifie le panier — ni cookie de session ni
-   * `woocommerce-process-checkout-nonce` ne sont nécessaires ici.
+   * ⚠️ **Le front Astro ne parle JAMAIS à PayPal dans ce tunnel.** Il crée
+   * une commande, rien d'autre. L'approbation et l'encaissement se font
+   * entièrement sur la page WooCommerce, celle que le WordPress sert déjà
+   * aujourd'hui à ses vrais clients.
    *
-   * ⚠️ Cette route ne lit le `Cart-Token` que si le plugin **`astro-cors`
-   * 1.3.0 ou supérieur** est installé sur le WordPress : WooCommerce
-   * n'installe son gestionnaire de session « Store API » que sur les routes
-   * `/wc/store/*`, et le plugin étend ce mécanisme à `wc-ppcp`. Sans lui, la
-   * route répond 200 avec un corps vide — d'où le message explicite
-   * ci-dessous plutôt qu'un plantage obscur.
+   * C'est la conséquence directe de l'incident du 22/09/2026 : appelée
+   * depuis Astro, `POST /wc-ppcp/v1/cart/checkout` **encaisse** puis renvoie
+   * vers sa page de relecture **sans créer de commande**. Deux paiements de
+   * 16 € ont été débités sans qu'aucune commande n'existe. Aucune
+   * vérification côté navigateur ne pouvait l'empêcher : elle juge la
+   * réponse, donc après coup.
+   *
+   * 🔒 **Ce tunnel rend ce scénario impossible, par construction et non par
+   * prudence** : la commande existe AVANT qu'une page de paiement ne
+   * s'affiche, et le front n'a aucun moyen de déclencher un encaissement.
+   * Tout débit est donc nécessairement rattaché à une commande, donc visible
+   * en back-office et remboursable depuis WooCommerce.
+   *
+   * L'étape de création est éprouvée : #26516, #26518 et #26519 ont toutes
+   * été créées ainsi, avec les bons montants et la bonne adresse, et aucune
+   * n'a donné lieu au moindre débit.
+   *
+   * ⚠️ `payment_data` ne porte QUE `payment_method`, volontairement. On
+   * n'envoie aucun identifiant PayPal : il n'y en a pas à ce stade, et c'est
+   * précisément ce qui garantit qu'aucune capture ne peut partir d'ici. Le
+   * doublon de `payment_method` reste nécessaire — `Legacy.php` remplace
+   * `$_POST`, donc la valeur de premier niveau n'y arriverait jamais.
    */
-  async createPaypalOrder(): Promise<string> {
-    const raw = await requestWpJson<unknown>("/wc-ppcp/v1/cart/order", {
-      method: "POST",
-      body: JSON.stringify({ payment_method: "ppcp", context: "checkout" }),
+  async startPaypalOrderPayment(args: {
+    billing: WcAddress;
+    shipping: WcAddress;
+    customerNote?: string;
+  }): Promise<{ orderId: string; orderKey: string; payUrl: string }> {
+    const result = await this.checkout({
+      billing_address: args.billing,
+      shipping_address: args.shipping,
+      customer_note: args.customerNote || undefined,
+      payment_method: "ppcp",
+      payment_data: [{ key: "payment_method", value: "ppcp" }],
     });
 
-    if (typeof raw !== "string" || !raw.trim()) {
+    const orderId = result.order_id != null ? String(result.order_id) : "";
+    const orderKey = result.order_key ?? "";
+
+    if (!orderId || !orderKey) {
+      console.error("[PayPal] commande non créée", result);
       throw new Error(
-        "PayPal n'a pas pu préparer le paiement (réponse vide de la boutique). " +
-          "Réessaie, ou choisis la carte bancaire.",
+        "La commande n'a pas pu être enregistrée et aucun montant n'a été débité. " +
+          "Choisis la carte bancaire, ou réessaie dans un instant.",
       );
     }
 
-    return raw;
-  },
-
-  /**
-   * Finalise un paiement PayPal **approuvé** par le client.
-   *
-   * On passe par la route propre de l'extension, `/wc-ppcp/v1/cart/checkout`,
-   * et non par `/wc/store/v1/checkout` comme pour la carte. Raison : c'est la
-   * seule dont on ait la preuve qu'elle comprend l'identifiant de commande
-   * PayPal qu'on lui transmet.
-   *
-   * Preuve, relevée en console le 22/09/2026 sans dépenser un centime — la
-   * route renvoie dans sa `redirect` un paramètre `_ppcp_order_review` qui
-   * contient, en base64, ce qu'elle a compris de la requête :
-   *
-   *   envoyé `paypal_order_id`      → {"paypal_order":null}                ignoré
-   *   envoyé `ppcp_paypal_order_id` → {"paypal_order":"4XS78307X1722144X"} ✅
-   *   envoyé rien                   → {"paypal_order":null}                témoin
-   *
-   * ⚠️ Deux noms cohabitent, et s'y tromper coûte cher : le champ **envoyé**
-   * s'appelle `ppcp_paypal_order_id`, le champ **interne** `paypal_order`.
-   *
-   * ⚠️ Cette route ne renvoie PAS `order_id` / `order_key` : elle répond
-   * comme le checkout classique de WooCommerce, par `{result, redirect}`, où
-   * `redirect` est l'URL « commande reçue ». On en extrait les deux valeurs
-   * dont la page de confirmation Astro a besoin.
-   *
-   * **La fonction échoue plutôt que de supposer.** Tant que la commande PayPal
-   * n'est pas approuvée, l'extension répond `result: "success"` avec une
-   * redirection vers sa page de relecture — c'est exactement ce qui avait
-   * produit la commande fantôme #26518, annoncée payée sans l'être. Ici, tout
-   * ce qui n'est pas une URL « commande reçue » exploitable lève une erreur.
-   */
-  async finalizePaypalOrder(
-    paypalOrderId: string,
-    customerNote?: string,
-  ): Promise<{ orderId: string; orderKey: string }> {
-    const raw = await requestWpJson<unknown>("/wc-ppcp/v1/cart/checkout", {
-      method: "POST",
-      body: JSON.stringify({
-        payment_method: "ppcp",
-        ppcp_paypal_order_id: paypalOrderId,
-        // Nom du champ de note du formulaire de commande classique, dont
-        // cette route reprend le format. L'adresse, elle, vient de la
-        // session (poussée par `cart/update-customer`).
-        order_comments: customerNote ?? "",
-      }),
-    });
-
-    const res = (raw ?? {}) as { result?: string; redirect?: string };
-    const redirect = typeof res.redirect === "string" ? res.redirect : "";
-
-    // Page de relecture = la commande PayPal n'a pas été encaissée.
-    const notApproved = redirect.includes("_ppcp_order_review");
-    const match = /\/order-received\/(\d+)\/?[^#]*[?&]key=(wc_order_[A-Za-z0-9]+)/.exec(
-      redirect,
-    );
-
-    if (res.result !== "success" || notApproved || !match) {
-      console.error("[PayPal] finalisation refusée", {
-        result: res.result,
-        redirect,
-        notApproved,
-      });
-      throw new Error(
-        "Le paiement n'a pas pu être finalisé et aucun montant n'a été débité. " +
-          "Choisis la carte bancaire, ou contacte-nous — ta commande n'a pas été enregistrée comme payée.",
-      );
-    }
-
-    return { orderId: match[1], orderKey: match[2] };
+    return { orderId, orderKey, payUrl: orderPayUrl(orderId, orderKey) };
   },
 
   async checkout(args: WcCheckoutPayload): Promise<WcCheckoutResponse> {
