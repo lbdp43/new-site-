@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { setCart } from "../../lib/cart-store";
+import { cartActions, setCart } from "../../lib/cart-store";
 import { wc, type WcAddress } from "../../lib/woocommerce";
-import { buildPpcpPaymentData } from "../../lib/payment-methods";
 import { loadPayPalSdk } from "../../lib/paypal";
 
 interface Props {
@@ -39,10 +38,16 @@ function missingFields(billing: WcAddress, shipping: WcAddress): string[] {
  *      un identifiant de commande PayPal ;
  *   2. PayPal ouvre sa fenêtre, le client approuve (`commit=true` : il valide
  *      définitivement là-bas) ;
- *   3. `onApprove` envoie cet identifiant à `POST /wc/store/v1/checkout` dans
- *      `payment_data.ppcp_paypal_order_id` — le même endpoint que la carte,
- *      qui crée la commande WooCommerce et déclenche la capture côté serveur ;
+ *   3. `onApprove` envoie cet identifiant à `POST /wc-ppcp/v1/cart/checkout`
+ *      dans `ppcp_paypal_order_id` — la route propre de l'extension, la seule
+ *      dont on ait la preuve qu'elle lit ce champ (cf. `finalizePaypalOrder`).
+ *      Elle crée la commande WooCommerce et déclenche la capture côté serveur ;
  *   4. redirection vers la page de confirmation Astro.
+ *
+ * ⚠️ Ce n'est PAS le même endpoint que la carte, contrairement à ce que cette
+ * doc a longtemps affirmé. `/wc/store/v1/checkout` avec l'identifiant en
+ * `payment_data` crée bien une commande, mais sans jamais l'encaisser : c'est
+ * ce qui a produit la commande fantôme #26518.
  *
  * Le front ne capture jamais lui-même : c'est WooCommerce qui le fait, ce qui
  * garantit que la commande, les e-mails, le stock et EasyBeer restent
@@ -90,6 +95,22 @@ export default function PayPalButtons({
 
             onBusyChange(true);
             try {
+              // ⚠️ L'extension PayPal lit l'adresse dans la SESSION WooCommerce,
+              // pas dans le corps de la requête — c'est ce qui explique qu'un
+              // corps minimal suffise à `cart/order`.
+              //
+              // Or le checkout ne pousse la session que lorsque le code postal,
+              // la ville ou le pays changent (calcul des frais de port). Un
+              // client qui saisit son adresse puis corrige son nom ou son
+              // e-mail laisserait donc une session périmée, et PayPal
+              // travaillerait sur l'ancienne valeur.
+              //
+              // On resynchronise juste avant d'ouvrir la fenêtre PayPal.
+              await cartActions.updateCustomer({
+                billing_address: b,
+                shipping_address: s,
+              });
+
               return await wc.createPaypalOrder();
             } catch (err) {
               onError(err instanceof Error ? err.message : "Erreur PayPal.");
@@ -105,28 +126,29 @@ export default function PayPalButtons({
             try {
               const { billing: b, shipping: s, customerNote: note } = latest.current;
 
-              const result = await wc.checkout({
+              // L'extension PayPal travaille sur la session WooCommerce : on
+              // y pousse l'adresse et la note AVANT de finaliser, puisque
+              // `cart/checkout` ne les prend pas dans son corps de requête.
+              await cartActions.updateCustomer({
                 billing_address: b,
                 shipping_address: s,
-                customer_note: note || undefined,
-                payment_method: "ppcp",
-                payment_data: buildPpcpPaymentData(data.orderID),
               });
 
-              if (result.payment_result.payment_status !== "success") {
-                onError(
-                  "Le paiement PayPal n'a pas abouti. Aucun montant n'a été débité — réessaie ou choisis la carte bancaire.",
-                );
-                return;
-              }
+              // Finalisation par la route propre de l'extension. Elle lève
+              // une erreur si la commande n'a pas réellement été encaissée —
+              // voir `wc.finalizePaypalOrder`.
+              const { orderId, orderKey } = await wc.finalizePaypalOrder(
+                data.orderID,
+                note,
+              );
 
               // Même nettoyage que le tunnel carte : sans clearSession(), le
               // prochain getCart() ressort le panier en cache et l'icône du
               // header garde les anciens articles après un paiement réussi.
               setCart(null);
               wc.clearSession();
-              window.location.href = `/commande/confirmation?order=${result.order_id}&key=${encodeURIComponent(
-                result.order_key,
+              window.location.href = `/commande/confirmation?order=${orderId}&key=${encodeURIComponent(
+                orderKey,
               )}`;
             } catch (err) {
               onError(
@@ -190,7 +212,7 @@ export default function PayPalButtons({
       {status === "ready" && (
         <p className="mt-3 text-xs text-ink-500">
           Vous serez redirigé vers PayPal pour valider le paiement, puis ramené
-          ici. Paiement en plusieurs fois disponible selon votre compte.
+          ici.
         </p>
       )}
     </div>

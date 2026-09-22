@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { ensureCartLoaded, formatMoney, useCart } from "../../lib/cart-store";
+import { addMinor, ensureCartLoaded, formatMoney, useCart } from "../../lib/cart-store";
+import { decodeEntities } from "../../lib/wc-text";
 
 export default function CartPage() {
   const {
@@ -97,7 +98,14 @@ export default function CartPage() {
         <ul className="divide-y divide-forest-100/80">
           {cart?.items.map((item) => {
             const image = item.images[0];
-            const subtotal = formatMoney(item.totals.line_total, minorUnit, currencySymbol);
+            // TTC, comme le prix unitaire juste à côté (`prices.price` suit le
+            // réglage d'affichage de la boutique, `totals.*` non) : sans ça la
+            // même ligne affichait 55,00 € l'unité et 45,83 € le sous-total.
+            const subtotal = formatMoney(
+              addMinor(item.totals.line_total, item.totals.line_total_tax),
+              minorUnit,
+              currencySymbol,
+            );
             const unit = formatMoney(item.prices.price, minorUnit, currencySymbol);
             return (
               <li key={item.key} className="py-5 md:grid md:grid-cols-[1fr_120px_150px_100px_40px] md:gap-4 md:items-center">
@@ -105,17 +113,17 @@ export default function CartPage() {
                   {image && (
                     <img
                       src={image.thumbnail || image.src}
-                      alt={image.alt || item.name}
+                      alt={decodeEntities(image.alt || item.name)}
                       width={72}
                       height={72}
                       className="w-16 h-16 rounded-lg object-cover bg-cream-100 border border-forest-100/60"
                     />
                   )}
                   <div>
-                    <div className="font-display text-lg text-forest-900 leading-tight">{item.name}</div>
+                    <div className="font-display text-lg text-forest-900 leading-tight">{decodeEntities(item.name)}</div>
                     {item.variation && item.variation.length > 0 && (
                       <div className="text-xs text-ink-500 mt-0.5">
-                        {item.variation.map((v) => v.value).join(" · ")}
+                        {item.variation.map((v) => decodeEntities(v.value)).join(" · ")}
                       </div>
                     )}
                     <div className="text-xs text-ink-500 mt-0.5 md:hidden">Unité : {unit}</div>
@@ -143,7 +151,7 @@ export default function CartPage() {
                   type="button"
                   onClick={() => removeItem(item.key)}
                   className="mt-2 md:mt-0 justify-self-end text-ink-400 hover:text-red-700 transition-colors"
-                  aria-label={`Retirer ${item.name} du panier`}
+                  aria-label={`Retirer ${decodeEntities(item.name)} du panier`}
                   disabled={loading}
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -194,19 +202,32 @@ export default function CartPage() {
         <div className="rounded-2xl bg-cream-50 border border-forest-100 p-6 shadow-cream-lg">
           <h2 className="font-display text-xl text-forest-900 mb-5">Récapitulatif</h2>
 
+          {/* Récapitulatif entièrement TTC — cf. la note fiscale sur
+              `WcCart.totals` : les montants de la Store API sont hors taxe,
+              seul `total_price` est TTC. Avec « dont TVA » (donc comprise),
+              sous-total + livraison doivent égaler le total. */}
           <dl className="space-y-3 text-sm">
             <div className="flex justify-between text-ink-700">
               <dt>Sous-total</dt>
               <dd className="tabular-nums">
-                {cart && formatMoney(cart.totals.total_items, minorUnit, currencySymbol)}
+                {cart &&
+                  formatMoney(
+                    addMinor(cart.totals.total_items, cart.totals.total_items_tax),
+                    minorUnit,
+                    currencySymbol,
+                  )}
               </dd>
             </div>
 
-            {cart && Number(cart.totals.total_shipping) > 0 ? (
+            {cart && Number(addMinor(cart.totals.total_shipping, cart.totals.total_shipping_tax)) > 0 ? (
               <div className="flex justify-between text-ink-700">
                 <dt>Livraison</dt>
                 <dd className="tabular-nums">
-                  {formatMoney(cart.totals.total_shipping, minorUnit, currencySymbol)}
+                  {formatMoney(
+                    addMinor(cart.totals.total_shipping, cart.totals.total_shipping_tax),
+                    minorUnit,
+                    currencySymbol,
+                  )}
                 </dd>
               </div>
             ) : cart?.needs_shipping ? (

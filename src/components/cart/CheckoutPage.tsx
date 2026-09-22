@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe, type Stripe } from "@stripe/stripe-js";
-import { ensureCartLoaded, formatMoney, setCart, useCart } from "../../lib/cart-store";
+import { addMinor, ensureCartLoaded, formatMoney, setCart, useCart } from "../../lib/cart-store";
 import { wc, type WcAddress } from "../../lib/woocommerce";
 import {
   getAvailablePaymentMethods,
   type PaymentMethodId,
 } from "../../lib/payment-methods";
 import PayPalButtons from "./PayPalButtons";
+import { decodeEntities } from "../../lib/wc-text";
 
 const STRIPE_KEY = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY as string | undefined;
 /**
@@ -163,7 +164,7 @@ function CheckoutInner() {
     if (!cart || beginSentRef.current) return;
     const items = (cart.items ?? []).map((it: any, i: number) => ({
       item_id: String(it.id),
-      item_name: it.name,
+      item_name: decodeEntities(it.name),
       price: Number(it.prices?.price ?? 0) / Math.pow(10, minorUnit),
       quantity: it.quantity,
       index: i,
@@ -436,7 +437,11 @@ function CheckoutInner() {
           <Section title="Mode de livraison">
             <ul className="space-y-2">
               {shippingRates.map((r) => {
-                const price = formatMoney(r.price, minorUnit, currencySymbol);
+                // Prix réellement payé = HT + TVA. La Store API les renvoie
+                // séparés, et afficher `r.price` seul annonçait « Forfait
+                // 12,50 € » pour un forfait facturé 15 € TTC.
+                const priceInclTax = addMinor(r.price, r.taxes);
+                const price = formatMoney(priceInclTax, minorUnit, currencySymbol);
                 const checked = r.rate_id === selectedRate;
                 return (
                   <li key={r.rate_id}>
@@ -458,10 +463,10 @@ function CheckoutInner() {
                           }}
                           className="text-forest-700"
                         />
-                        <span className="text-sm text-ink-800">{r.name}</span>
+                        <span className="text-sm text-ink-800">{decodeEntities(r.name)}</span>
                       </span>
                       <span className="text-sm font-medium text-forest-900 tabular-nums">
-                        {Number(r.price) === 0 ? "Offerte" : price}
+                        {Number(priceInclTax) === 0 ? "Offerte" : price}
                       </span>
                     </label>
                   </li>
@@ -556,33 +561,50 @@ function CheckoutInner() {
             {cart?.items.map((it) => (
               <li key={it.key} className="py-3 flex items-start justify-between gap-3 text-sm">
                 <div>
-                  <div className="text-ink-800 font-medium">{it.name}</div>
+                  <div className="text-ink-800 font-medium">{decodeEntities(it.name)}</div>
                   {it.variation && it.variation.length > 0 && (
                     <div className="text-xs text-ink-500">
-                      {it.variation.map((v) => v.value).join(" · ")}
+                      {it.variation.map((v) => decodeEntities(v.value)).join(" · ")}
                     </div>
                   )}
                   <div className="text-xs text-ink-500">Qté {it.quantity}</div>
                 </div>
                 <div className="tabular-nums text-ink-800">
-                  {formatMoney(it.totals.line_total, minorUnit, currencySymbol)}
+                  {formatMoney(
+                    addMinor(it.totals.line_total, it.totals.line_total_tax),
+                    minorUnit,
+                    currencySymbol,
+                  )}
                 </div>
               </li>
             ))}
           </ul>
 
+          {/* Récapitulatif entièrement TTC : la ligne « dont TVA » annonce une
+              TVA *comprise*, donc sous-total + livraison doivent égaler le
+              total. Avec les montants hors taxe de la Store API, l'addition
+              tombait à 58,33 € pour un total de 70,00 €. */}
           <dl className="space-y-2 text-sm border-t border-forest-100 pt-4">
             <div className="flex justify-between text-ink-700">
               <dt>Sous-total</dt>
               <dd className="tabular-nums">
-                {cart && formatMoney(cart.totals.total_items, minorUnit, currencySymbol)}
+                {cart &&
+                  formatMoney(
+                    addMinor(cart.totals.total_items, cart.totals.total_items_tax),
+                    minorUnit,
+                    currencySymbol,
+                  )}
               </dd>
             </div>
-            {cart && Number(cart.totals.total_shipping) > 0 && (
+            {cart && Number(addMinor(cart.totals.total_shipping, cart.totals.total_shipping_tax)) > 0 && (
               <div className="flex justify-between text-ink-700">
                 <dt>Livraison</dt>
                 <dd className="tabular-nums">
-                  {formatMoney(cart.totals.total_shipping, minorUnit, currencySymbol)}
+                  {formatMoney(
+                    addMinor(cart.totals.total_shipping, cart.totals.total_shipping_tax),
+                    minorUnit,
+                    currencySymbol,
+                  )}
                 </dd>
               </div>
             )}

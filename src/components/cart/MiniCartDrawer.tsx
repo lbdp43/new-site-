@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import { useCart, formatMoney, useMiniCart, closeMiniCart } from "../../lib/cart-store";
+import { addMinor, useCart, formatMoney, useMiniCart, closeMiniCart } from "../../lib/cart-store";
+import { decodeEntities } from "../../lib/wc-text";
 
 /**
  * MiniCartDrawer — panneau latéral droit qui glisse depuis la bordure.
@@ -104,9 +105,14 @@ export default function MiniCartDrawer() {
             <ul className="space-y-4">
               {items.map((item) => {
                 const img = item.images?.[0];
-                const linePrice = formatMoney(item.totals.line_total, minorUnit, currencySymbol);
+                // TTC — cf. la note fiscale sur `WcCart.totals`.
+                const linePrice = formatMoney(
+                  addMinor(item.totals.line_total, item.totals.line_total_tax),
+                  minorUnit,
+                  currencySymbol,
+                );
                 const variation = (item.variation ?? [])
-                  .map((v) => v.value)
+                  .map((v) => decodeEntities(v.value))
                   .join(" · ");
 
                 return (
@@ -117,19 +123,19 @@ export default function MiniCartDrawer() {
                         onClick={closeMiniCart}
                         className="flex-none w-16 h-16 rounded-lg overflow-hidden bg-white border border-forest-100"
                       >
-                        <img src={img.thumbnail} alt={img.alt || item.name} className="w-full h-full object-contain p-1" />
+                        <img src={img.thumbnail} alt={decodeEntities(img.alt || item.name)} className="w-full h-full object-contain p-1" />
                       </a>
                     )}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="text-sm font-medium text-forest-900 leading-tight">
-                          {item.name}
+                          {decodeEntities(item.name)}
                         </h3>
                         <button
                           type="button"
                           onClick={() => removeItem(item.key).catch(() => {})}
                           className="flex-none text-ink-400 hover:text-red-700 -mt-0.5 -mr-1 p-1"
-                          aria-label={`Retirer ${item.name}`}
+                          aria-label={`Retirer ${decodeEntities(item.name)}`}
                         >
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <line x1="18" y1="6" x2="6" y2="18" />

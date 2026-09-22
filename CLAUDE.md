@@ -190,9 +190,11 @@ pas été passé puis remboursé.
 2. Clic → `wc.createPaypalOrder()` → `POST /wc-ppcp/v1/cart/order` → ID PayPal.
 3. Le client approuve dans la fenêtre PayPal (flux **popup**, pas redirection :
    on garde la main sur la redirection finale).
-4. `onApprove` → `POST /wc/store/v1/checkout` avec `payment_method: "ppcp"` et
-   `ppcp_paypal_order_id` en `payment_data` — **le même endpoint que la
-   carte**, seul à renvoyer `order_id` + `order_key`.
+4. `onApprove` → `POST /wc-ppcp/v1/cart/checkout` avec `ppcp_paypal_order_id`
+   — **la route propre de l'extension, PAS celle de la carte.** Elle répond
+   comme le checkout classique (`{result, redirect}`) : on extrait l'ID et la
+   clé de commande de l'URL « commande reçue ». Tout ce qui n'est pas une
+   telle URL lève une erreur (cf. `wc.finalizePaypalOrder`).
 5. Redirection vers `/commande/confirmation`.
 
 Le front **ne capture jamais** : c'est WooCommerce qui le fait, donc commande,
@@ -202,6 +204,15 @@ e-mails, stock et EasyBeer restent synchronisés comme pour une carte.
 `*.paypalobjects.com` en `script-src`, `frame-src`, `connect-src` et
 `form-action`. Sans ça le navigateur bloque le SDK **sans message clair** —
 piège coûteux à rediagnostiquer.
+
+⚠️ **L'extension PayPal lit l'adresse dans la SESSION WooCommerce**, pas dans
+le corps de la requête — c'est pour ça qu'un corps minimal suffit à
+`cart/order`. Or le checkout ne pousse la session (`cart/update-customer`) que
+lorsque le **code postal, la ville ou le pays** changent, pour recalculer les
+frais de port. Un client qui saisit son adresse puis corrige son nom ou son
+e-mail laisserait donc PayPal travailler sur une session périmée.
+`PayPalButtons.createOrder` resynchronise désormais juste avant d'ouvrir la
+fenêtre PayPal. Ne pas retirer cet appel en le croyant redondant.
 
 ⚠️ **Les callbacks PayPal sont figés au rendu des boutons.**
 `PayPalButtons.tsx` passe donc les valeurs du formulaire par une `ref`. Ne
@@ -224,9 +235,15 @@ Deux enseignements :
 
 ✅ **SDK PayPal relevé le 22/09/2026** : `client-id` complet (dans
 `docs/paypal-checkout.md`), `intent=capture`, `commit=true`, `currency=EUR`,
-**`enable-funding=paylater`** et **aucun `merchant-id`** (compte marchand
-direct). ⚠️ Le Pay Later est donc actif aujourd'hui sur le WordPress : ne pas
-l'oublier côté Astro, sinon la bascule retire une facilité de paiement.
+`enable-funding=paylater` et **aucun `merchant-id`** (compte marchand direct).
+
+🔒 **Arbitrage Guillaume du 22/09/2026 : « mets juste le bouton PayPal ».**
+Côté Astro, `src/lib/paypal.ts` envoie donc **`disable-funding=paylater,card`**
+— un seul bouton, sans « Payer en plusieurs fois » ni « Carte bancaire ».
+⚠️ **Ne pas rétablir `enable-funding=paylater`** en croyant corriger un oubli :
+le Pay Later est bien actif sur le WordPress et cette doc a d'abord
+recommandé de le reproduire, mais la décision l'a écarté. La carte reste
+offerte par WooPayments dans l'autre onglet du sélecteur.
 
 ✅ **`cart/order` disséqué le 22/09/2026** (relevé réseau complet dans
 `docs/paypal-checkout.md`) :
@@ -268,24 +285,139 @@ est validée sur le terrain. Un corps minimal suffit
 (`{ payment_method: "ppcp", context: "checkout" }`) : les dizaines de champs
 du formulaire classique ne sont pas nécessaires à cette étape.
 
-✅ **Chemin de finalisation tranché le 22/09/2026** par une sonde gratuite
-(commande PayPal non approuvée, donc incapturable) : `POST
-/wc/store/v1/checkout` avec `payment_method: "ppcp"` et
-`ppcp_paypal_order_id` en `payment_data` a créé la commande WooCommerce
-**#26516** (`order_key`, statut `pending`, `payment_status: "success"`).
-C'est donc **le même endpoint que la carte**. ⚠️ Commande #26516 à supprimer,
-résidu de la sonde.
+❌ **Conclusion ERRONÉE du 22/09/2026, conservée ici comme mise en garde** :
+une sonde avait créé la commande **#26516** via `POST /wc/store/v1/checkout`
+avec `ppcp_paypal_order_id` en `payment_data`, réponse `payment_status:
+"success"` — et on en avait déduit « même endpoint que la carte ». Faux : la
+commande était créée mais **jamais encaissée**. Voir la section « commande
+fantôme » pour le chemin réel (`/wc-ppcp/v1/cart/checkout`).
 
-⛔ **Reste** : poser `PUBLIC_PPCP_ENABLED` et `PUBLIC_PAYPAL_CLIENT_ID` sur
-Vercel, **redéployer** (site statique : les `PUBLIC_*` sont figées au build),
-puis passer un vrai paiement sur `test.` et le rembourser. Mode opératoire
-dans `docs/paypal-checkout.md`. Aucun risque client : la boutique publique
-reste le WordPress sur `www.` jusqu'à la bascule DNS.
+**Leçon** : « une commande WooCommerce est apparue » ne prouve pas qu'un
+paiement a eu lieu. Le seul critère est `transaction_id` non vide et un
+statut « En cours ».
+
+## 🚨 PayPal — la commande fantôme du 22/09/2026 (À LIRE)
+
+**Premier vrai paiement de test : le client a vu « Merci pour votre commande »
+pour une commande JAMAIS ENCAISSÉE.** C'est le pire scénario possible, et il
+est passé à deux doigts de la production.
+
+Commande **#26518** (`created_via: store-api`, `payment_method: ppcp`) :
+
+| Champ | Valeur |
+|---|---|
+| `status` | **pending** |
+| `transaction_id` | **vide** |
+| `date_paid` | **null** |
+| meta `_ppcp_paypal_order_id` | **absente** |
+
+Guillaume était bien allé au bout côté PayPal, et n'a reçu **aucun e-mail**
+PayPal — cohérent : avec `intent=capture`, l'approbation n'débite rien, c'est
+le marchand qui encaisse ensuite côté serveur. **L'approbation a eu lieu,
+l'encaissement non.**
+
+### Les deux enseignements
+
+1. 🔑 **Ce n'est PAS un problème de nom de champ — c'est la MAUVAISE ROUTE.**
+
+   `POST /wc/store/v1/checkout` avec `ppcp_paypal_order_id` en `payment_data`
+   crée bien une commande WooCommerce, mais **ne l'encaisse jamais**. Le
+   `payment_data` de la Store API n'atteint pas la logique PayPal.
+
+   ✅ **La bonne route est `POST /wc-ppcp/v1/cart/checkout`**, celle de
+   l'extension — établi le 22/09/2026 sans dépenser un centime. Cette route
+   renvoie dans sa `redirect` un paramètre `_ppcp_order_review` qui contient,
+   en base64, **ce qu'elle a compris de la requête**. Sonde A/B/C :
+
+   ```
+   envoyé paypal_order_id      → {"paypal_order":null}                 ignoré
+   envoyé ppcp_paypal_order_id → {"paypal_order":"4XS78307X1722144X"}  ✅
+   envoyé rien                 → {"paypal_order":null}                 témoin
+   ```
+
+   ⚠️ **Deux noms cohabitent** : le champ **envoyé** est
+   `ppcp_paypal_order_id`, le champ **interne** `paypal_order`. Ne pas
+   confondre, et ne pas « corriger » l'un en l'autre.
+
+   ⚠️ **Erreur de méthode à ne pas refaire** : une première lecture de ce
+   `_ppcp_order_review` avait conclu à `paypal_order_id`. Le base64 avait été
+   reconstitué à partir d'une capture d'écran en devinant les caractères
+   illisibles — la reconstruction donnait un JSON valide, donc crédible, mais
+   fausse. **Ne jamais deviner un base64 : le faire décoder en console.**
+
+2. ⚠️ **`payment_status: "success"` NE VEUT PAS DIRE « payé ».** Le plugin
+   renvoie « success » aussi bien pour « c'est payé » que pour « la commande
+   est créée, il reste à l'approuver chez PayPal » — avec alors une
+   `redirect_url` vers paypal.com. La sonde A/B l'avait montré ; on ne l'avait
+   pas interprété.
+
+**`PayPalButtons.tsx` exige désormais trois conditions** avant d'afficher la
+confirmation : `payment_status === "success"`, **et** aucune `redirect_url`
+vers paypal.com, **et** un `status` de commande qui n'est ni `pending` ni
+`failed`. Au moindre doute, message d'échec explicite. Une page de
+confirmation mensongère est bien pire qu'une erreur.
+
+### 🧪 `cart/checkout` est une sonde GRATUITE
+
+Découvert le 22/09/2026, et très utile pour la suite : appeler
+`POST /wc-ppcp/v1/cart/checkout` avec un `paypal_order_id` absent ou non
+approuvé **ne crée AUCUNE commande WooCommerce** — le plugin se contente de
+renvoyer une redirection vers sa page de relecture. Vérifié : aucune commande
+n'est apparue après la sonde.
+
+C'est l'inverse de `POST /wc/store/v1/checkout`, qui crée une vraie commande
+à chaque appel — c'est ainsi que sont nées #26516 et #26518 (toutes deux à la
+corbeille). **Pour explorer le contrat du plugin, passer par `cart/checkout`.**
+
+⛔ **Reste à faire** : refaire un paiement réel de bout en bout avec la bonne
+clé, et **vérifier dans WooCommerce que la commande est en « En cours » avec
+un `transaction_id`** — ne jamais se fier à la seule page de confirmation.
+Mode opératoire dans
+`docs/paypal-checkout.md`.
+
+Aucun risque client : la boutique publique reste le WordPress sur `www.`
+jusqu'à la bascule DNS, et les deux variables ne sont posées que sur ce
+projet Vercel.
 
 Rappel : ces relevés se font **côté Guillaume**, l'environnement de dev ne
 joint pas le WordPress. Pistes de lecture du code du plugin épuisées le
 22/09/2026 (`downloads.wordpress.org`, `plugins.svn.wordpress.org`, miroirs
 CDN, `add_repo` GitHub) — ne pas repartir en chasse.
+
+## 💶 Store API : tous les montants sont HORS TAXE (sauf `total_price`)
+
+Piège contre-intuitif sur une boutique française, repéré par Guillaume le
+22/09/2026 : le checkout annonçait **« Forfait 12,50 € »** pour un forfait
+facturé **15 € TTC**.
+
+WooCommerce est réglé en prix TTC (`prices_include_tax: true`), les fiches
+produit affichent 55 €… mais la Store API renvoie les montants **hors taxe**,
+avec la TVA dans un champ séparé :
+
+| Champ | Contenu | Son pendant TVA |
+|---|---|---|
+| `totals.total_items` | HT | `total_items_tax` |
+| `totals.total_shipping` | HT | `total_shipping_tax` |
+| `items[].totals.line_total` | HT | `line_total_tax` |
+| `shipping_rates[].price` | HT | `taxes` |
+| **`totals.total_price`** | **TTC** | — (seul montant TTC) |
+
+⚠️ `items[].prices.price` (prix unitaire), lui, **suit** le réglage
+d'affichage de la boutique : il était donc TTC. Le panier affichait « 55,00 €
+l'unité / 45,83 € le sous-total » sur la même ligne, pour une quantité de 1.
+
+⚠️ **Pourquoi ça a survécu si longtemps** : les deux présentations tombent
+juste arithmétiquement (45,83 + 12,50 + 11,67 de TVA = 70,00 comme
+55,00 + 15,00 = 70,00). Un contrôle par l'addition ne l'aurait pas détecté.
+En revanche le récapitulatif, qui dit « **dont** TVA » (donc comprise), était
+bel et bien faux : 45,83 + 12,50 = 58,33 pour un total affiché à 70,00.
+
+**Règle** : tout montant montré au client se calcule en TTC avec
+`addMinor()` (`src/lib/cart-store.tsx`), et la TVA s'affiche en « dont TVA ».
+Ne jamais afficher un `total_*` brut, sauf `total_price`.
+
+Appliqué au panier, au mini-panier et au checkout (lignes, sous-total,
+livraison, sélecteur de mode de livraison).
 
 ## Variables d'environnement
 
@@ -643,6 +775,7 @@ remplacer le contenu de la colonne gauche.
 | `src/lib/cart-store.tsx` | Store de panier partagé entre îles Astro (module singleton + `useSyncExternalStore`, pas de Context) |
 | `src/lib/paypal.ts` | Chargeur du SDK JS PayPal (mémoïsé). Paramètres calqués sur ceux du checkout WordPress — dont `enable-funding=paylater`. |
 | `src/components/cart/PayPalButtons.tsx` | Boutons PayPal du checkout : création de commande, approbation, finalisation Store API, annulation et erreurs. ⚠️ Les valeurs du formulaire passent par une `ref` (les callbacks PayPal sont figés au rendu). |
+| `src/lib/wc-text.ts` | `decodeEntities()` — WooCommerce renvoie ses libellés **échappés en HTML** (`Mariage Aurore &amp; Damien`, `L&#8217;ALCHIMIE`, `&times;`). React ré-échappe ce qu'il affiche, donc sans décodage le client lit les entités en clair. À appeler sur **tout** texte venu de la Store API (nom d'article, variation, tarif de livraison, `alt`). Volontairement sans DOM (les îles sont rendues au build) et **en un seul passage** : `&amp;times;` doit donner `&times;`, pas `×`. |
 | `src/lib/payment-methods.ts` | **Source unique** du choix de moyen de paiement : croise `cart.payment_methods` (déclaré par WC) avec ce que le front sait faire. Porte le verrou `PPCP_FLOW_IMPLEMENTED` et toutes les hypothèses PayPal, regroupées et annotées. Ne jamais coder une liste de passerelles en dur ailleurs. |
 | `src/components/cart/CartIcon.tsx` | Icône panier Header (badge + total) |
 | `src/components/cart/AddToCartButton.tsx` | Bouton ajouter au panier fiche produit |

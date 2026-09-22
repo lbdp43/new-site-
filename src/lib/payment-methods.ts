@@ -142,50 +142,24 @@ export function getAvailablePaymentMethods(cart: WcCart | null): PaymentMethodOp
  * lui-même — c'est cohérent avec le fait que la commande WC passe directement
  * en « En cours » avec les frais PayPal déjà enregistrés.
  *
- * ✅ **Tout ce qui suit est vérifié en production le 22/09/2026**, depuis
+ * ✅ **Vérifié en production le 22/09/2026**, depuis
  * `test.labrasseriedesplantes.fr`, sans qu'aucun paiement n'ait eu lieu :
+ * `POST /wc-ppcp/v1/cart/order` avec `{payment_method:"ppcp",
+ * context:"checkout"}` renvoie une chaîne JSON nue, l'ID de commande PayPal
+ * (ex. `"8L3502990F093683F"`). Le `Cart-Token` suffit : ni cookie, ni
+ * `woocommerce-process-checkout-nonce`. Exige `astro-cors` ≥ 1.3.0 côté WP.
  *
- *   1. `POST /wc-ppcp/v1/cart/order` avec `{payment_method:"ppcp",
- *      context:"checkout"}` → renvoie une chaîne JSON nue, l'ID de commande
- *      PayPal (ex. `"8L3502990F093683F"`). Le `Cart-Token` suffit : ni
- *      cookie, ni `woocommerce-process-checkout-nonce`.
- *   2. `POST /wc/store/v1/checkout` avec `payment_method:"ppcp"` et
- *      `ppcp_paypal_order_id` dans `payment_data` → crée la commande
- *      WooCommerce (`order_id`, `order_key`, statut `pending`) et renvoie
- *      `payment_status:"success"`.
+ * ⛔ **LA FINALISATION NE PASSE PAS PAR LA STORE API.** Ce fichier a longtemps
+ * affirmé le contraire — que `POST /wc/store/v1/checkout` avec
+ * `ppcp_paypal_order_id` en `payment_data` finalisait, « le même endpoint que
+ * la carte ». C'était faux, et c'est ce qui a produit la commande fantôme
+ * #26518 : la commande WooCommerce est bien créée, mais **jamais encaissée**,
+ * et la réponse annonce quand même `payment_status: "success"`.
  *
- * C'est donc le **même endpoint que la carte** qui finalise, ce qui était
- * l'issue souhaitée : lui seul renvoie `order_id` + `order_key`, dont la page
- * de confirmation a besoin.
+ * La finalisation passe par la route propre de l'extension,
+ * `POST /wc-ppcp/v1/cart/checkout` — voir `wc.finalizePaypalOrder()` dans
+ * `woocommerce.ts`, qui porte la preuve du nom de champ attendu.
  *
- * ⚠️ L'étape 1 exige le plugin **`astro-cors` ≥ 1.3.0** côté WordPress.
+ * C'est pourquoi il n'existe plus d'assembleur de `payment_data` PPCP ici :
+ * il n'y a plus de `payment_data` PPCP du tout.
  * ────────────────────────────────────────────────────────────────────── */
-
-/**
- * Construit le `payment_data` d'un checkout PayPal.
- *
- * `payment_method` est volontairement DUPLIQUÉ dans payment_data, exactement
- * comme pour WooPayments : `WooCommerce/StoreApi/Legacy.php` fait
- * `$_POST = $payment_data` (il REMPLACE `$_POST`), donc le `payment_method`
- * de premier niveau n'atterrit jamais dans `$_POST['payment_method']`. Toute
- * passerelle qui lit cette valeur côté PHP ne la trouve pas — c'est ce qui
- * provoquait la TypeError fatale de WooPayments en avril 2026.
- *
- * @param paypalOrderId ID de commande PayPal approuvé par le client.
- * @param orderIdKey    Nom de la clé attendue par le plugin. La valeur par
- *                      défaut `ppcp_paypal_order_id` n'est pas devinée : elle
- *                      a été relevée dans le formulaire réel du checkout
- *                      WordPress, correspond à la métadonnée
- *                      `_ppcp_paypal_order_id` des commandes payées, et a été
- *                      **confirmée par un appel réel** à la Store API le
- *                      22/09/2026 (commande WooCommerce créée avec succès).
- */
-export function buildPpcpPaymentData(
-  paypalOrderId: string,
-  orderIdKey = "ppcp_paypal_order_id",
-): Array<{ key: string; value: string }> {
-  return [
-    { key: "payment_method", value: "ppcp" },
-    { key: orderIdKey, value: paypalOrderId },
-  ];
-}

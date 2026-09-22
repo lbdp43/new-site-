@@ -157,8 +157,13 @@ export interface WcCartItem {
   images: Array<{ src: string; thumbnail: string; alt: string }>;
   prices: WcProduct["prices"];
   totals: {
+    // ⚠️ Les montants `*_total` / `*_subtotal` de la Store API sont HORS TAXE,
+    // la TVA arrivant à part dans les champs `*_tax`. Voir la note fiscale sur
+    // `WcCart.totals`. Pour afficher un prix TTC : `addMinor(a, b)`.
     line_subtotal: string;
+    line_subtotal_tax: string;
     line_total: string;
+    line_total_tax: string;
     currency_code: string;
     currency_minor_unit: number;
   };
@@ -169,10 +174,33 @@ export interface WcCart {
   items_count: number;
   needs_shipping: boolean;
   needs_payment: boolean;
+  /**
+   * ⚠️ **TOUS ces montants sont HORS TAXE, sauf `total_price`.**
+   *
+   * C'est le piège fiscal de la Store API, et il est contre-intuitif sur une
+   * boutique française : WooCommerce est réglé en prix TTC
+   * (`prices_include_tax: true`), les fiches produit affichent 55 €… mais la
+   * Store API renvoie `total_items: "4583"` et la TVA à part dans
+   * `total_items_tax`. Idem pour la livraison : `total_shipping: "1250"` plus
+   * `total_shipping_tax: "250"`, pour un forfait facturé **15 € TTC**.
+   *
+   * Seul `total_price` est TTC. Les deux présentations tombent donc juste
+   * (45,83 + 12,50 + 11,67 TVA = 70,00 comme 55,00 + 15,00 = 70,00), ce qui
+   * rend l'erreur invisible à un contrôle arithmétique — elle a vécu jusqu'à
+   * ce que Guillaume repère « Forfait 12,50 € » le 22/09/2026.
+   *
+   * **Règle : tout ce qui est montré au client se calcule en TTC**, avec
+   * `addMinor()`, et la TVA s'affiche en « dont TVA » puisqu'elle est déjà
+   * comprise. Ne jamais afficher un `total_*` brut, sauf `total_price`.
+   */
   totals: {
     total_items: string;
+    total_items_tax: string;
     total_shipping: string;
+    total_shipping_tax: string;
+    /** TVA totale, déjà comprise dans `total_price`. */
     total_tax: string;
+    /** Le seul montant TTC de ce bloc. */
     total_price: string;
     currency_code: string;
     currency_minor_unit: number;
@@ -184,7 +212,10 @@ export interface WcCart {
     shipping_rates: Array<{
       rate_id: string;
       name: string;
+      /** HORS TAXE — la TVA est dans `taxes`. */
       price: string;
+      /** TVA du tarif, à ajouter à `price` pour obtenir le prix payé. */
+      taxes: string;
       selected: boolean;
     }>;
   }>;
@@ -336,6 +367,76 @@ export const wc = {
     }
 
     return raw;
+  },
+
+  /**
+   * Finalise un paiement PayPal **approuvé** par le client.
+   *
+   * On passe par la route propre de l'extension, `/wc-ppcp/v1/cart/checkout`,
+   * et non par `/wc/store/v1/checkout` comme pour la carte. Raison : c'est la
+   * seule dont on ait la preuve qu'elle comprend l'identifiant de commande
+   * PayPal qu'on lui transmet.
+   *
+   * Preuve, relevée en console le 22/09/2026 sans dépenser un centime — la
+   * route renvoie dans sa `redirect` un paramètre `_ppcp_order_review` qui
+   * contient, en base64, ce qu'elle a compris de la requête :
+   *
+   *   envoyé `paypal_order_id`      → {"paypal_order":null}                ignoré
+   *   envoyé `ppcp_paypal_order_id` → {"paypal_order":"4XS78307X1722144X"} ✅
+   *   envoyé rien                   → {"paypal_order":null}                témoin
+   *
+   * ⚠️ Deux noms cohabitent, et s'y tromper coûte cher : le champ **envoyé**
+   * s'appelle `ppcp_paypal_order_id`, le champ **interne** `paypal_order`.
+   *
+   * ⚠️ Cette route ne renvoie PAS `order_id` / `order_key` : elle répond
+   * comme le checkout classique de WooCommerce, par `{result, redirect}`, où
+   * `redirect` est l'URL « commande reçue ». On en extrait les deux valeurs
+   * dont la page de confirmation Astro a besoin.
+   *
+   * **La fonction échoue plutôt que de supposer.** Tant que la commande PayPal
+   * n'est pas approuvée, l'extension répond `result: "success"` avec une
+   * redirection vers sa page de relecture — c'est exactement ce qui avait
+   * produit la commande fantôme #26518, annoncée payée sans l'être. Ici, tout
+   * ce qui n'est pas une URL « commande reçue » exploitable lève une erreur.
+   */
+  async finalizePaypalOrder(
+    paypalOrderId: string,
+    customerNote?: string,
+  ): Promise<{ orderId: string; orderKey: string }> {
+    const raw = await requestWpJson<unknown>("/wc-ppcp/v1/cart/checkout", {
+      method: "POST",
+      body: JSON.stringify({
+        payment_method: "ppcp",
+        ppcp_paypal_order_id: paypalOrderId,
+        // Nom du champ de note du formulaire de commande classique, dont
+        // cette route reprend le format. L'adresse, elle, vient de la
+        // session (poussée par `cart/update-customer`).
+        order_comments: customerNote ?? "",
+      }),
+    });
+
+    const res = (raw ?? {}) as { result?: string; redirect?: string };
+    const redirect = typeof res.redirect === "string" ? res.redirect : "";
+
+    // Page de relecture = la commande PayPal n'a pas été encaissée.
+    const notApproved = redirect.includes("_ppcp_order_review");
+    const match = /\/order-received\/(\d+)\/?[^#]*[?&]key=(wc_order_[A-Za-z0-9]+)/.exec(
+      redirect,
+    );
+
+    if (res.result !== "success" || notApproved || !match) {
+      console.error("[PayPal] finalisation refusée", {
+        result: res.result,
+        redirect,
+        notApproved,
+      });
+      throw new Error(
+        "Le paiement n'a pas pu être finalisé et aucun montant n'a été débité. " +
+          "Choisis la carte bancaire, ou contacte-nous — ta commande n'a pas été enregistrée comme payée.",
+      );
+    }
+
+    return { orderId: match[1], orderKey: match[2] };
   },
 
   async checkout(args: WcCheckoutPayload): Promise<WcCheckoutResponse> {

@@ -232,6 +232,27 @@ export function useCart() {
   };
 }
 
+/**
+ * Additionne des montants WooCommerce (chaînes en « minor units », ex. "1250").
+ *
+ * Sert à reconstituer un prix **TTC** à partir du hors-taxe et de sa TVA, que
+ * la Store API renvoie séparés — cf. la note fiscale sur `WcCart.totals`.
+ *
+ *     addMinor(rate.price, rate.taxes)  // "1250" + "250" → "1500"
+ *
+ * Les valeurs absentes ou non numériques comptent pour zéro : une passerelle
+ * ou une extension qui omet un champ de taxe ne doit pas faire disparaître le
+ * prix de l'écran.
+ */
+export function addMinor(...amounts: Array<string | number | null | undefined>): string {
+  let total = 0;
+  for (const amount of amounts) {
+    const n = Number(amount);
+    if (Number.isFinite(n)) total += n;
+  }
+  return String(Math.round(total));
+}
+
 /** Formate une somme WC (ex: "1200" en minor units, 2) en "12,00 €". */
 export function formatMoney(amount: string, minorUnit: number, symbol = "€"): string {
   const n = Number(amount) / 10 ** minorUnit;
