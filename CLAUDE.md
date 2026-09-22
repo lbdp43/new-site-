@@ -232,6 +232,68 @@ L'origine est celle du site qui **affiche** les pages (Astro), pas celle qui
 sert l'API — donc le passage du WordPress sur `wp.labrasseriedesplantes.fr`
 ne demandera aucune retouche de cette liste.
 
+## 🔌 MCP WordPress — DEUX serveurs, un seul fonctionne
+
+⚠️ Ne pas confondre :
+
+| Serveur | État | Pourquoi |
+|---|---|---|
+| **`WordPress_com`** | ❌ inutilisable | Les 60 opérations renvoient « requires a paid Jetpack plan ». Le site est auto-hébergé chez IONOS, simplement rattaché via Jetpack. **Ne plus le retester** — le verrou est côté WordPress.com, ni la reconnexion ni la réautorisation n'y changent rien. |
+| **`mcp_wordpress`** | ✅ **fonctionne** | Connecté le 22/09/2026 via l'extension **Easy MCP AI** installée sur le WP. Accès administrateur complet : pages, articles, médias, plugins, réglages, utilisateurs, menus, révisions. |
+
+C'est `mcp_wordpress` qu'il faut utiliser pour toute lecture du WordPress.
+Il lève enfin la limite qui pesait sur le projet : le domaine est bloqué par
+le proxy réseau de l'environnement de dev, donc c'était jusqu'ici le seul
+moyen d'accéder au WP — et il ne marchait pas.
+
+## 🧩 Inventaire réel du WordPress (22/09/2026)
+
+**33 extensions actives**, relevées via `wp_list_plugins`. Ce que ça corrige
+et ce que ça révèle :
+
+### ❌ Trois erreurs de cette doc, corrigées
+
+1. **SEOPress, pas Yoast.** L'extension SEO est **SEOPress 10.2**. C'est ce
+   qui explique le format `/sitemaps.xml` du plan de site — Yoast produit
+   `sitemap_index.xml`. Toutes les mentions « sitemap Yoast » de ce fichier
+   étaient fausses.
+2. **Sendcloud, pas (seulement) EasyBee.** L'extension de livraison active
+   est **Sendcloud Shipping 1.0.33**. Aucune extension EasyBee n'est
+   installée. ⚠️ **À CLARIFIER AVEC GUILLAUME** avant de réécrire : EasyBee
+   existe peut-être hors WordPress (API, e-mail, logiciel métier). Cette doc
+   le mentionne 6 fois comme le transporteur notifié à la commande — c'est
+   peut-être Sendcloud qu'il faut lire.
+3. **Trois passerelles de paiement, pas deux.** En plus de WooPayments et
+   PayPal, **SumUp Payment Gateway 2.17.1** est actif. Il n'apparaît pas dans
+   les `payment_methods` de la Store API — donc probablement pas activé comme
+   moyen de paiement, ou incompatible Blocks. À vérifier.
+
+### ⚠️ Deux extensions qui touchent DIRECTEMENT le checkout Astro
+
+- **Checkout Field Editor for WooCommerce 2.2.0** — personnalise les champs
+  de la page de commande. Si des champs personnalisés **obligatoires** ont
+  été ajoutés, le checkout Astro ne les envoie pas : la commande peut être
+  refusée, ou partir sans une information dont l'équipe a besoin. **À
+  inspecter avant la bascule.**
+- **Age Gate 3.7.3** — vérification d'âge, obligatoire pour l'alcool.
+  ✅ Le site Astro a bien son propre `src/components/AgeGate.astro`
+  (18 ans, France). Rien de perdu à la bascule.
+
+### Autres extensions notables
+
+**Maintenance 4.32** (mode maintenance — actif en tant qu'extension, ce qui
+ne veut pas dire que le mode est enclenché), **WP Fastest Cache 1.5.2** (cf.
+risque de panier partagé ci-dessous), **GTM4WP** + **Google Site Kit**
+(analytics côté WP — à ne pas dupliquer avec le GA4 du site Astro),
+**Complianz** (bandeau cookies), **WP Mail SMTP** + **WP Mail Logging**
+(envoi et journal des e-mails), **WPvivid Backup**, **Akismet**,
+**WooCommerce Legacy REST API**, **Easy MCP AI** (qui fournit ce MCP),
+**Contact Form 7** + **Flamingo** + **WPForms Lite** (trois systèmes de
+formulaires en parallèle).
+
+ℹ️ E-mail d'administration du WP : `commande@labrasseriedesplantes.com`
+— noter le **`.com`**, pas `.fr`.
+
 ## 🚨 Cache WordPress — risque de panier partagé
 
 Deux plugins de cache tournaient en parallèle (vu le 21/09/2026) :
@@ -251,7 +313,7 @@ réponse (`x-cache`, `age`, `x-fastest-cache`) sur un appel à la Store API, et
 exclure `/wp-json/*` dans les réglages des deux plugins.
 
 Autres plugins repérés au passage : **WPvivid Backup** (le pré-requis backup
-est donc à portée de clic), Complianz (bandeau cookies), Yoast SEO, WPForms,
+est donc à portée de clic), Complianz (bandeau cookies), SEOPress, WPForms,
 Flamingo, Contact Form 7, Popup Maker, thème Flatsome.
 
 ## Commandes clés
@@ -416,7 +478,7 @@ remplacer le contenu de la colonne gauche.
 | `public/_redirects` + `public/_headers` | **Générés** depuis `vercel.json` au prebuild. Inertes sur Vercel (qui les ignore) — ils n'existent que pour le plan de repli Cloudflare. Ne jamais éditer à la main. |
 | `scripts/generate-cloudflare-config.mjs` | Traduit `vercel.json` → `_redirects` / `_headers` |
 | `scripts/verify-cloudflare-config.mjs` | **Filet de sécurité du plan 301**, indépendant de l'hébergeur. Trois contrôles, qui **font échouer le build** : (1) les redirections de `vercel.json` sont fidèlement traduites, testées sur 156 URL avec ET sans slash final ; (2) 23 pages vivantes ne sont capturées par aucune règle ; (3) **aucune URL réellement publiée par le WordPress ne tombe en 404** — lues dans `docs/wordpress-urls.txt`. |
-| `docs/wordpress-urls.txt` | **Jeu de test, pas de la doc.** Les URL réelles du WordPress live, relevées depuis son sitemap Yoast. Le domaine étant injoignable depuis l'environnement de dev (proxy) et le MCP WordPress verrouillé, elles sont **copiées à la main par Guillaume**. ⚠️ Incomplet : il manque encore les articles, catégories et étiquettes du blog WP. |
+| `docs/wordpress-urls.txt` | **Jeu de test, pas de la doc.** Les URL réelles du WordPress live, relevées depuis son sitemap SEOPress. Le domaine étant injoignable depuis l'environnement de dev (proxy) et le MCP WordPress verrouillé, elles sont **copiées à la main par Guillaume**. ⚠️ Incomplet : il manque encore les articles, catégories et étiquettes du blog WP. |
 | `docs/cloudflare-pages.md` | Plan de repli Cloudflare Pages en 5 étapes (migration envisagée puis écartée le 21/09/2026) |
 | `wordpress-plugin/astro-cors/astro-cors.php` | Plugin WP pour autoriser CORS depuis Astro |
 | `blog-audit-report.md` | Audit qualité 28 articles blog FR (2026-04-27) — scoring 100 pts, action queue priorisée |
@@ -744,7 +806,7 @@ Jusqu'au 21/09/2026, les 44 redirections de `vercel.json` avaient été écrites
 par le proxy réseau de l'environnement de dev (en `www.` comme en apex, en
 curl comme en fetch), et le MCP WordPress est verrouillé faute de plan Jetpack.
 
-Guillaume a relevé le sitemap Yoast (`/sitemaps.xml`, **pas** `wp-sitemap.xml`
+Guillaume a relevé le sitemap SEOPress (`/sitemaps.xml`, **pas** `wp-sitemap.xml`
 — le format natif n'existe pas sur ce site) et collé les URL. Résultat sur les
 31 premières : **30 couvertes, 1 trou**.
 

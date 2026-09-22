@@ -142,6 +142,17 @@ permettraient de basculer en quelques heures.
 
       Cadrage complet, état d'avancement et informations à relever :
       **`docs/paypal-checkout.md`**.
+- [ ] 🔴 **Inspecter les champs personnalisés du checkout WooCommerce** —
+      l'extension **Checkout Field Editor for WooCommerce** est active sur le
+      WP (relevé le 22/09/2026). Elle permet d'ajouter, modifier ou rendre
+      obligatoires des champs sur la page de commande.
+
+      Si des champs **obligatoires** ont été ajoutés, le checkout Astro ne les
+      envoie pas — la commande peut être refusée par WooCommerce, ou partir
+      sans une information dont l'équipe a besoin pour préparer le colis.
+
+      À vérifier dans WooCommerce → Checkout Form → liste des champs, et à
+      reporter dans `CheckoutPage.tsx` si nécessaire.
 - [ ] **Produit `coffret-original` créé côté Woo** (actuellement manquant, le
       bouton affiche "bientôt disponible").
 - [ ] **Site soumis à Google Search Console + Bing Webmaster Tools** avec le
@@ -311,7 +322,7 @@ SEO et pour éviter les oublis.
 - [ ] **Google Search Console — Sitemaps**
   1. Ouvrir la propriété domaine `labrasseriedesplantes.fr` dans GSC.
   2. Section *Sitemaps* → supprimer l'ancien `sitemap_index.xml` (format
-     Yoast WordPress, plus valide).
+     SEOPress WordPress, plus valide).
   3. Ajouter le nouveau : `sitemap-index.xml` (⚠️ **tiret**, pas underscore —
      c'est le format que génère Astro automatiquement).
   4. Vérifier l'état `Opération effectuée` + attendre 24-48h que Google
