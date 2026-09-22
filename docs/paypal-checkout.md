@@ -494,6 +494,34 @@ const c = await fetch('https://www.labrasseriedesplantes.fr/wp-json/wc/store/v1/
 console.log('Store API checkout →', c.status, await c.text());
 ```
 
+### ✅ Résultat — 22/09/2026
+
+```
+Commande PayPal : 8L3502990F093683F
+Store API checkout → 200
+{ "order_id": 26516, "status": "pending",
+  "order_key": "wc_order_Dlz04Fkm8nwMn",
+  "payment_method": "ppcp",
+  "payment_result": { "payment_status": "success",
+    "redirect_url": "https://www.paypal.com/checkoutnow?token=8L3502990F093683F" } }
+```
+
+**Chemin B validé.** La Store API accepte `ppcp`, lit `ppcp_paypal_order_id`,
+crée la commande WooCommerce et renvoie l'URL d'approbation PayPal.
+
+C'est l'issue souhaitée : **le même endpoint que la carte finalise**, et lui
+seul renvoie `order_id` + `order_key`, dont la page de confirmation Astro a
+besoin.
+
+⚠️ Une vraie commande **#26516** a été créée (en attente de paiement, rien de
+débité). À supprimer depuis WooCommerce → Commandes.
+
+ℹ️ La réponse contient un `redirect_url` vers PayPal : c'est le **flux par
+redirection**, celui du checkout WordPress. Le front Astro utilise le **flux
+par fenêtre** (SDK JS), où le client approuve *avant* la finalisation — la
+commande est alors capturée directement et on garde la main sur la
+redirection finale vers `/commande/confirmation`.
+
 ### Comment lire le refus
 
 | Réponse | Lecture |
@@ -605,6 +633,29 @@ Dans les deux cas, l'intégration s'écrit ensuite sans rien deviner.
 
 ---
 
+## 🚀 Activer et tester
+
+Le site étant **statique**, les variables `PUBLIC_*` sont figées au moment du
+build : les poser ne suffit pas, **il faut redéployer**.
+
+1. Vercel → projet `new-site` → Settings → Environment Variables. Ajouter sur
+   **Production et Preview** :
+   - `PUBLIC_PPCP_ENABLED` = `true`
+   - `PUBLIC_PAYPAL_CLIENT_ID` = le `client-id` relevé plus haut
+2. Redéployer (Deployments → dernier déploiement → Redeploy).
+3. Sur `test.labrasseriedesplantes.fr`, mettre l'article le moins cher au
+   panier, aller sur `/commande`, choisir **PayPal**, payer pour de vrai.
+4. Vérifier côté WooCommerce : commande en « En cours », e-mail parti, stock
+   décrémenté, EasyBeer synchronisé — exactement comme une commande carte.
+5. **Rembourser** depuis l'admin WooCommerce.
+
+✅ **Aucun risque pour les clients** : `test.labrasseriedesplantes.fr` est le
+déploiement de production de ce projet Vercel, mais la **boutique publique
+reste le WordPress sur `www.`**. Les clients ne voient rien de tout ça tant
+que la bascule DNS n'a pas eu lieu.
+
+---
+
 ## Ce qui est déjà fait côté Astro (22/09/2026)
 
 Le travail qui ne dépendait d'aucune des trois inconnues a été livré :
@@ -665,7 +716,12 @@ constat de Guillaume. Il ne change pas la décision : PayPal reste bloquant.
 - [x] **Pont de session** écrit dans `astro-cors` 1.3.0
 - [x] **`astro-cors` 1.3.0 installé** sur le WordPress live
 - [x] **Pont vérifié** — `cart/order` renvoie un ID depuis Astro, sans cookie ni nonce
-- [ ] **Trancher A ou B** — quelle route finalise après approbation *(sonde gratuite, cf. ci-dessous)*
+- [x] **Chemin B tranché** — `/wc/store/v1/checkout` finalise (commande #26516 créée)
+- [x] **Tunnel écrit** — SDK, boutons, création, finalisation, annulation, erreurs
+- [x] **CSP** — `*.paypal.com` / `*.paypalobjects.com` autorisés dans `vercel.json`
+- [ ] **Poser les 2 variables sur Vercel + redéployer** *(Guillaume)*
+- [ ] **Paiement réel de bout en bout** sur `test.` puis remboursement *(Guillaume)*
+- [ ] Supprimer la commande **#26516**, résidu de la sonde *(Guillaume)*
 - [ ] Reproduire **PayPal Pay Later** côté Astro (`enable-funding=paylater`)
 - [ ] Flux de création / approbation PayPal
 - [ ] Gestion des annulations et des échecs
