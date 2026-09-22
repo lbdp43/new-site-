@@ -385,13 +385,35 @@ Le premier test qui réunit **tous** les critères, et pour la bonne raison :
 site Astro, la commande porte le bon montant, le bon mode de livraison, et
 WooCommerce fait le reste (e-mails, stock, TVA).
 
-⚠️ **Ce qui n'est PAS validé pour autant** : le **tunnel carte
-(WooPayments)** n'a pas été rejoué depuis qu'il a reçu la même protection de
-montant. C'est le moyen de paiement majoritaire — à tester avant la bascule.
-
 ✅ **EasyBeer a bien reçu la commande** (confirmé par Guillaume le
 22/09/2026). Les commandes de test ont été remboursées et la fantôme #26534
 supprimée.
+
+### ✅ Le tunnel CARTE aussi — commande #26537, 22/09/2026
+
+Rejoué après la protection de montant de la PR #39 :
+
+| Critère | Valeur |
+|---|---|
+| Statut | **processing** |
+| `payment_method` | **`woocommerce_payments`** (« Carte ») |
+| `transaction_id` | **`pi_3UIUGaFkUaBLmhte1VIXFc9V`** |
+| `_intention_status` | **succeeded** |
+| `_charge_id` | `ch_3UIUGaFkUaBLmhte1V8zNg2E` |
+| `_wcpay_mode` | **prod** (vrai paiement) |
+| **Total** | **16,00 €** — le montant affiché |
+| **Livraison** | **« Retrait à la Brasserie », 0,00 €** |
+| Frais | 0,49 € (net 15,51 €) |
+
+**Les 28 s entre `date_created` et `date_paid` sont la signature du 3D
+Secure** : la commande est créée, le client valide la SCA, puis WooPayments
+confirme. Le tunnel SCA documenté plus haut fonctionne donc toujours.
+
+🔒 **La vérification de montant ne s'est pas déclenchée à tort** sur un
+paiement légitime — c'était le risque de faux positif de ce nouveau contrôle.
+
+**Les deux moyens de paiement du checkout Astro sont désormais validés de
+bout en bout, avec un vrai paiement chacun.**
 
 ### 💶 Remboursements : deux pièges, dans les deux sens
 
@@ -1941,18 +1963,17 @@ qui précède cette suppression.
    (le choix du client a tenu), les deux e-mails partis, page de confirmation
    affichée. Le tunnel headless est opérationnel.
 
-   ⛔ **Commandes de test à traiter** :
-   - **#26535** — vrai paiement de 16 €, **à rembourser via PayPal**
-   - **#26530** — remboursée en **manuel**, donc les 16 € sont **toujours
-     chez PayPal** (transaction `3PU60583A60848358`). À rembourser pour de
-     bon depuis le compte marchand.
-   - **#26534** — fantôme à 31 €, jamais payée, à supprimer
+   ✅ **Et le tunnel CARTE** — commande **#26537** : processing,
+   `payment_method: woocommerce_payments`,
+   `transaction_id: pi_3UIUGaFkUaBLmhte1VIXFc9V`, `_intention_status:
+   succeeded`, **16,00 €**, **« Retrait à la Brasserie » 0,00 €**, 3D Secure
+   passé. **Les deux moyens de paiement sont validés.**
 
-   ⛔ **Vérifier qu'EasyBeer a reçu #26535.**
+   ✅ **EasyBeer a reçu la commande**, les commandes de test sont remboursées
+   et la fantôme #26534 est supprimée.
 
-   ⛔ **Reste à faire côté carte** : le test de bout en bout avec
-   **WooPayments**, jamais rejoué — et qui vient justement de recevoir la
-   vérification de montant.
+   ⛔ **Reste** : rembourser **#26537** (vrai paiement carte de 16 €, frais
+   0,49 €) — via **WooPayments**, pas en manuel.
 
    ℹ️ 22/09/2026 : le plugin PayPal expose un **mode sandbox** (réglages API,
    liste « Environnement »). Il permettrait de tester sans argent réel — mais
