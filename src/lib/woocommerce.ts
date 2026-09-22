@@ -52,6 +52,26 @@ export interface WcStoreError {
 }
 
 /** Requête vers n'importe quelle route `/wp-json/…` du WordPress. */
+/**
+ * Erreur HTTP qui conserve le **code** et le **corps** de la réponse.
+ *
+ * Un simple `Error` perdait les deux, alors que certaines réponses d'erreur
+ * portent l'information décisive — typiquement le 409 de `pay-order`, dont le
+ * corps dit dans quel état la commande se trouve réellement. Le message reste
+ * celui destiné au client ; `status` et `data` ne servent qu'au code appelant.
+ */
+export class WcHttpError extends Error {
+  readonly status: number;
+  readonly data: unknown;
+
+  constructor(message: string, status: number, data: unknown) {
+    super(message);
+    this.name = "WcHttpError";
+    this.status = status;
+    this.data = data;
+  }
+}
+
 async function requestWpJson<T>(path: string, init: RequestInit = {}): Promise<T> {
   if (!WP_JSON) {
     throw new Error(
@@ -98,14 +118,18 @@ async function requestWpJson<T>(path: string, init: RequestInit = {}): Promise<T
   if (!res.ok) {
     const err = body as WcStoreError | null;
     if (err?.message) {
-      throw new Error(err.message);
+      throw new WcHttpError(err.message, res.status, body);
     }
     // Pas de JSON parsable — log la réponse brute pour diagnostic + message lisible.
     if (rawText) {
       console.error(`[WC] ${res.status} ${path} — body brut :`, rawText.slice(0, 500));
     }
     const ctx = res.status >= 500 ? "Erreur serveur de paiement" : "Erreur de paiement";
-    throw new Error(`${ctx} (HTTP ${res.status}). Réessaie ou contacte-nous si ça persiste.`);
+    throw new WcHttpError(
+      `${ctx} (HTTP ${res.status}). Réessaie ou contacte-nous si ça persiste.`,
+      res.status,
+      body,
+    );
   }
 
   return body as T;
@@ -288,6 +312,28 @@ function orderPayUrl(orderId: string, orderKey: string): string {
   );
 }
 
+/**
+ * Statuts WooCommerce d'une commande dont l'argent est encaissé.
+ *
+ * `processing` est celui d'une commande payée en attente de préparation —
+ * c'est l'état d'arrivée normal (relevé sur #26530). `completed` et `on-hold`
+ * sont payés aussi. Tout le reste (`pending`, `failed`, `cancelled`,
+ * `refunded`) ne l'est pas, et `refunded` ne doit surtout pas compter comme
+ * un paiement en cours.
+ */
+export const PAID_ORDER_STATUSES = ["processing", "completed", "on-hold"];
+
+/**
+ * Extrait le statut de commande que WordPress glisse dans le corps d'une
+ * réponse d'erreur (`data.order_status`), ou null s'il n'y est pas.
+ */
+function errorOrderStatus(err: unknown): string | null {
+  if (!(err instanceof WcHttpError)) return null;
+  const data = err.data as { data?: { order_status?: unknown } } | null;
+  const status = data?.data?.order_status;
+  return typeof status === "string" && status ? status : null;
+}
+
 export const wc = {
   async listProducts(params: { per_page?: number; search?: string } = {}): Promise<WcProduct[]> {
     const q = new URLSearchParams();
@@ -395,7 +441,12 @@ export const wc = {
     billing: WcAddress;
     shipping: WcAddress;
     customerNote?: string;
-  }): Promise<{ orderId: string; orderKey: string; payUrl: string }> {
+  }): Promise<{
+    orderId: string;
+    orderKey: string;
+    status: string | null;
+    payUrl: string;
+  }> {
     const result = await this.checkout({
       billing_address: args.billing,
       shipping_address: args.shipping,
@@ -415,7 +466,12 @@ export const wc = {
       );
     }
 
-    return { orderId, orderKey, payUrl: orderPayUrl(orderId, orderKey) };
+    return {
+      orderId,
+      orderKey,
+      status: result.status ?? null,
+      payUrl: orderPayUrl(orderId, orderKey),
+    };
   },
 
   /**
@@ -443,14 +499,33 @@ export const wc = {
     orderKey: string;
     paypalOrderId: string;
   }): Promise<{ status: string | null; transactionId: string; isPaid: boolean }> {
-    const raw = await requestWpJson<unknown>("/lbdp-astro/v1/pay-order", {
-      method: "POST",
-      body: JSON.stringify({
-        order_id: args.orderId,
-        order_key: args.orderKey,
-        ppcp_paypal_order_id: args.paypalOrderId,
-      }),
-    });
+    let raw: unknown;
+    try {
+      raw = await requestWpJson<unknown>("/lbdp-astro/v1/pay-order", {
+        method: "POST",
+        body: JSON.stringify({
+          order_id: args.orderId,
+          order_key: args.orderKey,
+          ppcp_paypal_order_id: args.paypalOrderId,
+        }),
+      });
+    } catch (err) {
+      // 409 = la commande n'attend plus de paiement. C'est le refus volontaire
+      // du garde-fou anti-double-encaissement, et sur ce tunnel c'est le cas
+      // NORMAL : `/wc/store/v1/checkout` encaisse déjà quand la commande
+      // PayPal approuvée est dans la session. Refuser deux fois est correct ;
+      // présenter ça au client comme un échec ne l'est pas — il a payé.
+      const status = errorOrderStatus(err);
+      if (err instanceof WcHttpError && err.status === 409 && status) {
+        return {
+          status,
+          // Le 409 ne renvoie pas le transaction_id : on ne l'invente pas.
+          transactionId: "",
+          isPaid: PAID_ORDER_STATUSES.includes(status),
+        };
+      }
+      throw err;
+    }
 
     const res = (raw ?? {}) as {
       status?: string | null;

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cartActions, setCart } from "../../lib/cart-store";
-import { wc, type WcAddress } from "../../lib/woocommerce";
+import { wc, PAID_ORDER_STATUSES, type WcAddress } from "../../lib/woocommerce";
 import { loadPayPalSdk } from "../../lib/paypal";
 
 interface Props {
@@ -40,13 +40,14 @@ function missingFields(billing: WcAddress, shipping: WcAddress): string[] {
  *   1. `wc.createPaypalOrder()` → commande PayPal (rien n'est débité :
  *      avec `intent=capture`, l'argent ne bouge qu'à l'encaissement) ;
  *   2. le client approuve dans la fenêtre PayPal ;
- *   3. `POST /wc/store/v1/checkout` → **la commande WooCommerce est créée**,
- *      en attente, toujours sans le moindre mouvement d'argent ;
- *   4. `wc.payExistingOrder()` → le plugin `astro-cors` appelle
- *      `process_payment()` sur la passerelle, **côté serveur** : c'est là, et
- *      seulement là, que l'argent est encaissé ;
- *   5. on relit le statut réel de la commande avant d'afficher quoi que ce
- *      soit au client.
+ *   3. `POST /wc/store/v1/checkout` → **la commande WooCommerce est créée**.
+ *      La commande PayPal approuvée étant dans la session, la passerelle
+ *      encaisse ici même et renvoie `processing` (relevé sur #26530) ;
+ *   4. `wc.payExistingOrder()` → **filet**, appelé seulement si l'étape 3 a
+ *      laissé la commande en attente. Le plugin `astro-cors` appelle alors
+ *      `process_payment()` côté serveur ;
+ *   5. on n'affiche la confirmation que sur un statut de commande payé, lu
+ *      chez WooCommerce.
  *
  * 🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Ainsi tout débit
  * est nécessairement rattaché à une commande : visible en back-office et
@@ -169,17 +170,26 @@ export default function PayPalCheckoutButton({
               });
               created = { orderId: order.orderId, orderKey: order.orderKey };
 
-              // 2) L'encaissement ensuite, côté serveur.
-              const paid = await wc.payExistingOrder({
-                orderId: order.orderId,
-                orderKey: order.orderKey,
-                paypalOrderId: data.orderID,
-              });
+              // 2) L'encaissement — **sauf si la commande est déjà payée**.
+              //    Relevé sur #26530 : quand la commande PayPal approuvée est
+              //    dans la session, `/wc/store/v1/checkout` encaisse lui-même
+              //    et renvoie `processing`. Rappeler `pay-order` ne ferait que
+              //    se heurter au verrou anti-double-encaissement (409).
+              const alreadyPaid =
+                order.status != null && PAID_ORDER_STATUSES.includes(order.status);
 
-              // 3) On ne croit que la commande relue en base : `is_paid` et un
-              //    `transaction_id` non vide. Un « success » de passerelle a
-              //    déjà menti (#26518).
-              if (!paid.isPaid || !paid.transactionId) {
+              const paid = alreadyPaid
+                ? { isPaid: true, status: order.status, transactionId: "" }
+                : await wc.payExistingOrder({
+                    orderId: order.orderId,
+                    orderKey: order.orderKey,
+                    paypalOrderId: data.orderID,
+                  });
+
+              // 3) On ne croit que l'état réel de la commande. Un « success »
+              //    de passerelle a déjà menti (#26518) — mais un statut payé,
+              //    lui, vient de WooCommerce et fait foi.
+              if (!paid.isPaid) {
                 console.error("[PayPal] encaissement non confirmé", {
                   order: order.orderId,
                   ...paid,
