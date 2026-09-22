@@ -2,7 +2,7 @@
 /**
  * Plugin Name: LBDP Astro CORS
  * Description: Autorise le site Astro (www. + apex + test.labrasseriedesplantes.fr + localhost:4321) à dialoguer avec la WooCommerce Store API depuis un navigateur. Expose aussi les headers Cart-Token / Nonce nécessaires au panier, et fait le pont de session pour les routes PayPal (wc-ppcp).
- * Version:     1.3.0
+ * Version:     1.4.0
  * Author:      La Brasserie des Plantes
  *
  * =====================================================================
@@ -13,6 +13,17 @@
  *  Pour retirer le CORS : désactive simplement le plugin.
  *
  *  CHANGELOG
+ *  1.4.0 — ROUTE D'ENCAISSEMENT `lbdp-astro/v1/pay-order`.
+ *          Suite de l'incident du 22/09/2026 : `/wc-ppcp/v1/cart/checkout`
+ *          encaisse SANS créer de commande (deux débits de 16 € sans aucune
+ *          trace en boutique), et `/wc/store/v1/checkout` crée la commande
+ *          sans jamais encaisser. Cette route recolle les deux moitiés dans
+ *          le bon ordre : le front crée d'abord la commande en attente, puis
+ *          appelle ceci pour l'encaisser via `process_payment()` — la même
+ *          méthode publique que WooCommerce appelle sur sa propre page.
+ *          Autorisation par `order_key`, comme la page de paiement invité.
+ *          Refuse toute commande qui n'est pas en attente de paiement.
+ *          ⚠️ ÉCRIT SANS POUVOIR ÊTRE TESTÉ — installer en surveillant.
  *  1.3.0 — PONT DE SESSION POUR PAYPAL (wc-ppcp).
  *          Diagnostic du 22/09/2026 : un appel à
  *          POST /wp-json/wc-ppcp/v1/cart/order avec un `Cart-Token` valide
@@ -228,3 +239,126 @@ add_action( 'rest_api_init', function () {
     }
     wc_load_cart();
 }, 5 );
+
+/* =====================================================================
+ *  ENCAISSEMENT D'UNE COMMANDE EXISTANTE (route maison)
+ * =====================================================================
+ *
+ *  POST /wp-json/lbdp-astro/v1/pay-order
+ *  { order_id, order_key, ppcp_paypal_order_id }
+ *
+ *  POURQUOI CETTE ROUTE EXISTE — incident du 22/09/2026.
+ *
+ *  Appelée depuis le front Astro, la route `/wc-ppcp/v1/cart/checkout` de
+ *  l'extension PayPal ENCAISSE réellement l'argent puis renvoie vers sa page
+ *  de relecture SANS CRÉER LA MOINDRE COMMANDE WooCommerce. Deux paiements de
+ *  16 € ont été débités sans qu'aucune commande n'existe côté boutique.
+ *  `/wc-ppcp/v1/order/pay` répond 200 avec un corps vide et ne fait rien.
+ *
+ *  Inversement, `POST /wc/store/v1/checkout` crée la commande de façon fiable
+ *  mais ne déclenche jamais l'encaissement PayPal.
+ *
+ *  Cette route recolle les deux moitiés, dans le bon ordre :
+ *  le front crée d'abord la commande (en attente, aucun argent en jeu), puis
+ *  appelle ceci pour l'encaisser. C'est exactement ce que fait WooCommerce sur
+ *  sa propre page de paiement — on appelle la MÊME méthode publique de la
+ *  passerelle, `process_payment()`, avec le même champ `$_POST`.
+ *
+ *  🔒 GARANTIE DE SÛRETÉ : la commande existe AVANT tout encaissement. Un
+ *  débit sans commande est donc impossible, et tout débit reste visible en
+ *  back-office et remboursable depuis WooCommerce. C'est la propriété que
+ *  l'incident avait fait perdre.
+ *
+ *  AUTHENTIFICATION : `order_key`, le secret que WooCommerce utilise déjà
+ *  lui-même pour autoriser le paiement d'une commande d'invité
+ *  (/checkout/order-pay/{id}/?key=…). On n'invente pas un mécanisme.
+ *
+ *  ⚠️ ÉCRIT SANS POUVOIR ÊTRE TESTÉ (l'environnement de dev ne joint pas le
+ *  WordPress). Les refus sont donc volontairement nombreux et explicites :
+ *  en cas de doute la route ne fait RIEN et le dit, plutôt que de tenter un
+ *  encaissement approximatif.
+ */
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'lbdp-astro/v1', '/pay-order', [
+        'methods'             => 'POST',
+        'permission_callback' => '__return_true', // l'order_key fait l'autorisation
+        'callback'            => 'lbdp_astro_pay_order',
+        'args'                => [
+            'order_id'  => [ 'required' => true ],
+            'order_key' => [ 'required' => true ],
+        ],
+    ] );
+} );
+
+function lbdp_astro_pay_order( WP_REST_Request $request ) {
+    if ( ! function_exists( 'wc_get_order' ) || ! function_exists( 'WC' ) ) {
+        return new WP_Error( 'lbdp_no_woo', 'WooCommerce n\'est pas actif.', [ 'status' => 500 ] );
+    }
+
+    $order_id  = absint( $request->get_param( 'order_id' ) );
+    $order_key = (string) $request->get_param( 'order_key' );
+    $order     = $order_id ? wc_get_order( $order_id ) : false;
+
+    if ( ! $order ) {
+        return new WP_Error( 'lbdp_no_order', 'Commande introuvable.', [ 'status' => 404 ] );
+    }
+
+    // Même contrôle que la page de paiement WooCommerce pour un invité.
+    if ( ! hash_equals( (string) $order->get_order_key(), $order_key ) ) {
+        return new WP_Error( 'lbdp_bad_key', 'Clé de commande invalide.', [ 'status' => 403 ] );
+    }
+
+    // Verrou anti-double-encaissement : une commande déjà payée n'est jamais
+    // repassée à la caisse, quoi que demande l'appelant.
+    if ( ! $order->needs_payment() ) {
+        return new WP_Error(
+            'lbdp_already_paid',
+            'Cette commande n\'est pas en attente de paiement.',
+            [ 'status' => 409, 'order_status' => $order->get_status() ]
+        );
+    }
+
+    $gateway_id = $order->get_payment_method();
+    $gateways   = WC()->payment_gateways() ? WC()->payment_gateways()->payment_gateways() : [];
+
+    if ( empty( $gateways[ $gateway_id ] ) ) {
+        return new WP_Error(
+            'lbdp_no_gateway',
+            sprintf( 'La passerelle « %s » n\'est pas disponible.', $gateway_id ),
+            [ 'status' => 400 ]
+        );
+    }
+
+    // La passerelle lit ses champs dans $_POST, comme sur le formulaire de
+    // commande classique. `ppcp_paypal_order_id` est le nom réellement
+    // employé par l'extension : relevé dans le formulaire WordPress, et seul
+    // des trois candidats testés que `cart/checkout` ait accepté.
+    foreach ( [ 'ppcp_paypal_order_id', 'paypal_order_id', 'paypal_order' ] as $field ) {
+        $value = $request->get_param( $field );
+        if ( is_string( $value ) && $value !== '' ) {
+            $_POST[ $field ]    = $value;
+            $_REQUEST[ $field ] = $value;
+        }
+    }
+    $_POST['payment_method']    = $gateway_id;
+    $_REQUEST['payment_method'] = $gateway_id;
+
+    try {
+        $result = $gateways[ $gateway_id ]->process_payment( $order_id );
+    } catch ( Exception $e ) {
+        return new WP_Error( 'lbdp_gateway_exception', $e->getMessage(), [ 'status' => 502 ] );
+    }
+
+    // On relit la commande depuis la base : c'est elle qui fait foi, pas ce
+    // que la passerelle prétend avoir fait.
+    $fresh = wc_get_order( $order_id );
+
+    return rest_ensure_response( [
+        'gateway_result' => is_array( $result ) ? $result : null,
+        'order_id'       => $order_id,
+        'order_key'      => $order->get_order_key(),
+        'status'         => $fresh ? $fresh->get_status() : null,
+        'transaction_id' => $fresh ? $fresh->get_transaction_id() : '',
+        'is_paid'        => $fresh ? ! $fresh->needs_payment() : false,
+    ] );
+}

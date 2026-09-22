@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
-import { cartActions } from "../../lib/cart-store";
+import { useEffect, useRef, useState } from "react";
+import { cartActions, setCart } from "../../lib/cart-store";
 import { wc, type WcAddress } from "../../lib/woocommerce";
+import { loadPayPalSdk } from "../../lib/paypal";
 
 interface Props {
   billing: WcAddress;
@@ -29,30 +30,34 @@ function missingFields(billing: WcAddress, shipping: WcAddress): string[] {
 }
 
 /**
- * Bouton PayPal du checkout — **le front ne parle jamais à PayPal.**
+ * Bouton PayPal du checkout — le client ne quitte jamais le site Astro.
  *
- * Déroulé :
+ * Déroulé, et **l'ordre compte plus que tout le reste** :
  *
- *   1. clic → `wc.startPaypalOrderPayment()` crée la commande WooCommerce
- *      **en attente** via la Store API, et renvoie l'adresse de sa page de
- *      paiement WordPress ;
- *   2. on y redirige le client. Approbation PayPal, encaissement, e-mails,
- *      stock et EasyBeer : tout se fait côté WooCommerce, sur la page que le
- *      WordPress sert déjà à ses vrais clients aujourd'hui.
+ *   1. `wc.createPaypalOrder()` → commande PayPal (rien n'est débité :
+ *      avec `intent=capture`, l'argent ne bouge qu'à l'encaissement) ;
+ *   2. le client approuve dans la fenêtre PayPal ;
+ *   3. `POST /wc/store/v1/checkout` → **la commande WooCommerce est créée**,
+ *      en attente, toujours sans le moindre mouvement d'argent ;
+ *   4. `wc.payExistingOrder()` → le plugin `astro-cors` appelle
+ *      `process_payment()` sur la passerelle, **côté serveur** : c'est là, et
+ *      seulement là, que l'argent est encaissé ;
+ *   5. on relit le statut réel de la commande avant d'afficher quoi que ce
+ *      soit au client.
  *
- * 🔒 **Pourquoi ce détour.** Le 22/09/2026, le tunnel entièrement headless a
- * débité deux fois 16 € **sans qu'aucune commande n'existe** : appelée depuis
- * Astro, la route `cart/checkout` de l'extension encaisse puis renvoie vers
- * sa page de relecture sans rien créer. Le garde-fou du front n'y pouvait
- * rien : il juge la réponse, donc après l'encaissement.
+ * 🔒 **Pourquoi la commande est créée AVANT l'encaissement.** Le 22/09/2026,
+ * le tunnel qui encaissait d'abord a débité deux fois 16 € sans qu'aucune
+ * commande n'existe — donc sans e-mail, sans préparation, sans trace. Ici,
+ * tout débit est nécessairement rattaché à une commande : visible en
+ * back-office et remboursable depuis WooCommerce.
  *
- * Ici la commande existe **avant** toute page de paiement, et ce composant
- * n'a aucun moyen technique de déclencher un débit. Un encaissement sans
- * commande n'est donc pas « improbable » : il est impossible.
+ * ⚠️ **Ne jamais inverser les étapes 3 et 4**, et ne jamais revenir à
+ * `/wc-ppcp/v1/cart/checkout` : cette route encaisse sans créer de commande.
+ * C'est la cause exacte de l'incident.
  *
- * ⚠️ Ne pas « moderniser » en réintroduisant le SDK PayPal et une
- * finalisation en JavaScript. C'est exactement ce qui a échoué, deux fois.
- * Le prix à payer est une page WordPress en fin de tunnel — c'est voulu.
+ * ⚠️ **Les callbacks PayPal sont figés au rendu des boutons** : les valeurs du
+ * formulaire passent donc par une `ref`. Ne pas « simplifier » en lisant les
+ * props directement — l'adresse envoyée serait celle d'avant la saisie.
  */
 export default function PayPalCheckoutButton({
   billing,
@@ -61,80 +66,175 @@ export default function PayPalCheckoutButton({
   onError,
   onBusyChange,
 }: Props) {
-  const [busy, setBusy] = useState(false);
-  // Empêche un double-clic de créer deux commandes : la redirection n'est pas
-  // instantanée, et le bouton reste à l'écran pendant ce temps.
-  const startedRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [status, setStatus] = useState<"loading" | "ready" | "failed">("loading");
 
-  async function handleClick() {
-    if (startedRef.current) return;
+  const latest = useRef({ billing, shipping, customerNote });
+  useEffect(() => {
+    latest.current = { billing, shipping, customerNote };
+  }, [billing, shipping, customerNote]);
 
-    onError(null);
+  useEffect(() => {
+    let cancelled = false;
+    let instance: { close?: () => void } | null = null;
 
-    const missing = missingFields(billing, shipping);
-    if (missing.length > 0) {
-      onError(`Complète ${missing.join(", ")} avant de payer avec PayPal.`);
-      return;
-    }
+    loadPayPalSdk()
+      .then((paypal) => {
+        if (cancelled || !containerRef.current) return;
 
-    startedRef.current = true;
-    setBusy(true);
-    onBusyChange(true);
+        const buttons = paypal.Buttons({
+          style: { layout: "vertical", color: "gold", shape: "pill", label: "paypal" },
 
-    try {
-      // WooCommerce lit l'adresse dans la session : on la resynchronise avant
-      // de créer la commande, le checkout ne la poussant que sur changement
-      // de code postal, ville ou pays.
-      await cartActions.updateCustomer({
-        billing_address: billing,
-        shipping_address: shipping,
+          createOrder: async () => {
+            onError(null);
+            const { billing: b, shipping: s } = latest.current;
+
+            const missing = missingFields(b, s);
+            if (missing.length > 0) {
+              const msg = `Complète ${missing.join(", ")} avant de payer avec PayPal.`;
+              onError(msg);
+              throw new Error(msg);
+            }
+
+            onBusyChange(true);
+            try {
+              // L'extension lit l'adresse dans la session WooCommerce, que le
+              // checkout ne pousse que sur changement de code postal, ville ou
+              // pays. On resynchronise avant d'ouvrir la fenêtre PayPal.
+              await cartActions.updateCustomer({
+                billing_address: b,
+                shipping_address: s,
+              });
+              return await wc.createPaypalOrder();
+            } catch (err) {
+              onError(err instanceof Error ? err.message : "Erreur PayPal.");
+              throw err;
+            } finally {
+              onBusyChange(false);
+            }
+          },
+
+          onApprove: async (data) => {
+            onBusyChange(true);
+            onError(null);
+
+            let created: { orderId: string; orderKey: string } | null = null;
+
+            try {
+              const { billing: b, shipping: s, customerNote: note } = latest.current;
+
+              // 1) La commande d'abord. Aucun argent en jeu à cette étape.
+              const order = await wc.startPaypalOrderPayment({
+                billing: b,
+                shipping: s,
+                customerNote: note,
+              });
+              created = { orderId: order.orderId, orderKey: order.orderKey };
+
+              // 2) L'encaissement ensuite, côté serveur.
+              const paid = await wc.payExistingOrder({
+                orderId: order.orderId,
+                orderKey: order.orderKey,
+                paypalOrderId: data.orderID,
+              });
+
+              // 3) On ne croit que la commande relue en base : `is_paid` et un
+              //    `transaction_id` non vide. Un « success » de passerelle a
+              //    déjà menti (#26518).
+              if (!paid.isPaid || !paid.transactionId) {
+                console.error("[PayPal] encaissement non confirmé", {
+                  order: order.orderId,
+                  ...paid,
+                });
+                onError(
+                  `Ta commande n° ${order.orderId} a bien été enregistrée, mais le paiement n'a pas pu être confirmé. ` +
+                    "Termine-le depuis le lien ci-dessous, ou contacte-nous en indiquant ce numéro — " +
+                    "rien ne sera débité deux fois.",
+                );
+                // On expose la page de paiement WooCommerce comme issue de
+                // secours plutôt que de laisser le client sans recours.
+                window.setTimeout(() => {
+                  window.location.href = order.payUrl;
+                }, 6000);
+                return;
+              }
+
+              setCart(null);
+              wc.clearSession();
+              window.location.href = `/commande/confirmation?order=${order.orderId}&key=${encodeURIComponent(
+                order.orderKey,
+              )}`;
+            } catch (err) {
+              const base =
+                err instanceof Error
+                  ? err.message
+                  : "Erreur lors de la finalisation de la commande.";
+              // Si la commande a été créée avant l'échec, son numéro est la
+              // seule information qui permette de retrouver un éventuel débit.
+              onError(
+                created
+                  ? `${base} (Ta commande porte le n° ${created.orderId} — garde-le si tu nous contactes.)`
+                  : base,
+              );
+            } finally {
+              onBusyChange(false);
+            }
+          },
+
+          onCancel: () => {
+            onBusyChange(false);
+            onError("Paiement PayPal annulé. Ton panier est intact.");
+          },
+
+          onError: (err: unknown) => {
+            onBusyChange(false);
+            console.error("[PayPal]", err);
+            onError(
+              "PayPal a rencontré une erreur. Réessaie, ou choisis la carte bancaire.",
+            );
+          },
+        });
+
+        instance = buttons;
+        return buttons.render(containerRef.current).then(() => {
+          if (!cancelled) setStatus("ready");
+        });
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        console.error("[PayPal] chargement", err);
+        setStatus("failed");
+        onError(
+          "PayPal n'a pas pu se charger. Choisis la carte bancaire, ou réessaie dans un instant.",
+        );
       });
 
-      const { payUrl } = await wc.startPaypalOrderPayment({
-        billing,
-        shipping,
-        customerNote,
-      });
-
-      // Pas de nettoyage du panier ici : WooCommerce le vide lui-même en
-      // créant la commande. Et si le client abandonne sur la page de
-      // paiement, la commande reste « en attente » côté boutique — état
-      // normal, que WooCommerce annule tout seul après son délai.
-      window.location.href = payUrl;
-    } catch (err) {
-      startedRef.current = false;
-      setBusy(false);
-      onBusyChange(false);
-      onError(
-        err instanceof Error
-          ? err.message
-          : "La commande n'a pas pu être enregistrée. Choisis la carte bancaire, ou réessaie.",
-      );
-    }
-  }
+    return () => {
+      cancelled = true;
+      try {
+        instance?.close?.();
+      } catch {
+        /* le SDK a déjà été retiré du DOM */
+      }
+    };
+    // Monté une seule fois : les valeurs à jour passent par `latest`.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
-      <button
-        type="button"
-        onClick={handleClick}
-        disabled={busy}
-        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#ffc439] hover:bg-[#f0b72f] text-[#003087] font-semibold disabled:opacity-60 transition-colors"
-      >
-        {busy ? (
-          <>
-            <span className="inline-block w-4 h-4 rounded-full border-2 border-[#003087]/30 border-t-[#003087] animate-spin" />
-            Préparation…
-          </>
-        ) : (
-          "Payer avec PayPal"
-        )}
-      </button>
+      {status === "loading" && (
+        <p className="text-sm text-ink-500 py-4">Chargement de PayPal…</p>
+      )}
 
-      <p className="mt-3 text-xs text-ink-500">
-        Votre commande est enregistrée, puis vous terminez le paiement sur la
-        page sécurisée de la boutique. Rien n'est débité avant cette étape.
-      </p>
+      <div ref={containerRef} />
+
+      {status === "ready" && (
+        <p className="mt-3 text-xs text-ink-500">
+          Vous validez le paiement dans la fenêtre PayPal, puis vous revenez ici
+          — sans quitter le site.
+        </p>
+      )}
     </div>
   );
 }

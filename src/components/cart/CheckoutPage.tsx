@@ -640,8 +640,8 @@ function CheckoutInner() {
 
           {paymentMethod === "ppcp" ? (
             <p className="mt-4 rounded-xl bg-forest-50 border border-forest-100 px-4 py-3 text-center text-sm text-ink-700">
-              Continuez avec le bouton <strong>Payer avec PayPal</strong> de la
-              section « Paiement ».
+              Terminez avec le bouton <strong>PayPal</strong> de la section
+              « Paiement ».
             </p>
           ) : (
           <button
