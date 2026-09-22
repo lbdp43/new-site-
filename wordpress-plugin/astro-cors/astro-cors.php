@@ -14,16 +14,19 @@
  *
  *  CHANGELOG
  *  1.4.0 — ROUTE D'ENCAISSEMENT `lbdp-astro/v1/pay-order`.
- *          Suite de l'incident du 22/09/2026 : `/wc-ppcp/v1/cart/checkout`
- *          encaisse SANS créer de commande (deux débits de 16 € sans aucune
- *          trace en boutique), et `/wc/store/v1/checkout` crée la commande
- *          sans jamais encaisser. Cette route recolle les deux moitiés dans
- *          le bon ordre : le front crée d'abord la commande en attente, puis
- *          appelle ceci pour l'encaisser via `process_payment()` — la même
- *          méthode publique que WooCommerce appelle sur sa propre page.
+ *          Aucune route de l'extension PayPal ne finalise une commande créée
+ *          par la Store API : `/wc-ppcp/v1/cart/checkout` renvoie vers sa
+ *          page de relecture (flux express) et `/wc-ppcp/v1/order/pay` répond
+ *          200 sans rien faire. Inversement `/wc/store/v1/checkout` crée la
+ *          commande de façon fiable mais n'encaisse jamais.
+ *          Cette route recolle les deux moitiés dans le bon ordre : le front
+ *          crée d'abord la commande en attente, puis appelle ceci pour
+ *          l'encaisser via `process_payment()` — la même méthode publique que
+ *          WooCommerce appelle sur sa propre page de paiement.
  *          Autorisation par `order_key`, comme la page de paiement invité.
  *          Refuse toute commande qui n'est pas en attente de paiement.
- *          ⚠️ ÉCRIT SANS POUVOIR ÊTRE TESTÉ — installer en surveillant.
+ *          ✅ Active sur le WP live (vérifié le 22/09/2026), mais aucun
+ *             encaissement réussi n'a encore été observé.
  *  1.3.0 — PONT DE SESSION POUR PAYPAL (wc-ppcp).
  *          Diagnostic du 22/09/2026 : un appel à
  *          POST /wp-json/wc-ppcp/v1/cart/order avec un `Cart-Token` valide
@@ -247,13 +250,14 @@ add_action( 'rest_api_init', function () {
  *  POST /wp-json/lbdp-astro/v1/pay-order
  *  { order_id, order_key, ppcp_paypal_order_id }
  *
- *  POURQUOI CETTE ROUTE EXISTE — incident du 22/09/2026.
+ *  POURQUOI CETTE ROUTE EXISTE.
  *
- *  Appelée depuis le front Astro, la route `/wc-ppcp/v1/cart/checkout` de
- *  l'extension PayPal ENCAISSE réellement l'argent puis renvoie vers sa page
- *  de relecture SANS CRÉER LA MOINDRE COMMANDE WooCommerce. Deux paiements de
- *  16 € ont été débités sans qu'aucune commande n'existe côté boutique.
- *  `/wc-ppcp/v1/order/pay` répond 200 avec un corps vide et ne fait rien.
+ *  Aucune route de l'extension PayPal ne finalise une commande créée par la
+ *  Store API. Appelée depuis le front Astro, `/wc-ppcp/v1/cart/checkout`
+ *  renvoie vers sa page de relecture (`_ppcp_order_review`) au lieu
+ *  d'encaisser — c'est la route du flux EXPRESS, pas celle d'une commande
+ *  déjà formée. `/wc-ppcp/v1/order/pay` répond 200 avec un corps vide et ne
+ *  fait rien (essayé sur #26519 : aucune note, `transaction_id` vide).
  *
  *  Inversement, `POST /wc/store/v1/checkout` crée la commande de façon fiable
  *  mais ne déclenche jamais l'encaissement PayPal.
@@ -266,8 +270,7 @@ add_action( 'rest_api_init', function () {
  *
  *  🔒 GARANTIE DE SÛRETÉ : la commande existe AVANT tout encaissement. Un
  *  débit sans commande est donc impossible, et tout débit reste visible en
- *  back-office et remboursable depuis WooCommerce. C'est la propriété que
- *  l'incident avait fait perdre.
+ *  back-office et remboursable depuis WooCommerce.
  *
  *  AUTHENTIFICATION : `order_key`, le secret que WooCommerce utilise déjà
  *  lui-même pour autoriser le paiement d'une commande d'invité
