@@ -174,7 +174,50 @@ export interface WcCart {
       selected: boolean;
     }>;
   }>;
-  payment_methods: string[]; // slugs ex "stripe"
+  /**
+   * Passerelles déclarées disponibles par WooCommerce pour CE panier.
+   * Relevé le 21/09/2026 sur le WP live : ["woocommerce_payments", "ppcp"].
+   * C'est la source de vérité du choix offert au client — on ne code jamais
+   * la liste en dur côté Astro.
+   */
+  payment_methods: string[];
+  /**
+   * Données publiées par les extensions qui se sont enregistrées auprès de la
+   * Store API (`ExtendSchema`). On y trouve notamment `wc_ppcp`, posé par
+   * l'extension PayPal (pymntpl-paypal-woocommerce).
+   */
+  extensions?: Record<string, unknown> & { wc_ppcp?: WcPpcpExtension };
+}
+
+/**
+ * Bloc `extensions.wc_ppcp` du panier Store API, publié par l'extension
+ * « Plugins de paiement pour PayPal WooCommerce » (pymntpl-paypal-woocommerce).
+ *
+ * ⚠️ Forme relevée à la main sur une réponse réelle le 21/09/2026, PAS lue
+ * dans le code du plugin (le WordPress est injoignable depuis l'environnement
+ * de dev, et la source du plugin n'est pas récupérable non plus). Tous les
+ * champs sont donc optionnels et doivent être lus défensivement : une montée
+ * de version du plugin peut en renommer ou en retirer.
+ */
+export interface WcPpcpExtension {
+  needsSetupToken?: boolean;
+  cart?: {
+    total?: string;
+    totalCents?: number;
+    needsShipping?: boolean;
+    currency?: string;
+    countryCode?: string;
+    availablePaymentMethods?: string[];
+    lineItems?: unknown[];
+    shippingOptions?: unknown[];
+    selectedShippingMethod?: string | null;
+  };
+  fastlane?: {
+    features?: string[];
+    fastlane_flow?: string;
+    [k: string]: unknown;
+  };
+  [k: string]: unknown;
 }
 
 // ---------- API ----------
@@ -283,8 +326,17 @@ export interface WcCheckoutPayload {
   billing_address: WcAddress;
   shipping_address: WcAddress;
   customer_note?: string;
-  payment_method: string;           // "stripe"
-  payment_data: Array<{ key: string; value: string }>; // dont stripe_source = pm_xxx
+  /** Slug de la passerelle : "woocommerce_payments" (carte) ou "ppcp" (PayPal). */
+  payment_method: string;
+  /**
+   * Couples clé/valeur transmis à la passerelle côté PHP.
+   *
+   * ⚠️ `WooCommerce/StoreApi/Legacy.php` fait `$_POST = $payment_data`
+   * (REMPLACE), donc toute valeur que la passerelle lit dans `$_POST` doit
+   * figurer ici — y compris `payment_method`, qu'on duplique volontairement.
+   * Cf. le commentaire détaillé dans CheckoutPage.tsx.
+   */
+  payment_data: Array<{ key: string; value: string }>;
 }
 
 export interface WcCheckoutResponse {

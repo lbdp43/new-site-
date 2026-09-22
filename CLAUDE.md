@@ -157,9 +157,40 @@ l'intégration headless est réaliste, pas un contournement.
 ⚠️ Attendre une surprise dans le format de `payment_data`, comme pour
 WooPayments (où il a fallu dupliquer `payment_method`).
 
-**Cadrage, étapes et statut : `docs/paypal-checkout.md`.** Ne pas démarrer
-l'implémentation avant d'avoir les routes REST du plugin — elles ne sont pas
-devinables, et l'environnement de dev ne peut pas joindre le WordPress.
+**Cadrage, étapes et statut : `docs/paypal-checkout.md`.**
+
+### État au 22/09/2026
+
+Deux vraies commandes PayPal ont été lues via le MCP WooCommerce (#26042,
+#25926). Ce qu'elles établissent :
+
+- passerelle `ppcp`, **seule des quatre passerelles PayPal à être active**
+  (`ppcp_card`, `ppcp_googlepay`, `ppcp_applepay` sont désactivées) ;
+- `transaction_id` = ID de **capture** PayPal, meta `_ppcp_paypal_order_id`
+  = ID de **commande** PayPal, plus `_ppcp_environment`, `_paypal_fee`,
+  `_paypal_net` ;
+- donc **le front fait approuver une commande PayPal et transmet son ID ;
+  c'est WooCommerce qui capture côté serveur.** La dernière étape reste un
+  `POST /wc/store/v1/checkout`, comme pour la carte.
+
+**Livré côté Astro** : `src/lib/payment-methods.ts` (source unique du choix de
+passerelle + hypothèses PPCP regroupées), types `extensions.wc_ppcp` dans
+`woocommerce.ts`, et un sélecteur de moyen de paiement dans `CheckoutPage.tsx`
+— affiché seulement s'il y a un vrai choix, donc **tunnel carte inchangé**.
+
+🔴 **Verrou `PPCP_FLOW_IMPLEMENTED = false`** dans `payment-methods.ts` :
+PayPal n'est jamais proposé tant qu'il vaut `false`, même si les variables
+`PUBLIC_PPCP_ENABLED` / `PUBLIC_PAYPAL_CLIENT_ID` sont posées. À basculer dans
+le même commit que l'implémentation du tunnel.
+
+⛔ **Trois inconnues bloquent la suite** : le nom de la clé `payment_data`, la
+route REST du plugin, et le `client_id` PayPal. Elles sont **inaccessibles
+depuis l'environnement de dev** — pistes épuisées le 22/09/2026 :
+`downloads.wordpress.org`, `plugins.svn.wordpress.org`, les miroirs CDN
+(jsdelivr, unpkg) et `add_repo` GitHub sont tous bloqués ou refusés, et aucun
+outil du MCP n'expose les options WP ni les routes REST. **Ne pas repartir en
+chasse : c'est un relevé navigateur côté Guillaume**, décrit pas à pas dans
+`docs/paypal-checkout.md` (3 relevés, tous en lecture seule).
 
 ## Variables d'environnement
 
@@ -170,6 +201,12 @@ Variables `PUBLIC_*` → exposées côté client (non-secret par design).
 | `PUBLIC_WC_BASE_URL` | `https://www.labrasseriedesplantes.fr` | Base URL de la Store API |
 | `PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_live_51ETDmy…TvtxNs` | Clé Stripe publique (WooPayments) |
 | `PUBLIC_STRIPE_ACCOUNT_ID` | `acct_1Mg83iFkUaBLmhte` | Compte Stripe Connect de WooPayments |
+| `PUBLIC_PPCP_ENABLED` | **absente** | Futur interrupteur PayPal — ne pas créer tant que le tunnel n'est pas écrit |
+| `PUBLIC_PAYPAL_CLIENT_ID` | **absente** | Futur `client-id` du SDK PayPal (clé publique, pas un secret) |
+
+⚠️ Les deux variables PayPal sont déclarées dans `.env.example` mais
+**neutralisées par le verrou `PPCP_FLOW_IMPLEMENTED`** — les poser sur Vercel
+n'active rien. Voir `docs/paypal-checkout.md`.
 
 Variables non-`PUBLIC_` (optionnelles, jamais exposées client) :
 
@@ -253,6 +290,20 @@ groupes pour des extensions non installées (ACF, Events Calendar, BuddyPress,
 Yoast, Rank Math, AIOSEO, Slim SEO, SEO Framework).
 
 C'est `mcp_wordpress` qu'il faut utiliser pour toute lecture du WordPress.
+
+**Limites relevées le 22/09/2026** — à connaître pour ne pas les redécouvrir :
+
+- **Pas d'accès aux options WP** ni aux réglages d'une extension. En
+  particulier, `wp_wc_list_payment_gateways` **retire volontairement** le bloc
+  `settings` de chaque passerelle (il contiendrait des identifiants d'API).
+- **Pas de lecture des routes REST** (`/wp-json/`) ni du code des extensions :
+  aucun outil générique de requête n'est exposé.
+- `wp_ability_woocommerce_orders_query` est **cassé** : ses dates ne valident
+  pas contre son propre schéma de sortie. Utiliser `wp_wc_list_orders`.
+- `wp_wc_list_orders` **ne renvoie pas `payment_method`** — impossible de
+  filtrer ou compter les commandes par passerelle sans tirer chaque commande.
+- Les **notes de commande sont invisibles** de `wp_list_comments` (WooCommerce
+  les masque de l'API commentaires). Passer par `wp_wc_list_order_notes`.
 Il lève enfin la limite qui pesait sur le projet : le domaine est bloqué par
 le proxy réseau de l'environnement de dev, donc c'était jusqu'ici le seul
 moyen d'accéder au WP — et il ne marchait pas.
@@ -284,18 +335,22 @@ et ce que ça révèle :
 
    ℹ️ EasyBeer est aussi accessible en MCP dans les sessions Claude
    (`mcp__easybeer__*`) : commandes, clients, stocks, indicateurs de vente.
-3. **Trois passerelles de paiement, pas deux.** En plus de WooPayments et
-   PayPal, **SumUp Payment Gateway 2.17.1** est actif. Il n'apparaît pas dans
-   les `payment_methods` de la Store API — donc probablement pas activé comme
-   moyen de paiement, ou incompatible Blocks. À vérifier.
+3. **Trois extensions de paiement, mais deux passerelles actives.** En plus de
+   WooPayments et PayPal, **SumUp Payment Gateway 2.17.1** est installé.
+   ✅ **Tranché le 22/09/2026** via `wp_wc_list_payment_gateways` : la
+   passerelle `sumup` est **désactivée** (`enabled: false`). Elle n'apparaît
+   donc légitimement pas dans les `payment_methods` de la Store API, et n'est
+   **pas un sujet pour la bascule**. Ne pas rouvrir la question.
 
 ### ⚠️ Deux extensions qui touchent DIRECTEMENT le checkout Astro
 
 - **Checkout Field Editor for WooCommerce 2.2.0** — personnalise les champs
-  de la page de commande. Si des champs personnalisés **obligatoires** ont
-  été ajoutés, le checkout Astro ne les envoie pas : la commande peut être
-  refusée, ou partir sans une information dont l'équipe a besoin. **À
-  inspecter avant la bascule.**
+  de la page de commande. ✅ **Risque levé le 22/09/2026** : les `meta_data`
+  de quatre commandes récentes passées par le checkout WordPress (#26042,
+  #26012, #25953, #25926) ne contiennent **aucun champ personnalisé** — que
+  `is_vat_exempt`, l'attribution WC, les métadonnées de paiement et le suivi.
+  L'extension est active mais **ne collecte rien de plus**. À re-vérifier
+  seulement si quelqu'un touche à ses réglages.
 - **Age Gate 3.7.3** — vérification d'âge, obligatoire pour l'alcool.
   ✅ Le site Astro a bien son propre `src/components/AgeGate.astro`
   (18 ans, France). Rien de perdu à la bascule.
@@ -471,6 +526,7 @@ remplacer le contenu de la colonne gauche.
 |---|---|
 | `src/lib/woocommerce.ts` | Client Store API (fetch wrapper, Cart-Token, Nonce) |
 | `src/lib/cart-store.tsx` | Store de panier partagé entre îles Astro (module singleton + `useSyncExternalStore`, pas de Context) |
+| `src/lib/payment-methods.ts` | **Source unique** du choix de moyen de paiement : croise `cart.payment_methods` (déclaré par WC) avec ce que le front sait faire. Porte le verrou `PPCP_FLOW_IMPLEMENTED` et toutes les hypothèses PayPal, regroupées et annotées. Ne jamais coder une liste de passerelles en dur ailleurs. |
 | `src/components/cart/CartIcon.tsx` | Icône panier Header (badge + total) |
 | `src/components/cart/AddToCartButton.tsx` | Bouton ajouter au panier fiche produit |
 | `src/components/cart/CartPage.tsx` | Page panier (tableau + récap + code promo) |

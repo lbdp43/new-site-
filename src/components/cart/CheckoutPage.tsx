@@ -3,6 +3,10 @@ import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-
 import { loadStripe, type Stripe } from "@stripe/stripe-js";
 import { ensureCartLoaded, formatMoney, setCart, useCart } from "../../lib/cart-store";
 import { wc, type WcAddress } from "../../lib/woocommerce";
+import {
+  getAvailablePaymentMethods,
+  type PaymentMethodId,
+} from "../../lib/payment-methods";
 
 const STRIPE_KEY = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY as string | undefined;
 /**
@@ -129,6 +133,24 @@ function CheckoutInner() {
 
   const effectiveShipping = shippingSame ? billing : shipping;
 
+  // Moyens de paiement réellement proposables, dérivés de ce que WooCommerce
+  // déclare pour ce panier (`cart.payment_methods`). Aujourd'hui PayPal est
+  // verrouillé côté `payment-methods.ts` : la liste ne contient donc que la
+  // carte et le sélecteur reste masqué — le tunnel est identique à avant.
+  const paymentMethods = useMemo(() => getAvailablePaymentMethods(cart), [cart]);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodId>(
+    () => paymentMethods[0]!.id,
+  );
+
+  // Si WooCommerce retire la passerelle sélectionnée en cours de route
+  // (panier vidé puis rerempli, changement de pays…), on retombe sur la
+  // première disponible plutôt que de soumettre une passerelle refusée.
+  useEffect(() => {
+    if (!paymentMethods.some((m) => m.id === paymentMethod)) {
+      setPaymentMethod(paymentMethods[0]!.id);
+    }
+  }, [paymentMethods, paymentMethod]);
+
   // ── GA4 ──────────────────────────────────────────────────────────────
   // Le paiement se termine côté WooCommerce : la page de confirmation ne
   // reçoit qu'un numéro de commande, sans montant ni lignes. Sans ça, GA4
@@ -181,6 +203,22 @@ function CheckoutInner() {
     e.preventDefault();
     setFormError(null);
 
+    if (paymentMethod === "ppcp") {
+      // Garde-fou : `payment-methods.ts` ne met PayPal dans la liste que si
+      // le tunnel d'approbation existe. Si on arrive ici, c'est qu'on l'a
+      // ouvert sans l'écrire — on refuse explicitement plutôt que d'envoyer
+      // à WooCommerce un checkout sans ID de commande PayPal, qui créerait
+      // une commande impayée.
+      setFormError(
+        "Le paiement PayPal n'est pas encore disponible sur ce site. Choisissez la carte bancaire.",
+      );
+      return;
+    }
+
+    await submitCardPayment();
+  }
+
+  async function submitCardPayment() {
     if (!stripe || !elements) {
       setFormError("Stripe n'est pas encore chargé. Réessaie dans un instant.");
       return;
@@ -440,11 +478,53 @@ function CheckoutInner() {
         )}
 
         <Section title="Paiement">
-          <PaymentElement options={{ layout: "tabs" }} />
-          <p className="mt-3 text-xs text-ink-500">
-            Paiement sécurisé par Stripe. Aucune donnée bancaire n'est stockée
-            sur nos serveurs.
-          </p>
+          {/* Sélecteur affiché seulement s'il y a un vrai choix. Avec une
+              seule passerelle disponible, l'écran reste celui d'avant. */}
+          {paymentMethods.length > 1 && (
+            <ul className="space-y-2 mb-6">
+              {paymentMethods.map((m) => {
+                const checked = m.id === paymentMethod;
+                return (
+                  <li key={m.id}>
+                    <label
+                      className={`flex items-center gap-3 p-4 rounded-xl border transition-colors cursor-pointer ${
+                        checked
+                          ? "border-forest-700 bg-forest-50"
+                          : "border-forest-200 hover:border-forest-400"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="payment-method"
+                        checked={checked}
+                        onChange={() => {
+                          setPaymentMethod(m.id);
+                          setFormError(null);
+                        }}
+                        className="text-forest-700"
+                      />
+                      <span>
+                        <span className="block text-sm text-ink-800 font-medium">
+                          {m.label}
+                        </span>
+                        <span className="block text-xs text-ink-500">{m.hint}</span>
+                      </span>
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+
+          {paymentMethod === "woocommerce_payments" && (
+            <>
+              <PaymentElement options={{ layout: "tabs" }} />
+              <p className="mt-3 text-xs text-ink-500">
+                Paiement sécurisé par Stripe. Aucune donnée bancaire n'est stockée
+                sur nos serveurs.
+              </p>
+            </>
+          )}
         </Section>
 
         <Section title="Note à la commande (optionnel)">
