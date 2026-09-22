@@ -247,17 +247,155 @@ Ce que chaque paramètre nous apprend :
 une intégration de plateforme. Ça simplifie le front Astro — rien d'autre à
 transmettre que le `client-id`.
 
+### 🎯 `cart/order` disséqué — relevé le 22/09/2026
+
+Le relevé réseau du checkout WordPress donne la requête complète.
+
+**L'appel ne vise PAS `/wp-json/` directement.** Il passe par le tunnel AJAX
+de WooCommerce :
+
+```
+POST /?wc-ajax=wc_ppcp_frontend_request
+     &path=%2Fwc-ppcp%2Fv1%2Fcart%2Forder
+     &_locale=user
+```
+
+`path` décodé vaut `/wc-ppcp/v1/cart/order`. L'initiateur est
+`api-fetch.min.js` : le plugin utilise `@wordpress/api-fetch` avec un
+middleware qui réécrit les chemins REST en `?wc-ajax=…`. **Raison d'être du
+tunnel** : `wc-ajax` démarre la session WooCommerce (le cookie qui dit quel
+panier appartient au visiteur) avant de traiter la requête.
+
+**Corps de la requête** — c'est le formulaire de commande WooCommerce
+classique, à plat :
+
+```
+payment_method:            "ppcp"
+context:                   "checkout"
+ppcp_paypal_order_id:      ""      ← 🔑 vide à la création
+ppcp_billing_token:        ""
+ppcp_payment_token:        ""
+ppcp_payment_token_nonce:  ""
+billing_first_name/last_name/company/address_1/address_2/
+  city/postcode/state/country/email/phone   (vides ici)
+shipping_* (mêmes champs)
+ship_to_different_address: "1"
+shipping_method[0]:        "flat_rate:4"
+order_comments:            ""
+woocommerce-process-checkout-nonce: "53f4acf6ce"   ← ⚠️
+wc_order_attribution_*     (une vingtaine de champs de traçage)
+_wp_http_referer:          "/?wc-ajax=update_order_review"
+```
+
+**Réponse** (HTTP 200, 0,9 ko) — une simple chaîne JSON :
+
+```json
+"3Y617367DX331090K"
+```
+
+C'est l'ID de commande PayPal, au même format que le `_ppcp_paypal_order_id`
+des commandes réelles. **Rien d'autre.**
+
+#### Quatre enseignements
+
+1. 🔑 **Le nom de la clé est `ppcp_paypal_order_id`.** Il apparaît en clair
+   dans le formulaire, vide à la création : c'est donc lui qui portera l'ID
+   approuvé à la finalisation. C'était la dernière inconnue de fond.
+2. **Les champs sont au format checkout classique** (`billing_first_name`…),
+   pas au format Store API (`billing_address: {…}`). Deux conventions
+   différentes à réconcilier côté Astro.
+3. ⚠️ **Un `woocommerce-process-checkout-nonce` est transmis.** C'est le nonce
+   du formulaire de commande classique, généré au rendu de la page WordPress.
+   **Le front Astro n'a aucun moyen évident de l'obtenir** — c'est le nouvel
+   obstacle, et il remplace celui qu'on vient de lever.
+4. **La création réussit avec un formulaire vide.** Tous les champs d'adresse
+   étaient vides et la route a quand même renvoyé un ID : la validation
+   stricte se fait ailleurs (probablement `checkout-validation`), pas ici.
+
+#### Ce que ça implique pour Astro
+
+Le tunnel `wc-ajax` s'appuie sur le **cookie de session WooCommerce**. Le
+front Astro, lui, identifie son panier avec un **`Cart-Token`** en en-tête.
+Passer par ce tunnel depuis Astro ferait voir au plugin un panier vide — ou,
+pire, celui d'un autre visiteur.
+
+D'où **la question qui décide de tout**, et qui se teste en une ligne de
+console (cf. « Test décisif » plus bas) : **la route REST
+`/wp-json/wc-ppcp/v1/cart/order` accepte-t-elle un `Cart-Token`, et
+exige-t-elle vraiment le nonce ?**
+
+Un indice sérieux plaide pour oui sur le premier point :
+`cart/order-update-callback` prend explicitement un `cart_token` en
+paramètre. Le plugin sait donc raisonner en jetons de panier Store API, pas
+seulement en cookies.
+
+Trois issues possibles, de la meilleure à la pire :
+
+| Issue | Conséquence |
+|---|---|
+| **A** — la route accepte `Cart-Token` et ignore le nonce | 🟢 intégration directe, rien à installer côté WordPress |
+| **B** — elle accepte `Cart-Token` mais exige le nonce | 🟡 il faut exposer le nonce ; notre plugin `astro-cors` existe déjà et peut le faire en quelques lignes |
+| **C** — elle n'accepte que le cookie de session | 🟠 il faut un petit relais côté WordPress, toujours dans `astro-cors` |
+
+**Aucune de ces issues n'est bloquante** — c'est la vraie nouvelle. Le pire
+scénario demande une dizaine de lignes dans une extension qu'on maintient
+déjà.
+
+---
+
+## 🧪 Test décisif — à lancer dans la console (aucun paiement)
+
+À exécuter sur **`https://test.labrasseriedesplantes.fr`**, avec au moins un
+article dans le panier Astro, dans la console du navigateur (F12 →
+**Console**) :
+
+```js
+const token = localStorage.getItem('lbdp_cart_token');
+const r = await fetch(
+  'https://www.labrasseriedesplantes.fr/wp-json/wc-ppcp/v1/cart/order',
+  {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Cart-Token': token },
+    body: JSON.stringify({ payment_method: 'ppcp', context: 'checkout' }),
+  },
+);
+console.log(r.status, await r.text());
+```
+
+**C'est sans risque** : créer une commande PayPal ne débite rien et n'engage
+personne. Une commande non approuvée expire d'elle-même. Aucune commande
+WooCommerce n'est créée à cette étape.
+
+Lecture du résultat :
+
+- **200 + une chaîne du type `"3Y617367DX331090K"`** → issue **A**, le
+  chemin est libre.
+- **403 / erreur de nonce** → issue **B**.
+- **erreur de panier vide, ou un ID alors que le panier Astro n'est pas
+  celui-là** → issue **C**.
+- **erreur CORS** → il faut ajouter la route aux origines autorisées du
+  plugin `astro-cors` ; ça ne dit rien sur le fond.
+
 ---
 
 ## ❗ Ce qui reste inconnu
 
-Il n'en reste plus qu'**une** (la route REST et le `client_id` sont levés) :
+Les inconnues de fond sont levées : route REST, `client_id`, nom de la clé
+(`ppcp_paypal_order_id`), forme de la requête et de la réponse de
+`cart/order`. **Il ne reste que des questions de plomberie**, toutes
+tranchables sans écrire une ligne de production :
 
-**La forme exacte des échanges** : que contient la requête vers `cart/order`,
-que renvoie-t-elle, et lequel des deux chemins (A ou B ci-dessus) le plugin
-emprunte réellement pour finaliser. Si c'est B, il faut en plus **le nom de
-la clé** portant l'ID de commande PayPal dans `payment_data` — la métadonnée
-s'appelle `_ppcp_paypal_order_id`, mais la clé POST peut différer.
+1. **Le `Cart-Token` suffit-il** à identifier le panier sur la route REST, et
+   le nonce est-il exigé ? → le « Test décisif » ci-dessus y répond.
+2. **Comment se fait la finalisation** après approbation PayPal : par
+   `/wc-ppcp/v1/cart/checkout`, ou par `/wc/store/v1/checkout` avec
+   `ppcp_paypal_order_id` dans `payment_data` ? Le site WordPress utilisant
+   le checkout **classique**, le relevé ne montre que son chemin à lui ; le
+   chemin Blocks, celui que le front Astro imite, reste à confirmer.
+
+   ⚠️ Le second est le plus probable pour Astro et coûte peu à tenter : on
+   connaît désormais le nom de la clé, donc le `payment_data` s'écrit sans
+   deviner.
 
 ### Pistes épuisées le 22/09/2026
 

@@ -203,15 +203,38 @@ Deux enseignements :
 direct). ⚠️ Le Pay Later est donc actif aujourd'hui sur le WordPress : ne pas
 l'oublier côté Astro, sinon la bascule retire une facilité de paiement.
 
-⛔ **Une seule inconnue bloque encore** : la forme exacte des échanges (et
-donc A ou B). Elle est **inaccessible depuis
-l'environnement de dev** — pistes épuisées le 22/09/2026 :
-`downloads.wordpress.org`, `plugins.svn.wordpress.org`, les miroirs CDN
-(jsdelivr, unpkg) et `add_repo` GitHub sont tous bloqués ou refusés, et aucun
-outil du MCP n'expose les options WP ni les routes REST. **Ne pas repartir en
-chasse : c'est un relevé navigateur côté Guillaume**, décrit pas à pas dans
-`docs/paypal-checkout.md`. Le relevé 2 ne demande **aucun paiement** (on
-annule à la fenêtre PayPal) et donnera peut-être déjà tout.
+✅ **`cart/order` disséqué le 22/09/2026** (relevé réseau complet dans
+`docs/paypal-checkout.md`) :
+
+- l'appel passe par le **tunnel AJAX** `/?wc-ajax=wc_ppcp_frontend_request&path=/wc-ppcp/v1/cart/order`,
+  pas par `/wp-json/` — le tunnel démarre la session WooCommerce ;
+- le corps est le **formulaire de commande classique** à plat
+  (`billing_first_name`…), pas le format Store API ;
+- 🔑 **le champ qui porte l'ID PayPal est `ppcp_paypal_order_id`** — vu en
+  clair, vide à la création. C'était la dernière inconnue de fond ;
+- la réponse est une simple chaîne JSON : `"3Y617367DX331090K"` ;
+- ⚠️ un **`woocommerce-process-checkout-nonce`** est transmis : c'est le
+  nouvel obstacle, le front Astro n'a pas de moyen évident de l'obtenir.
+
+⛔ **Ne restent que des questions de plomberie**, toutes tranchables sans
+écrire de code de production :
+
+1. le `Cart-Token` suffit-il sur la route REST, et le nonce est-il exigé hors
+   tunnel wc-ajax ? → **un test console d'une ligne** y répond, sans paiement
+   ni risque ; le snippet est dans `docs/paypal-checkout.md` ;
+2. la finalisation passe-t-elle par `/wc-ppcp/v1/cart/checkout` ou par
+   `/wc/store/v1/checkout` avec `ppcp_paypal_order_id` en `payment_data` ?
+   Le WordPress utilisant le checkout **classique**, le relevé ne montre que
+   son chemin ; le chemin Blocks (celui qu'Astro imite) reste à confirmer.
+
+Au pire des cas, il faudra exposer le nonce ou un petit relais depuis
+**`wordpress-plugin/astro-cors/`**, une extension qu'on maintient déjà — une
+dizaine de lignes. **Plus rien n'est bloquant.**
+
+Rappel : ces relevés se font **côté Guillaume**, l'environnement de dev ne
+joint pas le WordPress. Pistes de lecture du code du plugin épuisées le
+22/09/2026 (`downloads.wordpress.org`, `plugins.svn.wordpress.org`, miroirs
+CDN, `add_repo` GitHub) — ne pas repartir en chasse.
 
 ## Variables d'environnement
 
