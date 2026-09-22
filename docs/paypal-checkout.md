@@ -418,15 +418,91 @@ une erreur fatale sur tout le site.
 WordPress). La syntaxe est vérifiée (`php -l` passe), donc pas de risque
 d'erreur fatale au téléversement, mais le comportement reste à confirmer.
 
-### Comment le vérifier après installation
+### ✅ VÉRIFIÉ EN PRODUCTION — 22/09/2026
 
-Téléverser la version 1.3.0 (Extensions → Ajouter → Téléverser, remplacer +
-réactiver), puis **relancer exactement le même test console**. Si le pont
-fonctionne, la ligne `PPCP` passe de `corps : ""` à une chaîne du type
-`"3Y617367DX331090K"`.
+`astro-cors` 1.3.0 installé sur le WordPress live, test console rejoué depuis
+`test.labrasseriedesplantes.fr` :
+
+```
+PPCP → 200 | corps : "36L47978HU4613710"
+```
+
+**Le pont fonctionne.** Une vraie commande PayPal est créée depuis le front
+Astro avec le seul `Cart-Token` — sans cookie de session, et **sans
+`woocommerce-process-checkout-nonce`**.
+
+Trois conclusions :
+
+1. L'approche headless est **validée sur le terrain**, plus seulement en
+   théorie.
+2. Le nonce n'est **pas** exigé sur `cart/order`. Il pourrait encore l'être à
+   la finalisation — à vérifier le moment venu.
+3. Un corps minimal suffit : `{ payment_method: "ppcp", context: "checkout" }`.
+   Les dizaines de champs du formulaire classique (`billing_*`, `shipping_*`,
+   attribution…) ne sont **pas** nécessaires à cette étape.
 
 En cas de souci : désactiver l'extension suffit à tout remettre en état, le
 site WordPress n'en dépend pas.
+
+---
+
+## 🧪 Sonde A/B — trancher la finalisation sans payer
+
+**Le principe** : créer une commande PayPal (donc **non approuvée**, le client
+n'est jamais passé chez PayPal), puis tenter de finaliser avec elle via la
+Store API. PayPal **refusera forcément** la capture d'une commande non
+approuvée — mais la façon dont il refuse nous dit si le chemin est le bon.
+
+**Pourquoi c'est sans risque** : une commande PayPal au statut `CREATED` est
+**techniquement incapturable**. Aucun argent ne peut bouger. Au pire,
+WooCommerce laisse une commande en brouillon ou en échec, qu'il suffit de
+supprimer.
+
+```js
+const token = localStorage.getItem('lbdp_cart_token');
+const nonce = localStorage.getItem('lbdp_wc_nonce');
+const H = { 'Content-Type': 'application/json', 'Cart-Token': token };
+if (nonce) H['Nonce'] = nonce;
+
+// 1) Commande PayPal, non approuvée
+const o = await fetch('https://www.labrasseriedesplantes.fr/wp-json/wc-ppcp/v1/cart/order', {
+  method: 'POST', headers: H,
+  body: JSON.stringify({ payment_method: 'ppcp', context: 'checkout' }),
+});
+const paypalOrderId = JSON.parse(await o.text());
+console.log('Commande PayPal :', paypalOrderId);
+
+// 2) Tentative de finalisation — chemin B (Store API)
+const addr = {
+  first_name: 'Test', last_name: 'Sonde', company: '',
+  address_1: '1 rue de la Brasserie', address_2: '',
+  city: 'Saint-Didier-en-Velay', state: '', postcode: '43140',
+  country: 'FR', email: 'REMPLACE@PAR-TON-EMAIL.fr', phone: '0600000000',
+};
+const c = await fetch('https://www.labrasseriedesplantes.fr/wp-json/wc/store/v1/checkout', {
+  method: 'POST', headers: H,
+  body: JSON.stringify({
+    billing_address: addr,
+    shipping_address: addr,
+    payment_method: 'ppcp',
+    payment_data: [
+      { key: 'payment_method', value: 'ppcp' },
+      { key: 'ppcp_paypal_order_id', value: paypalOrderId },
+    ],
+  }),
+});
+console.log('Store API checkout →', c.status, await c.text());
+```
+
+### Comment lire le refus
+
+| Réponse | Lecture |
+|---|---|
+| Erreur mentionnant **PayPal / capture / `ORDER_NOT_APPROVED`** | 🟢 **Chemin B validé.** La clé est lue, la passerelle est appelée — il ne manquait que l'approbation du client. C'est exactement le comportement attendu |
+| **« Passerelle de paiement non valide »** ou équivalent | 🔴 La Store API ne connaît pas `ppcp` → il faut passer par le chemin **A** (`/wc-ppcp/v1/cart/checkout`) |
+| Erreur de **nonce** | Le nonce est exigé à la finalisation (pas à la création) — à traiter, mais le chemin reste bon |
+| Erreur de **validation de champ** | Un champ obligatoire manque — le message le nomme, il suffit de l'ajouter |
+| **200 avec une commande payée** 😱 | Impossible en théorie. Si ça arrivait : rembourser immédiatement depuis l'admin |
 
 ---
 
@@ -587,9 +663,9 @@ constat de Guillaume. Il ne change pas la décision : PayPal reste bloquant.
 - [x] **Relevé 2b** — requête + réponse de `cart/order` → clé `ppcp_paypal_order_id`
 - [x] **Test décisif** — le plugin ignore le `Cart-Token` (issue C)
 - [x] **Pont de session** écrit dans `astro-cors` 1.3.0
-- [ ] **Installer `astro-cors` 1.3.0** sur le WordPress *(Guillaume)*
-- [ ] **Rejouer le test console** pour confirmer que le pont marche *(Guillaume)*
-- [ ] **Relevé 3** — la requête de finalisation, qui tranche entre A et B *(Guillaume)*
+- [x] **`astro-cors` 1.3.0 installé** sur le WordPress live
+- [x] **Pont vérifié** — `cart/order` renvoie un ID depuis Astro, sans cookie ni nonce
+- [ ] **Trancher A ou B** — quelle route finalise après approbation *(sonde gratuite, cf. ci-dessous)*
 - [ ] Reproduire **PayPal Pay Later** côté Astro (`enable-funding=paylater`)
 - [ ] Flux de création / approbation PayPal
 - [ ] Gestion des annulations et des échecs

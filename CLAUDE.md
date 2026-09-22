@@ -228,16 +228,29 @@ immédiat : le plugin sort avant d'y arriver.
 
 🌉 **Corrigé dans `astro-cors` 1.3.0** (cf. section « Plugin WordPress CORS »)
 — deux hooks qui étendent le gestionnaire de session Store API aux routes
-`wc-ppcp` et chargent le panier. **À installer et à vérifier côté Guillaume.**
+`wc-ppcp` et chargent le panier.
 
-⛔ **Restent deux étapes**, aucune bloquante :
+🎉 **PONT VÉRIFIÉ EN PRODUCTION le 22/09/2026.** Plugin installé sur le WP
+live, test console rejoué depuis `test.` :
 
-1. installer `astro-cors` 1.3.0 puis **rejouer le test console** : si le pont
-   marche, la ligne `PPCP` passe de `""` à `"3Y617367DX331090K"` ;
-2. la finalisation passe-t-elle par `/wc-ppcp/v1/cart/checkout` ou par
-   `/wc/store/v1/checkout` avec `ppcp_paypal_order_id` en `payment_data` ?
-   Le WordPress utilisant le checkout **classique**, le relevé ne montre que
-   son chemin ; le chemin Blocks (celui qu'Astro imite) reste à confirmer.
+```
+PPCP → 200 | corps : "36L47978HU4613710"
+```
+
+Une vraie commande PayPal créée depuis le front Astro avec le seul
+`Cart-Token` — **sans cookie de session et sans nonce**. L'approche headless
+est validée sur le terrain. Un corps minimal suffit
+(`{ payment_method: "ppcp", context: "checkout" }`) : les dizaines de champs
+du formulaire classique ne sont pas nécessaires à cette étape.
+
+⛔ **Reste une étape** : la finalisation après approbation passe-t-elle par
+`/wc-ppcp/v1/cart/checkout` (A) ou par `/wc/store/v1/checkout` avec
+`ppcp_paypal_order_id` en `payment_data` (B) ? **B est préférable** — c'est
+l'endpoint que le front utilise déjà pour la carte, et le seul qui renvoie
+`order_id` + `order_key`, dont la page de confirmation a besoin. Le
+WordPress utilisant le checkout **classique**, le relevé réseau ne montre
+que son chemin à lui ; celui d'Astro reste à confirmer, par une sonde
+gratuite décrite dans `docs/paypal-checkout.md`.
 
 Rappel : ces relevés se font **côté Guillaume**, l'environnement de dev ne
 joint pas le WordPress. Pistes de lecture du code du plugin épuisées le
