@@ -61,15 +61,33 @@ const DISPLAY_ORDER: PaymentMethodId[] = ["woocommerce_payments", "ppcp"];
  * ────────────────────────────────────────────────────────────────────── */
 
 /**
- * ✅ Le tunnel d'approbation PayPal est écrit (22/09/2026) : chargement du
- * SDK, boutons, création de commande, finalisation, annulation et erreurs.
+ * 🛑 **COUPE-CIRCUIT — repassé à `false` le 22/09/2026 après un incident.**
  *
- * Il reste néanmoins **verrouillé par deux variables d'environnement**
- * absentes de Vercel à ce jour. Tant qu'elles ne sont pas posées, PayPal
- * n'est jamais proposé — le temps qu'un vrai paiement de bout en bout ait
- * été passé puis remboursé.
+ * `POST /wc-ppcp/v1/cart/checkout` **encaisse réellement l'argent**, puis
+ * renvoie vers sa page de relecture sans créer la moindre commande
+ * WooCommerce. Deux vrais paiements de 16 € ont été débités sur le compte de
+ * Guillaume (relevé bancaire, 12:36 et 12:39), et **aucune commande
+ * n'existe** côté boutique : ni #26520 ni #26521, total resté à 512.
+ *
+ * C'est le pire scénario possible — pire encore que la commande fantôme :
+ * le client est débité et la boutique n'en garde aucune trace. Pas de
+ * commande, donc pas d'e-mail, pas de préparation, pas de stock décrémenté,
+ * pas de remontée EasyBeer. Un vrai client aurait payé dans le vide.
+ *
+ * Le garde-fou côté front a bien fait son travail (message d'échec au lieu
+ * d'une confirmation), mais **il ne peut rien contre un encaissement déjà
+ * survenu côté serveur** : il juge la réponse, après coup.
+ *
+ * Tant que ce verrou est à `false`, PayPal n'apparaît nulle part, quelles que
+ * soient les variables d'environnement.
+ *
+ * ⚠️ **Ne le repasser à `true` qu'après** avoir établi, par un vrai paiement
+ * suivi d'une lecture dans WooCommerce, qu'une commande est créée ET porte un
+ * `transaction_id`. Jamais sur la seule foi d'une page de confirmation, ni
+ * d'une sonde : une sonde utilise une commande PayPal non approuvée et ne
+ * prouve donc rien sur l'encaissement.
  */
-const PPCP_FLOW_IMPLEMENTED = true;
+const PPCP_FLOW_IMPLEMENTED = false;
 
 const PPCP_ENABLED = import.meta.env.PUBLIC_PPCP_ENABLED === "true";
 const PAYPAL_CLIENT_ID = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID as string | undefined;

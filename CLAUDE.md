@@ -296,6 +296,43 @@ fantôme » pour le chemin réel (`/wc-ppcp/v1/cart/checkout`).
 paiement a eu lieu. Le seul critère est `transaction_id` non vide et un
 statut « En cours ».
 
+## 🛑 PayPal COUPÉ — argent pris sans commande (22/09/2026, À LIRE EN PREMIER)
+
+**`PPCP_FLOW_IMPLEMENTED` est repassé à `false`.** PayPal n'apparaît plus sur
+le checkout, quelles que soient les variables d'environnement.
+
+**Ce qui s'est passé** : `POST /wc-ppcp/v1/cart/checkout` **encaisse réellement
+l'argent**, puis renvoie vers sa page de relecture **sans créer la moindre
+commande WooCommerce**. Deux paiements de 16 € ont été débités sur le compte
+de Guillaume (relevé bancaire à 12:36 et 12:39) et **aucune commande n'existe**
+côté boutique — ni #26520 ni #26521, total resté à 512.
+
+C'est **pire que la commande fantôme** : là, au moins, une commande existait.
+Ici le client est débité et la boutique n'en garde aucune trace : pas d'e-mail,
+pas de préparation, pas de stock décrémenté, rien dans EasyBeer.
+
+⚠️ **Le garde-fou du front ne protège pas de ça.** Il juge la réponse, donc
+*après* l'encaissement. Il a correctement affiché une erreur — l'argent était
+déjà parti. **Aucune vérification côté client ne peut empêcher une passerelle
+de débiter.**
+
+### Les trois leçons
+
+1. **`cart/checkout` encaisse.** Toutes les sondes concluaient « elle ne fait
+   rien » parce qu'elles utilisaient une commande PayPal **non approuvée**,
+   donc incapturable. Dès qu'une vraie approbation est en jeu, elle débite.
+   **Une sonde ne prouve jamais rien sur l'encaissement.**
+2. **Ne jamais laisser un moyen de paiement actif tant qu'un cycle complet
+   n'a pas été observé dans WooCommerce** — commande créée **et**
+   `transaction_id` non vide. La page de confirmation ne vaut rien comme
+   preuve, la réponse HTTP non plus.
+3. **Un test « à 16 € remboursables » n'est pas sans risque** : il l'est tant
+   que l'argent reste traçable. Ici il ne l'était pas côté boutique.
+
+⛔ **À faire avant toute reprise** : rembourser les deux paiements depuis le
+compte PayPal (aucune commande WooCommerce ne permet de le faire depuis
+WordPress), puis retrouver ce que ces deux captures référencent côté PayPal.
+
 ## 🚨 PayPal — la commande fantôme du 22/09/2026 (À LIRE)
 
 **Premier vrai paiement de test : le client a vu « Merci pour votre commande »
