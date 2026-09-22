@@ -8,6 +8,7 @@ import {
   type PaymentMethodId,
 } from "../../lib/payment-methods";
 import PayPalButtons from "./PayPalButtons";
+import { decodeEntities } from "../../lib/wc-text";
 
 const STRIPE_KEY = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY as string | undefined;
 /**
@@ -163,7 +164,7 @@ function CheckoutInner() {
     if (!cart || beginSentRef.current) return;
     const items = (cart.items ?? []).map((it: any, i: number) => ({
       item_id: String(it.id),
-      item_name: it.name,
+      item_name: decodeEntities(it.name),
       price: Number(it.prices?.price ?? 0) / Math.pow(10, minorUnit),
       quantity: it.quantity,
       index: i,
@@ -458,7 +459,7 @@ function CheckoutInner() {
                           }}
                           className="text-forest-700"
                         />
-                        <span className="text-sm text-ink-800">{r.name}</span>
+                        <span className="text-sm text-ink-800">{decodeEntities(r.name)}</span>
                       </span>
                       <span className="text-sm font-medium text-forest-900 tabular-nums">
                         {Number(r.price) === 0 ? "Offerte" : price}
@@ -556,10 +557,10 @@ function CheckoutInner() {
             {cart?.items.map((it) => (
               <li key={it.key} className="py-3 flex items-start justify-between gap-3 text-sm">
                 <div>
-                  <div className="text-ink-800 font-medium">{it.name}</div>
+                  <div className="text-ink-800 font-medium">{decodeEntities(it.name)}</div>
                   {it.variation && it.variation.length > 0 && (
                     <div className="text-xs text-ink-500">
-                      {it.variation.map((v) => v.value).join(" · ")}
+                      {it.variation.map((v) => decodeEntities(v.value)).join(" · ")}
                     </div>
                   )}
                   <div className="text-xs text-ink-500">Qté {it.quantity}</div>

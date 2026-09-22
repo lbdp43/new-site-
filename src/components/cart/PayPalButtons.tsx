@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { setCart } from "../../lib/cart-store";
+import { cartActions, setCart } from "../../lib/cart-store";
 import { wc, type WcAddress } from "../../lib/woocommerce";
 import { buildPpcpPaymentData } from "../../lib/payment-methods";
 import { loadPayPalSdk } from "../../lib/paypal";
@@ -90,6 +90,22 @@ export default function PayPalButtons({
 
             onBusyChange(true);
             try {
+              // ⚠️ L'extension PayPal lit l'adresse dans la SESSION WooCommerce,
+              // pas dans le corps de la requête — c'est ce qui explique qu'un
+              // corps minimal suffise à `cart/order`.
+              //
+              // Or le checkout ne pousse la session que lorsque le code postal,
+              // la ville ou le pays changent (calcul des frais de port). Un
+              // client qui saisit son adresse puis corrige son nom ou son
+              // e-mail laisserait donc une session périmée, et PayPal
+              // travaillerait sur l'ancienne valeur.
+              //
+              // On resynchronise juste avant d'ouvrir la fenêtre PayPal.
+              await cartActions.updateCustomer({
+                billing_address: b,
+                shipping_address: s,
+              });
+
               return await wc.createPaypalOrder();
             } catch (err) {
               onError(err instanceof Error ? err.message : "Erreur PayPal.");

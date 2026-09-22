@@ -203,6 +203,15 @@ e-mails, stock et EasyBeer restent synchronisés comme pour une carte.
 `form-action`. Sans ça le navigateur bloque le SDK **sans message clair** —
 piège coûteux à rediagnostiquer.
 
+⚠️ **L'extension PayPal lit l'adresse dans la SESSION WooCommerce**, pas dans
+le corps de la requête — c'est pour ça qu'un corps minimal suffit à
+`cart/order`. Or le checkout ne pousse la session (`cart/update-customer`) que
+lorsque le **code postal, la ville ou le pays** changent, pour recalculer les
+frais de port. Un client qui saisit son adresse puis corrige son nom ou son
+e-mail laisserait donc PayPal travailler sur une session périmée.
+`PayPalButtons.createOrder` resynchronise désormais juste avant d'ouvrir la
+fenêtre PayPal. Ne pas retirer cet appel en le croyant redondant.
+
 ⚠️ **Les callbacks PayPal sont figés au rendu des boutons.**
 `PayPalButtons.tsx` passe donc les valeurs du formulaire par une `ref`. Ne
 pas « simplifier » en lisant directement les props : l'adresse envoyée à
@@ -307,9 +316,21 @@ l'encaissement non.**
 1. 🔑 **`ppcp_paypal_order_id` n'est PAS la bonne clé pour la Store API.**
    Elle vient du formulaire de commande **classique**. Envoyée dans
    `payment_data`, le plugin ne la lit pas : d'où l'absence de la métadonnée
-   et l'absence de capture. **La bonne clé reste à trouver** — ou il faut
-   basculer sur `/wc-ppcp/v1/cart/checkout` (architecture A), la route que le
-   front du plugin utilise lui-même.
+   et l'absence de capture.
+
+   ✅ **Le nom réel est `paypal_order_id`** — établi le 22/09/2026 sans
+   dépenser un centime. `POST /wc-ppcp/v1/cart/checkout` **renvoie en clair
+   ce qu'il a compris de la requête**, encodé en base64 dans le paramètre
+   `_ppcp_order_review` de sa `redirect` :
+
+   ```
+   {"payment_method":"ppcp","paypal_order_id":null,"fields":[]}
+   ```
+
+   Le plugin a donc **deux conventions de nommage** — piège coûteux :
+   `ppcp_paypal_order_id` dans le formulaire classique (préfixé pour ne pas
+   entrer en collision dans `$_POST`), `paypal_order_id` dans sa propre
+   couche REST. J'avais repris la première pour appeler la seconde.
 
 2. ⚠️ **`payment_status: "success"` NE VEUT PAS DIRE « payé ».** Le plugin
    renvoie « success » aussi bien pour « c'est payé » que pour « la commande
@@ -323,10 +344,22 @@ vers paypal.com, **et** un `status` de commande qui n'est ni `pending` ni
 `failed`. Au moindre doute, message d'échec explicite. Une page de
 confirmation mensongère est bien pire qu'une erreur.
 
-⛔ **Reste à faire** : trouver la bonne clé (ou passer par `cart/checkout`),
-puis refaire un paiement réel de bout en bout et **vérifier dans WooCommerce
-que la commande est en « En cours » avec un `transaction_id`** — ne jamais se
-fier à la seule page de confirmation. Mode opératoire dans
+### 🧪 `cart/checkout` est une sonde GRATUITE
+
+Découvert le 22/09/2026, et très utile pour la suite : appeler
+`POST /wc-ppcp/v1/cart/checkout` avec un `paypal_order_id` absent ou non
+approuvé **ne crée AUCUNE commande WooCommerce** — le plugin se contente de
+renvoyer une redirection vers sa page de relecture. Vérifié : aucune commande
+n'est apparue après la sonde.
+
+C'est l'inverse de `POST /wc/store/v1/checkout`, qui crée une vraie commande
+à chaque appel — c'est ainsi que sont nées #26516 et #26518 (toutes deux à la
+corbeille). **Pour explorer le contrat du plugin, passer par `cart/checkout`.**
+
+⛔ **Reste à faire** : refaire un paiement réel de bout en bout avec la bonne
+clé, et **vérifier dans WooCommerce que la commande est en « En cours » avec
+un `transaction_id`** — ne jamais se fier à la seule page de confirmation.
+Mode opératoire dans
 `docs/paypal-checkout.md`.
 
 Aucun risque client : la boutique publique reste le WordPress sur `www.`
@@ -694,6 +727,7 @@ remplacer le contenu de la colonne gauche.
 | `src/lib/cart-store.tsx` | Store de panier partagé entre îles Astro (module singleton + `useSyncExternalStore`, pas de Context) |
 | `src/lib/paypal.ts` | Chargeur du SDK JS PayPal (mémoïsé). Paramètres calqués sur ceux du checkout WordPress — dont `enable-funding=paylater`. |
 | `src/components/cart/PayPalButtons.tsx` | Boutons PayPal du checkout : création de commande, approbation, finalisation Store API, annulation et erreurs. ⚠️ Les valeurs du formulaire passent par une `ref` (les callbacks PayPal sont figés au rendu). |
+| `src/lib/wc-text.ts` | `decodeEntities()` — WooCommerce renvoie ses libellés **échappés en HTML** (`Mariage Aurore &amp; Damien`, `L&#8217;ALCHIMIE`, `&times;`). React ré-échappe ce qu'il affiche, donc sans décodage le client lit les entités en clair. À appeler sur **tout** texte venu de la Store API (nom d'article, variation, tarif de livraison, `alt`). Volontairement sans DOM (les îles sont rendues au build) et **en un seul passage** : `&amp;times;` doit donner `&times;`, pas `×`. |
 | `src/lib/payment-methods.ts` | **Source unique** du choix de moyen de paiement : croise `cart.payment_methods` (déclaré par WC) avec ce que le front sait faire. Porte le verrou `PPCP_FLOW_IMPLEMENTED` et toutes les hypothèses PayPal, regroupées et annotées. Ne jamais coder une liste de passerelles en dur ailleurs. |
 | `src/components/cart/CartIcon.tsx` | Icône panier Header (badge + total) |
 | `src/components/cart/AddToCartButton.tsx` | Bouton ajouter au panier fiche produit |

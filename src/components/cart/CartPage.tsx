@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ensureCartLoaded, formatMoney, useCart } from "../../lib/cart-store";
+import { decodeEntities } from "../../lib/wc-text";
 
 export default function CartPage() {
   const {
@@ -105,17 +106,17 @@ export default function CartPage() {
                   {image && (
                     <img
                       src={image.thumbnail || image.src}
-                      alt={image.alt || item.name}
+                      alt={decodeEntities(image.alt || item.name)}
                       width={72}
                       height={72}
                       className="w-16 h-16 rounded-lg object-cover bg-cream-100 border border-forest-100/60"
                     />
                   )}
                   <div>
-                    <div className="font-display text-lg text-forest-900 leading-tight">{item.name}</div>
+                    <div className="font-display text-lg text-forest-900 leading-tight">{decodeEntities(item.name)}</div>
                     {item.variation && item.variation.length > 0 && (
                       <div className="text-xs text-ink-500 mt-0.5">
-                        {item.variation.map((v) => v.value).join(" · ")}
+                        {item.variation.map((v) => decodeEntities(v.value)).join(" · ")}
                       </div>
                     )}
                     <div className="text-xs text-ink-500 mt-0.5 md:hidden">Unité : {unit}</div>
@@ -143,7 +144,7 @@ export default function CartPage() {
                   type="button"
                   onClick={() => removeItem(item.key)}
                   className="mt-2 md:mt-0 justify-self-end text-ink-400 hover:text-red-700 transition-colors"
-                  aria-label={`Retirer ${item.name} du panier`}
+                  aria-label={`Retirer ${decodeEntities(item.name)} du panier`}
                   disabled={loading}
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
